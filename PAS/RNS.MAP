@@ -1,0 +1,3182 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 0066AH 0066BH Rns                CODE
+ 00670H 07C6EH 075FFH BGIDriv            CODE
+ 07C70H 0B260H 035F1H userint            CODE
+ 0B270H 0BBBBH 0094CH editunit           CODE
+ 0BBC0H 0BC08H 00049H timer              CODE
+ 0BC10H 0BC31H 00022H Strings            CODE
+ 0BC40H 0BDECH 001ADH inout              CODE
+ 0BDF0H 0DE52H 02063H InitSc             CODE
+ 0DE60H 0F8A7H 01A48H fileunit           CODE
+ 0F8B0H 128CDH 0301EH helpunit           CODE
+ 128D0H 13E6FH 015A0H SDunit             CODE
+ 13E70H 15045H 011D6H Sd2Unit            CODE
+ 15050H 187A3H 03754H pageunit           CODE
+ 187B0H 19842H 01093H markunit           CODE
+ 19850H 1B7EFH 01FA0H Specunit           CODE
+ 1B7F0H 1D210H 01A21H sp2unit            CODE
+ 1D220H 1D736H 00517H musikunit          CODE
+ 1D740H 1E664H 00F25H noteunit           CODE
+ 1E670H 220C9H 03A5AH sndunit            CODE
+ 220D0H 25E1AH 03D4BH Comunit            CODE
+ 25E20H 25E20H 00000H Texts              CODE
+ 25E20H 261C3H 003A4H satunit            CODE
+ 261D0H 266BFH 004F0H prmunit            CODE
+ 266C0H 26B2EH 0046FH grintunit          CODE
+ 26B30H 27FE9H 014BAH GetUnit            CODE
+ 27FF0H 29186H 01197H utilunit           CODE
+ 29190H 293ECH 0025DH TitleUnit          CODE
+ 293F0H 2BA74H 02685H textunit           CODE
+ 2BA80H 2D8A2H 01E23H symbols            CODE
+ 2D8B0H 2F188H 018D9H printunit          CODE
+ 2F190H 2F2D1H 00142H dmemunit           CODE
+ 2F2E0H 2FFCCH 00CEDH butunit            CODE
+ 2FFD0H 327D2H 02803H imenuunit          CODE
+ 327E0H 33BB7H 013D8H GraphMenu          CODE
+ 33BC0H 34E82H 012C3H grinout            CODE
+ 34E90H 34E90H 00000H DispMenu           CODE
+ 34E90H 35895H 00A06H gcurunit           CODE
+ 358A0H 35DB5H 00516H Mousdrv            CODE
+ 35DC0H 36CCDH 00F0EH UserExit           CODE
+ 36CD0H 36E02H 00133H Xcrt               CODE
+ 36E10H 3742EH 0061FH Crt                CODE
+ 37430H 3761EH 001EFH Dos                CODE
+ 37620H 3762BH 0000CH MenuTyp            CODE
+ 37630H 3B269H 03C3AH Graph              CODE
+ 3B270H 3D48AH 0221BH System             CODE
+ 3D490H 464C7H 09038H DATA               DATA
+ 464D0H 4A4CFH 04000H STACK              STACK
+ 4A4D0H 4A4D0H 00000H HEAP               HEAP
+
+  Address         Publics by Value
+
+ 0000:0000       GraphExit
+ 0000:0029       HeapFunc
+ 0000:0229       RnsStartMessage
+ 0000:04A7       InstallUserDrivers
+ 0000:051F       @
+ 0067:0000       ATTDriverProc
+ 0067:187A       CgaDriverProc
+ 0067:30E4       EgaVgaDriverProc
+ 0067:467B       HercDriverProc
+ 0067:5E65       PC3270DriverProc
+ 07C7:1D7A       UseTopMenu
+ 07C7:35DB       @
+ 0B27:00BC       EdiRythmEdit
+ 0BC1:0000       StrPas
+ 0BC4:0000       Set_Video
+ 0BC4:003A       Get_Response
+ 0BDF:0008       UpString
+ 0BDF:007F       IniKeyPressed
+ 0BDF:014C       IniSwapColors
+ 0BDF:019F       IniHideCursor
+ 0BDF:01B2       IniShowCursor
+ 0BDF:01CE       IniExpand
+ 0BDF:0206       IniCenter
+ 0BDF:0285       IniTabChar
+ 0BDF:02B7       IniPos
+ 0BDF:02F2       IniMausEscape
+ 0BDF:0372       IniMausAssign
+ 0BDF:03C8       IniAltChar
+ 0BDF:043A       IniGraphMode
+ 0BDF:04EA       IniGraphinit
+ 0BDF:0550       IniUserFontFile
+ 0BDF:06EE       IniFileExist
+ 0BDF:0740       IniDirExist
+ 0BDF:07A5       IniTrailBlank
+ 0BDF:0800       IniLeadBlank
+ 0BDF:082F       IniLeftMargin
+ 0BDF:086D       IniOutTextXY
+ 0BDF:0930       IniGraphXY
+ 0BDF:0988       IniGotoXY
+ 0BDF:09CA       IniInversWrite
+ 0BDF:0CC8       IniInversText
+ 0BDF:0D76       IniClearLine
+ 0BDF:0F09       IniYBottomMargin
+ 0BDF:0F37       IniFirstBeatPos
+ 0BDF:0F80       IniDxValue
+ 0BDF:0FF0       IniNumChar
+ 0BDF:101A       IniArrow
+ 0BDF:1044       IniDoppel
+ 0BDF:1065       IniPrintChar
+ 0BDF:10A1       IniPrintNote
+ 0BDF:1100       IniNextnumber
+ 0BDF:11C8       IniNewPage
+ 0BDF:1213       IniYnow
+ 0BDF:1264       IniMaxHeader
+ 0BDF:1295       IniHeaderFooterLine
+ 0BDF:12FE       IniHeaderEnd
+ 0BDF:1353       IniMinFooter
+ 0BDF:1384       IniFooterEnd
+ 0BDF:13D9       IniLnow
+ 0BDF:141A       InitScreen
+ 0BDF:1605       IniRefInit
+ 0BDF:1677       IniGetSymbols
+ 0BDF:182E       IniEmptyLine
+ 0BDF:1883       IniClrCharField
+ 0BDF:1943       IniSetViewPort
+ 0BDF:19A2       IniCharAdd
+ 0BDF:1A53       IniIniColors
+ 0BDF:1E5F       IniIniSymbols
+ 0BDF:1F5C       IniHideColors
+ 0BDF:1FAD       IniSwapFrame
+ 0BDF:1FB8       IniSwapMenuColors
+ 0BDF:1FEB       WSwap
+ 0BDF:200F       @
+ 0DE6:005E       FilFindeErstBestenFont
+ 0DE6:00EB       FilCopyFile
+ 0DE6:0384       FilAssignRnsFile
+ 0DE6:04CB       FilCheckLine
+ 0DE6:06C9       FilStringSeparate
+ 0DE6:0862       FilBufStart
+ 0DE6:08B4       FilBufClear
+ 0DE6:0938       FilFindPtr
+ 0DE6:0A3A       FilFileToHeap
+ 0DE6:0CD4       FilHeapToFile
+ 0DE6:0FAB       FilHeapInsertString
+ 0DE6:129D       FilHeapExtractString
+ 0DE6:1423       FilHeapSqueeze
+ 0DE6:15AA       FilSavePage
+ 0DE6:1670       FilFindPage
+ 0DE6:1788       FilCompareFiles
+ 0DE6:1A38       @
+ 0F8B:0000       HlpBottomLine
+ 0F8B:0087       HlpHintFrame
+ 0F8B:014E       HlpTestFileName
+ 0F8B:028A       HlpGetFileName
+ 0F8B:044A       HlpText
+ 0F8B:05D4       HlpDemoText
+ 0F8B:0703       HlpHint
+ 0F8B:0955       HlpAreYouSure
+ 0F8B:0B46       HlpSymbolTable
+ 0F8B:0EF9       HlpSymbolSelect
+ 0F8B:1594       HlpCommandTable
+ 128D:0008       SduClearWin
+ 128D:0C49       SduSodir
+ 13E7:0DE8       Sdu2Sodir
+ 1505:082D       PagShowCurPosDistances
+ 1505:231C       PagUnMark
+ 1505:243F       PagCursorLeft
+ 1505:24ED       PagCursorRight
+ 1505:273F       PagPutBottomLine
+ 1505:2F24       PagClearBottomLine
+ 1505:2F5A       PagPageFrame
+ 1505:304A       PagEmptyPage
+ 1505:3126       PagRemovePage
+ 1505:31AC       PagGetPageFromHeap
+ 1505:32D0       PagDisplayPage
+ 1505:33BE       PagGetSetupPage
+ 1505:3474       PagReadPage
+ 1505:34E2       PagRefPage
+ 1505:34FE       PagRefClearVal
+ 1505:3548       PagRefreshPage
+ 1505:36CF       PagShowPage
+ 187B:0228       MarDeleteBlock
+ 187B:07CF       MarMarkToBuffer
+ 187B:0A74       MarkInverse
+ 187B:0C9B       MarkStart
+ 187B:0D41       MarkEnd
+ 187B:0E9E       MarkDisplay
+ 187B:107B       MarkInit
+ 1985:003F       SpeBlockCommands
+ 1985:09A1       SpeSplitFile
+ 1985:0C4E       SpeLineToBuf
+ 1985:0CD1       SpeSplitPage
+ 1985:0E6E       SpeJoinPage
+ 1985:114D       SpeEdLineAttr
+ 1985:1238       SpeLastFilled
+ 1985:12BB       SpeSpaceInPage
+ 1985:134C       SpeLineInsert
+ 1985:141F       SpeLineDelete
+ 1985:14F7       SpeNoteRight
+ 1985:15D2       SpeTextRight
+ 1985:165C       SpeInsNoteLine
+ 1985:1758       SpeInsTextLine
+ 1985:1826       SpeMoveBlock
+ 1985:19C2       SpeInsertBuffer
+ 1B7F:008D       Sp2HeaderFooterToBuffer
+ 1B7F:0450       Sp2SearchString
+ 1B7F:05CE       Sp2ReplaceString
+ 1B7F:0A11       Sp2SearchAndReplace
+ 1B7F:0D22       Sp2PageCommands
+ 1B7F:1193       Sp2SwapKeyboard
+ 1B7F:12AA       Sp2VisiMenu
+ 1B7F:13B3       Sp2SetHeaderFooter
+ 1B7F:152A       Sp2UnMarkFooter
+ 1B7F:15DF       Sp2UnMarkHeader
+ 1B7F:169E       Sp2MarkHeader
+ 1B7F:17DC       Sp2MarkFooter
+ 1B7F:1924       Sp2SelectLine
+ 1D22:000A       MusGetPromptedPattern
+ 1D22:019C       MusGetPattern
+ 1D74:0010       NotDelToEOL
+ 1D74:0090       NotInsNote
+ 1D74:01F2       NotDelNote
+ 1D74:0319       NotEdNoteLine
+ 1E67:0000       SndUpdateAddCent
+ 1E67:00B4       SndUpdateMulCent
+ 1E67:2F76       SndSoundMenu
+ 1E67:339C       SndPlaySound
+ 220D:01CC       ComEdEscape
+ 220D:0254       ComEdReturn
+ 220D:048E       ComEdMaus
+ 220D:0624       ComMouseAssign
+ 220D:0746       ComEdArrow
+ 220D:0D93       ComEdKey
+ 220D:1783       ComEdSpecial
+ 25E2:0024       SatSaveSym
+ 25E2:0127       SatSymbolParam
+ 261D:0249       PrmPrintMenu
+ 266C:002B       GriBeatMenuDisp
+ 26B3:000C       GetClearLines
+ 26B3:021F       GetNotePosX
+ 26B3:0452       GetActPosX
+ 26B3:05AC       GetNoteAttributes
+ 26B3:061C       GetNoteBlock
+ 26B3:081C       GetLine
+ 26B3:08C7       GetDrawBlock
+ 26B3:0E21       GetDrawBeats
+ 26B3:113F       GetDrawDistances
+ 26B3:1260       GetDrawSymbol
+ 26B3:14AE       @
+ 27FF:0000       UtiComputeGroup
+ 27FF:015E       UtiReplaceChars
+ 27FF:02AF       UtiCharReady
+ 27FF:057A       UtiNumReady
+ 27FF:0681       UtiCheckFlam
+ 27FF:0776       UtiComputeDxDy
+ 27FF:08EF       UtiKlammerZuPos
+ 27FF:097F       UtiKlammerAufPos
+ 27FF:0AF6       UtiDelNoteChar
+ 27FF:0C4E       UtiGetActDistance
+ 27FF:0D18       UtiDelNumChar
+ 27FF:0DAC       UtiGetNum
+ 27FF:0EBC       UtiCharBegin
+ 27FF:0F39       UtiFindCharEnd
+ 27FF:0FA9       UtiNextNum
+ 2919:0008       TitGetText
+ 2919:005B       TitVerify
+ 293F:0010       TexDelToEOL
+ 293F:0096       TexEndHKlammer
+ 293F:0567       TexEndVKlammer
+ 293F:0C70       TexTxtPosX
+ 293F:0F61       TexActPosX
+ 293F:1288       TexTabWidth
+ 293F:1971       TexDrawLine
+ 293F:1FDB       TexEdTextLine
+ 293F:22A2       TexInsChar
+ 293F:24C4       TexDelChar
+ 2BA8:0008       SymTabSymbol
+ 2BA8:00C9       SymTabSymbolDown
+ 2BA8:020E       SymNorKlammerZu
+ 2BA8:03A3       SymNorKlammerAuf
+ 2BA8:0544       SymHKlammerEvenMid
+ 2BA8:071B       SymHKlammerOddMid
+ 2BA8:090E       SymHKlammerStart
+ 2BA8:0AC6       SymHKlammerEnd
+ 2BA8:0C89       SymVKlammerEvenMid
+ 2BA8:0E73       SymVKlammerOddMid
+ 2BA8:107C       SymVKlammerCont
+ 2BA8:1112       SymVKlammerStart
+ 2BA8:1446       SymVKlammerEnd
+ 2BA8:16D8       Mainline
+ 2BA8:1732       DistanceMark
+ 2BA8:1898       Thinline
+ 2BA8:18F9       SymDottedLine
+ 2BA8:1986       SymInvisibleLine
+ 2BA8:19EF       SymNichts
+ 2BA8:1A5B       SymAbsNichts
+ 2BA8:1AA1       SymLeer
+ 2BA8:1B17       Beat
+ 2BA8:1BC0       Slash
+ 2BA8:1C76       SymDotSlash
+ 2BA8:1D4D       SymDotSlash2
+ 2D8B:0060       PriDrawLine
+ 2D8B:00A6       PriRXScale
+ 2D8B:013E       PriXScale
+ 2D8B:017E       PriRYScale
+ 2D8B:021B       PriYScale
+ 2D8B:025B       PriString
+ 2D8B:02C1       PriPlaceString
+ 2D8B:035E       PriAddreal
+ 2D8B:03C2       PriLine
+ 2D8B:0443       PriSetDash
+ 2D8B:04D1       PriReSetDash
+ 2D8B:0503       PriArc
+ 2D8B:05D0       PriMove
+ 2D8B:064A       PriStroke
+ 2D8B:0682       PriNewpath
+ 2D8B:0710       PriSwapFont
+ 2D8B:07A3       PriSetLineWidth
+ 2D8B:0872       PriWriteChar
+ 2D8B:0968       PriLeftString
+ 2D8B:0AE4       PriComplString
+ 2D8B:0B69       PriHorizontalKlammer
+ 2D8B:0E44       PriVerticalKlammer
+ 2D8B:118E       PriPostscript
+ 2D8B:12DE       PriPostscriptinit
+ 2D8B:16B5       PriPostscriptComplete
+ 2F19:0018       DmeDispChar
+ 2F19:00EE       DmePlaceWord
+ 2F2E:031D       butinit
+ 2F2E:0AB0       butdraw
+ 2F2E:0B94       ButActivated
+ 2FFD:0082       ImeInitSymbolMenus
+ 2FFD:031C       ImeInitCharMenu
+ 2FFD:0980       ImeIniVisiMenu
+ 2FFD:0C7C       ImeIniSwapMenu
+ 2FFD:0EA1       ImeInitPrOptionsMenu
+ 2FFD:12E2       ImeInitSndOptionsMenu
+ 2FFD:15FE       ImeInitHFMenu
+ 2FFD:1718       ImeInitSearchMenu
+ 2FFD:1A5F       ImeIniBlockMenu
+ 2FFD:1BFD       ImeIniPageMenu
+ 2FFD:1D82       ImeInitPrintMenu
+ 2FFD:1FCA       ImeInitSoundMenu
+ 2FFD:2261       ImeInitBeatMenu
+ 2FFD:24F8       ImeInitTopMenu
+ 2FFD:265F       ImeInitLineSelectMenu
+ 327E:0008       GrDisplay_Frame
+ 327E:01CB       GrDisplay_Menu
+ 327E:08AE       GrGet_Menu_Response
+ 327E:0EF1       GrGet_Menu_Values
+ 33BC:0000       GrPut_Integer
+ 33BC:003D       GrPut_Real
+ 33BC:015D       GrGet_String
+ 33BC:0414       GrGetUpcase_String
+ 33BC:0A4B       GrGet_Integer
+ 33BC:0DAF       GrGet_Prompted_String
+ 33BC:0EC2       GrGet_Prompted_Real
+ 33BC:0FE6       GrGet_Prompted_Integer
+ 33BC:1112       GrGet_Prompted_Toggle
+ 34E9:0000       GcuRightMargin
+ 34E9:02F8       GcuCursorClear
+ 34E9:0408       GcuPatternRestore
+ 34E9:07B6       GcuMoveCursor
+ 34E9:080B       GcuCursorRestore
+ 34E9:083E       GcuIniCursor
+ 34E9:09F0       @
+ 358A:0000       MausInstall
+ 358A:0042       MausZeigen
+ 358A:005A       MausDunkel
+ 358A:0072       IstDunkel
+ 358A:012C       MausPosition
+ 358A:02DC       MausPressedPosition
+ 358A:0315       MausGrafik
+ 358A:0368       MausBereichAdd
+ 358A:0428       MausBereich
+ 358A:04E2       MausSetXY
+ 358A:04FB       @
+ 35DC:0EE2       @
+ 36CD:0000       XReadKey
+ 36CD:010C       XKeypressed
+ 36CD:0122       @
+ 36E1:000D       @
+ 36E1:0177       TextMode
+ 36E1:018C       Window
+ 36E1:01CC       ClrScr
+ 36E1:01E6       ClrEol
+ 36E1:01FA       InsLine
+ 36E1:01FF       DelLine
+ 36E1:021F       GotoXY
+ 36E1:024B       WhereX
+ 36E1:0257       WhereY
+ 36E1:0263       TextColor
+ 36E1:027D       TextBackground
+ 36E1:0295       LowVideo
+ 36E1:029B       HighVideo
+ 36E1:02A1       NormVideo
+ 36E1:02A8       Delay
+ 36E1:02D4       Sound
+ 36E1:0301       NoSound
+ 36E1:0308       KeyPressed
+ 36E1:031A       ReadKey
+ 36E1:033C       AssignCrt
+ 3743:0000       GetFAttr
+ 3743:0024       SetFAttr
+ 3743:0042       FindFirst
+ 3743:0080       FindNext
+ 3743:00BE       FExpand
+ 3743:0187       MsDos
+ 3743:0192       Intr
+ 3762:0000       @
+ 3763:027E       GraphErrorMsg
+ 3763:04F3       GraphResult
+ 3763:07C2       RegisterBGIdriver
+ 3763:0977       RegisterBGIfont
+ 3763:0AAB       DetectGraph
+ 3763:0DAC       GraphDefaults
+ 3763:0E6C       InitGraph
+ 3763:1144       RestoreCrtMode
+ 3763:1171       CloseGraph
+ 3763:122C       ClearDevice
+ 3763:123F       SetViewPort
+ 3763:12D4       ClearViewPort
+ 3763:1337       MoveTo
+ 3763:1354       GetMaxX
+ 3763:1367       GetMaxY
+ 3763:137A       SetLineStyle
+ 3763:13B4       GetFillSettings
+ 3763:13CC       SetFillStyle
+ 3763:13F7       SetFillPattern
+ 3763:1453       SetBkColor
+ 3763:1488       GetColor
+ 3763:149D       GetBkColor
+ 3763:14B2       SetAllPalette
+ 3763:1557       SetPalette
+ 3763:1599       GetDefaultPalette
+ 3763:15B8       ImageSize
+ 3763:15EC       PutImage
+ 3763:169E       SetTextJustify
+ 3763:16E0       SetTextStyle
+ 3763:191C       TextHeight
+ 3763:194A       @
+ 3763:1AB6       SetVisualPage
+ 3763:1AD0       SetActivePage
+ 3763:1AED       SetWriteMode
+ 3763:1C95       Line
+ 3763:1CAF       DrawPoly
+ 3763:1CC6       FillPoly
+ 3763:1CDD       Bar
+ 3763:1CF7       Bar3D
+ 3763:1D2F       Ellipse
+ 3763:1D56       FillEllipse
+ 3763:1D8A       Sector
+ 3763:1DB1       GetArcCoords
+ 3763:1DD1       SetColor
+ 3763:1DE9       GetMaxColor
+ 3763:1DF9       GetPaletteSize
+ 3763:1E32       GetMaxMode
+ 3763:1E59       SetRGBPalette
+ 3763:1EBE       FloodFill
+ 3763:1F28       OutTextXY
+ 3763:1FB1       TextWidth
+ 3763:1FE2       GetPixel
+ 3763:1FFA       PutPixel
+ 3763:2011       GetImage
+ 3D49:0002       spec
+ 3D49:0022       flamset
+ 3D49:0122       HintTexts
+ 3D49:0C5E       OvrCodeList
+ 3D49:0C60       OvrHeapSize
+ 3D49:0C62       OvrDebugPtr
+ 3D49:0C66       OvrHeapOrg
+ 3D49:0C68       OvrHeapPtr
+ 3D49:0C6A       OvrHeapEnd
+ 3D49:0C6C       OvrLoadList
+ 3D49:0C6E       OvrDosHandle
+ 3D49:0C70       OvrEmsHandle
+ 3D49:0C72       HeapOrg
+ 3D49:0C76       HeapPtr
+ 3D49:0C7A       HeapEnd
+ 3D49:0C7E       FreeList
+ 3D49:0C82       FreeZero
+ 3D49:0C86       HeapError
+ 3D49:0C8A       ExitProc
+ 3D49:0C8E       ExitCode
+ 3D49:0C90       ErrorAddr
+ 3D49:0C94       PrefixSeg
+ 3D49:0C96       StackLimit
+ 3D49:0C98       InOutRes
+ 3D49:0C9A       RandSeed
+ 3D49:0C9E       SelectorInc
+ 3D49:0CA0       Seg0040
+ 3D49:0CA2       SegA000
+ 3D49:0CA4       SegB000
+ 3D49:0CA6       SegB800
+ 3D49:0CA8       Test8086
+ 3D49:0CA9       Test8087
+ 3D49:0CAA       FileMode
+ 3D49:0CAE       ExitSave
+ 3D49:0CB2       demoversion
+ 3D49:0CB3       firsttime
+ 3D49:0CB4       vtimer
+ 3D49:0CC0       vmstime
+ 3D49:0CC2       vmsstat
+ 3D49:0CC4       res100
+ 3D49:0CC8       symbcount
+ 3D49:0CCA       infile
+ 3D49:0DCA       debfile
+ 3D49:0ECA       GraphDriver
+ 3D49:0ECC       GraphMode
+ 3D49:0ECE       ErrCode
+ 3D49:0ED0       HercGraphicsMode
+ 3D49:0ED2       heapmark
+ 3D49:0ED6       curcolor
+ 3D49:0ED7       gridcolor
+ 3D49:0ED8       bkcolor
+ 3D49:0ED9       lcolor
+ 3D49:0EDA       ibkcolor
+ 3D49:0EDB       ilcolor
+ 3D49:0EDC       menutextcolor
+ 3D49:0EDD       menubkcolor
+ 3D49:0EDE       imenutextcolor
+ 3D49:0EDF       imenubkcolor
+ 3D49:0EE0       menuframecolor
+ 3D49:0EE1       bottomcolor
+ 3D49:0EE2       speccolor
+ 3D49:0EE3       helplinecolor
+ 3D49:0EE4       alarmcolor
+ 3D49:0EE5       alarmbkcolor
+ 3D49:0EE6       tmtext
+ 3D49:0EE7       tmbk
+ 3D49:0EE8       itmtext
+ 3D49:0EE9       itmbk
+ 3D49:0EEA       soundcolor
+ 3D49:0EEB       symtabcolor
+ 3D49:0EEC       symtabbkcolor
+ 3D49:0EED       symsymbolscolor
+ 3D49:0EEE       mausmtcolor
+ 3D49:0EEF       mausmbkcolor
+ 3D49:0EF0       FrameColor
+ 3D49:0EF1       FrameBkColor
+ 3D49:0EF2       PageLength
+ 3D49:0EF4       LineThick
+ 3D49:0EF6       line2thick
+ 3D49:0EF8       TopMargin
+ 3D49:0EFA       PageCount
+ 3D49:0EFC       Pagesav
+ 3D49:0EFE       CharWidth
+ 3D49:0F00       CharHeight
+ 3D49:0F02       Char2Width
+ 3D49:0F04       Char2Height
+ 3D49:0F06       Chr4Width
+ 3D49:0F08       Chr8Width
+ 3D49:0F0A       Page
+ 3D49:480A       actfilename
+ 3D49:490A       insmusicline
+ 3D49:4A0A       TextMargin
+ 3D49:4A0C       SymCount
+ 3D49:4A0E       ActNumber
+ 3D49:4A10       LastEntry
+ 3D49:4A11       Lastchar
+ 3D49:4A12       ArrowEntry
+ 3D49:4A14       SymArr
+ 3D49:5338       SymPar
+ 3D49:5818       actattr
+ 3D49:581F       dispspec
+ 3D49:5820       dispgrid
+ 3D49:5821       dispsound
+ 3D49:5822       disphidlines
+ 3D49:5823       charset
+ 3D49:5824       blankset
+ 3D49:5825       manset
+ 3D49:5826       delln
+ 3D49:5926       delpage
+ 3D49:5928       linecount
+ 3D49:592A       yzeropos
+ 3D49:592C       buffile
+ 3D49:5A2C       gmaxx
+ 3D49:5A2E       gmaxy
+ 3D49:5A30       GrMinX
+ 3D49:5A32       GrMaxX
+ 3D49:5A34       GrMinY
+ 3D49:5A36       GrMaxY
+ 3D49:5A38       UsrMenu
+ 3D49:65D0       Symbolmenu1
+ 3D49:7168       Symbolmenu2
+ 3D49:7D00       togglestring
+ 3D49:7DCC       hfminx
+ 3D49:7DCE       hfminy
+ 3D49:7DD0       hfmaxx
+ 3D49:7DD2       hfmaxy
+ 3D49:7DD4       TOP_Line
+ 3D49:7DD6       Left_Col
+ 3D49:7DD8       Valcol
+ 3D49:7DDA       stabxmin
+ 3D49:7DDC       stabxmax
+ 3D49:7DDE       stabymin
+ 3D49:7DE0       stabymax
+ 3D49:7DE2       sxmin
+ 3D49:7DE4       sxmax
+ 3D49:7DE6       symin
+ 3D49:7DE8       symax
+ 3D49:7DEA       datadir
+ 3D49:7DFC       fontfile
+ 3D49:7E0E       colorfile
+ 3D49:7E20       searchstring
+ 3D49:7F20       searchtyp
+ 3D49:7F21       replaceflag
+ 3D49:7F22       replacestring
+ 3D49:8022       nextresponse
+ 3D49:8023       nextkey
+ 3D49:8024       nextshift
+ 3D49:8025       nextctrl
+ 3D49:8026       symboldx
+ 3D49:8028       symboldy
+ 3D49:802A       mstart
+ 3D49:8032       mend
+ 3D49:803A       marpartline
+ 3D49:803B       actedit
+ 3D49:803C       inbuffer
+ 3D49:804E       bufstartptr
+ 3D49:8052       bufactptr
+ 3D49:8056       bufendptr
+ 3D49:805A       refxmin
+ 3D49:805C       refxmax
+ 3D49:805E       refymin
+ 3D49:8060       refymax
+ 3D49:8062       hintminx
+ 3D49:8064       hintminy
+ 3D49:8066       hintmaxx
+ 3D49:8068       hintmaxy
+ 3D49:806A       printeron
+ 3D49:806B       prformat
+ 3D49:806C       prpage
+ 3D49:806E       prdest
+ 3D49:8070       prfname
+ 3D49:8082       prfile
+ 3D49:8084       prdevice
+ 3D49:8095       paused
+ 3D49:8096       sndlength
+ 3D49:8098       sndlengthspm
+ 3D49:809E       sndlengthper
+ 3D49:809F       sndplaybeat
+ 3D49:80A0       sndplaypulse
+ 3D49:80A2       sndbeat
+ 3D49:80A4       sndbeatlength
+ 3D49:80A6       sndpulse
+ 3D49:80A8       sndpulselength
+ 3D49:80AA       sndchar
+ 3D49:80AB       PlaySuccess
+ 3D49:80AC       usrname
+ 3D49:81AC       usrfirstname
+ 3D49:82AC       showmenus
+ 3D49:82AE       addcent
+ 3D49:82B0       mulcent
+ 3D49:82B6       LastSound
+ 3D49:82B8       HintS1
+ 3D49:82C2       HintS2
+ 3D49:82CB       FrameWidth
+ 3D49:82CC       FileChanged
+ 3D49:82D4       psfile
+ 3D49:83D4       psactwidth
+ 3D49:83DA       psxmin
+ 3D49:83E0       psxmax
+ 3D49:83E6       psymin
+ 3D49:83EC       psymax
+ 3D49:83F2       vmenubutton
+ 3D49:86EA       vpageup
+ 3D49:86FE       vpagedn
+ 3D49:8712       vswap
+ 3D49:8726       vexit
+ 3D49:873A       PatternSave
+ 3D49:8852       GraphCursor
+ 3D49:896A       gcxcoord
+ 3D49:896C       gcycoord
+ 3D49:896E       dispcurs
+ 3D49:8970       CurGridX
+ 3D49:8A10       CurGridY
+ 3D49:8AB2       Mausexist
+ 3D49:8AB3       Mausform
+ 3D49:8AEA       LastFileName
+ 3D49:8BF0       CheckBreak
+ 3D49:8BF1       CheckEOF
+ 3D49:8BF2       DirectVideo
+ 3D49:8BF3       CheckSnow
+ 3D49:8BF4       LastMode
+ 3D49:8BF6       TextAttr
+ 3D49:8BF8       WindMin
+ 3D49:8BFA       WindMax
+ 3D49:8C04       DosError
+ 3D49:8C06       GraphGetMemPtr
+ 3D49:8C0A       GraphFreeMemPtr
+ 3D49:8DEA       Input
+ 3D49:8EEA       Output
+ 3D49:8FEA       SaveInt00
+ 3D49:8FEE       SaveInt02
+ 3D49:8FF2       SaveInt1B
+ 3D49:8FF6       SaveInt21
+ 3D49:8FFA       SaveInt23
+ 3D49:8FFE       SaveInt24
+ 3D49:9002       SaveInt34
+ 3D49:9006       SaveInt35
+ 3D49:900A       SaveInt36
+ 3D49:900E       SaveInt37
+ 3D49:9012       SaveInt38
+ 3D49:9016       SaveInt39
+ 3D49:901A       SaveInt3A
+ 3D49:901E       SaveInt3B
+ 3D49:9022       SaveInt3C
+ 3D49:9026       SaveInt3D
+ 3D49:902A       SaveInt3E
+ 3D49:902E       SaveInt3F
+ 3D49:9032       SaveInt75
+
+Line numbers for Rns(PAS\RNS.PAS) segment Rns
+
+    46 0000:0000    47 0000:000A    48 0000:000F    49 0000:0014
+    50 0000:0019    51 0000:0027    55 0000:0029    56 0000:0037
+    57 0000:003C    62 0000:0229    63 0000:0233    64 0000:023A
+    65 0000:023F    66 0000:0246    67 0000:024D    68 0000:0256
+    69 0000:025D    70 0000:0278    71 0000:0293    72 0000:02AE
+    74 0000:02C9    75 0000:02CB    82 0000:02E7    83 0000:0302
+    84 0000:031D    85 0000:0338    88 0000:0353    89 0000:036E
+    90 0000:0389    91 0000:03A4    94 0000:04A7    95 0000:04B1
+    99 0000:04C2   103 0000:04D3   107 0000:04E4   111 0000:04F5
+   115 0000:0506   117 0000:051F   118 0000:056A   119 0000:0573
+   120 0000:0576   121 0000:0579   122 0000:0587   123 0000:0594
+   124 0000:0599   125 0000:05A6   126 0000:05B5   127 0000:05C4
+   129 0000:05E1   131 0000:05EB   132 0000:05F9   133 0000:0608
+   136 0000:060D   138 0000:0612   139 0000:0617   140 0000:061E
+   141 0000:0625   142 0000:062A   143 0000:0654   145 0000:0663
+
+Line numbers for userint(USERINT.PAS) segment userint
+
+   100 07C7:0009   101 07C7:0017   102 07C7:0029   103 07C7:003A
+   105 07C7:0072   106 07C7:007E   107 07C7:0090   112 07C7:00BC
+   113 07C7:00CB   114 07C7:00DB   115 07C7:00EB   116 07C7:0108
+   117 07C7:0118   119 07C7:0134   121 07C7:013E   122 07C7:0147
+   123 07C7:0150   124 07C7:0152   125 07C7:0162   126 07C7:017E
+   127 07C7:018E   128 07C7:01AA   129 07C7:01BE   132 07C7:0234
+   134 07C7:023E   139 07C7:0247   140 07C7:0263   144 07C7:0265
+   145 07C7:0275   154 07C7:028D   155 07C7:029C   156 07C7:02AC
+   157 07C7:02C9   158 07C7:02D9   159 07C7:02F5   160 07C7:0311
+   161 07C7:0321   171 07C7:0339   172 07C7:0348   174 07C7:035A
+   175 07C7:0378   176 07C7:038B   177 07C7:03A8   178 07C7:03BA
+   179 07C7:03DA   181 07C7:045A   182 07C7:048A   183 07C7:04A6
+   184 07C7:04B0   185 07C7:04D0   186 07C7:04EC   187 07C7:04F6
+   188 07C7:0556   189 07C7:056E   190 07C7:059E   191 07C7:05CE
+   192 07C7:05EA   193 07C7:060A   194 07C7:061A   204 07C7:062D
+   205 07C7:063C   207 07C7:064E   208 07C7:0679   211 07C7:06CC
+   212 07C7:06E8   214 07C7:0711   217 07C7:079D   218 07C7:07CA
+   219 07C7:07E6   220 07C7:0803   221 07C7:081F   223 07C7:087C
+   224 07C7:0897   225 07C7:08C1   226 07C7:08EB   227 07C7:0907
+   228 07C7:092C   230 07C7:093C   245 07C7:09DA   246 07C7:09E9
+   248 07C7:09FA   250 07C7:0A0C   252 07C7:0A1E   253 07C7:0A4B
+   254 07C7:0A52   255 07C7:0A63   256 07C7:0A6A   257 07C7:0A72
+   260 07C7:0A84   263 07C7:0AD8   264 07C7:0ADE   266 07C7:0AE3
+   267 07C7:0AEB   268 07C7:0AFC   276 07C7:0B40   277 07C7:0B5C
+   278 07C7:0B60   279 07C7:0B70   281 07C7:0B7F   283 07C7:0B88
+   284 07C7:0B8C   287 07C7:0B8E   289 07C7:0B97   290 07C7:0B9B
+   291 07C7:0B9F   294 07C7:0BA1   296 07C7:0BAA   302 07C7:0BAE
+   304 07C7:0BB1   306 07C7:0BBC   307 07C7:0BC3   308 07C7:0BC7
+   309 07C7:0BDE   310 07C7:0BEF   311 07C7:0BF5   312 07C7:0BF9
+   313 07C7:0C03   315 07C7:0C16   317 07C7:0C3C   318 07C7:0C42
+   320 07C7:0C76   322 07C7:0C7F   324 07C7:0CAC   326 07C7:0CB2
+   327 07C7:0CB6   328 07C7:0CC1   331 07C7:0CC3   335 07C7:0D05
+   340 07C7:0D5F   342 07C7:0D62   343 07C7:0D66   344 07C7:0D6C
+   349 07C7:0DC0   350 07C7:0DC2   351 07C7:0DC6   352 07C7:0DCC
+   359 07C7:0E20   360 07C7:0E29   361 07C7:0E36   378 07C7:0F6E
+   379 07C7:0F7D   381 07C7:0F8F   382 07C7:0F94   383 07C7:0F9C
+   386 07C7:0FAE   388 07C7:0FBF   390 07C7:0FD1   393 07C7:1010
+   395 07C7:1016   396 07C7:103C   404 07C7:1080   405 07C7:109C
+   406 07C7:10B6   407 07C7:10E4   408 07C7:10E8   410 07C7:10F8
+   412 07C7:10FE   413 07C7:1102   414 07C7:110D   418 07C7:1110
+   420 07C7:1113   422 07C7:111E   423 07C7:1125   424 07C7:112A
+   425 07C7:1134   427 07C7:1149   428 07C7:114F   429 07C7:1160
+   430 07C7:1164   431 07C7:1167   432 07C7:1178   433 07C7:1187
+   434 07C7:118E   435 07C7:11B4   436 07C7:11B8   437 07C7:11BB
+   438 07C7:11CC   439 07C7:11DD   440 07C7:11E1   441 07C7:11E4
+   442 07C7:11F5   443 07C7:1206   444 07C7:120A   445 07C7:120D
+   446 07C7:1221   447 07C7:1225   448 07C7:1229   449 07C7:123B
+   453 07C7:127A   454 07C7:127D   462 07C7:1354   463 07C7:1365
+   465 07C7:1379   466 07C7:138A   467 07C7:138E   469 07C7:1391
+   471 07C7:139B   473 07C7:13A7   475 07C7:13D6   476 07C7:13E7
+   477 07C7:13EB   480 07C7:13ED   481 07C7:13FC   486 07C7:143B
+   489 07C7:143D   490 07C7:144A   492 07C7:145C   499 07C7:149B
+   502 07C7:149D   504 07C7:14A6   507 07C7:14E5   508 07C7:14FC
+   511 07C7:14FE   512 07C7:1502   515 07C7:1506   517 07C7:1508
+   518 07C7:150C   520 07C7:1512   523 07C7:1551   530 07C7:1568
+   531 07C7:1571   533 07C7:1577   534 07C7:157F   535 07C7:1587
+   536 07C7:158F   537 07C7:1597   540 07C7:159A   541 07C7:15BE
+   542 07C7:15C6   543 07C7:15E2   544 07C7:15F6   545 07C7:166C
+   546 07C7:167D   547 07C7:16AF   548 07C7:16B4   549 07C7:16C7
+   550 07C7:16CD   552 07C7:1701   553 07C7:1733   554 07C7:1738
+   555 07C7:174B   556 07C7:174E   558 07C7:175F   571 07C7:1847
+   572 07C7:1856   573 07C7:185A   575 07C7:1862   576 07C7:1888
+   577 07C7:1894   579 07C7:18A6   583 07C7:18B8   585 07C7:18C9
+   587 07C7:18DB   588 07C7:18E3   589 07C7:18E7   592 07C7:1926
+   595 07C7:1965   597 07C7:196E   600 07C7:1980   601 07C7:1991
+   602 07C7:19C1   603 07C7:19C5   604 07C7:19D7   605 07C7:19DC
+   606 07C7:19E9   607 07C7:19F6   608 07C7:1A3A   609 07C7:1A3E
+   611 07C7:1A4E   614 07C7:1A51   627 07C7:1AC1   628 07C7:1AD0
+   629 07C7:1AD4   631 07C7:1ADC   632 07C7:1B02   633 07C7:1B0E
+   635 07C7:1B20   636 07C7:1B2E   639 07C7:1B40   641 07C7:1B51
+   643 07C7:1B63   644 07C7:1B67   647 07C7:1BA6   650 07C7:1BE5
+   652 07C7:1BEB   653 07C7:1BFC   655 07C7:1C0B   676 07C7:1D7A
+   677 07C7:1D89   678 07C7:1D8C   679 07C7:1D8F   680 07C7:1D94
+   681 07C7:1D99   682 07C7:1D9C   683 07C7:1DA2   684 07C7:1DA7
+   685 07C7:1DAC   686 07C7:1DB1   687 07C7:1DB5   689 07C7:1DBA
+   690 07C7:1DC5   691 07C7:1DCA   692 07C7:1DD7   693 07C7:1DE2
+   694 07C7:1DE7   695 07C7:1DF9   696 07C7:1E24   697 07C7:1E40
+   698 07C7:1E50   699 07C7:1E55   701 07C7:1E5C   703 07C7:1E6A
+   705 07C7:1E73   709 07C7:1E78   712 07C7:1E7F   714 07C7:1E86
+   716 07C7:1EC4   718 07C7:1F01   720 07C7:1F3E   722 07C7:1F7D
+   725 07C7:1FBB   727 07C7:1FC2   729 07C7:1FFF   731 07C7:203C
+   733 07C7:207B   736 07C7:20BA   738 07C7:20C1   740 07C7:20FF
+   746 07C7:213D   747 07C7:2144   749 07C7:2178   750 07C7:21AA
+   751 07C7:21AF   753 07C7:21C2   754 07C7:21C9   755 07C7:21D0
+   756 07C7:2201   757 07C7:220A   759 07C7:2211   760 07C7:2217
+   762 07C7:221D   763 07C7:222D   769 07C7:2237   770 07C7:223E
+   771 07C7:2250   772 07C7:225D   773 07C7:226C   774 07C7:227E
+   775 07C7:228B   777 07C7:229A   779 07C7:22A4   780 07C7:22B6
+   781 07C7:22C3   782 07C7:22D2   783 07C7:230D   784 07C7:231A
+   785 07C7:2329   786 07C7:2339   789 07C7:233B   790 07C7:234B
+   792 07C7:2359   794 07C7:2368   795 07C7:2379   796 07C7:2388
+   798 07C7:2396   800 07C7:23A5   802 07C7:23B4   803 07C7:23DF
+   804 07C7:23EF   805 07C7:23F4   807 07C7:240B   808 07C7:2428
+   809 07C7:2435   810 07C7:247B   811 07C7:248B   812 07C7:248E
+   814 07C7:249E   815 07C7:24A5   817 07C7:2512   819 07C7:257F
+   820 07C7:2586   822 07C7:25E9   825 07C7:2656   826 07C7:265D
+   828 07C7:26CA   830 07C7:2737   831 07C7:273E   833 07C7:27A1
+   837 07C7:2804   839 07C7:280A   841 07C7:2811   843 07C7:2817
+   847 07C7:2851   848 07C7:285D   849 07C7:286D   850 07C7:287D
+   851 07C7:2882   852 07C7:2885   853 07C7:288C   854 07C7:2891
+   855 07C7:2896   856 07C7:289B   857 07C7:28A5   858 07C7:28AE
+   860 07C7:28F3   862 07C7:2918   864 07C7:2921   865 07C7:2933
+   866 07C7:295E   867 07C7:297A   868 07C7:298A   869 07C7:298D
+   870 07C7:29BD   871 07C7:29D3   872 07C7:2A2A   873 07C7:2A63
+   874 07C7:2A66   876 07C7:2ADA   879 07C7:2B30   880 07C7:2B4E
+   881 07C7:2B50   882 07C7:2B55   883 07C7:2B5A   885 07C7:2B8F
+   886 07C7:2B94   887 07C7:2B99   888 07C7:2BD3   889 07C7:2BD8
+   891 07C7:2BEF   892 07C7:2C0E   895 07C7:2C6E   898 07C7:2CAE
+   899 07C7:2CB6   900 07C7:2CC8   901 07C7:2CCA   902 07C7:2CCE
+   903 07C7:2CD1   904 07C7:2CD8   905 07C7:2CE3   906 07C7:2CF5
+   907 07C7:2D14   911 07C7:2D74   912 07C7:2D86   913 07C7:2D8D
+   914 07C7:2DD2   915 07C7:2DEE   916 07C7:2DF4   917 07C7:2E62
+   918 07C7:2E7E   919 07C7:2E85   921 07C7:2E8C   922 07C7:2F04
+   923 07C7:2F07   924 07C7:2F28   925 07C7:2F46   926 07C7:2F49
+   927 07C7:2F8B   928 07C7:2FAA   929 07C7:2FC9   930 07C7:2FCB
+   931 07C7:2FEC   932 07C7:300A   933 07C7:3029   934 07C7:302B
+   938 07C7:3030   940 07C7:3033   948 07C7:3094   949 07C7:309D
+   950 07C7:30B4   951 07C7:30CB   952 07C7:30CF   953 07C7:30E4
+   954 07C7:3107   955 07C7:3130   956 07C7:3132   957 07C7:316E
+   958 07C7:3170   959 07C7:3174   960 07C7:317B   962 07C7:31AA
+   966 07C7:31D3   967 07C7:3200   968 07C7:3209   969 07C7:3219
+   970 07C7:3255   971 07C7:327A   976 07C7:329F   978 07C7:32B2
+   979 07C7:32B9   981 07C7:32C4   982 07C7:32C7   984 07C7:32CB
+   986 07C7:32CE   987 07C7:32D5   988 07C7:32DA   989 07C7:32E2
+   990 07C7:32E7   991 07C7:32FA   992 07C7:32FF   993 07C7:3307
+   994 07C7:3310   996 07C7:3355   998 07C7:3358   999 07C7:335F
+  1000 07C7:3364  1001 07C7:336C  1002 07C7:3371  1003 07C7:3384
+  1004 07C7:3389  1005 07C7:3391  1006 07C7:339A  1008 07C7:33DF
+  1010 07C7:33E2  1011 07C7:33E9  1012 07C7:33EE  1013 07C7:33F8
+  1014 07C7:3401  1016 07C7:3446  1017 07C7:3449  1018 07C7:3464
+  1020 07C7:3480  1021 07C7:3485  1022 07C7:3488  1023 07C7:348B
+  1024 07C7:3490  1025 07C7:3495  1026 07C7:349A  1027 07C7:349E
+  1028 07C7:34A3  1029 07C7:34A5  1030 07C7:34A9  1032 07C7:34AC
+  1033 07C7:34B0  1034 07C7:34B5  1035 07C7:34BF  1036 07C7:34C8
+  1038 07C7:350D  1039 07C7:3528  1041 07C7:352B  1042 07C7:3532
+  1043 07C7:3537  1044 07C7:3541  1045 07C7:3546  1046 07C7:354B
+  1047 07C7:3554  1049 07C7:3599  1050 07C7:359E  1051 07C7:35B9
+  1052 07C7:35BE  1053 07C7:35C1  1054 07C7:35C6  1057 07C7:35CB
+  1058 07C7:35D0  1060 07C7:35D9  1062 07C7:35DB  1063 07C7:35E5
+  1064 07C7:35EA  1065 07C7:35EF
+
+Line numbers for editunit(EDITUNIT.PAS) segment editunit
+
+    58 0B27:00BC    59 0B27:00FB    60 0B27:0100    61 0B27:0105
+    62 0B27:010F    63 0B27:0114    64 0B27:0119    65 0B27:011F
+    66 0B27:0125    67 0B27:012F    69 0B27:0136    71 0B27:013B
+    73 0B27:0141    74 0B27:0152    75 0B27:0178    78 0B27:017A
+    79 0B27:0189    81 0B27:01A2    85 0B27:01AE    88 0B27:01C9
+    89 0B27:01CE    90 0B27:01D4    91 0B27:01DC    92 0B27:01E1
+    93 0B27:01F3    94 0B27:021D    95 0B27:022C    97 0B27:0249
+    98 0B27:0274    99 0B27:0292   100 0B27:02BC   101 0B27:02D8
+   102 0B27:02E5   103 0B27:02F4   104 0B27:031F   107 0B27:032F
+   108 0B27:033F   109 0B27:035C   110 0B27:036C   112 0B27:037C
+   114 0B27:0382   115 0B27:03AC   117 0B27:03BB   118 0B27:03CD
+   119 0B27:03EF   120 0B27:03FF   122 0B27:040D   123 0B27:0412
+   124 0B27:0431   126 0B27:0457   128 0B27:047D   129 0B27:0486
+   130 0B27:0496   131 0B27:04A8   132 0B27:04B8   134 0B27:04BD
+   136 0B27:04C7   137 0B27:04CC   138 0B27:04D1   139 0B27:04D6
+   140 0B27:04DB   141 0B27:04E0   142 0B27:04E5   143 0B27:0509
+   144 0B27:0520   146 0B27:0527   147 0B27:052D   150 0B27:052F
+   152 0B27:0536   153 0B27:054B   154 0B27:0550   155 0B27:0555
+   156 0B27:055C   157 0B27:057B   159 0B27:0580   162 0B27:059B
+   164 0B27:05A2   166 0B27:05D3   168 0B27:05DA   170 0B27:061B
+   173 0B27:061D   174 0B27:062E   175 0B27:0635   176 0B27:063A
+   177 0B27:0641   179 0B27:0648   180 0B27:064D   181 0B27:0652
+   183 0B27:0659   186 0B27:069E   188 0B27:06C7   189 0B27:06C9
+   190 0B27:06CE   192 0B27:06D3   193 0B27:06D7   195 0B27:070D
+   196 0B27:073A   198 0B27:0761   200 0B27:0795   204 0B27:07D1
+   205 0B27:07E6   206 0B27:07ED   207 0B27:07F2   208 0B27:07F7
+   210 0B27:07FE   211 0B27:0805   213 0B27:0824   214 0B27:0829
+   215 0B27:082C   216 0B27:0833   217 0B27:0838   218 0B27:0855
+   219 0B27:085A   221 0B27:0863   222 0B27:088D   223 0B27:089C
+   224 0B27:08C3   225 0B27:08E3   228 0B27:08E5   229 0B27:08EC
+   231 0B27:08F1   233 0B27:08FB   234 0B27:0904   236 0B27:0926
+   239 0B27:092F   240 0B27:0934   242 0B27:0939   243 0B27:0943
+   244 0B27:0948
+
+Line numbers for timer(TIMER.PAS) segment timer
+
+    86 0BBC:0008    87 0BBC:0016    89 0BBC:0020    90 0BBC:003F
+    91 0BBC:0045
+
+Line numbers for InitSc(INITSC.PAS) segment InitSc
+
+   279 0BDF:0008   280 0BDF:0016   281 0BDF:0069   282 0BDF:007B
+   295 0BDF:007F   296 0BDF:008D   298 0BDF:0094   299 0BDF:0098
+   302 0BDF:009A   304 0BDF:009E   306 0BDF:00AE   307 0BDF:00C0
+   309 0BDF:00C6   310 0BDF:00CA   311 0BDF:00CF   314 0BDF:00D1
+   316 0BDF:00D7   317 0BDF:00E9   319 0BDF:00FE   320 0BDF:0102
+   321 0BDF:0107   327 0BDF:010D   329 0BDF:0114   330 0BDF:0132
+   332 0BDF:0138   333 0BDF:013C   337 0BDF:0141   338 0BDF:0147
+   342 0BDF:014C   344 0BDF:0156   345 0BDF:0159   346 0BDF:015D
+   347 0BDF:0160   348 0BDF:0163   349 0BDF:0167   351 0BDF:016A
+   352 0BDF:016F   359 0BDF:0171   362 0BDF:017F   363 0BDF:0185
+   364 0BDF:018B   365 0BDF:018F   367 0BDF:019B   371 0BDF:019F
+   372 0BDF:01A9   373 0BDF:01B0   377 0BDF:01B2   378 0BDF:01BC
+   380 0BDF:01C3   381 0BDF:01C5   382 0BDF:01CC   386 0BDF:01CE
+   387 0BDF:01D8   388 0BDF:01D9   389 0BDF:01DA   390 0BDF:01DD
+   391 0BDF:01E0   392 0BDF:01E1   393 0BDF:01E4   394 0BDF:01E6
+   395 0BDF:01E8   396 0BDF:01EA   397 0BDF:01EB   398 0BDF:01ED
+   399 0BDF:01EE   400 0BDF:01EF   401 0BDF:01F1   402 0BDF:01F2
+   403 0BDF:01F3   404 0BDF:01F5   405 0BDF:01F7   407 0BDF:01F9
+   408 0BDF:01FA   415 0BDF:0206   416 0BDF:0215   417 0BDF:0225
+   418 0BDF:0267   419 0BDF:026E   420 0BDF:0281   424 0BDF:0285
+   425 0BDF:0293   427 0BDF:02A8   432 0BDF:02B7   433 0BDF:02C5
+   435 0BDF:02DD   436 0BDF:02E3   439 0BDF:02E5   441 0BDF:02EB
+   452 0BDF:02F2   453 0BDF:0300   454 0BDF:0304   455 0BDF:0309
+   457 0BDF:0312   458 0BDF:0324   459 0BDF:0330   462 0BDF:0332
+   463 0BDF:0350   464 0BDF:0353   465 0BDF:035E   468 0BDF:0367
+   469 0BDF:036D   475 0BDF:0372   476 0BDF:037C   478 0BDF:0382
+   479 0BDF:0389   482 0BDF:038B   484 0BDF:0391   487 0BDF:0398
+   496 0BDF:03C8   497 0BDF:03D6   498 0BDF:03E7   499 0BDF:0413
+   512 0BDF:043A   513 0BDF:0449   514 0BDF:0458   515 0BDF:046C
+   516 0BDF:0474   518 0BDF:047B   519 0BDF:04AC   520 0BDF:04C7
+   522 0BDF:04CF   523 0BDF:04D4   524 0BDF:04DD   525 0BDF:04E8
+   530 0BDF:04EA   531 0BDF:04F4   532 0BDF:04F8   533 0BDF:04FC
+   534 0BDF:0501   535 0BDF:050A   536 0BDF:0513   537 0BDF:0520
+   538 0BDF:052D   539 0BDF:053A   553 0BDF:0550   554 0BDF:057B
+   555 0BDF:0596   556 0BDF:05A9   557 0BDF:05E1   558 0BDF:05F1
+   559 0BDF:0603   561 0BDF:060C   563 0BDF:0617   564 0BDF:0627
+   565 0BDF:0630   566 0BDF:0634   567 0BDF:0644   569 0BDF:0647
+   570 0BDF:064C   571 0BDF:0672   572 0BDF:068F   573 0BDF:06AC
+   574 0BDF:06BE   575 0BDF:06C2   576 0BDF:06D2   578 0BDF:06D4
+   579 0BDF:06D7   580 0BDF:06E7   589 0BDF:06EE   590 0BDF:0718
+   591 0BDF:0729   592 0BDF:0736   599 0BDF:0740   601 0BDF:076A
+   603 0BDF:0774   605 0BDF:077D   606 0BDF:078C   607 0BDF:0790
+   610 0BDF:0792   612 0BDF:0796   619 0BDF:07A5   620 0BDF:07B3
+   621 0BDF:07BE   623 0BDF:07DB   624 0BDF:07EA   625 0BDF:07FA
+   626 0BDF:07FC   633 0BDF:0800   634 0BDF:080E   636 0BDF:081E
+   637 0BDF:0829   638 0BDF:082B   645 0BDF:082F   646 0BDF:083D
+   647 0BDF:084F   648 0BDF:085A   649 0BDF:0860   653 0BDF:086D
+   654 0BDF:0897   655 0BDF:089F   656 0BDF:08AA   657 0BDF:08B5
+   658 0BDF:08C0   660 0BDF:08C7   661 0BDF:08D5   662 0BDF:08E5
+   665 0BDF:08E7   666 0BDF:0906   668 0BDF:0921   669 0BDF:092C
+   674 0BDF:0930   675 0BDF:093A   676 0BDF:095B   677 0BDF:097C
+   682 0BDF:0988   683 0BDF:0992   685 0BDF:0999   687 0BDF:09BE
+   696 0BDF:09CA   697 0BDF:09F4   698 0BDF:09FC   699 0BDF:0A07
+   700 0BDF:0A17   701 0BDF:0A3E   702 0BDF:0A5C   703 0BDF:0A6D
+   704 0BDF:0A7F   705 0BDF:0A91   707 0BDF:0A9B   708 0BDF:0AA6
+   709 0BDF:0AB3   710 0BDF:0AC4   711 0BDF:0ACD   712 0BDF:0AD3
+   713 0BDF:0AD7   714 0BDF:0AEF   715 0BDF:0AFA   716 0BDF:0B4B
+   717 0BDF:0BA6   718 0BDF:0BB1   719 0BDF:0C04   720 0BDF:0C61
+   721 0BDF:0C6C   722 0BDF:0C72   724 0BDF:0C76   725 0BDF:0C81
+   726 0BDF:0C91   727 0BDF:0C9C   728 0BDF:0CA7   729 0BDF:0CB1
+   730 0BDF:0CBC   737 0BDF:0CC8   738 0BDF:0CF2   740 0BDF:0CF9
+   741 0BDF:0D07   742 0BDF:0D1E   745 0BDF:0D20   746 0BDF:0D27
+   747 0BDF:0D46   748 0BDF:0D61   750 0BDF:0D68   758 0BDF:0D76
+   759 0BDF:0D85   761 0BDF:0D8F   762 0BDF:0D9C   763 0BDF:0DAA
+   764 0BDF:0DC0   765 0BDF:0DD6   766 0BDF:0E0D   767 0BDF:0E1F
+   769 0BDF:0E79   772 0BDF:0E7C   773 0BDF:0E80   775 0BDF:0E96
+   776 0BDF:0EBC   777 0BDF:0EC4   778 0BDF:0ECB   779 0BDF:0EEA
+   781 0BDF:0F05   786 0BDF:0F09   787 0BDF:0F17   788 0BDF:0F32
+   793 0BDF:0F37   794 0BDF:0F59   795 0BDF:0F79   800 0BDF:0F80
+   801 0BDF:0FA2   802 0BDF:0FA8   804 0BDF:0FAF   806 0BDF:0FE9
+   812 0BDF:0FF0   813 0BDF:0FFE   814 0BDF:1013   820 0BDF:101A
+   821 0BDF:1028   822 0BDF:103D   828 0BDF:1044   829 0BDF:1052
+   830 0BDF:105E   836 0BDF:1065   837 0BDF:1073   841 0BDF:109A
+   847 0BDF:10A1   848 0BDF:10AF   852 0BDF:10F1   862 0BDF:1100
+   864 0BDF:110F   865 0BDF:1113   866 0BDF:1123   869 0BDF:1130
+   871 0BDF:1146   872 0BDF:117A   873 0BDF:1188   876 0BDF:118A
+   878 0BDF:1190   879 0BDF:11AA   880 0BDF:11B0   883 0BDF:11B2
+   885 0BDF:11B7   896 0BDF:11C8   897 0BDF:11D6   898 0BDF:11DB
+   899 0BDF:120F   904 0BDF:1213   905 0BDF:1221   907 0BDF:1227
+   908 0BDF:1238   913 0BDF:123A   915 0BDF:1251   916 0BDF:125D
+   921 0BDF:1264   922 0BDF:1272   923 0BDF:1288   928 0BDF:1295
+   929 0BDF:12A3   934 0BDF:12E5   935 0BDF:12E9   938 0BDF:12EB
+   940 0BDF:12EF   947 0BDF:12FE   948 0BDF:130C   949 0BDF:131B
+   951 0BDF:1329   952 0BDF:1344   953 0BDF:1346   954 0BDF:134E
+   959 0BDF:1353   960 0BDF:1361   961 0BDF:1377   968 0BDF:1384
+   969 0BDF:1392   970 0BDF:13A1   972 0BDF:13AF   973 0BDF:13CA
+   974 0BDF:13CC   975 0BDF:13D4   980 0BDF:13D9   981 0BDF:13E7
+   982 0BDF:13F2   989 0BDF:141A   990 0BDF:1428   991 0BDF:1430
+   992 0BDF:1438   993 0BDF:143E   994 0BDF:1444   995 0BDF:145C
+   996 0BDF:1468   997 0BDF:146E   998 0BDF:1485   999 0BDF:149C
+  1000 0BDF:14A8  1001 0BDF:14B4  1002 0BDF:14C0  1003 0BDF:14CC
+  1004 0BDF:1500  1005 0BDF:1507  1006 0BDF:150E  1007 0BDF:152E
+  1008 0BDF:1535  1009 0BDF:153A  1010 0BDF:154F  1011 0BDF:155A
+  1012 0BDF:155F  1013 0BDF:156A  1014 0BDF:156F  1016 0BDF:1574
+  1017 0BDF:157A  1018 0BDF:1580  1019 0BDF:1586  1020 0BDF:158C
+  1021 0BDF:1592  1023 0BDF:15A2  1024 0BDF:15B7  1025 0BDF:15C2
+  1026 0BDF:15CD  1028 0BDF:15D8  1030 0BDF:15DD  1032 0BDF:15E2
+  1033 0BDF:15E7  1034 0BDF:15EC  1036 0BDF:15FE  1038 0BDF:1603
+  1044 0BDF:1605  1045 0BDF:160F  1046 0BDF:1615  1047 0BDF:161A
+  1048 0BDF:1620  1049 0BDF:1625  1059 0BDF:1677  1060 0BDF:1686
+  1061 0BDF:1696  1062 0BDF:16B3  1063 0BDF:16C5  1064 0BDF:16CE
+  1065 0BDF:16D8  1066 0BDF:16E2  1067 0BDF:1749  1069 0BDF:1759
+  1070 0BDF:1769  1071 0BDF:1786  1072 0BDF:1798  1073 0BDF:17A1
+  1074 0BDF:17AB  1075 0BDF:17B5  1076 0BDF:181C  1077 0BDF:182C
+  1082 0BDF:182E  1083 0BDF:1854  1084 0BDF:185E  1087 0BDF:187C
+  1094 0BDF:1883  1096 0BDF:1891  1097 0BDF:18B3  1098 0BDF:18C6
+  1099 0BDF:18D7  1100 0BDF:18ED  1101 0BDF:1902  1102 0BDF:193F
+  1107 0BDF:1943  1108 0BDF:194D  1109 0BDF:1958  1110 0BDF:1963
+  1111 0BDF:1972  1112 0BDF:1981  1113 0BDF:1994  1125 0BDF:19A2
+  1126 0BDF:19B1  1128 0BDF:19B8  1129 0BDF:19C3  1131 0BDF:19CB
+  1132 0BDF:19EB  1134 0BDF:1A1A  1136 0BDF:1A31  1142 0BDF:1A53
+  1143 0BDF:1A62  1144 0BDF:1A72  1145 0BDF:1A8F  1146 0BDF:1A9F
+  1147 0BDF:1ABF  1148 0BDF:1ADF  1149 0BDF:1AFF  1150 0BDF:1B1F
+  1151 0BDF:1B3F  1152 0BDF:1B5F  1153 0BDF:1B7F  1154 0BDF:1B9F
+  1155 0BDF:1BBF  1156 0BDF:1BDF  1157 0BDF:1BFF  1158 0BDF:1C1F
+  1159 0BDF:1C3F  1160 0BDF:1C5F  1161 0BDF:1C7F  1162 0BDF:1C9F
+  1163 0BDF:1CBF  1164 0BDF:1CDF  1165 0BDF:1CFF  1166 0BDF:1D1F
+  1167 0BDF:1D3F  1168 0BDF:1D5F  1169 0BDF:1D7F  1170 0BDF:1D9F
+  1171 0BDF:1DBF  1172 0BDF:1DDF  1173 0BDF:1DFF  1174 0BDF:1E1F
+  1175 0BDF:1E2F  1182 0BDF:1E5F  1183 0BDF:1E6E  1185 0BDF:1E7B
+  1187 0BDF:1E85  1188 0BDF:1E98  1189 0BDF:1EA8  1190 0BDF:1EC6
+  1191 0BDF:1EEF  1192 0BDF:1EFF  1193 0BDF:1F1D  1194 0BDF:1F46
+  1195 0BDF:1F56  1196 0BDF:1F5A  1203 0BDF:1F5C  1204 0BDF:1F6B
+  1205 0BDF:1F71  1206 0BDF:1F77  1207 0BDF:1F7D  1208 0BDF:1F83
+  1209 0BDF:1F89  1210 0BDF:1F8F  1211 0BDF:1F95  1212 0BDF:1FA0
+  1213 0BDF:1FAB  1218 0BDF:1FAD  1219 0BDF:1FB0  1220 0BDF:1FB4
+  1221 0BDF:1FB7  1232 0BDF:1FB8  1233 0BDF:1FBB  1234 0BDF:1FBF
+  1236 0BDF:1FC2  1237 0BDF:1FC5  1238 0BDF:1FC9  1239 0BDF:1FCC
+  1240 0BDF:1FCF  1241 0BDF:1FD3  1243 0BDF:1FD6  1244 0BDF:1FD9
+  1245 0BDF:1FDD  1247 0BDF:1FE0  1248 0BDF:1FE3  1249 0BDF:1FE7
+  1250 0BDF:1FEA  1253 0BDF:1FEB  1254 0BDF:1FF5  1255 0BDF:1FF8
+  1256 0BDF:1FFB  1257 0BDF:1FFE  1258 0BDF:2001  1259 0BDF:2002
+  1260 0BDF:2005  1261 0BDF:2008  1262 0BDF:200B  1264 0BDF:200F
+  1265 0BDF:2019  1266 0BDF:201E  1267 0BDF:2023  1268 0BDF:2028
+  1269 0BDF:202D  1270 0BDF:2032  1271 0BDF:2036  1272 0BDF:203B
+  1273 0BDF:2040  1274 0BDF:2052  1275 0BDF:2057  1276 0BDF:205C
+  1277 0BDF:2061
+
+Line numbers for fileunit(FILEUNIT.PAS) segment fileunit
+
+    51 0DE6:0000    52 0DE6:000E    53 0DE6:0020    55 0DE6:0029
+    56 0DE6:0032    57 0DE6:0036    60 0DE6:0038    62 0DE6:003C
+    68 0DE6:005E    69 0DE6:006C    70 0DE6:007D    71 0DE6:0086
+    72 0DE6:0095    73 0DE6:00A4    74 0DE6:00CB    75 0DE6:00D3
+    78 0DE6:00D5    80 0DE6:00E7    89 0DE6:00EB    90 0DE6:011F
+    91 0DE6:013B    92 0DE6:0157    93 0DE6:0175    95 0DE6:017A
+    96 0DE6:0187    97 0DE6:0190    98 0DE6:0195    99 0DE6:01B3
+   100 0DE6:01C0   103 0DE6:01C9   104 0DE6:01E7   105 0DE6:0206
+   106 0DE6:0224   107 0DE6:0244   108 0DE6:0258   109 0DE6:0276
+   110 0DE6:0286   111 0DE6:02A4   112 0DE6:02B4   119 0DE6:02BC
+   120 0DE6:02E2   121 0DE6:02F3   122 0DE6:0311   123 0DE6:0321
+   124 0DE6:033F   125 0DE6:034F   126 0DE6:0369   134 0DE6:0384
+   135 0DE6:03AA   136 0DE6:03E7   139 0DE6:0403   141 0DE6:0428
+   142 0DE6:0438   143 0DE6:0456   145 0DE6:045C   146 0DE6:046B
+   147 0DE6:047A   150 0DE6:047C   151 0DE6:048B   153 0DE6:04B2
+   171 0DE6:04CB   172 0DE6:04DA   173 0DE6:04E1   176 0DE6:04EA
+   178 0DE6:04F8   179 0DE6:04FC   180 0DE6:0500   182 0DE6:0518
+   183 0DE6:052D   184 0DE6:0547   187 0DE6:0549   188 0DE6:0550
+   191 0DE6:0562   193 0DE6:0569   194 0DE6:058A   195 0DE6:05C8
+   196 0DE6:05DB   197 0DE6:05ED   199 0DE6:05F6   200 0DE6:0629
+   202 0DE6:0632   203 0DE6:0649   206 0DE6:064B   207 0DE6:0665
+   209 0DE6:067D   211 0DE6:0686   212 0DE6:0695   213 0DE6:06C5
+   223 0DE6:06C9   224 0DE6:06D8   226 0DE6:06F2   228 0DE6:0701
+   229 0DE6:0717   230 0DE6:073F   232 0DE6:0778   233 0DE6:078F
+   234 0DE6:07A2   235 0DE6:07B5   236 0DE6:07CB   238 0DE6:07DB
+   241 0DE6:07DD   243 0DE6:07EF   244 0DE6:0805   245 0DE6:0817
+   246 0DE6:082E   247 0DE6:0844   250 0DE6:0854   256 0DE6:0862
+   257 0DE6:086C   259 0DE6:0878   261 0DE6:0881   262 0DE6:0894
+   263 0DE6:08A4   266 0DE6:08B2   274 0DE6:08B4   275 0DE6:08C2
+   276 0DE6:08CF   278 0DE6:08E1   279 0DE6:08F6   280 0DE6:0904
+   281 0DE6:0911   282 0DE6:0913   283 0DE6:0921   284 0DE6:0929
+   285 0DE6:092E   300 0DE6:0938   302 0DE6:0947   305 0DE6:0963
+   306 0DE6:0973   307 0DE6:0978   308 0DE6:097D   310 0DE6:0988
+   312 0DE6:09B7   313 0DE6:09D4   314 0DE6:09D6   319 0DE6:0A0B
+   320 0DE6:0A2A   331 0DE6:0A3A   332 0DE6:0A49   334 0DE6:0A58
+   337 0DE6:0A67   338 0DE6:0A7A   339 0DE6:0A82   340 0DE6:0A8A
+   341 0DE6:0AA0   342 0DE6:0AB4   343 0DE6:0AC5   344 0DE6:0AD5
+   346 0DE6:0ADA   348 0DE6:0AE1   350 0DE6:0B03   351 0DE6:0B31
+   352 0DE6:0B4E   355 0DE6:0B5F   358 0DE6:0B8E   359 0DE6:0BC2
+   363 0DE6:0BC4   365 0DE6:0BE4   367 0DE6:0C0D   370 0DE6:0C0F
+   371 0DE6:0C18   373 0DE6:0C1F   374 0DE6:0C22   376 0DE6:0C2B
+   379 0DE6:0C4B   380 0DE6:0C79   382 0DE6:0C88   385 0DE6:0C8A
+   387 0DE6:0C91   402 0DE6:0CD4   403 0DE6:0CE3   404 0DE6:0CF3
+   405 0DE6:0D03   407 0DE6:0D11   408 0DE6:0D30   410 0DE6:0D56
+   412 0DE6:0D7C   413 0DE6:0D8C   414 0DE6:0D95   415 0DE6:0DA5
+   418 0DE6:0DA8   419 0DE6:0DC7   420 0DE6:0DED   421 0DE6:0DF5
+   423 0DE6:0DFB   424 0DE6:0E29   426 0DE6:0E38   428 0DE6:0E4F
+   429 0DE6:0E62   430 0DE6:0E7F   432 0DE6:0E89   433 0DE6:0EBB
+   434 0DE6:0EE9   435 0DE6:0F05   436 0DE6:0F19   437 0DE6:0F36
+   438 0DE6:0F39   439 0DE6:0F4C   441 0DE6:0F52   443 0DE6:0F67
+   444 0DE6:0F6A   446 0DE6:0F98   447 0DE6:0FA7   460 0DE6:0FAB
+   461 0DE6:0FD1   467 0DE6:1046   468 0DE6:1074   471 0DE6:1077
+   476 0DE6:10D6   477 0DE6:110E   480 0DE6:1111   482 0DE6:1121
+   483 0DE6:1135   484 0DE6:113F   485 0DE6:1149   487 0DE6:115D
+   489 0DE6:1175   490 0DE6:1187   491 0DE6:119B   492 0DE6:11B3
+   493 0DE6:11CB   496 0DE6:11CE   497 0DE6:11E6   498 0DE6:11FE
+   499 0DE6:1214   500 0DE6:122C   501 0DE6:124C   503 0DE6:1277
+   507 0DE6:128F   521 0DE6:129D   522 0DE6:12AC   524 0DE6:12D3
+   525 0DE6:12E9   526 0DE6:1306   527 0DE6:1337   528 0DE6:134B
+   530 0DE6:1352   531 0DE6:1368   534 0DE6:136B   535 0DE6:1383
+   536 0DE6:139B   538 0DE6:13B3   540 0DE6:13C5   541 0DE6:13DB
+   542 0DE6:13F1   543 0DE6:1403   546 0DE6:1415   557 0DE6:1423
+   558 0DE6:1432   560 0DE6:144D   561 0DE6:145F   562 0DE6:1475
+   564 0DE6:148E   566 0DE6:14A7   567 0DE6:14C4   569 0DE6:14E3
+   570 0DE6:14FD   572 0DE6:150A   574 0DE6:1515   575 0DE6:1549
+   578 0DE6:154B   579 0DE6:155B   581 0DE6:1571   584 0DE6:1573
+   585 0DE6:1583   587 0DE6:1599   589 0DE6:159C   599 0DE6:15AA
+   600 0DE6:15B9   602 0DE6:15D2   603 0DE6:1606   605 0DE6:164C
+   606 0DE6:1657   607 0DE6:166C   621 0DE6:1670   622 0DE6:167F
+   623 0DE6:1687   624 0DE6:168D   625 0DE6:16A1   626 0DE6:16A6
+   627 0DE6:16AB   629 0DE6:16B0   631 0DE6:16C2   633 0DE6:16F1
+   634 0DE6:1701   636 0DE6:170A   637 0DE6:1720   639 0DE6:1726
+   640 0DE6:1728   642 0DE6:172F   643 0DE6:1742   645 0DE6:175D
+   646 0DE6:177C   675 0DE6:1788   676 0DE6:17BC   677 0DE6:17C3
+   678 0DE6:17C8   679 0DE6:17CD   680 0DE6:17DE   681 0DE6:17FC
+   682 0DE6:180E   683 0DE6:181F   684 0DE6:183D   685 0DE6:184F
+   686 0DE6:1867   687 0DE6:1883   688 0DE6:1887   689 0DE6:18A5
+   690 0DE6:18B5   691 0DE6:18D3   692 0DE6:18E3   694 0DE6:18E6
+   695 0DE6:18FC   696 0DE6:190C   698 0DE6:1914   699 0DE6:1928
+   700 0DE6:1939   701 0DE6:194A   702 0DE6:1968   704 0DE6:1986
+   705 0DE6:1987   706 0DE6:198B   707 0DE6:198F   708 0DE6:1993
+   709 0DE6:1995   710 0DE6:1997   711 0DE6:1998   713 0DE6:199A
+   714 0DE6:199C   716 0DE6:199E   717 0DE6:19A0   719 0DE6:19A4
+   721 0DE6:19A5   722 0DE6:19B6   723 0DE6:19C7   724 0DE6:19D7
+   726 0DE6:19F6   727 0DE6:1A00   728 0DE6:1A03   729 0DE6:1A0A
+   730 0DE6:1A11   731 0DE6:1A21   732 0DE6:1A31   734 0DE6:1A38
+   735 0DE6:1A42   736 0DE6:1A46
+
+Line numbers for helpunit(HELPUNIT.PAS) segment helpunit
+
+    48 0F8B:0000    49 0F8B:002A    50 0F8B:002F    51 0F8B:0044
+    52 0F8B:0059    53 0F8B:0083    59 0F8B:0087    60 0F8B:0095
+    61 0F8B:00A0    62 0F8B:00AD    63 0F8B:00CD    64 0F8B:00FF
+    65 0F8B:0131    74 0F8B:014E    75 0F8B:0174    76 0F8B:017B
+    79 0F8B:018D    80 0F8B:019E    81 0F8B:01BC    82 0F8B:01C7
+    83 0F8B:01D0    84 0F8B:01E9    85 0F8B:01F4    86 0F8B:01FD
+    87 0F8B:0216    88 0F8B:0221    89 0F8B:022A    91 0F8B:0243
+    93 0F8B:024C    94 0F8B:0253    96 0F8B:025A    97 0F8B:0262
+   100 0F8B:0264   104 0F8B:0278   116 0F8B:028A   117 0F8B:02B5
+   119 0F8B:02BC   120 0F8B:02C0   121 0F8B:02DE   122 0F8B:02F3
+   123 0F8B:0308   127 0F8B:0391   128 0F8B:039E   130 0F8B:03A1
+   132 0F8B:03AB   133 0F8B:03AF   134 0F8B:03B9   136 0F8B:03CC
+   138 0F8B:03F2   142 0F8B:0406   143 0F8B:040F   144 0F8B:041B
+   145 0F8B:041F   154 0F8B:044A   155 0F8B:0475   156 0F8B:0487
+   157 0F8B:04AD   158 0F8B:04CF   160 0F8B:04F0   161 0F8B:0504
+   163 0F8B:050A   165 0F8B:052A   166 0F8B:053E   167 0F8B:0544
+   168 0F8B:0565   171 0F8B:0567   173 0F8B:056F   174 0F8B:0585
+   182 0F8B:05D4   183 0F8B:05E3   184 0F8B:05F5   185 0F8B:0606
+   186 0F8B:0628   187 0F8B:0649   188 0F8B:065D   190 0F8B:067D
+   191 0F8B:0686   192 0F8B:06A7   193 0F8B:06BD   203 0F8B:0703
+   204 0F8B:0712   205 0F8B:0724   206 0F8B:0731   207 0F8B:0736
+   208 0F8B:076B   209 0F8B:0799   210 0F8B:07B7   211 0F8B:07BA
+   213 0F8B:07BF   214 0F8B:0805   216 0F8B:0807   218 0F8B:082A
+   219 0F8B:086B   221 0F8B:0871   224 0F8B:08B1   225 0F8B:08BA
+   228 0F8B:08BC   230 0F8B:08C4   231 0F8B:08EC   232 0F8B:0921
+   233 0F8B:092C   243 0F8B:0955   246 0F8B:097F   247 0F8B:0981
+   248 0F8B:0983   249 0F8B:0987   250 0F8B:098C   251 0F8B:098E
+   252 0F8B:0990   253 0F8B:0992   256 0F8B:0994   257 0F8B:09A3
+   259 0F8B:09A9   260 0F8B:09B9   263 0F8B:09BB   265 0F8B:09C1
+   266 0F8B:09C6   267 0F8B:09F0   268 0F8B:0A13   269 0F8B:0A30
+   270 0F8B:0A56   275 0F8B:0A7C   277 0F8B:0A81   278 0F8B:0A89
+   279 0F8B:0A93   281 0F8B:0A99   282 0F8B:0AAB   283 0F8B:0AB5
+   285 0F8B:0ABF   286 0F8B:0ACB   287 0F8B:0AD7   288 0F8B:0ADC
+   289 0F8B:0AFA   290 0F8B:0B24   291 0F8B:0B2F   325 0F8B:0B46
+   326 0F8B:0B54   327 0F8B:0B59   329 0F8B:0B5E   331 0F8B:0B65
+   332 0F8B:0B6C   333 0F8B:0BA9   334 0F8B:0BE6   335 0F8B:0C23
+   337 0F8B:0C6C   338 0F8B:0C73   339 0F8B:0CBC   340 0F8B:0CF1
+   341 0F8B:0D2E   343 0F8B:0D6B   344 0F8B:0D80   345 0F8B:0D9E
+   346 0F8B:0DC2   347 0F8B:0DD4   348 0F8B:0DDF   350 0F8B:0DE9
+   352 0F8B:0E36   354 0F8B:0E40   356 0F8B:0E86   358 0F8B:0ED2
+   359 0F8B:0EDB   360 0F8B:0EE4   361 0F8B:0EEF   370 0F8B:0EF9
+   371 0F8B:0F07   372 0F8B:0F0D   373 0F8B:0F12   374 0F8B:0F16
+   375 0F8B:0F1B   377 0F8B:0F24   378 0F8B:0F28   379 0F8B:0F43
+   382 0F8B:0F45   383 0F8B:0F49   385 0F8B:0F67   386 0F8B:0F85
+   389 0F8B:0FA9   391 0F8B:0FAF   394 0F8B:0FF2   397 0F8B:0FF4
+   402 0F8B:103D   404 0F8B:1049   407 0F8B:104F   408 0F8B:106A
+   409 0F8B:1070   429 0F8B:1594   430 0F8B:15A3   435 0F8B:15AA
+   437 0F8B:15B1   438 0F8B:15D6   440 0F8B:1607   441 0F8B:165C
+   442 0F8B:16B1   443 0F8B:1706   445 0F8B:175B   446 0F8B:17C8
+   448 0F8B:1835   449 0F8B:1876   451 0F8B:18B7   452 0F8B:18BE
+   453 0F8B:18FF   455 0F8B:1940   456 0F8B:1981   458 0F8B:19C2
+   459 0F8B:1A17   460 0F8B:1A6C   461 0F8B:1AC1   462 0F8B:1B16
+   463 0F8B:1B6B   464 0F8B:1BC0   465 0F8B:1C15   467 0F8B:1C6A
+   468 0F8B:1CD7   469 0F8B:1D44   470 0F8B:1DB1   472 0F8B:1E1E
+   475 0F8B:1E29   477 0F8B:1E37   479 0F8B:1E49   480 0F8B:1E5B
+   481 0F8B:1E69   483 0F8B:1E7B   484 0F8B:1E8D   485 0F8B:1E9B
+   487 0F8B:1EAD   488 0F8B:1EBF   489 0F8B:1ECD   491 0F8B:1EDF
+   493 0F8B:1EE8   495 0F8B:1EF1   496 0F8B:1EF7   498 0F8B:1F0B
+   499 0F8B:1F48   500 0F8B:1F94   503 0F8B:1F97   507 0F8B:1F9A
+   508 0F8B:1FB3   509 0F8B:1FCC   510 0F8B:1FE5   511 0F8B:1FFD
+   512 0F8B:2015   513 0F8B:202D   514 0F8B:2045   515 0F8B:205D
+   526 0F8B:2073   527 0F8B:2077   528 0F8B:207C   529 0F8B:2081
+   531 0F8B:2086   532 0F8B:2089   533 0F8B:208D   534 0F8B:209E
+   535 0F8B:20B0   536 0F8B:20C2   537 0F8B:20D4   539 0F8B:20D7
+   540 0F8B:20DB   541 0F8B:20EC   544 0F8B:20FE   546 0F8B:2110
+   547 0F8B:2122   549 0F8B:2125   550 0F8B:2129   551 0F8B:213A
+   552 0F8B:214C   553 0F8B:215E   555 0F8B:2161   556 0F8B:2165
+   557 0F8B:2176   558 0F8B:2188   559 0F8B:219A   561 0F8B:219D
+   562 0F8B:21A1   563 0F8B:21B2   564 0F8B:21C4   565 0F8B:21D6
+   566 0F8B:21E8   568 0F8B:21EB   569 0F8B:21EF   570 0F8B:2200
+   571 0F8B:2212   572 0F8B:2224   573 0F8B:2236   575 0F8B:2239
+   576 0F8B:223D   577 0F8B:224E   578 0F8B:2260   579 0F8B:2272
+   581 0F8B:2275   582 0F8B:2279   583 0F8B:228A   584 0F8B:229C
+   585 0F8B:22AE   587 0F8B:22B1   588 0F8B:22B5   589 0F8B:22C6
+   590 0F8B:22D8   591 0F8B:22EA   592 0F8B:22FC   594 0F8B:22FF
+   595 0F8B:2303   596 0F8B:2314   597 0F8B:2326   598 0F8B:2338
+   599 0F8B:233D   601 0F8B:2340   602 0F8B:2344   604 0F8B:2347
+   605 0F8B:234B   606 0F8B:235C   607 0F8B:236E   608 0F8B:2380
+   610 0F8B:2383   612 0F8B:2387   614 0F8B:2398   615 0F8B:23AA
+   617 0F8B:23AD   618 0F8B:23B1   620 0F8B:23C2   621 0F8B:23D4
+   623 0F8B:23D7   626 0F8B:23DB   628 0F8B:23EC   630 0F8B:23FE
+   632 0F8B:2401   635 0F8B:2405   637 0F8B:2416   639 0F8B:2428
+   641 0F8B:242B   642 0F8B:242F   643 0F8B:2440   644 0F8B:2452
+   646 0F8B:2455   647 0F8B:2459   648 0F8B:246A   649 0F8B:247C
+   650 0F8B:248E   652 0F8B:2491   653 0F8B:2495   654 0F8B:24A6
+   655 0F8B:24B8   656 0F8B:24CA   657 0F8B:24CF   659 0F8B:24D2
+   660 0F8B:24D6   661 0F8B:24E7   662 0F8B:24F9   663 0F8B:250B
+   665 0F8B:250E   666 0F8B:2515   667 0F8B:2541   668 0F8B:2569
+   669 0F8B:2595   670 0F8B:25BD   671 0F8B:25E9   672 0F8B:2611
+   673 0F8B:263D   675 0F8B:2665   676 0F8B:2691   678 0F8B:26B9
+   679 0F8B:26E5   680 0F8B:270D   681 0F8B:2739   683 0F8B:2761
+   685 0F8B:2764   686 0F8B:276B   687 0F8B:2797   688 0F8B:27BF
+   689 0F8B:27EB   690 0F8B:2813   691 0F8B:283F   693 0F8B:2867
+   694 0F8B:2893   696 0F8B:28BB   697 0F8B:28E7   698 0F8B:290F
+   699 0F8B:293B   701 0F8B:2963   703 0F8B:2966   705 0F8B:296D
+   706 0F8B:2999   707 0F8B:29C1   708 0F8B:29ED   709 0F8B:2A15
+   710 0F8B:2A41   711 0F8B:2A69   712 0F8B:2A95   714 0F8B:2ABD
+   715 0F8B:2AE9   717 0F8B:2B11   718 0F8B:2B3D   719 0F8B:2B65
+   720 0F8B:2B91   722 0F8B:2BB9   725 0F8B:2BBC   728 0F8B:2BC3
+   729 0F8B:2BEF   730 0F8B:2C17   731 0F8B:2C43   732 0F8B:2C6B
+   733 0F8B:2C97   734 0F8B:2CBF   735 0F8B:2CEB   736 0F8B:2D13
+   737 0F8B:2D3F   739 0F8B:2D67   740 0F8B:2D93   741 0F8B:2DBB
+   742 0F8B:2DE7   744 0F8B:2E0F   745 0F8B:2E3B   747 0F8B:2E63
+   749 0F8B:2E66   753 0F8B:2E6A   754 0F8B:2E96   757 0F8B:2EBE
+   759 0F8B:2EC1   760 0F8B:2EC8   761 0F8B:2EF4   763 0F8B:2F1C
+   764 0F8B:2F48   771 0F8B:2F70   772 0F8B:2F98   773 0F8B:2FC1
+   774 0F8B:2FEA   775 0F8B:3013   776 0F8B:301C
+
+Line numbers for SDunit(SDUNIT.PAS) segment SDunit
+
+    30 128D:0008    31 128D:0012    32 128D:003C    33 128D:0041
+    34 128D:004E    96 128D:0052    97 128D:007F    98 128D:0096
+   103 128D:00A5   104 128D:00B3   105 128D:00E1   106 128D:012C
+   107 128D:015A   113 128D:0166   114 128D:0174   115 128D:017A
+   116 128D:0180   118 128D:01BE   119 128D:01F5   120 128D:022C
+   121 128D:0234   122 128D:0249   123 128D:024C   125 128D:024F
+   126 128D:025A   127 128D:026F   128 128D:0284   129 128D:0288
+   130 128D:0292   131 128D:029B   143 128D:02A8   144 128D:02CE
+   145 128D:02D5   146 128D:02E8   148 128D:02EA   149 128D:0313
+   150 128D:0318   151 128D:032B   154 128D:0337   155 128D:035D
+   156 128D:0387   157 128D:038C   158 128D:039F   159 128D:03AD
+   160 128D:03BC   162 128D:0448   164 128D:044E   166 128D:0463
+   169 128D:0466   170 128D:0475   171 128D:047E   172 128D:04DF
+   173 128D:04E6   174 128D:04ED   176 128D:04FE   189 128D:050A
+   190 128D:0518   194 128D:0539   196 128D:0567   197 128D:056B
+   200 128D:056D   202 128D:0571   203 128D:05A1   207 128D:05EC
+   209 128D:0637   210 128D:063D   213 128D:0671   225 128D:0685
+   226 128D:0693   227 128D:0698   228 128D:06AA   229 128D:06B3
+   230 128D:06F6   231 128D:0715   232 128D:0763   233 128D:07BB
+   234 128D:07E5   235 128D:0825   236 128D:082C   237 128D:0869
+   238 128D:08A6   239 128D:08AD   240 128D:08EA   241 128D:0927
+   242 128D:0932   243 128D:0944   244 128D:0950   245 128D:0956
+   246 128D:096C   247 128D:0978   248 128D:0987   249 128D:0996
+   250 128D:0999   251 128D:099C   252 128D:099E   253 128D:09A3
+   259 128D:09B3   260 128D:09C1   261 128D:09D4   263 128D:09DE
+   264 128D:09FB   265 128D:0A25   266 128D:0A4F   267 128D:0A56
+   295 128D:0A66   296 128D:0A8C   297 128D:0A94   298 128D:0A9E
+   300 128D:0AA5   301 128D:0AAA   302 128D:0AC2   303 128D:0AD9
+   306 128D:0B13   307 128D:0B19   309 128D:0B3D   310 128D:0B41
+   312 128D:0B55   313 128D:0B6C   314 128D:0B75   317 128D:0B77
+   318 128D:0BB6   322 128D:0BF5   323 128D:0C00   324 128D:0C03
+   325 128D:0C0D   326 128D:0C14   330 128D:0C1D   333 128D:0C49
+   334 128D:0C87   339 128D:0D1D   340 128D:0D20   341 128D:0D27
+   342 128D:0D32   343 128D:0D38   344 128D:0D3E   346 128D:0D44
+   347 128D:0D4A   348 128D:0D50   351 128D:0D52   352 128D:0D58
+   354 128D:0D5E   355 128D:0D8A   356 128D:0DB2   357 128D:0DB6
+   359 128D:0DC6   361 128D:0DCD   362 128D:0DD1   365 128D:0DD3
+   367 128D:0DDB   368 128D:0DE1   369 128D:0DEA   372 128D:0DF6
+   373 128D:0DFC   374 128D:0E01   376 128D:0E0A   378 128D:0E0F
+   380 128D:0E18   381 128D:0E2D   384 128D:0E30   386 128D:0E39
+   388 128D:0E58   390 128D:0E66   392 128D:0E72   393 128D:0E77
+   394 128D:0EA3   395 128D:0EA8   396 128D:0EC3   397 128D:0EC7
+   398 128D:0EED   399 128D:0EF1   400 128D:0EF6   401 128D:0F2E
+   402 128D:0F5F   403 128D:0F92   404 128D:0FB8   407 128D:0FBD
+   410 128D:0FBF   412 128D:0FC8   415 128D:0FCD   417 128D:0FD6
+   418 128D:0FDB   419 128D:0FE0   420 128D:0FE2   423 128D:0FEA
+   424 128D:0FF4   426 128D:0FF9   427 128D:0FFD   429 128D:1004
+   430 128D:1009   431 128D:101E   432 128D:102D   433 128D:1050
+   435 128D:1054   436 128D:1058   438 128D:105F   439 128D:1063
+   440 128D:1089   442 128D:10AF   444 128D:10B2   445 128D:10B9
+   448 128D:1102   449 128D:1106   450 128D:112C   453 128D:1152
+   455 128D:1155   456 128D:1159   458 128D:1160   459 128D:1164
+   460 128D:117F   462 128D:11B0   464 128D:11B3   465 128D:11BA
+   468 128D:120F   469 128D:1213   470 128D:122E   472 128D:125F
+   474 128D:1262   476 128D:1269   478 128D:12AC   479 128D:12E3
+   480 128D:12E9   481 128D:12EF   482 128D:12F8   483 128D:1337
+   484 128D:1343   485 128D:1345   486 128D:1349   487 128D:138C
+   488 128D:1393   489 128D:1397   490 128D:13B2   491 128D:13B8
+   493 128D:13BE   495 128D:13C1   497 128D:13C8   499 128D:13EF
+   500 128D:1409   505 128D:140B   506 128D:1411   507 128D:1417
+   508 128D:1420   509 128D:145F   512 128D:146B   513 128D:1470
+   515 128D:1473   516 128D:147A   517 128D:147E   518 128D:14C1
+   519 128D:14C8   520 128D:14CC   521 128D:14D1   522 128D:14EC
+   523 128D:14F2   524 128D:14F8   526 128D:14FB   527 128D:1502
+   529 128D:155E   530 128D:156F   531 128D:1576   532 128D:157A
+   533 128D:157C   534 128D:1584   539 128D:1589   540 128D:158C
+   541 128D:1597   542 128D:159C
+
+Line numbers for Sd2Unit(SD2UNIT.PAS) segment Sd2Unit
+
+   149 13E7:0000   150 13E7:002D   151 13E7:0044   156 13E7:0053
+   157 13E7:0061   158 13E7:008B   159 13E7:00CE   160 13E7:00F8
+   166 13E7:0104   167 13E7:0112   168 13E7:0118   169 13E7:011E
+   171 13E7:0158   172 13E7:018B   173 13E7:01BE   174 13E7:01C6
+   175 13E7:01DB   176 13E7:01DE   178 13E7:01E1   179 13E7:01EC
+   180 13E7:0201   181 13E7:0216   182 13E7:021A   183 13E7:0224
+   184 13E7:022A   185 13E7:0233   192 13E7:025E   193 13E7:026D
+   194 13E7:0276   195 13E7:027C   196 13E7:0283   197 13E7:0288
+   198 13E7:0292   199 13E7:0297   200 13E7:02AA   202 13E7:02B4
+   203 13E7:02D2   204 13E7:02D7   205 13E7:02EC   207 13E7:0301
+   208 13E7:0308   209 13E7:0311   210 13E7:0318   212 13E7:031E
+   213 13E7:0322   214 13E7:0354   215 13E7:036C   216 13E7:0375
+   217 13E7:0395   218 13E7:03AD   219 13E7:03B6   220 13E7:03BB
+   221 13E7:03D6   222 13E7:03DC   223 13E7:040E   224 13E7:0454
+   225 13E7:0456   226 13E7:046B   228 13E7:0473   232 13E7:047A
+   233 13E7:0484   234 13E7:0487   235 13E7:0491   236 13E7:049A
+   237 13E7:04A2   238 13E7:04AF   239 13E7:04B6   240 13E7:04BF
+   241 13E7:04C1   242 13E7:04C8   243 13E7:04E1   245 13E7:04E5
+   246 13E7:04EF   247 13E7:0502   250 13E7:0506   251 13E7:0514
+   252 13E7:0529   253 13E7:052E   255 13E7:0530   256 13E7:0544
+   257 13E7:0558   258 13E7:0561   259 13E7:056A   260 13E7:057A
+   261 13E7:057F   263 13E7:0581   264 13E7:05AC   268 13E7:05C5
+   269 13E7:05D4   270 13E7:05F5   271 13E7:05FC   272 13E7:05FF
+   273 13E7:0617   274 13E7:0624   275 13E7:062F   276 13E7:0667
+   277 13E7:0674   278 13E7:0676   280 13E7:0683   281 13E7:06BA
+   282 13E7:06F2   283 13E7:0703   284 13E7:0739   285 13E7:076F
+   286 13E7:0782   288 13E7:079C   289 13E7:07A5   290 13E7:0808
+   291 13E7:080F   292 13E7:0816   294 13E7:0829   299 13E7:0845
+   300 13E7:0853   301 13E7:0865   302 13E7:086E   303 13E7:0928
+   304 13E7:0932   305 13E7:0980   306 13E7:09B1   307 13E7:09F1
+   308 13E7:0A48   309 13E7:0A4F   310 13E7:0A8C   311 13E7:0AC9
+   312 13E7:0AD0   313 13E7:0B0D   314 13E7:0B4A   315 13E7:0B55
+   316 13E7:0B60   317 13E7:0B92   318 13E7:0BD1   319 13E7:0BF4
+   320 13E7:0BF6   321 13E7:0C3A   323 13E7:0C5D   325 13E7:0C61
+   326 13E7:0C6B   327 13E7:0CA9   329 13E7:0CAD   330 13E7:0CB7
+   331 13E7:0CBE   332 13E7:0CC5   335 13E7:0CD9   336 13E7:0CE7
+   337 13E7:0CF3   338 13E7:0CFD   339 13E7:0D00   341 13E7:0D03
+   342 13E7:0D0B   343 13E7:0D11   344 13E7:0D1C   346 13E7:0D24
+   347 13E7:0D47   348 13E7:0D4A   349 13E7:0D73   350 13E7:0D7B
+   351 13E7:0D83   352 13E7:0DA0   353 13E7:0DA2   354 13E7:0DA4
+   355 13E7:0DAE   356 13E7:0DB2   357 13E7:0DBE   358 13E7:0DC2
+   359 13E7:0DCA   360 13E7:0DD2   362 13E7:0DE8   363 13E7:0E26
+   364 13E7:0E2B   365 13E7:0E30   366 13E7:0E34   367 13E7:0E3A
+   368 13E7:0E3E   370 13E7:0E41   371 13E7:0E45   372 13E7:0E49
+   373 13E7:0E50   375 13E7:0E65   376 13E7:0E6A   377 13E7:0E6E
+   378 13E7:0E77   379 13E7:0E89   380 13E7:0E8C   381 13E7:0E98
+   382 13E7:0EB6   383 13E7:0EBE   384 13E7:0EC7   385 13E7:0EDD
+   386 13E7:0EE4   387 13E7:0EE9   388 13E7:0EFD   389 13E7:0F01
+   390 13E7:0F03   392 13E7:0F07   393 13E7:0F12   394 13E7:0F16
+   395 13E7:0F1F   396 13E7:0F23   399 13E7:0F2B   400 13E7:0F33
+   401 13E7:0F3C   403 13E7:0F41   404 13E7:0F44   406 13E7:0F4B
+   407 13E7:0F5D   408 13E7:0F60   409 13E7:0F64   410 13E7:0F78
+   411 13E7:0F7B   412 13E7:0F7F   413 13E7:0F93   414 13E7:0F96
+   415 13E7:0F9A   416 13E7:0FBB   417 13E7:0FBE   418 13E7:0FC2
+   419 13E7:0FDA   420 13E7:0FDD   421 13E7:0FE1   422 13E7:0FE7
+   423 13E7:1018   424 13E7:101B   425 13E7:101F   426 13E7:1025
+   427 13E7:104D   428 13E7:1050   429 13E7:1054   430 13E7:1068
+   431 13E7:106B   432 13E7:106F   433 13E7:1093   435 13E7:10A9
+   436 13E7:10E3   437 13E7:10E5   438 13E7:10E9   439 13E7:10F1
+   440 13E7:10F3   441 13E7:10F7   444 13E7:110B   446 13E7:110E
+   447 13E7:1112   448 13E7:1116   449 13E7:111D   450 13E7:1121
+   451 13E7:1126   452 13E7:112B   453 13E7:112F   454 13E7:1132
+   455 13E7:1139   456 13E7:113D   457 13E7:1144   458 13E7:115F
+   459 13E7:1197   460 13E7:11A1   461 13E7:11A8   462 13E7:11AC
+   463 13E7:11B4   464 13E7:11B9   465 13E7:11BB   466 13E7:11C2
+   471 13E7:11C6   472 13E7:11C9   473 13E7:11CE   474 13E7:11D2
+
+Line numbers for pageunit(PAGEUNIT.PAS) segment pageunit
+
+    64 1505:0000    66 1505:0026    67 1505:002C    68 1505:003D
+    69 1505:004D    70 1505:0051    71 1505:0059    72 1505:0060
+    73 1505:0062    74 1505:0064    75 1505:0068    76 1505:006C
+    79 1505:006E    80 1505:0075    81 1505:0077    82 1505:0092
+    83 1505:00A2    84 1505:00A6    85 1505:00AE    86 1505:00B5
+    87 1505:00B7    88 1505:00B9    89 1505:00BD    90 1505:00C1
+    93 1505:00C3    95 1505:00CD    96 1505:00D1   103 1505:00E0
+   104 1505:0106   105 1505:0115   106 1505:013C   109 1505:0149
+   110 1505:014D   112 1505:0150   113 1505:017A   114 1505:019C
+   115 1505:01C3   116 1505:01CA   117 1505:01CE   119 1505:01D0
+   120 1505:01D4   123 1505:01F3   124 1505:0201   125 1505:022E
+   126 1505:0275   127 1505:0278   128 1505:02A5   129 1505:02E0
+   130 1505:02E3   131 1505:0310   132 1505:0357   133 1505:0359
+   134 1505:038A   136 1505:0391   137 1505:0396   140 1505:03B5
+   141 1505:03C3   142 1505:03F0   144 1505:043D   145 1505:046A
+   147 1505:04AB   148 1505:04D8   150 1505:0525   151 1505:0556
+   152 1505:055A   153 1505:058B   154 1505:058F   157 1505:0596
+   158 1505:05A4   159 1505:05C7   162 1505:05CE   163 1505:05DC
+   164 1505:05FF   167 1505:0616   168 1505:0624   169 1505:0649
+   170 1505:0653   171 1505:065D   173 1505:0667   175 1505:066B
+   189 1505:082D   190 1505:083C   191 1505:085A   192 1505:0864
+   194 1505:0872   197 1505:08C5   198 1505:08C8   199 1505:08D2
+   200 1505:08D9   203 1505:092C   204 1505:092E   208 1505:0981
+   209 1505:0983   210 1505:098A   216 1505:09DD   217 1505:09E0
+   218 1505:09EA   219 1505:09F1   222 1505:0A44   223 1505:0A46
+   227 1505:0A99   228 1505:0A9B   229 1505:0AA2   232 1505:0AF5
+   233 1505:0AF7   234 1505:0AFD   238 1505:0B01   239 1505:0B1B
+   240 1505:0B20   241 1505:0B25   243 1505:0B5D   244 1505:0B64
+   245 1505:0B7D   246 1505:0B91   247 1505:0B94   248 1505:0B96
+   250 1505:0B9D   252 1505:0BA7   253 1505:0BBF   254 1505:0BD3
+   255 1505:0BE6   257 1505:0C18   260 1505:0C41   261 1505:0C64
+   262 1505:0C76   264 1505:0CAA   266 1505:0CD9   268 1505:0D16
+   269 1505:0D19   270 1505:0D29   271 1505:0D30   272 1505:0D5D
+   273 1505:0D90   274 1505:0DBD   275 1505:0DE7   276 1505:0DEA
+   277 1505:0DF1   278 1505:0E1E   279 1505:0E51   280 1505:0E7E
+   281 1505:0EA8   282 1505:0EAB   283 1505:0EB2   284 1505:0EDF
+   285 1505:0F12   286 1505:0F3F   287 1505:0F69   289 1505:0F6C
+   290 1505:0F86   291 1505:0F8D   292 1505:0FB0   293 1505:0FE3
+   294 1505:1010   295 1505:103A   296 1505:103D   297 1505:1044
+   298 1505:1067   299 1505:109A   300 1505:10C7   301 1505:10F1
+   302 1505:10F4   303 1505:10FB   304 1505:111E   305 1505:1151
+   306 1505:117E   311 1505:11A8   315 1505:11D1   316 1505:11D8
+   317 1505:1201   318 1505:1208   319 1505:1231   320 1505:1238
+   321 1505:1261   322 1505:1263   323 1505:1268   324 1505:1289
+   325 1505:12A2   326 1505:12BB   327 1505:12D4   328 1505:12ED
+   329 1505:1306   331 1505:131D   332 1505:131F   334 1505:1332
+   337 1505:1376   338 1505:137B   339 1505:1384   340 1505:13B7
+   342 1505:13BC   343 1505:13F4   344 1505:13FE   345 1505:1444
+   346 1505:147C   347 1505:147E   349 1505:14A3   350 1505:14A6
+   351 1505:14D9   352 1505:1511   353 1505:1513   356 1505:1538
+   357 1505:1548   359 1505:1566   361 1505:156D   363 1505:157B
+   364 1505:158F   367 1505:1591   369 1505:159F   370 1505:15B3
+   373 1505:15B5   375 1505:15C3   380 1505:15D7   381 1505:15DE
+   382 1505:15E5   384 1505:15EC   385 1505:15F3   387 1505:15F8
+   388 1505:1634   389 1505:163B   390 1505:164D   392 1505:165B
+   393 1505:166F   396 1505:16AB   397 1505:16D3   398 1505:16FC
+   400 1505:1706   401 1505:1742   402 1505:1763   403 1505:1795
+   404 1505:17EF   405 1505:1830   406 1505:1860   408 1505:1890
+   409 1505:18B5   412 1505:18B7   416 1505:18CA   417 1505:18F2
+   418 1505:191B   420 1505:1925   421 1505:1961   422 1505:1982
+   423 1505:19B4   424 1505:1A19   425 1505:1A4F   426 1505:1A7F
+   428 1505:1AAF   429 1505:1AD4   432 1505:1AD6   435 1505:1AE9
+   436 1505:1B20   437 1505:1B57   438 1505:1B8E   439 1505:1BCF
+   441 1505:1C10   442 1505:1C32   443 1505:1C4E   444 1505:1C68
+   445 1505:1C6D   446 1505:1C86   447 1505:1CC2   448 1505:1CFC
+   450 1505:1D01   451 1505:1D0A   456 1505:1D97   457 1505:1DA0
+   462 1505:1E21   463 1505:1E43   464 1505:1E5F   465 1505:1E79
+   466 1505:1E7E   467 1505:1E97   468 1505:1ED3   469 1505:1F0D
+   471 1505:1F12   476 1505:1F9F   478 1505:1FA2   480 1505:1FC0
+   481 1505:1FE2   482 1505:201E   483 1505:2058   484 1505:205D
+   485 1505:2076   486 1505:20B2   487 1505:20EC   488 1505:20F1
+   492 1505:2173   495 1505:21B6   499 1505:21F9   502 1505:223C
+   506 1505:227F   509 1505:22C2   526 1505:2305   531 1505:2310
+   540 1505:231C   541 1505:232A   542 1505:2339   543 1505:2348
+   544 1505:234E   545 1505:2366   547 1505:237E   550 1505:2390
+   551 1505:2395   552 1505:23CB   555 1505:23CD   557 1505:23DD
+   558 1505:23E2   560 1505:242E   563 1505:2430   566 1505:2435
+   576 1505:243F   577 1505:244E   579 1505:2466   580 1505:248B
+   581 1505:249F   582 1505:24AD   583 1505:24C3   586 1505:24C5
+   587 1505:24CD   589 1505:24E1   597 1505:24ED   598 1505:24FB
+   599 1505:2511   601 1505:2529   602 1505:253F   605 1505:2541
+   606 1505:2568   608 1505:257C   627 1505:2580   628 1505:25A6
+   629 1505:25BC   630 1505:25D2   631 1505:25FF   636 1505:260B
+   637 1505:2619   638 1505:266C   640 1505:273F   641 1505:274E
+   643 1505:2762   644 1505:276D   645 1505:2778   646 1505:2785
+   648 1505:27A2   652 1505:27E5   655 1505:2828   659 1505:286B
+   663 1505:28AE   667 1505:28F1   671 1505:2934   676 1505:2977
+   680 1505:29BA   684 1505:29FD   688 1505:2A40   689 1505:2A6A
+   690 1505:2A90   691 1505:2ABF   692 1505:2AC6   693 1505:2AF1
+   694 1505:2AF4   695 1505:2B23   697 1505:2B50   698 1505:2B79
+   699 1505:2B86   702 1505:2BBB   706 1505:2BEF   708 1505:2BF9
+   709 1505:2C15   710 1505:2C28   711 1505:2C99   712 1505:2CC2
+   714 1505:2CC9   715 1505:2CCD   716 1505:2CEF   717 1505:2CFC
+   718 1505:2D06   723 1505:2D3B   725 1505:2D42   727 1505:2D49
+   728 1505:2D52   731 1505:2D54   733 1505:2D5D   736 1505:2D5F
+   737 1505:2D75   741 1505:2DD8   742 1505:2DE5   744 1505:2DF6
+   745 1505:2E05   746 1505:2E0B   748 1505:2E3F   749 1505:2E52
+   752 1505:2E54   753 1505:2E63   754 1505:2E68   756 1505:2EB1
+   758 1505:2EC4   761 1505:2EC6   763 1505:2ECD   764 1505:2EE3
+   765 1505:2F0C   766 1505:2F17   769 1505:2F19   770 1505:2F1D
+   773 1505:2F22   778 1505:2F24   779 1505:2F2E   780 1505:2F3B
+   781 1505:2F58   789 1505:2F5A   790 1505:2F68   792 1505:2F6F
+   793 1505:2F80   794 1505:2F95   795 1505:2FAA   796 1505:2FBF
+   797 1505:2FD4   800 1505:2FD6   801 1505:2FE1   802 1505:2FEC
+   803 1505:3001   804 1505:3016   805 1505:302B   807 1505:3040
+   818 1505:304A   819 1505:3059   820 1505:305D   821 1505:306C
+   822 1505:3070   823 1505:3075   825 1505:3087   827 1505:3098
+   830 1505:30C6   832 1505:30DC   833 1505:30F7   836 1505:30F9
+   838 1505:30FD   839 1505:30FF   840 1505:3111   841 1505:3117
+   851 1505:3126   852 1505:3135   853 1505:3144   855 1505:3167
+   856 1505:3181   857 1505:319C   858 1505:319E   866 1505:31AC
+   867 1505:31BB   869 1505:31D6   871 1505:31DF   872 1505:31F9
+   873 1505:3221   875 1505:323C   876 1505:328D   877 1505:328F
+   878 1505:32A5   880 1505:32CC   891 1505:32D0   892 1505:32DF
+   893 1505:32E4   894 1505:32E8   896 1505:32EC   898 1505:3304
+   899 1505:331D   902 1505:331F   904 1505:3333   907 1505:333A
+   909 1505:3341   910 1505:334C   911 1505:335E   912 1505:3371
+   914 1505:3378   915 1505:3383   916 1505:3395   917 1505:33A8
+   918 1505:33AD   919 1505:33B2   929 1505:33BE   930 1505:33CD
+   931 1505:33D2   932 1505:33D7   933 1505:33EB   935 1505:3405
+   937 1505:3447   938 1505:345E   939 1505:3468   950 1505:3474
+   951 1505:3482   953 1505:3498   955 1505:34D6   956 1505:34DE
+   961 1505:34E2   962 1505:34EC   963 1505:34FC   968 1505:34FE
+   969 1505:3508   971 1505:3511   973 1505:3517   975 1505:3520
+   977 1505:3526   979 1505:352F   981 1505:3535   983 1505:353E
+   985 1505:3544   996 1505:3548   997 1505:3556   998 1505:355F
+   999 1505:3568  1000 1505:3575  1001 1505:3582  1002 1505:358F
+  1004 1505:359A  1005 1505:359F  1006 1505:35A4  1007 1505:35B9
+  1008 1505:35C4  1009 1505:35D3  1010 1505:35E2  1011 1505:35FA
+  1012 1505:360B  1013 1505:3610  1014 1505:3623  1015 1505:3627
+  1017 1505:3630  1019 1505:3634  1021 1505:363A  1022 1505:3650
+  1023 1505:3660  1024 1505:3677  1025 1505:367D  1027 1505:3684
+  1030 1505:3689  1031 1505:3695  1032 1505:36A5  1033 1505:36BC
+  1034 1505:36C1  1035 1505:36C6  1037 1505:36CB  1047 1505:36CF
+  1048 1505:36DD  1050 1505:36E3  1052 1505:36FD  1053 1505:3719
+  1054 1505:371F  1055 1505:3729  1056 1505:373C  1057 1505:3750
+
+Line numbers for markunit(MARKUNIT.PAS) segment markunit
+
+    67 187B:0003    68 187B:0011    70 187B:001D    71 187B:004B
+    72 187B:0054    73 187B:005A    75 187B:0073    77 187B:009B
+    78 187B:00A3    80 187B:00AB    88 187B:00AF    89 187B:00BD
+    92 187B:0101    94 187B:0114    96 187B:0157    97 187B:0173
+   100 187B:0175   101 187B:0186   104 187B:01CA   106 187B:01D3
+   107 187B:01E4   109 187B:0212   112 187B:0228   113 187B:0237
+   116 187B:0241   117 187B:0246   118 187B:024B   121 187B:0250
+   124 187B:026C   128 187B:028A   129 187B:02A5   132 187B:02B0
+   134 187B:02B9   135 187B:02C8   138 187B:02CA   142 187B:02D9
+   144 187B:02F5   145 187B:0309   148 187B:0313   150 187B:0339
+   151 187B:034D   154 187B:0357   156 187B:0377   158 187B:0391
+   159 187B:03AB   160 187B:03B5   163 187B:03BE   166 187B:03CA
+   167 187B:03CF   168 187B:03D4   169 187B:03D9   172 187B:03E8
+   174 187B:0404   175 187B:0418   178 187B:0422   180 187B:0448
+   181 187B:045C   185 187B:0466   186 187B:0483   188 187B:04A2
+   189 187B:04B2   190 187B:04CF   191 187B:04D1   193 187B:04EB
+   197 187B:04EE   199 187B:04F7   201 187B:0530   204 187B:0533
+   206 187B:053C   207 187B:054D   210 187B:054F   212 187B:0556
+   214 187B:0574   215 187B:058E   216 187B:05B6   220 187B:05EC
+   240 187B:05FC   241 187B:060B   242 187B:060F   243 187B:0622
+   244 187B:0626   245 187B:062B   246 187B:062F   248 187B:0633
+   250 187B:066C   252 187B:0672   253 187B:0698   256 187B:069A
+   258 187B:06BA   260 187B:06C9   262 187B:06D4   263 187B:0703
+   264 187B:0705   266 187B:0718   269 187B:0751   270 187B:076C
+   272 187B:0777   273 187B:078D   276 187B:0791   277 187B:07A3
+   278 187B:07B9   280 187B:07CF   283 187B:07DE   286 187B:07E7
+   290 187B:0806   292 187B:080F   294 187B:082E   297 187B:0830
+   301 187B:083E   305 187B:0842   308 187B:085A   310 187B:0863
+   311 187B:0873   314 187B:0875   318 187B:0885   320 187B:088E
+   321 187B:089E   324 187B:08A0   328 187B:08B0   330 187B:08CC
+   332 187B:08DC   335 187B:0927   336 187B:0931   341 187B:0947
+   343 187B:0950   345 187B:0959   346 187B:0967   349 187B:0969
+   352 187B:0992   355 187B:09BB   357 187B:09BF   363 187B:09C3
+   364 187B:09CD   366 187B:09D6   367 187B:09E2   368 187B:09E9
+   371 187B:09EB   372 187B:09F7   374 187B:09FE   383 187B:0A02
+   384 187B:0A10   385 187B:0A2B   386 187B:0A31   388 187B:0A47
+   389 187B:0A4F   390 187B:0A60   391 187B:0A68   399 187B:0A74
+   401 187B:0A82   402 187B:0AA2   403 187B:0ACA   404 187B:0ADB
+   405 187B:0AE1   406 187B:0B0B   407 187B:0B19   408 187B:0B1D
+   409 187B:0B25   411 187B:0B3B   412 187B:0B4C   413 187B:0B54
+   415 187B:0B5C   418 187B:0B71   419 187B:0B81   420 187B:0BA1
+   421 187B:0BC9   424 187B:0BDA   425 187B:0C05   428 187B:0C13
+   431 187B:0C1B   432 187B:0C2B   433 187B:0C46   434 187B:0C4E
+   435 187B:0C54   436 187B:0C58   438 187B:0C6E   439 187B:0C7F
+   440 187B:0C87   442 187B:0C8F   451 187B:0C9B   452 187B:0CA9
+   453 187B:0CAF   454 187B:0CB5   455 187B:0CBB   457 187B:0CD3
+   459 187B:0CF4   460 187B:0CFA   461 187B:0D2D   470 187B:0D41
+   471 187B:0D4F   476 187B:0D88   477 187B:0D8D   480 187B:0D9D
+   481 187B:0DA3   482 187B:0DBD   483 187B:0DC3   484 187B:0DED
+   485 187B:0DF5   486 187B:0DFA   489 187B:0DFD   490 187B:0E03
+   491 187B:0E09   492 187B:0E0F   494 187B:0E27   496 187B:0E60
+   497 187B:0E70   499 187B:0E72   500 187B:0E8D   504 187B:0E92
+   512 187B:0E9E   513 187B:0EAC   515 187B:0EBE   516 187B:0EC6
+   517 187B:0EDC   518 187B:0EE2   519 187B:0EE8   521 187B:0EF1
+   522 187B:0EF7   524 187B:0EFD   526 187B:0F06   527 187B:0F0C
+   529 187B:0F12   530 187B:0F22   533 187B:0F24   535 187B:0F34
+   541 187B:0F52   543 187B:0F63   544 187B:0F75   545 187B:0F80
+   546 187B:0F86   548 187B:0F92   549 187B:0FA2   550 187B:0FA4
+   552 187B:0FBB   555 187B:0FF0   556 187B:0FF6   558 187B:1002
+   559 187B:1012   560 187B:1014   563 187B:102A   567 187B:1063
+   569 187B:106E   570 187B:1079   575 187B:107B   576 187B:1085
+   577 187B:108B   578 187B:1091
+
+Line numbers for Specunit(SPECUNIT.PAS) segment Specunit
+
+    80 1985:003F    81 1985:004E    82 1985:0053    83 1985:0057
+    85 1985:005D    87 1985:0066    89 1985:00A3    91 1985:00E7
+    92 1985:00F2    93 1985:010A    94 1985:011D    97 1985:0159
+    98 1985:0165   101 1985:0167   103 1985:016D   104 1985:0170
+   106 1985:0174   108 1985:019B   109 1985:01A0   111 1985:01A3
+   113 1985:01AA   115 1985:01B4   116 1985:01BA   118 1985:01E1
+   120 1985:01EA   124 1985:0233   127 1985:0235   129 1985:023A
+   131 1985:025D   133 1985:0260   135 1985:0264   136 1985:0269
+   138 1985:026C   139 1985:0270   141 1985:0298   142 1985:029D
+   144 1985:02A0   145 1985:02A4   147 1985:02AB   149 1985:02CE
+   152 1985:02D0   154 1985:02D9   156 1985:02DC   157 1985:02E0
+   159 1985:02E7   160 1985:02FB   161 1985:0300   163 1985:0307
+   164 1985:0320   165 1985:0330   168 1985:0332   170 1985:0337
+   173 1985:0339   175 1985:0342   177 1985:0345   178 1985:034C
+   180 1985:0356   182 1985:036C   183 1985:0370   185 1985:039D
+   189 1985:03AD   192 1985:03B1   194 1985:03BA   195 1985:03E9
+   196 1985:0425   197 1985:0435   198 1985:0451   199 1985:045F
+   200 1985:0464   204 1985:04CF   207 1985:04ED   210 1985:04F2
+   213 1985:04F4   215 1985:04FD   217 1985:0500   218 1985:0507
+   220 1985:0511   222 1985:0527   225 1985:0554   226 1985:055D
+   229 1985:0560   230 1985:058F   231 1985:05CB   232 1985:05DB
+   233 1985:05F9   235 1985:060E   238 1985:068E   239 1985:069A
+   241 1985:06B9   243 1985:06E1   244 1985:06E6   247 1985:06E8
+   248 1985:0713   249 1985:0723   253 1985:072C   256 1985:072E
+   258 1985:0737   260 1985:0739   262 1985:073D   263 1985:0757
+   266 1985:077A   272 1985:07A3   273 1985:07D1   274 1985:07E0
+   283 1985:07EB   284 1985:07F9   286 1985:0812   288 1985:0832
+   289 1985:083A   297 1985:0848   298 1985:0857   299 1985:085D
+   301 1985:0869   302 1985:0879   303 1985:087B   304 1985:088B
+   306 1985:0894   308 1985:08DB   309 1985:08EB   310 1985:08ED
+   318 1985:08FB   319 1985:090A   320 1985:0910   322 1985:091C
+   325 1985:0963   326 1985:0973   327 1985:0975   339 1985:09A1
+   340 1985:09B0   342 1985:09E0   343 1985:09E9   347 1985:09EC
+   348 1985:09F0   350 1985:0A06   352 1985:0A33   355 1985:0A43
+   358 1985:0A47   360 1985:0A50   362 1985:0A6C   364 1985:0A9B
+   366 1985:0AB9   369 1985:0AD6   370 1985:0AF2   372 1985:0B0C
+   373 1985:0B20   374 1985:0B2A   376 1985:0B48   377 1985:0B72
+   378 1985:0B81   379 1985:0B9F   380 1985:0BC7   382 1985:0BDF
+   383 1985:0BF3   384 1985:0BF5   385 1985:0C12   386 1985:0C30
+   390 1985:0C4A   399 1985:0C4E   400 1985:0C5C   401 1985:0C61
+   402 1985:0C72   403 1985:0C81   404 1985:0C90   405 1985:0CB3
+   406 1985:0CB8   407 1985:0CBD   418 1985:0CD1   419 1985:0CE0
+   420 1985:0CF0   421 1985:0D02   422 1985:0D07   424 1985:0D1F
+   426 1985:0D68   427 1985:0D7F   428 1985:0D8F   431 1985:0D92
+   434 1985:0DB4   435 1985:0DCD   438 1985:0DE4   440 1985:0DF6
+   441 1985:0E0C   442 1985:0E29   443 1985:0E50   444 1985:0E62
+   457 1985:0E6E   458 1985:0E7D   459 1985:0E83   460 1985:0E88
+   461 1985:0E8D   462 1985:0E9D   464 1985:0EA2   466 1985:0EBA
+   467 1985:0EC3   469 1985:0EDE   472 1985:0F0E   473 1985:0F1E
+   475 1985:0F2C   478 1985:0F5C   481 1985:0F5E   484 1985:0F8E
+   485 1985:0FB3   486 1985:0FC3   488 1985:0FD3   492 1985:0FD6
+   495 1985:1006   496 1985:1016   498 1985:1024   502 1985:1054
+   504 1985:1067   506 1985:1087   507 1985:109E   509 1985:10B4
+   511 1985:10D1   513 1985:10E9   517 1985:10FD   518 1985:1124
+   519 1985:1136   522 1985:1138   524 1985:1141   532 1985:114D
+   533 1985:115B   536 1985:1163   540 1985:11A0   541 1985:11D5
+   542 1985:11DB   544 1985:11FB   545 1985:120B   546 1985:120D
+   548 1985:121A   549 1985:122C   555 1985:1238   556 1985:1242
+   557 1985:124D   559 1985:1279   560 1985:128F   561 1985:1291
+   562 1985:12A7   572 1985:12BB   573 1985:12C9   574 1985:12CD
+   575 1985:12D2   576 1985:12E3   578 1985:1317   579 1985:1327
+   581 1985:1329   582 1985:1337   583 1985:133D   591 1985:134C
+   592 1985:1372   594 1985:1398   595 1985:13DA   596 1985:13E4
+   597 1985:1409   606 1985:141F   607 1985:142D   608 1985:1433
+   610 1985:143F   611 1985:144F   612 1985:1451   614 1985:1471
+   615 1985:14B1   616 1985:14B9   618 1985:14BF   620 1985:14E3
+   630 1985:14F7   631 1985:1506   634 1985:1554   635 1985:156A
+   637 1985:156C   639 1985:159E   640 1985:15AF   642 1985:15C6
+   650 1985:15D2   651 1985:15E0   653 1985:15FF   655 1985:162E
+   656 1985:1644   657 1985:1658   667 1985:165C   668 1985:166B
+   669 1985:1674   673 1985:1697   674 1985:16A2   675 1985:16A7
+   677 1985:16BF   678 1985:16E3   679 1985:16EC   682 1985:16EE
+   683 1985:16F7   687 1985:16FC   689 1985:1703   690 1985:172D
+   692 1985:1742   702 1985:1758   703 1985:1767   706 1985:1774
+   708 1985:1781   709 1985:1794   711 1985:179E   712 1985:17B1
+   713 1985:17B7   716 1985:17B9   718 1985:17CC   719 1985:17D9
+   720 1985:17EF   721 1985:1805   722 1985:1817   725 1985:1819
+   727 1985:1822   737 1985:1826   738 1985:1834   739 1985:184F
+   740 1985:186B   741 1985:1887   743 1985:188B   745 1985:1892
+   746 1985:18A9   748 1985:18BA   749 1985:18BE   752 1985:18C0
+   754 1985:18C9   757 1985:18CD   760 1985:18CF   762 1985:18D7
+   763 1985:18DB   766 1985:18DD   768 1985:18E5   773 1985:18E9
+   775 1985:18EC   776 1985:18F0   777 1985:18F9   779 1985:18FC
+   780 1985:1900   781 1985:1914   783 1985:1939   784 1985:193E
+   786 1985:1940   787 1985:1944   789 1985:1969   790 1985:197D
+   791 1985:1982   793 1985:1988   796 1985:19A8   798 1985:19AF
+   804 1985:19B4   819 1985:19C2   820 1985:19D1   822 1985:19E7
+   823 1985:19F5   824 1985:19FC   825 1985:1A01   827 1985:1A06
+   830 1985:1A10   833 1985:1A40   835 1985:1A5B   836 1985:1A64
+   839 1985:1A67   840 1985:1A87   841 1985:1AA2   843 1985:1AB9
+   845 1985:1AD1   847 1985:1ADC   848 1985:1B04   851 1985:1B39
+   854 1985:1B3C   855 1985:1B41   856 1985:1B46   857 1985:1B4B
+   860 1985:1B50   864 1985:1B97   867 1985:1BC7   869 1985:1BCE
+   870 1985:1BE6   872 1985:1BF6   875 1985:1BF9   877 1985:1C0D
+   879 1985:1C14   880 1985:1C26   883 1985:1C4B   886 1985:1C7B
+   888 1985:1C85   890 1985:1CCF   891 1985:1CE7   892 1985:1CF7
+   894 1985:1D07   897 1985:1D0A   899 1985:1D14   902 1985:1D44
+   904 1985:1D4B   906 1985:1D82   907 1985:1D92   909 1985:1DA0
+   912 1985:1DB7   915 1985:1DBA   918 1985:1DDC   919 1985:1DF5
+   920 1985:1E0C   923 1985:1E1C   926 1985:1E3A   927 1985:1E44
+   929 1985:1E5F   930 1985:1E72   931 1985:1E77   932 1985:1E7C
+   934 1985:1E94   937 1985:1EC5   938 1985:1ECE   940 1985:1EEF
+   941 1985:1F02   942 1985:1F19   945 1985:1F25   946 1985:1F3B
+   947 1985:1F58   948 1985:1F7F   950 1985:1F91   953 1985:1F93
+   955 1985:1F9C
+
+Line numbers for sp2unit(SP2UNIT.PAS) segment sp2unit
+
+    51 1B7F:0000    52 1B7F:0026    53 1B7F:0040    54 1B7F:006A
+    55 1B7F:007D    67 1B7F:008D    68 1B7F:009C    69 1B7F:00A0
+    70 1B7F:00A5    71 1B7F:00B9    72 1B7F:00BE    73 1B7F:00D9
+    76 1B7F:00DE    77 1B7F:00FD    78 1B7F:010D    80 1B7F:0128
+    83 1B7F:0137    85 1B7F:014D    86 1B7F:0171    88 1B7F:0177
+    89 1B7F:018C    90 1B7F:01AD    92 1B7F:01D5    95 1B7F:021C
+    96 1B7F:0228    97 1B7F:0246   116 1B7F:024A   117 1B7F:0259
+   119 1B7F:026A   120 1B7F:0271   122 1B7F:02A2   123 1B7F:02DA
+   125 1B7F:02F4   126 1B7F:02FD   128 1B7F:0306   132 1B7F:034A
+   133 1B7F:035B   134 1B7F:0365   136 1B7F:036C   137 1B7F:03A5
+   138 1B7F:03C8   141 1B7F:03CA   142 1B7F:0403   146 1B7F:0426
+   147 1B7F:043E   148 1B7F:0444   152 1B7F:0450   153 1B7F:045F
+   154 1B7F:0464   155 1B7F:0469   157 1B7F:0473   158 1B7F:0478
+   159 1B7F:047D   160 1B7F:0486   161 1B7F:04A7   164 1B7F:04AD
+   166 1B7F:04BD   167 1B7F:04E2   168 1B7F:04E6   171 1B7F:04E8
+   173 1B7F:04F2   174 1B7F:0502   175 1B7F:0508   176 1B7F:051A
+   178 1B7F:0528   180 1B7F:0559   181 1B7F:055D   183 1B7F:0566
+   184 1B7F:0576   186 1B7F:057C   189 1B7F:057E   191 1B7F:0585
+   192 1B7F:058E   194 1B7F:05A3   197 1B7F:05A5   199 1B7F:05AE
+   200 1B7F:05B5   210 1B7F:05CE   211 1B7F:05DC   212 1B7F:05E1
+   213 1B7F:05FA   215 1B7F:060F   216 1B7F:0614   217 1B7F:0629
+   218 1B7F:062E   219 1B7F:0648   220 1B7F:0670   221 1B7F:069A
+   223 1B7F:06D3   226 1B7F:06D5   228 1B7F:06DA   248 1B7F:06DE
+   249 1B7F:0708   250 1B7F:070F   251 1B7F:0718   252 1B7F:0725
+   253 1B7F:0765   259 1B7F:0829   260 1B7F:083C   261 1B7F:084D
+   262 1B7F:0855   268 1B7F:0859   269 1B7F:0883   270 1B7F:088A
+   272 1B7F:08FA   273 1B7F:090B   274 1B7F:0913   279 1B7F:0917
+   280 1B7F:0921   285 1B7F:096C   287 1B7F:0981   288 1B7F:0986
+   291 1B7F:09C0   294 1B7F:0A11   295 1B7F:0A20   296 1B7F:0A25
+   297 1B7F:0A29   299 1B7F:0A2F   301 1B7F:0A6C   303 1B7F:0AB0
+   304 1B7F:0ABB   305 1B7F:0AD3   306 1B7F:0AE6   309 1B7F:0B22
+   311 1B7F:0B3D   312 1B7F:0B40   313 1B7F:0B48   314 1B7F:0B4D
+   315 1B7F:0B52   316 1B7F:0B62   317 1B7F:0B7D   319 1B7F:0B84
+   322 1B7F:0BAA   324 1B7F:0BAD   325 1B7F:0BB5   326 1B7F:0BBA
+   327 1B7F:0BBF   329 1B7F:0BCF   331 1B7F:0BD6   333 1B7F:0BFC
+   336 1B7F:0BFE   338 1B7F:0C13   340 1B7F:0C16   341 1B7F:0C1E
+   342 1B7F:0C23   343 1B7F:0C28   344 1B7F:0C38   345 1B7F:0C53
+   347 1B7F:0C5A   349 1B7F:0C6A   350 1B7F:0C7C   352 1B7F:0C80
+   354 1B7F:0C82   355 1B7F:0C8A   356 1B7F:0C8F   357 1B7F:0C94
+   359 1B7F:0CA4   361 1B7F:0CAB   363 1B7F:0CBB   367 1B7F:0CBF
+   368 1B7F:0CED   370 1B7F:0CF6   386 1B7F:0D22   387 1B7F:0D31
+   388 1B7F:0D36   390 1B7F:0D3D   392 1B7F:0D43   393 1B7F:0D47
+   395 1B7F:0D4D   397 1B7F:0D8A   399 1B7F:0DCE   400 1B7F:0DD9
+   401 1B7F:0DF1   402 1B7F:0E04   405 1B7F:0E40   406 1B7F:0E5B
+   407 1B7F:0E6B   410 1B7F:0EA9   412 1B7F:0EAC   413 1B7F:0EB7
+   414 1B7F:0EBD   419 1B7F:0F1A   420 1B7F:0F28   421 1B7F:0F34
+   422 1B7F:0F38   424 1B7F:0F41   427 1B7F:0F69   429 1B7F:0F6C
+   431 1B7F:0F74   432 1B7F:0F7A   433 1B7F:0F94   434 1B7F:0FA8
+   435 1B7F:0FC5   436 1B7F:0FCA   439 1B7F:0FCD   441 1B7F:0FD5
+   443 1B7F:0FF9   445 1B7F:0FFC   447 1B7F:1004   449 1B7F:1028
+   451 1B7F:102B   454 1B7F:1036   455 1B7F:103B   456 1B7F:104B
+   457 1B7F:1068   458 1B7F:1078   460 1B7F:1090   461 1B7F:10BE
+   462 1B7F:10C7   465 1B7F:10D7   467 1B7F:10EF   470 1B7F:10FF
+   473 1B7F:1106   475 1B7F:112F   478 1B7F:1131   479 1B7F:1145
+   480 1B7F:114B   485 1B7F:1150   486 1B7F:117E   487 1B7F:1187
+   497 1B7F:1193   498 1B7F:11A1   499 1B7F:11A6   500 1B7F:11AA
+   501 1B7F:11B2   502 1B7F:11BA   503 1B7F:11C2   505 1B7F:1206
+   506 1B7F:1211   507 1B7F:1229   508 1B7F:123C   510 1B7F:1256
+   511 1B7F:1265   512 1B7F:1274   513 1B7F:1283   514 1B7F:12A0
+   524 1B7F:12AA   525 1B7F:12B8   526 1B7F:12BD   527 1B7F:12C1
+   528 1B7F:12C9   529 1B7F:12D1   530 1B7F:12D9   532 1B7F:12E1
+   534 1B7F:1325   535 1B7F:1330   536 1B7F:1348   537 1B7F:135B
+   539 1B7F:1375   540 1B7F:1384   541 1B7F:1393   542 1B7F:13A2
+   544 1B7F:13B1   555 1B7F:13B3   556 1B7F:13C1   557 1B7F:13C6
+   558 1B7F:13CA   560 1B7F:13CF   562 1B7F:1413   563 1B7F:141E
+   564 1B7F:1436   565 1B7F:1449   569 1B7F:1481   570 1B7F:1484
+   571 1B7F:148C   572 1B7F:1493   573 1B7F:1497   575 1B7F:1499
+   576 1B7F:14A1   577 1B7F:14A8   578 1B7F:14AC   580 1B7F:14AE
+   581 1B7F:14B6   582 1B7F:14BA   583 1B7F:14BE   585 1B7F:14C0
+   586 1B7F:14C8   587 1B7F:14CC   590 1B7F:14D0   592 1B7F:14D9
+   594 1B7F:1516   601 1B7F:152A   602 1B7F:1538   603 1B7F:1547
+   605 1B7F:1556   606 1B7F:156F   607 1B7F:158A   608 1B7F:158C
+   610 1B7F:15CD   617 1B7F:15DF   618 1B7F:15ED   619 1B7F:15FC
+   621 1B7F:160B   622 1B7F:1624   623 1B7F:163F   624 1B7F:1641
+   626 1B7F:168C   633 1B7F:169E   634 1B7F:16AC   635 1B7F:16BD
+   637 1B7F:16C7   638 1B7F:16D0   641 1B7F:16D3   643 1B7F:16F2
+   644 1B7F:1713   645 1B7F:172C   646 1B7F:1734   648 1B7F:175C
+   649 1B7F:177D   650 1B7F:1796   651 1B7F:179E   654 1B7F:17C8
+   661 1B7F:17DC   662 1B7F:17EA   663 1B7F:17FB   665 1B7F:1805
+   666 1B7F:180E   669 1B7F:1811   671 1B7F:1830   672 1B7F:1851
+   673 1B7F:186A   674 1B7F:1872   676 1B7F:189A   677 1B7F:18BB
+   678 1B7F:18D4   679 1B7F:18DC   682 1B7F:1918   693 1B7F:1924
+   694 1B7F:1932   695 1B7F:1937   696 1B7F:193B   697 1B7F:1940
+   699 1B7F:1984   700 1B7F:198F   701 1B7F:19A7   702 1B7F:19BA
+   707 1B7F:19F2   709 1B7F:19F8   711 1B7F:1A1F
+
+Line numbers for musikunit(MUSIKUNIT.PAS) segment musikunit
+
+    49 1D22:000A    52 1D22:0035    53 1D22:004C    54 1D22:005C
+    55 1D22:0090    56 1D22:00C0    57 1D22:010E    60 1D22:0152
+    61 1D22:0176    79 1D22:019C    81 1D22:01AB    82 1D22:01BB
+    83 1D22:01CC    84 1D22:01DE    86 1D22:01E4    87 1D22:01EB
+    89 1D22:0200    91 1D22:0209    92 1D22:021C    93 1D22:022F
+    95 1D22:0250    96 1D22:026D    99 1D22:02BA   100 1D22:02DF
+   102 1D22:0308   103 1D22:030E   105 1D22:0320   107 1D22:0335
+   108 1D22:033A   110 1D22:0379   111 1D22:037E   112 1D22:0384
+   113 1D22:03A1   114 1D22:03A5   115 1D22:03B0   116 1D22:03B3
+   118 1D22:03B8   119 1D22:03C7   121 1D22:03C9   123 1D22:03CE
+   124 1D22:03DD   126 1D22:03DF   128 1D22:03E9   129 1D22:03F8
+   132 1D22:040B   133 1D22:040D   134 1D22:0411   136 1D22:0415
+   137 1D22:0419   138 1D22:0429   140 1D22:0441   142 1D22:0443
+   143 1D22:0447   144 1D22:0457   150 1D22:046F   151 1D22:0472
+   152 1D22:0484   153 1D22:0496   154 1D22:04A2   157 1D22:04BA
+   158 1D22:04CA   159 1D22:04DC   161 1D22:04FB   162 1D22:0513
+
+Line numbers for noteunit(NOTEUNIT.PAS) segment noteunit
+
+    32 1D74:0010    33 1D74:001A    34 1D74:005C    35 1D74:0082
+    44 1D74:0090    45 1D74:009F    46 1D74:00C4    47 1D74:00D7
+    49 1D74:00EC    50 1D74:00FB    51 1D74:00FD    52 1D74:010C
+    53 1D74:0119    54 1D74:0130    55 1D74:0159    56 1D74:017A
+    57 1D74:01A5    59 1D74:01E6    68 1D74:01F2    69 1D74:0201
+    70 1D74:0228    71 1D74:0249    72 1D74:026A    74 1D74:02AB
+    90 1D74:02AF    91 1D74:02B9    93 1D74:02C7    94 1D74:02D5
+    95 1D74:02D7    98 1D74:0319    99 1D74:0328   100 1D74:032E
+   101 1D74:0332   102 1D74:033E   103 1D74:0341   104 1D74:034B
+   105 1D74:0356   107 1D74:035A   108 1D74:035D   109 1D74:0363
+   110 1D74:0374   111 1D74:0385   112 1D74:03AA   113 1D74:03B2
+   115 1D74:03B7   117 1D74:03BE   119 1D74:03CA   120 1D74:03DC
+   123 1D74:03DE   125 1D74:03EA   126 1D74:03FC   129 1D74:03FE
+   131 1D74:040A   137 1D74:041C   139 1D74:0423   141 1D74:0429
+   142 1D74:042D   145 1D74:042F   147 1D74:0435   152 1D74:0439
+   153 1D74:0440   154 1D74:0448   156 1D74:045A   157 1D74:046C
+   159 1D74:049C   161 1D74:04A5   162 1D74:04CA   163 1D74:04DE
+   164 1D74:04EF   165 1D74:0506   166 1D74:052D   167 1D74:054E
+   168 1D74:0557   171 1D74:055A   173 1D74:0589   174 1D74:0594
+   178 1D74:05BB   180 1D74:05D3   182 1D74:05E5   184 1D74:05FD
+   185 1D74:0602   188 1D74:0604   190 1D74:0619   192 1D74:062B
+   194 1D74:0630   196 1D74:0645   197 1D74:066F   198 1D74:0678
+   199 1D74:0699   201 1D74:06B8   202 1D74:06E0   204 1D74:0736
+   206 1D74:073D   208 1D74:074A   209 1D74:074F   212 1D74:0751
+   216 1D74:077B   218 1D74:0782   220 1D74:0788   221 1D74:07C0
+   222 1D74:07C7   225 1D74:07CC   228 1D74:07CE   231 1D74:07D7
+   234 1D74:07DA   236 1D74:07EF   238 1D74:07FF   239 1D74:0810
+   240 1D74:0827   242 1D74:0834   243 1D74:0838   245 1D74:0867
+   246 1D74:0888   248 1D74:08C4   249 1D74:08CA   250 1D74:08CC
+   253 1D74:08ED   255 1D74:0908   256 1D74:0932   257 1D74:094C
+   259 1D74:0991   260 1D74:099E   262 1D74:09B2   265 1D74:09B4
+   267 1D74:09BD   270 1D74:09C0   271 1D74:09C5   272 1D74:09D3
+   273 1D74:09E1   274 1D74:09F1   275 1D74:09FA   276 1D74:0A01
+   277 1D74:0A22   279 1D74:0A5E   280 1D74:0A64   281 1D74:0A66
+   282 1D74:0A68   284 1D74:0A89   285 1D74:0AC0   286 1D74:0AFD
+   287 1D74:0B0E   288 1D74:0B13   290 1D74:0B16   292 1D74:0B1F
+   293 1D74:0B23   294 1D74:0B4E   296 1D74:0B57   300 1D74:0B8D
+   302 1D74:0BE2   305 1D74:0BE5   306 1D74:0BFF   308 1D74:0C0B
+   309 1D74:0C1F   310 1D74:0C33   311 1D74:0C3C   314 1D74:0C3F
+   317 1D74:0C49   319 1D74:0C50   321 1D74:0C8C   322 1D74:0CA2
+   323 1D74:0CA4   326 1D74:0CA6   328 1D74:0CBC   331 1D74:0CFF
+   332 1D74:0D20   333 1D74:0D4A   335 1D74:0D6C   336 1D74:0DAB
+   337 1D74:0DB4   341 1D74:0DC8   342 1D74:0DCF   344 1D74:0DF1
+   345 1D74:0E2A   347 1D74:0E3D   348 1D74:0E44   349 1D74:0E49
+   351 1D74:0E50   352 1D74:0E62   354 1D74:0E79   355 1D74:0E7B
+   357 1D74:0E8E   358 1D74:0EA0   359 1D74:0EA6   362 1D74:0EEB
+   365 1D74:0F21
+
+Line numbers for sndunit(SNDUNIT.PAS) segment sndunit
+
+    48 1E67:0000    50 1E67:000A    51 1E67:0022    52 1E67:0048
+    53 1E67:0050    54 1E67:0056    56 1E67:007D    57 1E67:0085
+    58 1E67:008B    63 1E67:00B2    67 1E67:00B4    69 1E67:00BE
+    70 1E67:00E5    71 1E67:00FE    72 1E67:0110    73 1E67:012A
+    77 1E67:013C    83 1E67:0146    84 1E67:0154    85 1E67:0164
+    86 1E67:0174    87 1E67:0182    88 1E67:01D3    89 1E67:0230
+    90 1E67:0240   100 1E67:025C   101 1E67:026A   102 1E67:026F
+   104 1E67:0285   105 1E67:02A3   106 1E67:02AB   108 1E67:02B6
+   109 1E67:02BB   111 1E67:02D4   112 1E67:030F   113 1E67:032F
+   114 1E67:035F   115 1E67:037D   116 1E67:0388   119 1E67:038E
+   121 1E67:03A8   122 1E67:03C3   123 1E67:03E4   126 1E67:03F0
+   127 1E67:0415   128 1E67:041D   129 1E67:0422   132 1E67:0424
+   134 1E67:0429   135 1E67:0434   137 1E67:043D   138 1E67:044F
+   139 1E67:0461   142 1E67:046D   146 1E67:0492   147 1E67:04A4
+   148 1E67:04A9   151 1E67:04AB   153 1E67:04B0   154 1E67:04BC
+   155 1E67:04C1   156 1E67:04D6   159 1E67:04D8   161 1E67:04EA
+   194 1E67:04F8   195 1E67:0507   196 1E67:0530   197 1E67:0536
+   198 1E67:053F   199 1E67:0541   200 1E67:0556   201 1E67:0571
+   202 1E67:0578   203 1E67:05A3   204 1E67:05C0   208 1E67:05C4
+   209 1E67:05CE   211 1E67:05D9   213 1E67:05E4   218 1E67:0608
+   219 1E67:0612   220 1E67:0637   222 1E67:067A   223 1E67:0683
+   224 1E67:0687   225 1E67:06DA   227 1E67:06E5   228 1E67:0702
+   229 1E67:070B   232 1E67:070D   234 1E67:0760   237 1E67:0763
+   238 1E67:076B   239 1E67:0777   240 1E67:0780   242 1E67:0783
+   243 1E67:078B   246 1E67:07A4   247 1E67:07AB   248 1E67:07CD
+   250 1E67:07EF   252 1E67:07F1   253 1E67:07FD   257 1E67:0806
+   258 1E67:0818   263 1E67:081C   264 1E67:0826   266 1E67:082D
+   268 1E67:0844   269 1E67:084F   270 1E67:0856   274 1E67:086A
+   275 1E67:0874   277 1E67:087B   282 1E67:08A1   283 1E67:08A8
+   284 1E67:08CA   287 1E67:08EC   288 1E67:0929   289 1E67:094D
+   293 1E67:0951   294 1E67:095B   295 1E67:0972   296 1E67:09CE
+   299 1E67:09EF   301 1E67:0A03   302 1E67:0A1C   304 1E67:0A2D
+   307 1E67:0A48   308 1E67:0A52   311 1E67:0AEB   312 1E67:0B11
+   314 1E67:0B2F   315 1E67:0B39   316 1E67:0B3E   317 1E67:0B50
+   319 1E67:0B55   320 1E67:0B66   321 1E67:0B7A   322 1E67:0B96
+   323 1E67:0BA6   324 1E67:0BBF   326 1E67:0BC6   327 1E67:0BCD
+   330 1E67:0BCF   332 1E67:0BDB   333 1E67:0BEC   335 1E67:0BF3
+   336 1E67:0C02   337 1E67:0C04   340 1E67:0C13   341 1E67:0C18
+   342 1E67:0C1E   343 1E67:0C25   345 1E67:0C39   346 1E67:0C4D
+   347 1E67:0C52   348 1E67:0C5E   349 1E67:0C73   350 1E67:0C77
+   351 1E67:0C7E   352 1E67:0C88   353 1E67:0C8F   354 1E67:0C96
+   355 1E67:0C9D   356 1E67:0CBC   357 1E67:0CBF   358 1E67:0CC1
+   359 1E67:0CC8   360 1E67:0CD1   361 1E67:0CD7   363 1E67:0CF1
+   364 1E67:0D01   365 1E67:0D03   367 1E67:0D0A   368 1E67:0D0D
+   369 1E67:0D11   371 1E67:0D2D   372 1E67:0D34   373 1E67:0D3B
+   374 1E67:0D3E   375 1E67:0D43   376 1E67:0D46   377 1E67:0D4D
+   378 1E67:0D5B   379 1E67:0D75   380 1E67:0D98   381 1E67:0DB2
+   382 1E67:0DC4   383 1E67:0DC6   384 1E67:0DD4   385 1E67:0DEE
+   386 1E67:0E10   387 1E67:0E2A   388 1E67:0E3C   389 1E67:0E41
+   390 1E67:0E44   391 1E67:0E4B   392 1E67:0E5C   393 1E67:0E76
+   394 1E67:0E99   395 1E67:0EC0   396 1E67:0ED2   397 1E67:0ED4
+   398 1E67:0EE2   399 1E67:0EFC   400 1E67:0F1E   401 1E67:0F38
+   402 1E67:0F4A   403 1E67:0F4F   404 1E67:0F52   405 1E67:0F59
+   406 1E67:0F6A   407 1E67:0F71   408 1E67:0F85   409 1E67:0F8B
+   410 1E67:0F90   411 1E67:0FA3   412 1E67:0FBC   413 1E67:0FC5
+   414 1E67:0FE5   415 1E67:0FFF   416 1E67:1018   417 1E67:1024
+   418 1E67:102D   419 1E67:104D   420 1E67:1053   421 1E67:105A
+   423 1E67:1061   424 1E67:106A   425 1E67:108C   427 1E67:1092
+   429 1E67:1099   430 1E67:109C   431 1E67:10A0   432 1E67:10C0
+   433 1E67:10C5   434 1E67:10C8   435 1E67:10CC   436 1E67:10F4
+   437 1E67:111B   438 1E67:111F   439 1E67:1139   440 1E67:115E
+   441 1E67:1162   442 1E67:117D   443 1E67:11A3   444 1E67:11A7
+   445 1E67:11C0   447 1E67:11E2   448 1E67:11E7   449 1E67:11EA
+   450 1E67:11F1   451 1E67:11FE   452 1E67:1205   454 1E67:1221
+   456 1E67:123B   457 1E67:123E   459 1E67:125A   462 1E67:1274
+   464 1E67:1284   465 1E67:12A9   466 1E67:12CE   467 1E67:12DF
+   468 1E67:130E   469 1E67:1333   470 1E67:1344   471 1E67:1367
+   472 1E67:1377   474 1E67:1390   477 1E67:13A5   478 1E67:13A8
+   479 1E67:13AF   480 1E67:13B9   481 1E67:13E7   482 1E67:13EC
+   483 1E67:1417   484 1E67:1433   485 1E67:1438   486 1E67:143A
+   489 1E67:1456   490 1E67:1459   491 1E67:1460   492 1E67:146A
+   493 1E67:1494   494 1E67:1499   495 1E67:14BF   496 1E67:14DB
+   498 1E67:14E0   499 1E67:14E2   502 1E67:14FE   503 1E67:1501
+   504 1E67:1505   505 1E67:1525   506 1E67:152A   507 1E67:152D
+   508 1E67:1535   509 1E67:153C   511 1E67:1541   512 1E67:1548
+   513 1E67:154B   514 1E67:1553   515 1E67:155A   517 1E67:155F
+   518 1E67:1566   519 1E67:1569   520 1E67:156D   521 1E67:159D
+   522 1E67:15A1   523 1E67:15A4   524 1E67:15A8   525 1E67:15B1
+   526 1E67:15B5   527 1E67:15B8   528 1E67:15BC   529 1E67:15DE
+   530 1E67:15E2   531 1E67:15E4   532 1E67:15E8   533 1E67:15EC
+   534 1E67:15F0   535 1E67:15F2   536 1E67:15F6   537 1E67:15F8
+   538 1E67:15FC   539 1E67:1600   540 1E67:1604   541 1E67:1606
+   542 1E67:160A   543 1E67:160F   544 1E67:1621   545 1E67:1623
+   546 1E67:1627   547 1E67:1630   548 1E67:1634   549 1E67:1636
+   550 1E67:163A   551 1E67:165C   554 1E67:1660   555 1E67:1663
+   556 1E67:166A   558 1E67:1689   559 1E67:1692   560 1E67:1699
+   561 1E67:16A0   563 1E67:16A3   565 1E67:16B4   566 1E67:16E6
+   567 1E67:1703   568 1E67:170A   569 1E67:1710   570 1E67:1739
+   571 1E67:1756   573 1E67:1760   575 1E67:1764   576 1E67:17B4
+   577 1E67:17CD   579 1E67:17D7   580 1E67:17DC   582 1E67:17E0
+   585 1E67:17E2   587 1E67:17E6   589 1E67:17E9   591 1E67:17F3
+   592 1E67:17F8   594 1E67:1813   595 1E67:1828   596 1E67:182C
+   597 1E67:1833   598 1E67:183D   599 1E67:1844   600 1E67:184B
+   601 1E67:1852   602 1E67:1871   603 1E67:1874   604 1E67:1876
+   605 1E67:187D   606 1E67:1886   607 1E67:188C   609 1E67:18A6
+   610 1E67:18B6   611 1E67:18B8   613 1E67:18BF   614 1E67:18C2
+   615 1E67:18C6   616 1E67:18CD   617 1E67:18D4   618 1E67:18D7
+   619 1E67:18DC   621 1E67:18F8   622 1E67:1917   623 1E67:191A
+   624 1E67:191D   625 1E67:1924   626 1E67:1932   627 1E67:194C
+   628 1E67:196F   629 1E67:1989   630 1E67:199B   631 1E67:199D
+   632 1E67:19AB   633 1E67:19C5   634 1E67:19E7   635 1E67:1A01
+   636 1E67:1A13   637 1E67:1A18   638 1E67:1A1B   639 1E67:1A22
+   640 1E67:1A33   641 1E67:1A4D   642 1E67:1A70   643 1E67:1A97
+   644 1E67:1AA9   645 1E67:1AAB   646 1E67:1AB9   647 1E67:1AD3
+   648 1E67:1AF5   649 1E67:1B0F   650 1E67:1B21   651 1E67:1B26
+   652 1E67:1B29   653 1E67:1B30   654 1E67:1B41   655 1E67:1B45
+   656 1E67:1B65   657 1E67:1B6C   658 1E67:1B73   659 1E67:1B75
+   660 1E67:1B81   661 1E67:1B86   662 1E67:1B89   663 1E67:1B8D
+   664 1E67:1BB5   665 1E67:1BDC   666 1E67:1BE0   667 1E67:1BFA
+   668 1E67:1C1F   669 1E67:1C23   670 1E67:1C3E   671 1E67:1C65
+   672 1E67:1C69   673 1E67:1C82   674 1E67:1CA7   676 1E67:1CAB
+   681 1E67:1CD8   682 1E67:1CE1   683 1E67:1CE6   684 1E67:1CFB
+   685 1E67:1CFE   686 1E67:1D02   687 1E67:1D07   688 1E67:1D0A
+   690 1E67:1D11   691 1E67:1D15   692 1E67:1D19   693 1E67:1D49
+   694 1E67:1D4D   695 1E67:1D50   696 1E67:1D54   697 1E67:1D5D
+   698 1E67:1D61   699 1E67:1D64   700 1E67:1D68   701 1E67:1D8A
+   702 1E67:1D8E   703 1E67:1D90   704 1E67:1D94   705 1E67:1D98
+   706 1E67:1D9C   707 1E67:1D9E   708 1E67:1DA2   709 1E67:1DA4
+   710 1E67:1DA8   711 1E67:1DAC   712 1E67:1DB0   713 1E67:1DB2
+   714 1E67:1DB6   715 1E67:1DBB   716 1E67:1DCD   717 1E67:1DCF
+   718 1E67:1DD3   719 1E67:1DDC   720 1E67:1DE0   721 1E67:1DE2
+   722 1E67:1DE6   723 1E67:1E08   727 1E67:1E0C   731 1E67:1E31
+   732 1E67:1E46   733 1E67:1E57   734 1E67:1E5E   735 1E67:1E73
+   736 1E67:1E78   737 1E67:1E7A   740 1E67:1E7F   741 1E67:1E84
+   742 1E67:1E87   743 1E67:1E8E   744 1E67:1E98   745 1E67:1EC6
+   746 1E67:1ECB   747 1E67:1EF6   748 1E67:1F12   749 1E67:1F17
+   750 1E67:1F19   753 1E67:1F35   754 1E67:1F38   755 1E67:1F3F
+   756 1E67:1F49   757 1E67:1F73   758 1E67:1F78   759 1E67:1F9E
+   760 1E67:1FBA   761 1E67:1FBF   762 1E67:1FC1   765 1E67:1FDD
+   766 1E67:1FE0   767 1E67:1FE4   768 1E67:2004   769 1E67:200B
+   770 1E67:2012   771 1E67:2014   772 1E67:2020   773 1E67:2025
+   774 1E67:2028   775 1E67:2030   776 1E67:2037   778 1E67:203C
+   779 1E67:2043   780 1E67:2046   781 1E67:204E   782 1E67:2055
+   784 1E67:205A   785 1E67:2061   786 1E67:2064   787 1E67:2068
+   788 1E67:2098   789 1E67:209C   790 1E67:209F   791 1E67:20A3
+   792 1E67:20AC   793 1E67:20B0   794 1E67:20B3   795 1E67:20B7
+   796 1E67:20D9   797 1E67:20DD   798 1E67:20DF   799 1E67:20E3
+   800 1E67:20E7   801 1E67:20EB   802 1E67:20ED   803 1E67:20F1
+   804 1E67:20F3   805 1E67:20F7   806 1E67:20FB   807 1E67:20FF
+   808 1E67:2101   809 1E67:2105   810 1E67:210A   811 1E67:211C
+   812 1E67:211E   813 1E67:2122   814 1E67:212B   815 1E67:212F
+   816 1E67:2131   817 1E67:2135   818 1E67:2157   821 1E67:215B
+   822 1E67:2162   823 1E67:2180   824 1E67:2187   825 1E67:21B2
+   827 1E67:21CF   828 1E67:21E2   829 1E67:21E6   830 1E67:21EA
+   831 1E67:21FA   832 1E67:220A   833 1E67:221A   834 1E67:221C
+   835 1E67:2222   836 1E67:2226   837 1E67:222B   838 1E67:2235
+   839 1E67:224A   841 1E67:2266   846 1E67:2280   847 1E67:228C
+   848 1E67:22A1   849 1E67:22A5   850 1E67:22AC   851 1E67:22B6
+   852 1E67:22BD   853 1E67:22C4   854 1E67:22CB   855 1E67:22EA
+   856 1E67:22ED   857 1E67:22EF   858 1E67:22F6   859 1E67:22FF
+   860 1E67:2308   861 1E67:230E   862 1E67:2314   864 1E67:232E
+   865 1E67:233E   866 1E67:234E   867 1E67:2350   869 1E67:2357
+   870 1E67:235A   871 1E67:235E   873 1E67:237A   874 1E67:2381
+   875 1E67:2388   876 1E67:238D   877 1E67:2390   878 1E67:2393
+   879 1E67:239A   880 1E67:23A8   881 1E67:23C2   882 1E67:23E5
+   883 1E67:23FF   884 1E67:2411   885 1E67:2413   886 1E67:2421
+   887 1E67:243B   888 1E67:245D   889 1E67:2477   890 1E67:2489
+   891 1E67:248E   892 1E67:2491   893 1E67:2498   894 1E67:24A9
+   895 1E67:24C3   896 1E67:24E6   897 1E67:250D   898 1E67:251F
+   899 1E67:2521   900 1E67:252F   901 1E67:2549   902 1E67:256B
+   903 1E67:2585   904 1E67:2597   905 1E67:259C   906 1E67:259F
+   907 1E67:25A6   908 1E67:25B7   909 1E67:25BB   910 1E67:25DB
+   911 1E67:25E2   912 1E67:25E9   913 1E67:25EB   914 1E67:25F7
+   915 1E67:25FC   916 1E67:25FF   917 1E67:2603   918 1E67:262B
+   919 1E67:2652   920 1E67:2656   921 1E67:2670   922 1E67:2695
+   923 1E67:2699   924 1E67:26B4   925 1E67:26DA   926 1E67:26DE
+   927 1E67:26F7   929 1E67:2719   930 1E67:271E   931 1E67:2721
+   932 1E67:2725   933 1E67:2755   934 1E67:2759   935 1E67:275C
+   936 1E67:2760   937 1E67:2769   938 1E67:276D   939 1E67:2770
+   940 1E67:2774   941 1E67:2796   942 1E67:279A   943 1E67:279D
+   944 1E67:27A1   945 1E67:27A5   946 1E67:27A9   947 1E67:27AC
+   948 1E67:27B0   949 1E67:27B3   950 1E67:27B7   951 1E67:27BB
+   952 1E67:27BF   953 1E67:27C2   954 1E67:27C6   955 1E67:27CB
+   956 1E67:27DD   957 1E67:27E0   958 1E67:27E4   959 1E67:27ED
+   960 1E67:27F1   961 1E67:27F4   962 1E67:27F8   963 1E67:281A
+   964 1E67:281E   965 1E67:2821   966 1E67:2828   967 1E67:2835
+   968 1E67:283C   970 1E67:2858   972 1E67:2872   973 1E67:2874
+   975 1E67:2890   977 1E67:28AA   978 1E67:28B4   980 1E67:28C9
+   981 1E67:28CC   982 1E67:28D3   983 1E67:28DD   984 1E67:290B
+   985 1E67:2910   986 1E67:293B   987 1E67:2957   988 1E67:295C
+   989 1E67:295E   993 1E67:297A   994 1E67:297D   995 1E67:2984
+   996 1E67:298E   997 1E67:29B8   998 1E67:29BD   999 1E67:29E3
+  1000 1E67:29FF  1002 1E67:2A04  1003 1E67:2A06  1006 1E67:2A22
+  1007 1E67:2A24  1008 1E67:2A28  1009 1E67:2A48  1010 1E67:2A4D
+  1011 1E67:2A4F  1012 1E67:2A57  1013 1E67:2A5E  1015 1E67:2A63
+  1016 1E67:2A6A  1017 1E67:2A6C  1018 1E67:2A74  1019 1E67:2A7B
+  1021 1E67:2A80  1024 1E67:2A87  1025 1E67:2A8A  1026 1E67:2A9B
+  1027 1E67:2AB1  1028 1E67:2AC1  1030 1E67:2AD1  1031 1E67:2AE5
+  1032 1E67:2AF5  1034 1E67:2B0A  1035 1E67:2B11  1037 1E67:2B30
+  1038 1E67:2B39  1039 1E67:2B40  1040 1E67:2B47  1041 1E67:2B66
+  1043 1E67:2B69  1045 1E67:2B7A  1046 1E67:2B88  1048 1E67:2B8F
+  1049 1E67:2BA8  1050 1E67:2BDA  1051 1E67:2BF7  1052 1E67:2BFE
+  1053 1E67:2C04  1054 1E67:2C2D  1055 1E67:2C4A  1057 1E67:2C54
+  1059 1E67:2C58  1060 1E67:2C5C  1062 1E67:2C66  1063 1E67:2C6A
+  1065 1E67:2C71  1066 1E67:2C79  1069 1E67:2C7D  1072 1E67:2C7F
+  1074 1E67:2C83  1075 1E67:2C86  1090 1E67:2C88  1091 1E67:2C8F
+  1092 1E67:2C96  1093 1E67:2C9D  1094 1E67:2CA6  1097 1E67:2CAD
+  1108 1E67:2CC1  1109 1E67:2CCF  1110 1E67:2CD4  1111 1E67:2D13
+  1112 1E67:2D29  1113 1E67:2D31  1114 1E67:2D39  1115 1E67:2D41
+  1116 1E67:2D47  1117 1E67:2D4D  1118 1E67:2D53  1119 1E67:2D59
+  1121 1E67:2D61  1123 1E67:2D82  1124 1E67:2D87  1125 1E67:2D9D
+  1126 1E67:2DA8  1127 1E67:2DC0  1128 1E67:2DD3  1129 1E67:2DD8
+  1130 1E67:2DF2  1131 1E67:2E1B  1132 1E67:2E31  1133 1E67:2E40
+  1134 1E67:2E4F  1135 1E67:2E5E  1136 1E67:2E64  1137 1E67:2E6A
+  1138 1E67:2E70  1139 1E67:2E76  1140 1E67:2E85  1156 1E67:2F76
+  1157 1E67:2F85  1158 1E67:2F8A  1160 1E67:2F8F  1161 1E67:2F94
+  1162 1E67:2F98  1163 1E67:2F9D  1165 1E67:2FBD  1166 1E67:2FD3
+  1167 1E67:2FDE  1168 1E67:2FF6  1169 1E67:3009  1170 1E67:300E
+  1173 1E67:3046  1174 1E67:3053  1175 1E67:305F  1177 1E67:3064
+  1179 1E67:306A  1180 1E67:306D  1183 1E67:3070  1185 1E67:3079
+  1186 1E67:307F  1187 1E67:3083  1188 1E67:3098  1189 1E67:309D
+  1191 1E67:30A2  1193 1E67:30AD  1194 1E67:30C9  1195 1E67:30E5
+  1197 1E67:30FF  1198 1E67:311B  1199 1E67:3137  1201 1E67:3151
+  1202 1E67:316D  1203 1E67:3189  1205 1E67:31A3  1206 1E67:31BF
+  1209 1E67:31D9  1210 1E67:31F7  1211 1E67:31FE  1212 1E67:3229
+  1213 1E67:3230  1215 1E67:325B  1216 1E67:3284  1218 1E67:32A1
+  1219 1E67:32BB  1221 1E67:32E4  1222 1E67:32EA  1223 1E67:3302
+  1224 1E67:3317  1226 1E67:331C  1227 1E67:3325  1228 1E67:332A
+  1229 1E67:333F  1230 1E67:3344  1233 1E67:3348  1234 1E67:3351
+  1257 1E67:3355  1258 1E67:335F  1260 1E67:336C  1261 1E67:3373
+  1264 1E67:3375  1266 1E67:337F  1267 1E67:338E  1270 1E67:339C
+  1271 1E67:33AB  1272 1E67:33B0  1273 1E67:33B7  1274 1E67:33C1
+  1275 1E67:33C7  1276 1E67:33CC  1277 1E67:33D3  1278 1E67:33DB
+  1279 1E67:3402  1280 1E67:3405  1281 1E67:3407  1282 1E67:3413
+  1283 1E67:341C  1284 1E67:3420  1285 1E67:3427  1287 1E67:342A
+  1289 1E67:3434  1290 1E67:343A  1291 1E67:3443  1292 1E67:346C
+  1293 1E67:3476  1294 1E67:349D  1295 1E67:34A2  1296 1E67:34C8
+  1297 1E67:34EC  1298 1E67:34F1  1299 1E67:34FA  1305 1E67:34FD
+  1306 1E67:350A  1307 1E67:350F  1308 1E67:352A  1310 1E67:352F
+  1311 1E67:3541  1314 1E67:3546  1315 1E67:3549  1316 1E67:3550
+  1317 1E67:3559  1318 1E67:3560  1319 1E67:3564  1320 1E67:357F
+  1324 1E67:3597  1325 1E67:359E  1326 1E67:35A7  1330 1E67:35A9
+  1331 1E67:35B2  1332 1E67:35BB  1333 1E67:35D7  1337 1E67:35EF
+  1338 1E67:35F6  1339 1E67:35FF  1343 1E67:3601  1345 1E67:360A
+  1346 1E67:3626  1347 1E67:364D  1348 1E67:3663  1349 1E67:366C
+  1350 1E67:36A1  1352 1E67:36C6  1353 1E67:36E2  1354 1E67:36E5
+  1355 1E67:36EF  1357 1E67:36F2  1358 1E67:36F9  1359 1E67:3700
+  1360 1E67:3706  1361 1E67:370B  1363 1E67:371E  1364 1E67:3727
+  1367 1E67:372A  1369 1E67:3731  1370 1E67:373A  1373 1E67:373D
+  1374 1E67:3742  1377 1E67:3754  1378 1E67:3759  1381 1E67:375B
+  1383 1E67:3760  1385 1E67:3769  1387 1E67:3770  1388 1E67:377E
+  1389 1E67:3783  1390 1E67:3788  1391 1E67:378C  1393 1E67:3792
+  1396 1E67:37C2  1397 1E67:37E3  1398 1E67:37EA  1399 1E67:37F3
+  1402 1E67:37F7  1405 1E67:37FA  1407 1E67:37FD  1408 1E67:3804
+  1409 1E67:380B  1411 1E67:3814  1412 1E67:3819  1413 1E67:381D
+  1415 1E67:3832  1416 1E67:3842  1417 1E67:3849  1418 1E67:384D
+  1420 1E67:3856  1422 1E67:3861  1423 1E67:3890  1424 1E67:3897
+  1425 1E67:38A0  1426 1E67:38A7  1428 1E67:38AC  1429 1E67:38AF
+  1430 1E67:38B2  1431 1E67:38BF  1432 1E67:38DD  1434 1E67:38E0
+  1435 1E67:38E7  1436 1E67:38EE  1438 1E67:390A  1439 1E67:390F
+  1440 1E67:3918  1442 1E67:391F  1443 1E67:3933  1444 1E67:3938
+  1445 1E67:393D  1447 1E67:3958  1452 1E67:3960  1453 1E67:3963
+  1454 1E67:3971  1455 1E67:397D  1458 1E67:39AD  1460 1E67:39CA
+  1462 1E67:39D4  1463 1E67:39DD  1464 1E67:39E1  1466 1E67:39E5
+  1467 1E67:39E8  1470 1E67:3A11  1473 1E67:3A16  1474 1E67:3A1F
+  1475 1E67:3A32  1476 1E67:3A37  1477 1E67:3A3E  1478 1E67:3A48
+  1479 1E67:3A4F  1480 1E67:3A56
+
+Line numbers for Comunit(COMUNIT.PAS) segment Comunit
+
+    75 220D:0008    76 220D:0016    78 220D:001D    79 220D:0021
+    82 220D:0023    83 220D:0027    86 220D:0030    88 220D:0036
+    90 220D:0048    91 220D:004C    95 220D:0055    97 220D:005B
+   104 220D:00AE   108 220D:00B2   110 220D:00B8   112 220D:00BE
+   116 220D:00C2   117 220D:00C8   145 220D:00EF   146 220D:00FD
+   149 220D:0119   150 220D:011D   153 220D:011F   154 220D:0123
+   157 220D:012C   159 220D:0132   162 220D:014E   163 220D:0152
+   167 220D:015B   169 220D:0161   173 220D:0182   174 220D:0186
+   178 220D:018F   180 220D:0195   183 220D:01B2   184 220D:01B6
+   188 220D:01BF   189 220D:01C5   195 220D:01CC   197 220D:01D6
+   199 220D:01DD   204 220D:01EB   205 220D:01F3   206 220D:01F8
+   208 220D:0221   209 220D:0226   211 220D:022D   214 220D:022F
+   215 220D:0234   216 220D:0239   218 220D:0240   228 220D:0254
+   229 220D:0263   231 220D:0275   232 220D:028A   234 220D:0290
+   235 220D:0298   236 220D:02B3   237 220D:02BC   238 220D:02C1
+   239 220D:02C7   240 220D:02C9   241 220D:0310   243 220D:0318
+   245 220D:032A   246 220D:0336   247 220D:0347   248 220D:036E
+   249 220D:0391   250 220D:0393   251 220D:039D   252 220D:03D3
+   253 220D:03F9   254 220D:041C   255 220D:041E   257 220D:0428
+   258 220D:044B   259 220D:0451   262 220D:045B   263 220D:0470
+   264 220D:0475   265 220D:047A   273 220D:048E   274 220D:049C
+   275 220D:04A0   277 220D:04DA   278 220D:04E0   279 220D:04E6
+   280 220D:0509   282 220D:0512   284 220D:0518   286 220D:0524
+   288 220D:052A   290 220D:0545   291 220D:055F   292 220D:0578
+   295 220D:057A   296 220D:058A   297 220D:05A1   298 220D:05AA
+   300 220D:05AF   301 220D:05C1   302 220D:05D0   303 220D:05DF
+   304 220D:05E4   305 220D:05F3   306 220D:0602   309 220D:0606
+   310 220D:060B   311 220D:0610   312 220D:0615   321 220D:0624
+   322 220D:062E   324 220D:0631   325 220D:0639   326 220D:0650
+   327 220D:0657   328 220D:0696   329 220D:0698   330 220D:069F
+   331 220D:06A5   333 220D:06AE   336 220D:06B5   338 220D:06B7
+   339 220D:06BC   340 220D:06C3   342 220D:06C5   343 220D:06CA
+   344 220D:06D1   345 220D:06D8   347 220D:06DA   348 220D:06DF
+   349 220D:06E6   350 220D:06ED   351 220D:06EF   352 220D:06F4
+   353 220D:06FB   354 220D:0702   355 220D:0704   356 220D:0709
+   357 220D:0710   358 220D:0717   359 220D:0719   360 220D:071E
+   361 220D:0725   365 220D:072C   366 220D:0733   367 220D:073A
+   379 220D:0746   380 220D:0755   381 220D:075A   382 220D:075D
+   383 220D:0764   388 220D:079B   389 220D:079E   390 220D:07B6
+   391 220D:07D5   392 220D:07DE   395 220D:07E3   397 220D:07FE
+   398 220D:080F   399 220D:0829   402 220D:082B   404 220D:0832
+   405 220D:0839   406 220D:0851   407 220D:085A   409 220D:085F
+   410 220D:0877   413 220D:0879   417 220D:0891   418 220D:0896
+   420 220D:0899   421 220D:08A0   423 220D:08AF   424 220D:08B2
+   425 220D:08CA   426 220D:08E9   427 220D:08F2   430 220D:08F7
+   432 220D:090F   434 220D:0913   435 220D:0924   436 220D:093E
+   438 220D:0940   440 220D:0944   442 220D:094B   443 220D:0952
+   444 220D:096A   445 220D:0973   447 220D:0978   448 220D:0990
+   451 220D:0992   457 220D:09AA   458 220D:09AF   460 220D:09B2
+   461 220D:09B9   463 220D:09D1   465 220D:09D5   466 220D:09E6
+   467 220D:0A00   469 220D:0A02   471 220D:0A06   472 220D:0A0F
+   473 220D:0A22   476 220D:0A3A   477 220D:0A3F   479 220D:0A41
+   480 220D:0A45   482 220D:0A5D   484 220D:0A61   485 220D:0A72
+   486 220D:0A8C   488 220D:0A8E   490 220D:0A92   493 220D:0AA2
+   496 220D:0AA7   497 220D:0AAC   498 220D:0AB1   503 220D:0ABD
+   504 220D:0AC7   506 220D:0AF2   508 220D:0B13   525 220D:0B29
+   526 220D:0B38   527 220D:0B51   528 220D:0B56   529 220D:0B8E
+   530 220D:0B94   531 220D:0B9B   532 220D:0BAD   534 220D:0BB0
+   535 220D:0BFB   536 220D:0C01   537 220D:0C32   538 220D:0C81
+   539 220D:0C85   540 220D:0C88   541 220D:0C9B   544 220D:0CAB
+   545 220D:0CBA   546 220D:0CFB   547 220D:0D17   548 220D:0D5B
+   549 220D:0D6F   550 220D:0D73   551 220D:0D84   553 220D:0D93
+   554 220D:0DA2   557 220D:0DB6   558 220D:0DBE   560 220D:0DC1
+   562 220D:0DC9   563 220D:0DD0   564 220D:0DD9   566 220D:0DDC
+   567 220D:0DF7   568 220D:0DFA   569 220D:0E33   570 220D:0E3B
+   571 220D:0E40   572 220D:0E7A   573 220D:0E7F   574 220D:0E89
+   575 220D:0EB8   576 220D:0EC1   577 220D:0EC4   578 220D:0ECA
+   579 220D:0ECE   580 220D:0EE6   581 220D:0F2E   583 220D:0F34
+   584 220D:0F3F   585 220D:0F45   587 220D:0F8C   588 220D:0FAE
+   590 220D:0FC0   592 220D:0FC3   593 220D:0FCB   594 220D:0FD0
+   595 220D:0FD5   596 220D:0FFC   597 220D:1009   598 220D:102F
+   599 220D:1044   600 220D:1049   601 220D:104E   602 220D:1053
+   604 220D:1055   606 220D:1070   607 220D:1075   608 220D:1089
+   609 220D:1092   610 220D:1097   613 220D:1099   614 220D:109E
+   618 220D:10B2   674 220D:10B6   675 220D:10C0   677 220D:10C9
+   678 220D:10CF   681 220D:10D1   683 220D:10DC   684 220D:10E7
+   687 220D:10F3   688 220D:1101   689 220D:1155   690 220D:116F
+   691 220D:118A   693 220D:1190   694 220D:1194   700 220D:11AD
+   701 220D:11BC   702 220D:11D5   703 220D:11DA   704 220D:1212
+   705 220D:1218   706 220D:121F   707 220D:1231   709 220D:1234
+   710 220D:127F   711 220D:1285   712 220D:12B6   713 220D:1305
+   714 220D:1309   715 220D:130C   716 220D:131F   719 220D:1337
+   720 220D:1346   721 220D:1364   722 220D:136D   723 220D:1371
+   725 220D:1374   726 220D:13B5   727 220D:13D1   728 220D:140B
+   729 220D:141F   730 220D:1437   731 220D:1440   732 220D:1444
+   734 220D:1446   735 220D:144F   736 220D:1453   737 220D:146B
+   739 220D:147E   740 220D:14A6   742 220D:1783   743 220D:1792
+   745 220D:17A6   746 220D:17AF   747 220D:17B3   749 220D:17B8
+   750 220D:17BD   752 220D:17D8   753 220D:17EA   754 220D:17EC
+   755 220D:1807   756 220D:180E   758 220D:1812   760 220D:1815
+   762 220D:181A   763 220D:1831   764 220D:1836   766 220D:183B
+   767 220D:1843   768 220D:1849   769 220D:184E   771 220D:1851
+   773 220D:1859   774 220D:1869   776 220D:1896   778 220D:18BB
+   779 220D:18DA   780 220D:18EA   781 220D:18F9   783 220D:191F
+   785 220D:1945   786 220D:194E   787 220D:195E   788 220D:197D
+   790 220D:19AA   792 220D:19AD   793 220D:19B2   794 220D:19CC
+   795 220D:19F6   796 220D:1A05   798 220D:1A22   799 220D:1A3F
+   800 220D:1A53   801 220D:1A72   803 220D:1A9F   805 220D:1AA2
+   807 220D:1AA7   808 220D:1AAC   809 220D:1ACA   810 220D:1ADF
+   811 220D:1AE4   813 220D:1AE7   815 220D:1AEC   816 220D:1AF1
+   818 220D:1B12   819 220D:1B27   820 220D:1B2C   822 220D:1B2F
+   824 220D:1B37   825 220D:1B3C   826 220D:1B41   827 220D:1B46
+   829 220D:1B4B   831 220D:1B56   832 220D:1B79   833 220D:1B9C
+   835 220D:1BBF   836 220D:1BE2   837 220D:1C05   839 220D:1C28
+   840 220D:1C4B   841 220D:1C6E   843 220D:1C91   844 220D:1CB4
+   847 220D:1CD7   848 220D:1CF5   849 220D:1CFC   850 220D:1D27
+   851 220D:1D2E   853 220D:1D59   854 220D:1D82   855 220D:1DA6
+   856 220D:1DC1   857 220D:1DC6   860 220D:1DF1   862 220D:1DFB
+   863 220D:1E15   865 220D:1E40   866 220D:1E47   867 220D:1E62
+   868 220D:1E69   869 220D:1E7E   871 220D:1E83   872 220D:1E8D
+   873 220D:1E92   874 220D:1E97   876 220D:1E9A   878 220D:1E9F
+   879 220D:1EA4   880 220D:1EAF   882 220D:1EB2   888 220D:1EB7
+   890 220D:1EDD   891 220D:1EE6   893 220D:1EE9   895 220D:1EF1
+   897 220D:1EF8   899 220D:1F1F   900 220D:1F24   903 220D:1F26
+   905 220D:1F2D   907 220D:1F54   908 220D:1F59   909 220D:1F7C
+   912 220D:1F7E   913 220D:1F83   916 220D:1F88   918 220D:1F8B
+   920 220D:1F90   921 220D:1F95   923 220D:1F98   925 220D:1F9D
+   926 220D:1FA1   927 220D:1FA5   929 220D:1FAB   930 220D:1FB0
+   931 220D:1FBA   933 220D:1FC6   934 220D:1FCF   936 220D:1FD3
+   937 220D:1FD5   939 220D:1FDB   941 220D:1FE0   942 220D:1FE5
+   948 220D:1FE8   950 220D:1FED   951 220D:2002   953 220D:2005
+   955 220D:200A   957 220D:2011   961 220D:2044   963 220D:2047
+   965 220D:204C   966 220D:2061   968 220D:2064   970 220D:2069
+   973 220D:2091   977 220D:20C4   979 220D:20C7   981 220D:20CF
+   982 220D:20D4   984 220D:20DD   986 220D:20F8   987 220D:2109
+   990 220D:210B   991 220D:211B   993 220D:2160   996 220D:2163
+   999 220D:216D  1000 220D:2173  1001 220D:218D  1002 220D:219D
+  1003 220D:21BA  1004 220D:21CA  1006 220D:21E2  1007 220D:2211
+  1008 220D:2216  1009 220D:221F  1010 220D:222F  1011 220D:224C
+  1012 220D:2251  1015 220D:2253  1017 220D:2274  1018 220D:2289
+  1021 220D:228E  1023 220D:2291  1025 220D:2299  1026 220D:229E
+  1028 220D:22A7  1030 220D:22C2  1031 220D:22D2  1034 220D:22D4
+  1035 220D:22E4  1037 220D:2329  1041 220D:232C  1043 220D:2347
+  1044 220D:2358  1047 220D:235A  1049 220D:236B  1050 220D:2380
+  1052 220D:2387  1053 220D:239A  1054 220D:23B5  1056 220D:23F8
+  1058 220D:2444  1060 220D:2447  1062 220D:244C  1063 220D:2451
+  1064 220D:2456  1066 220D:2459  1068 220D:2461  1069 220D:246B
+  1070 220D:248A  1071 220D:24CF  1073 220D:24F5  1074 220D:24FD
+  1075 220D:2503  1076 220D:2509  1077 220D:250F  1078 220D:2521
+  1079 220D:252B  1080 220D:2535  1081 220D:2537  1082 220D:2543
+  1083 220D:254F  1084 220D:2555  1086 220D:255C  1088 220D:2561
+  1090 220D:2564  1092 220D:2569  1093 220D:257E  1095 220D:2581
+  1097 220D:2586  1098 220D:258B  1099 220D:25A5  1100 220D:25AA
+  1102 220D:25D3  1104 220D:25D6  1106 220D:25DB  1108 220D:2600
+  1109 220D:2605  1111 220D:2608  1113 220D:260D  1114 220D:2612
+  1116 220D:2635  1118 220D:2638  1122 220D:263D  1126 220D:2640
+  1128 220D:2645  1129 220D:264A  1131 220D:266F  1133 220D:2672
+  1135 220D:2677  1136 220D:267C  1138 220D:269F  1140 220D:26A2
+  1142 220D:26A7  1143 220D:26AC  1144 220D:26B1  1153 220D:26B4
+  1155 220D:26B9  1157 220D:26DC  1158 220D:26E1  1160 220D:26E4
+  1162 220D:26E9  1163 220D:26EE  1164 220D:26F4  1165 220D:2708
+  1166 220D:2718  1167 220D:271D  1168 220D:2720  1170 220D:2728
+  1171 220D:2732  1173 220D:2740  1176 220D:2783  1177 220D:2786
+  1178 220D:2790  1179 220D:2797  1182 220D:27DA  1183 220D:27DC
+  1187 220D:281F  1188 220D:2821  1189 220D:2828  1195 220D:286B
+  1196 220D:286E  1197 220D:2878  1198 220D:287F  1201 220D:28C2
+  1202 220D:28C4  1206 220D:2907  1207 220D:2909  1208 220D:2910
+  1211 220D:2953  1215 220D:2955  1216 220D:295A  1217 220D:2975
+  1218 220D:298C  1219 220D:2991  1220 220D:2997  1221 220D:299E
+  1222 220D:29A4  1223 220D:29A9  1224 220D:29B2  1226 220D:29C3
+  1229 220D:29C8  1230 220D:29EB  1231 220D:2A0E  1232 220D:2A31
+  1233 220D:2A54  1234 220D:2A77  1236 220D:2A9A  1237 220D:2AC2
+  1238 220D:2AD6  1239 220D:2AF3  1240 220D:2AF9  1241 220D:2B04
+  1242 220D:2B09  1243 220D:2B21  1245 220D:2B29  1248 220D:2B76
+  1249 220D:2B99  1250 220D:2BAE  1251 220D:2BB2  1252 220D:2BC9
+  1253 220D:2BD1  1254 220D:2BD8  1255 220D:2BE4  1257 220D:2C38
+  1258 220D:2C4A  1259 220D:2C4F  1260 220D:2C51  1261 220D:2C56
+  1263 220D:2C5A  1264 220D:2C91  1265 220D:2C98  1267 220D:2CBD
+  1268 220D:2CE0  1269 220D:2CEF  1270 220D:2CF6  1271 220D:2D05
+  1272 220D:2D09  1273 220D:2D0C  1274 220D:2D13  1275 220D:2D26
+  1278 220D:2D4E  1279 220D:2D56  1280 220D:2D6E  1282 220D:2D76
+  1283 220D:2D9E  1284 220D:2DA4  1287 220D:2DE8  1288 220D:2DEB
+  1289 220D:2DF2  1290 220D:2E1A  1291 220D:2E2E  1292 220D:2E4B
+  1293 220D:2E6E  1294 220D:2E7A  1295 220D:2E8D  1297 220D:2E93
+  1298 220D:2EBB  1299 220D:2ECF  1300 220D:2EEC  1301 220D:2EF2
+  1302 220D:2EFD  1303 220D:2F02  1304 220D:2F1A  1306 220D:2F22
+  1309 220D:2F6F  1310 220D:2F72  1311 220D:2F79  1312 220D:2FA1
+  1313 220D:2FB5  1314 220D:2FD2  1315 220D:2FF5  1316 220D:3008
+  1318 220D:300E  1319 220D:3036  1320 220D:304A  1321 220D:3067
+  1322 220D:306D  1323 220D:3082  1325 220D:308E  1328 220D:30DB
+  1330 220D:30DD  1332 220D:30E1  1333 220D:30E4  1334 220D:30E8
+  1335 220D:30EB  1336 220D:30EF  1337 220D:311F  1338 220D:3124
+  1339 220D:3127  1340 220D:312B  1341 220D:313B  1342 220D:3140
+  1343 220D:3143  1344 220D:3147  1345 220D:3169  1346 220D:316E
+  1347 220D:3171  1348 220D:3175  1349 220D:3179  1350 220D:317E
+  1351 220D:3181  1352 220D:3185  1353 220D:3188  1354 220D:318C
+  1355 220D:3190  1356 220D:3195  1357 220D:3198  1358 220D:319C
+  1359 220D:31A1  1360 220D:31B3  1361 220D:31B6  1362 220D:31BA
+  1363 220D:31CA  1364 220D:31CF  1365 220D:31D2  1366 220D:31D6
+  1367 220D:31F8  1368 220D:31FD  1369 220D:3200  1370 220D:3207
+  1371 220D:320E  1373 220D:3215  1374 220D:3227  1375 220D:3279
+  1376 220D:3286  1377 220D:3289  1378 220D:3294  1379 220D:329B
+  1380 220D:32AE  1382 220D:32C5  1383 220D:32CD  1384 220D:32E5
+  1386 220D:32ED  1387 220D:3315  1388 220D:331B  1391 220D:335F
+  1393 220D:3361  1396 220D:3365  1397 220D:336E  1398 220D:3373
+  1399 220D:339B  1400 220D:33BE  1401 220D:33D1  1402 220D:33D7
+  1403 220D:33DC  1404 220D:33DF  1406 220D:33E4  1408 220D:340A
+  1410 220D:3417  1411 220D:341C  1414 220D:343F  1416 220D:3442
+  1418 220D:3447  1419 220D:344C  1421 220D:3475  1422 220D:347A
+  1423 220D:347F  1425 220D:3482  1427 220D:3487  1428 220D:348C
+  1430 220D:34B5  1431 220D:34BA  1433 220D:34BD  1435 220D:34C2
+  1436 220D:34C7  1437 220D:34CF  1438 220D:34D4  1439 220D:34DA
+  1441 220D:3501  1443 220D:3504  1445 220D:3509  1446 220D:3516
+  1448 220D:351D  1449 220D:3522  1450 220D:3527  1453 220D:3529
+  1455 220D:352E  1458 220D:3531  1460 220D:3541  1461 220D:354A
+  1462 220D:355C  1463 220D:3565  1464 220D:356A  1465 220D:3587
+  1466 220D:359F  1467 220D:35A7  1468 220D:35C5  1469 220D:35E0
+  1470 220D:35F8  1471 220D:3603  1472 220D:360E  1473 220D:362C
+  1474 220D:3631  1475 220D:3637  1477 220D:363D  1478 220D:3648
+  1479 220D:366B  1481 220D:3670  1482 220D:3679  1483 220D:367C
+  1484 220D:3688  1485 220D:3691  1487 220D:3697  1488 220D:36A0
+  1489 220D:36A3  1490 220D:36B5  1491 220D:36BC  1492 220D:36C5
+  1494 220D:36C8  1495 220D:36E3  1496 220D:36E6  1497 220D:3721
+  1498 220D:3729  1499 220D:372E  1500 220D:3768  1501 220D:376D
+  1502 220D:3777  1503 220D:37A6  1504 220D:37AF  1505 220D:37B2
+  1506 220D:37B8  1507 220D:37E4  1508 220D:37F9  1509 220D:3802
+  1510 220D:3805  1511 220D:380E  1512 220D:3813  1513 220D:3834
+  1514 220D:3872  1516 220D:3879  1517 220D:3884  1518 220D:388B
+  1519 220D:38B1  1521 220D:38E0  1525 220D:38F5  1526 220D:3910
+  1527 220D:3919  1528 220D:391E  1529 220D:3924  1532 220D:3926
+  1533 220D:393B  1534 220D:3940  1535 220D:3945  1536 220D:3947
+  1537 220D:394C  1538 220D:3958  1541 220D:397E  1542 220D:39C5
+  1543 220D:39CD  1544 220D:39D0  1546 220D:39D8  1548 220D:39F3
+  1549 220D:39F8  1550 220D:3A0A  1551 220D:3A20  1552 220D:3A38
+  1553 220D:3A3F  1554 220D:3A44  1555 220D:3A5F  1556 220D:3A65
+  1557 220D:3A6A  1559 220D:3A6C  1561 220D:3A6F  1563 220D:3A74
+  1565 220D:3A8F  1566 220D:3A94  1568 220D:3AB4  1570 220D:3AB7
+  1572 220D:3ABC  1574 220D:3AD7  1575 220D:3ADC  1577 220D:3AEE
+  1579 220D:3AF1  1581 220D:3AF6  1583 220D:3B11  1584 220D:3B16
+  1586 220D:3B27  1588 220D:3B2A  1590 220D:3B2F  1592 220D:3B4A
+  1593 220D:3B4F  1595 220D:3B61  1597 220D:3B64  1599 220D:3B69
+  1601 220D:3B84  1602 220D:3B89  1604 220D:3B9B  1606 220D:3B9E
+  1608 220D:3BA3  1610 220D:3BBE  1611 220D:3BC3  1613 220D:3BD5
+  1615 220D:3BD8  1617 220D:3BDD  1619 220D:3BF8  1620 220D:3BFD
+  1622 220D:3C0F  1624 220D:3C12  1626 220D:3C17  1627 220D:3C20
+  1628 220D:3C32  1630 220D:3C35  1632 220D:3C3A  1634 220D:3C62
+  1636 220D:3C65  1638 220D:3C6A  1639 220D:3C72  1640 220D:3C84
+  1642 220D:3C87  1644 220D:3C8C  1646 220D:3CB3  1648 220D:3CB5
+  1650 220D:3CBA  1651 220D:3CBF  1653 220D:3CE8  1654 220D:3CED
+  1655 220D:3CF2  1657 220D:3CF4  1659 220D:3CF9  1660 220D:3CFE
+  1662 220D:3D23  1666 220D:3D28  1667 220D:3D31  1668 220D:3D36
+  1670 220D:3D42  1673 220D:3D47
+
+Line numbers for satunit(SATUNIT.PAS) segment satunit
+
+    31 25E2:0024    32 25E2:0033    33 25E2:0043    34 25E2:0060
+    35 25E2:0072    37 25E2:007B    39 25E2:0084    41 25E2:008D
+    42 25E2:00E8    43 25E2:00EE    44 25E2:00F4    45 25E2:00FD
+    50 25E2:010D    60 25E2:0127    61 25E2:0135    64 25E2:013E
+    66 25E2:0148    67 25E2:01A3    68 25E2:01FE    70 25E2:0207
+    72 25E2:024B    73 25E2:0256    75 25E2:028C    76 25E2:02A9
+    77 25E2:02D7    79 25E2:02E1    80 25E2:033C    81 25E2:0397
+    83 25E2:03A0
+
+Line numbers for prmunit(PRMUNIT.PAS) segment prmunit
+
+    33 261D:001B    34 261D:002A    35 261D:002F    36 261D:0037
+    37 261D:003D    39 261D:004E    41 261D:0092    42 261D:009D
+    43 261D:00B5    44 261D:00C8    46 261D:00E2    47 261D:00F1
+    48 261D:00F7    51 261D:012F    52 261D:0135    55 261D:0137
+    57 261D:013C    59 261D:0146    60 261D:0150    62 261D:0163
+    64 261D:0189    66 261D:01C2    68 261D:01C8    70 261D:01D9
+    73 261D:01DB    76 261D:0220    91 261D:0249    93 261D:0258
+    94 261D:025D    95 261D:0262    96 261D:0266    98 261D:02A3
+   100 261D:02E7   101 261D:02F2   102 261D:030A   103 261D:031D
+   106 261D:0355   107 261D:0370   108 261D:037C   110 261D:0392
+   117 261D:0402   121 261D:0406   122 261D:0409   123 261D:040D
+   124 261D:0412   125 261D:0417   126 261D:041C   127 261D:0421
+   129 261D:0424   132 261D:0433   133 261D:0438   135 261D:043E
+   136 261D:0443   139 261D:0445   141 261D:044B   143 261D:0451
+   144 261D:0456   147 261D:0458   150 261D:0468   151 261D:0478
+   152 261D:047D   155 261D:04A6   156 261D:04AB   157 261D:04B0
+   158 261D:04D0   159 261D:04D5   160 261D:04DA   161 261D:04DC
+   162 261D:04E0   166 261D:04E3   168 261D:04EC
+
+Line numbers for grintunit(GRINTUNIT.PAS) segment grintunit
+
+    31 266C:002B    32 266C:003A    35 266C:003F    37 266C:0057
+    38 266C:007C    39 266C:0090    42 266C:0092    43 266C:00A4
+    46 266C:00B6    47 266C:00BD    48 266C:00C4    49 266C:00CB
+    50 266C:00D1    51 266C:00DA    53 266C:011E    54 266C:0129
+    55 266C:0141    56 266C:0154    57 266C:016E    58 266C:017E
+    59 266C:018E    60 266C:019E    61 266C:01B0    62 266C:01C0
+    63 266C:01D0    64 266C:01F1    65 266C:01F8    66 266C:01FF
+    67 266C:0206    68 266C:020C    69 266C:021C    71 266C:022E
+    73 266C:0246    74 266C:026B    77 266C:026D    80 266C:0280
+    81 266C:02A3    82 266C:02B8    83 266C:02E1    84 266C:02F6
+    85 266C:031F    86 266C:0334    87 266C:035D    88 266C:0375
+    90 266C:039E    91 266C:03AD    93 266C:03B7    94 266C:03C5
+    95 266C:03CB    97 266C:03F5    99 266C:040D   100 266C:0432
+   103 266C:0434   105 266C:0447   106 266C:0453   107 266C:045C
+   109 266C:046B
+
+Line numbers for GetUnit(GETUNIT.PAS) segment GetUnit
+
+    44 26B3:000C    45 26B3:001A    46 26B3:002D    47 26B3:0033
+    49 26B3:0054    52 26B3:0079    54 26B3:008C    55 26B3:009C
+    57 26B3:009E    58 26B3:00B1    59 26B3:00B7    61 26B3:00D8
+    64 26B3:00FD    66 26B3:0106    67 26B3:0116    68 26B3:0118
+    79 26B3:0124    80 26B3:0132    81 26B3:013F    82 26B3:0168
+    83 26B3:0192    84 26B3:01D3    85 26B3:020B   101 26B3:021F
+   102 26B3:022E   103 26B3:0253   104 26B3:0266   105 26B3:0274
+   106 26B3:028C   107 26B3:029E   109 26B3:02A4   111 26B3:02AF
+   112 26B3:02B5   116 26B3:02B9   118 26B3:02CB   121 26B3:02D9
+   122 26B3:02F1   123 26B3:0301   124 26B3:0312   127 26B3:0314
+   129 26B3:0323   132 26B3:0325   134 26B3:0353   136 26B3:036A
+   137 26B3:0390   138 26B3:03B0   139 26B3:03C9   140 26B3:03DF
+   141 26B3:03FC   144 26B3:03FE   148 26B3:041B   150 26B3:0421
+   154 26B3:043D   155 26B3:0446   170 26B3:0452   171 26B3:0461
+   172 26B3:0486   173 26B3:0499   174 26B3:04A7   175 26B3:04BF
+   176 26B3:04D1   178 26B3:04D7   180 26B3:0507   183 26B3:0515
+   184 26B3:052D   185 26B3:053D   188 26B3:053F   190 26B3:054E
+   193 26B3:0550   196 26B3:057E   198 26B3:0584   201 26B3:05A0
+   207 26B3:05AC   208 26B3:05B6   209 26B3:05C4   210 26B3:05D4
+   211 26B3:05E5   212 26B3:05F6   213 26B3:0610   222 26B3:061C
+   223 26B3:062B   224 26B3:064D   227 26B3:065B   228 26B3:0674
+   229 26B3:069E   230 26B3:06B8   231 26B3:06E2   232 26B3:06FC
+   233 26B3:0726   234 26B3:0743   235 26B3:076D   237 26B3:0773
+   238 26B3:07AD   240 26B3:07B7   241 26B3:07CD   244 26B3:07CF
+   248 26B3:07E5   249 26B3:07F5   250 26B3:0802   251 26B3:0810
+   260 26B3:081C   261 26B3:082B   263 26B3:0843   264 26B3:0868
+   265 26B3:087B   266 26B3:0896   267 26B3:08A6   269 26B3:08B3
+   283 26B3:08C7   284 26B3:08F9   285 26B3:0908   286 26B3:0919
+   287 26B3:0933   288 26B3:093C   289 26B3:0952   290 26B3:0958
+   291 26B3:095E   292 26B3:0963   293 26B3:0968   294 26B3:096E
+   295 26B3:0973   296 26B3:0978   298 26B3:097D   300 26B3:0987
+   304 26B3:0995   305 26B3:09B0   306 26B3:09B6   307 26B3:09BC
+   308 26B3:09C1   309 26B3:09C6   310 26B3:09CB   313 26B3:09CE
+   316 26B3:0A05   317 26B3:0A0D   318 26B3:0A19   319 26B3:0A30
+   320 26B3:0A34   321 26B3:0A3F   322 26B3:0A4F   323 26B3:0A63
+   324 26B3:0A77   325 26B3:0A8B   326 26B3:0A9F   327 26B3:0AB3
+   328 26B3:0AB7   330 26B3:0ABE   331 26B3:0AD5   332 26B3:0AF2
+   335 26B3:0AF4   336 26B3:0AF9   338 26B3:0B1F   339 26B3:0B22
+   340 26B3:0B26   342 26B3:0B2D   343 26B3:0B42   344 26B3:0B5F
+   347 26B3:0B61   348 26B3:0B66   350 26B3:0B8C   351 26B3:0B8F
+   353 26B3:0BAD   355 26B3:0BB4   356 26B3:0BBA   357 26B3:0BC0
+   359 26B3:0BCC   360 26B3:0BE0   362 26B3:0BF9   364 26B3:0C01
+   366 26B3:0C08   368 26B3:0C43   369 26B3:0C65   371 26B3:0C6C
+   374 26B3:0CB9   375 26B3:0CBE   376 26B3:0CC0   377 26B3:0CD0
+   378 26B3:0CEE   379 26B3:0CFA   383 26B3:0CFF   385 26B3:0D12
+   386 26B3:0D19   388 26B3:0D28   390 26B3:0D37   391 26B3:0D3A
+   399 26B3:0D46   400 26B3:0D68   401 26B3:0D6E   403 26B3:0D74
+   405 26B3:0D9F   406 26B3:0DAF   407 26B3:0DB1   409 26B3:0DCF
+   410 26B3:0DDF   412 26B3:0DE1   413 26B3:0E0A   427 26B3:0E21
+   428 26B3:0E43   431 26B3:0E50   432 26B3:0E58   433 26B3:0E63
+   435 26B3:0E75   437 26B3:0E7B   438 26B3:0EB2   441 26B3:0EB4
+   443 26B3:0EBA   444 26B3:0EE5   447 26B3:0EE7   450 26B3:0F12
+   453 26B3:0F15   455 26B3:0F1B   457 26B3:0F21   458 26B3:0F4C
+   461 26B3:0F4E   463 26B3:0F79   466 26B3:0F7B   468 26B3:0F82
+   474 26B3:0FAD   477 26B3:0FB6   478 26B3:0FCD   479 26B3:0FD1
+   481 26B3:0FE0   482 26B3:0FE5   485 26B3:0FE7   487 26B3:0FEC
+   489 26B3:1004   490 26B3:101E   491 26B3:1033   495 26B3:10A2
+   496 26B3:10CF   499 26B3:10D1   501 26B3:10FF   504 26B3:112C
+   505 26B3:1130   507 26B3:113B   517 26B3:113F   518 26B3:1161
+   524 26B3:11A2   527 26B3:11AF   528 26B3:11C6   530 26B3:11D1
+   532 26B3:11E6   535 26B3:1234   537 26B3:123C   553 26B3:1260
+   554 26B3:126F   555 26B3:1294   556 26B3:12A7   557 26B3:12B5
+   558 26B3:12CD   559 26B3:12DF   561 26B3:12E5   563 26B3:1312
+   566 26B3:1320   567 26B3:1338   568 26B3:1348   571 26B3:134A
+   573 26B3:1359   576 26B3:135B   577 26B3:1387   578 26B3:13AC
+   579 26B3:13BF   580 26B3:13E7   581 26B3:13F8   582 26B3:1402
+   583 26B3:1406   584 26B3:140C   585 26B3:140E   586 26B3:1412
+   588 26B3:1415   589 26B3:1418   590 26B3:142F   591 26B3:1446
+   594 26B3:145D   596 26B3:14A7   599 26B3:14AE   600 26B3:14B8
+
+Line numbers for utilunit(UTILUNIT.PAS) segment utilunit
+
+    43 27FF:0000    44 27FF:000E    45 27FF:0013    46 27FF:001C
+    47 27FF:001F    48 27FF:0027    49 27FF:002C    50 27FF:002E
+    51 27FF:0036    52 27FF:003B    53 27FF:0050    54 27FF:0052
+    55 27FF:005A    56 27FF:005F    59 27FF:0074    60 27FF:007A
+    68 27FF:0091    69 27FF:00BB    70 27FF:00D6    71 27FF:00F7
+    72 27FF:0118    73 27FF:0139    74 27FF:013F    83 27FF:015E
+    84 27FF:0184    85 27FF:0189    86 27FF:018E    88 27FF:019B
+    89 27FF:01BF    93 27FF:0240    95 27FF:025D    96 27FF:027A
+    97 27FF:027D    98 27FF:0284   108 27FF:02AF   109 27FF:02BE
+   112 27FF:02E0   116 27FF:02E7   117 27FF:0300   120 27FF:0351
+   123 27FF:0355   125 27FF:035E   129 27FF:0362   131 27FF:036B
+   133 27FF:0378   134 27FF:03A8   137 27FF:03AA   139 27FF:03ED
+   142 27FF:03F0   144 27FF:0405   146 27FF:0411   147 27FF:0436
+   150 27FF:0438   152 27FF:0459   155 27FF:045C   157 27FF:0462
+   159 27FF:047F   161 27FF:04A5   164 27FF:04A8   166 27FF:04B8
+   168 27FF:04EC   169 27FF:051C   172 27FF:051E   180 27FF:0543
+   183 27FF:0569   184 27FF:056D   187 27FF:056F   189 27FF:0573
+   199 27FF:057A   200 27FF:0589   202 27FF:05AB   206 27FF:05B2
+   208 27FF:05C8   210 27FF:05CF   213 27FF:05FF   214 27FF:0610
+   216 27FF:0621   217 27FF:062F   218 27FF:063C   220 27FF:064A
+   226 27FF:0668   227 27FF:066C   230 27FF:066E   232 27FF:0672
+   241 27FF:0681   242 27FF:068F   243 27FF:0693   247 27FF:06DD
+   248 27FF:06ED   249 27FF:06EF   252 27FF:071A   254 27FF:0740
+   256 27FF:0757   257 27FF:0767   258 27FF:0769   259 27FF:076F
+   266 27FF:0776   268 27FF:0780   271 27FF:07AE   273 27FF:07B1
+   274 27FF:07B5   275 27FF:07BD   276 27FF:07C5   278 27FF:07C7
+   279 27FF:07CB   280 27FF:07D3   281 27FF:07DB   283 27FF:07DD
+   284 27FF:07E1   285 27FF:07E9   286 27FF:07F1   288 27FF:07F3
+   289 27FF:07F7   290 27FF:0806   293 27FF:080E   296 27FF:0811
+   298 27FF:0821   300 27FF:0824   301 27FF:0828   302 27FF:0830
+   303 27FF:0838   305 27FF:083A   306 27FF:083E   307 27FF:0846
+   308 27FF:084E   310 27FF:0850   311 27FF:0854   312 27FF:085C
+   313 27FF:0864   315 27FF:0866   316 27FF:086A   317 27FF:0879
+   320 27FF:0881   323 27FF:0883   325 27FF:0886   326 27FF:088A
+   327 27FF:0892   328 27FF:089A   330 27FF:089C   331 27FF:08A0
+   332 27FF:08A8   333 27FF:08B0   335 27FF:08B2   336 27FF:08B6
+   337 27FF:08BE   338 27FF:08C6   340 27FF:08C8   341 27FF:08CC
+   342 27FF:08DB   347 27FF:08E3   356 27FF:08EF   357 27FF:08FE
+   358 27FF:0906   359 27FF:090B   360 27FF:0928   361 27FF:094B
+   363 27FF:0951   365 27FF:0969   373 27FF:097F   374 27FF:09A5
+   375 27FF:09AD   376 27FF:09B3   377 27FF:09BB   379 27FF:09C5
+   380 27FF:09EA   382 27FF:09FC   384 27FF:0A14   385 27FF:0A28
+   386 27FF:0A3C   387 27FF:0A50   388 27FF:0A64   389 27FF:0A78
+   390 27FF:0A85   391 27FF:0A92   392 27FF:0A9F   393 27FF:0AAC
+   396 27FF:0AD4   399 27FF:0AE8   407 27FF:0AF6   408 27FF:0B05
+   409 27FF:0B0C   412 27FF:0B47   413 27FF:0B5D   414 27FF:0B5F
+   415 27FF:0B75   418 27FF:0BA6   419 27FF:0BEA   420 27FF:0BFC
+   421 27FF:0BFF   422 27FF:0C40   431 27FF:0C4E   432 27FF:0C5D
+   433 27FF:0C64   434 27FF:0C7D   436 27FF:0CA4   437 27FF:0CD3
+   438 27FF:0CEE   439 27FF:0CF0   441 27FF:0CF9   443 27FF:0D0A
+   449 27FF:0D18   450 27FF:0D27   453 27FF:0D55   454 27FF:0D67
+   455 27FF:0D69   456 27FF:0DA0   464 27FF:0DAC   465 27FF:0DD2
+   466 27FF:0DD7   467 27FF:0DFB   468 27FF:0E10   469 27FF:0E21
+   470 27FF:0E36   471 27FF:0E6A   472 27FF:0E79   473 27FF:0E7B
+   474 27FF:0E82   475 27FF:0E87   477 27FF:0E89   478 27FF:0EA6
+   479 27FF:0EAD   486 27FF:0EBC   487 27FF:0EC6   490 27FF:0F15
+   491 27FF:0F2B   492 27FF:0F2D   499 27FF:0F39   500 27FF:0F43
+   503 27FF:0F7B   504 27FF:0F91   505 27FF:0F93   519 27FF:0FA9
+   520 27FF:0FB8   521 27FF:0FC0   522 27FF:0FD1   524 27FF:0FDA
+   525 27FF:0FE8   527 27FF:1016   528 27FF:1032   530 27FF:105C
+   531 27FF:1077   532 27FF:1079   534 27FF:10B2   537 27FF:10B5
+   538 27FF:10C3   540 27FF:10D6   541 27FF:10EF   543 27FF:1119
+   544 27FF:1134   545 27FF:1136   548 27FF:1176   549 27FF:1193
+
+Line numbers for TitleUnit(TITLEUNIT.PAS) segment TitleUnit
+
+    20 2919:0008    22 2919:0012    24 2919:002A    26 2919:0035
+    37 2919:005B    38 2919:006A    39 2919:007A    40 2919:0097
+    41 2919:00A7    42 2919:00C4    43 2919:00E1    45 2919:00ED
+    46 2919:010B    47 2919:0112    48 2919:0133    49 2919:0154
+    50 2919:015A    51 2919:0160    52 2919:0166    53 2919:0170
+    54 2919:017A    56 2919:0199    57 2919:01D2    58 2919:020D
+    59 2919:021E    60 2919:022B    61 2919:0248    62 2919:0258
+
+Line numbers for textunit(TEXTUNIT.PAS) segment textunit
+
+    35 293F:0010    36 293F:001A    37 293F:005C    38 293F:0082
+    50 293F:0096    51 293F:00A4    52 293F:00C5    53 293F:00D8
+    54 293F:00E8    57 293F:00FD    58 293F:0101    60 293F:0107
+    62 293F:012F    63 293F:0133    66 293F:0135    68 293F:0145
+    71 293F:0151    72 293F:0167    74 293F:0170    75 293F:018F
+    76 293F:01A2    77 293F:01B3    78 293F:01B9    80 293F:01F7
+    82 293F:0208    83 293F:0210    84 293F:025B    85 293F:026D
+    87 293F:028A    88 293F:029C    90 293F:02B5    91 293F:02C7
+    92 293F:02EE    93 293F:0315    94 293F:033C    95 293F:0363
+    96 293F:038A    97 293F:03B1    98 293F:03D8    99 293F:03FF
+   101 293F:0426   104 293F:0428   105 293F:043A   106 293F:0452
+   108 293F:0468   109 293F:046E   111 293F:04AC   113 293F:04BD
+   114 293F:04C5   115 293F:04D7   116 293F:0521   117 293F:0532
+   119 293F:0539   122 293F:0553   132 293F:0567   133 293F:0575
+   134 293F:0596   135 293F:05A5   139 293F:05A9   143 293F:060E
+   144 293F:0612   147 293F:0614   149 293F:062F   152 293F:0643
+   154 293F:064C   155 293F:065F   156 293F:067C   157 293F:06BC
+   159 293F:06DC   160 293F:06FB   162 293F:0703   164 293F:0729
+   165 293F:0748   166 293F:0768   167 293F:0791   170 293F:0793
+   171 293F:07B3   172 293F:07D2   174 293F:07FB   175 293F:081B
+   177 293F:0859   178 293F:0878   179 293F:0880   181 293F:0887
+   184 293F:08E1   185 293F:08E3   187 293F:08E7   188 293F:0907
+   190 293F:0926   191 293F:0952   192 293F:097E   193 293F:09AA
+   210 293F:09D6   217 293F:09E2   218 293F:09F0   220 293F:0A3A
+   222 293F:0A41   223 293F:0A53   224 293F:0A5E   225 293F:0A86
+   227 293F:0A91   235 293F:0AA7   236 293F:0AB5   238 293F:0ABB
+   239 293F:0AC0   240 293F:0AC8   243 293F:0ACB   244 293F:0AD1
+   246 293F:0AFC   247 293F:0B0C   248 293F:0B0E   250 293F:0B14
+   251 293F:0B19   254 293F:0B1B   256 293F:0B26   257 293F:0B2C
+   259 293F:0B5A   260 293F:0B6A   261 293F:0B6C   264 293F:0B81
+   266 293F:0B88   267 293F:0B99   268 293F:0BCB   271 293F:0BCE
+   272 293F:0BDA   273 293F:0C01   275 293F:0C0C   277 293F:0C13
+   278 293F:0C25   279 293F:0C30   280 293F:0C57   283 293F:0C62
+   292 293F:0C70   293 293F:0C7F   295 293F:0C97   296 293F:0CE2
+   298 293F:0CE4   299 293F:0D09   300 293F:0D18   302 293F:0D1F
+   303 293F:0D3F   305 293F:0D5C   307 293F:0D77   310 293F:0DA5
+   314 293F:0DCA   315 293F:0DD2   317 293F:0DD9   318 293F:0DEC
+   320 293F:0E37   322 293F:0E45   323 293F:0E58   326 293F:0E5A
+   328 293F:0E83   329 293F:0EB7   330 293F:0EC6   332 293F:0ED5
+   333 293F:0EEE   335 293F:0F1C   337 293F:0F22   340 293F:0F49
+   342 293F:0F53   353 293F:0F61   355 293F:0F70   356 293F:0F76
+   357 293F:0F89   360 293F:0F99   362 293F:0F9E   364 293F:0FBD
+   365 293F:1008   367 293F:100A   368 293F:102F   370 293F:103E
+   371 293F:1047   373 293F:104E   375 293F:105D   376 293F:1077
+   378 293F:1085   379 293F:108C   382 293F:108E   384 293F:10AE
+   385 293F:10C5   386 293F:10D7   387 293F:10F4   388 293F:110F
+   389 293F:111E   391 293F:1121   393 293F:112F   394 293F:1146
+   397 293F:1148   400 293F:117D   402 293F:1183   405 293F:11AC
+   412 293F:11B8   413 293F:11C6   414 293F:11E2   415 293F:11FA
+   417 293F:1202   418 293F:120D   419 293F:121C   421 293F:1258
+   422 293F:125D   424 293F:1274   439 293F:1288   441 293F:1296
+   444 293F:129D   445 293F:12B6   447 293F:12DC   448 293F:12F7
+   449 293F:12F9   453 293F:12FB   454 293F:1314   456 293F:133A
+   457 293F:1355   460 293F:1357   463 293F:136D   464 293F:1373
+   467 293F:1375   468 293F:137E   469 293F:1394   472 293F:139F
+   473 293F:13A5   476 293F:13A7   478 293F:13CB   480 293F:13D7
+   481 293F:13DD   483 293F:13E3   485 293F:13FE   491 293F:140D
+   492 293F:141B   496 293F:1479   502 293F:14A0   503 293F:14AF
+   504 293F:14B6   505 293F:14B9   506 293F:14D1   507 293F:14E9
+   508 293F:1501   509 293F:1518   510 293F:152F   512 293F:1546
+   514 293F:154C   515 293F:155D   518 293F:155F   520 293F:157A
+   522 293F:1581   536 293F:158D   537 293F:159B   538 293F:15D4
+   545 293F:15EB   546 293F:15FA   547 293F:1635   548 293F:1646
+   549 293F:1675   550 293F:169B   551 293F:16B3   552 293F:16D1
+   555 293F:16E5   557 293F:16F3   558 293F:16FA   559 293F:16FF
+   562 293F:1707   565 293F:176B   566 293F:177B   567 293F:1791
+   570 293F:1794   572 293F:17C3   573 293F:17C9   576 293F:17CB
+   578 293F:1800   579 293F:1806   580 293F:1808   600 293F:181C
+   601 293F:182B   603 293F:1839   604 293F:183F   606 293F:187F
+   607 293F:18B9   608 293F:18CE   609 293F:18FD   610 293F:1915
+   611 293F:1918   613 293F:1923   617 293F:1959   620 293F:1971
+   621 293F:1980   622 293F:1986   623 293F:1991   626 293F:19C3
+   629 293F:19E1   630 293F:1A05   631 293F:1A0A   632 293F:1A0F
+   634 293F:1A1A   635 293F:1A28   636 293F:1A41   638 293F:1A5E
+   639 293F:1A90   641 293F:1A9B   643 293F:1AA0   645 293F:1AA3
+   647 293F:1AAA   649 293F:1AB5   651 293F:1ABB   652 293F:1AC6
+   655 293F:1AC8   657 293F:1AD3   658 293F:1AEE   659 293F:1AFF
+   661 293F:1B09   662 293F:1B19   665 293F:1B43   667 293F:1B4C
+   668 293F:1B70   670 293F:1BB0   672 293F:1BBB   674 293F:1BEF
+   676 293F:1BFA   679 293F:1BFC   684 293F:1C2A   685 293F:1C2D
+   687 293F:1C3C   688 293F:1C40   689 293F:1C4A   690 293F:1C54
+   691 293F:1C5E   692 293F:1C63   695 293F:1C70   696 293F:1C79
+   699 293F:1C7B   701 293F:1C84   702 293F:1C8D   703 293F:1CCA
+   704 293F:1D07   705 293F:1D12   706 293F:1D15   708 293F:1D19
+   709 293F:1D24   711 293F:1D27   713 293F:1D2B   714 293F:1D43
+   716 293F:1D46   718 293F:1D4A   719 293F:1D55   721 293F:1D58
+   723 293F:1D5C   724 293F:1D71   726 293F:1D74   728 293F:1D78
+   729 293F:1D81   731 293F:1D84   733 293F:1D88   734 293F:1DA9
+   736 293F:1DAC   738 293F:1DB3   740 293F:1DBA   741 293F:1DCD
+   744 293F:1DCF   746 293F:1DE5   748 293F:1DEC   751 293F:1E1A
+   752 293F:1E2A   755 293F:1E2C   757 293F:1E48   759 293F:1E4B
+   761 293F:1E4F   762 293F:1E70   765 293F:1E73   768 293F:1E80
+   769 293F:1EA5   770 293F:1EB0   773 293F:1EB2   775 293F:1ED4
+   779 293F:1F29   781 293F:1F2E   784 293F:1F38   786 293F:1F71
+   789 293F:1F82   791 293F:1F9C   794 293F:1FB4   795 293F:1FC4
+   796 293F:1FC7   803 293F:1FDB   804 293F:1FE9   806 293F:1FF0
+   807 293F:1FF5   810 293F:1FF7   812 293F:1FFC   813 293F:2004
+   815 293F:200D   817 293F:2019   818 293F:201F   819 293F:2022
+   820 293F:2038   821 293F:2049   822 293F:205E   824 293F:207D
+   826 293F:20A1   827 293F:20AC   829 293F:20BF   832 293F:20C2
+   835 293F:20EF   836 293F:2100   837 293F:2126   840 293F:2165
+   841 293F:2176   844 293F:2178   846 293F:218D   847 293F:2198
+   848 293F:21AE   850 293F:21BE   852 293F:21D8   853 293F:21F7
+   855 293F:221D   857 293F:2233   858 293F:2257   859 293F:226D
+   862 293F:2275   865 293F:2288   874 293F:22A2   875 293F:22B1
+   878 293F:22D3   879 293F:22F3   880 293F:231E   881 293F:2349
+   882 293F:2352   883 293F:2376   885 293F:237D   886 293F:23C8
+   888 293F:23D8   890 293F:2404   891 293F:2458   892 293F:2461
+   893 293F:2487   895 293F:24AC   904 293F:24C4   905 293F:24D3
+   906 293F:24F7   908 293F:250F   910 293F:2515   912 293F:2525
+   914 293F:254A   915 293F:259E   916 293F:25A7   917 293F:25C7
+   918 293F:25F2   919 293F:261D   920 293F:2626   921 293F:265C
+   923 293F:2681
+
+Line numbers for symbols(SYMBOLS.PAS) segment symbols
+
+    57 2BA8:0008    58 2BA8:0016    60 2BA8:0020    61 2BA8:0032
+    63 2BA8:003D    65 2BA8:0047    66 2BA8:00AC    67 2BA8:00B2
+    69 2BA8:00BD    77 2BA8:00C9    78 2BA8:00D7    80 2BA8:00E1
+    81 2BA8:00F3    82 2BA8:00FE    83 2BA8:013B    84 2BA8:0178
+    85 2BA8:01B5    87 2BA8:01C0    92 2BA8:01C4    93 2BA8:01D2
+    94 2BA8:0201    99 2BA8:020E   100 2BA8:0218   102 2BA8:0222
+   103 2BA8:0233   104 2BA8:0238   106 2BA8:0292   107 2BA8:02C3
+   109 2BA8:0313   112 2BA8:0316   113 2BA8:0347   114 2BA8:0378
+   116 2BA8:039F   121 2BA8:03A3   122 2BA8:03AD   124 2BA8:03B7
+   125 2BA8:03C8   126 2BA8:03CD   128 2BA8:0429   129 2BA8:045A
+   131 2BA8:04AC   134 2BA8:04AF   135 2BA8:04E0   136 2BA8:0511
+   138 2BA8:0538   145 2BA8:0544   146 2BA8:0552   147 2BA8:0564
+   148 2BA8:058B   149 2BA8:05B2   150 2BA8:05D9   151 2BA8:0600
+   152 2BA8:0627   153 2BA8:064E   154 2BA8:0675   155 2BA8:069C
+   156 2BA8:06D0   157 2BA8:070F   164 2BA8:071B   165 2BA8:0729
+   166 2BA8:073B   167 2BA8:0762   168 2BA8:077E   169 2BA8:079A
+   170 2BA8:07C1   171 2BA8:07E8   172 2BA8:080F   173 2BA8:0836
+   174 2BA8:085D   175 2BA8:0884   176 2BA8:08C3   177 2BA8:0902
+   191 2BA8:090E   192 2BA8:091C   193 2BA8:092E   194 2BA8:0955
+   195 2BA8:0971   196 2BA8:0998   197 2BA8:09BF   199 2BA8:09D0
+   200 2BA8:09F7   201 2BA8:0A1E   202 2BA8:0A45   203 2BA8:0A6C
+   204 2BA8:0A93   205 2BA8:0ABA   213 2BA8:0AC6   214 2BA8:0AD4
+   215 2BA8:0AE6   216 2BA8:0B02   217 2BA8:0B29   218 2BA8:0B50
+   219 2BA8:0B6C   221 2BA8:0B93   222 2BA8:0BBA   223 2BA8:0BE1
+   224 2BA8:0C08   225 2BA8:0C2F   226 2BA8:0C56   227 2BA8:0C7D
+   234 2BA8:0C89   236 2BA8:0C97   237 2BA8:0CA9   238 2BA8:0CC5
+   239 2BA8:0CE1   240 2BA8:0D08   241 2BA8:0D24   242 2BA8:0D40
+   243 2BA8:0D67   244 2BA8:0D83   245 2BA8:0D9F   246 2BA8:0DC6
+   247 2BA8:0E03   248 2BA8:0E2A   249 2BA8:0E67   256 2BA8:0E73
+   258 2BA8:0E81   259 2BA8:0E93   260 2BA8:0EAF   261 2BA8:0ECB
+   262 2BA8:0EF2   263 2BA8:0F0E   264 2BA8:0F2A   265 2BA8:0F51
+   266 2BA8:0F6D   267 2BA8:0F89   268 2BA8:0FB0   269 2BA8:0FD7
+   270 2BA8:0FFE   271 2BA8:103B   272 2BA8:1078   277 2BA8:107C
+   278 2BA8:1086   279 2BA8:108A   280 2BA8:10BD   281 2BA8:1106
+   289 2BA8:1112   290 2BA8:1120   291 2BA8:1132   292 2BA8:1136
+   293 2BA8:1153   294 2BA8:117B   295 2BA8:11A2   296 2BA8:11D4
+   297 2BA8:11FB   298 2BA8:122D   299 2BA8:1254   300 2BA8:1286
+   301 2BA8:12AD   302 2BA8:12DF   303 2BA8:1306   304 2BA8:1338
+   305 2BA8:135F   307 2BA8:1391   308 2BA8:13AE   309 2BA8:13D6
+   310 2BA8:1408   311 2BA8:143A   318 2BA8:1446   319 2BA8:1454
+   320 2BA8:1466   321 2BA8:1482   322 2BA8:149E   323 2BA8:14BA
+   324 2BA8:14D6   325 2BA8:14F2   326 2BA8:150E   327 2BA8:1535
+   328 2BA8:155C   329 2BA8:1583   330 2BA8:15AA   331 2BA8:15D1
+   333 2BA8:15F8   334 2BA8:1614   335 2BA8:163B   336 2BA8:1662
+   337 2BA8:1689   342 2BA8:168D   343 2BA8:1697   344 2BA8:16A2
+   345 2BA8:16C9   346 2BA8:16D4   364 2BA8:16D8   365 2BA8:16E2
+   367 2BA8:16E9   368 2BA8:16F7   369 2BA8:1708   372 2BA8:170A
+   373 2BA8:1715   375 2BA8:1726   383 2BA8:1732   384 2BA8:1740
+   385 2BA8:1746   386 2BA8:1758   388 2BA8:1763   390 2BA8:176E
+   393 2BA8:17C6   395 2BA8:17E2   397 2BA8:17E9   398 2BA8:17FA
+   401 2BA8:1816   403 2BA8:181C   404 2BA8:185A   405 2BA8:187F
+   407 2BA8:1881   408 2BA8:1891   409 2BA8:1894   413 2BA8:1898
+   414 2BA8:18A2   416 2BA8:18A9   417 2BA8:18BA   418 2BA8:18CB
+   421 2BA8:18CD   422 2BA8:18D9   423 2BA8:18EA   425 2BA8:18F5
+   432 2BA8:18F9   433 2BA8:1907   435 2BA8:190E   436 2BA8:191F
+   437 2BA8:193A   438 2BA8:194B   439 2BA8:1950   442 2BA8:1952
+   443 2BA8:195E   444 2BA8:196F   446 2BA8:197A   453 2BA8:1986
+   454 2BA8:1994   456 2BA8:199B   457 2BA8:19AD   458 2BA8:19B8
+   459 2BA8:19C4   460 2BA8:19D5   461 2BA8:19E0   463 2BA8:19EB
+   468 2BA8:19EF   469 2BA8:19F9   471 2BA8:1A00   472 2BA8:1A11
+   473 2BA8:1A2D   476 2BA8:1A2F   477 2BA8:1A3B   479 2BA8:1A57
+   484 2BA8:1A5B   485 2BA8:1A65   486 2BA8:1A6C   487 2BA8:1A6E
+   488 2BA8:1A7A   490 2BA8:1A81   492 2BA8:1A9D   497 2BA8:1AA1
+   498 2BA8:1AAB   500 2BA8:1AB2   501 2BA8:1AC3   502 2BA8:1AEA
+   505 2BA8:1AEC   507 2BA8:1B13   513 2BA8:1B17   514 2BA8:1B25
+   515 2BA8:1B2A   517 2BA8:1B31   518 2BA8:1B42   519 2BA8:1B69
+   522 2BA8:1B6B   524 2BA8:1B71   525 2BA8:1B7C   528 2BA8:1B7E
+   530 2BA8:1B8A   531 2BA8:1BB1   533 2BA8:1BBC   537 2BA8:1BC0
+   538 2BA8:1BCA   540 2BA8:1BD1   541 2BA8:1BE0   542 2BA8:1C1D
+   545 2BA8:1C1F   546 2BA8:1C2A   547 2BA8:1C67   549 2BA8:1C72
+   553 2BA8:1C76   554 2BA8:1C80   556 2BA8:1C87   557 2BA8:1C96
+   558 2BA8:1CB1   559 2BA8:1CEE   560 2BA8:1CF3   563 2BA8:1CF5
+   564 2BA8:1D01   565 2BA8:1D3E   567 2BA8:1D49   571 2BA8:1D4D
+   572 2BA8:1D57   574 2BA8:1D5E   575 2BA8:1D6D   576 2BA8:1D87
+   577 2BA8:1DC4   578 2BA8:1DC9   581 2BA8:1DCB   582 2BA8:1DD7
+   583 2BA8:1E14   585 2BA8:1E1F
+
+Line numbers for printunit(PRINTUNIT.PAS) segment printunit
+
+    56 2D8B:0000    57 2D8B:000A    58 2D8B:001C    59 2D8B:002E
+    64 2D8B:0030    65 2D8B:003A    66 2D8B:004C    67 2D8B:005E
+    73 2D8B:0060    74 2D8B:006A    75 2D8B:006E    76 2D8B:0086
+    77 2D8B:009E    78 2D8B:00A2    85 2D8B:00A6    86 2D8B:00B4
+    87 2D8B:0131    94 2D8B:013E    95 2D8B:014C    96 2D8B:0171
+   103 2D8B:017E   104 2D8B:018C   105 2D8B:020E   112 2D8B:021B
+   113 2D8B:0229   114 2D8B:024E   118 2D8B:025B   119 2D8B:026A
+   120 2D8B:0294   121 2D8B:02AF   122 2D8B:02B6   126 2D8B:02C1
+   127 2D8B:02E7   128 2D8B:02FD   129 2D8B:0327   130 2D8B:0358
+   137 2D8B:035E   138 2D8B:036D   139 2D8B:0386   140 2D8B:03B7
+   147 2D8B:03C2   148 2D8B:03D1   149 2D8B:03D6   150 2D8B:03E9
+   151 2D8B:03FC   152 2D8B:0425   153 2D8B:042F   160 2D8B:0443
+   161 2D8B:0452   162 2D8B:0465   163 2D8B:0478   164 2D8B:048B
+   165 2D8B:04B4   166 2D8B:04BE   173 2D8B:04D1   174 2D8B:04E0
+   175 2D8B:04F3   176 2D8B:04FD   182 2D8B:0503   183 2D8B:0512
+   184 2D8B:0516   185 2D8B:051B   186 2D8B:052E   187 2D8B:0541
+   188 2D8B:0554   189 2D8B:0567   190 2D8B:057A   191 2D8B:05B7
+   192 2D8B:05C1   193 2D8B:05C5   200 2D8B:05D0   201 2D8B:05DF
+   202 2D8B:05E4   203 2D8B:05F7   204 2D8B:060A   205 2D8B:0633
+   206 2D8B:063D   223 2D8B:064A   224 2D8B:0659   225 2D8B:066C
+   226 2D8B:0676   233 2D8B:0682   234 2D8B:0691   235 2D8B:06A4
+   236 2D8B:06AE   243 2D8B:0710   244 2D8B:071F   245 2D8B:0732
+   246 2D8B:073C   247 2D8B:074F   248 2D8B:0759   249 2D8B:076C
+   250 2D8B:0776   251 2D8B:0789   252 2D8B:0793   259 2D8B:07A3
+   260 2D8B:07B2   262 2D8B:0806   263 2D8B:080B   264 2D8B:081E
+   265 2D8B:0847   266 2D8B:0851   268 2D8B:0865   275 2D8B:0872
+   276 2D8B:0881   277 2D8B:0886   278 2D8B:08C4   279 2D8B:090B
+   280 2D8B:0915   288 2D8B:0968   289 2D8B:098E   290 2D8B:09C1
+   291 2D8B:09CB   293 2D8B:0A10   294 2D8B:0A1A   295 2D8B:0A2D
+   296 2D8B:0A56   297 2D8B:0A69   298 2D8B:0A92   299 2D8B:0A9C
+   300 2D8B:0ACF   301 2D8B:0AD9   305 2D8B:0AE4   306 2D8B:0B0A
+   307 2D8B:0B34   308 2D8B:0B65   318 2D8B:0B69   319 2D8B:0B77
+   320 2D8B:0B87   321 2D8B:0B97   322 2D8B:0BC3   323 2D8B:0BD3
+   324 2D8B:0BE1   325 2D8B:0C06   326 2D8B:0C5C   327 2D8B:0C81
+   328 2D8B:0CA6   329 2D8B:0CAA   330 2D8B:0CCF   331 2D8B:0D23
+   332 2D8B:0D79   333 2D8B:0D9E   334 2D8B:0DC3   335 2D8B:0DC7
+   336 2D8B:0DEC   337 2D8B:0E40   347 2D8B:0E44   348 2D8B:0E52
+   349 2D8B:0E62   350 2D8B:0E72   351 2D8B:0E9E   352 2D8B:0EAE
+   353 2D8B:0EBC   354 2D8B:0EE1   355 2D8B:0F37   356 2D8B:0F5C
+   357 2D8B:0F81   358 2D8B:0F85   359 2D8B:0FAA   360 2D8B:0FFE
+   361 2D8B:1052   362 2D8B:1077   363 2D8B:109C   364 2D8B:10A0
+   365 2D8B:10C5   366 2D8B:111B   376 2D8B:118E   377 2D8B:119D
+   378 2D8B:11B0   379 2D8B:11BA   380 2D8B:11CD   381 2D8B:11D7
+   382 2D8B:11EA   383 2D8B:11F4   384 2D8B:1207   386 2D8B:1211
+   389 2D8B:1222   391 2D8B:1234   392 2D8B:1247   393 2D8B:1251
+   394 2D8B:1254   397 2D8B:1256   399 2D8B:1259   400 2D8B:1269
+   411 2D8B:12DE   412 2D8B:12ED   414 2D8B:12F4   415 2D8B:1322
+   416 2D8B:135E   419 2D8B:1360   420 2D8B:136F   423 2D8B:138C
+   426 2D8B:139B   428 2D8B:13B6   429 2D8B:13C9   430 2D8B:13E7
+   431 2D8B:1411   433 2D8B:1418   434 2D8B:1435   435 2D8B:145F
+   438 2D8B:1461   439 2D8B:147E   441 2D8B:14A8   442 2D8B:14C6
+   443 2D8B:14F0   444 2D8B:150D   445 2D8B:1537   446 2D8B:1553
+   447 2D8B:156E   450 2D8B:1589   451 2D8B:1599   452 2D8B:15B6
+   454 2D8B:15C6   455 2D8B:15CB   457 2D8B:15DF   458 2D8B:15FD
+   459 2D8B:161A   460 2D8B:1636   461 2D8B:1638   462 2D8B:1655
+   464 2D8B:1665   465 2D8B:166A   466 2D8B:166F   467 2D8B:1675
+   468 2D8B:1687   469 2D8B:1699   470 2D8B:169C   477 2D8B:16B5
+   478 2D8B:16C4   480 2D8B:16DD   481 2D8B:16E0   482 2D8B:16F3
+   485 2D8B:16FD   486 2D8B:1727   487 2D8B:1736   488 2D8B:173B
+   489 2D8B:1740   491 2D8B:174A   492 2D8B:175A   493 2D8B:176A
+   494 2D8B:1787   495 2D8B:1797   496 2D8B:17C2   497 2D8B:17D2
+   499 2D8B:17E9   500 2D8B:1806   501 2D8B:1824   502 2D8B:184F
+   503 2D8B:186C   505 2D8B:186F   506 2D8B:188C   507 2D8B:189C
+   508 2D8B:18C7   509 2D8B:18D7
+
+Line numbers for dmemunit(DMEMUNIT.PAS) segment dmemunit
+
+    22 2F19:0018    23 2F19:0026    26 2F19:0062    28 2F19:006C
+    29 2F19:00AF    30 2F19:00DC    32 2F19:00E2    39 2F19:00EE
+    40 2F19:00FC    42 2F19:010E    43 2F19:010F    44 2F19:0112
+    46 2F19:0115    47 2F19:0117    48 2F19:0119    49 2F19:011A
+    50 2F19:011B    51 2F19:011E    52 2F19:0120    53 2F19:0123
+    54 2F19:0126    55 2F19:0128    56 2F19:012C    57 2F19:012E
+    58 2F19:012F    59 2F19:0132    60 2F19:0135    62 2F19:013A
+    63 2F19:013B    65 2F19:013C    84 2F19:013E
+
+Line numbers for butunit(BUTUNIT.PAS) segment butunit
+
+    47 2F2E:0008    48 2F2E:0032    49 2F2E:003B    50 2F2E:0042
+    51 2F2E:0049    52 2F2E:0050    53 2F2E:0064    54 2F2E:006B
+    55 2F2E:0080    61 2F2E:0084    63 2F2E:008E    64 2F2E:00BE
+    65 2F2E:010D    73 2F2E:0119    74 2F2E:0127    76 2F2E:01A9
+    78 2F2E:01AF    79 2F2E:01C6    81 2F2E:01D3    82 2F2E:01D9
+    97 2F2E:031D    98 2F2E:032B   100 2F2E:0335   102 2F2E:033F
+   103 2F2E:0342   104 2F2E:0347   105 2F2E:034A   106 2F2E:034F
+   107 2F2E:0360   108 2F2E:0362   109 2F2E:0367   110 2F2E:0378
+   111 2F2E:037A   112 2F2E:037F   113 2F2E:0390   114 2F2E:0392
+   115 2F2E:0397   118 2F2E:03A8   119 2F2E:03AB   120 2F2E:03B0
+   121 2F2E:03B3   122 2F2E:03B8   123 2F2E:03C9   124 2F2E:03CB
+   125 2F2E:03D0   126 2F2E:03E1   127 2F2E:03E3   128 2F2E:03E8
+   129 2F2E:03F9   130 2F2E:03FB   131 2F2E:0400   134 2F2E:0411
+   135 2F2E:0414   136 2F2E:0419   137 2F2E:041C   138 2F2E:0421
+   139 2F2E:0432   140 2F2E:0434   141 2F2E:0439   142 2F2E:044A
+   143 2F2E:044C   144 2F2E:0451   145 2F2E:0455   146 2F2E:0457
+   147 2F2E:045C   150 2F2E:046D   151 2F2E:0470   152 2F2E:0475
+   153 2F2E:0478   154 2F2E:047D   155 2F2E:048E   156 2F2E:0490
+   157 2F2E:0495   158 2F2E:04A6   159 2F2E:04A8   160 2F2E:04AD
+   161 2F2E:04B1   162 2F2E:04B3   163 2F2E:04B8   166 2F2E:04C9
+   167 2F2E:04CC   168 2F2E:04D1   169 2F2E:04D4   170 2F2E:04D9
+   171 2F2E:04EA   172 2F2E:04EC   173 2F2E:04F1   174 2F2E:0502
+   175 2F2E:0504   176 2F2E:0509   177 2F2E:051A   178 2F2E:051C
+   179 2F2E:0521   182 2F2E:0532   183 2F2E:0535   184 2F2E:053A
+   185 2F2E:053D   186 2F2E:0542   187 2F2E:0553   188 2F2E:0555
+   189 2F2E:055A   190 2F2E:056B   191 2F2E:056D   192 2F2E:0572
+   193 2F2E:0583   194 2F2E:0585   195 2F2E:058A   198 2F2E:059B
+   199 2F2E:059E   200 2F2E:05A3   201 2F2E:05A6   202 2F2E:05AB
+   203 2F2E:05BC   204 2F2E:05BE   205 2F2E:05C3   206 2F2E:05C7
+   207 2F2E:05C9   208 2F2E:05CE   209 2F2E:05DF   210 2F2E:05E1
+   211 2F2E:05E6   214 2F2E:05F7   215 2F2E:05FA   216 2F2E:05FF
+   217 2F2E:0602   218 2F2E:0607   219 2F2E:0618   220 2F2E:061A
+   221 2F2E:061F   222 2F2E:0630   223 2F2E:0632   224 2F2E:0637
+   225 2F2E:0648   226 2F2E:064A   227 2F2E:064F   230 2F2E:0653
+   231 2F2E:0656   232 2F2E:065B   233 2F2E:065E   234 2F2E:0663
+   235 2F2E:0674   236 2F2E:0676   237 2F2E:067B   238 2F2E:068C
+   239 2F2E:068E   240 2F2E:0693   241 2F2E:06A4   242 2F2E:06A6
+   243 2F2E:06AB   246 2F2E:06BC   247 2F2E:06BE   248 2F2E:06C3
+   249 2F2E:06C6   250 2F2E:06CB   251 2F2E:06DC   252 2F2E:06DE
+   253 2F2E:06E3   254 2F2E:06F4   255 2F2E:06F6   256 2F2E:06FB
+   257 2F2E:070C   258 2F2E:070E   259 2F2E:0713   265 2F2E:0717
+   266 2F2E:073D   267 2F2E:076C   268 2F2E:0770   270 2F2E:0773
+   271 2F2E:0778   272 2F2E:0788   273 2F2E:078A   274 2F2E:078F
+   275 2F2E:079F   276 2F2E:07A1   277 2F2E:07A6   278 2F2E:07B6
+   279 2F2E:07B8   280 2F2E:07BD   285 2F2E:07CD   288 2F2E:085E
+   289 2F2E:0867   291 2F2E:0870   292 2F2E:0875   295 2F2E:088E
+   298 2F2E:092A   302 2F2E:09C6   303 2F2E:09CB   305 2F2E:09E4
+   307 2F2E:0A42   309 2F2E:0A96   317 2F2E:0AB0   318 2F2E:0ABE
+   319 2F2E:0AD0   320 2F2E:0AE2   321 2F2E:0AED   322 2F2E:0AFA
+   324 2F2E:0B04   326 2F2E:0B0E   327 2F2E:0B3C   328 2F2E:0B42
+   329 2F2E:0B48   330 2F2E:0B51   331 2F2E:0B5A   332 2F2E:0B63
+   333 2F2E:0B6C   334 2F2E:0B77   335 2F2E:0B82   343 2F2E:0B94
+   344 2F2E:0BA2   345 2F2E:0BA6   346 2F2E:0BAB   348 2F2E:0BB4
+   349 2F2E:0BB9   351 2F2E:0BBF   354 2F2E:0C01   355 2F2E:0C05
+   356 2F2E:0C0A   358 2F2E:0C0F   359 2F2E:0C1F   360 2F2E:0C21
+   361 2F2E:0C31   362 2F2E:0C34   364 2F2E:0C3A   366 2F2E:0C56
+   368 2F2E:0C5C   370 2F2E:0C78   372 2F2E:0C7E   374 2F2E:0C9A
+   376 2F2E:0CA0   378 2F2E:0CBC   379 2F2E:0CCE   380 2F2E:0CD2
+   381 2F2E:0CE4   382 2F2E:0CE9
+
+Line numbers for imenuunit(IMENUUNIT.PAS) segment imenuunit
+
+    37 2FFD:0000    38 2FFD:000A    39 2FFD:0015    40 2FFD:0022
+    47 2FFD:0082    48 2FFD:0091    49 2FFD:009C    52 2FFD:00A9
+    53 2FFD:00AE    55 2FFD:00B3    56 2FFD:00B9    57 2FFD:00BF
+    58 2FFD:00C5    59 2FFD:00D6    61 2FFD:00FC    63 2FFD:0106
+    64 2FFD:0163    65 2FFD:0177    67 2FFD:0198    72 2FFD:01A1
+    73 2FFD:01A6    75 2FFD:01AB    76 2FFD:01B1    77 2FFD:01B7
+    78 2FFD:01BD    79 2FFD:01CE    81 2FFD:01F4    83 2FFD:01FE
+    84 2FFD:025B    85 2FFD:026F    86 2FFD:0290    89 2FFD:0299
+    98 2FFD:031C    99 2FFD:032B   100 2FFD:032E   101 2FFD:0336
+   105 2FFD:0346   106 2FFD:034B   108 2FFD:0350   109 2FFD:0356
+   110 2FFD:035C   111 2FFD:0362   112 2FFD:0373   114 2FFD:0384
+   116 2FFD:038E   117 2FFD:0391   119 2FFD:0403   121 2FFD:0474
+   124 2FFD:04E3   125 2FFD:0517   126 2FFD:054C   127 2FFD:0581
+   129 2FFD:05C2   130 2FFD:05C5   132 2FFD:0637   134 2FFD:06A8
+   137 2FFD:0717   138 2FFD:074B   139 2FFD:0780   140 2FFD:07B5
+   142 2FFD:07F6   144 2FFD:07FF   152 2FFD:0980   153 2FFD:098E
+   156 2FFD:0991   157 2FFD:0996   159 2FFD:099B   160 2FFD:09A1
+   161 2FFD:09A7   162 2FFD:09AD   163 2FFD:09BE   165 2FFD:09CF
+   166 2FFD:09E0   167 2FFD:09F1   168 2FFD:0A02   169 2FFD:0A13
+   170 2FFD:0A24   171 2FFD:0A35   172 2FFD:0A46   173 2FFD:0A57
+   175 2FFD:0A6D   176 2FFD:0A81   177 2FFD:0A96   178 2FFD:0AAB
+   179 2FFD:0AB3   180 2FFD:0AC4   181 2FFD:0AD5   182 2FFD:0ADB
+   184 2FFD:0AE1   185 2FFD:0AF2   186 2FFD:0B03   188 2FFD:0B14
+   189 2FFD:0B1A   190 2FFD:0B20   191 2FFD:0B31   192 2FFD:0B42
+   195 2FFD:0B53   202 2FFD:0C7C   203 2FFD:0C8A   206 2FFD:0C8D
+   207 2FFD:0C92   209 2FFD:0C97   210 2FFD:0C9D   211 2FFD:0CA3
+   212 2FFD:0CA9   213 2FFD:0CBA   215 2FFD:0CCB   216 2FFD:0CDC
+   217 2FFD:0CED   218 2FFD:0CFE   219 2FFD:0D0F   220 2FFD:0D20
+   221 2FFD:0D31   223 2FFD:0D47   224 2FFD:0D5B   225 2FFD:0D70
+   226 2FFD:0D85   227 2FFD:0D8D   228 2FFD:0D9E   231 2FFD:0DAF
+   238 2FFD:0EA1   239 2FFD:0EAF   242 2FFD:0EB2   243 2FFD:0EB7
+   245 2FFD:0EBC   246 2FFD:0EC2   247 2FFD:0EC8   248 2FFD:0ECE
+   249 2FFD:0EDF   251 2FFD:0EF0   252 2FFD:0F01   254 2FFD:0F12
+   255 2FFD:0F17   256 2FFD:0F1D   258 2FFD:0F23   259 2FFD:0F34
+   261 2FFD:0F45   262 2FFD:0F56   264 2FFD:0F67   265 2FFD:0F6C
+   266 2FFD:0F72   268 2FFD:0F78   269 2FFD:0F89   270 2FFD:0F9A
+   271 2FFD:0FAB   272 2FFD:0FBC   273 2FFD:0FCD   275 2FFD:0FDE
+   276 2FFD:0FEF   278 2FFD:1000   281 2FFD:1005   288 2FFD:12E2
+   289 2FFD:12F0   292 2FFD:12F3   293 2FFD:12F8   295 2FFD:12FD
+   296 2FFD:1303   297 2FFD:1309   298 2FFD:130F   299 2FFD:1320
+   301 2FFD:1331   302 2FFD:1342   304 2FFD:1353   305 2FFD:1358
+   306 2FFD:136A   308 2FFD:137C   309 2FFD:138D   311 2FFD:139E
+   312 2FFD:13A3   313 2FFD:13A9   314 2FFD:13AF   315 2FFD:13C0
+   317 2FFD:13D1   318 2FFD:13E2   320 2FFD:13F3   321 2FFD:13F8
+   322 2FFD:13FE   324 2FFD:1404   325 2FFD:1415   326 2FFD:1426
+   328 2FFD:1437   329 2FFD:1448   331 2FFD:1459   332 2FFD:145E
+   333 2FFD:1464   334 2FFD:146A   335 2FFD:147B   337 2FFD:148C
+   338 2FFD:149D   340 2FFD:14AE   341 2FFD:14B3   342 2FFD:14B9
+   344 2FFD:14BF   345 2FFD:14D0   347 2FFD:14E1   348 2FFD:14E6
+   349 2FFD:14EC   351 2FFD:14F2   352 2FFD:1503   354 2FFD:1514
+   355 2FFD:1519   356 2FFD:151F   358 2FFD:1525   359 2FFD:1536
+   361 2FFD:1547   362 2FFD:154C   363 2FFD:1552   365 2FFD:1558
+   366 2FFD:1569   367 2FFD:157A   368 2FFD:157F   369 2FFD:1585
+   370 2FFD:158B   371 2FFD:159C   374 2FFD:15AD   379 2FFD:15FE
+   380 2FFD:1608   383 2FFD:160B   384 2FFD:1610   386 2FFD:1615
+   387 2FFD:161B   388 2FFD:1621   389 2FFD:1627   390 2FFD:1638
+   392 2FFD:1649   393 2FFD:165A   395 2FFD:165F   396 2FFD:1670
+   398 2FFD:1675   399 2FFD:1686   401 2FFD:168B   402 2FFD:169C
+   405 2FFD:16A1   412 2FFD:1718   413 2FFD:1726   416 2FFD:1729
+   417 2FFD:172E   419 2FFD:1733   420 2FFD:1739   421 2FFD:173F
+   422 2FFD:1745   423 2FFD:1756   425 2FFD:1767   426 2FFD:1778
+   427 2FFD:1789   428 2FFD:179A   430 2FFD:17AB   432 2FFD:17C9
+   433 2FFD:17E0   436 2FFD:17E8   443 2FFD:1A5F   444 2FFD:1A6D
+   447 2FFD:1A70   448 2FFD:1A75   450 2FFD:1A7A   451 2FFD:1A80
+   452 2FFD:1A86   453 2FFD:1A8C   454 2FFD:1A9D   456 2FFD:1AAE
+   457 2FFD:1ABF   458 2FFD:1AD0   459 2FFD:1AE1   460 2FFD:1AF2
+   461 2FFD:1B03   463 2FFD:1B14   464 2FFD:1B25   465 2FFD:1B36
+   468 2FFD:1B47   470 2FFD:1B65   471 2FFD:1B7C   474 2FFD:1B84
+   481 2FFD:1BFD   482 2FFD:1C0B   485 2FFD:1C0E   486 2FFD:1C13
+   488 2FFD:1C18   489 2FFD:1C1E   490 2FFD:1C24   491 2FFD:1C2A
+   492 2FFD:1C3B   494 2FFD:1C4C   495 2FFD:1C5D   496 2FFD:1C6E
+   497 2FFD:1C7F   498 2FFD:1C90   500 2FFD:1CA1   502 2FFD:1CBF
+   503 2FFD:1CD6   506 2FFD:1CDE   513 2FFD:1D82   514 2FFD:1D90
+   517 2FFD:1D93   518 2FFD:1D98   520 2FFD:1D9D   521 2FFD:1DA3
+   522 2FFD:1DA9   523 2FFD:1DAF   524 2FFD:1DC0   526 2FFD:1DD1
+   527 2FFD:1DE2   528 2FFD:1DF3   529 2FFD:1E04   530 2FFD:1E15
+   532 2FFD:1E26   534 2FFD:1E44   535 2FFD:1E5B   538 2FFD:1E63
+   545 2FFD:1FCA   546 2FFD:1FD8   549 2FFD:1FDB   550 2FFD:1FE0
+   552 2FFD:1FE5   553 2FFD:1FEB   554 2FFD:1FF1   555 2FFD:1FF7
+   556 2FFD:2008   558 2FFD:2019   559 2FFD:202A   560 2FFD:203B
+   561 2FFD:204C   562 2FFD:205D   564 2FFD:206E   566 2FFD:208C
+   567 2FFD:20A3   570 2FFD:20AB   578 2FFD:2261   580 2FFD:2270
+   583 2FFD:2273   584 2FFD:2278   586 2FFD:227D   587 2FFD:2283
+   588 2FFD:2289   589 2FFD:228F   590 2FFD:22A0   592 2FFD:22B1
+   593 2FFD:22C2   594 2FFD:22C7   595 2FFD:22CD   596 2FFD:22D3
+   598 2FFD:22E4   599 2FFD:22F5   600 2FFD:22FA   601 2FFD:22FF
+   602 2FFD:2305   604 2FFD:2316   605 2FFD:2327   606 2FFD:232C
+   607 2FFD:2332   608 2FFD:234D   609 2FFD:2353   610 2FFD:2367
+   613 2FFD:2397   614 2FFD:23A8   615 2FFD:23AD   616 2FFD:23B3
+   617 2FFD:23B9   619 2FFD:23CA   620 2FFD:23DB   621 2FFD:23E0
+   622 2FFD:23E6   623 2FFD:23EC   624 2FFD:23FD   625 2FFD:240E
+   626 2FFD:241F   627 2FFD:2430   628 2FFD:2441   629 2FFD:2452
+   632 2FFD:2463   639 2FFD:24F8   642 2FFD:2506   643 2FFD:250B
+   645 2FFD:2510   646 2FFD:2516   647 2FFD:251C   648 2FFD:2522
+   649 2FFD:2533   651 2FFD:2544   652 2FFD:2555   653 2FFD:2566
+   654 2FFD:2577   655 2FFD:2588   656 2FFD:2599   657 2FFD:25AA
+   658 2FFD:25BB   660 2FFD:25D9   661 2FFD:25F0   664 2FFD:25F8
+   674 2FFD:265F   675 2FFD:266E   678 2FFD:2671   679 2FFD:2676
+   681 2FFD:267B   682 2FFD:2681   683 2FFD:2687   684 2FFD:268D
+   685 2FFD:269E   687 2FFD:26AF   688 2FFD:26B4   689 2FFD:26B9
+   690 2FFD:26CB   692 2FFD:26D7   693 2FFD:2702   694 2FFD:2720
+   696 2FFD:2727   697 2FFD:2758   698 2FFD:2774   699 2FFD:2788
+   700 2FFD:278D   701 2FFD:2790   704 2FFD:2792   706 2FFD:2799
+   707 2FFD:279E   710 2FFD:27C3   711 2FFD:27C6   712 2FFD:27F1
+   714 2FFD:2801
+
+Line numbers for GraphMenu(GRAPHMENU.PAS) segment GraphMenu
+
+    41 327E:0008    42 327E:0016    43 327E:0028    44 327E:0033
+    45 327E:0053    46 327E:0085    48 327E:00B7    50 327E:00BD
+    52 327E:00E4    54 327E:00EA    56 327E:0111    57 327E:011C
+    58 327E:0121    59 327E:0128    60 327E:0165    65 327E:0169
+    66 327E:0173    67 327E:018A    68 327E:019A    69 327E:01AA
+    80 327E:01CB    82 327E:01DA    84 327E:01E8    88 327E:01F1
+    91 327E:0211    93 327E:022D    94 327E:024C    96 327E:026B
+    98 327E:0274    99 327E:02AF   100 327E:02B7   101 327E:02BD
+   102 327E:02C5   103 327E:02CB   104 327E:0314   105 327E:0323
+   106 327E:0332   109 327E:0334   110 327E:0361   113 327E:03A6
+   116 327E:03A8   118 327E:03CE   119 327E:03E7   120 327E:03EE
+   122 327E:0426   124 327E:0454   125 327E:0458   126 327E:047E
+   127 327E:0480   128 327E:0484   135 327E:04E7   137 327E:04F2
+   196 327E:050C   197 327E:051B   198 327E:0520   199 327E:0537
+   200 327E:0544   201 327E:0551   202 327E:0557   203 327E:05C2
+   204 327E:05C5   205 327E:05CD   206 327E:05D3   207 327E:05DB
+   208 327E:05E1   209 327E:064C   210 327E:065B   212 327E:066A
+   213 327E:066D   215 327E:0678   217 327E:06EB   218 327E:06F0
+   221 327E:06F3   222 327E:0732   223 327E:0737   225 327E:0775
+   228 327E:07AE   230 327E:07C9   232 327E:07CF   234 327E:080D
+   236 327E:0846   239 327E:0848   244 327E:0885   245 327E:088A
+   249 327E:08AE   250 327E:08BC   252 327E:08C5   253 327E:08CA
+   254 327E:08D1   255 327E:08DC   256 327E:08E4   264 327E:08EA
+   266 327E:08F3   267 327E:08FB   268 327E:0901   269 327E:0907
+   270 327E:090D   271 327E:0913   274 327E:0919   276 327E:0950
+   277 327E:0965   278 327E:096B   281 327E:096D   283 327E:097C
+   284 327E:0988   286 327E:0991   287 327E:099E   288 327E:09B1
+   290 327E:09B8   292 327E:09D5   294 327E:0A12   295 327E:0A1D
+   296 327E:0A28   301 327E:0A2E   307 327E:0A90   308 327E:0A98
+   309 327E:0AA0   312 327E:0AA2   314 327E:0AC2   315 327E:0AC9
+   318 327E:0ACB   321 327E:0AD2   324 327E:0AD4   325 327E:0ADD
+   326 327E:0AE3   327 327E:0AE7   330 327E:0AEF   335 327E:0AF2
+   336 327E:0B0A   337 327E:0B11   338 327E:0B17   339 327E:0B29
+   340 327E:0B35   341 327E:0B40   342 327E:0B46   343 327E:0B58
+   345 327E:0B5E   346 327E:0B71   347 327E:0B75   353 327E:0B78
+   354 327E:0B7C   355 327E:0B8E   356 327E:0B92   357 327E:0BAB
+   359 327E:0BC8   360 327E:0BCC   361 327E:0BD2   362 327E:0BD8
+   363 327E:0BDA   364 327E:0BE2   365 327E:0BE8   366 327E:0BEC
+   370 327E:0BEE   372 327E:0BF4   375 327E:0BF8   376 327E:0C02
+   378 327E:0C0A   380 327E:0C19   381 327E:0C28   383 327E:0C43
+   384 327E:0C55   387 327E:0C5B   388 327E:0C60   389 327E:0C66
+   431 327E:0C84   432 327E:0C93   433 327E:0C98   435 327E:0CA5
+   436 327E:0CE4   437 327E:0D09   439 327E:0D0F   441 327E:0D4C
+   444 327E:0D4E   446 327E:0D7E   449 327E:0D9D   450 327E:0DBA
+   451 327E:0DC1   453 327E:0E01   455 327E:0E37   457 327E:0E68
+   462 327E:0ED8   463 327E:0EDD   465 327E:0EF1   466 327E:0EFF
+   468 327E:0F08   472 327E:0F18   478 327E:0F1D   481 327E:0F3C
+   483 327E:0F42   484 327E:0F5B   485 327E:0F62   498 327E:1051
+   511 327E:112C   521 327E:11D5   538 327E:12B0   540 327E:12B6
+   541 327E:12C3   543 327E:12CC   544 327E:12DC   546 327E:12E3
+   548 327E:12FD   550 327E:133A   551 327E:1345   552 327E:1350
+   555 327E:1356   560 327E:1359   561 327E:136E   562 327E:1375
+   563 327E:137B   564 327E:138D   565 327E:1399   566 327E:13A4
+   567 327E:13AA   569 327E:13BC   571 327E:13C2   573 327E:13C6
+   574 327E:13CF   576 327E:13D4
+
+Line numbers for grinout(GRINOUT.PAS) segment grinout
+
+   134 33BC:0000   138 33BC:000E   139 33BC:0023   140 33BC:0033
+   163 33BC:003D   167 33BC:004C   168 33BC:006D   169 33BC:0081
+   171 33BC:00E0   172 33BC:010E   173 33BC:013C   174 33BC:014C
+   256 33BC:015D   261 33BC:016C   262 33BC:0171   264 33BC:0189
+   266 33BC:018F   267 33BC:01A4   269 33BC:01B8   270 33BC:01CD
+   274 33BC:01DE   275 33BC:01ED   276 33BC:0201   278 33BC:0206
+   280 33BC:0240   281 33BC:0252   282 33BC:0262   285 33BC:0269
+   289 33BC:027B   290 33BC:0287   292 33BC:0290   294 33BC:0299
+   295 33BC:029C   296 33BC:029F   297 33BC:02BA   299 33BC:02D0
+   301 33BC:02E4   311 33BC:02E7   313 33BC:02F7   314 33BC:032A
+   315 33BC:0337   317 33BC:0364   318 33BC:0385   322 33BC:0388
+   323 33BC:0397   325 33BC:03D1   326 33BC:03E1   327 33BC:03E4
+   329 33BC:03ED   331 33BC:03FE   332 33BC:0403   388 33BC:0414
+   393 33BC:0423   394 33BC:0428   396 33BC:0440   397 33BC:0446
+   399 33BC:045B   400 33BC:046F   402 33BC:0484   406 33BC:0495
+   407 33BC:04A4   408 33BC:04B8   409 33BC:04BD   411 33BC:04F7
+   415 33BC:0507   420 33BC:0513   422 33BC:051C   424 33BC:0525
+   425 33BC:0528   426 33BC:052B   427 33BC:0546   429 33BC:055C
+   431 33BC:0570   441 33BC:0573   443 33BC:0583   444 33BC:05BC
+   445 33BC:05C9   447 33BC:05F6   448 33BC:0617   451 33BC:061A
+   452 33BC:0629   454 33BC:0663   455 33BC:0673   456 33BC:0676
+   458 33BC:067F   460 33BC:0690   461 33BC:0695   505 33BC:069F
+   506 33BC:06AE   507 33BC:06B3   509 33BC:06D1   510 33BC:06F7
+   511 33BC:070B   513 33BC:076A   514 33BC:0798   518 33BC:07C6
+   522 33BC:07D7   525 33BC:0813   529 33BC:0823   534 33BC:0838
+   535 33BC:0844   539 33BC:086A   541 33BC:0882   545 33BC:088B
+   551 33BC:08C3   552 33BC:08DA   554 33BC:08E3   555 33BC:0906
+   556 33BC:091A   558 33BC:0979   559 33BC:09A7   560 33BC:09D5
+   562 33BC:09E5   565 33BC:09E7   567 33BC:09ED   568 33BC:09F2
+   571 33BC:0A02   574 33BC:0A04   576 33BC:0A0D   577 33BC:0A12
+   580 33BC:0A14   582 33BC:0A1A   586 33BC:0A2A   588 33BC:0A2C
+   590 33BC:0A31   591 33BC:0A3A   593 33BC:0A3F   638 33BC:0A4B
+   639 33BC:0A5A   640 33BC:0A5F   645 33BC:0A76   649 33BC:0A87
+   652 33BC:0AC3   656 33BC:0AD3   661 33BC:0AE8   662 33BC:0AEE
+   666 33BC:0B14   668 33BC:0B2E   672 33BC:0B34   678 33BC:0B44
+   679 33BC:0B4D   681 33BC:0B53   682 33BC:0B68   684 33BC:0B78
+   687 33BC:0B7A   689 33BC:0B80   690 33BC:0B85   693 33BC:0B95
+   696 33BC:0B97   698 33BC:0BA0   699 33BC:0BA5   702 33BC:0BA7
+   704 33BC:0BAD   708 33BC:0BBD   710 33BC:0BBF   712 33BC:0BC4
+   713 33BC:0BCD   715 33BC:0BD2   732 33BC:0BDE   734 33BC:0BEC
+   736 33BC:0C23   738 33BC:0C33   741 33BC:0C5A   745 33BC:0CCF
+   746 33BC:0CFC   747 33BC:0D04   748 33BC:0D3C   749 33BC:0D41
+   750 33BC:0D81   753 33BC:0D86   754 33BC:0DA1   798 33BC:0DAF
+   803 33BC:0DDA   804 33BC:0E22   805 33BC:0E39   809 33BC:0E6D
+   812 33BC:0EB4   839 33BC:0EC2   844 33BC:0EED   845 33BC:0F35
+   846 33BC:0F4C   850 33BC:0F80   855 33BC:0FD8   884 33BC:0FE6
+   889 33BC:1011   890 33BC:1059   891 33BC:1070   895 33BC:10A4
+   900 33BC:10F1   922 33BC:1112   927 33BC:113D   928 33BC:1175
+   929 33BC:11B5   930 33BC:11C7   931 33BC:11D4   932 33BC:1227
+   933 33BC:123E   937 33BC:1272   942 33BC:12BF
+
+Line numbers for gcurunit(GCURUNIT.PAS) segment gcurunit
+
+    38 34E9:0000    39 34E9:000E    40 34E9:0013    45 34E9:0018
+    46 34E9:0022    47 34E9:0035    48 34E9:0048    49 34E9:0065
+    50 34E9:0082    55 34E9:0086    56 34E9:0094    57 34E9:00D2
+    58 34E9:00DD    59 34E9:00E3    64 34E9:00EA    65 34E9:00F8
+    66 34E9:0130    67 34E9:0139    68 34E9:0140    69 34E9:0146
+    70 34E9:014B    71 34E9:0151    78 34E9:0178    79 34E9:0186
+    80 34E9:0195    81 34E9:01A0    83 34E9:01B7    84 34E9:01CD
+    85 34E9:01E3    87 34E9:0239    89 34E9:0243    91 34E9:024D
+    92 34E9:0274    93 34E9:02A4    94 34E9:02CA    96 34E9:02D3
+    97 34E9:02DE   104 34E9:02F8   105 34E9:0306   107 34E9:031D
+   108 34E9:0333   109 34E9:0349   110 34E9:0399   112 34E9:03A0
+   114 34E9:03AA   115 34E9:03C5   116 34E9:03E0   118 34E9:03E6
+   125 34E9:0408   126 34E9:0416   127 34E9:041D   128 34E9:0420
+   129 34E9:0425   130 34E9:0434   131 34E9:043F   132 34E9:0456
+   133 34E9:046C   134 34E9:0482   136 34E9:04D6   138 34E9:04E0
+   140 34E9:04EA   141 34E9:0511   142 34E9:053F   143 34E9:0563
+   145 34E9:056C   146 34E9:0577   153 34E9:0591   154 34E9:059F
+   155 34E9:05AE   156 34E9:05B9   157 34E9:05C0   158 34E9:05C3
+   159 34E9:05C8   161 34E9:05DE   162 34E9:05F5   163 34E9:060E
+   164 34E9:0627   165 34E9:0651   166 34E9:06A8   168 34E9:06AF
+   170 34E9:06B9   171 34E9:06E0   172 34E9:0700   173 34E9:0708
+   174 34E9:071E   176 34E9:0724   177 34E9:0727   178 34E9:073E
+   179 34E9:0768   181 34E9:0792   183 34E9:07A9   184 34E9:07B4
+   189 34E9:07B6   190 34E9:07C0   191 34E9:07F0   192 34E9:07FB
+   193 34E9:0801   194 34E9:0807   199 34E9:080B   200 34E9:0815
+   201 34E9:0821   202 34E9:0824   209 34E9:083E   211 34E9:084C
+   212 34E9:0856   213 34E9:0860   215 34E9:0898   217 34E9:08A2
+   218 34E9:08BD   219 34E9:08D8   221 34E9:08DE   223 34E9:08E3
+   224 34E9:0902   226 34E9:090C   227 34E9:0938   229 34E9:0946
+   231 34E9:096D   232 34E9:0991   234 34E9:09B1   235 34E9:09DD
+   236 34E9:09E5   237 34E9:09EE   239 34E9:09F0   240 34E9:09FA
+   241 34E9:09FF   242 34E9:0A04
+
+Line numbers for UserExit(USEREXIT.PAS) segment UserExit
+
+    17 35DC:0008    18 35DC:0017    22 35DC:00BF    25 35DC:00C3
+    26 35DC:00D2    27 35DC:00EB    28 35DC:00FE    32 35DC:060D
+    34 35DC:061C    35 35DC:061F    37 35DC:0621    38 35DC:0628
+    39 35DC:062D    40 35DC:0634    41 35DC:063B    42 35DC:0642
+    43 35DC:0645    44 35DC:0654    45 35DC:0657    46 35DC:0674
+    47 35DC:0691    48 35DC:06AE    50 35DC:06C9    51 35DC:06D3
+    52 35DC:0758    53 35DC:075E    54 35DC:0784    55 35DC:078A
+    56 35DC:07B0    57 35DC:07B2    59 35DC:07CD    60 35DC:07DA
+    61 35DC:07F4    62 35DC:07F7    63 35DC:0810    64 35DC:0829
+    65 35DC:0861    66 35DC:0899    67 35DC:08D1    68 35DC:0909
+    69 35DC:0941    70 35DC:0979    71 35DC:09B1    72 35DC:09E9
+    73 35DC:0A02    74 35DC:0A1B    75 35DC:0A34    76 35DC:0A4D
+    77 35DC:0A66    78 35DC:0A94    79 35DC:0ACC    80 35DC:0B04
+    81 35DC:0B3C    82 35DC:0B55    83 35DC:0B6E    84 35DC:0B87
+    85 35DC:0BA0    86 35DC:0BB9    87 35DC:0BD2    88 35DC:0BEB
+    89 35DC:0C04    90 35DC:0C1D    91 35DC:0C36    92 35DC:0C4F
+    93 35DC:0C68    94 35DC:0C81    95 35DC:0C9A    96 35DC:0CB3
+    97 35DC:0CCC    98 35DC:0CE5    99 35DC:0CFE   100 35DC:0D17
+   101 35DC:0D30   102 35DC:0D49   103 35DC:0D62   104 35DC:0D7B
+   105 35DC:0D94   106 35DC:0DAC   107 35DC:0DC4   108 35DC:0DDC
+   109 35DC:0DF4   111 35DC:0E0C   113 35DC:0E1D   114 35DC:0E23
+   115 35DC:0E49   116 35DC:0E4F   117 35DC:0E75   118 35DC:0E77
+   119 35DC:0E92   120 35DC:0E9F   121 35DC:0EB9   123 35DC:0EC7
+   124 35DC:0ECF   126 35DC:0EE0   128 35DC:0EE2   129 35DC:0EEC
+   130 35DC:0EFA   131 35DC:0F07   132 35DC:0F0C
+
+Line numbers for MenuTyp(MENUTYP.PAS) segment MenuTyp
+
+    50 3762:0000    51 3762:000A
+
+Program entry point at 0000:051F

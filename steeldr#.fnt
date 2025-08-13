@@ -1,0 +1,568 @@
+nff
+% Font fuer steeldr#-Notation: C C# D Eb E F F# G Ab A Bb B c
+
+% norm: nothing :)
+	/norm
+	{
+	} def
+
+% Font fuer Cypher-Notation
+
+	 /myline {
+	   % Ziel: 0,w,-dx,-dy,0,-w,dx,dy, Ausgangslage: dx,dy,w
+
+	   dup neg 0 exch 5 2 roll % 0,-w,dx,dy,w
+	   3 1 roll                % 0,-w,w,dx,dy
+	   dup neg 6 1 roll        % -dy,0,-w,w,dx,dy
+	   exch dup neg 7 1 roll   % -dx,-dy,0,-w,w,dy,dx
+	   exch 3 2 roll           % -dx,-dy,0,-w,dx,dy,w
+	   7 1 roll                % w,-dx,-dy,0,-w,dx,dy
+	   0 8 1 roll              % 0,w,-dx,-dy,0,-w,dx,dy
+
+	   gsave
+	   currentpoint newpath moveto
+	   rlineto
+	   rlineto
+	   rlineto
+	   rlineto
+	   fill
+	   grestore
+	 } def
+
+/slw 1 def % sharp line width 0.5
+/shlw 1.5 def % sharp hor line width 0.5
+% Kreuz
+	/sharp {
+	   gsave
+	   dup stringwidth pop 2 div
+	   2.25 rmoveto
+
+	   4 2 shlw myline
+	   0 -3.5 rmoveto
+	   4 2 shlw myline
+	   currentpoint
+	   newpath
+	   moveto
+	   slw setlinewidth
+	   1 5.75  rmoveto
+	   0 -8.5 rlineto
+	   2 1  rmoveto
+	   0 8.5  rlineto
+
+	   stroke
+
+	   grestore
+	} def
+
+/blw 1 def % bee line width
+
+% Beee: wird wirklich auch noch immer wieder ben”tigt
+	/flat {
+	   gsave
+	   1 setlinejoin
+	   blw setlinewidth
+	   dup stringwidth pop 2 div 0.75 add
+	   5.5 rmoveto
+	   0 -9 rlineto
+%           2 2.5 4 5 0 5 rcurveto
+	   2.5 2.5 4.5 5 0 5 rcurveto
+
+	   stroke
+
+	   grestore
+
+	} def
+
+%% sharp:
+%        /sharp
+%        {
+%          gsave
+%           1 setlinewidth
+%           currentpoint
+%           newpath
+%           moveto
+%           (I) stringwidth pop dup 2 div neg
+%           5.5 rmoveto
+%           2.5 rlineto
+%           stroke
+%          grestore
+%        }def
+%% flat:
+%        /flat
+%        {
+%          gsave
+%           1 setlinewidth
+%           currentpoint
+%           newpath
+%           moveto
+%           (I) stringwidth pop dup 2 div neg
+%           8 rmoveto
+%           -2.5 rlineto
+%           stroke
+%          grestore
+%        }def
+
+
+/hds 6.5 def
+/lds -5.75 def
+
+/nhds hds neg def
+/nlds lds neg def
+
+
+% dot:
+	/sym_dot
+	{
+	  currentpoint
+	  currentpoint
+	   newpath 1 0 360 newpath arc fill
+	  moveto
+	} def
+
+% Text Symbol drucken
+% stack: <string>
+	/sym_print
+	{
+	  dup
+	  stringwidth
+	  exch 2 div neg % x-Wert
+	  exch pop -4  % y-Wert
+	  rmoveto
+	  show
+	} def
+
+	/SymBlank % " "
+	{ 3.5 4 rmoveto
+	  0 1 rlineto
+	  stroke
+	} def
+
+	/Syma % "a"
+	{
+	  (C) norm sym_print
+	} def
+
+	/SymA % "A"
+	{
+	  (C) sharp sym_print
+	} def
+
+	/Symaa % "<alt>a"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (B) norm sym_print
+	} def
+
+	/Symb % "b"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (G) norm sym_print
+	} def
+
+	/SymB % "B"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (A) flat sym_print
+	} def
+
+	/Symab % "<alt>b"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (F) sharp sym_print
+	} def
+
+	/Symc % "c"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (E) norm sym_print
+	} def
+
+	/SymC % "C"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (F) norm sym_print
+	} def
+
+	/Symac % "<alt>c"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (E) flat sym_print
+	} def
+
+	/Symd % "d"
+	{
+	  (E) norm sym_print
+	} def
+
+	/SymD % "D"
+	{
+	  (F) norm sym_print
+	} def
+
+	/Symad % "<alt>d"
+	{
+	  (E) flat sym_print
+	} def
+
+	/Syme % "e"
+	{
+	  (e) norm sym_print
+	} def
+
+	/SymE % "E"
+	{
+	  (f) norm sym_print
+	} def
+
+	/Symae % "<alt>e"
+	{
+	  (e) flat sym_print
+	} def
+
+	/Symf % "f"
+	{
+	  (F) norm sym_print
+	} def
+
+	/SymF % "F"
+	{
+	  (F) sharp sym_print
+	} def
+
+	/Symaf % "<alt>f"
+	{
+	  (E) norm sym_print
+	} def
+
+	/Symg % "g"
+	{
+	  (G) norm sym_print
+	} def
+
+	/SymG % "G"
+	{
+	  (A) flat sym_print
+	} def
+
+	/Symag % "<alt>g"
+	{
+	  (F) sharp sym_print
+	} def
+
+	/Symh % "h"
+	{
+	  (A) norm sym_print
+	} def
+
+	/SymH % "H"
+	{
+	  (B) flat sym_print
+	} def
+
+	/Symah % "<alt>h"
+	{
+	  (A) flat sym_print
+	} def
+
+	/Symi % "i"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (c) norm sym_print
+	} def
+
+	/SymI % "I"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (c) sharp sym_print
+	} def
+
+	/Symai % "<alt>i"
+	{
+	  (b) norm sym_print
+	} def
+
+	/Symj % "j"
+	{
+	  (B) norm sym_print
+	} def
+
+	/SymJ % "J"
+	{
+	  (c) norm sym_print
+	} def
+
+	/Symaj % "<alt>j"
+	{
+	  (B) flat sym_print
+	} def
+
+	/Symk % "k"
+	{
+	  (W) stringwidth pop neg 0
+	  rmoveto
+	  (W) stringwidth pop 0
+	  rlineto
+	} def
+
+	/SymK % "K"
+	{
+	} def
+
+	/Symak % "<alt>k"
+	{
+	  (W) stringwidth pop neg 0
+	  rmoveto
+	  (W) stringwidth pop 0
+	  rlineto
+	} def
+
+	/Syml % "l" %         Roll-Zeichen
+	{
+	  (*) norm sym_print
+	} def
+
+	/SymL % "L"
+	{
+	  (*) norm sym_print
+	} def
+
+	/Symal % "<alt>l"
+	{
+	  0 2 rmoveto
+	  (~) norm sym_print
+	} def
+
+	/Symm % "m"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (B) norm sym_print
+	} def
+
+	/SymM % "M"
+	{
+	  (C) norm sym_print
+	} def
+
+	/Symam % "<alt>m"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (B) flat sym_print
+	} def
+
+	/Symn % "n"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (A) norm sym_print
+	} def
+
+	/SymN % "N"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (B) flat sym_print
+	} def
+
+	/Syman % "<alt>n"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (A) flat sym_print
+	} def
+
+	/Symo % "o"
+	{
+	  -0.5 5 rmoveto sym_dot 0.5 -5 rmoveto
+	  (d) norm sym_print
+	} def
+
+	/SymO % "O"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (e) flat sym_print
+
+	} def
+
+	/Symao % "<alt>o"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (c) sharp sym_print
+	} def
+
+	/Symp % "p"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (e) norm sym_print
+	} def
+
+	/SymP % "P"
+	{
+	  -1.75 5 rmoveto sym_dot 1.75 -5 rmoveto
+	  (f) norm sym_print
+	} def
+
+	/Symap % "<alt>p"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (e) flat sym_print
+	} def
+
+	/Symq % "q"
+	{
+	  (c) norm sym_print
+	} def
+
+	/SymQ % "Q"
+	{
+	  (c) sharp sym_print
+	} def
+
+	/Symaq % "<alt>q"
+	{
+	  (B) norm sym_print
+	} def
+
+	/Symr % "r"
+	{
+	  (f) norm sym_print
+	} def
+
+	/SymR % "R"
+	{
+	  (f) sharp sym_print
+	} def
+
+	/Symar % "<alt>r"
+	{
+	  (e) norm sym_print
+	} def
+
+	/Syms % "s"
+	{
+	  (D) norm sym_print
+	} def
+
+	/SymS % "S"
+	{
+	  (E) flat sym_print
+	} def
+
+	/Symas % "<alt>s"
+	{
+	  (C) sharp sym_print
+	} def
+
+	/Symt % "t"
+	{
+	  (g) norm sym_print
+	} def
+
+	/SymT % "T"
+	{
+	  (a) flat sym_print
+	} def
+
+	/Symat % "<alt>t"
+	{
+	  (f) sharp sym_print
+	} def
+
+	/Symu % "u"
+	{
+	  (b) norm sym_print
+	} def
+
+	/SymU % "U"
+	{
+	  0 5 rmoveto sym_dot 0 -5 rmoveto
+	  (c) norm sym_print
+	} def
+
+	/Symau % "<alt>u"
+	{
+	  (b) flat sym_print
+	} def
+
+	/Symv % "v"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (F) norm sym_print
+	} def
+
+	/SymV % "V"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (F) sharp sym_print
+	} def
+
+	/Symav % "<alt>v"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (E) norm sym_print
+	} def
+
+	/Symw % "w"
+	{
+	  (d) norm sym_print
+	} def
+
+	/SymW % "W"
+	{
+	  (e) flat sym_print
+	} def
+
+	/Symaw % "<alt>w"
+	{
+	  (c) sharp sym_print
+	} def
+
+	/Symx % "x"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (D) norm sym_print
+	} def
+
+	/SymX % "X"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (E) flat sym_print
+	} def
+
+	/Symax % "<alt>x"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (C) sharp sym_print
+	} def
+
+	/Symy % "y"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (C) norm sym_print
+	} def
+
+	/SymY % "Y"
+	{
+	  0 lds rmoveto sym_dot 0 nlds rmoveto
+	  (C) sharp sym_print
+	} def
+
+	/Symay % "<alt>y"
+	{
+	  -2 lds rmoveto sym_dot 2 nlds rmoveto
+	  2 lds rmoveto sym_dot -2 nlds rmoveto
+	  (B) norm sym_print
+	} def
+
+	/Symz % "z"
+	{
+	  (a) norm sym_print
+	} def
+
+	/SymZ % "Z"
+	{
+	  (b) flat sym_print
+	} def
+
+	/Symaz % "<alt>z"
+	{
+	  (a) flat sym_print
+	} def
+
+	% *************************************************

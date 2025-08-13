@@ -1,0 +1,368 @@
+VERSION 004
+OERGELI4.FNT
+  750  1  2  2  1  0
+ 8.0000000000E+01
+T  F
+T  F      class                      TITLE                                                                     Î
+T  F      È                       Í
+T
+T
+T
+T
+N            4    0  480    3 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F                                 OERGELI1.FNT: Resolution 480!
+T  F      È                       Í
+T
+T
+T
+T
+N            2    6  480    3 %.1.12.6ló6lÇ6lï6lí6lÉ6lÖ6lñ6lÑ6lë6lÄ6.12.
+T
+T
+T
+N            2    6  480    3 %.1.6lx6lc6lv6ls6ld6lf6lw6le6lr6la6lq6.
+T
+T
+T
+N            2    6  480    3 %.1.12.12.12lC6lC6lV6lS6lD6lF6lW6lE6lR6lA6Q12.
+T
+T
+T         È
+T
+T
+T                                                           Achtung:  AltGr-j - Absturz (wegen Nero!)
+T
+T                                                                     nur Alt-j (auf linker Hand) verwenden!
+T
+T
+T
+N            2    6  480    3 %.1.12.6Å6ç6å6Ü6á6â6ì6ô6î6ä6à.12.
+T
+T
+T
+N            2    6  480    3 %.1.6b6n6m6g6h6j6t6z6u6k6i6.
+T
+T
+T
+N            2    6  480    3 %.1.12.6B6N6M6G6H6J6T6Z6U6K6IQ12.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F                                 OERGELI1.FNT: Resolution 480!
+T  F      È                       Í
+T
+T
+T         NORMAL                 
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4.4X4C4V4S4D4F4W4E4R4A4Qó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4.
+T         mitte - hoch - tief    	 Normal                       	 Shift                 	Alt
+T
+T         CAPS LOCK
+N            8    4  480    3 %.1X4C4V4S4D4F4W4E4R4A4Q.4.4x4c4v4s4d4f4w4e4r4a4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4êÄ4.
+T         Norm.+Shift vertauscht 	 Normal                       	 Shift                 	Alt
+T
+T         È
+T
+T
+T         SWAPPED  NORMAL
+N            8    4  480    3 %.1ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4êQ.4.4x4c4v4s4d4f4w4e4r4a4X4C4V4S4D4F4W4E4R4A4.
+T         aussen - mitte - innen 	 Normal                       	 Shift                 	Alt
+T
+T
+T         SWAPPED  CAPS LOCK
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4.4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4X4C4V4S4D4F4W4E4R4A4.
+T         Shift+Alt vertauscht   	 Normal                       	 Shift                 	Alt
+T
+T         È
+T
+T
+T                                                                                          2
+N            8    4  480    3 %.1lx4lx4lx4lx4lX4lx4lX4lX4ló4ló4ló4ló4lc4lc4lc4lc4lC4lC4lC4lC4lÇ4lÉ4ãl.4lÇ12.12s12É12Ñ12.12.4&4Lã4.4.4.4.4.
+T                                	 Eb    	           	           	 Bb        	                    Ab        	
+T
+T
+T
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4X4C4V4S4D4F4W4E4R4A4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4q4.
+T
+T
+T
+T
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4X4C4V4S4D4F4W4E4R4A4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4.
+T
+T
+T
+N            8    4  480    3 %.1a4Ä4A4.
+T
+T                                1
+T                                1
+N            8    3  480    3 %.1lóx9.9lX9ló9l9l9l9l9l9l9.
+T
+T
+T
+T
+T  F
+T  F                                 OERGELI1.FNT: Resolution 480!
+T  F      È                       Í
+T
+T
+T         NORMAL                 
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4.4X4C4V4S4D4F4W4E4R4A4Qó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4.
+T         mitte - hoch - tief    	 Normal                       	 Shift                 	Alt
+T
+T         CAPS LOCK
+N            8    4  480    3 %.1X4C4V4S4D4F4W4E4R4A4Q.4.4x4c4v4s4d4f4w4e4r4a4.ó4.Ç4ï4í4É4Ö4ñ4Ñ4ë4êÄ4.
+T         Norm.+Shift vertauscht 	 Normal                       	 Shift                	Alt
+T
+T         È
+T
+T
+T         SWAPPED  NORMAL
+N            8    4  480    3 %.1ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4êQ.4.4x4c4v4s4d4f4w4e4r4a4X4C4V4S4D4F4W4E4R4A4.
+T         aussen - mitte - innen 	 Normal                       	 Shift                 	Alt
+T
+T
+T         SWAPPED  CAPS LOCK
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4.4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4X4C4V4S4D4F4W4E4R4A4.
+T         Shift+Alt vertauscht   	 Normal                       	 Shift                 	Alt
+T
+T         È
+T
+T
+T                                                                                          2
+N            8    4  480    3 %.1lx4lx4lx4lx4lX4lx4lX4lX4ló4ló4ló4ló4lc4lc4lc4lc4lC4lC4lC4lC4lÇ4lÉ4ãl.4lÇ12.12s12É12Ñ12.12.4&4Lã4.4.4.4.4.
+T                                	 Eb    	           	           	 Bb        	                    Ab        	
+T
+T
+T
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4X4C4V4S4D4F4W4E4R4A4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4q4.
+T
+T
+T
+T
+N            8    4  480    3 %.1x4c4v4s4d4f4w4e4r4a4q4X4C4V4S4D4F4W4E4R4A4ó4Ç4ï4í4É4Ö4ñ4Ñ4ë4Ä4.
+T
+T
+T
+N            8    3  480    3 %.1lÇ3lÇ3lÇ3lÇ3lÇ3lÇ3lÇ3lÇ3lÇ3.
+T
+T                                1
+T                                1
+N            8    3  480    3 %.1lóx9.9lX9ló9l9l9l9l9l9l9.
+T
+T
+T
+T
+T  F
+T  F      class                      TITLE                                                                     Î
+T  F      È                       Í
+T
+T
+T
+T
+T                                =ss      =(ss)     =(s)s     =s(s)
+T
+T
+T         =
+N            4    0  480    3 %.1=ss2=(ss)2=(s)s2=s(s)2.
+T
+T         -
+N            4    0  480    3 %.1-ss2-(ss)2-(s)s2-s(s)2.
+T
+T         +
+N            4    0  480    3 %.1+ss2+(ss)2+(s)s2+s(s)2.
+T
+T         È
+T
+T         =
+N            4    0  480    3 %.1=íí2=(íí)2=(í)í2=í(í)2.
+T
+T         -
+N            4    0  480    3 %.1--íí2-(íí)2-(í)í2-í(í)2.
+T
+T         +
+N            4    0  480    3 %.1+íí2+(íí)2+(í)í2+í(í)2.
+T
+T                                  È
+T
+T         =
+N      4	    4    4  480    3%.1=SS2=(SS)2=(S)S2=S(S)2.
+T
+T         -
+N      4	    4    4  480    3%.1-SS2-(SS)2-(S)S2-S(S)2.
+T
+T         +
+N	     4	    4    4  480    3%.1+SS2+(SS)2+(S)S2+S(S)2.
+T
+T
+T
+T
+T
+N	     4	    4    4  480    3%.1(s)1(í)1(S)1.
+T
+T
+T
+T
+T
+T
+T  F
+T  F      class                      TITLE                                                                     Î
+T  F      È                       Í
+T
+T
+T
+T
+T                                =ff      =(ff)     =(f)f     =f(f)
+T
+T
+T         =
+N            4    0  480    3 %.1=ff2=(ff)2=(f)f2=f(f)2.
+T
+T         -
+N            4    0  480    3 %.1-ff2-(ff)2-(f)f2-f(f)2.
+T
+T         +
+N            4    0  480    3 %.1+ff2+(ff)2+(f)f2+f(f)2.
+T
+T         È
+T
+T         =
+N            4    0  480    3 %.1=ÖÖ2=(ÖÖ)2=(Ö)Ö2=Ö(Ö)2.
+T
+T         -
+N            4    0  480    3 %.1--ÖÖ2-(ÖÖ)2-(Ö)Ö2-Ö(Ö)2.
+T
+T         +
+N            4    0  480    3 %.1+ÖÖ2+(ÖÖ)2+(Ö)Ö2+Ö(Ö)2.
+T
+T                                  È
+T
+T         =
+N      4	    4    4  480    3%.1=FF2=(FF)2=(F)F2=F(F)2.
+T
+T         -
+N      4	    4    4  480    3%.1-FF2-(FF)2-(F)F2-F(F)2.
+T
+T         +
+N	     4	    4    4  480    3%.1+FF2+(FF)2+(F)F2+F(F)2.
+T
+T
+T
+T
+T
+N	     4	    4    4  480    3%.1(f)1(Ö)1(F)1.
+T
+T
+T
+T
+T
+T
+T  F
+T  F      claff                      TITLE                                                                     Î
+T  F      È                       Í
+T
+T
+T
+T
+T                                =dd      =(dd)     =(d)d     =d(d)
+T
+T
+T         =
+N            4    0  480    3 %.1=dd2=(dd)2=(d)d2=d(d)2.
+T
+T         -
+N            4    0  480    3 %.1-dd2-(dd)2-(d)d2-d(d)2.
+T
+T         +
+N            4    0  480    3 %.1+dd2+(dd)2+(d)d2+d(d)2.
+T
+T         È
+T
+T         =
+N            4    0  480    3 %.1=ÉÉ2=(ÉÉ)2=(É)É2=É(É)2.
+T
+T         -
+N            4    0  480    3 %.1--ÉÉ2-(ÉÉ)2-(É)É2-É(É)2.
+T
+T         +
+N            4    0  480    3 %.1+ÉÉ2+(ÉÉ)2+(É)É2+É(É)2.
+T
+T                                  È
+T
+T         =
+N      4	    4    4  480    3%.1=DD2=(DD)2=(D)D2=D(D)2.
+T
+T         -
+N      4	    4    4  480    3%.1-DD2-(DD)2-(D)D2-D(D)2.
+T
+T         +
+N	     4	    4    4  480    3%.1+DD2+(DD)2+(D)D2+D(D)2.
+T
+T
+T
+T
+T
+N	     4	    4    4  480    3%.1(d)1(É)1(D)1.
+T
+T
+T
+T
+T
+T

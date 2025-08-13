@@ -1,0 +1,893 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%BoundingBox:   46.00   64.00  558.00  829.00
+%%Creator: RNS
+%%EndComments
+
+% Notenkopf: wird immer wieder benîtigt
+	 /notehead {
+	  newpath
+	  gsave
+	  500 500 translate
+	  rotate
+	  1.50 0.95 scale
+	  dup 500 sub 0 exch moveto
+	  dup 500 sub 0 exch 150 0 360 arc
+	  closepath
+	  fill
+	  grestore
+	} def
+
+/helplinewidth 0.1 def
+/helplinelength 360.0 def
+% Hilfslinie: wird auch immer wieder benîtigt
+	/helpline {        
+	  newpath
+	  dup 500.0 helplinelength sub exch helplinewidth sub moveto
+	  dup 500.0 helplinelength add exch helplinewidth sub lineto
+	  dup 500.0 helplinelength add exch helplinewidth add lineto
+	      500.0 helplinelength sub exch helplinewidth add lineto
+	  closepath
+	  fill
+	  } def
+/sharpposx 120 def
+/sharpvheight 190 def %170 ; 200
+/sharpvwidth 55 def   % 50 ;  60
+/sharphheight 80 def  % 70 ;  90
+/sharphwidth  90 def  % 80 ; 100
+/sharpang 30 def
+/sharpvlinewidth 1 def
+/sharphlinewidth 50 def
+% Kreuz: wird auch noch immer wieder benîtigt
+	/sharp {
+	  newpath
+	  gsave
+	  sharpposx exch translate
+	  sharpvlinewidth setlinewidth
+	  0 sharpvwidth sub sharpvheight moveto
+	  0 sharpvwidth sub 0 sharpvheight sub lineto
+	  sharpvwidth sharpvheight sharpang add moveto
+	  sharpvwidth 0 sharpvheight sub sharpang add lineto
+	  stroke
+	  newpath
+	  sharphlinewidth setlinewidth
+	  0 sharphwidth sub   sharphheight     sharpang sub moveto
+	    sharphwidth       sharphheight     sharpang add lineto
+	  0 sharphwidth sub 0 sharphheight sub sharpang sub moveto
+	    sharphwidth     0 sharphheight sub sharpang add lineto
+	  stroke
+	  grestore
+	} def
+% Beee: wird wirklich auch noch immer wieder benîtigt
+	/flat {
+	} def
+/SimpleFont 10 dict def
+SimpleFont begin
+	% "Mu·"-EintrÑge:
+	/FontMatrix [0.001 0 0 0.001 0 0] def
+	/FontType   3 def
+	/FontBBox   [0 0 1000 1000] def
+	/Encoding   256 array def
+
+
+	% Encoding erst mit "nichts" fÅllen:
+	0 1 255 {Encoding exch {} put} for
+	% jetzt gezielt:
+
+	Encoding 32 /SimpleBlank put
+	Encoding 97 /Simplea put
+	Encoding 65 /SimpleA put
+	Encoding 128 /Simpleaa put
+	Encoding 98 /Simpleb put
+	Encoding 66 /SimpleB put
+	Encoding 129 /Simpleab put
+	Encoding 99 /Simplec put
+	Encoding 67 /SimpleC put
+	Encoding 130 /Simpleac put
+	Encoding 100 /Simpled put
+	Encoding 68 /SimpleD put
+	Encoding 131 /Simplead put
+	Encoding 101 /Simplee put
+	Encoding 69 /SimpleE put
+	Encoding 132 /Simpleae put
+	Encoding 102 /Simplef put
+	Encoding 70 /SimpleF put
+	Encoding 133 /Simpleaf put
+	Encoding 103 /Simpleg put
+	Encoding 71 /SimpleG put
+	Encoding 134 /Simpleag put
+	Encoding 104 /Simpleh put
+	Encoding 72 /SimpleH put
+	Encoding 135 /Simpleah put
+	Encoding 105 /Simplei put
+	Encoding 73 /SimpleI put
+	Encoding 136 /Simpleai put
+	Encoding 106 /Simplej put
+	Encoding 74 /SimpleJ put
+	Encoding 137 /Simpleaj put
+	Encoding 107 /Simplek put
+	Encoding 75 /SimpleK put
+	Encoding 138 /Simpleak put
+	Encoding 108 /Simplel put
+	Encoding 76 /SimpleL put
+	Encoding 139 /Simpleal put
+	Encoding 109 /Simplem put
+	Encoding 77 /SimpleM put
+	Encoding 140 /Simpleam put
+	Encoding 110 /Simplen put
+	Encoding 78 /SimpleN put
+	Encoding 141 /Simplean put
+	Encoding 111 /Simpleo put
+	Encoding 79 /SimpleO put
+	Encoding 142 /Simpleao put
+	Encoding 112 /Simplep put
+	Encoding 80 /SimpleP put
+	Encoding 143 /Simpleap put
+	Encoding 113 /Simpleq put
+	Encoding 81 /SimpleQ put
+	Encoding 144 /Simpleaq put
+	Encoding 114 /Simpler put
+	Encoding 82 /SimpleR put
+	Encoding 145 /Simplear put
+	Encoding 115 /Simples put
+	Encoding 83 /SimpleS put
+	Encoding 146 /Simpleas put
+	Encoding 116 /Simplet put
+	Encoding 84 /SimpleT put
+	Encoding 147 /Simpleat put
+	Encoding 117 /Simpleu put
+	Encoding 85 /SimpleU put
+	Encoding 148 /Simpleau put
+	Encoding 118 /Simplev put
+	Encoding 86 /SimpleV put
+	Encoding 149 /Simpleav put
+	Encoding 119 /Simplew put
+	Encoding 87 /SimpleW put
+	Encoding 150 /Simpleaw put
+	Encoding 120 /Simplex put
+	Encoding 88 /SimpleX put
+	Encoding 151 /Simpleax put
+	Encoding 121 /Simpley put
+	Encoding 89 /SimpleY put
+	Encoding 152 /Simpleay put
+	Encoding 122 /Simplez put
+	Encoding 90 /SimpleZ put
+	Encoding 153 /Simpleaz put
+
+	% Alle Buchstaben in Simpledict:
+	/Simpledict 90 dict def
+	Simpledict begin
+
+	/SimpleBlank % " "
+	{ 500.0 400.0 moveto
+	  500.0 600.0 lineto
+	  stroke
+	} def
+
+	/Simplea % "a"
+	{ 500.0 25 notehead
+	  500.0 helpline
+	} def
+
+	/SimpleA % "A"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	  500.0 helpline
+	} def
+
+	/Simpleaa % "<alt>a"
+	{ 500.0 25 notehead
+	  500.0 helpline
+	} def
+
+	/Simpleb % "b"
+	{ 300.0 25 notehead
+	  465.0 helpline
+	  795.0 helpline
+	} def
+
+	/SimpleB % "B"
+	{ 300.0 25 notehead
+	  300.0 sharp
+	  465.0 helpline
+	  765.0 helpline
+	} def
+
+	/Simpleab % "<alt>b"
+	{ 300.0 25 notehead
+	  465.0 helpline
+	  765.0 helpline
+	} def
+
+	/Simplec % "c"
+	{ 160.0 25 notehead
+	  320.0 helpline
+	} def
+
+	/SimpleC % "C"
+	{ 160.0 25 notehead
+	  160.0 sharp
+	  320.0 helpline
+	} def
+
+	/Simpleac % "<alt>c"
+	{ 160.0 25 notehead
+	  320.0 helpline
+	} def
+
+	/Simpled % "d"
+	{ 500.0 25 notehead
+	} def
+
+	/SimpleD % "D"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	} def
+
+	/Simplead % "<alt>d"
+	{ 500.0 25 notehead
+	} def
+
+	/Simplee % "e"
+	{ 460.0 25 notehead
+	} def
+
+	/SimpleE % "E"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	} def
+
+	/Simpleae % "<alt>e"
+	{ 460.0 25 notehead
+	} def
+
+	/Simplef % "f"
+	{ 460.0 25 notehead
+	} def
+
+	/SimpleF % "F"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	} def
+
+	/Simpleaf % "<alt>f"
+	{ 460.0 25 notehead
+	} def
+
+	/Simpleg % "g"
+	{ 500.0 25 notehead
+	} def
+
+	/SimpleG % "G"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	} def
+
+	/Simpleag % "<alt>g"
+	{ 500.0 25 notehead
+	} def
+
+	/Simpleh % "h"
+	{ 460.0 25 notehead
+	} def
+
+	/SimpleH % "H"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	} def
+
+	/Simpleah % "<alt>h"
+	{ 460.0 25 notehead
+	} def
+
+	/Simplei % "i"
+	{ 500.0 25 notehead
+	  500.0 helpline
+	  170.0 helpline
+	} def
+
+	/SimpleI % "I"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	  500.0 helpline
+	  170.0 helpline
+	} def
+
+	/Simpleai % "<alt>i"
+	{ 500.0 25 notehead
+	  500.0 helpline
+	  170.0 helpline
+	} def
+
+	/Simplej % "j"
+	{ 500.0 25 notehead
+	} def
+
+	/SimpleJ % "J"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	} def
+
+	/Simpleaj % "<alt>j"
+	{ 500.0 25 notehead
+	} def
+
+	/Simplek % "k"
+	{ 
+	} def
+
+	/SimpleK % "K"
+	{ 
+	} def
+
+	/Simpleak % "<alt>k"
+%        { 0 setlinejoin
+%          211.3  750.0 moveto
+%          788.7  750.0 lineto
+%          500.0  250.0 lineto
+%          closepath
+%          fill
+	{ 500.0 helpline
+	  160.0 helpline
+	} def
+
+	/Simplel % "l"
+	{
+	} def
+
+	/SimpleL % "L"
+	{ 125.0 940.0 moveto
+	  875.0 940.0 lineto
+	  875.0 1000.0 lineto
+	  125.0 1000.0 lineto
+	  closepath
+	  fill
+	  125.0 410.0 moveto
+	  875.0 410.0 lineto
+	  875.0 470.0 lineto
+	  125.0 470.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleal % "<alt>l"
+%        { 125.0   0.0 moveto
+%          875.0   0.0 lineto
+%          875.0  60.0 lineto
+%          125.0  60.0 lineto
+%          closepath
+%          fill
+%          125.0 530.0 moveto
+%          875.0 530.0 lineto
+%          875.0 590.0 lineto
+%          125.0 590.0 lineto
+%          closepath
+%          fill
+	{ 500.0 helpline
+	  160.0 helpline
+	} def
+
+	/Simplem % "m"
+	{ 460.0 25 notehead
+	  640.0 helpline
+	} def
+
+	/SimpleM % "M"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	  640.0 helpline
+	} def
+
+	/Simpleam % "<alt>m"
+	{ 460.0 25 notehead
+	  640.0 helpline
+	} def
+
+	/Simplen % "n"
+	{ 500.0 25 notehead
+	  860.0 helpline
+	  500.0 helpline
+	} def
+
+	/SimpleN % "N"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	  860.0 helpline
+	  500.0 helpline
+	} def
+
+	/Simplean % "<alt>n"
+	{ 500.0 25 notehead
+	  860.0 helpline
+	  500.0 helpline
+	} def
+
+	/Simpleo % "o"
+	{ 680.0 25 notehead
+	  510.0 helpline
+	  180.0 helpline
+	} def
+
+	/SimpleO % "O"
+	{ 680.0 25 notehead
+	  680.0 sharp
+	  510.0 helpline
+	  180.0 helpline
+	} def
+
+	/Simpleao % "<alt>o"
+	{ 680.0 25 notehead
+	  510.0 helpline
+	  180.0 helpline
+	} def
+
+	/Simplep % "p"
+	{ 760.0 25 notehead
+	  730.0 helpline
+	  400.0 helpline
+	   70.0 helpline
+	} def
+
+	/SimpleP % "P"
+	{ 760.0 25 notehead
+	  730.0 sharp
+	  730.0 helpline
+	  400.0 helpline
+	   70.0 helpline
+	} def
+
+	/Simpleap % "<alt>p"
+	{ 760.0 25 notehead
+	  730.0 helpline
+	  400.0 helpline
+	   70.0 helpline
+	} def
+
+	/Simpleq % "q"
+	{ 460.0 25 notehead
+	} def
+
+	/SimpleQ % "Q"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	} def
+
+	/Simpleaq % "<alt>q"
+	{ 460.0 25 notehead
+	} def
+
+	/Simpler % "r"
+	{ 500.0 25 notehead
+	} def
+
+	/SimpleR % "R"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	} def
+
+	/Simplear % "<alt>r"
+	{ 500.0 25 notehead
+	} def
+
+	/Simples % "s"
+	{ 460.0 25 notehead
+	} def
+
+	/SimpleS % "S"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	} def
+
+	/Simpleas % "<alt>s"
+	{ 460.0 25 notehead
+	} def
+
+	/Simplet % "t"
+	{ 460.0 25 notehead
+	} def
+
+	/SimpleT % "T"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	} def
+
+	/Simpleat % "<alt>t"
+	{ 460.0 25 notehead
+	} def
+
+	/Simpleu % "u"
+	{ 460.0 25 notehead
+	  300.0 helpline
+	} def
+
+	/SimpleU % "U"
+	{ 460.0 25 notehead
+	  460.0 sharp
+	  300.0 helpline
+	} def
+
+	/Simpleau % "<alt>u"
+	{ 460.0 25 notehead
+	  300.0 helpline
+	} def
+
+	/Simplev % "v"
+	{ 180.0 25 notehead
+	  180.0 helpline
+	  540.0 helpline
+	  900.0 helpline
+	} def
+
+	/SimpleV % "V"
+	{ 180.0 25 notehead
+	  180.0 sharp
+	  180.0 helpline
+	  540.0 helpline
+	  900.0 helpline
+	} def
+
+	/Simpleav % "<alt>v"
+	{ 180.0 25 notehead
+	  180.0 helpline
+	  540.0 helpline
+	  900.0 helpline
+	} def
+
+	/Simplew % "w"
+	{ 500.0 25 notehead
+	} def
+
+	/SimpleW % "W"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	} def
+
+	/Simpleaw % "<alt>w"
+	{ 500.0 25 notehead
+	} def
+
+	/Simplex % "x"
+	{ 200.0 25 notehead
+	  200.0 helpline
+	  520.0 helpline
+	} def
+
+	/SimpleX % "X"
+	{ 200.0 25 notehead
+	  200.0 sharp
+	  200.0 helpline
+	  520.0 helpline
+	} def
+
+	/Simpleax % "<alt>x"
+	{ 200.0 25 notehead
+	  200.0 helpline
+	  520.0 helpline
+	} def
+
+	/Simpley % "y"
+	{ 160.0 25 notehead
+	  320.0 helpline
+	  640.0 helpline
+	} def
+
+	/SimpleY % "Y"
+	{ 160.0 25 notehead
+	  160.0 sharp
+	  320.0 helpline
+	  640.0 helpline
+	} def
+
+	/Simpleay % "<alt>y"
+	{ 160.0 25 notehead
+	  320.0 helpline
+	  640.0 helpline
+	} def
+
+	/Simplez % "z"
+	{ 500.0 25 notehead
+	  500.0 helpline
+	} def
+
+	/SimpleZ % "Z"
+	{ 500.0 25 notehead
+	  500.0 sharp
+	  500.0 helpline
+	} def
+
+	/Simpleaz % "<alt>z"
+	{ 500.0 25 notehead
+	  500.0 helpline
+	} def
+
+	end % von Simpledict
+	/BuildChar
+	{       1000 0 0 0 1000 1000 setcachedevice
+		exch begin
+		Encoding exch get
+		Simpledict exch get
+		end
+		exec
+	} def
+	end % von BuildChar
+	% der neue Font hei·t "SymbolFont"
+	/SymbolFont SimpleFont definefont pop
+	% *************************************************
+%%IncludeFont: SymbolFont
+%%BeginFont: SymbolFont
+/SymbolFont findfont 15 scalefont setfont
+%%EndFont
+ 0.800  setlinewidth
+ newpath 
+558.000 829.000 moveto
+558.000 486.000 lineto
+ stroke 
+ newpath 
+46.000 829.000 moveto
+46.000 486.000 lineto
+ stroke 
+ newpath 
+46.000 829.000 moveto
+558.000 829.000 lineto
+ stroke 
+ newpath 
+46.000 486.000 moveto
+558.000 486.000 lineto
+ stroke 
+166.899 749.693 moveto
+(y) show
+180.635 749.693 moveto
+(x) show
+194.371 753.738 moveto
+(c) show
+208.106 754.547 moveto
+(v) show
+221.842 756.974 moveto
+(b) show
+235.578 756.165 moveto
+(n) show
+249.314 758.592 moveto
+(m) show
+263.049 760.210 moveto
+(a) show
+276.785 762.637 moveto
+(s) show
+290.521 764.255 moveto
+(d) show
+304.257 766.682 moveto
+(f) show
+317.992 768.300 moveto
+(g) show
+331.728 770.726 moveto
+(h) show
+345.464 772.344 moveto
+(j) show
+359.200 774.771 moveto
+(q) show
+372.935 776.389 moveto
+(w) show
+386.671 778.816 moveto
+(e) show
+400.407 780.434 moveto
+(r) show
+414.143 782.861 moveto
+(t) show
+427.878 784.479 moveto
+(z) show
+441.614 786.906 moveto
+(u) show
+455.350 788.524 moveto
+(i) show
+469.086 788.524 moveto
+(o) show
+482.821 790.142 moveto
+(p) show
+ 0.100  setlinewidth
+ newpath 
+46.801 770.755 moveto
+558.000 770.755 lineto
+ stroke 
+ newpath 
+46.801 774.800 moveto
+558.000 774.800 lineto
+ stroke 
+ newpath 
+46.801 778.844 moveto
+558.000 778.844 lineto
+ stroke 
+ newpath 
+46.801 782.889 moveto
+558.000 782.889 lineto
+ stroke 
+ newpath 
+46.801 786.934 moveto
+558.000 786.934 lineto
+ stroke 
+ newpath 
+173.399 765.901 moveto
+173.399 791.788 lineto
+ stroke 
+ newpath 
+269.549 765.901 moveto
+269.549 791.788 lineto
+ stroke 
+ newpath 
+365.700 765.901 moveto
+365.700 791.788 lineto
+ stroke 
+ newpath 
+461.850 765.901 moveto
+461.850 791.788 lineto
+ stroke 
+166.899 678.505 moveto
+(Y) show
+180.635 678.505 moveto
+(X) show
+194.371 682.550 moveto
+(C) show
+208.106 683.358 moveto
+(V) show
+221.842 685.785 moveto
+(B) show
+235.578 684.976 moveto
+(N) show
+249.314 687.403 moveto
+(M) show
+263.049 689.021 moveto
+(A) show
+276.785 691.448 moveto
+(S) show
+290.521 693.066 moveto
+(D) show
+304.257 695.493 moveto
+(F) show
+317.992 697.111 moveto
+(G) show
+331.728 699.538 moveto
+(H) show
+345.464 701.156 moveto
+(J) show
+359.200 703.583 moveto
+(Q) show
+372.935 705.200 moveto
+(W) show
+386.671 707.627 moveto
+(E) show
+400.407 709.245 moveto
+(R) show
+414.143 711.672 moveto
+(T) show
+427.878 713.290 moveto
+(Z) show
+441.614 715.717 moveto
+(U) show
+455.350 717.335 moveto
+(I) show
+469.086 717.335 moveto
+(O) show
+482.821 718.953 moveto
+(P) show
+ newpath 
+46.801 699.566 moveto
+558.000 699.566 lineto
+ stroke 
+ newpath 
+46.801 703.611 moveto
+558.000 703.611 lineto
+ stroke 
+ newpath 
+46.801 707.656 moveto
+558.000 707.656 lineto
+ stroke 
+ newpath 
+46.801 711.700 moveto
+558.000 711.700 lineto
+ stroke 
+ newpath 
+46.801 715.745 moveto
+558.000 715.745 lineto
+ stroke 
+ newpath 
+173.399 694.712 moveto
+173.399 720.599 lineto
+ stroke 
+ newpath 
+269.549 694.712 moveto
+269.549 720.599 lineto
+ stroke 
+ newpath 
+365.700 694.712 moveto
+365.700 720.599 lineto
+ stroke 
+ newpath 
+461.850 694.712 moveto
+461.850 720.599 lineto
+ stroke 
+166.899 600.844 moveto
+(ò) show
+180.635 600.844 moveto
+(ó) show
+194.371 604.889 moveto
+(Ç) show
+208.106 605.698 moveto
+(ï) show
+221.842 608.125 moveto
+(Å) show
+235.578 607.316 moveto
+(ç) show
+249.314 609.743 moveto
+(å) show
+263.049 611.361 moveto
+(Ä) show
+276.785 613.788 moveto
+(í) show
+290.521 615.406 moveto
+(É) show
+304.257 617.833 moveto
+(Ö) show
+317.992 619.450 moveto
+(Ü) show
+331.728 621.877 moveto
+(á) show
+345.464 623.495 moveto
+(â) show
+359.200 625.922 moveto
+(ê) show
+372.935 627.540 moveto
+(ñ) show
+386.671 629.967 moveto
+(Ñ) show
+400.407 631.585 moveto
+(ë) show
+414.143 634.012 moveto
+(ì) show
+427.878 635.630 moveto
+(ô) show
+441.614 638.057 moveto
+(î) show
+455.350 639.675 moveto
+(à) show
+469.086 639.675 moveto
+(é) show
+482.821 641.292 moveto
+(è) show
+ newpath 
+46.801 621.906 moveto
+558.000 621.906 lineto
+ stroke 
+ newpath 
+46.801 625.950 moveto
+558.000 625.950 lineto
+ stroke 
+ newpath 
+46.801 629.995 moveto
+558.000 629.995 lineto
+ stroke 
+ newpath 
+46.801 634.040 moveto
+558.000 634.040 lineto
+ stroke 
+ newpath 
+46.801 638.085 moveto
+558.000 638.085 lineto
+ stroke 
+ newpath 
+173.399 617.052 moveto
+173.399 642.939 lineto
+ stroke 
+ newpath 
+269.549 617.052 moveto
+269.549 642.939 lineto
+ stroke 
+ newpath 
+365.700 617.052 moveto
+365.700 642.939 lineto
+ stroke 
+ newpath 
+461.850 617.052 moveto
+461.850 642.939 lineto
+ stroke 
+%%IncludeFont: Helvetica
+%%BeginFont: Helvetica
+/Helvetica findfont 9 scalefont setfont
+%%EndFont
+showpage

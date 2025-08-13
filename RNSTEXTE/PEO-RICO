@@ -1,0 +1,32 @@
+12.12.93
+
+01, 2-19, 020-099 durch 1-9 + 010-099 ersetzt
+00100-00999 vorbereitet, Anzeige ist aber dann falsch (betr. pageunit.pas)
+betrifft: utilunit.pas, pageunit.pas, helpunit.pas
+Ins pageunit.pas k”nntest Du nochmals hineinschauen, aber nt schliiesse!
+Hat natrlich wieder Stunden gedauert.
+
+sndunit.pas 'L'
+Wnschenswert w„re mit Shift-Esc:
+soundplay bis und mit erstem Beat.
+
+bei der Angabe des Symbol-Keys in der Statuszeile wird nicht bercksichtigt, ob
+CapsLock eingeschaltet ist oder nicht.
+
+Marsch-Trommel.FNT machen: siehe rnsperc\drum\salamin.rns
+Dynamikzeichen (adds) in den Font einbauen:
+Betonungszeichen sowie p, mf, f; p---f etc.
+Beeinflussung der Lautsprecherlautst„rke bewirken.
+Lautst„rken„nderung NICHT M™GLICH
+
+Zahleneingabe:
+- Durch Enter abschliessen
+- 1..9,010..099
+- 01..09,10..99
+Ins Shft-F10 aufnehmen
+
+Hlphint: Nur noch Nummer angebenÄÄ>einheitliche Texte
+S„mtliche Texte in ein UnitÄÄ>fr bersetzungen
+----------------------------------
+
+Mausbereich Kopfzeile Dir.Menu + File.Menu zu hoch oben

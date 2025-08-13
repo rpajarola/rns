@@ -1,0 +1,368 @@
+VERSION 004
+LETTER1.FNT
+  545  1  2  0  1  2
+ 1.1000000000E+02
+T  F
+T  F      Steeldrum                  .                                                                         л
+T  F      й                       рк
+T
+T
+T
+T
+N            4    0  480    3 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      Melody  Eb-Dur  110 BPM    HOW DEEP IS YOUR LOVE (Bee Gees)
+T  F      й                       рк
+T                                                    р м                  р м                  р м
+T
+T
+T         A1
+N           17    2  510    3 %.2Й2Г2f2g1g2Г2f1g2lГ2.1.2 2d2f2g2G2.2G2G2f2g1G2lf2.1.1 2/2.1.
+T
+T         B1
+N           17    2  510    3 %.2g2G2Й2.2Й2Й2g2Й2q1Й1g1Г1Г2f2g2G2G2G2G2Й1g2lf2.1.1 2/2.1.
+T
+T         C1
+N           17    2  510    3 %.2Г2Г2q1q1q1Д2q2r1w1Й1Й2q2Д1q2Й2q1Й2g2Й1g1f2.2Ё.2/1.
+T
+T
+T         D
+N           16    2  480    3 %Г2f2g2Й1q1Д2lt1.1 2t2t2t2t2t1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2lt1 2T2t1lr1 2t1T1Ф2Ф2Ф2Ф2Ф2i1lФ2.1.2 2,Ф3.3,i3.3,I3.3.
+T
+T         F
+N           16    2  480    3 %.1lФ1.1 2Ф2i2I2.1I1i2Ф1lT2.1.1 2T2Ф2u2.1u2Ф1T1lt2.
+T
+T
+T         A2
+N           16    2  480    3 %.1.2 2g2Г2f1g2lГ2.2.1 2,d3.3,f3.3,g3.3G2.2G2f2g1G2lf2.1.1 2Ё.2.1.
+T
+T         B2
+N           17    2  510    3 %.2g2G2lЙ2.2 2Й2g2Й2q1Й1lg2.1 1f2g2G1G1Й1g2lf2.1.1 2/2.1.
+T
+T         C2
+N           17    2  510    3 %.2Г2Г2q1q1q1Д1r1w1Й1Й2q2Д1q2Й2q1Й2g2Й1g1f2.2Ё.2/1.
+T
+T
+T         A3
+N           16    2  480    3 %.1.2 2g2Г2f1g2lГ2.1 2Г2.1.1 2G2q2Д2.1Ё.1/1.
+T
+T         D2                     	 -                  	 -
+N            8    2  240    3 %Й2q1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2t2.1T2t1r2.1t1T1Ф2Ф2Ф2Ф2Ф2i1Ф2.1.1,Ф3.3,i3.3,I3.3.
+T
+T         F2  ausblenden
+N           16    2  480    3 %.1Ф1.1.2Ф2i2I2.1I1i2Ф1T2.1.1.2T2Ф2u2.1.2.1Ё.1.2.
+T
+T
+T  F      й
+T  F
+T  F      Schema:                    A1 B1 C1 / D E F / A2 B2 C2 / D E F / A3 D2 E F2
+T  F
+T  F      Guitar  Eb-Dur  110 BPM    HOW DEEP IS YOUR LOVE (Bee Gees)
+T  F      й                       рк
+T                                р м                  р м                  р м                  р м
+T             Melody:
+T
+T         A   Guitar:
+N           17    2  510    3 %.2,=Й2.=Г2=f2=g2В2.=g2=ГВ2.=f2b2=g2=Гb2.2v1v2.=d2=fy2.=g2=Gy2.2=Gv2.=G2=fv2.=g2b2.=G2=fН2.2Н1Н1/2.
+T
+T
+N   H       17    2  510    5 %.2g2G2Й2.2Й2Й2g2Й2q1Й1g1Г1Г2f2g2G2G2G2G2Й1g2lf2.1.1.2/2.1.
+T         B
+N           17    2  510    3 %.2Й1Й1Г1Г1g1g1a1a1g1g1f1f1З1З1f1f1/2.1.
+T
+T
+N   H       17    2  510    5 %.2Г2Г2q1q1q1Д2q2r1w1Й1Й2q2Д1q2Й2q1Й2g2Й1g1f2.2Ё.2/1.
+T         C
+N           17    2  510    3 %.2З1Й1З1З1Г1a1g1g1Й1Й1f1f1Г1Г1g1f1Ёg2/1.
+T
+T         D
+N           16    2  480    3 %Г2f2g2Й1q1Д2lt1.1 2t2t2t2t2t1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2lt1 2T2t1lr1 2t1T1Ф2Ф2Ф2Ф2Ф2i1lФ2.1.2 2,Ф3.3,i3.3,I3.3.
+T
+T         F
+N           16    2  480    3 %.1lФ1.1 2Ф2i2I2.1I1i2Ф1lT2.1.1 2T2Ф2u2.1u2Ф1T1lt2.
+T
+T
+T
+T         A3
+N           16    2  480    3 %.1.2 2g2Г2f1g2lГ2.1 2Г2.1.1 2G2q2Д2.1Ё.1/1.
+T
+T         D2                     	 -                  	 -
+N            8    2  240    3 %Й2q1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2t2.1T2t1r2.1t1T1Ф2Ф2Ф2Ф2Ф2i1Ф2.1.1,Ф3.3,i3.3,I3.3.
+T
+T         F2  ausblenden
+N           16    2  480    3 %.1Ф1.1.2Ф2i2I2.1I1i2Ф1T2.1.1.2T2Ф2u2.1.2.1Ё.1.2.
+T
+T
+T
+T
+T
+T
+T
+T
+T  F      й
+T  F
+T  F      Schema:                    A1 B1 C1 / D E F / A2 B2 C2 / D E F / A3 D2 E F2
+T  F
+T  F      Guitar  Eb-Dur  110 BPM    HOW DEEP IS YOUR LOVE (Bee Gees)
+T  F      й                       рк
+T                                р м                  р м                  р м                  р м
+T
+T             Tenor:
+N   H       17    2  510    5 %.2Й2Г2f2g1g2Г2f1g2lГ2.1.1d2f2g2G2.2G2G2f2g1G2lf2.1.1.2/2.1.
+T         A   Guitar:
+N           17    2  510    3 %.2[Й2Г2f]2.2Г1Г1g1g1f1f1a1a1f1f1g1З1З1З1/2.
+T
+T             Tenor:
+N   H       17    2  510    5 %.2Й2Г2f2g1g2Г2f1g2lГ2.1.1d2f2g2G2.2G2G2f2g1G2lf2.1.1.2/2.1.
+T         A   Guitar:
+N           17    2  510    3 %.2[Й2Г2f]2.2Г1Г1g1g1f1f1a1a1f1f1g1З1З1З1/2.
+T
+T
+N   H       17    2  510    5 %.2g2G2Й2.2Й2Й2g2Й2q1Й1g1Г1Г2f2g2G2G2G2G2Й1g2lf2.1.1.2/2.1.
+T         B
+N           17    2  510    3 %.2Й1Й1Г1Г1g1g1a1a1g1g1f1f1З1З1f1f1/2.1.
+T
+T
+N   H       17    2  510    5 %.2Г2Г2q1q1q1Д2q2r1w1Й1Й2q2Д1q2Й2q1Й2g2Й1g1f2.2Ё.2/1.
+T         C
+N           17    2  510    3 %.2З1Й1З1З1Г1a1g1g1Й1Й1f1f1Г1Г1g1f1Ёg2/1.
+T
+T         D
+N           16    2  480    3 %Г2f2g2Й1q1Д2lt1.1 2t2t2t2t2t1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2lt1 2T2t1lr1 2t1T1Ф2Ф2Ф2Ф2Ф2i1lФ2.1.2 2,Ф3.3,i3.3,I3.3.
+T
+T         F
+N           16    2  480    3 %.1lФ1.1 2Ф2i2I2.1I1i2Ф1lT2.1.1 2T2Ф2u2.1u2Ф1T1lt2.
+T
+T
+T
+T         A3
+N           16    2  480    3 %.1.2 2g2Г2f1g2lГ2.1 2Г2.1.1 2G2q2Д2.1Ё.1/1.
+T
+T         D2                     	 -                  	 -
+N            8    2  240    3 %Й2q1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2t2.1T2t1r2.1t1T1Ф2Ф2Ф2Ф2Ф2i1Ф2.1.1,Ф3.3,i3.3,I3.3.
+T
+T         F2  ausblenden
+N           16    2  480    3 %.1Ф1.1.2Ф2i2I2.1I1i2Ф1T2.1.1.2T2Ф2u2.1.2.1Ё.1.2.
+T
+T
+T  F      й
+T  F
+T  F      Schema:                    A1 B1 C1 / D E F / A2 B2 C2 / D E F / A3 D2 E F2
+T  F
+T  F      Guitar  Eb-Dur  110 BPM    HOW DEEP IS YOUR LOVE (Bee Gees)
+T  F      й                       рк
+T            н                                       р м                  р м                  р м
+T                                р 1                  р 2                  р 3                  р 4
+T             й
+T            н                                       р м                  р м                  р м
+T
+T         A
+N           16    2  480    3 %.1.2Г1Г1g1g2.2f1f1a1a2.2f1f1g1З2.2З1З1Й1Й2.
+T
+T         B
+N           16    2  480    3 %.1.2Г1Г1g1g1a1a1g1g1f1f1З1З1f1f1З1Й2.
+T
+T         C
+N           16    2  480    3 %.1.2З1З1Г1a1g1g1Й1Й1f1f1Г1Г1g1f1g1f2.
+T
+T
+T         D
+N           16    2  480    3 %.1.2g1g1Г1Г1Й1Й1q1q1Г1Г1g1g1Г1Г1g1w2.
+T
+T         E
+N           16    2  480    3 %.1.2З1З1q1q1З1З1f1f1Г1Г1g1g1Й1Й2Ц1Ц1.
+T
+T         F
+N           16    2  480    3 %.1.2q1q1g1g1q1q1Й1З1f1f1Г1Г1З1З1f1Г2.
+T
+T
+T         A3
+N           16    2  480    3 %.1.2Г1Г1g1g1a1a1Й1Й1З1З1q1q2/1.
+T
+T         D2                     	 -                  	 -
+N            8    2  240    3 %.1.2Г1Г1g1g1Г1Г1g2.2w2.
+T
+T         E
+N           16    2  480    3 %.1.2З1З1q1q1З1З1f1f1Г1Г1g1g1Й1Й2Ц1Ц1.
+T
+T         F2   ausblenden
+N           16    2  480    3 %.1.2q1q1g1g1q1q1Й1З1f1f1Г1Г1З1З1f1Г2.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F      й
+T  F
+T  F      Schema:                    A B C / D E F / A B C / D E F / A3 D2 E F
+T  F
+T  F      Melody  C-Dur  110 BPM     HOW DEEP IS YOUR LOVE (Bee Gees)
+T  F      й                       рк
+T                                                    р м                  р м                  р м
+T
+T
+T         A1
+N           17    2  510    3 %.2g2a2s2d1d2a2s1d2la2.1.2 2A2s2d2f2.2f2f2s2d1f2ls2.1.1 2/2.1.
+T
+T         B1
+N           17    2  510    3 %.2d2f2g2.2g2g2d2g2h1g1d1a1a2s2d2f2f2f2f2g1d2ls2.1.1 2/2.1.
+T
+T         C1
+N           17    2  510    3 %.2a2a2h1h1h1q2h2w1j1g1g2h2q1h2g2h1g2d2g1d1s2.2Ё.2/1.
+T
+T
+T         D
+N           16    2  480    3 %a2s2d2g1h1q2le1.1 2e2e2e2e2e1g2q2j1h1g1q1j1h2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1g2h2q2le1 2r2e1lw1 2e1r1t2t2t2t2t2z1lt2.1.2 2,t3.3,z3.3,Ф3.3.
+T
+T         F
+N           16    2  480    3 %.1lt1.1 2t2z2Ф2.1Ф1z2t1lr2.1.1 2r2t2T2.1T2t1r1le2.
+T
+T
+T         A2
+N           16    2  480    3 %.1.2 2d2a2s1d2la2.1.2 2,A3.3,s3.3,d3.3f2.2f2s2d1f2ls2.1.1 2Ё.2.1.
+T
+T         B2
+N           17    2  510    3 %.2d2f2lg2.2 2g2d2g2h1g1ld2.1 1s2d2f1f1g1d2ls2.1.1 2/2.1.
+T
+T         C2
+N           17    2  510    3 %.2a2a2h1h1h1q1w1j1g1g2h2q1h2g2h1g2d2g1d1s2.2Ё.2/1.
+T
+T
+T         A3
+N           16    2  480    3 %.1.2 2d2a2s1d2la2.1 2a2.1.1 2f2h2q2.1Ё.1/1.
+T
+T         D2                     	 -                  	 -
+N            8    2  240    3 %g2h1g2q2j1h1g1q1j1h2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1g2h2q2e2.1r2e1w2.1e1r1t2t2t2t2t2z1t2.1.1,t3.3,z3.3,Ф3.3.
+T
+T         F2  ausblenden
+N           16    2  480    3 %.1t1.1.2t2z2Ф2.1Ф1z2t1r2.1.1.2r2t2T2.1.2.1Ё.1.2.
+T
+T
+T  F      й
+T  F
+T  F      Schema:                    A1 B1 C1 / D E F / A2 B2 C2 / D E F / A3 D2 E F2
+T  F
+T  F      Melody  Es-Dur  110 BPM    HOW DEEP IS YOUR LOVE (Bee Gees)
+T  F      й                       рк
+T                                                    р м                  р м                  р м
+T
+T         A1
+N           17    2  510    3 %.2Й2Г2f2g1g2Г2f1g2lГ2.1.2 2d2f2g2G2.2G2G2f2g1G2lf2.1.1 2/2.1.
+T
+T         B1
+N           17    2  510    3 %.2g2G2Й2.2Й2Й2g2Й2q1Й1g1Г1Г2f2g2G2G2G2G2Й1g2lf2.1.1 2/2.1.
+T
+T         C1
+N           17    2  510    3 %.2Г2Г2q1q1q1Д2q2r1w1Й1Й2q2Д1q2Й2q1Й2g2Й1g1f2.2Ё.2/1.
+T
+T         D
+N           16    2  480    3 %Г2f2g2Й1q1Д2lt1.1 2t2t2t2t2t1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2lt1 2T2t1lr1 2t1T1Ф2Ф2Ф2Ф2Ф2i1lФ2.1.2 2Ф3.3i3.3I3.3.
+T
+T         F
+N           16    2  480    3 %.1lФ1.1 2Ф2i2I2.1I1i2Ф1lT2.1.1 2T2Ф2u2.1u2Ф1T1lt2.
+T
+T         A2
+N           16    2  480    3 %.1.2 2g2Г2f1g2lГ2.1.2 2d3.3f3.3g3.3G2.2G2f2g1G2lf2.1.1 2Ё.2.1.
+T
+T         B2
+N           17    2  510    3 %.2g2G2lЙ2.2 2Й2g2Й2q1Й1lg2.1 1f2g2G1G1Й1g2lf2.1.1 2/2.1.
+T
+T         C2
+N           17    2  510    3 %.2Г2Г2q1q1q1Д1r1w1Й1Й2q2Д1q2Й2q1Й2g2Й1g1f2.2Ё.2/1.
+T
+T         D
+N           16    2  480    3 %Г2f2g2Й1q1Д2lt1.1 2t2t2t2t2t1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2lt1 2T2t1lr1 2t1T1Ф2Ф2Ф2Ф2Ф2i1lФ2.1.2 2Ф3.3i3.3I3.3.
+T
+T         F
+N           16    2  480    3 %.1lФ1.1 2Ф2i2I2.1I1i2Ф1T2.1.1 2T2Ф2u2.1u2Ф1T1lt2.
+T
+T         A3
+N           16    2  480    3 %.1.2 2g2Г2f1g2lГ2.1 2Г2.1.1 2G2q2Д2.1Ё.1/1.
+T
+T         D2                     	 -                  	 -
+N            8    2  240    3 %Й2q1Й2Д2w1q1Й1Д1w1q2Ё.2 2.
+T
+T         E
+N           16    2  480    3 %.1Й2q2Д2t2.1T2t1r2.1t1T1Ф2Ф2Ф2Ф2Ф2i1Ф2.1.1Ф3.3i3.3I3.3.
+T
+T         F2  ausblenden
+N           16    2  480    3 %.1Ф1.1.2Ф2i2I2.1I1i2Ф1T2.1.1.2T2Ф2u2.1.2.1Ё.1.2.

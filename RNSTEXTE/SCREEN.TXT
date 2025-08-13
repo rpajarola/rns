@@ -1,0 +1,24 @@
+.pas-files mit Bildschirm-Text in C:\MUSIC\RNS
+C:\MUSIC\RNS\comunit.pas   enthÑlt   9	Bildschirm-Texte zum öbersetzen
+C:\MUSIC\RNS\fileunit.pas	     2	fÅr anderssprachige Versionen
+C:\MUSIC\RNS\grinout.pas	     1	als Englisch
+C:\MUSIC\RNS\helpunit.pas	    63	Vorschlag:
+C:\MUSIC\RNS\imenuuni.pas	   138	Uebersetzungen kînnte man in ein File
+C:\MUSIC\RNS\initsc.pas 	     2	schreiben (Userzugang)
+C:\MUSIC\RNS\inout.pas		     ?	Texte kînnten dann ev. sogar selbst
+C:\MUSIC\RNS\noteunit.pas	     4	verÑndert (!???), aber auch in eine
+C:\MUSIC\RNS\pageunit.pas	     7	beliebige Sprache Åbersetzt werden
+C:\MUSIC\RNS\prepsym.pas	     1
+C:\MUSIC\RNS\prmunit.pas	     2
+C:\MUSIC\RNS\sndunit.pas	     6
+C:\MUSIC\RNS\sp2unit.pas	    10
+C:\MUSIC\RNS\specunit.pas	    16
+C:\MUSIC\RNS\upgrade.pas	     3
+C:\MUSIC\RNS\userint.pas	    13
+			   Total   277
+
+'y' or 'Y' mÅsste fÅr die Deutsche Version mit 'j' und 'J' ersetzt werden,
+fÅr weitere Sprachen entsprechend den Wort fÅr "ja"
++ entsprechender ASCII-Code
+LÑndercode fÅr Keyboard berÅcksichtigen
+

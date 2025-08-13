@@ -1,0 +1,868 @@
+         
+
+
+
+
+
+
+                        D I S K   -   L A B E L
+
+              
+
+
+
+
+
+
+                          INHALTSVERZEICHNIS:
+
+              Installation..............................1
+              Einleitung................................1
+              Aufklebergr”áen...........................1
+              Label justieren...........................2
+              Steuercodes „ndern........................2
+              Einlesen/Maske „ndern.....................3
+              Aufklebergr”áe............................3
+              Filenamen einlesen......................3/4
+              Filenamen ausdrucken......................4
+              Eigene Angaben/Label......................5
+              Adressetiketten...........................5
+              Adressdatei laden/speichern.............5/6
+              Etiketten bearbeiten......................6
+              Etiketten markieren.....................6/7
+              Blockmarkierung...........................7
+              Editorbefehle.............................7
+              Adressetiketten drucken...................8
+              Laufwerk & Adressdateien..................8
+              Files ohne EXT............................8
+              Erweiterungen ab v2.5.....................9
+              Leeretiketten.............................9
+              Filenamen l”schen.........................9
+              Adressetiketten kopieren.................10
+              Parameteraufruf..........................10
+              NEC-Drucker..............................11
+              Umschalten: LPT2.........................11
+              Kalenderaufruf...........................12
+              SETUP / Feiertage........................12
+              SETUP-Menpunkte.........................12
+              Kalender/extern..........................13
+
+
+
+
+
+
+         INSTALLATION: 
+
+         
+         Festplatte: Legen Sie ein Directory an:   MD LABEL
+         ™ffnen Sie das Directory und kopieren Sie die Dateien vom ent-
+         sprechenden Laufwerk in das Directory:  COPY A:*.* (oder B:*.*).
+
+         Diskette:   Kopieren Sie die Diskette und entfernen Sie alle 
+         nicht ben”tigten Files.
+
+         Bei Vollversion:
+         Rufen Sie das Programm SETUP auf und passen Sie das LABEL- und 
+         das Kalender-Programm Ihrem Bundesland an.  >> Siehe: SETUP <<
+         
+         
+         EINLEITUNG:
+
+         Mit  diesem Programm lassen sich Disketten - Aufkleber fr 5¬
+         und 3« Zoll Disketten erstellen.
+
+         Das  Programm  liest  alle  gewnschten   Filenamen  ein  und
+         druckt anschlieáend Aufkleber fr Disketten aus.
+         Die Schriftgr”áe richtet sich nach der Anzahl der  Namen,  so
+         daá Aufkleber, die nur 3-4 Eintr„ge enthalten, in Normalgr”áe
+         gedruckt werden - nicht in Microschrift.
+         Fr 3« Zoll - Aufkleber muá der Drucker jedoch  in  der  Lage
+         sein,  ELITE im Compressed Mode zu drucken. Bei Citizen LSP10
+         und 120D besteht diese M”glichkeit nicht,  wenn  der  Drucker
+         sich im IBM-Modus befindet. Diese Drucker mssen in den EPSON
+         Modus umgeschaltet werden. Auch stimmen  dort  die  Vorschbe
+         nicht  mehr.  Fr  CITIZEN  ist  ein  Druckertreiber  auf der
+         Diskette enthalten. Kopieren Sie diesen folgendermaáen:
+
+                        COPY CITIZEN.PRN DRUCKER.PRN
+
+         Findet  das  Programm  nach  dem  Start   ein   File   namens
+         DRUCKER.PRN,  so wird es geladen und die dort abgespeicherten
+         Druckercodes benutzt.
+
+         Fr andere Drucker, die mit  den  vorgegebenen  Codes  (EPSON
+         LQ-550)  nichts  anfangen  k”nnen, lassen sich eigene Treiber
+         erstellen und abspeichern. Als Vorgabe k”nnen Sie CITIZEN.PRN
+         laden und entsprechend ab„ndern.
+         Das Programm setzt folgende Etikettengr”áen voraus:
+
+         5¬ Zoll - ca. 89   x 36   (bxh)  - auch Adressaufkleber
+         3« Zoll - ca. 71.5 x 69.5 (bxh)
+
+         Wenn Sie mehr als ein  Laufwerk  besitzen,  starten  Sie  das
+         Programm  am  besten von <B:> (oder Festplatte) aus, da somit
+         st„ndiger  Diskettenwechsel  entf„llt,  wenn   auf   Diskette
+         gedruckt werden soll. Wird ein bestimmtes Laufwerk mit ASSIGN  
+         zum A- oder B-Laufwerk benannt, Programm vom ge„nderten Lauf-
+         werk (wenn nur 2 Laufwerke) oder Festplatte starten.
+         
+
+                                      
+                                      1
+
+
+
+         
+         Nach dem Start und Titelscreen erscheint ein Men:
+
+         Suchen  Sie  sich  den gewnschten Punkt mit den Cursortasten
+         aus oder aber Bet„tigen Sie die Taste des Anfangsbuchstabens,
+         um zum gewnschten Punkt zu gelangen.
+
+
+         ADRESSVERWALTUNG: Siehe weiter unten.
+
+
+         LABEL justieren: Hier wird  eine Anzahl  (X)  ausgedruckt, um
+                          die  Etiketten  in  die  richtige  Lage   zu
+                          bringen.
+
+
+         ENDE : auch ESC = Programm beenden.
+
+
+         STEUERCODES: Mit <P> k”nnen  Sie einen Probeausdruck starten,
+                      um zu testen, ob die gewnschten Druckereinstel-
+                      lungen  funktionieren.  Ist dies nicht der Fall,
+                      springen Sie  den  Punkt  <S>teuercodes  an  und
+                      geben die Werte ein, die Ihr Drucker versteht.
+                      Werte  dezimal  eingeben.  Mit  den Cursortasten
+                      l„át sich der Cursor an jede gewnschte Position
+                      bewegen.
+
+                      Editieren beenden: CTRL+ENTER.
+
+                      Anschlieáend  werden  die  nderungen auf Wunsch
+                      abgespeichert.
+
+                      Der Zeilenvorschub bei Micro - Schrift wird  bei
+                      diesem Programm in n/180 Schritten durchgefhrt.
+                      Sollte  Ihr  Drucker  keine   180tel   Vorschbe
+                      kennen,  so  nehmen  Sie  einen  anderen - evtl.
+                      n/144 oder n/216 usw -->> siehe CITIZEN.PRN.
+                      Anschlieáend mssen die Codes (Abstand, Abstand1
+                      und  Abstand2)  entsprechend  ver„ndert  werden.
+                      Lassen sich die  Werte  nicht  durch  Umrechnung
+                      bestimmen,  so  probieren  Sie es aus und lassen
+                      zwischenzeitlich einen Probeausdruck ausgeben.
+
+                      Abstand:  - Zeilenvorschub nach jeder Zeile,  in
+                                  der  hochgestellte  Schrift  benutzt
+                                  wird.
+
+                      Abstand1: - Vorschub,  nach  Ausdruck  eines  5¬
+                                  Zoll  Aufklebers,  um den Anfang des
+                                  n„chsten Etiketts zu erreichen.
+
+                      Abstand2: - Vorschub bei 3« Zoll, um den  Anfang
+                                  des n„chsten Etiketts zu erreichen.
+
+
+
+                                      
+                                      
+                                      2
+
+
+
+
+                      Als  Trennzeichen (senkrechte Linie) ist ASCII -
+                      Zeichen 179 vorgegeben. Wollen Sie  ein  anderes
+                      Zeichen zwischen den Filenamen zur Trennung ver-
+                      wenden, l„át sich auch dieses hier ver„ndern.
+                      Da Citizen im EPSON-Mode statt senkrechter Linie
+                      dort  eine  <3> ausdruckt, ist hier <*> vorgege-
+                      ben.
+
+
+
+         DISKETTEN-LABEL:
+
+
+              Zurck: Rcksprung zum Hauptmen.
+
+
+              Maske / Zoll -->> 5¬:
+
+                      Grundeinstellung der Etikettengr”áe ist 5¬ Zoll.
+                      Wollen  Sie  auf  3«  umschalten,  diesen  Punkt
+                      w„hlen und Taste <A> bet„tigen.
+
+
+                      <M> - Maske der  Files,  die  eingelesen  werden
+                            sollen, kann hier bestimmt werden.
+                            ENTER = alle BAT, COM und EXE-Files werden
+                            eingelesen.
+                            Wildcards sind erlaubt.  Wollen  Sie  alle
+                            Textfiles  mit  der Endung <TXT> einlesen,
+                            geben Sie hier <*.TXT> ein.
+
+                            Handelt es sich um eine  ungltige  Maske,
+                            so  werden keine Files eingelesen. Derzeit
+                            gltige Maske wird oben links ausgegeben.
+
+
+              Sortieren:
+
+                      Die Files werden nach Namen sortiert.
+
+
+              Einlesen:
+
+                      Eingelesen  werden  die  Disketten   immer   von
+                      Laufwerk <A:> oder Laufwerk <B:>.
+                      Legen  Sie  die gewnschte Diskette in gew„hltes
+                      Laufwerk und bet„tigen Sie eine Taste.
+                      Alle  eingelesen  Files  werden  nun  mit  ihren
+                      Directorynamen auf dem Bildschirm ausgegeben.
+                      Sind schon einmal Namen eingelesen worden, fragt
+
+
+
+
+                                      
+                                      
+
+                                      3
+
+                                      
+
+                                      
+                      das Programm, ob diese gel”scht werden sollen.
+                      L”schen geschieht nicht automatisch, so daá  die
+                      M”glichkeit   besteht,  eine  Diskette  mehrmals
+                      einzulesen.
+                      Besitzen Sie zum Beispiel eine Diskette mit Pro-
+                      grammbeschreibungen  und  wollen diese Namen auf
+                      dem Etikett ausgedruckt haben - jedoch nicht die
+                      Hilfsprogramme,  wie  LESEN.COM  ... - so „ndern
+                      Sie nach jedem Durchgang die Maske (*.DOC, *.DOK
+                      und  evtl. *.TXT) und k”nnen so alle Textfilena-
+                      men einlesen. 
+                      Bei  Vollversion  lesen Sie  alle  Files ein und 
+                      l”schen anschlieáend die nicht ben”tigten.
+
+                      Besitzen Sie eventuell ein Zusatzlaufwerk,  z.B.
+                      3«  Zoll  und  bei  A- und B-Laufwerk handelt es
+                      sich um ein 5¬ Zoll - Laufwerk,  so  k”nnen  Sie
+                      von MSDOS aus Abhilfe schaffen:
+
+                      Geben  Sie vor dem Start von MSDOS aus folgenden
+                      Befehl ein:
+
+                                  ASSIGN d = B  (oder d = A)
+
+                      <d> - Bezeichnung des gewnschten Laufwerks.
+
+
+                      Nun wird Laufwerk <d:> als Laufwerk <B:>  (<A:>)
+                      angesehen  und  Sie  k”nnen  auch  die 3« Zoll -
+                      Disketten einlesen.
+
+                      Beabsichtigen Sie, auf diese  Weise  eine  Fest-
+                      platte  zum  A-Laufwerk  zu benennen, so muá nur
+                      bercksichtigt werden, daá das Programm nur  bis
+                      zu 1200 Filenamen einliest - alle brigen werden
+                      ignoriert. Auch drfte bei der Menge nur Drucken
+                      auf Diskette m”glich sein.
+                                                         
+
+
+              Drucken:
+
+                      <L>aufwerk: Programmnamen eingeben - es wird ein
+                                  ASCII-File auf Diskette gespeichert,
+                                  das  sp„ter  mit  fast  jedem Editor
+                                  bearbeitet und eigenen Vorstellungen
+                                  angepaát  werden  kann.  ENTER statt
+                                  Name = Abbruch.
+                                  Mit und ohne Extension m”glich.
+
+
+
+
+
+
+
+
+
+                                      4
+
+
+
+
+              <D>rucker:
+
+              Hier k”nnen Sie nun w„hlen, ob Sie  einen  Ausdruck  mit
+              oder  ohne  Extension wnschen. Wird die Extension nicht
+              gewnscht, lassen sich mehr Namen auf dem Etikett unter-
+              bringen.
+              Als  n„chstes  kann  eine Zeile mit eigenen Angaben (z.B
+              Nummer,   Hinweis   auf   Programmart   -   Spiele,...-)
+              eingebracht  werden. šberschreitet die Anzahl der einge-
+              gebenen Zeichen 17 bei 5¬ (16 bei  3«),  so  wird  diese
+              Zeile  in  Normalgr”áe  ausgedruckt, ansonsten in Breit-
+              schrift.
+
+              Die Schriftgr”áe richtet sich nun nach  der  Anzahl  der
+              Filenamen  -  es  wird normal, compressed oder in Micro-
+              Schrift gedruckt.
+
+              Wird die H”chstanzahl  berschritten,  so  erfolgt  eine
+              Meldung,  daá  nur Druck auf Diskette m”glich ist. Legen
+              Sie eine Datei an und drucken  Sie  diese  nach  eigenen
+              Vorstellungen aus.
+
+
+              PS: Sollte die automatische Erkennung fr Hercules-Karte
+              bei Ihnen nicht funktionieren, rufen  Sie  das  Programm
+              folgendermaáen auf:
+
+
+                          D-LABEL sw  (D-LABEL SW)
+
+
+         ADRESSVERWALTUNG:
+
+         Ab  Version  2.0 ist anstelle des Punktes <Registration> eine
+         kleine Adressroutine integriert, die  es  erlaubt,  zwischen-
+         durch schnell ein Adress-Etikett auszudrucken.
+         Etikettgr”áe wie bei Disk-Label.
+
+
+         Nach  Ansprung  dieses  Punktes wird wieder ein Hauptmen auf
+         dem Bildschirm, in dem Sie mit den  Cursortasten  oder  Druck
+         auf  die Taste des Anfangsbuchstabens die verschiedenen Men-
+         punkte anw„hlen k”nnen.
+
+         LADEN:
+
+              Sind Dateien mit  der  Endung  <ADR>  vorhanden,  werden
+              diese  auf  dem  Bildschirm ausgegeben. Gewnschte Datei
+              mit Cursortasten aussuchen und mit ENTER laden.
+              ESC = Abbruch - vorhandene  Datei  bleibt  weiterhin  im
+              Speicher.
+
+
+
+
+                                      
+                                      
+
+                                      5
+
+
+
+
+         SPEICHERN:
+
+              Vorhandene  Datei wird abgespeichert. Ist kein Dateiname
+              vorhanden, wird dieser vorher abgefragt. Dateinamen ohne
+              EXT eingeben - alle Dateien erhalten die Endung <ADR>.
+              Keine Eingabe = Abbruch.
+
+         DATEI L™SCHEN:
+
+              Eine  vorhandene  Datei  wird  nach  Rckfrage  aus  dem
+              Speicher entfernt.
+
+         ZURšCK:
+
+              Rcksprung zum Hauptmen. Ist die Datei editiert worden,
+              erfolgt  hier  noch  einmal  eine  Abfrage, ob die Datei
+              gespeichert werden  soll.  Vorsichtshalber  sollte  sie,
+              wenn nderungen vorgenommen wurden, gesichert werden, da
+              bei Programmende keine Abfrage mehr  erscheint  und  man
+              das   ganze   schnell  vergisst,  wenn  zwischenzeitlich
+              Disketten eingelesen werden.
+
+         BEARBEITEN:
+
+              Auf dem Bildschirm wird nun ein Fenster  ausgegeben,  in
+              dem  Etiketten  bearbeitet werden k”nnen. Ist eine Datei
+              geladen, erscheint hier das letzte Etikett, das  in  der
+              Datei gespeichert ist.
+
+              F1 - erstes Etikett wird auf dem Bildschirm ausgegeben.
+
+              F2 - letztes Etikett wird ausgegeben.
+
+              F3 - bl„ttert   ein  Etikett vorw„rts. Befindet  sich im
+                   aktuellen Etikett  kein  Eintrag,  wird  das  erste
+                   ausgegeben.
+
+              F4 - bl„ttert ein Etikett zurck. Wird 1 unterschritten,
+                   wird das letzte ausgegeben.
+
+              F5 - Etikett nach Rckfrage l”schen.
+                   Beim  L”schen  wird  aus  Zeitgrnden  das   letzte
+                   Etikett an die Stelle des zu l”schenden verschoben.
+                   Ist  das  letzte  aktuelle leer, so wird ein leeres
+                   Etikett ausgegeben. In diesem Falle erneut l”schen.
+
+              F6 - Markieren - zum Drucken:
+
+                   <M> - Etikett wird markiert  oder,  wenn  markiert,
+                         demarkiert.
+
+                   <A> - Alle Markierungen werden entfernt.
+
+
+
+                                      
+                                      
+
+                                      6
+
+
+
+
+                   <B> - Blockmarkierung:
+                         Es  werden alle Etiketten rckw„rts markiert,
+                         bis das Programm auf ein  markiertes  Etikett
+                         st”át.   Ist   kein   vorhergehendes  Etikett
+                         markiert, so werden alle bis zum 1. markiert.
+                         Ist das aktuelle  Etikett  bereits  markiert,
+                         wird dieses auch als Endpunkt angesehen.
+                         Markierungen werden rechts ausgegeben.
+
+              F8 - Suchen:
+
+                   Suchbegriff  eingeben.  Groá-  und  Kleinbuchstaben
+                   werden gleich behandelt. Wird ein gesuchter Begriff
+                   gefunden,  wird  das  betreffende  Etikett  auf dem
+                   Bildschirm ausgegeben. Mit <J>a kann  weitergesucht
+                   werden, mit <N>ein wird die Suche abgebrochen.
+
+
+         F7 - EDITIEREN:
+
+              Unter diesem Punkt k”nnen Etikett und Absender ver„ndert
+              werden - auch der Ausdruck erfolgt von hier.
+
+              Mit den Cursortasten kann der Cursor an  jede  beliebige
+              Stelle innerhalb des Fensters bewegt werden.
+
+
+              CTRL  +  <--  =  Cursor  springt  zum ersten Zeichen der
+                           Zeile.
+
+              CTRL + --> = Cursor springt ein Wort weiter.
+
+
+              INS     - schaltet zwischen šberschreib- und Einfgemodus.
+
+
+              <-DEL   - l”scht Zeichen links vom Cursor.
+
+              DEL->   - l”scht Zeichen unterm Cursor.
+
+              CTRL+Y  - L”scht Zeile, in der sich der Cursor befindet.
+
+              CTRL+B  - Fgt eine Leerzeile an der Stelle ein, an  der
+                        sich  der  Cursor  befindet. Letzte Zeile wird
+                        somit entfernt.
+
+              CTRL+A  - Absender eingeben:
+
+                        Hier  kann   der   Absendereintrag   ver„ndert
+                        werden.
+
+                        SHIFT+F10 - alten Eintrag l”schen.
+
+
+
+                                      
+                                      
+
+                                      7
+
+
+
+
+                        SHIFT+F9  - versehentliche L”schung rckg„ngig
+                        machen.  Alter  Eintrag  bleibt   solange   im
+                        Speicher, bis erneut SHIFT+F10 gedrckt wird.
+
+                        Der   Absender  wird  im  Compressed-Mode  und
+                        unterstrichen  ausgedruckt.  Wollen  Sie   ein
+                        Etikett mit Absender ausdrucken, setzen Sie in
+                        die erste Zeile ( an die erste  Stelle  )  ein
+                        ASCII-Zeichen  ( # ). Findet das Programm beim
+                        Ausdruck  ein  solches   Zeichen,   wird   der
+                        vorhandene  Absender  mit  ausgedruckt und die
+                        erste Zeile ignoriert - kann in dem  Fall  fr
+                        Notizen verwandt werden.
+                        Ist  kein  (#)-Zeichen  vorhanden, erfolgt der
+                        Ausdruck wie auf dem Bildschirm dargestellt.
+
+
+              CTRL+D  - Schalten Sie den Drucker ein und bet„tigen Sie
+                        eine beliebige Taste. ESC = Abbruch.
+                        Ausgedruckt  werden  alle markierten Etiketten
+                        und das derzeit aktuelle.
+                        Ist  kein  Etikett  markiert,  wird  nur   das
+                        aktuelle ausgedruckt.
+
+
+
+
+              LW-Betrieb und Adressdateien:
+
+
+              Wenn von dem Laufwerk eingelesen wird, von dem aus auch
+              das Programm gestartet wird, mssen sich die Adress -
+              Dateien im ROOT-Directory befinden, da beim Einlesen
+              das Laufwerk auf ROOT-DIRECTORY geschaltet wird.
+
+              Hinweis: Um alle File ohne EXTENSION einzulesen, muá
+                       die Maske folgendermaáen aussehen:
+
+                                 *.   (Stern und Punkt)
+
+                       Wenn Sie wenig Speicher zur Verfgung haben,
+                       und es sollte einmal Probleme beim Einlesen
+                       geben, l”schen Sie die Adressdatei. Es k”n-
+                       evtl. einmal passieren, wenn viele Directo-
+                       rys mit eigenen Directory eingelesen werden.
+                       Bei ca. 500KB freiem Speicher, voller Adress-
+                       datei (1000) und Einlesen der Festplatte tra-
+                       ten keine Probleme auf.
+
+
+                    
+
+
+
+                                      
+                                      
+
+
+                                      8
+
+
+
+
+         Erweiterungen in Version 2.5
+
+
+
+         Folgende Erweiterungen wurden gegenber der Version 2.0
+         eingearbeitet:
+
+         1. Zum Ausdrucken von Etiketten muá nicht st„ndig in den
+            Editor gewechselt werden.
+
+         2. Mit dieser Version lassen sich auch LEER-Etiketten er-
+            stellen.
+
+                - L”schen Sie den Speicher und w„hlen Sie drucken.
+                  (L”schen wie Einlesen - nach L”schen <ESC>.
+                - Nach der Abfrage, ob ein Leer-Etikett gedruckt
+                  werden soll, k”nnen Sie zwischen 2- bis 5-spal-
+                  tig w„hlen.
+
+         3. Es k”nnen nun einzelne Files gel”scht werden, bevor Sie
+            ausdrucken.
+
+                - Nach dem Einlesen den Punkt Sortieren/L”schen an-
+                  springen (<S> oder <L>).
+                - Durch Eingabe <L> die L”schroutine ausw„hlen.
+                - Es werden nun die ersten 14 Eintr„ge auf dem Bild-
+                  schirm angezeigt.
+                - Mit den Cursortasten <auf/ab> und mit <PgDn/PgUp>
+                  k”nnen Sie einen Eintrag/ganze Seite vor und zu -
+                  rckbl„ttern.
+                - Soll ein Eintrag entfernt werden, bet„tigen Sie
+                  die Taste DEL/ENTF auf dem Ziffernblock (bei AT's
+                  auch die Taste ENTF links neben dem Ziffernblock.
+
+         4. Wenn Sie weniger als 22 Filenamen eingelesen haben, k”n-
+            nen Sie diese auch in der Etiketten - Verwaltung abspei-
+            chern.
+
+                - W„hlen Sie nach dem Einlesen den Punkt l”schen.
+                  Falls Sie mehr Eintr„ge als 21 im Speicher haben,
+                  k”nnen Sie die berz„hligen hier l”schen.
+                - Nach Abbruch mit ESC erfolgt eine Abfrage, ob die
+                  Filenamen in der Etiketten-Verwaltung gespeichert
+                  werden sollen.
+                - Beantworten Sie dies mit <J>, so werden alle vor-
+                  handenen Namen ( ohne EXTENSION, da sonst nur 14
+                  Namen m”glich w„ren ) an die bestehende Etikett -
+                  Datei angeh„ngt.
+                  Reicht der Speicher nicht aus, oder sind bereits
+                  1000 Adressen vorhanden, erfolgt keine Abfrage.
+
+
+
+
+
+
+
+
+                                     9
+
+
+
+
+            Wenn Sie alle gewnschten Disketten eingelesen und nach
+            "Etikett" verschoben haben, wechseln Sie in die Adress-
+            verwaltung und fgen Ihre eigenen Notizen ein.
+            Wenn die erste Zeile einen bestimmten (klein gedruckten)
+            Eintrag erhalten soll, geben Sie, wie bei Adressen, ein
+            <#>-Zeichen ein und ver„ndern den Absendereintrag.
+
+
+         5. Eigene Angaben bei Disklabeldruck werden gespeichert und
+            beim n„chsten Aufruf  wieder ausgegeben.  Somit entf„llt
+            bei mehrmaligem Druck die wiederholte Eingabe.
+
+         6. Sie  k”nnen nun Adressen von einer  Datei in eine andere
+            kopieren.
+
+                - Wollen Sie  Etiketten aus der vorhandenen Datei an
+                  eine andere anh„ngen, so markieren Sie diese.
+                - Bet„tigen Sie die Tastenkombination <CTRL+T>.
+                - Auf dem Bildschirm werden nun alle vorhandenen Da-
+                  teien ausgegeben. Suchen Sie die  gewnschte Datei
+                  aus - oder aber w„hlen Sie "Neue Datei", dann wird
+                  anschlieáend nach dem Dateinamen gefragt.
+                - Nachdem Sie ENTER bet„tigt haben, werden alle mar-
+                  kierten, sowie das aktuelle, Etikett an die ausge-
+                  w„hlte Datei geh„ngt.
+
+
+         Erweiterungen in 2.6
+
+         Das Programm kann nun mit einem Parameter aufgerufen, der
+         den Pfad enthalten kann, in dem die Dateien der Adressver-
+         waltung zu finden sind:
+
+         z.B. LABEL26 C:\DATEN\D-LABEL\
+              LABEL26 B:\DATEN\
+
+         Die  Dateien mssen sich nicht im gleichen Directory befin-
+         den wie das Programm.
+
+         Parameter mssen  jedoch  mit einem Backslash enden, es sei
+         denn, es wird das  aktuelle Directory des gewnschten Lauf-
+         werks aufgerufen.
+
+         LABEL26 C:   -   sucht die Daten im aktuellen (ge”ffneten)
+                          Directory von C:
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    10
+
+
+
+
+         ERWEITERUNGEN 2.7
+
+         Von 2.6 auf 2.7 ist nur eine Ver„nderung dazugekommen:
+
+         Der Parameteraufruf  wurde  insoweit ver„ndert, daá  SW und
+         der
+         Pfad ber Parameter aufgerufen werden k”nnen:
+
+         LABEL27 sw d:\name\
+
+         <sw> muá an erster Stelle stehen, wenn es beim Aufruf ben”-
+         tigt  wird.
+
+
+
+         Erweiterungen 2.75
+
+         Da NEC - Drucker fr einen Totalreset  einen  anderen  Wert
+         ben”tigen, wurde dieser ge„ndert. Sollten mit einer „lteren
+         Version einen eigenen Druckertreiber erstellt haben, „ndern
+         Sie die Zeile Nr. 3 bitte ab - nun 2 Werte:   < 27  64 >
+         Bei NEC P6/P7 etc. folgende Werte:    < 28  64 >
+
+
+
+         Erweiterung 2.8
+
+         Um evtl. einen weiteren Drucker LPT2  ansprechen zu k”nnen,
+         haben Sie  die M”glichkeit, im Hauptmen  durch  Bet„tigung
+         der Tasten  CTRL+P die Ausgabe auf LPT2 umzuleiten - erneu-
+         tes Bet„tigen stellt LPT1 ein.
+
+         Um die Fehlerquellen bei dieser nderung so gering wie m”g-
+         lich zu halten, wurde auf eine Fehlerabfangroutine verzich-
+         tet. Sie sollten also darauf achten, daá der Drucker (LPT2)
+         eingeschaltet und auch sonst bereit ist.
+
+
+
+         Erweiterung 3.0
+
+         In  dieser  Version ist eine  Kalenderroutine dazugekommen.
+         Wenn ein Men  auf dem Bildschirm erscheint, oder auch beim
+         Editieren der Adress - Etiketten,  k”nnen Sie mit Hilfe der
+         Tasten <CTRL+F1> einen Kalender abrufen. Angezeigt wird der
+         aktuelle  Monat ( vorausgesetzt, Sie haben das richtige Da-
+         tum in Ihrem Computer eingestellt ).  Feier-  und  Sonntage
+         werden rot ( bei Hercules doppelte Intensit„t ) dargestellt
+         und im unteren Teil des Kalenders erhalten Sie Hinweise, um
+         welche Feiertage es sich handelt.
+
+
+
+
+
+
+
+
+                                    11
+
+
+
+
+         Steuerung:
+
+         Cursor rechts/links      -  ein Monat vor/zurck
+         Cursor auf/ab            -  ein Jahr vor/zurck
+         SHIFT + auf/ab           -  10 Jahre vor/zurck
+         ESC                      -  Ende / Abbruch
+
+         ===========================================================
+
+         In der " Vollversion " finden Sie ein Feiertags-SETUP,  mit
+         dem Sie  dem Programm Ihre Feiertage (Bundesland) mitteilen
+         k”nnen.
+
+
+         SETUP   -  VOLLVERSION !!
+
+         Beim Start wird ( da gr”áte Anzahl ) die Feiertagsdatei fr
+         BAYERN auf dem Bildschirm ausgegeben.
+
+
+         In der unteren Bildschirmzeile befindet sich das Men:
+
+
+         <N> - Es werden alle  Feiertage ausgegeben, die im gesamten
+               Bundesgebiet gltig sind.
+
+         <L> - DATEI LADEN
+
+               Alle vorhandenen   Dateien  werden  aufgelistet - ist
+               keine  vorhanden, erfolgt Fehlermeldung.
+
+               - gewnschte Datei mit den Cursortasten aussuchen und
+                 mit ENTER laden. ESC = Abbruch ohne Laden.
+
+         <S> - DATEI SPEICHERN
+
+               Es wird  jedesmal der  Dateiname  abgefragt. So  kann
+               eine Datei  geladen und unter anderem Namen abgespei-
+               chert werden.
+               Dateinamen (bis 8 Zeichen) eingeben -  EXT wird ange-
+               h„ngt.  Wird kein  Dateiname  eingegeben, so wird die
+               Datei unter dem Namen " $$$ " und einer fortlaufenden
+               Nummer gespeichert. Nach jedem  Programmstart beginnt
+               diese Nummer mit <1>.
+               Editieren wie unter DATEI EDITIEREN.
+
+         <E> - DATEI EDITIEREN
+
+               Der jeweilige Eintrag  wird invers dargestellt. EDIT-
+               ROUTINE befindet sich st„ndig im INSERT-Modus.
+               Der Cursor l„át sich durch   -->   und   <--   an die
+               gewnschte Stelle bewegen.
+
+
+
+
+
+
+                                    12
+
+
+
+
+               - CTRL + <--  =  Ein Wort zurck
+               - CTRL + -->  =  Ein Wort vor
+               - SFIFT + F10 =  Eintrag l”schen
+               - SFIFT + F9  =  L”schung rckg„ngig machen
+                                Es wird jeweils die letzte L”schung
+                                gespeichert.
+               - Cursortasten auf/ab
+                             -  bewegen den Cursor eine Zeile auf/ab
+               - ENTER       =  Eintrag beenden -Sprung zum n„chsten
+                                Feld.
+               - CTRL+ENTER  =  Editieren beenden.
+
+
+         <D>ISKLABEL UPDATEN
+
+               - Die nderungen werden in das Programm <LABEL30.EXE>
+                 eingebaut.
+                 Bitte KALENDER und LABEL30.EXE (nicht vor SETUP um-
+                 benennen) auf eine Diskette (Directory) kopieren.
+
+
+         <K>ALENDER UPDATEN
+
+                 ( In  der Vollversion finden  Sie den Kalender  zu-
+                  s„tzlich als  eigenes Programm  vor.  Kopieren Sie
+                  dieses in ein Directory,  das  von  DOS  jederzeit
+                  durchsucht  wird, so  k”nnen Sie den  Kalender bei
+                  Bedarf jederzeit abrufen.)
+
+               - Die nderungen werden in  das Programm KALENDER.EXE
+                 eingebaut.
+                 Bitte LABEL30 und KALENDER.EXE (nicht vor SETUP um-
+                 benennen) auf eine Diskette (Directory) kopieren.
+
+
+         <ESC> -  Programmabbruch.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    13
+

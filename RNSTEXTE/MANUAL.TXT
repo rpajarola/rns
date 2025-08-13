@@ -1,0 +1,88 @@
+  ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹
+  MANUAL ZU RHYTHMICS
+  ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+
+* Eine bestimmte Zeile / ein Muster in allen .rns-Files suchen
+  ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+- Zeile markieren und Åber  Shift-F1, "write block to file" in ein .buf-File
+  kopieren.
+- Aus dem RNS hinausgehen und auf der DOS-Ebene mit cd [directory]
+  ins Directory wechseln, in welchem dieses .buf-File abgespeichert ist.
+- Mit dem Editor oder mit show.com das File im Text-Modus auf den Bildschirm
+  bringen. Die Zeile auf Papier abschreiben.
+  Bsp. ........ (Abspeicherungs-SchlÅssel)
+- Z.B. mit Nortons Utility, FileFind im ganzen RNS nach dieser entsprechenden
+  Zeile suchen. Mit View die Stelle ansehen und sich merken.
+- Wieder ins RNS zurÅckgehen, in die verschiedenen entsprechenden Files, und
+  mit Shift-F8/F9 nach dem Muster suchen.
+
+
+* UnregelmÑssiger Beat - zusammengesetzte Rhythmen
+  ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+- Im RNSPERC Hilfsbeat auf Alt-u: am besten in den "replace mode swapped"-Betrieb
+  im Shift-F10 wechseln.
+- Musiklinie im Shift-F3 "Number of beats": 1 wÑhlen. Mit Tab und Alt-F7 kînnen
+  zwischen Alt-F5 Linien wenigstens optisch die Beats richtig gesetzt werden.
+  (siehe Beispiel \rnsstiff\Tritonus\ZÅritanz)
+  Oft kann auch die ganze Phrase als eine BeatlÑnge betrachtet werden, die Ge-
+  samtzahl der Elemente - z.B. 3+2+2+3 = 10 - ist die Anzahl Pulse. Hervor-
+  hebungen/Betonungen kînnen mit dem Betonungszeichen auf "v" aggezeigt werden.
+  (siehe Beispiel \rnsstiff\Tritonus\Ariari)
+
+
+* Sound-Check: Abspielgeschwindigkeit
+  ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+  Ctrl-F5, Options, Speed per: "beat" oder Speed per: "line" wÑhlen
+  Geschwindigkeit wird in Millisekunden (pro Beat resp. pro Linie eingegeben:
+
+  1000 (ms) = 60 (Beats/Linien pro Minute, resp. 1 pro Sekunde)
+  2000	    = 30
+  3000	    = 20			     Standard fÅr Speed per line
+   750	    = 80 (= Voreinstellung/default), Standard fÅr Speed per beat
+   500	    =120
+		       60     *    1000
+  Umrechnungs-Formel: ---------------------  =	Anzahl Beats/Linien pro Min.
+		       Anzahl Millisek.
+
+		       60     *    1000
+  Umrechnungs-Formel: --------------------- =	Beat-/Linien-Abspiel-Geschwin-
+		       Anzahl Beats/Linien	dikeit in Millisekunden
+		       pro Minute
+
+  plus 1 Millisekunde	     = minus 0.06 Beat/Linie pro Min.
+  plus 1 Beat/Linie pro Min. = minus 16zweiDrittel Millisekunden
+
+  Die Geschwindikeit von MusikstÅcken wird normalerweise in Anzahl Viertel /
+  Achtel / punktierte Viertel / punktierte Achtel / Halbe / punktierte Halbe
+  angegeben : z.B. [Viertels-Note] = 60, bedeutet also 60 Viertel pro Min.
+  Messdaten hingegen - z.B. die Zeit von einem Beat zum nÑchsten oder die LÑnge
+  einer Form (Takt) - fallen normalerweise in Millisekunden an.
+
+  Die Option Speed per "line" ist sinnvoll bei Notationen von StÅcken mit
+  unregelmÑssigem Beat (siehe dort), sowie in den FÑllen, wo z.B. auf zwei
+  nacheinander abzuspielenden Linien die Puls-Geschwindigkeit gleich bleibt
+  (das Schlag-Muster im gleichen Tempo weitergeht), jedoch der Beat langsamer
+  oder schneller wird:
+  Bsp.: 3+3+3+3 (=12) wird in 4+4+4 (=12) oder 2+2+2+2+2+2 (=12) aufgeteilt.
+
+
+  Index-Seite erstellen
+  ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+  Mit Ctrl-PageUp an den Anfang des Files gehen
+  Im Shift-F2 Menu "Insert Page" anwÑhlen + [Enter]
+  Im Shift-F7 Menu alle Header generell markieren (mark all headers)
+  Alle Headers, die im Index erscheinen sollen, mÅssen markiert sein
+  Header-Markierung der ersten Seite wieder entfernen (Shift-F7: Unmark header)
+  Die Seite mit "Index" betiteln
+  Im Shift-F1 Menu "Index: Collect all headers" anwÑhlen + [Enter]
+  Alle Header sind nun im Buffer gespeichert und kînnen mit Ctrl-Insert wie ein
+  Block in die erste Seite kopiert werden.
+
+
+  Fehler-Liste (Beispiele)
+  ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+  Kein Cursor:		 Shift-F5, "Cursor" toggle bis "show" oder "Cursor+Cross"
+  vîllig falsche Farben: Sie haben ev. vorher Windows oder ein anderes Programm
+			 laufen lassen, das die Farbsettigs verfremdet
+			 Programm beenden, dann Reset oder Ctrl-Alt-Del drÅcken
+

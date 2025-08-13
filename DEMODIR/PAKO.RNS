@@ -1,0 +1,368 @@
+VERSION 004
+TESTFONT.FNT
+  600  1  3  0  1  2
+ 1.0000000000E+02
+T  F
+T  F      Steeldrum                  ---                                                                       л
+T  F      й                       рк
+T
+T
+T
+T
+N            8    4  480    3 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      Steeldrum: Melody          PAKO (100 BPM)
+T  F      й                       рк
+T                                                                        р м
+T                      р 4  р  +   р 1   р +   р 2   р +  р  3  р  +  р  4  р  +  р  1  р  +  р  2   р +  р  3  р  +  р  4  р  +
+T
+T
+T         I    A    е
+N            9    4  540    3 %.2.4Й4.4h4f4s4k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.4.k=sЙ4.k=sЙ4.4s4Й4.4h4f4s4k=ha4.4k=ha4.k=ha4.4.k=ha4.4.k=ha4.k=ha4.4a4/4.4.4.4.4.
+T
+T
+T         I    A
+N            9    4  540    3 %.2.4Й4.4h4f4s4k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.4.k=sЙ4.k=sЙ4.4s4Й4.4h4f4s4k=ha4.4k=ha4.k=ha4.4.k=ha4.4.k=ha4.k=ha4.4a4/4.
+T
+T
+T         I    B1
+N            9    4  540    3 %.2.4f4.4d4a4s4k=ad4.4k=ad4k=ad4.4.k=ad4.k=ad4.4k=ag4.4k=ag4.k=ag4.4.k=ag4.k=ag4.4k=hf4.4k=hf4.k=hf4.4.k=hf4k=hf4.4Г4.4.4/4.
+T                   ж
+T
+T         I    A    е
+N            9    4  540    3 %.2.4Й4.4h4f4s4k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.4.k=sЙ4.k=sЙ4.4s4Й4.4h4f4s4k=ha4.4k=ha4.k=ha4.4.k=ha4.4.k=ha4.k=ha4.4a4/4.
+T
+T
+T         I    A
+N            9    4  540    3 %.2.4Й4.4h4f4s4k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.4.k=sЙ4.k=sЙ4.4s4Й4.4h4f4s4k=ha4.4k=ha4.k=ha4.4.k=ha4.4.k=ha4.k=ha4.4a4/4.
+T
+T
+T         I    B2
+N            9    4  540    3 %.2.4f4.4d4a4s4k=ad4.4k=ad4k=ad4.4.k=ad4.k=ad4.4k=ag4.4k=ag4.k=ag4.4.k=ag4.k=ag4.4k=hf4.4k=hf4.k=hf4.4.k=hf4.k=hf4.4k=hГ4.4k=hГ4.4..k=hf4.4..k=hf4.4.
+T                   ж
+T
+T
+T         II   C1   е
+N            8    4  480    3 %.1k=dq4.4k=fh4k=dq4.4k=fh4k=dq4.4k=sЙ4.4k=sЙ4k=sЙ4k=sЙ4.4k=sЙ4k=fh4.4...k=fh4.4..k=fh4.4...k=fh4..k=fh4.4k=Йg4.4k=Йg4k=Йg4k=Йg4.4k=Йg4/4.
+T
+T
+T         II   C2
+N            8    4  480    3 %.2.4k=dq4.4k=fh4.4k=dq4.4k=fh4k=dq4.4k=sЙ4.4k=sЙ4k=sЙ4k=sЙ4.4k=sЙ4k=fh4.4...k=fh4.4..k=fh4.4...k=fh4..k=fh4.4k=Йg4.4k=Йg4k=Йg4k=Йg4.4k=Йg4/4.
+T
+T
+T         II   D
+N            8    4  480    3 %.2.4k=hf4.4.4.4k=hf4.4k=hf4k=hf4.4k=hГ4.4.4.4.4.4.4.4/4.
+T                   ж
+T
+T
+T         III  E1   е
+N            8    4  480    3 %.1k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.k=sЙ4.4k=fh4.4.k=fh4.k=fh4.4..k=fh4k=fh4.4k=dq4.4k=dq4k=dq4.4k=dq4k=dq4.4k=fh4.4.k=fh4.k=fh4.4..k=fh4k=fh4.4.
+T
+T
+T         III  E2
+N            8    4  480    3 %.1k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.k=sЙ4.4k=fh4.4.k=fh4.k=fh4.4..k=fh4k=fh4.4k=ag4.4k=ag4k=ag4.4k=dg4k=dg4.4k=hf4.4k=hГ4/4.
+T                   ж
+T  F
+T  F      Steeldrum: Melody          PAKO (100 BPM)
+T  F      й                       рк
+T                                                                        р м
+T                      р 4  р  +   р 1   р +   р 2   р +  р  3  р  +  р  4  р  +  р  1  р  +  р  2   р +  р  3  р  +  р  4  р  +
+T
+T         I    A
+N            9    4  540    3 %.2.4Й4.4h4f4s4*sЙ4.4&4&4.4&4.4&4&4.4&4Й4.4h4f4s4*ha4.4&4&4.4&4.4&4&4.4&4/4.4.4.4.4.
+T
+T
+T
+T         I    A
+N            9    4  540    3 %.2.4Й4.4h4f4s4=sЙ4.4&4&4.4&4.4&4&4.4&4Й4.4h4f4s4=ha4.4&4&4.4&4.4&4&4.4&4/4.4.4.4.4.
+T
+T
+T
+T         I    B1
+N            9    4  540    3 %.2.4f4.4d4a4s4k=ad4.4&4&4.4&4&4.4k=ag4.4&4&4.4&4&4.4k=hf4.4&4&4.4&4&4.4Г4.4.4/4.
+T
+T
+T         I    B1
+N            9    4  540    3 %.2.4f4.4d4a4s4d4.4&4&4.4&4&4.4g4.4&4&4.4&4&4.4f4.4&4&4.4&4&4.4Г4.4.4/4.
+T
+T
+T
+T         I    B2   р  rep.B1
+N            9    4  540    3 %.2.4,4.4,4,4,4,4.4,4,4.4,4,4.4,4.4,4,4.4,4,4.4,4.4,4,4.4,4,4.4k=hГ4.4,4.4..k=hf4.4,4.4.
+T
+T
+T
+T         II   C1
+N            8    4  480    3 %.1k=dq4.4k=fh4k=dq4.4k=fh4k=dq4.4k=sЙ4.4&4&4&4.4&4k=fh4.4&4.4&4.4&4&4.4k=Йg4.4&4&4&4.4&4/4.
+T
+T
+T         II   C2                                    р rep.C1
+N            8    4  480    3 %.2.4k=dq4.4k=fh4.4k=dq4.4k=fh4k=dq4.4,4.4,4,4,4.4,4,4.4,4.4,4.4,4,4.4,4.4,4,4,4.4,4/4.
+T
+T
+T         II   D
+N            8    4  480    3 %.2.4k=hf4.4.4.4&4.4&4&4.4k=hГ4.4.4/4.
+T
+T
+T
+T         III  E1
+N            8    4  480    3 %.1k=sЙ4.4&4&4.4&4&4.4k=fh4.4&4&4.4&4&4.4k=dq4.4&4&4.4&4&4.4k=fh4.4&4&4.4&4&4.4.
+T
+T
+T         III  E2                р rep.E1
+N            8    4  480    3 %.1,4.4,4,4.4,4,4.4,4.4,4,4.4,4,4.4k=ag4.4&4&4.4k=dg4&4.4k=hf4.4k=hГ4/4.
+T  F      й
+T  F
+T  F      Scheme:                    A A B1 A A B2 / C1 C2 C1 C2 D / A A B1 A A B2 / E1 E2 / rep.
+T  F
+T  F      Steeldrum                  AKO                                                                       л
+T  F      й                       рк
+T                                                                         рм
+T
+T
+T
+T         A
+N            8    4  480    3 %Й4h4f4s4k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.4.k=sЙ4.k=sЙ4.4.k=sЙ4.4Й4h4f4s4k=ha4.4k=ha4.k=ha4.4.k=ha4.4.k=ha4.k=ha4.4.k=ha4.4/4.
+T
+T
+T
+T         B1
+N            8    4  480    3 %f4d4a4s4k=ad4.4k=ad4k=ad4.4.k=ad4.k=ad4.4k=ag4.4k=ag4.k=ag4.4.k=ag4.k=ag4.4k=hf4.4k=hf4.k=hf4.4.k=hf4.4k=hf4.k=hf4.4..k=hf4.4/4.
+T
+T
+T         B2           	 rep.
+N            8    4  480    3 % 1.1.1.1.1.1.1.1=hf4.4..k=hf4.4.
+T
+T
+T
+T         C1
+N            8    4  480    3 %.1k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.k=sЙ4.4k=fh4.4.k=fh4.k=fh4.4..k=fh4k=fh4.4k=dq4.4k=dq4.k=dq4.4.k=dq4.k=dq4.4k=fh4.4...k=fh4..k=fh4.4k=fh4k=fh4.4..
+T
+T
+T         C2                     	 rep.
+N            8    4  480    3 %.1 1.1.1.1.1.1k=fh4.4...k=fh4.4/4..
+T
+T
+T
+N            8    4  480    3 %.1k=dq4.4k=fh4k=dq4.4k=fh4k=dq4.4k=sЙ4.4k=sЙ4k=sЙ4k=sЙ4.4k=sЙ4k=fh4.4...k=fh4.4..k=fh4.4...k=fh4..k=fh4.4k=Йg4.4k=Йg4k=Йg4k=Йg4.4k=Йg4.4.
+T
+T
+T
+N            8    4  480    3 %.1k=dq4.4k=fh4k=dq4.4k=fh4k=dq4.4k=sЙ4.4k=sЙ4k=sЙ4k=sЙ4.4k=sЙ4k=fh4.4...k=fh4.4..k=fh4.4...k=fh4..k=fh4.4k=Йg4.4k=Йg4k=Йg4k=Йg4.4k=Йg4.4.
+T
+T
+T
+N            8    4  480    3 %.1k=hf4.4.4k=hf4.4k=hf4k=hf4.4k=hГ4.4.4.4/4.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F      й
+T  F
+T  F      Scheme:                    2xA B1 / 2xA B2 / C1 C2
+T  F
+T  F
+T  F      Steeldrum                  AKO                                                                       л
+T  F      й                       рк
+T                                                                         рм
+T
+T
+T
+T
+T         A1
+N            4    4  480    3 %Й4h4f4s4k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.4.k=sЙ4.k=sЙ4.4.k=sЙ4.4/4.
+T
+T
+T         A2
+N            4    4  480    3 %Й4h4f4s4k=ha4.4k=ha4.k=ha4.4.k=ha4.4.k=ha4.k=ha4.4.k=ha4.4/4.
+T
+T
+T
+T
+T
+T         B1
+N            4    4  480    3 %f4d4a4s4k=ad4.4k=ad4k=ad4.4.k=ad4.k=ad4.4k=ag4.4k=ag4.k=ag4.4.k=ag4.k=ag4.4.
+T
+T
+T         B2
+N            4    4  480    3 %.1k=hf4.4k=hf4.k=hf4.4.k=hf4.4k=hf4.k=hf4.4..k=hf4.4/4.
+T
+T
+T         B2'
+N            4    4  480    3 %.1Ё.4.4.4.4.4.4.4.4.4.4.4.4=hf4.4..k=hf4.4.
+T
+T
+T
+T
+T
+T         C1
+N            4    4  480    3 %.1k=sЙ4.4k=sЙ4.k=sЙ4.4.k=sЙ4.k=sЙ4.4k=fh4.4.k=fh4.k=fh4.4..k=fh4k=fh4.4.
+T
+T
+T         C2
+N            4    4  480    3 %.1k=dq4.4k=dq4.k=dq4.4.k=dq4.k=dq4.4k=fh4.4...k=fh4..k=fh4.4k=fh4k=fh4.4.
+T
+T
+T         C2'
+N            4    4  480    3 %.1k=dq4.4k=dq4.k=dq4.4.k=dq4.k=dq4.4k=fh4.4...k=fh4.4/4.
+T
+T
+T
+T
+T  F      й
+T  F
+T  F      Scheme:                    2x(A1 A2) B1 B2 / 2x(A1 A2) B1 B2' / C1 C2 C1 C2'
+T  F
+T  F
+T  F      Steeldrum                  AKO                                                                       л
+T  F      й                       рк
+T                                                                         рм
+T
+T
+T
+T
+T         A1
+N            8    4  480    3 %Й4h4f4s4Й4.4Й4Й4.4Й4.4Й4Й4.4Й4.4Й4h4f4s4a4.4a4.k=haa4.4.k=ha4.4.k=ha4.k=ha4.4.k=ha4.4/4.
+T
+T
+T         A2
+N            4    4  480    3 %Й4h4f4s4a4.4a4.k=haa4.4.k=ha4.4.k=ha4.k=ha4.4.k=ha4.4/4.
+T
+T
+T
+T
+T
+T         B1
+N            4    4  480    3 %f4d4a4s4d4.4d4d4.4d4d4.4g4.4g4g4.4g4g4.4.
+T
+T
+T         B2
+T
+N            8    4  480    3 %.1k=sЙ4.4&4&4.4&4&4.4&4.4&4&4.4&4&4.4&4.4&4&4.4&4&4.4&4.4&4&4.4&4&4.4..
+T
+T         B2'
+T
+T
+T
+T
+T
+T         C1
+N            8    4  480    2 %.1k=sЙ4.4&4&4.4&4&4.4k=fh4.4&4&4.4&4&4.4k=sЙ4.4&4&4.4&4&4.4k=fh4.4&4&4.4&4&4.4..
+T
+T
+T         C2
+N            4    4  480    3 %.1q4&4q4q4.4q4q4.4h4.4h4h4.4h4h4.4.
+T
+T
+T         C2'
+N            4    4  480    3 %.1k=dq4.4k=dq4.k=dq4.4.k=dq4.k=dq4.4k=fh4.4...k=fh4.4/4.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      Steeldrum                  ---                                                                       л
+T  F      й       рк
+T
+T
+T
+T
+N            8    4  576    3 %.1А8&8&8&8&8&8.8.8A8&8&8&8&8&8.8.8s8&8&8&8&8&8.8.8S8&8&8&8&8&8.8.8d12&12&12&12&12&12&12&12&12.8.8.
+T
+T
+T
+N            8    4  480    3 %.1Р8&8&8&8&8&8.8.8Q8&8&8&8&8&8.8.8w8&8&8&8&8&8.8.8W8&8&8&8&8&8.8.8e12&12&12&12&12&12&12&12&12.8.8.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T

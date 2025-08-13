@@ -1,0 +1,1512 @@
+VERSION 004
+PERC.FNT
+  750  1  2  0  1  0
+ 8.0000000000E+01
+T  F
+T  F      RHYTHMICS MANUAL           .                                                                         Î
+T  F      È                       Í
+T
+T
+T
+T
+T
+N            4    0  480    3 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           INDEX: to attend again later - press [Ctrl]+[Page Up]                     Î
+T  F      È                       Í
+T  F
+T  F                                 [Shift]+[F9]/mouse [page]: P - Go to page [Enter], type [pagenumber] + [Enter]
+T  F      È
+T
+T
+T                            2       GENERALLY: [Enter], [Esc], [F1], [Page Dn], [Page Up]
+T
+T                            3       THE FUNCTION OF [Enter] ON THE WORKSHEET
+T
+T                            4       THE MOUSE BUTTONS
+T
+T                            5       FUNCTION KEYS: [F1] to [F12]
+T
+T                            6-9     SHOW/HIDE: NON-PRINTING MARKS, GRIDS, HELPLINES, CURSOR: [Shift]+[F1]
+T
+T                            10      DRAW A NEW NOTE LINE: [Shift]+[F3]
+T
+T                            11      NUMBER OF PULSES PER BEAT: [1] to [9] and [010] to [099]
+T
+T                            12      USING [<] AND [>]
+T
+T                            13      OPEN A NEW FILE / INSTALL SETUP PAGE
+T
+T                            14-16   SOUND: [F5] Play, [Shift]+[F5] Sound Options, [Ctrl]+[F5] Play single Symbols.
+T
+T                            17      SOUND: Hot-Key Switches while Playing: [B] [P] [S] [L] [M] [R] [(] [[] [{] [›]
+T
+T                            18-19   MARKS: JUMP- AND END MARKS [›], [\] and [/]; REPEAT MARKS [&] and ["]
+T
+T                            20      BRACES: [Alt] + [F1]-[F4]
+T
+T                            21      CHANGING PARAMETER(S) OF SEVERAL NOTELINES: [F8] and [Shift]+[F3]
+T
+T                            22      WORKING WITH SEVERAL INDEPENDENT BUFFERS (Memories): [F7], [F8], [F9]
+T
+T                            23      SYMBOLS: 'REPLACE/CUMULATE' OR 'ADD': [Shift]+[F10]
+T
+T                            24      SYMBOLS: [F10]-TABLE, FREQUENCY/LENGTH, CHANGE FONT by [Ctrl]+[F10]
+T
+T                            25      TEXTLINES: SCREEN- AND POSTSCRIPT-FONT
+T
+T                            26      PRINTING: POSTSCRIPT PRINTS: [Ctrl]+[F1] / SCREEN PRINTS
+T
+T                            27      TEXTLINES: ASCII for Rhythmics: special Signs and Symbols
+T
+T  F      È
+T  F
+T  F                         28      TEST-SHEET on last page: press [Ctrl]+[Page Dn]
+T  F
+T  F
+T  F      RHYTHMICS MANUAL           GENERALLY: [Enter], [Esc], [F1], [Page Dn], [Page Up]                     Î
+T  F      È                       Í
+N   H        1    0  480    5 %.1.
+T
+T         [Enter]                    Pressing [Enter] ACTIVATES a selection.
+T
+T
+T         (large key at the right    - Ex.:  Press [Shift]+[F4], select B with the cursor then press [Enter]:
+T
+T         side of the letter-keys)           this linestyle is now selected and could be activated with [F3].
+T
+T
+T                                    - The LEFT MOUSE BUTTON is identical to [Enter].
+T
+T         see also next page         - LEFT and MIDDLE MOUSE BUTTON to toggle (= [Spacebar]).
+T         ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹
+T
+T         È
+T
+T
+T         [Esc]                      Pressing [Esc] IGNORES a selection or ESCAPES from a menu or file.
+T
+T
+T         (key at top left)          - Ex.:  If you press [Esc] now, the programm will go back to the main menu,
+T
+T                                            twice [Enter] will bring you back to the first page of this file.
+T
+T
+T                                    - The RIGHT MOUSE BUTTON is identical to [Esc].
+T
+T
+T                         È
+T
+T
+T         [F1] = HELP                Pressing [F1] will present a COMMAND-TABLE as a MATRIX:
+T
+T
+T         (first Function-Key of     - Ex.:  Press the [Shift]-button (normally used to get capital letters) -
+T
+T         [F1] to [F12]                      TOGETHER WITH [F3] - you will get the menu to define a noteline.
+T
+T         in the top row)                    [Esc] saves the settings and returns to the file.
+T
+T                                    - Ex.:  Press [F3] ALONE - you draw the defined line.
+T
+T                                    - Ex.:  Try all the different marks and flams (bottom-right of [F1]-table)!
+T
+T         È
+T
+T         [Page Dn]/[Page Up]        = next/previous page. Together with [Ctrl]: last/first page
+T
+T  F
+T  F      RHYTHMICS MANUAL           THE FUNCTION OF [Enter] ON THE WORKSHEET                                  Î
+T  F      È                       Í
+T
+T
+T         [Enter]                    moves cursor to the FOLLOWING(1) NOTELINE on the page - if there is any -
+T
+T                                    and from last one back to first one.
+T
+T                                    If there are several TOGETHER (distance = 1): moves to MAIN (last) noteline.
+T
+T                                    While playing: plays next noteline (see SOUND).
+T
+T
+T         [Shift]+[Enter]            moves cursor TWO LINES downwards(2): text entering mode, from last line back
+T
+T                                    to first one. [Ctrl]+[Cursor R/L] moves cursor to next/previous WORD. Try it!
+T
+T
+T         [Ctrl]+[Enter]             Only if the cursor stands somewhere on a noteline:
+T
+T                                    draws a new SIMILAR NOTELINE - 4 lines below(3).
+T
+T                                    Minimum distance should be 5 lines to next noteline.
+T
+T                                    The last chosen PULSE IS ALREADY INSTALLED!
+T
+T                                    - This function is very helpful for continuous entering.
+T
+T                                    - Works as well when there are several lines together (no space inbetween!)
+T
+T
+T         ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+T         [Alt]+ above combination   reverses the directions to: PREVIOUS(1)/upwards(2)/above(3).
+T         ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹
+T
+T         È
+T
+T
+T         Test here:
+N            8    4  480    3 %.1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2.
+T
+N            8    4  480    3 %.1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2.
+T
+N            8    4  480    3 %.1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2.
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           THE MOUSE BUTTONS L(eft), M(iddle) and R(ight)                            Î
+T  F      È                       Í
+N   H        1    0  480    5 %.1.
+T
+T
+T         ON THE WORKSHEET           L      =  cursor jumps to the position of the mouse cursor.
+T
+T                                              while button pressed: cursor moves with the mouse.
+T
+T
+T
+T                                    R      =  Save + Quit file (?)                           -  like [Esc]
+T
+T
+T
+T                                    M      =  1st time:  Start   block mark                  -  like [F8]
+T
+T         ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ             2nd time:  End     block mark                     see [Shift]+[F8]
+T           Is mouse installed ?
+T         ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹             3rd time:  Unmark  block
+T
+T                                    L+M    =             Paste   block                       -  like [Ctrl]+[F8]
+T
+T
+T
+T                                    M+R    =  shows the SYMBOL TABLE                         -  like [F10]
+T
+T
+T
+T                                    L+R    =  change FONT                                    -  like [Ctrl]+[F10]
+T
+T
+T
+T                                    all 3  =  shows the HELP TABLE                           -  like [F1]
+T
+T
+T         È
+T
+T
+T
+T         WITHIN MENUS/TABLES        L      =  execute / select / accept                      -  like [Enter]
+T
+T
+T
+T                                    R      =  save settings and escape                       -  like [Esc]
+T
+T
+T
+T                                    M      =  toggle                                         -  like [Spacebar]
+T
+T
+N  FH        1    0  480    5 %.1.
+T  F      RHYTHMICS MANUAL           [F1] to [F12]  MENU [F11]: 1-10 = [F1]-[F10], S/C/A = [Shift]/[Ctrl]/[Alt]Î
+T  F      È                        Í
+T
+T         Help   Table       [F1]    Press this key then leave the HELP again by [Esc]. Use often: learn by heart!
+T
+T         View / Print               [Shift]+[F1]: show/hide setting. [Ctrl]+[F1]: Postscript printing options.
+T         È
+T
+T         File   Save        [F2]    saves a file: use often! [Esc]: Save/Quit options. [Ctrl]+[Esc]: Save + Quit.
+T
+T                Split               [Shift]+[F2]: save as. [Ctrl]+[F2]: Split the file (save rest under new name).
+T         È
+T
+T         Notelines          [F3]    draws a new noteline; [Shift]+[F3]: Definition. [Ctrl]+[F3]: split (note)line.
+T         È
+T
+T         Spacing            [F4]    moves rest downwards. [Shift]+[F4]: insert new page. [Ctrl]+[F4]: split page.
+T         È
+T
+T         Sound  Play        [F5]    plays a selection of notelines depending on cursor position or marked buffer.
+T
+T                Options             [Shift]+[F5]: Sound Options. [Ctrl]+[F5]: Playing single symbols. See SOUND
+T         È
+T
+T         Header/Footer      [F6]    Mark/unmark a header or footer by menu.
+T
+T         Search + Replace           [Shift]+[F6]: Search/replace text or patterns. [Ctrl]+[F6]: Repeat search.
+T         È
+T
+T         Line   Copy/Paste  [F7]    copy line to line buffer. [Ctrl]+[F7]. Paste. [Shift]+[F7]: Line commands.
+T         È
+T
+T         Block  Mark/Paste  [F8]    marks block: beginning/end/unmark. [Ctrl]+[F8]: Paste block from block buffer.
+T
+T                Commands            [Shift]+[F8]: Block commands: move, write/read buffer files, index etc.
+T         È
+T
+T         Page   Mark/Paste  [F9]    marks/unmarks page. [Shift]+[F9]: Page commands. [Ctrl]+[F9]: Paste page.
+T
+T                Setup / Number      [Alt]+[F9]: Setup file page. [Alt]+[F10]!: Page numbering at cursor position.
+T         È
+T
+T         Symbol Table       [F10]   Table of noteline symbols: Possibility to change freqency and soundlength.
+T
+T         Keybrd Setup               [Shift]+[F10]: Keyboard swap: mode, symbol size, spacebar symbol
+T
+T         Font   Selection           [Alt]  +[F10]: Select symbol font (changes symbol font in file and saves it).
+T         È
+T
+T         MENU     [F11]  /  [F12]   swappes between status field and mouse MENU.  /  [F12]: Makes a page refresh.
+T
+T  F
+T  F      RHYTHMICS MANUAL           NON-PRINTING MARKS: [Shift]+[F1]                                          Î
+T  F      È                       Í
+T
+T
+T         NON-PRINTING MARKS are     These marks - as the name says - will not be printed, they are a working
+T
+T         shown in an extra color    instrument on the screen only.
+T
+T         È
+T
+T
+T         TABULATOR MARKS            Tabulators:        [Tab]  or   [Shift]+[Tab]
+T
+T         È
+T
+T
+T         HEADER/FOOTER MARKS        Header- and/or Footer-marks: [F6]
+T
+T                                    Put the non-printing marks in the [Shift]+[F1] menu on 'show', you will see
+T
+T                                    the header-mark in the upper left - a footer-mark in the lower left corner.
+T
+T         È
+T
+T
+T         LINE MARKS                 Vertical- and horizontal-line marks: [Alt] + [F5]-[F8]
+T
+T                                    See the little marks in the title of this page:
+T
+T                                    one under the R of RHYTHMICS, the second left of the NON-PRINTING.
+T
+T         È
+T
+T
+T         HELP MARKS                 Points ([.]) on notelines.
+T
+T
+T                                 1                   2                   3                   4
+T         Cursor Positions
+N            4    0  480    3 %.1.4.4.4.4.3.3.3.6.6.6.6.6.6.2.2.
+T         and Tabulators
+T                                       1        2       3       4       1      2       3       1       2       3       4        5       6      1                2
+T
+T  F      È
+T  F
+T  F      < This is a footer mark    Put 'non-printing marks' on SHOW, try with the cursor on the noteline - put
+T  F
+T  F                                 them on HIDE and try again. HIDE for screen prints (change to ptpage.col!)
+T  F
+T  F                                 Work with 'non-printing marks' SHOW, put them on HIDE for presentation.
+T  F
+T  F
+T  F      RHYTHMICS MANUAL           GRIDS: [Shift]+[F3] and [Shift]+[F1]                                      Î
+T  F      È                       Í
+T
+T
+T         GRIDS                      Grids are a simple help for the eyes - like fine lines on a writing block or
+T
+T                                    notation sheet: Install GRIDS in the [Shift]+[F3]-menu.
+T
+T
+T                                    If you choose HIDE in [Shift]+[F1] they are neigther shown nor printed.
+T
+T
+T                                    Choosing SHOW ALL: Grids are shown and printed on all notelines that you
+T
+T                                    defined with grids ([Shift]+[F3]).
+T
+T
+T                                    SHOW MAIN shows and prints ONLY the grids defined on the BOTTOM NOTELINE =
+T
+T                                    last of several lines following each other without empty line inbetween.
+T
+T
+T                                    Pitch-notelines show grids only on the bottom line!
+T
+T         È
+T
+T
+T                                    Ex.: 4 Notelines following each other immediately
+T
+N            4    4  480    3 %.1.1.
+N            4    4  480    3 %.1.
+N            4    4  480    3 %.1.
+N            4    4  480    3 %.1.1.1.1.1.
+T
+T
+T                                    Ex.: Pitch (5 lines system)
+T
+T
+T
+N            4    4  480    2 %.1.1
+T
+T
+T
+T  F      È
+T  F
+T  F      Test:                      Activate the [Shift]+[F1]-menu and make changes, [Esc].
+T  F
+T  F                                 Activate SHOW MAIN, put cursor on each noteline: space them by pressing [F4].
+T  F
+T  F                                 Put cursor into the gaps, press [Ctrl]+[Backspace].
+T  F
+T  F
+T  F      RHYTHMICS MANUAL           HELPLINES: [Shift]+[F3] and [Shift]+[F1]                                  Î
+T  F      È                       Í
+T
+T
+T         HELPLINES are shown in     Helplines will normally not be printed. If you use screen shot printing - put
+T
+T         an extra color.            them on HIDE if you don't want them to be seen.
+T
+T
+T
+T                                    Use to show special or extra symbols connected to the previous or next line;
+T
+T                                    possibly as references for tabulators.
+T
+T
+T                                    Beats and grids cannot be seen, but a helpline works like an ordinary note-
+T
+T                                    line, except that PLAY works only if you put the cursors ON it an press [F5].
+T
+T
+T                                    Best is, you put the linestyle in [Shift]+[F3] on THIN - write the symbols on
+T
+T                                    the line - then change the linestyle to HELPLINE.
+T
+T
+T
+T
+N   H        4   12  480    5 %.1í4.4í4í4.4í4í4.4í4.4í4í4.4í4í4.4.
+T         Drum + Bell
+N            4   12  480    3 %.1f4 4s4 4f4f4 4d4 4d4 4d4 4d4d4 4.
+T
+T
+T
+T                                    Work with 'Helplines' SHOW - presentations with HIDE.
+T
+T
+T         È
+T
+T
+N   H        4   12  480    5 %.1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.
+T         Try here
+N            4   12  480    3 %.1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.
+T
+T
+N   H        4   12  480    5 %.1ó.2Ç.2ó.2Ç.2ó.2Ç.2ó.2Ç.2.
+T
+T
+T
+T
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           CURSOR and CURSOR-CROSS: [Shift]+[F1]                                     Î
+T  F      È                       Í
+T
+T
+T         CURSOR SHOW                Shows a vertical cursor that can be moved by the cursor keys [Up, Down, (Ctrl)
+T
+T                                    Left and Right] - [Backspace] - [Home], [End] - [Ctrl]+[Home], [Ctrl]+[End].
+T
+T
+T                                    [Enter] alone moves it to the next - [Alt]+[Enter] to the previous noteline.
+T
+T
+T                                    [Shift]+[Enter]: cursor 2 lines downwards, [Alt]+[Shift]+[Enter]: upwards;
+T
+T                                    from last line jumping to 1st one, resp. from 1st line to last one: try now!
+T
+T
+T                                    When writing quickly or holding down a cursor key (not too long!) the form of
+T
+T                                    the cursor changes to an underline mark.
+T
+T
+T         CURSOR SHOW + CROSS        SHOW + CROSS can be useful for correct positioning of text and for comparing
+T
+T                                    positions on different notelines as well as to make sure you are on the right
+T
+T                                    line when deleting ([Ctrl]+[Backspace]) or spacing ([F4]).
+T
+T         È
+T
+T
+T         MOUSE CURSOR               When using a mouse, a second cursor shows up that can be freely moved all over
+T
+T                                    the work sheet - including the status field and the mouse menu ([MENU]).
+T
+T
+T                                    Quick positioning of the normal cursor by pressing the LEFT BUTTON shortly.
+T
+T
+T                                    Holding down the left button moves the normal cursor with the mouse.
+T
+T         È
+T
+T
+T         CURSOR HIDE                HIDE should only be used when making hard copies or for presentations.
+T
+T                                    The mouse cursor cannot be hidden by a menu; but you can hide it by moving it
+T
+T                                    out of sight to the right or downwards - or deactivate it on DOS level.
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           DRAW A NEW NOTE LINE: [Shift]+[F3] and [F3]                               Î
+T  F      È                       Í
+N   H        1    0  480    5 %.1.
+T
+T         SHOW/HIDE             1    Press [Shift]+[F1] now and make sure that all parameters are put on SHOW.
+T
+T                                    Grids should be set to SHOW ALL, Cursor to SHOW + CROSS.
+T
+T
+T         CURSOR                2    Read through this text first - then put the cursor into the empty field below.
+T
+T
+T         MENU                  3    Select the 'Noteline Definition Menu' with [Shift]+[F3].
+T
+T         BEATS                      a)  Number of beats [1-150]   (Always read QUICK HELP at bottom of the menu!)
+T
+T                                        Type the number of beats per line / [Enter].
+T
+T                                        Ex.:  4 would mean that you will have 1 form with 4 beats (4/4)
+T
+T
+T         GRIDS                      b)  Grids [0-320]                (Follow the instructions of possible hints!)
+T
+T                                        Grids are only visual devisions: smallest units / pulses per beat etc.
+T
+T                                        Ex.1: Entering 12 will show 12 grids between two beats. 0 = none.
+T
+T         RESOLUTION                 c)  Resolution [8-640]           (Follow the instructions of possible hints!)
+T
+T                                        Select a resolution which makes sense! (default 480 or 576).
+T
+T                                        e.g. if you want 7 beats and devide them lateron into 4 resp. 3 pulses:
+T
+T                                        (4x3x7=84): 420, 504 or 588. Ex. 480: 2, 3, 4, 5, 6, 8, 10, 12, 15, 16 etc.
+T
+T         LINES                      d)  No. of lines [1-52]
+T
+T                                        For the moment enter 1 (later press [Shift]+[PgDn] and try as you wish).
+T
+T         LINESTYLE                  e)  Line style
+T
+T                                        Try different types, change with spacebar / [Esc].
+T
+T         DRAW LINE             4    Press [F3] / Change with [Shift]+[F3] / Delete with [Ctrl]+[Backspace].
+T
+T         È
+T
+T
+T
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           NUMBER OF PULSES PER BEAT: See lower left corner of HELP TABLE [F1]       Î
+T  F      È                       Í
+T
+T
+T                                    Example: Resolution 480 / 4 Beats / 12 Grids / 1 line / thin
+T
+T                               1    Put the cursor on the following noteline:
+T
+T                                    the choices will be shown in the status field below: ' R 480 / B 4 / G 12 '
+T
+T
+N            4   12  480    3 %.1.
+T
+T
+T                               2    If necessary, move the cursor to the crosspoint of vertical line and noteline.
+T
+T                                    ' 1 Æ [.] Ø ..? ' shows the key ([.]), the distance to the left and the right.
+T
+T
+T
+T                                    Now observe the changes in the status field!
+T         ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹
+T
+T         The pulse is definded by   -  Press [.] (the point*) - then press [4] (number 4):
+T
+T         entering a chiffre            the cursor moves to the second beat then returns to the second puls that
+T
+T         1 to 9  or:  010 to 099.      has a distance of 1/4 to the first one. Status field now: ' 4 Æ [.] Ø ..? '
+T
+T         ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ
+T                                    -  Press [3]: the distance changed to 1/3.
+T
+T                                    -  Press [2]; [6]; [9]; [1] =  1/2; 1/6; 1/9; 1/1.
+T
+T                                    -  Press [0], then [1] and [2]: [012] = 1/12.
+T
+T                                    -  Acordingly press any "pulse" between [010] and [099].
+T
+T
+T
+T                               3    Fill in the noteline with different pulses - then change distances at any(!!)
+T
+T                                    point as you like. Use [Ins] and [Del], [Shift]+[Del], [Shift]+[Backspace].
+T
+T                                    Move the cursor, observe the changes in the status field.
+T
+T
+T  F      È
+T  F
+T  F                                 * or an other key: see key table with [F10] / [Esc]
+T  F
+T  F
+T  F      RHYTHMICS MANUAL           USING [<] AND [>]: See lower left corner of HELP TABLE [F1]               Î
+T  F      È                       Í
+T
+T
+T         PULSES BEFORE         1    If you have an empty line and want to use the space left of the first beat:
+T
+T         THE FIRST BEAT             put the cursor on the first beat and enter the chiffre for the pulse you wish.
+T
+T
+T                               2    If you filled in pulses after the first beat already:
+T
+T                                    best is you put the cursor on the first beat, press [<] shortly, then enter
+T
+T                                    the pulse chiffre. Move the cursor in place.
+T
+T
+N            4    0  480    3 %.1.3.3.
+T
+T         CLEAR                 3    To clear such pulses again:
+T
+T                                    put cursor on second pulse (from beginning of line), delete as far as
+T
+T                                    necessary (don't mind all the rest moving left!), then press [1].
+T
+T
+T                               4    Using [>] when the rest to the right is still empty - status: ' Ø ..? ' -
+T
+T                                    defines the following pulse - but you can as well enter [.] or any other
+T
+T                                    symbol and THEN change the pulse.
+T
+T         È
+T
+T         SUBPULSES             5    If you wish to go inbetween two pulses use  [>] from the left, or quicker
+T
+T                                                                                [<] from the right one shortly,
+T
+T                                    then type a possible SUBPULSE chiffre - or:
+T
+T                                    simply add [:] after [<] or [>], enter a DIVISOR (1-9 / 010-099) -
+T
+T                                    Rhythmics calculates the subpulse by itself.
+T
+T         È
+T
+T         INSERT                     [Ins] inserts a pulse with the distance to the right and moves rest forwards.
+T
+T         DELETE                     [Del] deletes the pulse at cursor position and joins the rest.
+T
+T         CUT                        [Shift]+[Delete] clears to the right, [Shift]+[Backspace] to the left.
+T
+T  F
+T  F      RHYTHMICS MANUAL           OPEN A NEW FILE AND INSTALL THE SETUP PAGE                                Î
+T  F      È                       Í
+N   H        4    0  480    5 %.1.
+T
+T         PROGRAM               1    Go to the Directory RNS (= RHYTHMICS Notation System).
+T
+T                                    Type 'rns', [Enter]: you will get to the main menu.
+T
+T
+T         DIRECTORY             2    Choose 'Directories': you will attend the directory menu.
+T
+T                                    Choose a directory or open a new one by typing the new name, [Enter], confirm.
+T         È
+T
+T
+T         FILE                  3    Choose 'Files': you will get to the file menu.
+T
+T                                    Type the name of the new file, confirm with [Y].
+T
+T                                    You will be on the 'SETUP PAGE' of this new file:
+T
+T                                    the brown background warns you that you are not yet on a ordinary file page!
+T
+T
+T         SETUP PAGE            5    Install the page as you want it to look like each time you will ask for a new
+T
+T                                    page in the file (to make changes lateron call it up by [Alt]+[F9] or mouse).
+T
+T
+T         FUNCTION KEYS              [Shift]+[F1]: all on 'show' (toggle with the spacebar)
+T
+T                                    [Shift]+[F3]: define a noteline, [F3]: draw this noteline.
+T
+T                                    Use [Tab] = lower Tabulator and [Shift]+[Tab] = upper Tabulator to position
+T
+T                                    lines: (move with [Ins] and [Del], if necessary refresh page with [F12]):
+T
+T                                    [Alt]+[F5]:  top to bottom line.
+T
+T                                    [Alt]+[F6]:  vertical line between horizontal lines; [Alt]+[F8]): 3D-version.
+T
+T                                    [Alt]+[F5]:  draws a horizontal 3D-line.
+T
+T                                    [Alt]+[F10]  marks 3 zeros to position the automatic page numbering.
+T
+T                                    [F6]         marks header (from top to the cursor position) or footer.
+T         È
+T
+T
+T         FILE PAGE             6    [Esc] will show first page of file. Maybe change the font: [Ctrl]+[F10].
+T
+T  F
+T  F      RHYTHMICS MANUAL           SOUND: [F5] Play, [Shift]+[F5] Menus, [Ctrl]+[F5]                         Î
+T  F      È                       Í
+T
+T         [F5]               plays   LINE        if the cursor is ON a note- or helpline.
+T
+T                                    PAGE        if the cursor is NOT ON a note- or helpline.
+T
+T                                    BUFFER      if you MARKED a buffer first.
+T
+T         During playing mode        [Enter]     immediately plays next noteline, [Alt]+[Enter]: previous noteline.
+T
+T                                                [Ctrl]+[Enter] finishes current noteline, then jumps to next one.
+T
+T                                    [Esc]       stop playing. [Shift]+[Esc] play line to end and stop.
+T
+T                                    [Spacebar]  swaps to PAUSE mode.
+T
+T         During pause mode          [Cursor R]  plays stepwise, [Cursor Up/Dn] play/stop symbol sound.
+T
+T                                    [Spacebar]  will swap back to playing mode. [Esc] will quit from sound modes.
+T         È
+T
+T
+T         [Shift]+[F5]               Sound menu  OPTIONS: go stepwise through the menu and read BOTTOM LINES!
+T
+T         L  -  Line         plays   LINE        if the cursor was ON a noteline; if it was ABOVE a noteline, the
+T
+T                                                next noteline containing information will be played - or the last
+T
+T                                                one if the cursor was BELOW the last noteline.
+T
+T         P  -  Page         plays   PAGE        whereever the cursor was placed (even when ON a noteline).
+T
+T         B  -  Buffer       plays   BUFFER      When no buffer is marked: previous buffer*- or hint: buffer empty.
+T
+T         F  -  File         plays   WHOLE FILE  but without playing marks!*
+T         È
+T
+T
+T         [Ctrl]+[F5]        plays   SYMBOL      [Cursor R/L]: stepwise forwards/backwards.
+T
+T                                                [Spacebar]: pause/play, [Esc]: quit single step mode.
+T         È
+T
+T
+N            4   12  480    3 %.1f4 4d4 4f4d4d4 4f4d4 4d4f4 4s4s4.
+T
+T         Try:
+T
+N            4   12  480    3 %.1í4,4í4í4,4í4,4í4í4,4í4 4í6í6,6,4í4.
+T
+T  F
+T  F      RHYTHMICS MANUAL           SOUND: Changing speed during playing and pause mode                       Î
+T  F      È                       Í
+T
+T
+T         BPM  (max. 600)            Speed is normally indicated in 'Beats per Minute' - in short BPM.
+T
+T                                    It can be very helpful to indicate this value in the header of a file page.
+T
+T
+T         [Shift]+[F5] - Options     You can fix the speed in the Sound Options menu:
+T
+T                                    up to 3 positions after the point are accepted: for example 93.257 (units).
+T
+T         LPM  (max. 600)            RHYTHMICS has the special feature of playing 'Lines per Minute' as well: LPM.
+T
+T                                    This is necessary if a pattern continues to be played in the same speed - but
+T
+T                                    with a different beat (A); or if a rhythm changes to a proportional tempo (B).
+T
+T                                    Therefore you have to choose BPM (standard) or LPM as the unit of speed.
+T
+T
+T         [F5]                       But you can change the speed even while playing:
+T
+T         [+] or [-]                 press the grey [+] or [-] keys (numberblock). Observe changes: status field!
+T
+T         [Shift]  [Ctrl]  [Alt]     Together with [Shift]: Ò 10, with [Ctrl]: double/half, with [Alt]: factor 4/3.
+T
+T         [.]                        To round the positions after the point use [.] (numberblock).
+T
+T
+T         [/]                        While playing in BPM press the grey [/] key (numberblock): the speed in LPM
+T
+T                                    will be calculated automatically depending on resolution and number of beats.
+T
+T                                    The tempo does not change until you play a different type of line!
+T
+T         [*]                        [*] (numberblock) swaps back to BPM - but mind on which line you change!
+T
+T         È
+T
+T         Test:
+N            4    3  480    3 %.1l3,3l3,3l3l3,3l3,3l3,3l3.
+T         A  (30 LPM)
+N            3    4  480    3 %.1l4,4l4,4l4l4,4l4,4l4,4l4.
+T
+T
+N            8    4  480    3 %.1d4s4,4s4d4,4s4,4d4s4,4s4d4,4s4,4d4d4d4d4d4d4d4d4d4,4f4,4d4d4,4d4.
+T         B  (15 LPM)
+N            6    4  480    3 %.1f4,4f4,4,4,4f4,4f4,4s4s4d4,4s4s4d4,4s4s4d4,4s4s4.
+T
+T  F
+T  F      RHYTHMICS MANUAL           SOUND: Changing pitch during playing and pause modes: Numberblock         Î
+T  F      È                       Í
+T
+T
+T               Numberblock      -   NumLock ON!: Observe Òintervall to original frequency in the Status Field.
+T         È
+T
+T               [7]  ˘  [9]      -   -/+  8        =  1 octave            :      Ò1200             Cent
+T
+T                                    -5  to  +5˘8  =  11 octaves          :      -6000  to  +6000  Cent
+T
+T                   [8]
+T
+T               [4]  ˘  [6]      -   -/+  1 half-  or  -/+  1 full tone   :      Ò 100  or  Ò 200  Cent
+T
+T                   [2]
+T
+T         ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ   Ò  2b  /  2   =  minor-  /  second   :      Ò 100  /   Ò 200  Cent
+T         While [F5] / [Ctrl]+[F5]
+T                                    Ò  3b  /  3   =  minor-  /  third    :      Ò 300  /   Ò 400  Cent
+T         use as a special utility
+T                                    Ò  4   /  4#  =  forth   /  major-   :      Ò 500  /   Ò 600  Cent
+T         - Transposing
+T                                    Ò  5          =  fifth               :      Ò 700             Cent
+T         - Tuning
+T                                    Ò  6b  /  6   =  minor-  /  sixth    :      Ò 800  /   Ò 900  Cent
+T         - Intervalls in Hz, Cent
+T         ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹   Ò  7b  /  7   =  minor-  /  seventh  :      Ò1000  /   Ò1100  Cent
+T
+T
+T               [1]  ˘  [3]      -   -/+  1% of a halftone                :      Ò   1             Cent
+T
+T                                    1  to  50(49) Cent                   :      -  50  to  +  50  Cent
+T
+T
+T               [  0  ]          -   round Cent to closest halftone
+T
+T
+T                   [5]          -   or ending RNS: reset to original frequency (as in [F10]]
+T
+T         È
+T
+T               ATTENTION!       -   the keyboard sounds (when entering new symbols) are NOT adapted!
+T  F      È
+T  F
+T  F      Test here:    4B/4P
+N  F         4    4  480    3 %.1s1d1f1d1.
+T  F
+T  F                    6B/4P
+N  F         6    4  480    3 %.1s1d1d1f1d1d1.
+T  F
+T  F
+T  F      RHYTHMICS MANUAL           SOUND: Hot-Key Switches during playing and pause mode                     Î
+T  F      È                       Í
+T
+T         on/off   [B]           -   Beat sound
+T
+T         on/off   [P]           -   Pause mark sound (normally set off: acts like empty stroke -/pause symbol)
+T
+T         on/off   [T]           -   Time mark sound (normally set off: acts like pulse symbol)
+T         È
+T
+T         on/off   [S]           -   Staccato playing
+T
+T         on/off   [L]           -   Legato playing (direct switching from [S] to [L] possible!)
+T
+T                                    if L on:   only rest mark [ ] cuts previous sound (check length in [F10]!)
+T
+T                                    if L off:  also help mark [.] and time mark [,] cut previous sound
+T
+T                                    - S and L can be combined with R!
+T
+T         on/off   [M]           -   Muffled playing (= very short: night times, neighbours! ...)
+T
+T                                    - can be combined with R. Deactivate to hear L or S again !!!
+T
+T         on/off   [R]           -   Rhythmic structure only (= all symbols played with equal frequency)
+T
+T                                    - can be combined with S, L and M. Deactivate to hear original symbol sounds!
+T         È
+T
+T         on/off   [(]  or  [)]  -   ignore/play symbols in parentheses (meaning: symbol can be dropped)
+T
+T         on/off   [[]  or  []]  -   play/ignore symbols in brackets (meaning: symbol can be added)
+T
+T         on/off   [{}  or  [}]  -   play/ignore symbols in braces (meaning: alternative symbol)
+T
+T         on/off            [›]  -   ignore/accept jump mark
+T         È
+T
+T         Switches  BPTSL ([{›       Switch settings will be SAVED and remain until next change!
+T
+T         Switches  RM               R will NOT be saved, M activated REMAINS until you leave the program!
+T  F      È
+T  F
+T  F      Test [F5]:
+N  F         4   12  480    3 %.2(d)4d4={sf4s4s4s4=s}f4d4(d)4d4-[d]d6d6d6d4d4f4={d}f4›,4,4.
+T  F
+N  F         4   12  480    3 %.1.1›s4 4d4s4f4[s]4s4(s)4d4s4f4,4.
+T  F
+N  F         4   12  480    3 %.1d4d4 4[s]4d4d4(s)4,4d4d4 4[s]4s4s4›(s)4,4.
+T  F
+T  F                                                            [F5]: see switches here below
+T  F
+T  F      RHYTHMICS MANUAL           JUMP- AND END MARK: See lower middle table of HELP TABLE [F1]             Î
+T  F      È                       Í
+T
+T
+T         /  =  slash            -   Press [Enter], then [F5]: Line A will be played.
+T
+T         ›  =  dashed slash         While playing press [Ctrl]+[Enter]. Continue like this until all lines have
+T
+T               (also ASCII 221)     been played. Observe the jumps when going from one line to the next. Listen
+T
+T         \  =  dotted backslash     to the continuity of the beat sound. Play Pagesound as well.
+T
+T                                -   The slash is an absolute end mark! The dashed slash is active or ignored
+T
+T         Show/hide jump marks       depending on the playing mode and the start of the current line: B+G C+H E.
+T
+T         in the Shift-F1-menu       The dotted backslash is necessary only if the next line starts with even more
+T
+T                                    symbols before Beat 1 than the current one: D and F.
+T
+T                                -   An end mark in the beginning deactivates the whole line! - Try it.
+T
+T                                -   A dashed jump mark on Beat 1 starts playing from the next available symbol: C.
+T
+T                                -   Make a (common) mistake on line G: delete the last point - then Pagesound!
+T
+T  F      A
+N	 F   4	    4    4  480    3%.2s4s4.4.4d4d4.4.4s4s4.4.4d4d4.4.4/4.
+T  F                                                                                            end mark
+T  F      B
+N	 F   4	    4    4  480    3%.2s4s4s4.4d4d4d4.4s4s4s4.4d4d4.4.4›.4.4.
+T  F                                                                                            jump mark
+T  F      C
+N	 F   4	    4    4  480    3%.1›.4.4.4.4.4.4.4.4f4.4f4f4.4.4.4›.4.
+T  F
+T  F      D
+N	 F   4	    4    4  480    3%.2.4s4f4.4s4.4d4d4.4d4.4d4d4s4.4.4\.4/4.
+T  F                                                                                            jump mark2
+T  F      E
+N	 F   4	    4    4  480    3%.2s4s4d4.4s4d4.4s4d4.4s4d4.4s4d4.4›.4/4.
+T  F
+T  F      F
+N	 F   4	    4    4  480    3%.2.4d8d8d4d4d4d4.4d4.4-dd4s4s4.4f4.4.4\.4/4.
+T  F
+T  F      G
+N	 F   4	    4    4  480    3%.2d4d4s4.4.4d4s4.4.4s4.4.4d4d4.4.4›.4.4.
+T  F
+T  F      H
+N	 F   4	    4    4  480    3%.1-ss4.4d4d4.4d4.4d4d4.4s4s4s4.4›.4.4.
+T  F
+T  F
+T  F
+T  F      RHYTHMICS MANUAL           REPEAT MARKS: [&] and ["]                                                 Î
+T  F      È                       Í
+T
+T
+T
+T         [&]
+N            4    4  480    3 %.1d8&8&8&8&8&8&8&8s8&8&8&8&8&8&8&8d6&6&6&6&6&6-ds4.4&4.4.
+T
+T
+T                                    The [&] shows this 'repeat last symbol' mark on a noteline -
+T
+T                                    repeating automatically the last symbol or the last cluster of symbols.
+T
+T                                    Especially in letter- or cypher-notations clusters made in the cumulate mode
+T
+T                                    can be repeated without copying or rewriting all the symbols - though giving
+T
+T                                    more space and immediate understanding of redundant information.
+T
+T
+T
+T
+T
+N            4    4  480    3 %.1d4s4s4d4s4s4d4s4s4d4s4s4d4d4s4s4.
+T
+T         ["]
+N            4    4  480    3 %.1"d4"s4"s4"d4"s4"s4"d4"s4"s4"d4"s4"s4d8d8d4d4d4.
+T
+T
+T                                    The lower noteline is a [F7]/[Ctrl]+[F7] copy of the upper one:
+T
+T                                    each symbol that should be read from the upper noteline is overwritten by
+T
+T                                    a quotation mark ["]: the symbol (or as well cluster of symbols) is ONLY
+T
+T                                    HIDDEN - making it possible to get the sound with [F5] as it would really
+T
+T                                    come from the upper line.
+T
+T                                    Each sign can be revived by typing ["] a second time.
+T
+T
+T
+T                                    Both symbols allow to reduce redundance showing repetitions immediateliy and
+T
+T                                    free the notation from unnecessary information.
+T
+T
+T                                    Try with other fonts and complicated clusters of symbols.
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           BRACES: [Alt] + [F1]-[F4]                                                 Î
+T  F      È                       Í
+T
+T                                                                                     Â
+T         [Alt]+[F1]                 Sets the BEGINNING  of a VERTICAL    brace
+T
+T         [Alt]+[F2]                 Sets the END        of a VERTICAL    brace          can be used
+T
+T                                                                                        with tabulators:
+T         [Alt]+[F3]                 Sets the BEGINNING  of a HORIZONTAL  brace
+T                                                                                        [Tab] / [Shift]+[Tab]
+T         [Alt]+[F4]                 Sets the END        of a HORIZONTAL  brace
+T                                                                                     Ê
+T         È
+T
+T
+T                                      ≥       ≥                                      ≥
+T         CURSOR-POSITION
+T                                    ƒ Â ƒ   ƒ Á ƒ                                  ƒ Ë ƒ
+T
+T                                      ≥       ≥                                      ≥
+T                                              ....................
+T                                              Á                  Ë
+T
+T
+T                                              ..                                    12
+T         SIZES                                ÁË smallest horizontal brace:         ÁË
+T
+T                                              Â -
+T                                                -
+T                                                -
+T                                                - Â 1                             Â
+T                                      ≥         -   2                               abcdefg
+T                                                -   3 smallest vertical brace:      abcdefg
+T                                    ƒ Ê ƒ     Ê - Ê 4                             Ê
+T
+T                                      ≥
+T
+T         È
+T
+T
+T         Examples:        Â
+N            4   12  480    3 %.1s4s4s4s4d8d8d8d8d8d8d8d8s6s6s6s6s6s6d3d6d2.
+T                                                    	 Á      	Ë	 Á      	Ë	 Á     	Ë 	 Á     	Ë 	 Á     	Ë 	 Á       Ë
+T
+N            4    0  480    3 %.1s4s4s4s4s8d8d8s8d8d8s8d8d6s6d6s6d6s6d3d3d3.
+T                          Ê                         	 Á      	Ë 	Á      	Ë 	Á     	Ë 	 Á     	Ë 	 Á      Ë
+T                                                    	 Á                	Ë 	Á               	Ë
+T                                                    	 Á                                   	Ë 	 Á                 Ë
+T
+T
+T  F
+T  F      RHYTHMICS MANUAL           CHANGING PARAMETER(S) OF SEVERAL NOTELINES: [F8] - [Ctrl]+[F3]            Î
+T  F      È                       Í
+T
+T
+T         [F8] + [F8]                Mark BEGINNING and END of a block on the work sheet: upwards or downwards.
+T
+T                                    (Changing parameters in a block passing the current filepage is not possible!)
+T
+T                                    A third time [F8] would unmark the block.
+T
+T
+T         [C] or [Shift]+[F8]-[C]    If you wish a security copy of the block: copies to [Ctrl]+[F8] - buffer.
+T
+T
+T         [Shift]+[F3]               Change parameter(s), (changing the number of 'Lines' will have no influence!).
+T
+T
+T                                    Changes that you want FOR ALL NOTELINES in the blockmark must                                                                                                                                   I
+T
+T                                    - eigther be made by entering new values
+T
+T                                    - or be confirmed with [Enter] - if you want the given values.
+T
+T                                    To change the 'Linestyle' you must activate the [Spacebar] - if choosing
+T
+T                                    'pitch', the lines should have a distance of at least 4, better 5 (Use [F4]).
+T
+T                                    Parameters that ar left untouched will not be changed: Ex.: change Grids only.
+T
+T
+T         [Esc]                      You will be asked to confirm the changes separately for each parameter.
+T
+T         È
+T
+T         MOUSE:                     MIDDLE mouse button is identical to [F8] (make shure mouse is installed!).
+T
+T                                    LEFT mouse button = [Enter] or [Y]. RIGHT mouse button = [Esc].
+T
+T                                    Use [ Block ] and [ NLDef ] of the mouse menu: [ MENU  ] or [F11].
+T          È
+T
+T         Test here:
+T
+N            8    0  480    3 %.1.1.1.1.1.
+T
+T
+N            4    4  480    1 %.1.1.1.1.1.
+T
+T
+N            5   12  600    3 %.1.1.1.1.1.
+T
+T  F
+T  F      RHYTHMICS MANUAL           WORKING WITH SEVERAL INDEPENDENT BUFFERS (MEMORIES)                       Î
+T  F      È                       Í
+T
+T         LINE BUFFER            -   [F7] saves a note- or (also empty!) textline to the LINE BUFFER.
+T
+T                                    [Ctrl]+[F7] pastes this buffer at cursor position.
+T
+T                                    Will only be overwritten by pressing [F7] again!
+T
+T                                -   Can be done as well in the [Shift]+[F7] menu or with the mouse: MENU or [F11].
+T
+T
+T         SPECIAL LINE BUFFER    -   Delete a line by pressing [Ctrl]+[Backspace].
+T
+T                                    Undelete it by [Shift]+[Insert]: works like an UNDO or MOVE.
+T
+T                                    Will only be overwritten by deleting a line again with [Ctrl]+[Backspace].
+T
+T                                -   Can be done as well in the [Shift]+[F7] menu.
+T
+T                                -   [Shift]+[Delete] and [Shift]+[Backspace] (see Line menu) do NOT use a buffer!
+T
+T
+T         BLOCK BUFFER           -   A marked block is copied to the buffer as soon as any action like:
+T
+T                                    copying [C], pasting [Ctrl]+[F8], moving (M), deleting [Ctrl]+[Del] is done.
+T
+T                                    [Esc] or [F8] again have no influence!
+T
+T                                    A deleted block can be recalled by [Ctrl]+[F8] or [Ctrl]+[Insert].
+T
+T                                -   Can be done as well in the [Shift]+[F8] menu or with the mouse.
+T
+T
+T         BUFFER FILES           -   See the Block menu [Shift]+[F8]: W and R!
+T
+T                                    Marked blocks can be written to xxxxxxxx.buf files that you name yourself.
+T
+T                                    Coming from any RNS-file these .buf files are all stored in the BUF-Directory.
+T
+T                                -   'Reading from a .buf file' presents a table of all the .buf files stored:
+T
+T                                    this allows you to copy (move) blocks to any other file in any RNS Directory -
+T
+T                                    or: use it as clipboard for special lines or buffers that you often use.
+T
+T
+T         PAGE BUFFER            -   [F9] marks the whole page including header/footer. Copying, moving, pasting,
+T
+T                                    delete (undelete) are then possible. See [Shift]+[F9] and mouse menu. Try it!
+T
+T  F
+T  F      RHYTHMICS MANUAL           SYMBOLS: REPLACE/OR CUMULATE ([Shift]+[F10]) or ADD                       Î
+T  F      È                       Í
+T
+T
+T                                    Each symbol has a parameter defining it as a 'replace' or an 'add' symbol.
+T
+T
+T         REPLACE/CUMULATE           If the keyboard setup [Shift]+[F10] is in standard mode, a symbol normally
+T
+T                                    replaces the older one(s) when you write in the same place.
+T
+T                                    - Otherwise use [Delete] and [.]).
+T
+T                                    If this mode is 'swapped', the symbols will be cumulated:
+T
+T                                    - for example to write a second voice with the pitch.fnt.
+T
+T                                      Mind the order of cumulated sounds - play with staccato mode (F5 - S)
+T
+T                              !!!   - Letter- and cypher.fnts: combine also: =, +, -, *, *=, *+, *- + 2 symbols.
+T
+T
+T         ADD                        Add symbols do never overwrite: they act as added information concerning
+T
+T         Ex.: [F10]+[Enter]:        a replace symbol or as information at a certain point (play: no influence!).
+T
+T         frequency = 0              After having typed an add symbol you must move the cursor: [cursor keys].
+T
+T         È
+T
+T
+T         PERC.FNT:                  Ex.: the PERC.FNT has several such add symbols:
+T
+T                   [*]
+N            4    0  480    3 %.1qd2pd2ad2yd2xd2cd2vd2md2.
+T
+T
+T         [Shift]+  [*]
+N            4    0  480    3 %.1Qd2Pd2d2Yd2Xd2Cd2Vd2Md2.
+T
+T
+T         [Alt]+    [*]
+N            4    0  480    3 %.1êd2èd2Äd2òd2ód2Çd2ïd2åd2.
+T
+T
+T                   [*]   =     	 [Q] 	      [P] 	      [A]  	     [Y] 	      [X] 	      [C] 	      [V] 	      [M]
+T
+T                                    Combining two or more add symbols is possible as well.
+T         È
+T
+T         STATUS LINE:               Use [Tab] and [Shift]+[Tab] to see the keys used.
+T  F
+T  F      RHYTHMICS MANUAL           SYMBOLS: [F10]-TABLE, FREQUENCY AND LENGTH OF SOUNDS                      Î
+T  F      È                       Í
+N   H        1    0  480    5 %.1.
+T
+T         PERC-SYS.RNS               To learn to use the keyboard for symbols, best is to refer to the files
+T
+T         PITCHSYS.RNS               called XXXX-SYS.RNS. They will show you the ergonomic keyboard installation.
+T
+T
+T         [F10]                      The [F10]-table gives a quick alphabetic overview: which key for which symbol.
+T
+T                                    For compatibility reasons you have no influence on form and placement. But by
+T
+T         FREQUENCY AND              choosing a key with the cursor and [Enter] you have direct influence on:
+T
+T         LENGTH OF SOUND            frequency and (maximum) length of each symbol sound.
+T
+T         È
+T
+T
+T         PITCH ADAPTIONS            Pitch adaptions to any (percussive) instrument or to any scale and key are
+T
+T                                    possible - but first try [F5] or [Ctrl]+[F5] and Numberblock!
+T
+T
+T         ADD SYMBOLS                In general the frequency of add symbols is set to zero.
+T
+T
+T         BEAT AND PULS              Beat- and Puls sound can be changed in the Options: [Shift]+[F5] + [Enter].
+T
+T         È
+T
+T
+T         YOUR OWN SOUND SETTING:    You should first copy for example perc.* into a file named by your choice:
+T
+T                                    (Ex.: perc-1.*) on the DOS level.
+T
+T                                    Restart RHYTHMICS, reopen the file and change to the new font: [Ctrl]+[F10].
+T
+T                                    This is because you overwrite the font immediately!
+T
+T                                    Or: at least take notes of your changes.
+T
+T
+T
+T
+T
+T         È
+T
+T         [Ctrl]+[F10]               Changes the font for the active file only
+T
+T  F
+T  F      RHYTHMICS MANUAL           TEXTLINES: SCREEN- AND POSTSCRIPT-FONT / CIRSPR MOVEMENTS                 Î
+T  F      È                       Í
+T
+T
+T                                    In order to get the result you want - you have to follow certain rules:
+T
+T
+T         POSTSCRIPT-FONT        -   ONE BLANK [Space] on the screen will be one blank for the postscript font as
+T
+T         ON TEXTLINES:              well, but as this font will equilibrate the spaces between the letters, the
+T
+T         GS HELVETICA 9 Pt          result will be different from what you see on the screen.
+T
+T
+T                                -   TWO BLANKS (or more) make the next word in postscript to start at the same
+T
+T                                    place as it starts on the screen: somehow this works like a tabulator.
+T
+T         È
+T
+T
+T
+T                                    Ex.:  - xxxxxx                              - xxxxxx
+T                                                          would show in PS:
+T                                            xxxxxx                                 xxxxxx
+T
+T
+T                                          -  xxxxxx                             -  xxxxxx
+T                                                          would show in PS:
+T                                             xxxxxx                                xxxxxx
+T
+T
+T         È
+T
+T
+T
+T         TABULATORS             -   If you want or need to insert TABULATORS with [TAB] or [Shift]+[TAB], be
+T
+T                                    aware that you must have reference points on a note- or helpline.
+T
+T
+T         È
+T
+T
+T
+T                                -   RHYTHMICS is of course NOT meant as a text editor, but you can nevertheless
+T
+T                                    use it partly as such: for technical references, syllables, song texts etc.
+T
+T                                    Use tabulators to position. Words passing over the right border are not cut!
+T
+T  F
+T  F      RHYTHMICS MANUAL           PRINTING: POSTSCRIPT PRINTS [Ctrl]+[F1] / SCREEN PRINTS                   Î
+T  F      È                       Í
+T
+T
+T         POSTSCRIPT PRINTS          Open the Print Menu with [Ctrl]+[F1] or with the mouse: MENU, Print.
+T
+T                                    Choose Options, read the comments in the bottom line, choose if 1 or 2 file-
+T
+T                                    pages should be printed on 1 (A4) sheet, choose a destination (usually 'File',
+T
+T                                    except when you have a postscript printer: then usually LPT1), enter a name
+T
+T                                    for the postscript file (.eps will be added automatically), leave Options.
+T
+T
+T                                    Select direct printing (to file) of - the current page only, - the whole file,
+T
+T                                    - from current page to end of file, - from beginning of file to current page.
+T
+T
+T                                    'List' let's you decide which pages and in what order they will be printed:
+T
+T                                    Possibilities:  a list with separators: [Space], [,] or [+],
+T
+T                                                    from/to commands upwards and downwards: [-] or [..]
+T
+T                                                    and all combinations and repetitions.
+T
+T
+T                                    This PS-file will be stored in the RNS-Subdirectory \PSFILES from where it
+T
+T                                    can be printed with a Postscript Printing Program.
+T
+T                                    There are several such programs, Goscript for example (commercial).
+T
+T                                    'Ghoastscript' is another one - and it is public domain!
+T
+T
+T         SCREEN PRINTS              There are commercial and non commercial Print Screen Programs (you might get
+T
+T                                    it by your printer dealer): choose the adequat color setting in the main menu
+T
+T                                    C - Colors: to get the result you want.
+T
+T                                    Do not forget to hide nonprintings, helplines, cursor and mousecursor!
+T
+T
+T                                    If you start Rhythmics from Windows you can use the clipboard and Paint Brush
+T
+T                                    to get screen prints - there you can even manipulate the outprint.
+T
+T  F      ASCII for RHYTHMICS: Press [Alt]+Code Number (on Numberblock)                                        Î
+T  F      È
+T                 Ï         Ï         Ï         Ï         Ï         Ï         Ï        Ï        Ï         Ï
+T         001       026       051  3    076  L    101  e    126  ~    151  ó    176  ∞   201  …   226  ‚‚   251  ˚
+T
+T         002      027  Esc  052  4    077  M    102  f    127  dLn  152  ò    177  ±   202      227   „   252  ¸
+T
+T         003      028      053  5    078  N    103  g    128  Ä    153  ô    178  ≤   203  À   228   ‰   253  ˝
+T
+T         004      029      054  6    079  O    104  h    129  Å    154  ö    179  ≥   204  Ã   229  vBr  254  ˛
+T
+T         005      030      055  7    080  P    105  i    130  Ç    155  õ    180  ¥   205  Õ   230  vBr  255  ˇ
+T
+T         006      031      056  8    081  Q    106  j    131  É    156  ú    181  µ   206  Œ   231  hBr
+T
+T         007      032  Spc  057  9    082  R    107  k    132  Ñ    157  ù    182  ∂   207  œ   232  hBr
+T
+T         008  BS   033  !    058  :    083  S    108  l    133  Ö    158  û    183  ∑   208  –   233  hLn
+T
+T         009  Tab  034  "    059  ;    084  T    109  m    134  Ü    159  ü    184  ∏   209  —   234  vLn
+T
+T         010       035  #    060  <    085  U    110  n    135  á    160  †    185  π   210  “   235  PNu
+T
+T         011      036  $    061  =    086  V    111  o    136  à    161  °    186  ∫   211  ”   236  vLn
+T
+T         012      037  %    062  >    087  W    112  p    137  â    162  ¢    187  ª   212  ‘   237  vLn
+T
+T         013  Ent  038  &    063  ?    088  X    113  q    138  ä    163  £    188  º   213  ’   238  Ó
+T
+T         014      039  '    064  @    089  Y    114  r    139  ã    164  §    189  Ω   214  ÷   239  Ô
+T
+T         015      040  (    065  A    090  Z    115  s    140  å    165  •    190  æ   215  ◊   240  Tab
+T
+T         016      041  )    066  B    091  [    116  t    141  ç    166  ¶    191  ø   216  ÿ   241  Ò
+T
+T         017      042  *    067  C    092  \    117  u    142  é    167  ß    192  ¿   217  Ÿ   242  Ú
+T
+T         018      043  +    068  D    093  ]    118  v    143  è    168  ®    193  ¡   218  ⁄   243  Û
+T
+T         019      044  ,    069  E    094  ^    119  w    144  ê    169  ©    194  ¬   219  €   244  Ù
+T
+T         020      045  -    070  F    095  _    120  x    145  ë    170  ™    195  √   220  ‹   245  ı
+T
+T         021      046  .    071  G    096  `    121  y    146  í    171  ´    196  ƒ   221  ›   246  ˆ
+T
+T         022      047  /    072  H    097  a    122  z    147  ì    172  ¨    197  ≈   222  ﬁ   247  ˜
+T
+T         023      048  0    073  I    098  b    123  {    148  î    173  ≠    198  ∆   223  ﬂ   248  ¯
+T
+T         024      049  1    074  J    099  c    124  |    149  ï    174  Æ    199  «   224      249  ˘
+T
+T         025      050  2    075  K    100  d    125  }    150  ñ    175  Ø    200  »   225  ·   250  ˙
+T  F
+T  F      RHYTHMICS MANUAL           TEST-SHEET: Change Font with [Ctrl]+[F10] or with MENU/Fonts              Î
+T  F      È                       Í
+T
+T
+T
+T
+T         for PERC.FNT:
+N            4   12  480    3 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T         È
+T
+T
+T
+T
+T         for PITCH.FNT(s)
+T
+T
+T
+N            8    4  480    2 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F      È
+T  F
+T  F                                 Going back to first page: Press [Ctrl]+[PgUp]
+T  F

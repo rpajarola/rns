@@ -1,0 +1,1 @@
+This directory contains postscript (.eps) files printed by rns.

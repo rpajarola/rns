@@ -1,0 +1,732 @@
+VERSION 003
+PERC.FNT
+  750  1  3  1  1
+ 8.0000000000E+01
+T PF
+T PF
+T PF      R H Y T H M I C S    .                                                     Î
+T PF
+T PF      È                 Í
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T P
+T
+T  F
+T  F      R H Y T H M I C S          INDEX                                                                     Î
+T  F      È                      	 Í
+N   H        1    0  480    5 %.1.
+T
+T
+T         PERC.FNT                   KEYBOARD: SYMBOLS AND SYMBOL-SIZES                                         2
+T
+T                                    KEYBOARD: ADDITIONAL SYMBOLS AND SPECIAL SIGNS                             3
+T
+T                                    KEYBOARD - ERGONOMY                                                        4
+T
+T                                    KEYBOARD: [-] [=] [+] [(] [)]                                              5
+T
+T
+T         È
+T
+T
+T
+T         SYSTEM IN DEUTSCH          SYMBOLE: PERKUSSIONS-SATZ                                                  6
+T
+T                                    ZUSATZ-SYMBOLE: PERKUSSIONS-SATZ                                           6
+T
+T                                    SPEZIELLE ZEICHEN                                                          8
+T
+T
+T                                    ZEIT-EINHEITEN (BEISPIELE)                                                 9
+T
+T                                    BEAT, INTER-BEATs, OFF-BEATs / binÑr - ternÑr                             10
+T
+T                                    BEWEGUNGS-TECHNIK                                                         11
+T
+T
+T                                    TROMMELSPRACHE / RHYTHMUSSPRACHE: REGELN                                  12
+T
+T                                    TROMMELSPRACHE / RHYTHMUSSPRACHE: BEISPIELE                               13
+T
+T
+T         È
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T         È
+T
+T                                                                                             NEXT PAGE: [Page Dn]
+T
+T         R H Y T H M I C S          KEYBOARD - ERGONOMY ([Shift]+F10]: standard!)                             Î
+T         È
+T                                 Í
+T         [Shift]          Â
+N            1    0  480    3 %.1.13Q.13W13E13R13.13T13Z13.13U13I13O13P.13.
+T
+T         UPPER ROW
+N            1    0  480    3 %.1.13q.13w13e13r13.13t13z13.13u13i13o13p.13.
+T
+T
+T         [Alt]
+N            1    0  480    3 %.1.13ê.13ñ13Ñ13ë13.13ì13ô13.13î.13à13é13è.13.
+T                          Ê
+T         È
+T
+T         UPPER ROW                     	Q  	   W  	   E  	   R        	   T  	   Z        	   U  	   I  	   O  	   P
+T         È
+T
+T         [Shift]          Â
+N            1    0  480    3 %.1.13A13S13D13F13.13G13H13.13J13K13L13.13.
+T
+T
+T         MIDDLE ROW
+N            1    0  480    3 %.1.13.a13s13d13f13.13g13h13.13j13k13l13.13.
+T
+T
+T         [Alt]
+N            1    0  480    3 %.1.13Ä.13í13É13Ö13.13Ü13á13.13â13ä13ã13.13.
+T                          Ê
+T
+T         È
+T
+T         MIDDLE ROW                   	 A  	   S  	   D  	   F        	   G  	   H        	   J  	   K  	   L  	   î
+T         È
+T
+T
+T         [Shift]          Â
+N            1    0  480    3 %.1.13Y.13X.13C.13V.13.13B13N13.13M.13.13.13.13.
+T
+T
+T         LOWER ROW
+N            1    0  480    3 %.1.13y.13x.13c.13v.13.13b13n13.13m.13,13.13.13.
+T
+T
+T
+T         [Alt]
+N            1    0  480    3 %.1.13ò.13ó.13Ç.13ï.13.13Å13ç13.13å.13,13.13 13.
+T                          Ê
+T         È
+T
+T         LOWER ROW                    	 Y  	   X   	  C  	   V        	   B  	   N        	   M  	   ,  	   .	  Spacebar
+T  F
+T  F      R H Y T H M I C S          KEYBOARD: SYMBOLS AND SYMBOL-SIZES                                        Î
+T  F      È                       Í
+T
+T
+T                                                      left              HAND               right
+T
+T         I/II: [Shift]+[F10]          Â
+N            1    1  480    3 %.4.4.4.4.12.12S12D12^òF12.12.12.12ïJ12K12L12.12.
+T               Symbols swap
+T
+T                                    I          	S     	D     	F                         	J     	K     	L
+T         I                              Â
+N            1    1  480    3 %.4d4D12É12.12d12D12É12,12.12s12d12f12.12.12.12j12k12l12.12.
+T                                      Ê
+T             	d     	D   	[Alt]d     II        	 s    	 d    	 f                        	 j     	k    	 l
+T         II                  	
+N            1    1  480    3 %.4É4d4É12d12D12.12.12í12É12Ö12.12.12.12â12ä12ã12.12.
+T                                        Ê
+T
+T         È
+T
+T
+T                                      Â
+N            1    1  480    3 %.4.4.4.4.12.12W12E12R12.12.12.12U.12I12O12.12.
+T
+T
+T                                    I          	W     	E     	R                         	U     	I     	O
+T                                        Â
+N            1    1  480    3 %.4.4.4.4.12.12w12e12r12.12.12.12u12i12o12.12.
+T                                      Ê
+T                                    II         	w     	e     	r                         	u     	i     	o
+T
+N            1    1  480    3 %.4.4.4.4.12.12ñ12Ñ12ë12.12.12.12î12à12é12.12.
+T                                        Ê
+T
+T         È
+T
+T
+T                                      Â
+N            1    1  480    3 %.4.4.4.4.12.12G12B12T12.12.12.12Z12N12H12.12.
+T
+T
+T                                    I          	G     	B     	T                         	Z     	N     	H
+T                                        Â
+N            1    1  480    3 %.4.4.4.4.12.12g12b12t12.12.12.12z12n12h12.12.
+T                                      Ê
+T                                    II         	g    	 b     	t                         	z     	n     	h
+T
+N            1    1  480    3 %.4.4.4.4.12.12Ü12Å12ì12.12.12.12ô12ç12á12.12.
+T                                        Ê	
+T
+T  F
+T  F      R H Y T H M I C S          KEYBOARD: ADDITIONAL SYMBOLS AND SPECIAL SIGNS                            Î
+T  F     ÈÈ                       Í
+T
+T
+T
+T
+N            1    1  480    3 %.4.4.4.4.6ê.12Q.12q.3p.12P.12è.6.
+T
+T         Q   P                              	[Alt]q 	  Q   	  q                        	 p   	  P  	[Alt]p
+T
+T         È
+T
+T
+T
+N            1    1  480    3 %.4.4.4.4.6Ä.12k12a.3.12.12.6.
+T
+T         A                               [Alt]a	    	  A   	  a
+T
+T         È
+T
+T
+T
+N            1    1  480    3 %.4.4.4.4.6[.]12.12(.)3m.12M.12å.6$
+T
+T         []  ()  M                           	 [ ]          	( )          	             	 m   	  M  	[Alt]m
+T
+T         È
+T
+T
+T
+N            1    1  480    3 %.4.4.4.4.6ò.12Y.12y.3v.12V.12ï.6$
+T
+T         Y   V                              	[Alt]y  	 Y   	  y                        	 v   	  V  	[Alt]v
+T
+T         È
+T
+T
+T
+N            1    1  480    3 %.4.4.4.4.6ó.12X.12x.3c.12C.12Ç.6$
+T
+T         X   C                              	[Alt]x  	 X   	  x                        	 c   	  C 	 [Alt]c
+T
+T         È
+T
+T
+T                                                                         [Shift]+[F10]               Non-printing
+N            1    1  480    3 %.4.4.4.4.6|≥.6/3 12,12.6.
+T                                                                              swap            	       [Shift]+[F1]
+T         ›   /   Spacebar   ,   .        	      ›           	 /                      	Spacebar	 ,     	.
+T                                                                                                      show/hide
+T
+T  F
+T  F      R H Y T H M I C S          KEYBOARD: [-] [=] [+], [(] [)], [[] []]                                   Î
+T  F      È                       Í
+T
+T
+T
+T
+T         -   =   +
+N            1    1  480    3 %.1.5d5-dd5=dd5+dd5.
+T
+T                                             	    d            	 -dd           	   =dd           	  +dd
+T
+T
+T         ()      []
+N            1    1  480    3 %.1.5(d)5[=dd]5-(d)d5=[s]d5.
+T
+T                                             	   (d)          	  =dd[]        	   -(d)d         	  =[s]d
+T
+T
+T
+T         È
+T
+T
+T
+T
+T
+N            1    1  480    3 %.1.5t5b5g5,=b5.
+T
+T                                               	  t           	    b         	      g            	  =b,
+T
+T
+N            1    1  480    3 %.1.5z5n5h5,=n5.
+T
+T                                               	  z           	    n         	      h            	   n,
+T
+T
+N            1    1  480    3 %.1.5=gg5=bb5=gb5=bg5.
+T
+T                                               	 =gg          	   =bb        	     =gb           	  =bg
+T
+T
+N            1    1  480    3 %.1.5=hh5=nn5=hn5=nh5.
+T
+T                                               	 =hh          	   =nn        	     =hn           	  =nh
+T
+T
+N            1    1  480    3 %.1.5=ÜÜ5=áá5=gT5=hZ5.
+T
+T                                               	 =gg          	   =hh        	     =gT           	  =hZ
+T
+T
+T
+T  F
+T  F      R H Y T H M I C S          SYMBOLE: PERKUSSIONS-SATZ                                                 Î
+T  F      È                       Í
+T
+T
+T
+T         Bass / Muffle *
+N            1    1  480    3 %.1F12F12f12f12Ö12Ö12J12J12j12j12â12â12.
+T         (betont/unbetont)
+T
+T
+T         Offen / Randschlag
+N            1    1  480    3 %.1D12D12d12d12É12É12K12K12k12k12ä12ä12.
+T         (betont/unbetont)
+T
+T
+T         Slap (allgemein)
+N            1    1  480    3 %.1S12S12s12s12í12í12L12L12l12l12ã12ã12.
+T
+T
+T
+T         Leerschlag / Touche
+N            1    1  480    3 %.1 12 12 12 12 12 12Ñ12Ñ12Ñ12Ñ12Ñ12Ñ12.
+T
+T
+T
+T         Muffle *
+N            1    1  480    3 %.1R12R12R12R12r12r12r12r12ë12ë12ë12ë12.
+T         als Zwischenschlag
+T
+T
+T         Ballen / Tip
+N            1    1  480    3 %.1W12w12w12ñ12E12e12e12Ñ12w12e12ñ12Ñ12.
+T         / Wippe
+T
+T
+T         auf+ab, weg+zu
+N            1    1  480    3 %.1t12b12=gg12=bb12=gb12=bg12z12n12=hh12=nn12=hn12=nh12.
+T         betont / unbetont
+T
+T         in 3 versch. Grîssen
+T
+T
+T         Parallelschlag,
+N            1    1  480    3 %.1=ff12=dd12=ss12=ds12-ff12-dd12-ss12-ds12+ff12+dd12+ss12+sd12.
+T         Vor- + Nachschlag-Flams
+T
+T         in 3 versch. Grîssen.
+T                                    -  bei mehreren Trommeln: verschiedene Grîssen verwenden
+T         Kombinierbar!
+T                                    -  gross/klein, fett/mager definierbar als betont/unbetont
+T
+T  F
+T  F      R H Y T H M I C S          ZUSATZ-SYMBOLE: PERKUSSIONS-SATZ                                          Î
+T  F      È                       Í
+T
+T
+T
+T
+T         Klingender Slap
+N            1    1  480    3 %.1qs12qs12qs12qs12qs12qs12qs12qs12qs12qs12qs12qs12.
+T
+T
+T
+T         Gestoppter ...
+N            1    1  480    3 %.1ad12ad12ad12ad12ad12ad12as12as12as12as12as12as12.
+T
+T
+T
+T         Gepresster ...
+N            1    1  480    3 %.1(pf12pf12pf12pf)12pd12pd12pd12pd12ps12ps12ps12ps12.
+T
+T
+T
+T         GedÑmpter ...
+N            1    1  480    3 %.1(mf12mf12mf12mf)12md12md12md12md12ms12ms12ms12ms12.
+T         mit 2.Hand
+T
+T
+T         GedrÅckter ...
+N            1    1  480    3 %.1(cf12cf12Cf12Cf)12cd12cd12Cd12Cd12cs12cs12Cs12Cs12.
+T         mit 2.Hand
+T
+T
+T         GedrÅckter ...
+N            1    1  480    3 %.1(xf12xf12Xf12Xf)12xd12xd12Xd12Xd12(xs12xs12Xs12Xs)12.
+T         mit Ellbogen
+T
+T
+T         Betonter/Leiser ...
+N            1    1  480    3 %.1vf12Vf12yf12Yf12vd12Vd12yd12Yd12vs12Vs12ys12Ys12.
+T
+T
+T
+T         Glissando (Moose)
+N            1    1  480    3 %.1åd12åd12åd12åd12åd12åd12åd12åd12åd12åd12åd12åd12.
+T
+T
+T
+T         Vibrato (Wirbel)
+N            1    1  480    3 %.1Md12Md12Md12Md12Md12Md12Md12Md12Md12Md12Md12Md12.
+T
+T
+T
+T  F
+T  F      R H Y T H M I C S          SPEZIELLE ZEICHEN                                                         Î
+T  F      È                       Í
+T
+T
+T         reine
+N            1    1  480    3 %.1,12,12,12,12,12,12,12,12,12,12,12,12.
+T         Zeiteinheiten
+T
+T         È
+T
+T
+T                                    wiederholen          bedingte Sprungmarke                   absolute
+N            1    1  480    3 %.1A12.12.12›.12.12.12.12.12.12/12.12.12.
+T                                    in Form              (kann auch am Anfang stehen)           Sprungmarke
+T
+T         È
+T
+T
+T         ganze Form(en)             Wiederholung
+N            4    1  480    3 %.1Q,1QP.1.1P$
+T
+T         È
+T
+T                                   s               e             c         d         p/pp      f/ff
+T         von ...
+N            1    1  480    3 %.7ê.7ê,7ê,7ê,7.7.7ê,8,8è,8ê,8ê,8ê,8ê,8.16è,16.
+T         bis und mit                Start   /    Ende          	  cresc.   	 dim.   	   piano   	  forte     	..bis
+T
+T         È
+T
+T
+T         Richtungs- und
+N            1    1  480    3 %.8Å.8ò,12=òò,12=Åò,12Åò,12ó,12.12.4óÄ,4Ç,4ò,4ï,4.
+T         Beachtungs-Pfeile
+T                                    Muster / Pulswechsel / Anmerkungen
+T
+T         È
+T
+T
+T         weglassen : ()
+N            1    1  480    3 %.1(d)4[-(d)d]4(-[d]d)4+[d]d4.
+T         hinzufÅgen: []
+T
+T         È
+T
+T
+T         bestimmen
+N            1    1  480    3 %.1/12s12/12qs12/12.
+T         (Definition)
+T
+T
+T  F
+T  F      R H Y T H M I C S          ZEIT-EINHEITEN (BEISPIELE)                                                Î
+T  F      È                       Í
+T
+T
+T
+T
+T         Form (F):   4  (Beats)
+N            4   12  480    3 %.1,4,4,4,4.4,4,4,4,4,4,4,4,4,4,4,4.
+T
+T         Formzahl:  16  (Units)  	1   	 2  	  3  	  4  	  5  	  6  	  7  	  8  	  9 	  10  	 11  	 12  	 13  	 14  	 15   	16
+T
+T         Units (U) = Einheiten
+T                                 	1                 	  2                  	 3                 	  4
+T         Beat (B)
+N            4   12  480    3 %.1d4,4,4,4d4,4,4,4d4,4,4,4d4,4,4,4.
+T
+T         Puls (P)   (U per B)    	1   	 2   	 3   	 4   	 1   	 2   	 3   	 4   	 1   	 2   	 3   	 4   	 1   	 2   	 3   	 4
+T
+T
+T
+T         4B/4P
+N            4   12  480    3 %.1d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4.
+T         4x4 (16U)
+T
+T
+T                                 1                   2                   3
+T         3B/4P
+N            4   12  480    3 %.1d4d4d4d4d4d4d4d4d4d4d4d4/4.4.4.4.
+T         3x4 (12U)
+T
+T
+T                                 1                         2                         3
+T         3B/4P
+N            3   16  480    3 %.1d4d4d4d4d4d4d4d4d4d4d4d4.
+T         3x4 (12U)
+T
+T
+T                                 1                   2                   3                   4
+T         4B/3P
+N            4   12  480    3 %.1d3d3d3d3d3d3d3d3d3d3d3d3.
+T         4x3 (12U)
+T
+T
+T                                 1            2            3            4            5            6
+T         6B/4P
+N            6    8  480    3 %.1d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4.
+T         6x4 (24U)
+T
+T
+T
+T
+T  F
+T  F      R H Y T H M I C S          BEAT, INTER-BEATs, OFF-BEATs / binÑr - ternÑr                             Î
+T  F      È                       Í
+T
+T
+T             binÑr   b                	    Inter-Beats    	            Off-Beats                    Puls
+N            3    1  480    3 %.1.2.2.2.2.2.2.
+T             ternÑr  t           	 Á                     	  Ë 	Á                      	 Ë 	Á                       Ë
+T
+T                                              	 IB                        	OB                    	    P
+T         1P  Beat B
+N            3   12  480    3 %.1f1f1f1.
+T
+T                                 	1                        	 1                        	 1
+T
+T         2P  Single-Time ST
+N            3   12  480    3 %.1f1f2s2f2,2$
+T             1bOB
+T                                 	1                        	 1 	           +(und) 	      1	            2
+T
+T         3P  ST
+N            3   12  480    3 %.1f3.3.3f3s3s3f3,3,3.
+T             2tOB
+T                                 	1                        	 1	       +(und)  	-(ae)     	 1       	2       	3
+T
+T         4P  Double-Time DT
+N            3   12  480    3 %.4.4.4.4f2d2f4s4 4s4f4,4 4,4.
+T             1IB/2bOB
+T                                 	1           	 2            	1     	+     	2    	 +     	1     	2     	3     	4
+T
+T         6P  DT
+N            3   12  480    3 %.6.6.6.6.6.6f2d2f12.12s12.12s12.12 12.12s12.12s12.12f6,6,6 6,6,6.
+T             1IB/4tOB
+T                                 	1            	2            	1   	+   	-  	 2  	 +   	-   	1   	2   	3   	4   	5   	6
+T
+T         6P  Triple-Time TT
+N            3   12  480    3 %.1f3d3d3f6s6 6s6 6s6f6,6 6,6 6,6.
+T             2IB/3bOB
+T                                 	1       	2      	 3        	1 	  + 	  2 	  + 	  3 	  +   	1   	2   	3   	4   	5   	6
+T
+T         8P  DDT
+N            3   12  480    3 %.1f4d4d4d4f8s8 8s8 8s8 8s8f8,8 8,8 8,8 8,8.
+T             3IB/4bOB
+T                                	 1    	 2    	 3    	 4    	 1 	 + 	 2 	 + 	 3 	 + 	 4 	 + 	 1  	2 	 3  	4  	5  	6  	7 	 8
+T
+T        12P  DTT/TDT
+N            3   12  480    3 %.1f6d6d6d6d6d6f12s12 12s12 12s12 12s12 12s12 12s12f12,12 12,12 12,12 12,12 12,12 12,12.
+T             5IB/6bOB
+T                                 	1   	2   	3   	4   	5   	6   	1 	+ 	2 	+ 	3 	+ 	4 	+ 	5 	+ 	6 	+ 	1	 .	 .	 .	 .	 .	 -	 .	 .	 .	 .	 12
+T             2x3/3x2
+T
+T
+T  F
+T  F      R H Y T H M I C S          BEWEGUNGS-TECHNIK                                                         Î
+T  F      È                       Í
+T
+T
+T
+T         Handsatz:                  1 = Haupthand (R fÅr RechtshÑnder, L fÅr LinkshÑnder)
+T
+T                                    2 = Nebenhand (L fÅr RechtshÑnder, R fÅr LinkshÑnder)
+T
+T         È
+T
+T
+T         Hand 1
+N            4   12  480    3 %.1f3,3d3,3s3,3f3,3d3,3s3,3.
+T
+N            4   12  480    3 %.1,3d3,3f3,3 3,3d3,3s3,3,3.
+T         Hand 2
+T
+T
+T         zusammen
+N            4   12  480    3 %.1f3d3d3f3s3 3f3d3d3s3s3 3.
+T
+T
+T         versch. Technikeb (T):
+T
+T
+T         alt     (alterniert)    	1     	2     	1     	2     	1     	2     	1     	2     	1     	2     	1     	2
+T
+T
+T         alt    (abgeleitet.von)	1     	2     	1     	2     	1     	-     	1     	2     	1     	2     	1     	-
+T
+T
+T         rhyalt  (rhythmisch alt)	1     	2     	1     	2     	1     	      	2     	1     	2     	1     	2
+T
+T
+T         1-1-2 / (1-1-2)        	1     	1     	2     	1     	1    	(2)    	1     	1     	2     	1     	1    	(2)
+T
+T
+T         1-1-2 + rhyalt          	1     	1     	2     	1     	2            	1     	1     	2     	1     	2
+T
+T         È
+T
+T
+T
+N            4   12  480    3 %.1Ö3,3É3,3É3,3É3,3É3,3É3,3.
+T
+T         Faust- und              	f            	i            	m            	r            	s            	t
+T
+T         Finger-Technik         	 fist         	index        	middle       	ring         	small        	thumb
+T
+T
+T  F
+T  F      R H Y T H M I C S          TROMMELSPRACHE / RHYTHMUSSPRACHE: REGELN                                  Î
+T  F      È                       Í
+T
+T
+T         mit tiefem Ton     :       eine Silbe mit dem Vokal u  (auch a oder e)
+N            1    0  480    3 %.3.3.3f1.
+T
+T         mit mittlerem Ton  :       eine Silbe mit dem Vokal e  (auch i oder o)
+N            1    0  480    3 %.3.3.3d1.
+T
+T         mit hohem Ton      :       eine Silbe mit dem Vokal a  (auch o oder e)
+N            1    0  480    3 %.3.3.3s1.
+T
+T
+T
+T                               A    Wichtigstes Element ist die Tonhîhe (hier sind interkulturell alle Rhythmus-
+T
+T                                    Sprachen gleich); Beat betonen oder mindestens mitdenken!
+T
+T
+T
+T                               B    Der mittlere Ton soll dem gestimmten Ton des Instruments (harmonisch) ent-
+T
+T                                    sprechen; die Trommelsprache soll das/die Instrument/e nachahmen: sowohl
+T
+T                                    rhythmisch als auch melodisch.
+T
+T
+T
+T                               C    Tonfolgen wie DO-MI-SOL, DO-FA-LA, FA-LA-DO und DO-SOL-DO sind die gebrÑuch-
+T
+T                                    lichsten; bei mehreren Instrumenten werden deren Stimmungen Åbernommen.
+T
+T
+T
+T                               D    Mit tiefem Ton: fÅr leere Beats anfangs ein u, dann ein - hinten erzeugtes
+T
+T                                    'n' (n wie im Wort 'Hunger'), spÑter ganz weglassen.
+T
+T
+T
+T                               E    Konsonanten vor Vokale setzen: t + k/c, d + g, p + t/d, k + l, tr/tl + k
+T
+T                                    sollten sich abwechseln; die stÑrkeren Konsonanten fÅr Beat/Zwischenbeat ver-
+T
+T                                    wenden; phonetische Aussprache, nicht aspirieren: z.B. "ta" ist nicht "tha".
+T
+T
+T
+T                               F    Vokalvermehrungen und/oder die Endung 'ng' drÅcken Pause(n) aus.
+T
+T  F
+T  F      R H Y T H M I C S          TROMMELSPRACHE / RHYTHMUSSPRACHE: BEISPIELE                               Î
+T  F      È                       Í
+T
+T
+T         A
+N            4   12  480    3 %.1f1f1f1f1.
+T
+T                               	 Tung 	               tung              	  tung           	     tung
+T                                 	-                   	-                   	-                   	-
+T         B
+N            4   12  480    3 %.4.4.4.4f4 4s4s4f4d4d4d4f4 4s4s4f4 4d4d4.
+T
+T                               	 Tung-    	 ka- 	 da  	 tu- 	 ge- 	 de- 	 ge  	 tung-    	 ka- 	 da  	 tung-    	 ke- 	 de
+T                                 	-                   	-                   	-                   	-
+T         C
+N            4   12  480    3 %.1f3s3s3f3d3d3f3s3 3d3s3 3.
+T
+T                               	 Tu- 	  ga- 	  da	    tu- 	  ge-	   de	    tu- 	  gang       	  te- 	  gang
+T                                 	-                   	-                   -                   -
+T         D
+N            4   12  480    3 %.1s4,4,4s4,4,4s4,4,4,4s4,4s4,4,4,4.
+T
+T                             	   Tang          	 ka-	  dung-   	  kang     	 tung-   	  kang-   	  kang
+T                                 	-                   	-                   	-                   	-
+T                              	  Tang          	 ka- 	  n       	 kaa      	 -n       	 kang-    	 kang
+T                                 	-                   	-                   	-                   	-
+T         E
+N            4   12  480    3 %.3.3s3s3,3s3,3s3s3,3s3,3s3,3/3.
+T
+T                         	 ka-	   Dang       	  ka- 	   n-  	 ka-  	 da- 	   n-  	 kang      	   kang
+T                                 	-                   	-                   	-                   	-
+T                          	ko- 	  Long       	  ko- 	   ng  	 ko-  	 lo- 	   ng  	 kong      	   kong
+T
+T         F
+N            4   12  480    3 %.1w4e4s4r4w4e4d4d4w4e4s4D4D4r4d4d4.
+T
+T                               	 Ti- 	 ki-  	ta- 	  ng  		ti- 	 ki- 	 te- 	 ke  	 ti- 	 ki- 	 ta- 	 ko- 	 to- 	  ng 	 te- 	 ke
+T
+T         G
+N            4   12  480    3 %.1-ss3d3d3s6s6d3d3d6d6d6d6d6d6s6s6d3d3.
+T
+T                               	Tra  	 -ke  	 -te  	  ta	-ra	-ke  	 -te   	 te	-ge	-de	-te	-ge	-de 	ta	-ra	-ke  	 -te
+T
+T
+T         È
+T
+T
+T         öBUNG 1:  ([Enter]/[F5])   Einzelne Linien abspielen und mitsprechen. (grau)[+]/[-] = Geschwindigkeit.
+T
+T         öBUNG 2:                   'Wîrter' mit/ohne Bindungen auf ein Blatt schreiben. Beats unterstreichen
+T

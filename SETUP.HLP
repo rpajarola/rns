@@ -1,0 +1,32 @@
+version 001				      A
+	      4   12  480    3		      B
+N	     4	  0  480    3 %.1.	      C
+	      1 			      D
+	    2  1  2  3	1  1  2 	      E
+  1  1					      F
+d.eps					      G
+  1					      H
+FILE					      I
+  750  1  3  2	1			      J
+L					      K
+  1760	  10				      L
+    50	  10				      M
+PERC.FNT				      N
+********************************************************************************
+
+A   RHYTHMICS Versions-Nummer
+B   4 = Number of beats, 12 = Number of Grids, 480 = Resolution, 3 = Linestyle thick-thin[ ]/thick[ ]/thin[3]/dotted[ ]/helpline[ ] (im Shift F3 Menu;
+C   N = Noteline: 4 = Number of beats, 0 = Number of Grids, 480 = Resolution, 3 = Linestyle, %. = 1.Beat, 1 = 1er-Puls von links, . = Leerzeichen '.';
+D   1 = Number of Lines (im Shift-F3 Menu);
+E   2 = nonprinting marks show[1]/hide[2], 1 = Grids hide[1]/show all[2]/show main[3], 2 = Helplines show[1]/hide[2], 3 = Cursor show[1]/show cross[2]/hide[3];
+    1 = Symbol size standard[1]/swapped[2], 1 = Empty symbol standard[1]/swapped[2]/, 2 = Replace mode standard[1]/swapped[2];
+F   1 = Print on 1page[1]/2pages[2], 1 = Print to LPT1[1]/LPT2[2]/LPT3[3]/com1[4]/com2[5]File[6];
+G   d.eps = Name des .eps-files (in Ctrl-F1, Options)
+H   1 = ?
+I   FILE = Drucken in [File]/[LPT1]/[LPT2]/[LPT3]/[com1]/[com2] (in Ctrl-F1, Options)
+J   750 = Speed, 1 = per beat[1]/line[2], 3 = Beatsound no[1]/always[2]/empty only[3], 2 = Pulssound no[1]/yes[2], 1 = Keyboard sound on[1]/off[2] (in Ctrl-F5, Options);
+K   L = Linesound[L]/Pagesound[P]/Buffersound[B]/Filesound[F] (im Ctrl-F5 Menu);
+L   1760 = Anzahl Hz des Beat-Sounds, 10 = Tondauer in ms (in Ctrl-F5, Options)
+M   50 = Anzahl Hz des Puls-Souds, 10 = Tondauer in ms (in Ctrl-F5, Options)
+N   PERC.FNT = Font-File das im zusetzt bearbeiteten Directory verwendet wurde
+

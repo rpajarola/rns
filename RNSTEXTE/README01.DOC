@@ -1,0 +1,276 @@
+Ver„nderungen vorgenommen in:
+********************************************************************************
+
+helpunit.pas
+comunit.pas
+specunit.pas
+sp2unit.pas
+sndunit.pas
+sdunit.pas
+imenunit.pas
+
+andere diesmal leider ohne Gew„hr, kannst Du vermutlich testen:
+wenn ja, bitte sag mir dann WIE.
+
+Kopiere das SETUP.CFG ber alle Deine Setup.cfg-s in den Directories,
+sonst bekommst Du Runtimes; w„re eben etwas zum Abfangen.
+Suche nach Funktion: "...erstbesten..." in den .pas-files.
+
+
+********************************************************************************
+
+
+Lieber Paul,
+
+das line pattern setup und das default page setup funktioniert
+wieder! (File EDITUNIT.PAS, Zeile if not defpage...)
+
+
+das program l„uft auch, wenn das directory, das im config.rns steht,
+nicht existiert. (UseSaveConfig)
+Stimmt leider nicht immer: irgendwie nimmt er immer wieder den PERC.FNT
+hinein, und bleibt dann schon am Anfang mit einem Runtime stecken.
+Nenn mal den Perc.fnt um, geh' aber VORHER noch in ein Directory und configu-
+riere dafr den Perc.fnt..
+Rico und ich haben daran gebastelt, sind aber immer wieder auf die Nase gefallen,
+Suche nach "erstbesten".
+
+
+fonts werden correct gespeichert wenn das directory gewechselt wird.
+(UseTopMenu)
+Fontwechsel sollte aus einem Directory m”glich sein, so weiss man nie genau
+wofr der Wechsel dann wirklich gilt - jetzt muss man ZUERST das Directory
+anw„hlen, DANN den dafr gewnschten Font. Mach' ich's mal umgekehrt, bleibt
+eben der Font configuriert, den ich das letzte Mal fr dieses Directory
+gew„hlt habe.
+
+
+Neu programmiert:
+
+xxxxxxxxxxxxxx xxxxx ssssss  (Hint 32)
+Press Y to continue, [Esc] to cancel
+
+HintFrame und Texth”he fr Ctrl-F2 (Split File) und F2 (Saving file) justiert
+
+New Page?
+Press [Enter] or Y to continue, [PgUp] or [Esc] to cancel
+Und den Rahmen, resp. den Text den andern Hints angepasst (war zu schmal)
+
+F2  = Save file, und Anzeigedauer verkrzt (weil blicher: BP, PE und andere)
+      bei Setup page nicht m”glich (wie gehabt, aber wieso eigentlich nicht?)
+F10 = Symbol-Table (weil auf Shift-F10 Keybord)
+      auch aus Setup page aufrufbar (ist ja klar, oder? nur: bis man weiss wo
+      Du das wieder versteckt hast ..)
+
+PagRefPage berall dort hineingenommen, wo der Refresh ungengend oder (st”-
+rend) nicht vorhanden war.
+Bsp.: nach Hintexten, allen Menus, unmark block etc.
+Mit dem Stiff-Font ist die PagRefClearVal v”llig ungengen bei ins und del,
+mit dem Perc-Font ist' aber wieder o.k.
+im Moment leb' ich besser mit diesen Refreshes, k”nnte mir aber vorstellen,
+dass man PagRefClearVal von symbols.par (shift-height) abh„ngig macht, er
+msste allerdings am besten die ganze ML erst absuchen, den tiefsten und
+h”chsten Shift-heigt finden und enstprechend refreshen.
+Man msste die PagRefClearVal(ues) mal berarbeiten.
+
+F6  1.Mal = Begin blockmark
+    2.Mal = End   blockmark
+    3.Mal = Unmark  block, dann f„ngts wieder von vorne an
+
+Damit ist F8 endlich wieder frei als Buffer fr die mit F7 gesaveten Linien,
+womit ein von Ctrl-Insert unabh„ngiger Buffer entsteht (Hab ich aber leider
+nicht "hinjekriecht", w„re also eine kleine Aufgabe fr Dich).
+So kann man sich gleichzeitig 3er Online-Buffer bedienen:
+-  Ctrl-Insert (durch Ctrl-Delete, copy block, delete block gefllt)
+-  Shift-Insert (durch Ctrl-BS)
+-  F8 (durch F7)
+Die Funktion Write to / Read from Buffer verlangt
+die Fhrung einer Liste der .buf-Files oder
+die Benennung mit der Endung .rns (dann sieht man sie wenigstens als "Files"
+Ich wrde die .buf alle in ein separates Directory schreiben, dorthin und
+von dort beim Aufruf von Write to und Read from buffer schreiben, wobei beide
+Male die LISTE der .buf-Files erscheinen wrde. Dann w„re diese Option
+auch brauchbar und wirklich ein Super-Tool, so ist es eher mhsam damit umzu-
+gehen (weiss Name nicht mehr oder nicht ganz genau, Kopieren in andere Files
+oder gar Directories ziemlich aufwendig.
+Rico ist dran eine MultiFileFunction zu erstellen: vergl. Cascade, Tiles im BP,
+womit dann "Windowshaftes Herumtransportieren" erfllt sein wrde (ob er's
+schafft?).
+
+Shift-F6 funktioniert jetzt auch wenn aus einem Header aufgerufen
+	 ebenfalls, wenn ein Block markiert ist:
+		    (kleinen Fehler hat's noch: siehe couldyou.doc)
+	 d.h. man kann (endlich) einen Block in die Setup page importieren
+	 resp. von dort auch exportien. Bis jetzt musste ich dies immer ber
+	 writeto/readfrom machen
+	 Bsp.: Man zeichnet in einem File etwas, das man eigentlich gerne in
+	       der Setup page h„tte (kommt oft genug vor).
+	 Wenn der markierte Block zu gross ist, resp. wenn eigentlich auf der
+	 Setup page kommen msste 'not enough space on page', (bei einem Ein-
+	 schub zum Beispiel), dann meckert er nicht, schreibt nichts irgendwo
+	 anders hin etc., gibt aber auch keine Meldung aus - dies msstest Du
+	 noch erg„nzen - ansonsten ist das jetzt fr mich sehr brauchbar.
+	 Auf insert-textline und Del-BS im Header habe ich vorl„ufig ver-
+	 zichtet, weil die berhmten 'Nebenwirkungen' noch zu wenig erforscht
+	 sind (w„re aber sinnvoll).
+In diesem Zusammenhang: erg„nzen, ev. mit einem einzigen "Menupunkt:
+toggle: page / file" (msste wahrscheinlich immer wieder automatisch  auf page
+zurckgesetzt werden, nach einmaligem Gebrauch von file (!???)) (waseliwas?):
+Mark/Unmark ALL headers/footers (sonst OBERMšHSAM einen Index von einem
+gr”sseren File zu erstellen, oder auch: Fehler, weil dann irgendeine Seite aus
+Versehen nicht markiert ist, vorheriges genaues Durchkontrollieren n”tig etc.)
+Eine Andere Idee:
+Index k”nnte auch erstellte werden, wenn einfach immer z.B. die ersten 8 Linien
+eines Files kopiert wrden; gerade professionell ist dies allerdings nicht,
+vielleicht praktikabler
+
+LinePattMenu Shift-F4: Firstline auf 2 gesetzt
+Titel-Zeile-Linie der Menus: Abstand auf 22 erh”ht
+Alle Menus mit Hintline: Abstand von unten von 4 auf 5 gesetzt (damit's nicht
+			 mehr nach Amateur-Programmierung aussieht)
+Options-Menus: 6, stimmt dann auch wieder bei Ctrl-F5
+
+Habe erlaubt, dass bei einer Blockmarkierung auch Insert Page m”glich ist:
+kommt ”fter mal vor, dass man den Block schon markiert hat, dann geht man
+an die Stelle, wo man ihn hinbringen oder kopieren will - und m”chte das dann
+doch lieber in eine eingeschobene Seite bringen - man musste den Block wieder
+entmarkieren, die Seite einfgen, den Block ... ich denke, Du siehst's jetzt ein
+
+F1-Menu aufdatiert, berarbeitet und neu dargestellt; Cursor entfernt
+H„tte das eigentlich ganz gerne auch im Grafik-Modus (in Anlehnung an die
+Symbol-Table). Ebenso die Initscreen, das Ganze wrde wesentlich einheitlicher.
+K”nnte man als Bildschirmschrift eine Proportionalschrift verwenden (sans z.B.)
+Rico hat die M”glichkeit TIF-Bilder umzuwandeln, so dass man sie ins Programm
+einbinden k”nnte: frher oder sp„ter gibts dann also einen signethaften Titel
+
+
+Ebenfalls von Rico angesagt: Drucker-Treiber fr HP-Drucker
+			     (90-180-300 dpi Aufl”sung)
+Schon gemacht: Die *.bgi     sind ins Programm integriert
+			     (habe ich noch draussen gelassen)
+Neu ab Dienstag:	     Alle File-Namen gleich breites Feld: TEST	   RNS
+								  ODERACHT RNS
+			     Hightlight immer gleich breit
+			     Weiter nach unten oder nach rechts als Files vor-
+			     handen sind, wird nicht mehr m”glich sein.
+
+			     Testet ob wenigstens ein 286 benutzt wird
+			     Seit die Konfigurationen Directory-abh„ngig sind
+			     (was ja schon gut ist) ist es schon mit einem
+			     286 penibel zu arbeiten
+			     Damit F11 und F12 benutzt werden kann, was dann
+			     ja auch sinnvoll ist, wird eine neue Routine
+			     kommen, die dies erm”glicht.
+
+Das eine gr”ssere Ver„stelung m”glich w„re, hat er nicht geschafft:
+W„re aber mein "Osterwunsch" gewesen, jetzt wart ich eben bis Weihnachten
+C:(\MUSIC)\RCS (fr Rhythmics); wrde diese Umtaufe vorschlagen !!!
+	    \DIRs		Files k”nnten weiterhin, .rns heissen, falls es
+	      \SUBDIRs		sonst zu komblisiert wird (.RNS fr Rhythm No-
+		\FILEs		tation System) .rcs w„re aber vom Programm-
+				Namen her logischer.
+				Programm-Files wie config.rns
+				umtaufen: keine Endung wie fr Files verwenen.
+
+
+Bist Du also doch noch zu Deinem readme.doc gekommen
+
+						 Lieben Gruss
+
+						 Peo
+
+(Schlieren, 1.Mai (Tag der Computer-Arbeit, (' s'machtSpasss'machtSpass ')))
+
+
+Frage:		Ist die eigene Kreation eines Zeichenfonts fr RNS im Prinzip
+		durch einen raffinierten user m”glich?
+		Wie verhinderbar?
+
+Bitte:		\c: QRAM.SYS kopieren
+		Sonst kann ich QEMM nicht einrichten.
+
+********************************************************************************
+11.07.93
+Neuerungen:
+-Sndunit/pageunit/comunit/imenuuni:
+
+F5:		Falls linesound (in sndchar) angew„hlt ist, und der Curosr
+		nicht auf einer ML ist, wird automatisch pagesound ausgefhrt.
+		Falls ein Block markiert ist, wird automatisch der Block
+		abgespielt. Wenn er auf einer ML ist wird Linesound gespielt.
+		Und wenn die ganze Seite leer ist, gibt es einen Absturz.
+		betrifft sndunit, comunit
+
+ctrl-F5 	Falls linesound angew„hlt wird, und der Cursor nicht auf einer
+		ML ist, wird die n„chste ML ausgefhrt. Wenn die Seite leer ist
+		wird normalerweise ein filesound ausgefhrt, manchmal fhrt das
+		auch zu einem Absturz.
+		betrifft sndunit, comunit
+
+		Bei beiden F5s kann man beliebig viel mal esc drcken, ohne
+		dass er ganz raus verreist(diese Formulierung stammt von Peo)
+		Wenn man vorher etwas anderes drckt, spielt es die linie
+		nicht solange, bis endlich das esc im Tastaturpuffer dran ist,
+		sondern liest den ganzen Puffer.
+		betrifft imenuuni
+		Wnschenswert w„re ein sofortiger Abbruch bei Esc, ein play
+		to end of line (ideal: wieder bis und mit 1ster Beat) mit
+		Shift-Esc.
+		Alt-Esc k”nnte man zum Abbruch ohne saving verwenden.
+
+Shft-F2 	J/S waren vertauscht, stimmt jetzt.
+		betrifft pageunit.
+
+********************************************************************************
+
+12.7.93
+
+F1		helpunit.pas leicht ver„ndert
+		F1 'this help table'
+		F5 'sound check' wegen den neuen M”glichkeiten von F5
+		Ctrl-F5 'sound options'
+
+		Ctrl-F5 hat nicht mehr die gleiche Bedeutung wie vorher, da
+		man jetzt das Meiste, ev. ausser File-Sound und Options direkt
+		mit F5 machen kann!!!.
+		Dieses 'sound options' sollte unbedingt mit Shift-F5 aufgerufen
+		werden k”nnen, wie die andern Menus.
+		Es erg„ben sich damit Verschiebungen:
+		(mit noch ein paar andern Ueberlegungen zusammen)
+
+		      F6: cut line
+		      F7: paste line
+		Shift-F1: show / hide
+		Shift-F2: setup filepage (entspr. save file, split file)
+
+		Shift-F5: sound options  (entspr. F5 sound check)
+		Shift-F6: search and replace
+		Ctrl- F6: repeat search
+		Shift-F7: o.k. (entspr. F8, Shift-F8 block, header ist auch ein Block)
+		Shift-F8: block commands (entspr. F8 block mark)
+		Shift-F9: page commands (enstspr. refresh page)
+		Alt-F9	: number of page (entsprechend F9 und Shift-F9)
+
+		Habe noch (fast) nichts ge„ndert, weils fr Dich wahrscheinlich
+		zu viele Konsequenzen h„tte fr Deine Maus-Routinen
+		Was momentan sicher sinnvoll ist:
+		Shift-F5: sound options
+		show / hide dafr auf Shift F9
+		search repeat hingegen auf auf Ctrl-F8
+		Dies habe ich bereits erledigt,
+		und auch das Help neu berarbeitet: auf Grund mehrerer Gross-
+		muttertests, sowie um die Neuerungen anzuzeigen
+		Keys erscheinen jetzt auch im Help in [ ]!
+		Die 'Others' sind gehighlightet, Hinweis: '[Esc] : to file'
+		etc.: tubelisicherer gemacht!
+
+13.7.93
+
+		Symbols.pas
+		Horizontale Bildschirm-Klammer der vertikalen angepasst:
+		Mitte habe ich jedoch leider nicht hingekriegt, ist ja
+		aber ein kleiner Fisch fr Dich.
+		Vertikale Klammer sollte so nach rechts verschoben werden,
+		dass der Klammerbeginn rechts vom Cursor leicht hervorgxlet!
+
+

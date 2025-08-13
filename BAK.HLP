@@ -1,0 +1,21 @@
+
+  RHYTHMICS
+
+  What is the use of the .bak-files? And how to restore an old file-version?
+  컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+  When you open an .rns-file, a .bak file will automatically be created.
+
+  When you leave (save) the file, the .bak file will not be used anymore.
+  If you leave the file by [Shift]+[F2] and answer with [N], this .bak-file
+  will be used by the program.
+  In any case the .bak will be deleted afterwards automatically.
+
+  To get the old .rns file, write on DOS-prompt:
+  undelete .bak (and confirm with ENTER). Follow the instructions.
+  Finally copy .bak into .rns
+
+  When you leave the program in an abnormal way, the old file version is
+  still saved in the .bak file!
+
+

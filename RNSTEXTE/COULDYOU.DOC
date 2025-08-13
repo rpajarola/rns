@@ -1,0 +1,237 @@
+
+ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+Fehlerliste:
+ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+Rico:		KOMMENTARE DAZU BITTE IN GROSS-SCHRIFT EINFšGEN
+		VERNDERUNGEN INS README.DOC šBERNEHMEN
+
+RUNTIME ERRORS:
+
+
+1505:0192	Code 201
+		in SmallPerc 14P gibt einen šberlauf wenn alle Pulse 14 sind
+
+
+
+
+ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+Wunschliste:
+ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+Rico:		KOMMENTARE DAZU BITTE IN GROSS-SCHRIFT EINFšGEN
+		VERNDERUNGEN INS README.DOC šBERNEHMEN
+
+///		bedeutet: neu
+********************************************************************************
+
+F8:		Blockmarkierung auch hindertschi!
+		(Es gibt brigens eine von Dir programmierte Funktion, die Dir
+		selbst wahrscheinlich unbekannt sein drfte:
+		Erweitere Block:
+		Markiere einen Block mit F8/F8
+		Stelle den Cursor tiefer, Shift-F8, end block
+		Stelle den Cursor h”her, Shift-F8, start block
+		Dies funktioniert auch ber mehrere Seiten
+		gratuliere!
+		Ja -
+		und weil man nie zu lange auf den Loorbeeren ausruhen sollte,
+		dazu grad noch ein Wunsch:
+		Wenn die Blockmarkierung z.B. ber 3 Seiten geht:
+
+		**************************************************************
+		*	   1.Seite					     *
+		*							     *
+		*							     *
+
+
+		*							     *
+		*							     *
+		*							     *
+		*	   2.Seite					     *
+		*							     *
+		*							     *
+		*							     *
+		*							     *
+		*							     *
+		*							     *
+		*							     *
+
+
+		*							     *
+		*							     *
+		*	   3.Seite					     *
+		*							     *
+		*							     *
+		**************************************************************
+
+		Und grad noch eine kleine Anmerkung:
+		Ein solcher Block mit ML gemoved verliert auf dem Weg an den
+		neuen Ort ein paar Zeilen  der zweiten Seite
+		Wirkt verwirrend (bis ver„rgernd)
+
+F10:		Symbol-Tabelle:
+		wenn man Tonh”hen und -L„ngen „ndert, msste eine Abfrage
+		kommen:
+	      - (Save /) Save as / Quit without saving
+		Ein bestehender Font k”nnte nur ber die Sicherheitsabrage
+		"exists already - overwrite?" ge„ndert werden
+	      - mit "Save as" k”nnten neue Fonts kreiert werden
+
+	      - M”glichkeit die Tonl„nge fr alle Symbole mit Tonl„nge > 0
+		auf einmal zu „ndern; Abfrage: vorbergehend - fix
+
+
+Shift-F9:     - Split-Page geht gleich auf die n„chste Seite, und funktioniert
+		auch wenn ein Block markiert ist
+
+Shift-F3:	No. of forms/tacts    1= standard (bis ..?)    !!!!!!!!!!!!!!
+		entsprechend im Shft-F5 Options-Menu:
+		per form/tact
+
+Shift-F3:	Alle ML in einem Buffer werden bei Aufruf von Shift-F3 wie
+		folgt ge„ndert:
+		Beim Aufruf des Menus werden nur diejenigen Attribute ange-
+		zeigt, welche bei allen gleich sind:	       !!!!!!!!!!!!!!!
+		Wenn man eine Eingabe macht wo's nichts anzeigt - weil auf
+		verschiedenen Linien verschiedene Eingaben sind: z.B. dicke
+		und dnne Linien, Grids und keine Grids etc. - dann werden
+		alle Linien entsprechend formatiert.
+		Ctrl-F3 undo last line-formatting (mit Sicherheitsabfrage)
+
+Shift-F3:	ML/Res.: Wahrscheinlich auf 639 begrenzen oder sonstwie l”sen:
+		Bei R = 640 gibts links vom Rand noch einen Beatstrich beim
+		Drucken.
+
+F5:	      - Zeitmessung beim Abspielen einbauen, Pausen bercksichtigen
+	      - Zahlenreihe (scancodes!) fr direkte Intervalleingabe,
+		sonst ev. Alt+ (oder Ctrl+) Zahlenblock und + -
+		oder wieso nicht Tab und Zahlen(block)?
+	      - Status-Buttons mausaktiv machen
+
+Shift-F5	Option: wieviele Male abspielen
+
+Shift-F1:	Cursor hide: automatisch wieder Cursor on, wenn Esc aus File
+		(damit ein Cusor da ist, wenn man wieder neu ins File kommt)
+
+Shift-F6:	Noch ein kleiner Fehler zu korrigieren:
+		Habe erlaubt, dass Shift-F6 aufrufbar ist, auch wenn ein
+		Block markiert ist (siehe readme.doc), - man merkts lange
+		nicht, bin dann aber doch zuf„llig draufgestossen - :
+		Aufruf von Shift-F6, Esc, F9 : Block ist wieder weg -
+		und das sollte natrich nicht so sein
+
+Shift-F8:	ein Pattern/Text wird markiert, Shift-F8 aufgerufen
+		bei Wahl des gewnschten/entsprechenden Menu-Punktes wird
+		das Pattern/der Text direkt aus dem Buffer eingelesen
+
+Shift-F8/F9	Antwortm”glichkeit bei der Abfrage 'replace' mit der Antwort
+		'replace all' erg„nzen
+
+Shift-F10:	Zahleneingabe sperren wenn auf ML
+		einmal eingegebene Pulsabst„nde k”nnten dann nicht mehr aus
+		Versehen ver„ndert werden.
+		Wenn dennoch eine Zahl gedrckt wird:
+		Meldung: Change Puls desactivated - activate?
+			Press Y to activate again
+			Press [Enter] to change Puls momentanously (last entry)
+			[Esc] to cancel
+
+Shift-F12:	Hot-Key zum schnellen Umschalten von
+		replace zu add- mode
+		Mode IMMER sichtbar in der Status-Zeile
+
+Shift-BS:	Gibt's eigentlich gar nicht
+		wenn man auf der Header-Markierung macht, radiert es dennoch
+		die Markierung weg - auch wenn sie mit F9 wieder da ist
+
+********************************************************************************
+
+Ctrl-F1:	EPS: Aus dem Programm direkt in ein separates \RCSEPS schreiben
+		Geht man aus dem Programm, geht er zuerst direkt in dieses
+		SubDir und listet alle .eps auf
+
+Ctrl-F2:	Split File incl. der jetzigen Seite
+
+Ctrl-F5:	Grid-Sound: toggle: on/no
+		Tonh”he und Tondauer (wie fr Puls-Sound)
+
+Ctrl-F5:	Sound-Play: Pause unterbricht das Abspielen an jeder Stelle
+		Enter macht weiter, Esc bricht ganz ab
+		Sound-Play: Esc bricht nicht am Ende der Linie ab, sondern
+		spielt bei Line Sound bis und mit Symbol auf erstem Beat,
+		sollte dort ein , oder . sein - bis zum n„chsten Symbol.
+		Bei Page-, File- und Buffer-Play entsprechend bis zur 1 der
+		n„chsten Linie.
+
+Ctrl-F5:	Tempo-Angaben: in Beats/Min. auf wenigstens 2 Kommastellen
+		ev. Umschaltm”glichkeit auf Millisec.
+
+Ctrl-F5:	Play Sound: toggle: mit/ohne Symbole in Klammern
+
+Ctrl-F5:	- Options: Menupunkt "play selected notes only"
+		ruft Symbol-Table (F10) Untermenu auf:
+		Standard alle off
+		select mit Cursor + Enter oder mit Direkteingabe (z.B. Alt F)
+		- Rhythmic Incipit: a) Notenbild bleibt, 1 Ton
+				    b) 1 Symbol, 1 Ton
+				    c) 1 Symbol, Tonh”he variert
+
+Ctrl-Enter	pitch-Linien etwa ab der Mitte mit Ctrl-Enter kopiert - unten
+		angelangt nochmals eine Kopie:
+		Statt der Angabe: no space on page Absturz:
+		Runtime Errors 120E:15B7, 1F65:13EC oder - 21FC
+
+Ctrl-BS:	im Header erlauben
+F4:		ebenfalls (gibt jetzt noch  Probleme mit der Markierung)
+
+********************************************************************************
+
+Ctrl-Shift:	+ Keyboard: zus„tzliche Oktave oben	     !!!!!!!!!!!!!!
+
+Ctrl-Alt:	+ Keyboard: zus„tzliche Oktave unten
+
+********************************************************************************
+
+Alt-F7: 	gepunktete Linie geht (wenigstens) auf Bildschirm ber den
+///		untern Rand hinaus - sollte korrigiert werden
+
+********************************************************************************
+
+Norton: 	Version 6.0 auftreiben
+
+Editor: 	Um die Postscript-Fonts zu bearbeiten (Du h„ttest ihn mal
+		bekommen, sagtest Du)
+
+csym.exe:	Uebernahme EINZELNER ZEICHEN von einem .....par und .....sym
+		zum andern erm”glichen
+
+Status-Zeilen:	St„ndige Einblendung von vB oder vL = .....ms
+///		Besser (oder w„hlbar): Angabe als B oder L pro Min.
+		BS (Beat-Sound) on/off (auf nur wenn Beat leer, k”nnte ver-
+		zichtet werden).
+		PS (Puls-Sound) on/off
+
+Routine 	, die es erlaubt, Hints und Kommentarzeilen etc. eine einstell-
+		bare Anzahl Male blinken zu lassen bis es sich wieder "beruhigt"
+
+ML-Ref.:	, damit man mit einem Schema die Wiederholungen und Schlaufen
+		abspielen k”nnte.
+		Ins gleiche Kapitel geh”rt:
+		eine Markierung, die veranlasst, dass er die zuletzt gespielte
+		Linie/Takt mit Ausnahme der neu eingegebenen Ver„nderungen
+		abspielt.
+		hnlich: |....|  ...| auf ML bedeutet eine Definition
+		Alt-1-Taste (Rest der Zeile leer, oder als leer betrachten)
+		Beispiel: ab hier bis zur Neudefinition gilt \(Zeichen fr
+		Slap)\[gleich]Zeichen fr Slap mit Zusatz-Zeichen fr gestoppten
+		Slap.
+
+Swap-Routine:	Alle Symbole in Normalgr”sse in kleine Gr”sse umschreiben
+		Uebrigens: wenn mit Shift-F10 Size geswapped wird, stimmen
+		die Sounds nicht mit den dargestellten Symbolen berein.
+
+Kompatibilit„t	Midi-Standard
+		Umwandlung in Esac-Code, resp. von Esac-Code
+
+

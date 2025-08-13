@@ -1,0 +1,108 @@
+VERSION 004
+PITC#C-G.FNT
+  750  1  1  0  1  0
+ 8.0000000000E+01
+T  F
+T  F      class                TITLE                                            page:ë
+T  F      é                ð ê
+T
+T
+T
+T
+T
+N            4   12  480    2 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F
+T  F      Examples                   BEAT / PULSE / PITCH  (install pitch.fnt or pitc#.fnt with [Ctrl]+[F[10])
+T  F      é                      ð ê
+T
+T
+T         diatonic (7P)
+T
+T
+N            4    7  480    2 %.1Šy7Šx7Šc7v7b7n7m7a7s7d7f7g7h7j7q7w7e7r7t7z7u7i1.
+T
+T
+T
+T         Beat
+N            4    4  480    3 %.1a4 4,4,4a4 4,4,4a4 4,4,4a4 4,4,4.
+T
+T
+T         diatonic    (7P)
+T
+T
+N            4    7  480    2 %.1Šy7Šx7Šc7v7b7n7m7a1a7s7d7f7g7h7j7q1.
+T
+T
+T
+T         chromatic   (12P)
+T
+T
+N            4    4  480    2 %.1a12A12s12S12d12f12F12g12G12h12H12j12q1q12Q12w12W12e12r12R12t12T12z12Z12u12i1.
+T
+T
+T         3-tonic     (3P)
+T
+T
+N            4    3  480    2 %.1a3d3g3q1f3h3q3r1.
+T
+T
+T         6-tonic     (6P)
+T
+T
+N            4    6  480    2 %.1a6s6d6F6G6H6q1q6w6e6R6T6Z6i1.
+T
+T
+T         4-tonic     (4P)
+T
+T
+N            4    4  480    2 %.1a4S4F4h4q1q4W4R4z4i1.
+T
+T
+T         5-tonic     (5P)
+T
+T
+N            4    5  480    2 %.1a5s5d5g5h5q1q5w5e5t5z5i1.
+T

@@ -1,0 +1,212 @@
+VERSION 004
+LETT'RHF.FNT
+  600  1  2  1  1  2
+ 1.0000000000E+02
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                       рк
+T
+T
+T
+T
+N            4    0  480    3 %.1h1.*dd1-dd1=dd1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                       рк
+T
+T
+T
+T
+N            4    0  480    3 %.1=fs*h1.-fs
+T
+T
+T
+T
+T
+N            4    0  480    3 %.1.-da1.-fs
+T
+T
+N   H        4    0  480    5 %.1.-fs1.-fs
+T
+T
+N	     4	    4    4  480    3%.1..*da1.1.1.1.
+T
+T
+T
+T
+T
+N	     4	    4    4  480    3%.1*qt4&4&*d4&4&4 =qt*d4&4&4/4.*=ad
+T
+T
+T
+T
+N	  H  4	    4    4  480    5%.1.1.1.1.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                       рк
+T
+T
+T
+T
+N            4    0  480    3 %.1=as4+as4-as4*as4.
+T
+T
+T
+T
+T
+N            4    0  480    3 %.1.*=as=df1.*+as=+as1.*-as+df1.1.
+T
+T
+T
+T
+T
+T
+T
+N            4    0  480    3 %.1.=q-gd*=c*-ad4.4.4.4.
+T
+T
+T
+T
+T
+T
+T
+N            4    0  480    3 %.1.4.4.4.4.
+T
+T
+T
+T
+N            4    0  480    3 %.1.4.4.4.4.
+T
+T
+T
+T
+T                             M
+T
+T                             S
+N            4    0  480    3 %.1Э.4.4..=e-jg*-mb*=c4..=r-qh*-an*=c4..=q-gd*+bc*=y+j4.-gd4..+gd4..-jd4..+jd4.4.4.4.4.4.4.4.
+T                             G
+T
+T                             B
+T
+N            4    0  480    3 %.1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.
+T
+T
+T
+T
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                       рк
+T
+T
+T
+T
+N            4    0  480    3 %.1h1.*dd1-dd1=dd1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T

@@ -1,0 +1,17 @@
+ 
+
+
+
+
+  R H Y T H M I C S
+  ___________________________________________________________________________
+
+  Quick install:         type 'A:INSTALL' on the DOS-Prompt
+                         (for security reasons some files like the manual.rns 
+                         will be set write-protected automatically!)
+
+  For advanced users:    read README.TXT first)
+                         install program on DOS-Prompt 
+                         or with WINDOWS Program Manager
+                         attrib +r files that you wish to be write-protected!
+  ___________________________________________________________________________

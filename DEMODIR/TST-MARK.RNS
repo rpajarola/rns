@@ -1,0 +1,108 @@
+VERSION 004
+PERC.FNT
+  750  1  3  1  1  0
+ 8.0000000000E+01
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                      р к
+T
+T
+T
+T
+T
+N            4   12  480    2 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F
+T  F                                 SOUND: JUMP- AND END MARK
+T  F      й                       рк
+T
+T
+N            4    4  480    3 %.1D1d1d1.2/2.
+T
+N            4    4  480    3 %.4.4s4s4D1d1d1d4.4Э.4/4.
+T
+N            4    4  480    3 %.4.4.4s4D1d1d1d2.4Э.4.
+T
+N            4    4  480    3 %.4.4.4.4D1d1d1.4Э.4.4.4.
+T
+N            4    4  480    3 %.4s4s4s4D1d1f2.2f4Э.4.4.4.
+T
+N            4    4  480    3 %.4.4.4.4.1.1f2f2f2.2.
+T
+N            4    4  480    3 %.4.4.4.4Э.1.1f4f4f4f4f2.2.
+T
+N            4    4  480    3 %.4.4.4.4.1.1Эd4d4d4d4d2.2.
+T
+N            4    4  480    3 %.4.4.4.4.1.1f2f2f2Э.2.
+T              е                                                            р *
+N            4    4  480    3 %.4.4s4s4D1.1f2f2f4/4.
+T
+N            4    4  480    3 %.4s4s4s4D1.1d4.4d4s4s4Э.4.4.4.
+T              ж
+N            4    4  480    3 %.4.4.4.4Э.1d1d2d4s4s4.4.4Э.4.
+T
+N            4    4  480    3 %.4.4.4s4s1.1.1/1.
+T
+T         Important             :    last distance to line end must be correct (status field!)
+T
+T         й
+T
+T         Jump mark [Э] rules        symbols before Beat 1      	м  NO symbols before Beat 1  	 м
+T         й
+T                                                               	м                            	 м
+T         Linesound             :    jumps to beginning of line    ignores jump mark             End mark [/] =
+T
+T                                                                                                absolute jump mark
+T         Pagesound etc.        :    ignores jump mark             jumps to next line
+T
+T                                    (does not work if next line
+T
+T                                    has more symbols before
+T
+T                                    Beat 1 than actual line *)
+T
+T         jump mark on B1 or on
+T                                                                  from 1st sound symbol
+T         first symbol:

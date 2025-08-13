@@ -1,0 +1,30 @@
+7     Worksheet    Background	    F-2  ³  0 "black"       15  white
+12    Worksheet    Symbols + Text   t	 ³  1  blue	     9	light blue
+6     Setuppage    Background		 ³  2  green	    10	light green
+12    Setuppage    Symbols + Text     t  ³  3  blue-green   11	light blue-green
+1     Cursor				 ³  4  red	    12	light red
+4     Cross-Cursor			 ³  5  purple	    13	light purple
+12    Menu	   Text 	    r r  ³  6  brown	    14	yellow
+7     Menu	   Background	    b b  ³  8  grey	     7	light grey
+12    Menu	   Text 	inverse  ³
+7     Menu	   Background	inverse  ³
+7     Status Field			 ³
+5     Nonprintings			 ³
+11    Helplines 			 ³
+1     Textmode	   Text 		 ³
+15    Textmode	   Background		 ³
+15    Textmode	   Text 	inverse  ³
+1     Textmode	   Background	inverse  ³
+5     Alarm	   Text 		 ³
+4     Alarm	   Background		 ³
+5     Soundmark 			 ³
+12    Symbol Table Text 		 ³
+7     Symbol Table Background		 ³
+12    Symbol Table Symbols		 ³
+5     Menu	   Frame		 ³
+12    Mausmenu	   Text 		 ³
+7     Mausmenu	   Background		 ³
+5     Frame	   light		 ³
+12    Frame	   shadow		 ³
+
+

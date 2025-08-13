@@ -1,0 +1,19 @@
+
+    IDEEN FöRS RHYTHMICS 2.0
+
+  1 wait.com und wait.text, sowie lesen.com und lesen.text aus \tools\utility
+    ins RNS Åbernehmen:
+    lesen.com funktioniert wie browse.com (ohne Befehls-Zeile)
+    wait kann in batch-files integriert werden (siehe wait.txt)
+
+  2 savescrn.exe und savescrn.txt aus Easy-G fÅr Hardcopies Åbernehmen.
+
+  3 TXT2EXES.EXE (in den Utilities) verwenden (PD) um eine DOC.TXT-Datei in ei-
+    DOC.EXE-Datei zu verwandeln. Farbliche Texthervorhebungen, scrolling etc.
+    sind dann mîglich; vor allem aber kann automatisch nach Stichworten gesucht
+    werden.
+
+  4 Nur Schlagpattern eingeben, oder aus Block Åbernehmen:
+    - Compi macht VorschlÑge mit versch. Beatanzahl und versch. Puls
+    - automatisch: gleiches Schlagmuster, aber in einem andern Puls tînt wie?
+

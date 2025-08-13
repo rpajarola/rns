@@ -1,0 +1,971 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%BoundingBox:   46.00  486.00  558.00  829.00
+%%Creator: RNS
+%%EndComments
+% Font fuer Perkussions-Instrumente
+/SimpleFont 10 dict def
+SimpleFont begin
+	% "Mu·"-EintrÑge:
+	/FontMatrix [0.001 0 0 0.001 0 0] def
+	/FontType   3 def
+	/FontBBox   [0 0 1000 1000] def
+	/Encoding   256 array def
+
+	% Encoding erst mit "nichts" fÅllen:
+	0 1 255 {Encoding exch {} put} for
+	% jetzt gezielt:
+
+	Encoding 32 /SimpleBlank put
+	Encoding 97 /Simplea put
+	Encoding 65 /SimpleA put
+	Encoding 128 /Simpleaa put
+	Encoding 98 /Simpleb put
+	Encoding 66 /SimpleB put
+	Encoding 129 /Simpleab put
+	Encoding 99 /Simplec put
+	Encoding 67 /SimpleC put
+	Encoding 130 /Simpleac put
+	Encoding 100 /Simpled put
+	Encoding 68 /SimpleD put
+	Encoding 131 /Simplead put
+	Encoding 101 /Simplee put
+	Encoding 69 /SimpleE put
+	Encoding 132 /Simpleae put
+	Encoding 102 /Simplef put
+	Encoding 70 /SimpleF put
+	Encoding 133 /Simpleaf put
+	Encoding 103 /Simpleg put
+	Encoding 71 /SimpleG put
+	Encoding 134 /Simpleag put
+	Encoding 104 /Simpleh put
+	Encoding 72 /SimpleH put
+	Encoding 135 /Simpleah put
+	Encoding 105 /Simplei put
+	Encoding 73 /SimpleI put
+	Encoding 136 /Simpleai put
+	Encoding 106 /Simplej put
+	Encoding 74 /SimpleJ put
+	Encoding 137 /Simpleaj put
+	Encoding 107 /Simplek put
+	Encoding 75 /SimpleK put
+	Encoding 138 /Simpleak put
+	Encoding 108 /Simplel put
+	Encoding 76 /SimpleL put
+	Encoding 139 /Simpleal put
+	Encoding 109 /Simplem put
+	Encoding 77 /SimpleM put
+	Encoding 140 /Simpleam put
+	Encoding 110 /Simplen put
+	Encoding 78 /SimpleN put
+	Encoding 141 /Simplean put
+	Encoding 111 /Simpleo put
+	Encoding 79 /SimpleO put
+	Encoding 142 /Simpleao put
+	Encoding 112 /Simplep put
+	Encoding 80 /SimpleP put
+	Encoding 143 /Simpleap put
+	Encoding 113 /Simpleq put
+	Encoding 81 /SimpleQ put
+	Encoding 144 /Simpleaq put
+	Encoding 114 /Simpler put
+	Encoding 82 /SimpleR put
+	Encoding 145 /Simplear put
+	Encoding 115 /Simples put
+	Encoding 83 /SimpleS put
+	Encoding 146 /Simpleas put
+	Encoding 116 /Simplet put
+	Encoding 84 /SimpleT put
+	Encoding 147 /Simpleat put
+	Encoding 117 /Simpleu put
+	Encoding 85 /SimpleU put
+	Encoding 148 /Simpleau put
+	Encoding 118 /Simplev put
+	Encoding 86 /SimpleV put
+	Encoding 149 /Simpleav put
+	Encoding 119 /Simplew put
+	Encoding 87 /SimpleW put
+	Encoding 150 /Simpleaw put
+	Encoding 120 /Simplex put
+	Encoding 88 /SimpleX put
+	Encoding 151 /Simpleax put
+	Encoding 121 /Simpley put
+	Encoding 89 /SimpleY put
+	Encoding 152 /Simpleay put
+	Encoding 122 /Simplez put
+	Encoding 90 /SimpleZ put
+	Encoding 153 /Simpleaz put
+
+	% Alle Buchstaben in Simpledict:
+	/Simpledict 90 dict def
+	Simpledict begin
+
+	/SimpleBlank % " "
+	{ 500.0 400.0 moveto
+	  500.0 600.0 lineto
+	  stroke
+	} def
+
+	/Simplea % "a"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 100.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/SimpleA % "A"
+	{ 100.0 900.0 moveto
+	  100.0 900.0 100.0 0.0 360.0 arc
+	  fill
+	  900.0 100.0 moveto
+	  900.0 100.0 100.0 0.0 360.0 arc
+	  fill
+	     0.0    0.0 moveto
+	     0.0  100.0 lineto
+	  1000.0 1000.0 lineto
+	  1000.0  900.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleaa % "<alt>a"
+	{ 500.0 1000.0 moveto
+	  500.0  100.0 lineto
+	  700.0  100.0 lineto
+	  30 setlinewidth stroke
+	  700.0  200.0 moveto
+	  873.2  100.0 lineto
+	  700.0    0.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleb % "b"
+	{ 0 setlinejoin
+	  269.1  500.0 moveto
+	  730.9  500.0 lineto
+	  500.0  100.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleB % "B"
+	{ 0 setlinejoin
+	  211.3  500.0 moveto
+	  788.7  500.0 lineto
+	  500.0    0.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleab % "<alt>b"
+	{ 0 setlinejoin
+	  326.8  500.0 moveto
+	  500.0  200.0 lineto
+	  673.2  500.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simplec % "c"
+	{  350.0  350.0 moveto
+	   500.0  650.0 lineto
+	   650.0  350.0 lineto
+	   30 setlinewidth stroke
+	} def
+	
+	/SimpleC % "C"
+	{  350.0  350.0 moveto
+	   500.0  650.0 lineto
+	   650.0  350.0 lineto
+	   30 setlinewidth stroke
+	   350.0  600.0 moveto
+	   500.0  900.0 lineto
+	   650.0  600.0 lineto
+	   30 setlinewidth stroke
+	} def
+	
+	/Simpleac % "<alt>c"
+	{  425.0  500.0 moveto
+	   575.0  500.0 lineto
+	   575.0  740.2 lineto
+	   700.0  740.2 lineto
+	   500.0 1000.0 lineto
+	   300.0  740.2 lineto
+	   425.0  740.2 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpled % "d"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 300.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/SimpleD % "D"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 400.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simplead % "<alt>d"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simplee % "e"
+	{ 200.0  750.0 moveto
+	  300.0  750.0 lineto
+	  800.0  250.0 lineto
+	  700.0  250.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleE % "E"
+	{ 100.0  825.0 moveto
+	  250.0  825.0 lineto
+	  900.0  175.0 lineto
+	  750.0  175.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleae % "<alt>e"
+	{ 285.0  675.0 moveto
+	  365.0  675.0 lineto
+	  715.0  325.0 lineto
+	  635.0  325.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simplef % "f"
+	{ 200.0  200.0 moveto
+	  200.0  800.0 lineto
+	  800.0  800.0 lineto
+	  800.0  200.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleF % "F"
+	{ 100.0  100.0 moveto
+	  100.0  900.0 lineto
+	  900.0  900.0 lineto
+	  900.0  100.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleaf % "<alt>f"
+	{ 300.0  300.0 moveto
+	  300.0  700.0 lineto
+	  700.0  700.0 lineto
+	  700.0  300.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleg % "g"
+	{ 0 setlinejoin
+	  269.1  100.0 moveto
+	  730.9  100.0 lineto
+	  500.0  500.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleG % "G"
+	{ 0 setlinejoin
+	  211.3    0.0 moveto
+	  788.7    0.0 lineto
+	  500.0  500.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleag % "<alt>g"
+	{ 0 setlinejoin
+	  326.8  200.0 moveto
+	  673.2  200.0 lineto
+	  500.0  500.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleh % "h"
+	{ 0 setlinejoin
+	  269.1  100.0 moveto
+	  730.9  100.0 lineto
+	  500.0  500.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleH % "H"
+	{ 0 setlinejoin
+	  211.3    0.0 moveto
+	  788.7    0.0 lineto
+	  500.0  500.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleah % "<alt>h"
+	{ 0 setlinejoin
+	  326.8  200.0 moveto
+	  673.2  200.0 lineto
+	  500.0  500.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simplei % "i"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/SimpleI % "I"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simpleai % "<alt>i"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simplej % "j"
+	{ 200.0  200.0 moveto
+	  200.0  800.0 lineto
+	  800.0  800.0 lineto
+	  800.0  200.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleJ % "J"
+	{ 100.0  100.0 moveto
+	  100.0  900.0 lineto
+	  900.0  900.0 lineto
+	  900.0  100.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleaj % "<alt>j"
+	{ 300.0  300.0 moveto
+	  300.0  700.0 lineto
+	  700.0  700.0 lineto
+	  700.0  300.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simplek % "k"
+	{ 800.0 500.0 moveto
+	  500.0 500.0 300.0 0.0 360.0 arc
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleK % "K"
+	{ 900.0 500.0 moveto
+	  500.0 500.0 400.0 0.0 360.0 arc
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleak % "<alt>k"
+	{ 700.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  30 setlinewidth stroke
+	} def
+
+	/Simplel % "l"
+	{ 260.0  260.0 moveto
+	  740.0  740.0 lineto
+	  30 setlinewidth stroke
+	  260.0  740.0 moveto
+	  740.0  260.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleL % "L"
+	{ 190.0  190.0 moveto
+	  810.0  810.0 lineto
+	  30 setlinewidth stroke
+	  190.0  810.0 moveto
+	  810.0  190.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleal % "<alt>l"
+	{ 330.0  330.0 moveto
+	  670.0  670.0 lineto
+	  25 setlinewidth stroke
+	  330.0  670.0 moveto
+	  670.0  330.0 lineto
+	  25 setlinewidth stroke
+	} def
+
+	/Simplem % "m"
+	{ 300.0  500.0 moveto
+	  700.0  500.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleM % "M"
+	{ 230.0  425.0 moveto
+	  320.0  650.0 lineto
+	  440.0  350.0 moveto
+	  560.0  650.0 lineto
+	  680.0  350.0 moveto 
+	  770.0  575.0 lineto
+	  20 setlinewidth stroke
+	  320.0  650.0 moveto
+	  440.0  350.0 lineto
+	  560.0  650.0 moveto 
+	  680.0  350.0 lineto
+	  60 setlinewidth stroke
+
+%       { 0.0  500.0 moveto
+%         125.0  625.0 lineto
+%         375.0  375.0 lineto
+%         625.0  625.0 lineto
+%         875.0  375.0 lineto
+%        1000.0  500.0 lineto
+%         30 setlinewidth stroke
+	
+	} def
+
+	/Simpleam % "<alt>m"
+	{ 500.0 500.0 moveto
+	  400.0 500.0 100.0 0.0 180.0 arc
+	  30 setlinewidth stroke
+	  500.0 500.0 moveto
+	  600.0 500.0 100.0 180.0 0.0 arc
+	  30 setlinewidth stroke
+	} def
+
+	/Simplen % "n"
+	{ 0 setlinejoin
+	  269.1  500.0 moveto
+	  500.0  100.0 lineto
+	  730.9  500.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleN % "N"
+	{ 0 setlinejoin
+	  211.3  500.0 moveto
+	  500.0    0.0 lineto
+	  788.7  500.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simplean % "<alt>n"
+	{ 0 setlinejoin
+	  326.8  500.0 moveto
+	  500.0  200.0 lineto
+	  673.2  500.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleo % "o"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/SimpleO % "O"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simpleao % "<alt>o"
+	{ 500.0 500.0 moveto
+	  500.0 500.0 200.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simplep % "p"
+	{ 300.0  500.0 moveto
+	  700.0  500.0 lineto
+	  30 setlinewidth stroke
+	  500.0  300.0 moveto
+	  500.0  700.0 lineto
+	  stroke
+	} def
+
+	/SimpleP % "P"
+	{ 500.0  0.0 moveto
+	  500.0  1000.0 lineto
+	  30 setlinewidth stroke
+	  250.0 700.0 moveto
+	  250.0 700.0 100.0 0.0 360.0 arc
+	  fill
+	  250.0 300.0 moveto
+	  250.0 300.0 100.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simpleap % "<alt>p"
+	{ 500.0    0.0 moveto
+	  500.0  900.0 lineto
+	  300.0  900.0 lineto
+	  30 setlinewidth stroke
+	  300.0  800.0 moveto
+	  126.7  900.0 lineto
+	  300.0 1000.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleq % "q"
+	{ 650.0 500.0 moveto
+	  500.0 500.0 150.0 0.0 360.0 arc
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleQ % "Q"
+	{ 500.0  0.0 moveto
+	  500.0  1000.0 lineto
+	  30 setlinewidth stroke
+	  750.0 700.0 moveto
+	  750.0 700.0 100.0 0.0 360.0 arc
+	  fill
+	  750.0 300.0 moveto
+	  750.0 300.0 100.0 0.0 360.0 arc
+	  fill
+	} def
+
+	/Simpleaq % "<alt>q"
+	{ 500.0    0.0 moveto
+	  500.0  900.0 lineto
+	  700.0  900.0 lineto
+	  30 setlinewidth stroke
+	  700.0  800.0 moveto
+	  873.2  900.0 lineto
+	  700.0 1000.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpler % "r"
+	{ 500.0  200.0 moveto
+	  500.0  800.0 lineto
+	  100 setlinewidth stroke
+	} def
+
+	/SimpleR % "R"
+	{ 500.0  100.0 moveto
+	  500.0  900.0 lineto
+	  100 setlinewidth stroke
+	} def
+
+	/Simplear % "<alt>r"
+	{ 500.0  300.0 moveto
+	  500.0  700.0 lineto
+	  100 setlinewidth stroke
+	} def
+
+	/Simples % "s"
+	{ 200.0  250.0 moveto
+	  300.0  250.0 lineto
+	  800.0  750.0 lineto
+	  700.0  750.0 lineto
+	  closepath
+	  fill
+	  200.0  750.0 moveto
+	  300.0  750.0 lineto
+	  800.0  250.0 lineto
+	  700.0  250.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleS % "S"
+	{ 100.0  175.0 moveto
+	  250.0  175.0 lineto
+	  900.0  825.0 lineto
+	  750.0  825.0 lineto
+	  closepath
+	  fill
+	  100.0  825.0 moveto
+	  250.0  825.0 lineto
+	  900.0  175.0 lineto
+	  750.0  175.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleas % "<alt>s"
+	{ 300.0  330.0 moveto
+	  360.0  330.0 lineto
+	  700.0  670.0 lineto
+	  640.0  670.0 lineto
+	  closepath
+	  fill
+	  300.0  670.0 moveto
+	  360.0  670.0 lineto
+	  700.0  330.0 lineto
+	  640.0  330.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simplet % "t"
+	{ 0 setlinejoin
+	  269.1  500.0 moveto
+	  730.9  500.0 lineto
+	  500.0  900.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleT % "T"
+	{ 0 setlinejoin
+	  211.3  500.0 moveto
+	  788.7  500.0 lineto
+	  500.0 1000.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleat % "<alt>t"
+	{ 0 setlinejoin
+	  326.8  500.0 moveto
+	  673.2  500.0 lineto
+	  500.0  800.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleu % "u"
+	{ 500.0  200.0 moveto
+	  500.0  800.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleU % "U"
+	{ 500.0  000.0 moveto
+	  500.0  1000.0 lineto
+	  10 setlinewidth stroke
+	} def
+
+	/Simpleau % "<alt>u"
+	{ 500.0  300.0 moveto
+	  500.0  700.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/Simplev % "v"
+	{  350.0  350.0 moveto
+	   650.0  500.0 lineto
+	   350.0  650.0 lineto
+	   30 setlinewidth stroke
+	} def
+
+	/SimpleV % "V"
+	{  900.0  650.0 moveto
+	   100.0  500.0 lineto
+	   900.0  350.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleav % "<alt>v"
+	{  475.0  350.0 moveto
+	   525.0  350.0 lineto
+	   525.0  650.0 lineto
+	   475.0  650.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simplew % "w"
+	{ 200.0  250.0 moveto
+	  300.0  250.0 lineto
+	  800.0  750.0 lineto
+	  700.0  750.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/SimpleW % "W"
+	{ 100.0  175.0 moveto
+	  250.0  175.0 lineto
+	  900.0  825.0 lineto
+	  750.0  825.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpleaw % "<alt>w"
+	{ 285.0  325.0 moveto
+	  365.0  325.0 lineto
+	  715.0  675.0 lineto
+	  635.0  675.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simplex % "x"
+	{  350.0  650.0 moveto
+	   500.0  350.0 lineto
+	   650.0  650.0 lineto
+	   30 setlinewidth stroke
+	} def
+
+	/SimpleX % "X"
+	{  350.0  650.0 moveto
+	   500.0  350.0 lineto
+	   650.0  650.0 lineto
+	   30 setlinewidth stroke
+	   350.0  900.0 moveto
+	   500.0  600.0 lineto
+	   650.0  900.0 lineto
+	   30 setlinewidth stroke
+	} def
+
+	/Simpleax % "<alt>x"
+	{  425.0 1000.0 moveto
+	   575.0 1000.0 lineto
+	   575.0  759.8 lineto
+	   700.0  759.8 lineto
+	   500.0  500.0 lineto
+	   300.0  759.8 lineto
+	   425.0  759.8 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simpley % "y"
+	{  650.0  350.0 moveto
+	   350.0  500.0 lineto
+	   650.0  650.0 lineto
+	   30 setlinewidth stroke
+	} def
+
+	/SimpleY % "Y"
+	{  100.0  650.0 moveto
+	   900.0  500.0 lineto
+	   100.0  350.0 lineto
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleay % "<alt>y"
+	{  475.0  350.0 moveto
+	   525.0  350.0 lineto
+	   525.0  650.0 lineto
+	   475.0  650.0 lineto
+	  closepath
+	  fill
+	} def
+
+	/Simplez % "z"
+	{ 0 setlinejoin
+	  269.1  500.0 moveto
+	  730.9  500.0 lineto
+	  500.0  900.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/SimpleZ % "Z"
+	{ 0 setlinejoin
+	  211.3  500.0 moveto
+	  788.7  500.0 lineto
+	  500.0 1000.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	/Simpleaz % "<alt>z"
+	{ 0 setlinejoin
+	  326.8  500.0 moveto
+	  673.2  500.0 lineto
+	  500.0  800.0 lineto
+	  closepath
+	  30 setlinewidth stroke
+	} def
+
+	end % von Simpledict
+	/BuildChar
+	{       1000 0 0 0 1000 1000 setcachedevice
+		exch begin
+		Encoding exch get
+		Simpledict exch get
+		end
+		exec
+	} def
+	end % von BuildChar
+	% der neue Font hei·t "SymbolFont"
+	/SymbolFont SimpleFont definefont pop
+	% *************************************************
+/Helvetica findfont dup maxlength dict
+/newdict exch def % Ziel-Dict
+{1 index /FID ne
+	{newdict 3 1 roll put
+	}
+	{pop pop % wenn FID: beides entfernen
+      } ifelse
+} forall
+newdict /Encoding get dup length array copy
+newdict /Encoding 3 -1 roll put
+newdict begin
+Encoding 132 /adieresis put % Ñ 
+Encoding 142 /Adieresis put % é 
+Encoding 160 /aacute put % † 
+Encoding 133 /agrave put % Ö 
+Encoding 131 /acircumflex put % É 
+Encoding 134 /aring put % Ü 
+Encoding 143 /Aring put % è 
+Encoding 255 /ogonek put % ogonek 
+Encoding 130 /eacute put % Ç 
+Encoding 144 /Eacute put % ê 
+Encoding 138 /egrave put % ä 
+Encoding 136 /ecircumflex put % à 
+Encoding 137 /edieresis put % â 
+Encoding 139 /idieresis put % ã 
+Encoding 161 /iacute put % ° 
+Encoding 141 /igrave put % ç 
+Encoding 140 /icircumflex put % å 
+Encoding 152 /ydieresis put % ò 
+Encoding 148 /odieresis put % î 
+Encoding 153 /Odieresis put % ô 
+Encoding 162 /oacute put % ¢ 
+Encoding 149 /ograve put % ï 
+Encoding 147 /ocircumflex put % ì 
+Encoding 129 /udieresis put % Å 
+Encoding 154 /Udieresis put % ö 
+Encoding 163 /uacute put % £ 
+Encoding 151 /ugrave put % ó 
+Encoding 150 /ucircumflex put % ñ 
+Encoding 126 /tilde put % ~ 
+Encoding 164 /ntilde put % § 
+Encoding 165 /Ntilde put % • 
+Encoding 168 /questiondown put % ® 
+Encoding 173 /exclamdown put % ≠ 
+Encoding 174 /guillemotleft put % Æ 
+Encoding 175 /guillemotright put % Ø 
+Encoding 135 /ccedilla put % á 
+Encoding 128 /Ccedilla put % Ä 
+Encoding 225 /germandbls put % Doppel-s 
+Encoding 179 /bar put % ≥ 
+Encoding 196 /emdash put % ƒ 
+Encoding 248 /ring put % ¯ 
+Encoding 21 /section put %  
+Encoding 123 /braceleft put % { 
+Encoding 125 /braceright put % } 
+end
+newdict /FontName (New-Font) put
+/New-Font newdict definefont pop
+ 0.800  0.800  scale
+%%IncludeFont: SymbolFont
+%%BeginFont: SymbolFont
+/SymbolFont findfont 15.000  scalefont setfont
+%%EndFont
+gsave
+57.500 607.500 translate
+gsave
+%%IncludeFont: New-Font
+%%BeginFont: New-Font
+/New-Font findfont 5 scalefont setfont
+%%EndFont
+-4 0 moveto
+90.0 rotate
+.0 setgray
+(R H Y T H M I C S    N O T A T I O N    S Y S T E M    + 4 1   1   7 3 0  3 7  3 7) show
+grestore
+ 0.800  setlinewidth
+ newpath 
+639.000 424.000 moveto
+639.000  0.000 lineto
+ stroke 
+ newpath 
+ 0.000 424.000 moveto
+ 0.000  0.000 lineto
+ stroke 
+ newpath 
+ 0.000 424.000 moveto
+639.000 424.000 lineto
+ stroke 
+ newpath 
+ 0.000  0.000 moveto
+639.000  0.000 lineto
+ stroke 
+ 0.100  setlinewidth
+ newpath 
+ 1.000 360.000 moveto
+639.000 360.000 lineto
+ stroke 
+ 0.200  setlinewidth
+ newpath 
+159.000 354.000 moveto
+159.000 372.000 lineto
+ stroke 
+ newpath 
+279.000 354.000 moveto
+279.000 372.000 lineto
+ stroke 
+ newpath 
+399.000 354.000 moveto
+399.000 372.000 lineto
+ stroke 
+ newpath 
+519.000 354.000 moveto
+519.000 372.000 lineto
+ stroke 
+ 0.100  setlinewidth
+ newpath 
+ 1.000 312.000 moveto
+639.000 312.000 lineto
+ stroke 
+ 0.200  setlinewidth
+ newpath 
+159.000 306.000 moveto
+159.000 324.000 lineto
+ stroke 
+ newpath 
+279.000 306.000 moveto
+279.000 324.000 lineto
+ stroke 
+ newpath 
+399.000 306.000 moveto
+399.000 324.000 lineto
+ stroke 
+ newpath 
+519.000 306.000 moveto
+519.000 324.000 lineto
+ stroke 
+%%IncludeFont: New-Font
+%%BeginFont: New-Font
+/New-Font findfont 11.25 scalefont setfont
+%%EndFont
+ 6.000 405.000 moveto
+(class ) show
+168.000 405.000 moveto
+(TITLE ) show
+612.000 405.000 moveto
+(  1) show
+ 0.800  setlinewidth
+ newpath 
+ 0.000 399.000 moveto
+639.000 399.000 lineto
+ stroke 
+159.000 397.000 moveto
+() show
+ 0.100  setlinewidth
+ newpath 
+159.000 423.000 moveto
+159.000  1.000 lineto
+ stroke 
+showpage
+grestore

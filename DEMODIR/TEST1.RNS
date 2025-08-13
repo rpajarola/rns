@@ -1,0 +1,212 @@
+VERSION 004
+PERC.FNT
+ 1500  1  1  0  1  0
+ 4.0000000000E+01
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                       рк
+T
+T
+T
+T
+N            4    0  480    3 %.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T  F
+T  F      class                      TITLE                                                                     л
+T  F      й                       рк
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+N      4	    4   12  480    2%.1.1(Л)1=Л(s)1.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T         vert. line (alt-f5)
+T           к
+T
+T
+T
+T
+T                 hor. 3d-line (alt-f7)
+T                   й
+T
+T
+T                       нvert. 3d-line (alt-f8)
+T
+T
+T
+T                             р    thick
+N	     4	    4    8  480    1%.1.
+T
+T
+T
+T                             р    pitch
+T
+T
+N      4	    4    8  480    2%.1.
+T
+T                             р    thin
+N      4	    4    8  480    3%.1.
+T
+T                             р    dotted
+N      4	    4    8  480    4%.1.
+T
+T                             р    helpline
+N   H  4	    4    8  480    5%.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T         з
+T
+T
+T           к
+T
+T
+T               м
+T
+T
+T                   й
+T
+T
+T                       н
+T
+T
+T
+T                             р    thick
+N	     4	    4    8  480    1%.1.
+T
+T
+T
+T                             р    pitch
+T
+T
+N      4	    4    8  480    2%.1.
+T
+T                             р    thin
+N      4	    4    8  480    3%.1.
+T
+T                             р    dotted
+N      4	    4    8  480    4%.1.
+T
+T                             р    helpline
+N   H  4	    4    8  480    5%.1.
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
