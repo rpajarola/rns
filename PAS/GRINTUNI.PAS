@@ -267,7 +267,7 @@ Procedure GriBeatMenuDisp(linenum: integer);
 
 var c : char;
     Bufstr : string79;
-    i, j, y, hy : integer;
+    i, y, hy : integer;
     inblock, bufline : stringline;
     lineattr,tempattr: lineattrtype;
     EndMlineSav,
