@@ -109,7 +109,7 @@ begin
      j:=starty+1;
      IniGraphXY(i,j);
      txtfnt.Write(i,j,Title,getcolor,sz6x12,stnormal);
-     { Schreibe die Wahlmîglichkeiten und deren Beschreibungen auf den
+     { Schreibe die WahlmÔøΩglichkeiten und deren Beschreibungen auf den
        Bildschirm }
      for i := 1 to NUM_CHOICES do begin
        ActLine:= Top_Line + i * Spacing;
@@ -172,24 +172,24 @@ procedure GrGet_Menu_Response (startx, starty : integer;
 
 {
 BESCHREIBUNG:
-    Dieses  Unterprogramm erfa·t die getroffene Wahl eines  Benut-
-    zers aus einem MenÅ. Die Auswahl kann entweder dadurch erfol-
-    gen,  da·  das vorgegebene Zeichen des MenÅs  eingegeben  wird
-    oder da· Pfeiltasten mit abschlie·endem RETURN gedrÅckt wer-
+    Dieses  Unterprogramm erfaÔøΩt die getroffene Wahl eines  Benut-
+    zers aus einem MenÔøΩ. Die Auswahl kann entweder dadurch erfol-
+    gen,  daÔøΩ  das vorgegebene Zeichen des MenÔøΩs  eingegeben  wird
+    oder daÔøΩ Pfeiltasten mit abschlieÔøΩendem RETURN gedrÔøΩckt wer-
     den, oder mit einem ESCAPE.
 
 PARAMETER:
     MENU  (Eingabe)               - Bereits  auf  den  Bildschirm
-                                    geschriebenes MenÅ
+                                    geschriebenes MenÔøΩ
     USERS_CHOICE (Ein-/Ausgabe)   - Getroffene Wahl des Benutzers
-    leftright - true, wenn links-rechts cursortasten gÅltige
+    leftright - true, wenn links-rechts cursortasten gÔøΩltige
                 Eingaben sind
     keyright - true, falls der Shortcut-key rechts von der
                Auswahl stehen soll
 
-BENôTIGTE TYPENVEREINBARUNGEN:
-    STRING79      - Wird fÅr alle Strings verwendet
-    MENU_REC      - Record mit den MenÅ-Informationen
+BENÔøΩTIGTE TYPENVEREINBARUNGEN:
+    STRING79      - Wird fÔøΩr alle Strings verwendet
+    MENU_REC      - Record mit den MenÔøΩ-Informationen
     RESPONSE_TYPE - Typ der Eingabe (von Get_Respsonse)
     MOVEMENT      - Richtung der eingegebenen Pfeiltasten
                     (von Get_Response)
@@ -201,7 +201,7 @@ var
   I,j,L, s, x, y : integer;
   RESP : RESPONSE_TYPE;  { Tastatur-Eingabe - siehe Get_Response }
   DIR : MOVEMENT;        { Eingegebene Richtung der Pfeiltaste }
-  FOUND : boolean;       { Flag fÅr die Suche der Wahlmîglichkeit  }
+  FOUND : boolean;       { Flag fÔøΩr die Suche der WahlmÔøΩglichkeit  }
   shiftp, ctrlp: boolean;
   mp : Word;
 
@@ -242,7 +242,7 @@ var
             outstring:=choices[current_choice]+' - '+descriptions[current_choice];
             xpos:=-1;
           end else begin{ if menuattr.highliteline }
-            outstring:={ ' '} + DESCRIPTIONS[CURRENT_CHOICE];
+            outstring:=' ' + DESCRIPTIONS[CURRENT_CHOICE];
             xpos:= 4;
             IniClearLine (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE*SPACING,
                           length(outstring), menubkcolor);
@@ -265,7 +265,7 @@ var
             outstring:=' '+choices[current_choice]+' - '+descriptions[current_choice]+' ';
             xpos:=-1;
           end else begin{ if menuattr.highliteline }
-            outstring:={ ' '} + DESCRIPTIONS[CURRENT_CHOICE];
+            outstring:=' ' + DESCRIPTIONS[CURRENT_CHOICE];
             xpos:= 4;
             IniClearLine (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE*SPACING,
                           length(outstring), menubkcolor);
@@ -300,11 +300,11 @@ begin
     CURRENT_CHOICE := choicenum;
     s:=choicenum;
     Highlite(1);
-{ Erfasse die Eingabe des Benutzers solange, bis eine zulÑssige
+{ Erfasse die Eingabe des Benutzers solange, bis eine zulÔøΩssige
    Wahl getroffen wurde }
     repeat
-{ Hebe die jetzige Wahlmîglichkeit hervor }
-{ öbernimm die nach dem Prompt eingegebene Antwort }
+{ Hebe die jetzige WahlmÔøΩglichkeit hervor }
+{ ÔøΩbernimm die nach dem Prompt eingegebene Antwort }
       if maustaste = 0 then begin
         if s<>current_choice Then Begin
           i:=current_choice;
@@ -339,7 +339,7 @@ begin
         if CURRENT_CHOICE > NUM_CHOICES then
           CURRENT_CHOICE:= NUM_CHOICES;
 { leftright = true: es sind 2 Menus angezeigt. Teste
-  ob Maus in der richtigen HÑlfte des Schirmes.
+  ob Maus in der richtigen HÔøΩlfte des Schirmes.
   Achtung: Koordinaten sind = gxcoord div 8}
         if ((not leftright) or (((startx < (gmaxx div 16)) and
            (mausx < (gmaxx div 2))) or ((startx > (gmaxx div 16)) and
@@ -356,8 +356,8 @@ begin
         maustaste:= 0;
       end;
       case RESP of
-{ éndere die aktuell getroffene Wahl, wenn die Pfeiltasten in der
-  Richtung nach oben oder nach unten gedrÅckt wurden }
+{ ÔøΩndere die aktuell getroffene Wahl, wenn die Pfeiltasten in der
+  Richtung nach oben oder nach unten gedrÔøΩckt wurden }
         ARROW: begin
           if (DIR = DOWN) and (CURRENT_CHOICE = NUM_CHOICES) then
             CURRENT_CHOICE := 1
@@ -372,8 +372,8 @@ begin
             RESP:= RETURN;
           end;
         end;{arrow}
-{ Nur wenn direkt das SchlÅsselzeichen fÅr die Wahlmîglichkeit ge-
-  drÅckt wurde: Suche nach dem entsprechenden Element im Feld
+{ Nur wenn direkt das SchlÔøΩsselzeichen fÔøΩr die WahlmÔøΩglichkeit ge-
+  drÔøΩckt wurde: Suche nach dem entsprechenden Element im Feld
   CHOICES }
         KEY : begin
           USERS_CHOICE:=UpCase(USERS_CHOICE);
@@ -388,7 +388,7 @@ begin
           if FOUND then
             RESP := RETURN
         end;{key}
-{ öbergib die aktuelle Wahlmîglichkeit, wenn RETURN gedrÅckt wurde }
+{ ÔøΩbergib die aktuelle WahlmÔøΩglichkeit, wenn RETURN gedrÔøΩckt wurde }
         RETURN: changed[Current_Choice]:=True;
         ESCAPE:;
       end; {case}
@@ -413,15 +413,15 @@ procedure GrGet_Menu_Values (startx, starty, endy: integer;
                              var USERS_CHOICE: char);
 {
 BESCHREIBUNG:
-    Dieses  Unterprogramm erfa·t die Parameter Wahl eines  Benut-
-    zers aus einem Werte - MenÅ. Die Auswahl kann entweder dadurch erfol-
-    gen,  da·  Werte eingegeben werden,
-    oder da· Pfeiltasten mit abschlie·endem RETURN gedrÅckt wer-
+    Dieses  Unterprogramm erfaÔøΩt die Parameter Wahl eines  Benut-
+    zers aus einem Werte - MenÔøΩ. Die Auswahl kann entweder dadurch erfol-
+    gen,  daÔøΩ  Werte eingegeben werden,
+    oder daÔøΩ Pfeiltasten mit abschlieÔøΩendem RETURN gedrÔøΩckt wer-
     den, oder mit einem ESCAPE.
 
 PARAMETER:
     MENU  (Eingabe)               - Bereits  auf  den  Bildschirm
-                                    geschriebenes MenÅ
+                                    geschriebenes MenÔøΩ
     USERS_CHOICE (Ein-/Ausgabe)   - Getroffene Wahl des Benutzers
 
  ---------------------------------------------------------------- }
@@ -431,7 +431,7 @@ var
 
   RESP : RESPONSE_TYPE;  { Tastatur-Eingabe - siehe Get_Response }
   DIR : MOVEMENT;        { Eingegebene Richtung der Pfeiltaste }
-  FOUND : boolean;       { Flag fÅr die Suche der Wahlmîglichkeit  }
+  FOUND : boolean;       { Flag fÔøΩr die Suche der WahlmÔøΩglichkeit  }
   KeyResponse : Char;
   ACTLINE, y, x : integer;
   mausx, mausy, maustaste, mausmenu: word;
@@ -448,7 +448,7 @@ var
   begin
     Mausdunkel;
     with MENU do begin
-      outstring:= {' '} + DESCRIPTIONS[Current_Choice];
+      outstring:= ' ' + DESCRIPTIONS[Current_Choice];
       IniExpand(outstring, menu_width +1);
       If VideoVal = 1 then begin
         IniInversText ( LEFT_COL - 1, TOP_LINE + CURRENT_CHOICE*SPACING,
@@ -481,19 +481,19 @@ begin
        changed[pry]:=false;}
        pry:= endy - 2;
 
-      { Bestimme die aktuelle (hervorgehobene) Wahlmîglichkeit }
+      { Bestimme die aktuelle (hervorgehobene) WahlmÔøΩglichkeit }
 
       CURRENT_CHOICE := 1;
 
-     { Erfasse die Eingabe des Benutzers solange,  bis eine zulÑssige
+     { Erfasse die Eingabe des Benutzers solange,  bis eine zulÔøΩssige
        Wahl getroffen wurde }
 
      repeat
         ActLine:= Top_Line + Current_Choice * Spacing;
 
-        { Hebe die jetzige Wahlmîglichkeit hervor }
+        { Hebe die jetzige WahlmÔøΩglichkeit hervor }
         HighLite(1);
-        { öbernimm die nach dem Prompt eingegebene Antwort }
+        { ÔøΩbernimm die nach dem Prompt eingegebene Antwort }
         case ChoiceVal[Current_Choice].TypIdent of
            'o' :;
 {New}      'r' : GrGet_Prompted_Real (
@@ -513,7 +513,7 @@ begin
                           ChoiceVal[Current_Choice].IVal,
                           ChoiceVal[Current_Choice].IValMin,
                           ChoiceVal[Current_Choice].IValMax,
-                          FieldLength, + {#26}'>',
+                          FieldLength, '>',
                           ValCol + (FieldLength + 1),
                           TOP_LINE + CURRENT_CHOICE*SPACING,
                           ValCol,
@@ -537,7 +537,7 @@ begin
                           ChoiceVal[Current_Choice].TValMin,
                           ChoiceVal[Current_Choice].TValMax,
                           Togglestring,
-                          FieldLength, + '<',
+                          FieldLength, '<',
                           ValCol + (FieldLength + 1),
                           TOP_LINE + CURRENT_CHOICE*SPACING,
                           ValCol,
@@ -547,7 +547,7 @@ begin
                           RESP, DIR, KeyResponse,
                           mausx, mausy, maustaste, mausmenu,changed[current_choice]);
        end; {case}
-        { éndere die noch hervorgehobene Wahlmîglichkeit in normale
+        { ÔøΩndere die noch hervorgehobene WahlmÔøΩglichkeit in normale
          Schrift um }
        HighLite(0);
 
@@ -564,8 +564,8 @@ begin
 
        case RESP of
 
-       { éndere die aktuell getroffene Wahl, wenn die Pfeiltasten in der
-         Richtung nach oben oder nach unten gedrÅckt wurden }
+       { ÔøΩndere die aktuell getroffene Wahl, wenn die Pfeiltasten in der
+         Richtung nach oben oder nach unten gedrÔøΩckt wurden }
 
           ARROW : if (DIR = DOWN) and (CURRENT_CHOICE = NUM_CHOICES) then
                      CURRENT_CHOICE := 1
