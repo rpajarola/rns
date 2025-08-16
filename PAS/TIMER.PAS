@@ -22,35 +22,24 @@ Function TimActTime: longint;
 
 implementation
 
-uses dos;
+uses dos, SysUtils;
 {**********************************************************}
 Procedure TimGetTime(var acttime: longint);
-
-var regs: registers;
-
 begin
-   regs.ah:= 0;
-   Intr($1A, regs);
-   acttime:= regs.cx;
-   acttime:= acttime*65536 + regs.dx;
+   { Modern replacement for DOS interrupt timer }
+   { Original: INT 1Ah function 0 - get system time in timer ticks }
+   { Modern: Use system time converted to similar format }
+   acttime := GetTickCount64 div 55; { Approximate conversion from ms to DOS timer ticks }
 end;
 
 {**********************************************************}
-Procedure TimActCounter(var msstat, mstime: word); assembler;
-asm
-{   MOV AX, 0}
-   XOR AX,AX
-   MOV AL, 11000010b               ;{Counter latch and status vorbereiten}
-   OUT 43h, AL                     ;{Control word absetzen}
-   IN  AL, 40h                     ;{Status einlesen}
-{   LES BX, MSSTAT
-   MOV ES:[BX], AX                 ;}{Status speichern}
-   MOV Word Ptr MSSTAT,AX
-   IN  AL, 40h                     ;{Counter LSB einlesen}
-   IN  AL, 40h                     ;{Counter MSB einlesen}
-{   LES BX, MSTIME
-   MOV ES:[BX], AX                 ;}{Counter speichern}
-   MOV Word Ptr MSTIME,AX
+Procedure TimActCounter(var msstat, mstime: word);
+begin
+   { Modern replacement for assembly timer counter access }
+   { Original: Direct hardware access to 8253/8254 timer chip via ports 40h/43h }
+   { Modern: Use high-resolution timer simulation }
+   msstat := 0; { Status - always ready in modern systems }
+   mstime := Word(GetTickCount64 and $FFFF); { Current time in timer units }
 end;
 
 {**********************************************************}
