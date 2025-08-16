@@ -32,7 +32,6 @@ Function EdiSavePossible(fn : String) : Boolean;
 implementation
 
 uses mousdrv,
-     Undebug,
      CRCUnit;
 
 Const crcOK  = 0;
@@ -95,9 +94,6 @@ End;
 Function EdiCheckDemoFileName(instring : String;var f : Text) : Boolean;
 { Check if file is in list and CRC ok }
 Begin
-{$IFDEF USER}
-  LockKbd;
-{$ENDIF}
   instring:=UpString(instring);
   Case EdiCheckCRC(instring) Of
     crcOK: Begin
@@ -133,9 +129,6 @@ Begin
       End;
     End;
   End;
-{$IFDEF USER}
-  UnLockKbd;
-{$ENDIF}
 End;
 {******************************************************}
 procedure EdiRythmEdit(instring,bakname: string79; defpagesetup, demloc: boolean);
@@ -212,7 +205,7 @@ begin
     LastFileName:=FExpand(TextRec(ifile).Name);
     Close(ifile);
     {leeren von Pagefil.rns Dieses File wird nach Abschluss
-     des Pagelayout in Sp2Unit zurÅckgeladen}
+     des Pagelayout in Sp2Unit zurÔøΩckgeladen}
     Assign(ifile, 'PAGEFIL.RNS');
     LastFileName:=FExpand('PAGEFIL.RNS');
     rewrite(ifile);

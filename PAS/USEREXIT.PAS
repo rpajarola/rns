@@ -7,7 +7,6 @@ Var LastFileName : String;
 
 Implementation
 Uses Crt,
-     Undebug,
      HelpUnit,
      Graph,
      InitSc;
@@ -174,14 +173,7 @@ begin
 end;
 
 begin
-   LockKbd;
-   SwitchMode;
    OrgExitProc := ExitProc;
-{$IFDEF USER}
-   ExitProc    := @NewExit;
-{$ELSE}
    ExitProc    := @DebugExit;
-{$ENDIF}
    LastFileName:='';
-   Int3;
 end.

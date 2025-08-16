@@ -418,7 +418,6 @@ uses gcurunit,
      mousdrv,
      fileunit,
      getunit,
-     Undebug;
 
 {******************************************************}
 Function UpString(VAR Zeile : STRING) : String;
@@ -1623,8 +1622,6 @@ begin
   LastSound:=0;
   FrameWidth:=1;
   FileChanged:=0;
-  Int3;
-  SwitchMode;
   TFastFontViewer(TxtFnt).Init('RNS'); {'RNS'}
   sndwarning:=1;
   pagebuf:=-1;

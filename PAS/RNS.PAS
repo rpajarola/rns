@@ -9,8 +9,7 @@ Uses Graph,
      EditUnit,
      menutyp,
      helpunit,
-     userexit,
-     Undebug;
+     userexit;
 
 
 Var
@@ -50,21 +49,12 @@ end;
 
 {**************************RNS Main**************************}
 begin
-   Int3;
-   LockKbd;
    IF Ioresult=0 Then;
    InstallUserDrivers;
-   LockKbd;
-{$IFDEF USER}
-   ExitSave:= ExitProc;
-   ExitProc:= @GraphExit;
-{$ENDIF}
    HercGraphicsMode := false;
-   Int3;
    Heaperror:= @HeapFunc;
    Assign(Buffile,'Buffer');
    Assign(debfile,'Debfile');
-   LockKbd;
    LastFileName:=FExpand('DEBFILE');
    {$I-}
    Rewrite(debfile);
