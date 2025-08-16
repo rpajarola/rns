@@ -102,7 +102,7 @@ Function Sp2SearchString(var linenum, actposn, actpost: integer;
  searchtyp, beginnend mit der gegenwaertigen Position
  wird true falls der String gefunden wurde}
 
-var i, x: integer;
+var x: integer;
     ipos, iline, ipage: integer;
     inblock, testline, tempbuffer: stringline;
     foundflag, endreached: boolean;
@@ -235,7 +235,7 @@ var dir: movement;
     c: char;
     resp: response_type;
     choicenum: byte;
-    x, y, hy, i: integer;
+    x, y, hy: integer;
     instring, rstring: string16;
     s : string;
     b: boolean;
@@ -367,8 +367,6 @@ var dir: movement;
     resp: response_type;
     choicenum: byte;
     x, y, hy, i: integer;
-    instring: string16;
-    dummyb: boolean;
     mausx, mausy, maustaste, mausmenu: word;
     changed : boolean;
 begin
@@ -478,8 +476,7 @@ end;
 {*****************************************************************}
 Procedure Sp2SwapKeyboard;
 
-var dir: movement;
-    y, hy: integer;
+var y, hy: integer;
     c: char;
     choicenum: byte;
 
@@ -504,8 +501,7 @@ end;
 
 {*****************************************************************}
 Procedure Sp2VisiMenu;
-var dir: movement;
-    y, hy: integer;
+var y, hy: integer;
     c: char;
     choicenum: byte;
 begin
