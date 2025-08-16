@@ -39,7 +39,7 @@ const
       ttyp = 1; {horizontal TextJustify}
 
       drightmargin = 0;
-      linestyletop = 11; {max. Hîhe beim Editieren der Linestyles}
+      linestyletop = 11; {max. HÔøΩhe beim Editieren der Linestyles}
       dygraph = 6; {Schriftverschiebung in y-Richtung}
       labellength = 20;
       leftx = 20; {linker Rand in den Symbol - Menus}
@@ -69,7 +69,7 @@ const
       piwidth = 0.2; { pitch }
       tnwidth = 0.2; { thin }
 
-      spec: set of char = [' ','/','.',',','\','›','&','"'];
+      spec: set of char = [' ','/','.',',','\','ÔøΩ','&','"'];
       flamset: set of char = ['+', '=', '-', '*'];
       klammerset : set of char = ['(',')','[',']','{','}'];
       sndmaxspm = 600;
@@ -83,7 +83,7 @@ const
       hpFileMenu     = 2;
 
       notes : Set of char =
-['a'..'z', 'A'..'Z', #128..#153,'/','›','\','.',' ',',','+','=','-','*'];{"?}
+['a'..'z', 'A'..'Z', #128..#153,'/','ÔøΩ','\','.',' ',',','+','=','-','*'];{"?}
       numbers : set of char = ['0'..'9'];
       sz8x8  =  0;    { Sizes }
       sz8x16 =  1;
@@ -102,7 +102,7 @@ const
       frLow        = $02;       { versenkt                      }
       fr3D         = $03;       { 3D Rahmen (Hallo Windows)     }
       frL3D        = $04;       { 3D Rahmen (Platten-Effekt)    }
-      frDel3D      = $80;       { lîscht den 3D Rahmen          }
+      frDel3D      = $80;       { lÔøΩscht den 3D Rahmen          }
       frNoBar      = $40;       { zeichnet keinen Balken        }
       frSmallBar   = $20;       { zeichnet einen kleineren Balk.}
 
@@ -117,17 +117,17 @@ const
       poParentheses = $01;      { spielt () nicht                }
       poBrackets    = $02;      { spielt []                      }
       poBraces      = $04;      (*spielt {} variante 2          *)
-      poDashSlash   = $08;      { ignoriert ›                    }
+      poDashSlash   = $08;      { ignoriert ÔøΩ                    }
 
-      saLegato      = $01;      { spielt die Tîne legato         }
-      saStaccato    = $02;      { spielt die Tîne staccato       }
-(*    saInterval    = $??;      { spielt alle Intervalle, zÑhlt  } *)
-(*    saPitches     = $??;      { spielt die vorhandenen Tîne    }
+      saLegato      = $01;      { spielt die TÔøΩne legato         }
+      saStaccato    = $02;      { spielt die TÔøΩne staccato       }
+(*    saInterval    = $??;      { spielt alle Intervalle, zÔøΩhlt  } *)
+(*    saPitches     = $??;      { spielt die vorhandenen TÔøΩne    }
                                 { aufsteigend ohne Wiederholungen) *)
       saRhythm      = $08;      { spielt rhythmisches Skelett    }
 (*    saYFreq       = $??;      { spielt Melodie ohne Rhythmus   } *)
                                 {hexadez: 01,02,04,08,10,20,40,80,100}
-      saMuffled     = $04;      { spielt gedÑmpft/sehr kurz      }
+      saMuffled     = $04;      { spielt gedÔøΩmpft/sehr kurz      }
       saPhrased     = $10;      { spielt phrasiert ab}
 
 
@@ -138,7 +138,7 @@ const
       staccatolength= 50;
       legatolength  = 30000;    { damit richtig legato gespielt wird }
       RhythmFreq    = 392;      { spielt Rhythmus mit 392 Hz         }
-      muffledlength = 5;        { spielt Tîne leise/sehr kurz        }
+      muffledlength = 5;        { spielt TÔøΩne leise/sehr kurz        }
       phrasedmul1   = 2;        { Abstandsmultiplikator: phrasiert   }
 
       logoname = 'TITLE.BMP';
@@ -201,7 +201,7 @@ type stringline = string[255];
      TCharSet = Set Of Char;
 var ThePalette : TDACTable;
     PalSteps   : TRealDAC;
-    symbcount : byte;   {das wievielte Zeichen wird angezeigt(fÅr pagshowcurposistances}
+    symbcount : byte;   {das wievielte Zeichen wird angezeigt(fÔøΩr pagshowcurposistances}
     infile, debfile : text;
     GraphDriver : integer;
     GraphMode : integer;
@@ -300,12 +300,12 @@ var ThePalette : TDACTable;
     prdevice: string16;
 
     paused:boolean;    {pause?}
-    sndlength: integer; {lÑnge pro beat}
-    sndlengthspm : real;{new}{dasselbe fÅr strokes/min}
+    sndlength: integer; {lÔøΩnge pro beat}
+    sndlengthspm : real;{new}{dasselbe fÔøΩr strokes/min}
     sndlengthper: byte; {Laenge pro beat oder Line}
     sndplaybeat: byte; {Beat spielen oder nicht}
     sndplaypulse: byte; {Puls spielen oder nicht}{ bit 0: ','; bit 1:' '}
-    {Beathîhe, LÑnge, Pulshîhe, LÑnge}
+    {BeathÔøΩhe, LÔøΩnge, PulshÔøΩhe, LÔøΩnge}
     sndbeat, sndbeatlength, sndpulse, sndpulselength: integer;
     sndchar: char;
     sndwarning:byte;
@@ -327,7 +327,7 @@ var ThePalette : TDACTable;
     lastbuf       : integer;
     ctrlF5        : boolean;
     bufffile      : boolean;
-    playoptions   : byte;(* () [] {} › / *)
+    playoptions   : byte;(* () [] {} ÔøΩ / *)
     soundattr     : byte;
     soundchange   : byte;
     Logo          : pbmp16;
@@ -422,7 +422,7 @@ uses gcurunit,
 
 {******************************************************}
 Function UpString(VAR Zeile : STRING) : String;
-(* Umwandlung eines Strings in Gro·buchstaben *)
+(* Umwandlung eines Strings in GroÔøΩbuchstaben *)
 VAR i : INTEGER;
 BEGIN
   FOR i := 1 TO Length(Zeile) DO  Zeile[i] := UpCase(Zeile[i]);
@@ -430,7 +430,7 @@ BEGIN
 END;
 {******************************************************}
 Function IniKeyPressed: boolean;
-{wird true, wenn ein key gedrÅckt wurde, der den Bildaufbau
+{wird true, wenn ein key gedrÔøΩckt wurde, der den Bildaufbau
  abbricht}
 const skipset:
       set of byte = [59, 60, 62, 67, 73, 81, 89, 118, 132];
@@ -576,7 +576,7 @@ begin
 end;
 {******************************************************}
 Procedure IniMausAssign(maustaste: word; var resp: response_type);
-{resp wird return bzw. escape, falls taste 1 bzw. 7 gedrÅckt wurde}
+{resp wird return bzw. escape, falls taste 1 bzw. 7 gedrÔøΩckt wurde}
 begin
   if maustaste = 1 then begin
     resp:= return;
@@ -779,7 +779,7 @@ begin
    end else begin
      X1:= X-2;
      X2:= X+Length(Texts)*8;
-     Y1:= Y-6;{-1 wÑre besser, clear funktioniert dann aber noch nicht richtig}
+     Y1:= Y-6;{-1 wÔøΩre besser, clear funktioniert dann aber noch nicht richtig}
      Y2:= Y+5;
    end;
    fcolor:= GetColor;
@@ -814,7 +814,7 @@ begin
   IF Not d Then Mausdunkel;
   X1:= X-2;
   X2:= X+Length(Texts)*CharWidth;
-  Y1:= Y-(Char2Height+1)-1;{+2 wÑre besser, clear funktioniert dann aber noch nicht richtig}
+  Y1:= Y-(Char2Height+1)-1;{+2 wÔøΩre besser, clear funktioniert dann aber noch nicht richtig}
   Y2:= Y+Char2Height+1;
   if t=frNoFrame then begin
     inc(x1,2);
@@ -999,12 +999,12 @@ begin
 End;
 {**************************************************************}
 Function IniNextnumber(var strbuf: stringline) : integer;
-{Liest einen integer aus dem Buffer und gibt ihn als Funktionswert zurÅck.
- Der String selbst wird im Buffer gelîscht.}
+{Liest einen integer aus dem Buffer und gibt ihn als Funktionswert zurÔøΩck.
+ Der String selbst wird im Buffer gelÔøΩscht.}
 var numstring : string[20];
     i, codei : integer;
 begin
-{Lîsche leading blanks}
+{LÔøΩsche leading blanks}
   numstring:='';
   while (length(strbuf) > 0 ) and (strbuf[1] = ' ') do
     delete(strbuf,1,1);
@@ -1182,7 +1182,7 @@ end;
 Procedure IniClrCharField( x, y : integer);
 var i,j,k : integer;
 begin
-{Lîsche ein Feld von Charactergroesse}
+{LÔøΩsche ein Feld von Charactergroesse}
   if x < textmargin+2 then x:= textmargin+2;
   if x > 640 then
     exit;
@@ -1205,8 +1205,8 @@ end;
 {**************************************************************}
 Procedure IniCharAdd(var TargetString : stringline; C : Char;
                       PosInString : integer);
-{FÅgt den Character C in TargetString auf Position PosInString ein,
- wobei wenn nîtig Blanks hinzugefÅgt werden}
+{FÔøΩgt den Character C in TargetString auf Position PosInString ein,
+ wobei wenn nÔøΩtig Blanks hinzugefÔøΩgt werden}
 var i,j,k : integer;
     ActLength : integer;
 begin
@@ -1471,39 +1471,16 @@ Begin
     PalSteps[a].B:=ThePalette[a].B/128;
   End;
 End;
-Procedure IniSetDACReg(n,r,g,b : byte);Assembler;
-asm
-  MOV  DX,3C8h                  { DAC                                   }
-  MOV  AL,n                     { Index                                 }
-  OUT  DX,AL
-  INC  DX                       { Data                                  }
-  MOV  AL,r                     { red                                   }
-  OUT  DX,AL
-  MOV  AL,g                     { green                                 }
-  OUT  DX,AL
-  MOV  AL,B                     { blue                                  }
-  OUT  DX,AL
+Procedure IniSetDACReg(n,r,g,b : byte);
+begin
+  // TODO: Set single palette register with modern graphics API
+  // Original: Set VGA DAC register n to RGB values r,g,b
 end;
-Procedure IniSetAllDACRegs(aPalette : TDACTable);Assembler;
-Asm
-  PUSH DS                       { save DS                               }
-  LDS  SI,aPalette              { Source                                }
-  CLD                           { clear dir flag                        }
-  MOV  CX,3*100h                { 3*100h Bytes                          }
-  MOV  DX,3C8h                  { DAC                                   }
-  XOR  AH,AH                    { Index:0                               }
-@@1:
-  MOV  AL,AH
-  OUT  DX,AL
-  INC  DX                       { Data                                  }
-  LODSB                         { get byte                              }
-  OUT  DX,AL                    { write                                 }
-  DEC  DX
-  INC  AH
-  DEC  CX                       { =loop                                 }
-  JNZ  @@1
-  POP  DS
-End;
+Procedure IniSetAllDACRegs(aPalette : TDACTable);
+begin
+  // TODO: Set complete palette with modern graphics API
+  // Original: Set all 256 VGA DAC registers from aPalette array
+end;
 
 Procedure IniFadeOut;
 Var a,b : byte;
@@ -1578,7 +1555,7 @@ begin
 end;
 
 Begin
-(* 'BPTSLMR ([{›' *)
+(* 'BPTSLMR ([{ÔøΩ' *)
   DrawTriStateChar(01,'B',SndPlayBeat);
   DrawStateChar(02,'P',(SndPlayPulse and plspace)=0);
   DrawTriStatechar(03,'T',(SndPlayPulse And plPulse)+1);
@@ -1590,7 +1567,7 @@ Begin
   DrawStateChar(09,'(',(PlayOptions And poParentheses)=0);
   DrawStateChar(10,'[',(PlayOptions And poBrackets)=0);
   DrawStateChar(11,'{',(PlayOptions And poBraces)=0);
-  DrawStateChar(12,'›',(PlayOptions And poDashSlash)=0);
+  DrawStateChar(12,'ÔøΩ',(PlayOptions And poDashSlash)=0);
 
 {  IF SndPlayBeat=1 Then
     TxtFnt.WriteChar(402,438,'B',ImenuTextColor,sz8x8,stnormal)
@@ -1633,9 +1610,9 @@ Begin
   Else
     TxtFnt.WriteChar(482,438,'{',AlarmColor,sz8x8,stnormal);
   IF (PlayOptions And poDashSlash)=0 Then
-    TxtFnt.WriteChar(490,438,'›',ImenuTextColor,sz8x8,stnormal)
+    TxtFnt.WriteChar(490,438,'ÔøΩ',ImenuTextColor,sz8x8,stnormal)
   Else
-    TxtFnt.WriteChar(490,438,'›',AlarmColor,sz8x8,stnormal);}
+    TxtFnt.WriteChar(490,438,'ÔøΩ',AlarmColor,sz8x8,stnormal);}
 End;
 
 begin
