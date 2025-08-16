@@ -69,7 +69,7 @@ const
       piwidth = 0.2; { pitch }
       tnwidth = 0.2; { thin }
 
-      spec: set of char = [' ','/','.',',','\','�','&','"'];
+      spec: set of char = [' ','/','.',',','\','&','"'];
       flamset: set of char = ['+', '=', '-', '*'];
       klammerset : set of char = ['(',')','[',']','{','}'];
       sndmaxspm = 600;
@@ -83,7 +83,7 @@ const
       hpFileMenu     = 2;
 
       notes : Set of char =
-['a'..'z', 'A'..'Z', #128..#153,'/','�','\','.',' ',',','+','=','-','*'];{"?}
+['a'..'z', 'A'..'Z', #128..#153,'/','\'  ,'.',' ',',','+','=','-','*'];
       numbers : set of char = ['0'..'9'];
       sz8x8  =  0;    { Sizes }
       sz8x16 =  1;
@@ -415,7 +415,7 @@ implementation
 uses gcurunit,
      mousdrv,
      fileunit,
-     getunit,
+     getunit;
 
 {******************************************************}
 Function UpString(VAR Zeile : STRING) : String;
