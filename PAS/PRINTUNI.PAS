@@ -26,7 +26,7 @@ const cxmin= 46.0;    {links-rechts Verschiebung}{linker  Rand}
 
       cymaxbot=407.0; {2.File-Seite Rand oben : Abstand vom untern Blattrand}
       cyminbot= 64.0; {2.File-Seite Rand unten: Abstand vom untern Blattrand}
-      {Diff2:  343.0  {* je gr”sser die Differenz desto h”her die File-Seite}
+      {Diff2:  343.0} {je gr”sser die Differenz desto h”her die File-Seite}
 
 var psactwidth: real;
     psxmin, psxmax, psymin, psymax: real;
@@ -476,7 +476,7 @@ end;
 {***************************}
 procedure PriWriteSym(c: char; x,y: real);
 var inblock: stringline;
-    ch : string[2];
+    ch : string;
 begin
   if nff then begin
     inblock:='';
@@ -575,7 +575,6 @@ end;
 procedure PriPostscript;
 {Drucken auf ein Postscript File.}
 var inblock: stringline;
-    infile: text;
 begin
   if not nff then begin
     inblock:= '%%IncludeFont: SymbolFont';       { Symbolfont anmelden       }
