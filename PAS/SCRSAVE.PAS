@@ -2,7 +2,7 @@ Unit ScrSave;
 
 Interface
 
-Uses Graph;
+Uses Graph, CRT;
 
 Procedure SaveScreen;
 
@@ -13,12 +13,11 @@ Begin
   LineY:=Round((X*A)+B);
 End;
 Function KeyPressed : Boolean;
-InLine($31/$C0/         { XOR  AX,AX    }
-       $8E/$C0/         { MOV  ES,AX    }
-       $26/             { ES:           }
-       $A1/$041A/       { MOV  AX,[41A] }
-       $26/             { ES:           }
-       $33/$06/$041C);  { XOR  AX,[41C] }
+begin
+  { Modern replacement for assembly keyboard buffer check }
+  { Original checked BIOS keyboard buffer at 0040:001A vs 0040:001C }
+  KeyPressed := CRT.KeyPressed; { Use CRT unit's KeyPressed function }
+end;
 Procedure SaveScreen;
 Type TImageLine = Record
        XR,YR    : Word;
@@ -58,10 +57,9 @@ Begin
       a:=0;
     end;
   End;
-  Asm
-    XOR AX,AX
-    INT 16h
-  End;
+  { Modern replacement for assembly keyboard wait }
+  { Original: INT 16h with AX=0 (wait for keypress) }
+  CRT.ReadKey; { Wait for a key press }
 End;
 {Procedure SaveScreen;
 Type TImage = Record
