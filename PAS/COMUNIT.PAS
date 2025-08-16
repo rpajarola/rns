@@ -158,7 +158,7 @@ end;
 Function ComSpecGrant(c: char; linenum: integer): boolean;
 {testet, ob ein Spezialzeichen c zur Zeit erlaubt ist}
 
-const marknocommands:          { w„hrend Markierung nicht erlaubt }
+const marknocommands:          { wï¿½hrend Markierung nicht erlaubt }
       set of byte = [61{F3},62{F4},64{F6},67{F9},
                      82{INS}, 83{DEL},
                      87{shft f4},90{shft F7},92{shft F9},
@@ -170,7 +170,7 @@ const marknocommands:          { w„hrend Markierung nicht erlaubt }
                      87{shft f4},91{shft F8},
                      94{Ctrl F1},95{Ctrl F2},97{ctrl f4}];
 
-      pagenocommands:          { w„hrend Page layout nicht erlaubt }
+      pagenocommands:          { wï¿½hrend Page layout nicht erlaubt }
       set of byte = [60{F2}, 73{PU},81{PD},
                      92{Shft F9},
                      132{Ctrl PU},118{Ctrl PD},
@@ -223,7 +223,7 @@ begin
           (not (defsetuppage in actedit))) then
       begin
          {Zuletzt wurden die Pagesettings geaendert, escape
-          springt ins file zurck}
+          springt ins file zurï¿½ck}
           actedit:= actedit - [setuppage];
           IniSwapColors;
           PagShowPage(linenum, actposn, actpost,
@@ -605,16 +605,16 @@ begin
         ComSysstart(l);                 { Erste Zeile des Systems          }
         ComSysend(Linenum);             { Letzte Zeile des Systems         }
 
-        { unterste Linie, die noch zur linenum geh”rt)                     }
+        { unterste Linie, die noch zur linenum gehï¿½rt)                     }
         k:=linenum+comskiplinesdown(linenum);
 
         { i=naechstuntere, nichtleere Linie, ueberspringe Trommelsprache.. }
         i:=ComNextLine(k);
 
-        { insl=Zeilennummer wo die neue Linie eingefgt wird               }
+        { insl=Zeilennummer wo die neue Linie eingefï¿½gt wird               }
         insl:=ComSpaceBetweenNeed(k,l)+k+comsysheight(linenum);
 
-        { ins=Anzahl ben”tigter Leerzeilen                                 }
+        { ins=Anzahl benï¿½tigter Leerzeilen                                 }
         ins:=ComSpaceBetweenNeed(k,l)+ComSpaceBetweenNeed(linenum,i)+comsysheight(linenum);
 
         { ->ins=Anzahl einzuschiebender Leerzeilen                         }
@@ -645,8 +645,8 @@ begin
             end;
             for y:=1 to m do
               inblock:=inblock+v+'.';
-            If Searchlastchiffre(linenum-l)<>'0' Then{ Beat bernehmen }
-              inblock:=inblock+Searchlastchiffre(linenum-l);{NL einfgen}
+            If Searchlastchiffre(linenum-l)<>'0' Then{ Beat ï¿½bernehmen }
+              inblock:=inblock+Searchlastchiffre(linenum-l);{NL einfï¿½gen}
             Page[insl-l]:=inblock;
           End;
           Linenum:=Insl;
@@ -682,7 +682,7 @@ begin
           end else begin
             TexEdTextLine(linenum, actpost, KeyResponse);
             getredraw(linenum,gcxcoord-18,gcxcoord);
-            ComLineRep(linenum); {neu fr TAB PEO}
+            ComLineRep(linenum); {neu fï¿½r TAB PEO}
             lastentry:= other;
           end;
         end;
@@ -693,36 +693,33 @@ begin
 end;
 
 {******************************************************}
-procedure KillCursor;assembler;{New}
+procedure KillCursor;{New}
 
-asm
-  CMP cursorkilled, false
-  JNZ @001
-  MOV AH,3
-  MOV BH,0
-  INT $10
-  MOV cursorlinestart,ch
-  MOV cursorlineend,cl
-  MOV AH,1
-  MOV CH,$20
-  INT $10
-  MOV cursorkilled,true
-@001:
+begin
+  { TODO: Implement cursor hiding functionality }
+  { Original: INT 10h cursor manipulation }
+  if not CursorKilled then
+  begin
+    Cursorlinestart := 0; { Save cursor info }
+    Cursorlineend := 0;
+    CursorKilled := true;
+    { Stub: Actual cursor hiding not implemented }
+  end;
 end;
 
 {******************************************************}
 
-procedure RestoreCursor;assembler;{New}
-asm
-  CMP cursorkilled, true
-  JNZ @001
-  MOV AH,1
-  MOV CH,cursorlinestart
-  MOV CL,cursorlineend;
-  INT $10
-  MOV cursorkilled,FALSE
-@001:
-END;
+procedure RestoreCursor;{New}
+begin
+  { TODO: Implement cursor restoration functionality }
+  { Original: INT 10h cursor manipulation }
+  if CursorKilled then
+  begin
+    { Restore cursor using saved values }
+    CursorKilled := false;
+    { Stub: Actual cursor restoration not implemented }
+  end;
+end;
 
 {******************************************************}
 Procedure ComEdSpecial(var linenum, actposn, actpost: integer;
@@ -961,12 +958,12 @@ begin
         IniSpacedText(20,58,'                     ',frLow);
 
 
-        IniSpacedText(42,54,' on/off: BPTSLMR ([{İ ',frHigh);
-        IniSpacedText(42,56,' ('+#24+'/Ctrl/Alt)ñ: speed ',frHigh);
+        IniSpacedText(42,54,' on/off: BPTSLMR ([{ï¿½ ',frHigh);
+        IniSpacedText(42,56,' ('+#24+'/Ctrl/Alt)ï¿½: speed ',frHigh);
         IniSpacedText(42,58,'                      ',frHigh);
-   {      IniSpacedText(42,54,' ñ, '+#24+'ñ = speedñ1, ñ10 ',frHigh);
-        IniSpacedText(42,56,' Ctrlñ = speedù,:2    ',frHigh);
-        IniSpacedText(42,58,'  Altñ = speedù,:1.33 ',frHigh);  }
+   {      IniSpacedText(42,54,' ï¿½, '+#24+'ï¿½ = speedï¿½1, ï¿½10 ',frHigh);
+        IniSpacedText(42,56,' Ctrlï¿½ = speedï¿½,:2    ',frHigh);
+        IniSpacedText(42,58,'  Altï¿½ = speedï¿½,:1.33 ',frHigh);  }
         IniDrawSoundState;
 
         IniSpacedText(65,54,' / * = LPMBPM ',frHigh);
@@ -1435,7 +1432,7 @@ begin
                           Copy(sndgetcentstr(addcent),2,19),frLow);
                   End;
                   #73 :Begin{PageUp=+100Hz}
-                    MulCent:=MulCent*2; {Reaktion vorl„ufig:1Oktave h”her}
+                    MulCent:=MulCent*2; {Reaktion vorlï¿½ufig:1Oktave hï¿½her}
                     SndUpDateAddCent;
                     IniSpacedText(16,gmaxy div charheight - 1,
                           Copy(sndgetcentstr(addcent),2,19),frLow);
@@ -1609,7 +1606,7 @@ begin
                   IF i<linenum Then Begin{erste NL oberhalb suchen}
                     While (Page[i,1]<>'N') and (i>1) Do
                       Dec(i);
-                    if i<=1 Then{keine NL oberhalbÄ>von unten beginnen}
+                    if i<=1 Then{keine NL oberhalbï¿½>von unten beginnen}
                       i:=pagelength;
                   End;{if i<linenum}
                   IF i>linenum Then Begin{unterste NL suchen}
@@ -1635,17 +1632,17 @@ begin
                       ComSysEnd(l);        { Letzte Zeile des Systems       }
                       ComSysStart(Linenum);{ Erste Zeile des Systems        }
 
-                      { oberste Linie, die noch zu l geh”rt                 }
+                      { oberste Linie, die noch zu l gehï¿½rt                 }
                       k:=linenum-comskiplinesup(linenum);
 
                       { i=naechstobere, nichtleere Linie                    }
                       i:=ComPrevLine(k);
 
-                      { ins=Anzahl ben”tigter Leerzeilen                    }
+                      { ins=Anzahl benï¿½tigter Leerzeilen                    }
                       ins:=ComSpaceBetweenNeed(i,linenum)+ComSpaceBetweenNeed(l,k)+comsysheight(linenum);
 
                       { ->ins=Anzahl einzuschiebender Leerzeilen            }
-                      { insl=Zeilennummer wo die neue Linie eingefgt wird  }
+                      { insl=Zeilennummer wo die neue Linie eingefï¿½gt wird  }
                       ins:=ins-comspacebetween(k,i);
                       if ins<0 Then begin
                         ins:=0;
@@ -1664,8 +1661,8 @@ begin
                         For x:=0 To (ComSysHeight(Linenum))-1 Do Begin
                           inblock:=copy(page[linenum+x],1,pos('%',page[linenum+x]))+'.1.';
                           page[linenum+x,2]:=' ';
-                          If Searchlastchiffre(linenum+x)<>'0' Then{ Beat bernehmen }
-                            inblock:=inblock+Searchlastchiffre(linenum+x)+'.';{NL einfgen}
+                          If Searchlastchiffre(linenum+x)<>'0' Then{ Beat ï¿½bernehmen }
+                            inblock:=inblock+Searchlastchiffre(linenum+x)+'.';{NL einfï¿½gen}
                           Page[insl+x]:=inblock;
                         End;
                         Linenum:=Insl;
@@ -1917,8 +1914,8 @@ Begin
 End;
 
 Function ComSpaceUpNeed(linenum : integer) : Byte;
-{ Anzahl der freien linien, die beim einfgen einer NL mittel ctrl-enter
-  oder ctrl-f3 nach oben ben”tigt werden}
+{ Anzahl der freien linien, die beim einfï¿½gen einer NL mittel ctrl-enter
+  oder ctrl-f3 nach oben benï¿½tigt werden}
 Var inblock : stringline;
     lineattr: lineattrtype;
 Begin
@@ -1937,8 +1934,8 @@ Begin
   End;
 End;
 Function ComSpaceDownNeed(linenum : integer) : Byte;
-{ Anzahl der freien linien, die beim einfgen einer NL mittels ctrl-enter
-  oder ctrl-f3 nach unten ben”tigt werden}
+{ Anzahl der freien linien, die beim einfï¿½gen einer NL mittels ctrl-enter
+  oder ctrl-f3 nach unten benï¿½tigt werden}
 Var inblock : stringline;
     lineattr: lineattrtype;
 Begin
@@ -1977,7 +1974,7 @@ Begin
     ComSpaceBetween:=0;
 End;
 Function ComLinesUpBelong2(linenum : integer) : Byte;
-{ Anzahl Linien oberhalb, die zu dieser Linie geh”ren (oder umgekehrt...) }
+{ Anzahl Linien oberhalb, die zu dieser Linie gehï¿½ren (oder umgekehrt...) }
 { NL: 0, TL: 2 }
 Var inblock : stringline;
     lineattr: lineattrtype;
@@ -1988,9 +1985,9 @@ Begin
     ComlinesUpBelong2:=0;
 End;
 Function ComLinesDownBelong2(linenum : integer) : Byte;
-{ Anzahl der Linien unterhalb, die unabh„ngig von deren Art zu dieser Linie
-  geh”ren k”nnen
-  leere TL: 1, benutzte TL: 2, NL: Falls n„chste Linie auch NL, dann 1,
+{ Anzahl der Linien unterhalb, die unabhï¿½ngig von deren Art zu dieser Linie
+  gehï¿½ren kï¿½nnen
+  leere TL: 1, benutzte TL: 2, NL: Falls nï¿½chste Linie auch NL, dann 1,
   sonst je nach Linientyp }
 Var inblock : stringline;
     lineattr: lineattrtype;
@@ -2018,8 +2015,8 @@ Begin
 End;
 
 Function ComLineBelong2(linenum : integer) : Byte;
-{ 0 wenn linenum nicht zur n„chstoberen Linie geh”rt,
-  sonst Anzahl der Linien unterhalb, die zu dieser geh”ren k”nnen,
+{ 0 wenn linenum nicht zur nï¿½chstoberen Linie gehï¿½rt,
+  sonst Anzahl der Linien unterhalb, die zu dieser gehï¿½ren kï¿½nnen,
   Notenlinie: immer 0,
   tl: 0, falls zuviele Linien oberhalb leer, 1, falls Linie leer, sonst 2}
 var i : integer;
@@ -2037,10 +2034,10 @@ Begin
   ComLineBelong2:=0;
 end;
 Function comskiplinesDown(linenum : integer) : integer;
-{ Anzahl der zu ueberspringenden linien, falls unterhalb eine NL eingefgt
+{ Anzahl der zu ueberspringenden linien, falls unterhalb eine NL eingefï¿½gt
   werden soll
   linenum=nummer der NL
-  i=z„hler,b=temp
+  i=zï¿½hler,b=temp
 }
 Var i,a,b: integer;
 Begin
@@ -2224,7 +2221,7 @@ Begin
   if page[src]='N' Then begin
     inblock:=copy(page[Src],1,33)+'.';
     If Searchlastchiffre(src)<>'0' Then
-      inblock:=inblock+Searchlastchiffre(Src);{NL einfgen}
+      inblock:=inblock+Searchlastchiffre(Src);{NL einfï¿½gen}
     IF Page[Des,4]<>' ' Then Begin
       HlpHint(HntCopyLineToHeader, HintWaitEsc);
       CopyLine:=False;
