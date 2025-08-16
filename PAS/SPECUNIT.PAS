@@ -354,7 +354,7 @@ end;
 
 {******************************************************}
 Procedure SpeSplitFile(var actptr, startptr, lastptr: listptr);
-{schreibt von der n„chsten Seite an alles in ein neues File}
+{schreibt von der nï¿½chsten Seite an alles in ein neues File}
 
 var instring: string16;
     ok : boolean;
@@ -459,7 +459,7 @@ end;
 {******************************************************}
 Procedure SpeJoinPage(linenum: integer; var actposn, actpost: integer;
                       var actptr, startptr, lastptr: listptr);
-{Schiebt die n„chste Seite an die gegenw„rtige}
+{Schiebt die nï¿½chste Seite an die gegenwï¿½rtige}
 
 var i, j, lineins, linepage: integer;
     tempptr: listptr;
@@ -545,11 +545,11 @@ var
 begin
    GriBeatMenuDisp(linenum{, startptr, lastptr});
 
-   {Beatmenu - Feld l”schen}
+   {Beatmenu - Feld lï¿½schen}
    PagRefClearVal(GrMinX - 10, GrMinY - 10,
                   GrMaxX + 10, GrMaxY + 10);
 
-   {Start-y fr refresh berechnen}
+   {Start-y fï¿½r refresh berechnen}
    PagRefClearVal(0, IniYnow(linenum - 2), GetMaxX, IniYnow(LineNum + 2));
    i:= topmargin;
    while ((i < linenum) and (page[i,1] <> 'N')) do
@@ -596,7 +596,7 @@ end;
 
 {******************************************************}
 Procedure SpeLineInsert(linenum: integer; inblock : stringline);
-{Fgt eine Zeile an der Stelle Linenum ein}
+{Fï¿½gt eine Zeile an der Stelle Linenum ein}
 
 var i: integer;
 
@@ -1036,22 +1036,17 @@ Begin
 End;
 
 Function SpeLineUsed(Linenum : Integer) : Boolean;
-Function TextLength(S : String) : Byte;Assembler;
-Asm
-  PUSH DS
-  LES  DI,S
-  LDS  SI,S
-  LODSB
-  XOR  AH,AH
-  ADD  DI,AX
-  MOV  CX,AX
-  INC  CX
-  MOV  AL,' '
-  STD
-  REPZ SCASB
-  MOV  AL,CL
-  POP  DS
-End;
+Function TextLength(S : String) : Byte;
+var
+  i: Integer;
+begin
+  { Modern Pascal replacement for assembly string length without trailing spaces }
+  { Original: Scanned string backwards removing trailing spaces }
+  i := Length(S);
+  while (i > 0) and (S[i] = ' ') do
+    Dec(i);
+  TextLength := i;
+end;
 Begin
   IF (Linenum<1) Or (Linenum>PageLength) Then Begin
     RErr:=True;
