@@ -10,7 +10,7 @@ uses graph,
      GcuRunit;
 
 type
-   string8 = string[8];
+   string10 = string[10];
 
    pbutton = ^tbutton;
    tbutton = object
@@ -18,18 +18,18 @@ type
       x0, x1, y0, y1: integer;
       resp: response_type;
       keyresponse: char;
-      mtext: string8;
+      mtext: string10;
    public
       constructor init(ax0, ax1, ay0, ay1: integer;
                      aresp:  response_type; akeyresponse: char;
-                     amtext: string8);
+                     amtext: string10);
       procedure draw;virtual;
       function activated(mausx, mausy: integer;
                          var vresp:  response_type; var vkeyresponse: char):
                          boolean;
       Procedure GetSize(Var aX0,aY0,aX1,aY1 : integer);
       Procedure GetSettings(Var aresp : response_type;var akeyresp : char;
-                            var amtext : string8);
+                            var amtext : string10);
    end;
 
    pThreeDButton = ^tThreeDButton;
@@ -38,7 +38,7 @@ type
      TColor : Byte;
      constructor init(ax0, ax1, ay0, ay1: integer;
                       aresp:  response_type; akeyresponse: char;
-                      amtext: string8;aFC,aTC : byte);
+                      amtext: string10;aFC,aTC : byte);
      procedure draw;virtual;
      procedure frame(c1,c2 : Byte);
    end;
@@ -59,7 +59,7 @@ implementation
 {*************************************************************}
 constructor TButton.init(ax0, ax1, ay0, ay1: integer;
                       aresp:  response_type; akeyresponse: char;
-                      amtext: string8);
+                      amtext: string10);
 begin
    x0:= ax0;
    x1:= ax1;
@@ -104,13 +104,13 @@ const butsizex = 56;
       butdiffy =  3;
       butxmarg = 2;
       butymarg = -1;
-var i, j, x, y: word;
+var i, j: word;
     vresp:  response_type;
     vkeyresponse: char;
-    vmtext: string8;
+    vmtext: string10;
     fc,tc: Byte;
 
-const butmenu : array[1..10,1..4] of String8 =
+const butmenu : array[1..10,1..4] of string10 =
 (('1  Help  ',
   'S  Show  ',
   'C  Print ',
@@ -190,8 +190,6 @@ begin
          vmtext:=butmenu[i,5-j];                       { Menutext }
          vresp:= specialkey;                           { Key-Typ  }
          vkeyresponse:=char(ButVKeyResp[j]+i);         { Scancode }
-         x:= butleftx(i);                              { Pos      }
-         y:= ButTopY(j);
          vmenubutton[i,j].init(butleftx(i), butrightx(i),
                                buttopy(j),  butboty(j),
                                vresp, vkeyresponse, vmtext,
@@ -314,7 +312,7 @@ begin
 end;
 
 Procedure TButton.GetSettings(Var aresp : response_type;var akeyresp : char;
-                            var amtext : string8);
+                            var amtext : string10);
 begin
   aresp:=resp;
   akeyresp:=keyresponse;
@@ -323,7 +321,7 @@ end;
 
 constructor tThreeDButton.init(ax0, ax1, ay0, ay1: integer;
                       aresp:  response_type; akeyresponse: char;
-                      amtext: string8;aFC,aTC : Byte);
+                      amtext: string10;aFC,aTC : Byte);
 begin
   inherited init(ax0, ax1, ay0, ay1, aresp, akeyresponse, amtext);
   fcolor:=aFC;
