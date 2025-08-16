@@ -1622,7 +1622,7 @@ begin
   LastSound:=0;
   FrameWidth:=1;
   FileChanged:=0;
-  TFastFontViewer(TxtFnt).Init('RNS'); {'RNS'}
+  TTextFontViewer(TxtFnt).Init('RNS'); {'RNS'}
   sndwarning:=1;
   pagebuf:=-1;
   lastbuf:=-1;

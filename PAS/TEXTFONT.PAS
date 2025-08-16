@@ -24,11 +24,7 @@ Type TTextFont = array[0..2,1..4200] of char;
        Procedure Write(X,Y : Word;St : String;Color : Byte;Size : Integer;
                        Style : Byte);
      End;
-     PFastFontViewer = ^TFastFontViewer;
-     TFastFontViewer = Object(TTextFontViewer)
-       Procedure WriteChar(X,Y : Word;Ch : Char;Color : Byte;Size : Integer;
-                           Style : Byte);Virtual;
-     End;
+
 Implementation
 
 Uses Graph;
@@ -123,7 +119,7 @@ end;
 
 Procedure TTextFontViewer.Write(X,Y : Word;St : String;Color : Byte;Size : Integer;Style : Byte);
 var
-  a,f,dx  : integer;
+  a,dx  : integer;
 begin
   dx:=Byte(font[size,1]);
   if size=sz8x16 then
@@ -138,88 +134,4 @@ begin
 end;
 
 
-Procedure TFastFontViewer.WriteChar(X,Y : Word;Ch : Char;Color : Byte;
-                                    Size : Integer;Style : Byte);
-Assembler;
-Var Counter : Byte;
-Asm
-@@Start:
-  MOV  Counter,0
-  CMP  X,634d
-  JB   @@0
-  CMP  X,640
-  JAE  @@5
-  INC  Counter
-@@0:
-  PUSH DS               { Save DS                       }
-  LDS  SI,Self          { DS:SI = @SELF                 }
-  ADD  SI,Offset TFastFontViewer.Font{ DS:SI=@Font      }
-  MOV  AX,4200
-  MUL  Size
-  ADD  SI,AX
-  MOV  AL,[SI+1]        { Vertical Counter              }
-  MOV  BH,AL
-  MOV  AL,&ch           { Compute CharStart Address     }
-  MUL  Byte [SI+1]
-  ADD  SI,AX
-  ADD  SI,2
-  MOV  AX,0A000h        { Display Memory Segment        }
-  MOV  ES,AX
-  MOV  AX,Y             { Addr=y*80+(x div 8)           }
-  CMP  Size,sz6x12
-  JNZ  @@1
-  SUB  AX,2
-@@1:
-  SUB  AX,4
-  MOV  DI,AX
-  SHL  DI,4
-  SHL  AX,6
-  ADD  DI,AX
-
-  MOV  DX,03CEh         { GDC Controller                }
-  XOR  AL,AL            { set/reset ->Color             }
-  MOV  AH,Color
-  OUT  DX,AX
-
-  MOV  AX,0305h         { Write mode 3                  }
-  OUT  DX,AX
-
-  MOV  AX,X             { Add X/8 to Addr(DI)           }
-  INC  AX
-  MOV  CX,AX
-  SHR  AX,3
-  ADD  DI,AX
-  AND  CL,7             { Pixel Offset                  }
-@@2:
-  LODSB                 { Get Pixel Mask                }
-  XOR  AH,AH            { Clear Hibyte                  }
-  ROR  AX,CL
-  MOV  BL,ES:[DI]       { Load latch bytes              }
-  STOSB                 { Write                         }
-  TEST Counter,1
-  JZ  @@3
-  ADD  DI,79
-  DEC  BH
-  JNZ  @@2
-  JMP  @@4
-@@3:
-  MOV  AL,AH
-  MOV  BL,ES:[DI]       { Load latch bytes              }
-  STOSB
-  ADD  DI,78            { Next line:+78,+2 from STOSW   }
-  DEC  BH               { Decrement Counter             }
-  JNZ  @@2              { and check for zero            }
-@@4:
-  MOV  AX,0005h         { Write mode 0 (default)        }
-  OUT  DX,AX
-
-  POP  DS               { Restore DS                    }
-@@5:
-  CMP  Style,stbold
-  JNZ  @@6
-  AND  Style,NOT stbold
-  INC  X
-  JMP  @@Start
-@@6:
-End;
 End.
