@@ -1,92 +1,62 @@
 {$I RNS.H}
 unit Xcrt;
+
 interface
 
 function XReadKey(var shiftp, ctrlp: boolean): char;
-Function XKeypressed: Boolean;
+Function XKeyPressed: Boolean;
 Procedure XClearKbd;
 
 implementation
 
+uses Crt;
+
 var lastkey: char;
     extended: boolean;
 
-function XReadKey(var shiftp, ctrlp: boolean): char;assembler;
-asm
-  xor  al,al
-  les  di,ctrlp
-  mov  es:[di],al
-  les  di,shiftp
-  mov  es:[di],al
-  cmp  extended,0
-  jz   @@notextended
-
-  mov  extended,al
-  mov  bl,LastKey
-  jmp  @@3
-@@notextended:
-  mov  ah,10h
-  int  16h
-  or   al,al                    {al=0 or al=224->extended key           }
-  jz   @@isext
-  cmp  al,224d
-  jnz  @@noext
-@@isext:
-  mov  extended,TRUE
-  mov  lastkey,ah
-  xor  al,al
-@@noext:
-  mov  bx,ax
-  mov  ah,12h                   {get kbd flags...:)                     }
-  int  16h
-  test al,3                     {shift? left or right...                }
-  jz   @@1
-  les  di,shiftp
-  mov  byte ptr es:[di],1
-@@1:
-  test al,4                     {ctrl?                                  }
-  jz   @@2
-  les  di,ctrlp
-  mov  byte ptr es:[di],1
-@@2:
-  test ah,8                     {???                                    }
-  jz   @@3                      {exchange scancodes: 44<->21            }
-  cmp  lastkey,21d
-  jnz  @@4
-  mov  lastkey,44d
-  jmp  @@3
-@@4:
-  cmp  lastkey,44d
-  jnz  @@3
-  mov  lastkey,21d
-@@3:
-  mov  al,bl
+function XReadKey(var shiftp, ctrlp: boolean): char;
+var ch: char;
+begin
+  // TODO: Replace with modern keyboard input API
+  // For now, use basic CRT functions and assume no modifier keys
+  shiftp := False;
+  ctrlp := False;
+  
+  if extended then
+  begin
+    extended := False;
+    XReadKey := lastkey;
+  end
+  else
+  begin
+    ch := ReadKey;
+    // Check for extended keys (function keys, arrow keys, etc.)
+    if ch = #0 then
+    begin
+      extended := True;
+      lastkey := ReadKey; // Get the scan code
+      XReadKey := #0;
+    end
+    else
+      XReadKey := ch;
+  end;
 end;
 
-Function XKeyPressed: Boolean;Assembler;
-Asm
-  XOR AX,AX
-  MOV ES,AX
-  MOV AX,Word PTR ES:[$041A]
-  XOR AX,Word PTR ES:[$041C]
-  OR  AL,extended
-  RET
-@001:
+Function XKeyPressed: Boolean;
+begin
+  // TODO: Replace with modern keyboard status API
+  XKeyPressed := KeyPressed or extended;
 end;
 
-{*********************************}
-Procedure XClearKbd;Assembler;
-{L”scht den Tastatur-Buffer}
-Asm
-  XOR AX,AX
-  MOV ES,AX
-  MOV Extended,AL
-  CLI
-  MOV AX,Word PTR ES:[$041A]
-  MOV Word PTR ES:[$041C],AX
-  STI
-End;
+Procedure XClearKbd;
+begin
+  // TODO: Replace with modern keyboard buffer clear API
+  // Clear any pending keys
+  while KeyPressed do
+    ReadKey;
+  extended := False;
+end;
 
 begin
-   extended:= false;
+   extended := false;
 end.
