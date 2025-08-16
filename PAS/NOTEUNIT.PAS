@@ -48,7 +48,6 @@ end;
 {****************************************************************}
 Procedure NotInsNote(linenum : integer; var actpos: integer);
 var inblock : stringline;
-    lineattr: lineattrtype;
     i: integer;
 begin
   inblock:=page[linenum];
@@ -66,9 +65,7 @@ begin
 end;
 {****************************************************************}
 Procedure NotDelNote(linenum: integer; var actpos : integer);
-var inblock: stringline;
-    lineattr: lineattrtype;
-    stbuf: string16;
+var stbuf: string16;
 begin
    UtiDelNoteChar(page[linenum], actpos, stbuf);
    UtiDelNumChar(page[linenum], actpos);
@@ -81,11 +78,11 @@ end;
 Procedure NotEdNoteLine(linenum: integer; var actpos: integer; c : char);
 
 var i, j, k, ordc: integer;
-    inblock, strbuf, txtbuf: stringline;
+    inblock, strbuf: stringline;
     lineattr: lineattrtype;
     x, deltax, clearendx : integer;
     clinemin, clinemax: integer;
-    left, delold, found, moveright, arrow, reallymoveright: boolean;
+    left, moveright, arrow, reallymoveright: boolean;
     indexc: char;
     oldx: integer;
     ref : Byte;
