@@ -94,7 +94,6 @@ procedure GrDisplay_Menu (startx, starty: integer;
 var
   ACTLINE : integer;
   I,J,L  : integer;
-  save,savebk   : integer;
   outstring : stringline;
   m         : boolean;
 begin
@@ -198,7 +197,7 @@ BEN�TIGTE TYPENVEREINBARUNGEN:
 
 var
   CURRENT_CHOICE,   { Getroffene und hervorgehobene Wahl }
-  I,j,L, s, x, y : integer;
+  I,j,L, s, y : integer;
   RESP : RESPONSE_TYPE;  { Tastatur-Eingabe - siehe Get_Response }
   DIR : MOVEMENT;        { Eingegebene Richtung der Pfeiltaste }
   FOUND : boolean;       { Flag f�r die Suche der Wahlm�glichkeit  }
@@ -209,7 +208,6 @@ var
 
   var outstring: string79;
       xpos: integer;
-  save,savebk   : integer;
   { Ein kleines Unterprogramm um aktuelle Wahl hervorzuheben
     bzw. die verlassene Wahl wieder in normaler Schrift darzustellen
 
@@ -431,9 +429,8 @@ var
 
   RESP : RESPONSE_TYPE;  { Tastatur-Eingabe - siehe Get_Response }
   DIR : MOVEMENT;        { Eingegebene Richtung der Pfeiltaste }
-  FOUND : boolean;       { Flag f�r die Suche der Wahlm�glichkeit  }
   KeyResponse : Char;
-  ACTLINE, y, x : integer;
+  ACTLINE, y : integer;
   mausx, mausy, maustaste, mausmenu: word;
 
   Procedure HighLite(VideoVal : Integer);

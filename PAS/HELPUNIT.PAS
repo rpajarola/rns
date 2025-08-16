@@ -60,7 +60,6 @@ end;
 {******************************************************}
 Procedure HlpHintFrame(hintminx, hintminy, hintmaxx, hintmaxy: integer);
 
-var c : char;
 begin
    SetColor(alarmcolor);
    SetFillstyle(1, alarmbkcolor);
@@ -210,8 +209,6 @@ end;
 {******************************************************}
 Procedure HlpDemoText(x, xmax, y: integer);
 
-var hinttext, outstring: string79;
-
 begin
    Mausdunkel;
    HlpHintFrame(grminx+171, grmaxy - 22, grmaxx, grmaxy+32);
@@ -227,7 +224,6 @@ end;
 Procedure HlpHint(hintnum: integer; WaitTime: Integer);
 
 var ymaxframe: integer;
-    temp1, temp2: boolean;
     SPic : Pointer;
     SC : Byte;
     HintText : String;
@@ -296,7 +292,6 @@ Function HlpAsk(hinttext,choicetext: string79; position : byte;
                 Resp : TCharSet) : char;
 var c : char;
     ymax: integer;
-    temp1, temp2: boolean;
     SPic : Pointer;
     m : Boolean;
     mem : integer;
@@ -519,8 +514,7 @@ Const nminx = 0;         { Screen frame                 }
       altofs1 = 64;
       altofs2 = 80;
 
-var c : char;
-    i : byte;
+var i : byte;
     textst1, textst2, textst3, textst4, stri : string79;
 begin
    SetBkColor(7{menubkcolor}); {bei einer andern Farbe mÅssten Schatten rechts und unten definiert werden!}

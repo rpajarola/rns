@@ -26,7 +26,7 @@ end;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Function TitVerify: Boolean;
 var licfile: text;
-    i, j, k: integer;
+    i, j: integer;
     nsum, ndiff, isum, idiff: integer;
     dummy: stringline;
 begin

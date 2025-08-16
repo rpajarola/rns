@@ -249,8 +249,6 @@ const
 
 var
   OLDSTR : STRING79;          { Originaler String }
-  IN_CHAR: char;              { Zeicheneingabe von Tastatur }
-  I  : integer;              { ZÑhler fÅr String-LÑnge }
   clstring: string79;
   shiftp, ctrlp: boolean;
   mp : word;
@@ -361,8 +359,6 @@ const
 
 var
   OLDSTR : STRING79;          { Originaler String }
-  IN_CHAR: char;              { Zeicheneingabe von Tastatur }
-  I  : integer;              { ZÑhler fÅr String-LÑnge }
   clstring: string79;
   shiftp, ctrlp: boolean;
   mp : word;
@@ -478,8 +474,6 @@ const
 
 var
   OLDSTR : STRING79;          { Originaler String }
-  IN_CHAR: char;              { Zeicheneingabe von Tastatur }
-  I  : integer;              { ZÑhler fÅr String-LÑnge }
   clstring: string79;
   shiftp, ctrlp: boolean;
   mp : word;
@@ -835,7 +829,6 @@ PARAMETER:
     STRING79 - Wird fÅr alle Strings verwendet
 
 -------------------------------------------------------------------}
-VAR i : integer;
 
 begin
 
@@ -868,8 +861,6 @@ procedure GrGet_Prompted_Spaced_String (var IN_STRING: STRING16;
                               var mausx, mausy: word;
                        var maustaste, mausmenu: word;
                                   var changed : boolean);
-
-VAR i : integer;
 
 begin
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
@@ -908,8 +899,6 @@ BESCHREIBUNG:
     Dieses Unterprogramm liest eine Real-Zahl an einer bestimmten
     Stelle des Bildschirms ein. Rest siehe bei GrGet_Prompted_String.
 -------------------------------------------------------------------}
-
-VAR r : Real;
 
 begin
 
@@ -955,8 +944,6 @@ BESCHREIBUNG:
     Stelle des Bildschirms ein. Rest siehe bei GrGet_Prompted_String.
 -------------------------------------------------------------------}
 
-VAR i : integer;
-
 begin
 
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
@@ -992,8 +979,7 @@ procedure GrGet_Prompted_Toggle (var tval: integer;
                                  var mausx, mausy: word;
                                  var maustaste, mausmenu: word;
                                  var changed : boolean);
-VAR i : integer;
-    outstring: string79;
+VAR outstring: string79;
 
 begin
 

@@ -16,7 +16,7 @@ uses helpunit;
 {******************************************************************}
 Procedure DmeDispChar(x, y: integer; c : char; blnum: integer);
 
-var i, j : integer;
+var i : integer;
     muster : word;
 
 begin

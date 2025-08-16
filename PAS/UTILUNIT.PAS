@@ -192,8 +192,7 @@ end;
 Function UtiNumReady(var inblock: string16; c:char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch eine Abstandseingabe fertig ist}
-var i, j : byte;
-    strbuf: string16;
+var strbuf: string16;
 begin
    if (Not(IniNumchar(inblock[1])Or IniArrow(inblock[1])))Then
      inblock:='';
@@ -220,8 +219,7 @@ end;
 {****************************************************************}
 Function UtiCheckFlam(var inblock: stringline; actpos: integer): char;
 {wird +,-,=,* wenn der actuelle character ein Flam enth„lt}
-var i: integer;
-    c: char;
+var c: char;
 begin
   c:=' ';
   while (actpos>1) and (not IniNumChar(inblock[actpos-1])) do
@@ -290,7 +288,6 @@ end;
 {****************************************************************}
 Procedure UtiKlammerZuPos(c: char; var dx: integer; flamchar : char);
 var dy: integer;
-    i: byte;
     inblock: stringline;
 begin
   inblock:= c;
