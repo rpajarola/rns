@@ -10,7 +10,6 @@ Uses Graph,
      menutyp,
      helpunit,
      userexit,
-     BGIDriv,
      Undebug;
 
 
