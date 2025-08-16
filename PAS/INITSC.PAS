@@ -206,8 +206,6 @@ var ThePalette : TDACTable;
     GraphDriver : integer;
     GraphMode : integer;
     ErrCode : integer;
-    HercGraphicsMode : Boolean;
-    HercGraphicsPage : Byte absolute $0000:$0199;
     heapmark: pointer;
 
     curcolor, gridcolor: byte;
@@ -598,23 +596,19 @@ end;
 Procedure IniGraphClose;
 begin
   CloseGraph;
-  HercGraphicsMode := false;
 end;
 {******************************************************}
 Procedure IniGraphMode;
 begin
-  IF Not HercGraphicsMode Then Begin
-    GraphDriver:=VGA;
-    GraphMode:=VGAHi;
-    InitGraph(GraphDriver, GraphMode, '');
-    ErrCode:=GraphResult;
-    If ErrCode <> grOk then begin
-      writeln('Graphics error ',GraphErrorMsg(ErrCode));
-      writeln('Program aborted');
-      halt(1);
-    end;
-    HercGraphicsMode := true;
-  End;
+  GraphDriver:=VGA;
+  GraphMode:=VGAHi;
+  InitGraph(GraphDriver, GraphMode, '');
+  ErrCode:=GraphResult;
+  If ErrCode <> grOk then begin
+    writeln('Graphics error ',GraphErrorMsg(ErrCode));
+    writeln('Program aborted');
+    halt(1);
+  end;
   SetTextJustify(LeftText, Ttyp);
   SetTextStyle(DefaultFont, HorizDir, 1);
 end;

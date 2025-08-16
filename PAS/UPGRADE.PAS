@@ -38,7 +38,6 @@ begin
    datadir:= '';
    linenum:= 1;
    clrscr;
-   hercgraphicsmode:= false;
    oldstring:= instring;
    c:= chr(0);
    Display_Frame(substartx, substarty, subendx, subendy, true, true);

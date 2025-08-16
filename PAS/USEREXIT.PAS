@@ -107,8 +107,7 @@ Begin
   {if erroraddr=nil then begin}
     ExitProc:=OrgExitProc;
     CloseGraph;
-    HercGraphicsMode := false;
-    IniShowCursor;
+     IniShowCursor;
     exit;
   end;
 {  if HlpAsk('Your program makes shit! '+ExitCode2Msg(ExitCode),
@@ -117,7 +116,6 @@ Begin
   end;
   ExitProc:=OrgExitProc;
   CloseGraph;
-  HercGraphicsMode := false;
   IniShowCursor;
 End;}
 procedure NewExit;FAR;

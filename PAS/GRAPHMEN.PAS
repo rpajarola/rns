@@ -326,9 +326,6 @@ begin
       if (maustaste = 1) then begin
         IniMausAssign(maustaste, resp);
         y:= mausy;
-        if hercgraphicsmode then begin
-{          y:= mausy - dygraph;}
-        end;
         if menu.spacing>4 then
           CURRENT_CHOICE:=(((y div 8)-starty-menu.menuattr.firstline+4) div spacing)
         else
@@ -558,10 +555,6 @@ begin
        if (maustaste = 1) then
        begin
           y:= mausy;
-          if hercgraphicsmode then
-          begin
-             y:= mausy - dygraph;
-          end;
           CURRENT_CHOICE:= ((y div 8) - starty -
                              menu.menuattr.firstline + 1) div spacing;
           if CURRENT_CHOICE < 1 then CURRENT_CHOICE:= 1;

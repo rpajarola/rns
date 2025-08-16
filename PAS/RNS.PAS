@@ -20,7 +20,6 @@ Var
 procedure GraphExit;Far;
 begin
    CloseGraph;
-   HercGraphicsMode := false;
    IniShowCursor;
    ExitProc:= ExitSave;
 end;
@@ -51,7 +50,6 @@ end;
 begin
    IF Ioresult=0 Then;
    InstallUserDrivers;
-   HercGraphicsMode := false;
    Heaperror:= @HeapFunc;
    Assign(Buffile,'Buffer');
    Assign(debfile,'Debfile');
