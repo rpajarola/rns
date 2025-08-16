@@ -119,7 +119,7 @@ begin
   rewrite(outfile, 1);
   IF IOResult<>0 Then;
 {$I+}
-  inblocksize:=Word(memavail)-16;
+  inblocksize:=65536-16; { Modern replacement for memavail - use fixed buffer size }
   if inblocksize>filesize(infile) then
     inblocksize:=filesize(infile);
   getmem(inblock,inblocksize);
@@ -185,12 +185,12 @@ Procedure FilCheckLine(var tempbuffer, inblock: stringline;
                        var tempptr, startptr, lastptr: listptr;
                        var tbufpos: byte; var endreached: boolean;
                        skip: boolean; delline: boolean);
-{Inblock wird = n„chste Zeile. Tempbuffer ist der aktuelle String im Heap,
- in der der n„chste Terminator gesucht wird. Die bersprungene Zeile
+{Inblock wird = nï¿½chste Zeile. Tempbuffer ist der aktuelle String im Heap,
+ in der der nï¿½chste Terminator gesucht wird. Die ï¿½bersprungene Zeile
  ist in inblock. Tempptr zeigt auf den Nachfolger
  von tempbuffer, tbufpos gibt die Position des 0-terminators in Tempbuffer an.
- Ist skip true, wird die Zeile bersprungen, sonst nur angezeigt in inblock
- Ist DELLINE true, wird die Zeile gel”scht.}
+ Ist skip true, wird die Zeile ï¿½bersprungen, sonst nur angezeigt in inblock
+ Ist DELLINE true, wird die Zeile gelï¿½scht.}
 
 var tbsav: byte;
     dumblock: stringline;
@@ -198,7 +198,7 @@ var tbsav: byte;
 begin
    endreached:= false;
    tbsav:= tbufpos;
-   {Lies n„chsten String aus dem Heap, wenn der Buffer leer ist}
+   {Lies nï¿½chsten String aus dem Heap, wenn der Buffer leer ist}
 
    if Length(tempbuffer) <= tbufpos then
    begin
@@ -316,7 +316,7 @@ Procedure FilFindPtr(pagenum, linenum: integer; var foundptr,
                      startptr, lastptr: listptr;
                      lastinclude: boolean);
 {suchen des Pointers auf die Zeile linenum auf der Seite pagenum
- lastinclude = true heisst, dass die letzte Zeile noch bersprungen
+ lastinclude = true heisst, dass die letzte Zeile noch ï¿½bersprungen
                wird}
 
 var inblock, dummyblock: stringline;
@@ -444,7 +444,7 @@ begin
                                 actptr, false);
             tempbuffer:=inblock+#0;
           end else begin
-            {Noch Platz im Buffer, Buffer weiter fllen}
+            {Noch Platz im Buffer, Buffer weiter fï¿½llen}
             tempbuffer:=tempbuffer+inblock+#0
           end;
         end;{if(inblock[1]='T')or(inblock[1]='N')}
@@ -532,7 +532,7 @@ Procedure FilHeapInsertString(inblock: stringline; var nowptr, firstptr,
                               endptr, actptr: listptr; newactptr : boolean);
 {Einfuegen des Strings inblock an die Stelle nowptr,
  nowptr wird auf den neuen String gesetzt, falls newactptr = true ist,
- sonst bleibt es unver„ndert
+ sonst bleibt es unverï¿½ndert
  ist nowptr = actptr, so wird auf jeden Fall ein neuer Pointer kreiert}
 
 var workdat: linerec;
@@ -629,7 +629,7 @@ end;
 {*********************************************************}
 Procedure FilHeapSqueeze(var actptr, startptr, endptr: listptr;
                          trailblank: boolean);
-{Heap auf maximale Stringl„nge verdichten}
+{Heap auf maximale Stringlï¿½nge verdichten}
 
 var inblock: stringline;
     lineend: byte;
@@ -729,7 +729,7 @@ end;
 {**************************************************************}
 Procedure FilSkipPage(var tempptr, startptr, lastptr: listptr);
 
-{Springt auf die n„chste Seite im Heap, und holt die aktuelle
+{Springt auf die nï¿½chste Seite im Heap, und holt die aktuelle
  aus dem Heap}
 
 var actline : integer;
@@ -918,7 +918,7 @@ Begin
     oldpage:=pagecount;
     { Aktuelle Seite sichern }
     FilSavePage(1, pagelength,actptr, startptr, lastptr);
-    { Zu l”schende Seite suchen und vom Heap holen }
+    { Zu lï¿½schende Seite suchen und vom Heap holen }
     FilFindPage(pagebuf, Result, actptr, startptr, lastptr);
     PagGetPageFromHeap(actptr, startptr, lastptr, i);
     for i:= 1 to pagelength do
@@ -933,7 +933,7 @@ Begin
   if pagecount > 0 then begin{show new page, dont save this page}
      FilFindPage(pagecount, Result, actptr, startptr, lastptr);
      PageCount:= Result;
-     IniNewPage(i{dummy});{parameter sollte linenum sein, wird aber nicht bercksichtigt}
+     IniNewPage(i{dummy});{parameter sollte linenum sein, wird aber nicht berï¿½cksichtigt}
      PagGetPageFromHeap(actptr, startptr, lastptr, i);
   end else begin
     PagGetSetupPage(actptr, startptr, lastptr);
@@ -995,7 +995,7 @@ begin
   MarkInverse(1,Pagelength,grminx,grmaxx);
 end;
 
-{ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ FilUnMarkPage ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ}
+{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ FilUnMarkPage ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
 
 Procedure FilUnMarkPage;
 
@@ -1011,7 +1011,7 @@ begin
     PagRefClearVal(grminx,iniYnow(linenum+50),grmaxx,iniYnow(linenum+50));}
     {Funktioniert einzeln, zusammen macht es praktisch PageRefresh ???}
 
-    {Weitere Strategie: 1. und 52. Zeile saven, l”schen, dann neu schreiben:}
+    {Weitere Strategie: 1. und 52. Zeile saven, lï¿½schen, dann neu schreiben:}
 {    x:=1;
     y:=1;
     SetViewPort (x,y+3,x+638,y+9,true);
@@ -1023,7 +1023,7 @@ begin
   end;
 end;
 
-{ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ FilCopyPage ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ}
+{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ FilCopyPage ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
 
 Procedure FilCopyPage(var actptr, startptr, lastptr : listptr);
 Var Copyfile : Text;
