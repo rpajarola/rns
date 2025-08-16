@@ -155,7 +155,6 @@ begin
   soundattr:=0;
   Mausdunkel;
   symcount:=0;
-  Mark(heapmark);
   Response:= No_Response;
   firstpage:= 1;
   actposn:= 1;
@@ -379,7 +378,6 @@ begin
     EdiCopyFile('DEMODIR\TESTFILE.RNS','DEMODIR\DEMOTEST.PRE');
     SetCRCFileEntry('DEMODIR\DEMOTEST.PRE',GetCRC('DEMODIR\DEMOTEST.PRE'))
   {$ENDIF};
-  Release(heapmark);
   Mausdunkel;
 end;
 Function EdiSavePossible(fn : String) : Boolean;
