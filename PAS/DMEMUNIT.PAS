@@ -33,35 +33,24 @@ end;
 Procedure DmePlaceWord(x,y : integer; w : word);
 
 var acolor: byte;
+    i: integer;
+    bitval: word;
+    pixelx: integer;
 
 begin
    acolor:= getcolor;
-   Asm
-     CLD
-     MOV AX,W
-     MOV CX,16
-   @001:
-     SHL AX,1
-     JNC @002
-     PUSH AX
-     PUSH CX
-     MOV BX,16
-     SUB BX,CX
-     ADD BX,X
-     CMP BX,1
-     JLE @003
-     CMP BX,639
-     JGE @003
-     PUSH BX
-     PUSH Y
-     PUSH Word Ptr ACOLOR
-     CALL PutPixel
-   @003:
-     POP CX
-     POP AX
-   @002:
-     LOOP @001
-   End;
+   { Modern Pascal replacement for assembly bit manipulation }
+   bitval := w;
+   for i := 0 to 15 do
+   begin
+     if (bitval and $8000) <> 0 then { Test highest bit }
+     begin
+       pixelx := x + i;
+       if (pixelx > 1) and (pixelx < 639) then
+         PutPixel(pixelx, y, acolor);
+     end;
+     bitval := bitval shl 1; { Shift left for next bit }
+   end;
 end;
 
 end.
