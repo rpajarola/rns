@@ -11,7 +11,7 @@ Implementation
 Uses Dos;
 
 Function UpString(VAR Zeile : STRING) : String;
-(* Umwandlung eines Strings in Groábuchstaben *)
+(* Umwandlung eines Strings in Groï¿½buchstaben *)
 VAR i : INTEGER;
 BEGIN
   FOR i := 1 TO Length(Zeile) DO  Zeile[i] := UpCase(Zeile[i]);
@@ -124,12 +124,8 @@ Begin
     BlockRead(F,Buf,SizeOf(Buf),Res);
     For a:=0 To (Res div 2)-1 Do Begin
       b:=Buf[a];
-      Asm
-        MOV  AX,CRC
-        ROR  AX,1
-        XOR  AX,B
-        MOV  CRC,AX
-      End;
+      { Modern Pascal replacement for assembly CRC calculation }
+      CRC := ((CRC shr 1) or (CRC shl 15)) xor b;
     End;
     if Res<>SizeOf(Buf) Then
       Break;
