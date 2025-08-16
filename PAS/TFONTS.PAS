@@ -33,11 +33,6 @@ Type TCharBitM = Array[0..31] OF Byte;
      End;
 Implementation
 
-Function VGAAvail : Boolean;Assembler;
-Asm
-  MOV  AX,01A00h
-  INT  10h       { IF VGAavail then AL=1A, otherwise it's left zero        }
-End;             { Turbo Pascal treats every value different to 0 as true! }
 
 Constructor TVGAFontViewer.Init(FN : String);
 Var FF : File;
@@ -45,7 +40,6 @@ Var FF : File;
     R  : Word;
 Begin
 {$I-}
-  IF Not VGAAvail Then Fail;
   Assign(FF,FN);
   ReSet(FF,1);
   IF IOResult<>0 Then Fail;

@@ -28,11 +28,6 @@ begin
 end;
 {$ENDIF}
 {*******************************************************}
-Function VGAAvail : Boolean;Assembler;
-Asm
-  MOV  AX,01A00h
-  INT  10h       { IF VGAavail then AL=1A, otherwise it's left zero        }
-End;             { Turbo Pascal treats every value different to 0 as true! }
 {*******************************************************}
 Function HeapFunc(Size: word): integer; Far;
 begin
@@ -46,10 +41,6 @@ begin
    TextColor(White);
    TextBackGround(Red);
    GotoXY(1,12);
-   if not VGAAvail then begin
-     WriteLn('Sorry, you need a VGA graphics adapter to run this program!');
-     Halt($FF);
-   end;
    IF RegisterBGIDriver(@EGAVGADriverProc)<0 then begin
       WriteLn('Error loading VGA graphics driver, program halted');
       Writeln;
