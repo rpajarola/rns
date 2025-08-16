@@ -26,7 +26,6 @@ Uses
 {******************************************************************}
 Procedure PrmSetOptions;
 var c     : char;
-    resp  : response_type;
     y, hy : integer;
     ok    : boolean;
     m     : boolean;
@@ -132,7 +131,6 @@ Procedure Printpages(var linenum,actposn,actpost : integer;
 var spagecount : integer;
     i          : integer;
     inblock    : stringline;
-    Result     : integer;
     n          : integer;
 Begin
   if (not (prfile=1)) or (not IniFileExist(psdir+'\'+prfname)) or
@@ -179,9 +177,8 @@ var dir                               : movement;
     c                                 : char;
     resp                              : response_type;
     choicenum                         : byte;
-    x, y, hy, i, lastpage,dy          : integer;
+    x, y, hy, i, dy          : integer;
     mausx, mausy, maustaste, mausmenu : word;
-    b                                 : byte;
     s                                 : string;
     changed                           : boolean;
     list                              : TPageList;
