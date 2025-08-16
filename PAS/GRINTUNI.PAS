@@ -98,7 +98,7 @@ begin
             #27 : begin
               continue;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -112,7 +112,7 @@ begin
             #27 : begin
               continue;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -126,7 +126,7 @@ begin
             #27 : begin
               continue;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -140,7 +140,7 @@ begin
             #27 : begin
               continue;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -341,7 +341,7 @@ begin
               ChoiceVal[1].Ival:=TempAttr.Beats;
               changed[1]:=false;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -358,7 +358,7 @@ begin
               ChoiceVal[2].Ival:=TempAttr.eint;
               changed[2]:=false;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -375,7 +375,7 @@ begin
               ChoiceVal[3].Ival:=TempAttr.resolution;
               changed[3]:=false;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
@@ -392,7 +392,7 @@ begin
               ChoiceVal[5].tval:=TempAttr.linestyle;
               changed[5]:=false;
             end;
-            #13,'N': begin
+            #13, 'Y': begin
             end;
           end;{case}
         end;
