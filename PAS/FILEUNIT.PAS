@@ -45,7 +45,7 @@ Procedure FilCopyFile(instring, outstring: stringline);
 Procedure FilAssignRnsFile(var tfile: text; instring: stringline;
           readf: boolean);
 Procedure FilFindeErstBestenFont(VAR instring : stringline);
-Function FilCompareFiles(FName1,FName2 : String) : Boolean;FAR;
+Function FilCompareFiles(FName1,FName2 : String) : Boolean;
 Procedure FilFontSelect;
 Procedure FilDelPage(var actptr, startptr, lastptr : listptr);
 Procedure FilUnDelPage(var actptr, startptr, lastptr : listptr);
