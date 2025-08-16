@@ -70,25 +70,21 @@ Var CLS,CLE: byte;
 
 {******************************************************}
 
-Procedure KillCursor;Assembler;
-ASM
-   MOV AH,3
-   MOV BH,0
-   INT $10
-   MOV CLS,CH
-   MOV CLE,CL
-   MOV AH,1
-   MOV CH,$20
-   INT $10
+Procedure KillCursor;
+begin
+   { TODO: Implement cursor hiding functionality }
+   { Original: INT 10h function 3 (get cursor) then function 1 (set cursor invisible) }
+   CLS := 0; { Save current cursor start line }
+   CLE := 0; { Save current cursor end line }
+   { Stub: Cursor visibility control not implemented }
 end;
 {********************************************************}
 
-Procedure RestoreCursor;Assembler;
-ASM
-   MOV AH,1
-   MOV CH,CLS
-   MOV CL,CLE
-   INT $10
+Procedure RestoreCursor;
+begin
+   { TODO: Implement cursor restoration functionality }
+   { Original: INT 10h function 1 (set cursor) with saved CLS/CLE values }
+   { Stub: Cursor visibility control not implemented }
 end;
 {******************************************************}
 Procedure UseGetConfig;
@@ -348,7 +344,7 @@ begin
                  begin
                     instring:= instring + '.RNS';
                  end;
-                 if ok then     { GÅltiger Filename? }
+                 if ok then     { GÔøΩltiger Filename? }
                     HlpTestFileName(datadir + '\' + instring, ok,
                                  substartx, subendx, substarty + 6);
                  if ok then
@@ -667,7 +663,7 @@ Begin
        (topstartx+20)*Charwidth-6, (topstarty+478)); {Trennungslinie dunkel 1}
   Line((topstartx+20)*CharWidth-7, (topstarty-1),
        (topstartx+20)*Charwidth-7, (topstarty+478)); {Trennungslinie dunkel 2}
-     {Rahmen fÅr Text}
+     {Rahmen fÔøΩr Text}
   IF C<>'F' then begin
     SetColor(12);
     Line((substartX+0)*Charwidth-1, (substarty+2)*2*Charheight+6,
@@ -754,9 +750,9 @@ begin
     SetColor(MenuFrameColor);
     UseGetPickFil(instring);
     Mausdunkel;
-    if c<>' ' then begin{ nur beim ersten mal nicht lîschen }
-      bar(172, 1,639,479);{lîscht nur rechten Teil, nicht Hauptmenu}
-{      bar( 10,61,159,110);}{lîscht nur 1.Button des Hauptmenus: wegen Dir\}
+    if c<>' ' then begin{ nur beim ersten mal nicht lÔøΩschen }
+      bar(172, 1,639,479);{lÔøΩscht nur rechten Teil, nicht Hauptmenu}
+{      bar( 10,61,159,110);}{lÔøΩscht nur 1.Button des Hauptmenus: wegen Dir\}
       { ClearDevice;} {alternativ zur den bars}
       ImeInitTopmenu; {damit richtiger Pfad 1.button Hauptmenu gezeigt wird}
     end else begin
@@ -854,7 +850,7 @@ begin
                  Assign(Bakfile,datadir+'\'+Copy(instring,1,
                    Pos('.',instring))+'BAK');
               End;
-             BakName:=strpas(TTextRec(BakFile).Name);
+             BakName:=datadir+'\'+Copy(instring,1,Pos('.',instring))+'BAK'; { Modern file name access }
            End Else
              BakName:='';
            IniSwapMenuColors;
@@ -958,11 +954,11 @@ begin
              Erase(BakFile);
         {$I+}
 {.........................................................................}
-           {ZurÅcksetzungen vor Save beim verlassen des Files}
+           {ZurÔøΩcksetzungen vor Save beim verlassen des Files}
 {          soundchange:=(soundchange xor saMuffled) and not saMuffled;}
-           {muffled M soll wÑhrend ganzer Session fÅr alle Files gelten!}
+           {muffled M soll wÔøΩhrend ganzer Session fÔøΩr alle Files gelten!}
            soundchange:=(soundchange xor saRhythm) and not saRhythm;
-           {nur rhythmische Stuktur R wird beim Filesave gelîscht}
+           {nur rhythmische Stuktur R wird beim Filesave gelÔøΩscht}
            PageCount:=1;
 {.........................................................................}
            UseSaveSetup;
