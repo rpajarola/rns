@@ -81,9 +81,8 @@ Procedure SpeBlockCommands(var linenum, actposn, actpost: integer;
 
 var dir: movement;
     c: char;
-    resp: response_type;
     choicenum: byte;
-    x, y, hy, i, endy: integer;
+    y, hy, i, endy: integer;
     instring: string16;
     dummyb: boolean;
     bfile: text;
@@ -358,7 +357,6 @@ Procedure SpeSplitFile(var actptr, startptr, lastptr: listptr);
 
 var instring: string16;
     ok : boolean;
-    tempptr: listptr;
     outfile: text;
     i: integer;
 
@@ -426,7 +424,6 @@ Procedure SpeSplitPage(linenum: integer; var actposn, actpost: integer;
 
 var i, lineins, linepage: integer;
     tempptr: listptr;
-    lmin, lmax: byte;
 
 begin
    tempptr:= actptr;
@@ -461,7 +458,7 @@ Procedure SpeJoinPage(linenum: integer; var actposn, actpost: integer;
                       var actptr, startptr, lastptr: listptr);
 {Schiebt die n�chste Seite an die gegenw�rtige}
 
-var i, j, lineins, linepage: integer;
+var i, lineins, linepage: integer;
     tempptr: listptr;
     inblock, tempbuffer: stringline;
     endreached: boolean;
@@ -540,7 +537,7 @@ end;
 Procedure SpeEdLineAttr(linenum: integer; var actposn, actpost: integer;var startptr, lastptr : listptr);
 
 var
-   i, j: integer;
+   i: integer;
 
 begin
    GriBeatMenuDisp(linenum{, startptr, lastptr});
@@ -634,10 +631,7 @@ end;
 {******************************************************}
 Procedure SpeNoteRight(linenum: integer; var actpos: integer);
 
-var i: integer;
-    inblock : stringline;
-    lineattr: lineattrtype;
-    x : integer;
+var x : integer;
 
 begin
    while (actpos < length(page[linenum])) and
@@ -669,8 +663,8 @@ end;
 {******************************************************}
 Procedure SpeInsNoteLine(var linenum, actposn: integer;
                          var tempptr, startptr, lastptr: listptr);
-var i, y : integer;
-    inblock, strbuf: stringline;
+var i : integer;
+    inblock: stringline;
     inserted: boolean;
     lineattr: lineattrtype;
 begin
@@ -817,8 +811,8 @@ Procedure SpeInsertBuffer(linenum: integer; var actposn, actpost: integer;
 var
     apos, numpages, lineins, linepage, i, j: integer;
     tempbuffer, inblock : stringline;
-    tsavptr, tempptr: listptr;
-    keepblank, endreached: boolean;
+    tempptr: listptr;
+    endreached: boolean;
     tbufpos: byte;
 
 begin
@@ -1109,9 +1103,8 @@ Procedure SpeLineCommands(var linenum, actposn, actpost: integer;
 
 var dir: movement;
     c, inchar: char;
-    resp: response_type;
     choicenum: byte;
-    y, hy, i, endy: integer;
+    y, hy: integer;
     mausx, mausy, maustaste, mausmenu: word;
 
 begin
