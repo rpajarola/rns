@@ -1,8 +1,5 @@
 {$I RNS.H}
 unit Xcrt;
-{$D-}
-{$L-}
-{$Y-}
 interface
 
 function XReadKey(var shiftp, ctrlp: boolean): char;

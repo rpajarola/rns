@@ -1,21 +1,14 @@
-  {$F-}               { Force Far Calls    }
   {$R+}               { Range Check        }
   {$Q+}               { Overflow Check     }
   {$S+}               { Stack Check        }
   {$I+}               { IO-Check           }
   {$A-}               { Word align Data    }
-  {$G+}               { 286 Code           }
   {$V-}               { Strict VAR Strings }
   {$B-}               { Boolean Eval       }
   {$T-}               { Typed @            }
   {$P-}               { Open Params        }
   {$X+}               { Extended Syntax    }
-  {$N-}               { Coprocessor        }
-  {$E-}               { Emulation          }
   {$D-}               { Debug information  }
-  {$L-}               { Local Symbols      }
-  {$Y-}               { Symbol information }
-  {$O-}               { Overlay Code       }
 
 unit inout;
 
