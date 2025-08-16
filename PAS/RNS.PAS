@@ -1,8 +1,7 @@
 {$I RNS.H}
 Program Rns(Input, Output);
 
-Uses Test86,
-     Graph,
+Uses Graph,
      crt,
      Dos,
      initsc,
