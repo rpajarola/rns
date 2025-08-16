@@ -44,7 +44,6 @@ procedure MusGetPromptedPattern (var IN_STRING: STRINGLINE;
 
 {Eingabe eines Musikpatterns}
 
-VAR i : integer;
 begin
   {schreibe den Prompt}
   IniExpand(prompt, prlength);
@@ -61,7 +60,7 @@ procedure MusGetPattern (var IN_STRING: STRINGLINE;
                       var KEYRESPONSE : char);
 
 var
-  IN_CHAR, c: char;           { Zeicheneingabe von Tastatur }
+  c: char;                    { Zeicheneingabe von Tastatur }
   I  : integer;               { ZÑhler fÅr String-LÑnge }
   inblock: stringline;
   lineattr : lineattrtype;
