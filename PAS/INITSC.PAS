@@ -495,29 +495,11 @@ Procedure IniShowCursor;
 begin
 end;
 {******************************************************}
-Procedure IniExpand(var instring: string79; newlength: byte);Assembler;
-Asm
-  CLD
-  PUSH DS
-  LDS SI,InString
-  LES DI,InString
-  LODSB
-  MOV CL,NewLength
-  CMP AL,CL
-  JAE @001
-  XOR CH,CH
-  PUSH CX
-  XCHG CL,AL
-  PUSH CX
-  STOSB
-  REP MOVSB
-  POP AX
-  POP CX
-  SUB CL,AL
-  MOV AL,' '
-  REP STOSB
-@001:
-  POP DS
+Procedure IniExpand(var instring: string79; newlength: byte);
+begin
+  // Expand string to newlength by padding with spaces if needed
+  while Length(instring) < newlength do
+    instring := instring + ' ';
 end;
 {******************************************************}
 Procedure IniCenter(Var instring : String;newlength: byte);
@@ -615,21 +597,15 @@ end;
 {******************************************************}
 Procedure IniGraphinit;
 begin
-  asm
-    mov  dx,3d4h
-    xor  al,al
-    out  dx,al
-  end;
+  // TODO: Modern graphics initialization
+  // Original: VGA CRTC register setup
   IniGraphMode;
   InitScreen;
   GcuIniCursor;
   IniInitPalette;
   IniPalBlank(0,0,0);
-  asm
-    mov  dx,3d4h
-    mov  al,20h
-    out  dx,al
-  end;
+  // TODO: Modern graphics mode setup
+  // Original: VGA mode register setup
 end;
 {******************************************************}
 Function IniBytes(x,y:integer):integer;
@@ -1285,52 +1261,58 @@ begin
   SetColor(bkcolor);
 end;
 {*************************************************************************}
-Procedure IniSwapFrame;Assembler;
-Asm
-  MOV AL,FrameColor
-  XCHG AL,FrameBkColor
-  MOV FrameColor,AL
-End;
+Procedure IniSwapFrame;
+var
+  temp: Byte;
+begin
+  temp := FrameColor;
+  FrameColor := FrameBkColor;
+  FrameBkColor := temp;
+end;
 {*************************************************************************}
 Const OldMenuBkColor    : Byte = 7;
       OldFrameColor     : Byte = 5;
       OldIMenuTextColor : Byte = 5;
       OldIMenuBkColor   : Byte = 1;
       OldMenuTextColor  : Byte = 12;
-Procedure IniSwapMenuColors;Assembler;
-Asm
-  MOV AL,MenuBkColor
-  XCHG AL,OldMenuBkColor
-  MOV MenuBkColor,AL
+Procedure IniSwapMenuColors;
+var
+  temp: Byte;
+begin
+  // Swap MenuBkColor with OldMenuBkColor
+  temp := MenuBkColor;
+  MenuBkColor := OldMenuBkColor;
+  OldMenuBkColor := temp;
 
-  MOV AL,MenuTextColor
-  XCHG AL,OldMenuTextColor
-  MOV MenuTextColor,AL
+  // Swap MenuTextColor with OldMenuTextColor
+  temp := MenuTextColor;
+  MenuTextColor := OldMenuTextColor;
+  OldMenuTextColor := temp;
 
-  MOV AL,FrameColor
-  XCHG AL,OldFrameColor
-  MOV FrameColor,AL
+  // Swap FrameColor with OldFrameColor
+  temp := FrameColor;
+  FrameColor := OldFrameColor;
+  OldFrameColor := temp;
 
-  MOV AL,IMenuTextColor
-  XCHG AL,OldIMenuTextColor
-  MOV IMenuTextColor,AL
+  // Swap IMenuTextColor with OldIMenuTextColor
+  temp := IMenuTextColor;
+  IMenuTextColor := OldIMenuTextColor;
+  OldIMenuTextColor := temp;
 
-  MOV AL,IMenuBkColor
-  XCHG AL,OldIMenuBkColor
-  MOV IMenuBkColor,AL
-End;
+  // Swap IMenuBkColor with OldIMenuBkColor
+  temp := IMenuBkColor;
+  IMenuBkColor := OldIMenuBkColor;
+  OldIMenuBkColor := temp;
+end;
 {*************************************************************************}
-Procedure WSwap(Var a,b);Assembler;
-Asm
-  LES DI,a
-  MOV AX,ES:[DI]
-  LES DI,b
-  MOV BX,ES:[DI]
-  XCHG AX,BX
-  MOV ES:[DI],BX
-  LES DI,a
-  MOV ES:[DI],AX
-End;
+Procedure WSwap(Var a,b: Word);
+var
+  temp: Word;
+begin
+  temp := a;
+  a := b;
+  b := temp;
+end;
 {*************************************************************************}
 Procedure Ini3DFrame(X0,Y0,X1,Y1 : Word;F,B : Byte;t : byte);
 { Rahmen: X0,Y0/X1,Y1, F,B : Colors, t: frxxxx }
@@ -1441,23 +1423,9 @@ Begin
   IniSetDACReg(5,63,63,63);     { magenta   ->Weiss  }
   IniSetDACReg(63,10,10,10);    { Weiss     ->Grau   Mausfarbe!!!       }
 {  SetRGBPalette}
-  Asm
-    CLD                         { Clear dir flag                        }
-    LEA  DI,ThePalette          { ES:DI=@Palette                        }
-    MOV  AX,DS
-    MOV  ES,AX
-    MOV  CX,3*100h              { 3*100h bytes                          }
-    MOV  DX,3C8h                { DAC                                   }
-    MOV  AL,1                   { Index 0                               }
-    OUT  DX,AL
-    INC  DX                     { Data:                                 }
-  @@1:
-    DB   0E4h,060h              { waste some time                       }
-    IN   AL,DX                  { Get Byte, Idx will be incremented auto}
-    STOSB                       { store                                 }
-    DEC  CX                     { =loop                                 }
-    JNZ  @@1
-  End;
+  // TODO: Modern palette initialization
+  // Original: Read VGA DAC palette into ThePalette array
+  // Initialize ThePalette with default values for now
   For a:=0 TO $FF Do Begin
     PalSteps[a].R:=ThePalette[a].R/128;
     PalSteps[a].G:=ThePalette[a].G/128;
