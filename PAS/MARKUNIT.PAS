@@ -86,9 +86,6 @@ var heapfptr: listptr;
 
     Procedure MarClearLine(var heapptr: listptr; var emptyl: integer;
                            linenum: integer; delflag : boolean);
-
-    var i: integer;
-
     begin
        FilCheckLine(tempbuf, inblock, heapptr, startptr, lastptr,
                     tbufpos, endreached, false, false);
@@ -382,7 +379,7 @@ end;
 
 Procedure MarkInverse(lstart, lend, mstartx, mendx : integer);
 
-var i, j, k, i1, i2, j1, j2, nowpage, linenum: integer;
+var i, i1, i2, j1, j2: integer;
     switch : boolean;
 
 begin
@@ -531,8 +528,7 @@ end;
 Procedure MarkStart(actpos, linenum, nowpage: integer);
       {Starte Block}
 
-var i, j: integer;
-    b: byte;
+var i: integer;
 
 begin
    mstart.mline:= linenum;
@@ -551,8 +547,7 @@ end;
 Procedure MarkEnd(actpos, linenum, nowpage: integer);
    {Beende Block}
 
-var i, j, ymin, ymax, ocolor, x : integer;
-    mtmp: markdescrtyp;
+var i, x : integer;
     mpos,mline,mpag : integer;
 begin
   if ((mstart.mpag < nowpage) or
