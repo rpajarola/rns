@@ -210,8 +210,6 @@ procedure UseSaveSetup;
 {speichert das Setup-File}
 
 var infile: text;
-    inblock: stringline;
-    tempattr: lineattrtype;
 
 begin
    FilAssignRnsFile(infile,'setup', false);
@@ -252,7 +250,6 @@ Var
     resp : response_type;
     dir : movement;
     KeyResp : Char;
-    i,j,k : integer;
     ok : boolean;
     oldstring: string79;
     demloc: boolean;
@@ -389,18 +386,15 @@ Var
     resp : response_type;
     dir : movement;
     KeyResp : Char;
-    i,j,k : integer;
     ok, demloc : boolean;
     instring: string79;
     actdir : string79;
-    c: char;
     b: byte;
     st: string;
     changed : boolean;
 begin
   IniSpacedText(substartx,substarty+1,
   ' Active Directory [8(.+3)]:                              ',frLow);
-  c:=#0;
   maustaste:= 0;
   IniSpacedText(substartx, (subendy-1)*2,
              ' [Enter] (last name) - new name, cursor+[Enter] or [Esc] ',
@@ -553,11 +547,8 @@ const hy = 25;
 Var
     ok : boolean;
     instring: string79;
-    c: char;
-    infile, outfile: text;
 
 begin
-   c:= #0;
    maustaste:= 0;
 
    Instring:=' Active Font: ' + fontfile;
@@ -601,10 +592,7 @@ const hy = 25;
 Var
     ok : boolean;
     instring: string79;
-    c: char;
-    infile, outfile: text;
 begin
-   c:= chr(0);
    maustaste:= 0;
 
    Instring:=' Active Color Setting: ' + colorfile;
@@ -718,7 +706,7 @@ Var
     resp : response_type;
     dir : movement;
     KeyResp : Char;
-    i,j,k : integer;
+    i : integer;
     b : byte;
     c : char;
     instring, inbuf : string79;
@@ -729,7 +717,6 @@ Var
     mausx, mausy, maustaste, mausmenu: word;
     mx,my,mt,mm : Word;
     changed : boolean;
-    blankcolor : byte;
 begin
   UseGetConfig;
   UseGetSetup;
@@ -743,7 +730,6 @@ begin
   mausmenu:= 0;
   choicenum:= 1;
   demoversion:=not(IniFileExist('imie.rns') and TitVerify);
-  blankcolor:=$2A;
   ImeInitTopmenu;
   repeat
     SetFillStyle(SolidFill,MenuBkColor);
