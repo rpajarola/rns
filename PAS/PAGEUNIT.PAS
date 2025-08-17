@@ -136,7 +136,7 @@ var beats, eint, resolution: string;
       Getadd:=Sympar[Page[linenum,actposn],2,1]=2
     else if (Page[linenum,actposn] IN ['A'..'Z']) then
       Getadd:=Sympar[Char(Byte(Page[linenum,actposn])+32),2,2]=2
-    else if (Page[linenum,actposn] IN ['€'..'š']) then
+    else if (Page[linenum,actposn] IN [Chr(161)..Chr(191)]) then
       Getadd:=Sympar[Char(Byte(Page[linenum,actposn])-31),2,3]=2
     else if (Page[linenum,actposn] IN [' ','.',',']) then
       Getadd:=false
@@ -243,7 +243,7 @@ begin
         end;{if paggetfreq}
         if (symbcount<>0) or nextavail(linenum,actposn) or
             lastavail(linenum,actposn) then Begin
-          col:=col+' [Tab]  '  { ' [('+#24+')Tab]  '}{zu lang in gewissen F„llen}
+          col:=col+' [Tab]  '  { ' [('+#24+')Tab]  '}{zu lang in gewissen Fï¿½llen}
         end;
       end{if corry<>2} else begin
         i:=paggetfreq(page[linenum,actposn]);
@@ -266,7 +266,7 @@ begin
           i:=round(abs(i*mulcent-i));
           str(i:5,row);
 {???}     if i>0{ich meine if i=0}  Then
-            row:=' ñ'+row+'Hz ';
+            row:=' ï¿½'+row+'Hz ';
           col:=col+'Hz '+row;
         End;{ if mulcent<>1}
         if (mulcent=1) then begin
@@ -316,8 +316,8 @@ begin
       ',':Col:='  0 Hz  time mark  ';
       '/':Col:='  0 Hz   end mark  ';
       '.':Col:='  0 Hz  help mark  ';
-      '\':Col:='  0 Hz  jump marký ';{Alt Gr 1}
-      'Ý':Col:='  0 Hz  jump mark  ';{Alt Gr 7}
+      '\':Col:='  0 Hz  jump markï¿½ ';{Alt Gr 1}
+      Chr(167):Col:='  0 Hz  jump mark  ';{Alt Gr 7}
     End;
   end else{if page}
     col:='                   ';
@@ -364,12 +364,12 @@ begin
         if c = ' ' then
           c:=',';
     end;
-    chbuf:= '®  [' + c + ']  ¯';
+    chbuf:= 'ï¿½  [' + c + ']  ï¿½';
     if c=' ' then
-      chbuf:='® space ¯';
+      chbuf:='ï¿½ space ï¿½';
     if (c>= #128) and (c<= #153) then begin
       c:= chr(ord(c) - 31);
-      chbuf:= '® Alt-' + c + ' ¯';
+      chbuf:= 'ï¿½ Alt-' + c + ' ï¿½';
     end;
 
     NL:=GetN(Page[linenum],ActPosn,0);
@@ -390,9 +390,9 @@ begin
         Lst:= ' '+Lst;
       {  if Lst='  1' then Lst:= '  1';  }
       if Lst='   ' then
-        Lst:= ' Ä ';
+        Lst:= ' ï¿½ ';
     end else begin
-      LSt:=' Ä ';
+      LSt:=' ï¿½ ';
     end;
       {Anzeige nach rechts}
     NR:=GetN(Page[linenum],ActPosn,1);
@@ -446,7 +446,7 @@ begin
     IF CorrY=0 Then
       IniSpacedText(gmaxx div (3*charwidth) - 24,
                     gmaxy div charheight - 5,
-                    ' '+#25+Row+'³'+'    '+#26+' ',frLow);
+                    ' '+#25+Row+'ï¿½'+'    '+#26+' ',frLow);
 
      {damit die y-Position der ML gleichzeitig richtig angezeigt wird:}
     Str(ActPost-10,Col);
@@ -472,7 +472,7 @@ begin
       else if addcent<0 then
         col:='-'+col
       else
-        col:='ñ'+Col;
+        col:='ï¿½'+Col;
       str(round(paggetfreq(page[linenum,actposn])*mulcent):5,row);
       col:=' '+col+'Cent='+row+'Hz';
       IniExpand(col,19);
@@ -498,7 +498,7 @@ begin
       Row[0]:=#4;
       IniSpacedText(gmaxx div (3*charwidth) - 24,
                     gmaxy div charheight - 5,
-                    ' '+#25+Row+'³'+Col+#26+' ',frLow);
+                    ' '+#25+Row+'ï¿½'+Col+#26+' ',frLow);
 
       IniSpacedText(gmaxx div (2*charwidth) - 3,
                        gmaxy div charheight - 5,
@@ -724,20 +724,11 @@ begin
                     gmaxy div charheight - 3,
                     ' PAGE :  '+inblock+' ',frLow);
     end;
-    i:= MemAvail;
-    if i < 20000 then begin
-      i:=imenubkcolor;
-      imenubkcolor:=alarmcolor;
-      IniSpacedText(grmaxx div charwidth - 22, gmaxy div charheight - 1,
-      ' Split file (memory!!) ',frLow);
-      imenubkcolor:=i;
-    end else begin
-      i:=framewidth;
-      Framewidth:=0;
-      IniSpacedText(grmaxx div charwidth - 22, gmaxy div charheight - 1,
-      ' ' + fontfile,frLow);
-      Framewidth:=i;
-    end;
+    i:=framewidth;
+    Framewidth:=0;
+    IniSpacedText(grmaxx div charwidth - 22, gmaxy div charheight - 1,
+    ' ' + fontfile,frLow);
+    Framewidth:=i;
   end else {if not printeron} begin
     if printeron then begin
       Str(pagecount:3, inblock);
@@ -755,7 +746,7 @@ Procedure PagClearBottomLine;
 
 begin
    SetFillStyle(1, bottomcolor);
-   Bar(1, grmaxy+3, gmaxx-1, gmaxy-1); {l”scht aber den Lichtrand nicht!}
+   Bar(1, grmaxy+3, gmaxx-1, gmaxy-1); {lï¿½scht aber den Lichtrand nicht!}
 end;
 
 {*******************************************************************}
@@ -767,16 +758,16 @@ begin
     PriDrawFrame(grminx,grminy, grmaxx, grmaxy);
   end else begin
     SetColor(5);
-    Line(grminx, grminy, grminx, grmaxy); { ³ l}
-    Line(grminx, grminy, grmaxx, grminy); { Ä o}
+    Line(grminx, grminy, grminx, grmaxy); { ï¿½ l}
+    Line(grminx, grminy, grmaxx, grminy); { ï¿½ o}
     SetColor(bkcolor);
-    Line(grmaxx, grminy+1, grmaxx, grmaxy-1); { ³ r }
+    Line(grmaxx, grminy+1, grmaxx, grmaxy-1); { ï¿½ r }
   end;
 end;
 
 {*******************************************************************}
 Function PagEmptyPage(var tempptr, startptr, lastptr: listptr): boolean;
-{Testen, ob die n„chste Seite im Heap leer ist}
+{Testen, ob die nï¿½chste Seite im Heap leer ist}
 var result, endreached: boolean;
     i, tbufpos: byte;
     inblock, tempbuf: stringline;
@@ -804,7 +795,7 @@ end;
 
 {*******************************************************************}
 Procedure PagRemovePage(var tempptr, startptr, lastptr: listptr);
-{l”scht ersatzlos eine Seite im Buffer}
+{lï¿½scht ersatzlos eine Seite im Buffer}
 var
     i: byte;
     inblock: stringline;
@@ -844,7 +835,7 @@ end;
 
 {*******************************************************************}
 Procedure PagDisplayPage(var tempptr, startptr, lastptr: listptr);
-{Darstellen einer Seite von der gegenw„rtigen Position an}
+{Darstellen einer Seite von der gegenwï¿½rtigen Position an}
 
 var inblock : stringline;
     linec, i : integer;
@@ -898,7 +889,7 @@ end;
 {*******************************************************************}
 Procedure PagReadPage(var tempptr, startptr, lastptr: listptr;
                       var tempbuf: stringline; var tbufpos: byte);
-{liest eine Seite aus dem heap, ohne den Heap zu ver„ndern}
+{liest eine Seite aus dem heap, ohne den Heap zu verï¿½ndern}
 var i : integer;
     endreached: boolean;
 begin
@@ -1010,13 +1001,13 @@ begin
     a:=Sympar[Char(Byte(c)+32),3,2];
   end else if (c IN ['a'..'z']) then begin
     a:=Sympar[c,3,1];
-  end else if (c IN ['€'..'š']) then begin
+  end else if (c IN [Chr(161)..Chr(191)]) then begin
     a:=Sympar[Char(Byte(c)-31),3,3];
   end else if (c IN [' ','.',',']) then begin
     a:=0;
   end else if (c IN ['+','-','=','*']) then begin
     a:=0;
-  end else if (c IN ['/','Ý','\']) then begin
+  end else if (c IN ['/',Chr(167),'\']) then begin
     a:=0;
   end else if (c in ['0','1','2','3','4','5','6','7','8','9'])then begin
     a:=32767;
