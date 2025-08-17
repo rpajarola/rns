@@ -374,9 +374,9 @@ end;
 
 {****************************************************************}
 Function UtiGetNum(inblock: stringline; actpos : integer) : Integer;
-Var St : String;
-    I  : Integer;
-    c : integer;
+Var St   : String;
+    I    : Integer;
+    code : integer;
 begin
    St:='';
    InBlock:=copy(inblock,actpos,10);
@@ -390,7 +390,9 @@ begin
      UtiGetNum:=0;
      Exit;
    End;
-   Val(St,i,c);
+   Val(St,i,code);
+   if code <> 0 then
+     i := 0;
    UtiGetNum:=i;
 end;
 
@@ -454,6 +456,8 @@ begin
       end;
    end;
    Val(numstr, numres, code);
+   if code <> 0 then
+       numres := 0;
 end;
 
 Function UtiNextChar(inblock : stringline;c : char;p : integer) : integer;
