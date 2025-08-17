@@ -41,7 +41,6 @@ Uses
 const cfllength = 30;
       itemmax = 10;
 
-{type itemcharstyp = array[1..itemmax, 0..1] of integer;}
 type itemcharstyp = array[1..itemmax] of record
        length,pitch : integer;
      end;
@@ -192,7 +191,6 @@ begin
     if ((idel > 0) and (isnd > 0)) then begin
     {$R-}
       NoSound;
-{      Sound(Round(isnd*MulCent));}
       XSound(isnd,MulCent);
       if wait then
         Delay(idel);
@@ -205,7 +203,6 @@ begin
     if ((idel > 0) and (isnd > 0)) then begin
     {$R-}
       NoSound;
-{      Sound(Round(isnd*MulCent));}
       XSound(isnd,MulCent);
     {$IFNDEF USER}
     {$R+}
@@ -219,7 +216,6 @@ begin
       NoSound
     else
       if lastsound<>0 then
-{        sound(Round(lastsound*MulCent))}
         XSound(lastsound,MulCent)
       else
         nosound;
@@ -227,7 +223,6 @@ begin
       delay(timemax - totlength);
   end else if wait then begin
     if playlast and (lastsound<>0) then
-{      sound(Round(lastsound*MulCent))}
       XSound(lastsound,MulCent)
 
     else
@@ -335,7 +330,7 @@ var lineattr: lineattrtype;
            '/': begin
              inblock:= '';
            end;
-           'Ý': Begin
+           #189: Begin
              if ((playOptions and poDashSlash)=0) then begin
                if slinexmin<IniFirstBeatPos(lineattr) Then Begin
                  wait:=False;
@@ -361,8 +356,6 @@ var lineattr: lineattrtype;
             {End;}
            end;
            ',': begin
-{             playlast:=false;
-             lastsound:=0;}
              if leaveout>0 then
                dec(leaveout);
              if (sndplaypulse and plPulse)<>0 then begin
@@ -429,7 +422,7 @@ var lineattr: lineattrtype;
                k:=1;
                while (inblock[k]='.') or IniNumChar(inblock[k]) do
                  Inc(k);
-               if inblock[k]='Ý' then
+               if inblock[k]='ï¿½' then
                  wait:=False;
              end;
            End;
@@ -445,12 +438,9 @@ var lineattr: lineattrtype;
                SndIncItemCount;
              end;
              repeatchar:=true;
-{             while(not ininumchar(inblock[1])) do
-               delete(inblock,1,1);
-             exit;}
            End;
          end; {case inblock[1]}
-       end; {else if (k > 0) then }
+       end;
        delete(inblock, 1, 1);
     end;
 
@@ -480,19 +470,6 @@ var lineattr: lineattrtype;
           else
             itemchars[itemcount].length:= sndbeatlength;
         end;
-{      if (inblock[1]='.')or(inblock[1]=',')or(blength>actlength)then
-        playlast:=true;
-      if wait then begin
-        if ((sndplaybeat<>playBeatNever)) and
-           ((sndplaybeat=PlayBeatAlways) or (blength>actlength) or
-             (inblock[1]=' ')or(inblock[1]=',')or(inblock[1]='.')) then begin
-          SndIncItemCount;
-          itemchars[itemcount].pitch:= sndbeat;
-          if playlast and ((soundattr and saLegato)<>0) then
-            itemchars[itemcount].length:= 5
-          else
-            itemchars[itemcount].length:= sndbeatlength;
-        end;}
       end;
       { make sure the beat won't eat up the next ones time }
       rlength:= rlength-actlength;
@@ -551,17 +528,14 @@ begin
       while inblock[1] <> '%' do begin
          delete(inblock, 1, 1);
       end;
-{      auftakt:=copy(inblock,1,3)<>'%.1';}
       delete(inblock, 1, 1);
 
       {Suche Beginn: 1. Beat oder 1. Vorschlag}
       found:= false;
       itemcount:= 0;
       playnext:=false;
-{      i:=imenubkcolor;
-      imenubkcolor:=alarmcolor;   funktioniert nicht!!!}
+      imenubkcolor:=alarmcolor;   {funktioniert nicht!!!}
       IniSpacedText(20,gmaxy div charheight - 1,sndgetcentstr(addcent),frLow);
-{      imenubkcolor:=i; }
       if (length(inblock)>0) and (not (ininumchar(inblock[1]) or
                                       (inblock[1]='.') )) then begin
         blength:=0;
@@ -608,7 +582,7 @@ begin
                End;{Case InpC Of #13}
 
                #10 : begin {Ctrl-Enter}
-                     {spiele Linie zu Ende bevor n„chste gespielt wird}
+                     {spiele Linie zu Ende bevor nï¿½chste gespielt wird}
                   IniSpacedText( 12,gmaxy div charheight - 5,
                                 'pause  ',frNoFrame);
                   SndUpdateSndLength(sndlengthspm,sndlength,actlength,sndlengthper);
@@ -823,15 +797,6 @@ begin
                  soundchange:=(soundchange xor saRhythm) {and saRhythm};
                  IniDrawSoundState;
                end;
-(*             'Y' :begin
-                 soundattr:=(soundattr xor saYFreq) and saYFreq;
-               end;                                                   *)
-(*             'P' :begin
-                 soundattr:=(soundattr xor saPitch) and saPitch;
-               end;                                                   *)
-(*             'I' :begin
-                 soundattr:=(soundattr xor saInterval) and saInterval;
-               end;                                                   *)
                'M' :begin
                  soundchange:=(soundchange xor saMuffled) {and saMuffled};
                  IniDrawSoundState;
@@ -852,16 +817,11 @@ begin
                  PlayOptions:=PlayOptions xor poBraces;
                  IniDrawSoundState;
                end;
-               'Ý' :begin
+               #189:begin
                  PlayOptions:=PlayOptions xor poDashSlash;
                  IniDrawSoundState;
                end;
 {Wenn NumLock off: ---------------------------------------------------------}
-(* 1              #71 :Begin{Home=+1Hz}
-                 MulCent:=MulCent*2; {Reaktion vorl„ufig:+1Oktave}
-                 SndUpDateAddCent;
-                 st:=sndgetcentstr(addcent);          IniSpacedText(20,gmaxy div charheight - 1,st,frLow);
-               End; *)
 {---------------------------------------------------------------------------}
 
            End;{Case}
@@ -880,22 +840,6 @@ begin
            timemax:=round(rtime);
            if timemax<0 Then
              timemax:=0;
-
-(*           rtime:=0;
-           ok:=false;
-           repeat
-             if IniNumChar(inblock[1]) then begin
-               rtime:=rtime+(actlength/IniNextNumber(inblock));
-             end else begin
-               if (inblock[1]='.')or((inblock[1]=',')and
-               ( ((SndPlayPulse and plpulse)=plPulseNever) or
-                (((SndPlayPulse and plpulse)=plPulseNoLeg)And((soundattr and saLegato)<>0))))then
-{               if (inblock[1]='.')or((inblock[1]=',')and((SndPlayPulse and plpulse)<>plPulseAlways)) then}
-                 delete(inblock,1,1)
-               else
-                 ok:=true;
-             end;
-           until ok or (length(inblock)=0);*)
 
             timemax:=round(rtime);
             if timemax<0 Then
@@ -954,7 +898,7 @@ begin
                   End;{Case InpC Of #13}
 
                   #10 : begin {Ctrl-Enter}
-                     {spiele Linie zu Ende bevor n„chste gespielt wird}
+                     {spiele Linie zu Ende bevor nï¿½chste gespielt wird}
                   IniSpacedText( 12,gmaxy div charheight - 5,
                                 'pause  ',frNoFrame);
                   SndUpdateSndLength(sndlengthspm,sndlength,actlength,sndlengthper);
@@ -999,8 +943,6 @@ begin
                      Case XReadKey(Temp1,Temp2) OF
                        #28  :{Alt-Enter} Begin
                          if not(Temp1 or Temp2) and (c<>#27) then begin{Alt-Enter}
-{                           PagRefClearVal(0,     IniYnow(linenum)-1,
-                                          gmaxX, IniYnow(linenum));}
                            i:=Linenum;
                            ComSysStart(i);
                            i:=SpePrevNotLine(i);
@@ -1143,9 +1085,6 @@ begin
                                 soundchange:=(soundchange xor saRhythm) {and saRhythm};
                                 IniDrawSoundState;
                               end;
-(*                            'I' :begin
-                              soundattr:=(soundattr xor saIncipit) and saIncipit;
-                              end;  *)
                               'M' :begin
                               soundchange:=(soundchange xor saMuffled) {and saMuffled};
                                 IniDrawSoundState;
@@ -1166,20 +1105,10 @@ begin
                                 PlayOptions:=PlayOptions xor poBraces;
                                 IniDrawSoundState;
                               end;
-                              'Ý' :begin
+                              #189 :begin
                                 PlayOptions:=PlayOptions xor poDashSlash;
                                 IniDrawSoundState;
                               end;
-(*                           '/' :begin
-                               PlayOptions:=PlayOptions xor poSlash;
-                             end;*)
-{Wenn NumLock off: ---------------------------------------------------------}
-(* 2              #71 :Begin{Home=+1Hz}
-                 MulCent:=MulCent*2; {Reaktion vorl„ufig:+1Oktave}
-                 SndUpDateAddCent;
-                 st:=sndgetcentstr(addcent);          IniSpacedText(20,gmaxy div charheight - 1,st,frLow);
-               End;    *)
-{---------------------------------------------------------------------------}
                             End;
                             {$R-}
                             sound(Round(LastSound*MulCent));
@@ -1196,7 +1125,7 @@ begin
                        End;
                      End;{Case XReadKey OF}
                      SChanged:=True;
-                  End;{{case inpC OF #0}
+                  End;{case inpC OF #0}
                '/': Begin
                   IF Sndlengthper=1 Then
                      if sndlengthspm / lineattr.beats >= 2 {and <=SndMaxSpm} then Begin
@@ -1316,11 +1245,7 @@ begin
                  soundchange:=(soundchange xor saRhythm) {and saRhythm};
                  IniDrawSoundState;
                end;
-(*             'I' :begin
-                 soundattr:=(soundattr xor saIncipit) and saIncipit;
-               end;  *)
                'M' :begin
-(*                 soundchange:=(soundchange xor saMuffled) {and saMuffled};*)
                  soundattr:=(soundattr xor saMuffled) {and saMuffled};
                  IniDrawSoundState;
                end;
@@ -1340,20 +1265,10 @@ begin
                  PlayOptions:=PlayOptions xor poBraces;
                  IniDrawSoundState;
                end;
-               'Ý' :begin
+               #189 :begin
                  PlayOptions:=PlayOptions xor poDashSlash;
                  IniDrawSoundState;
                end;
-(*             '/' :begin
-                 PlayOptions:=PlayOptions xor poSlash;
-               end;*)
-{Wenn NumLock off: ---------------------------------------------------------}
-(* 3              #71 :Begin{Home=+1Hz}
-                 MulCent:=MulCent*2; {Reaktion vorl„ufig:+1Oktave}
-                 SndUpDateAddCent;
-                 st:=sndgetcentstr(addcent);          IniSpacedText(20,gmaxy div charheight - 1,st,frLow);
-               End; *)
-{---------------------------------------------------------------------------}
                End;
                IF SChanged Then Begin
                Str(sndlengthspm:4:3,st);
@@ -1379,16 +1294,6 @@ begin
                      IniSpacedText( 2,gmaxy div charheight - 1,
                                    ' Esc = stop end ',frHigh);
                End;{case inpC OF ' '}
-          (*     #63: Begin
-                  Paused:=False;
-                  nosound;
-                  if savey<>0 Then
-                     SndDraw(saveslinexmin, Saveslinexmax, Savey,wait);
-                  IniSpacedText( 12,gmaxy div charheight - 5,
-                                 'pause  ',frNoFrame);
-                     IniSpacedText( 2,gmaxy div charheight - 1,
-                                   ' Esc = stop end ',frHigh);
-               End;{case inpC OF #63}  *)
             End;
          End;
          While xKeyPressed Do Begin
@@ -1428,7 +1333,7 @@ begin
                End;{Case InpC Of #13}
 
                #10 : begin {Ctrl-Enter}
-                     {spiele Linie zu Ende bevor n„chste gespielt wird}
+                     {spiele Linie zu Ende bevor nï¿½chste gespielt wird}
                   IniSpacedText( 12,gmaxy div charheight - 5,
                                 'pause  ',frNoFrame);
                   SndUpdateSndLength(sndlengthspm,sndlength,actlength,sndlengthper);
@@ -1579,7 +1484,7 @@ begin
                End;
 {Wenn NumLock off: ---------------------------------------------------------}
 (* 4              #71 :Begin{Home=+1Hz}
-                 MulCent:=MulCent*2; {Reaktion vorl„ufig:+1Oktave}
+                 MulCent:=MulCent*2; {Reaktion vorlï¿½ufig:+1Oktave}
                  SndUpDateAddCent;
                  st:=sndgetcentstr(addcent);          IniSpacedText(20,gmaxy div charheight - 1,st,frLow);
                End; *)
@@ -1680,7 +1585,7 @@ begin
                  PlayOptions:=PlayOptions xor poBraces;
                  IniDrawSoundState;
                end;
-               'Ý' :begin
+               #189 :begin
                  PlayOptions:=PlayOptions xor poDashSlash;
                  IniDrawSoundState;
                end;
@@ -1872,8 +1777,8 @@ IniSpacedText(20,gmaxy div charheight - 5,' (A/C)Enter = '+#24+#25+'Line ',frHig
 IniSpacedText(20,gmaxy div charheight - 3,' 0=roundCent 5=reset ',frHigh);
 IniSpacedText(20,gmaxy div charheight - 1,'                     ',frLow);
 
-IniSpacedText(42,gmaxy div charheight - 5,' on/off: BPTSLMR ([{Ý ',frHigh);
-IniSpacedText(42,gmaxy div charheight - 3,' ('+#24+'/Ctrl/Alt)ñ: speed ',frHigh);
+IniSpacedText(42,gmaxy div charheight - 5,' on/off: BPTSLMR ([{ï¿½ ',frHigh);
+IniSpacedText(42,gmaxy div charheight - 3,' ('+#24+'/Ctrl/Alt)ï¿½: speed ',frHigh);
 IniSpacedText(42,gmaxy div charheight - 1,'                      ',frHigh);
 
 IniSpacedText(65,gmaxy div charheight - 5,' / * = LPMBPM ',frHigh);
@@ -2154,59 +2059,58 @@ Var O,HT,Cn: Integer;
     S1,S2  : String;
     corrY  : Byte;
 Const IV : Array[0..11] of string[3] =
-('Ä ³'{+#25},'2b³','2 ³','3b³','3 ³','4 ³','4#³','5 ³','6b³','6 ³','7b³','7 ³');
+('ï¿½ ï¿½'{+#25},'2bï¿½','2 ï¿½','3bï¿½','3 ï¿½','4 ï¿½','4#ï¿½','5 ï¿½','6bï¿½','6 ï¿½','7bï¿½','7 ï¿½');
 
-Procedure OHTCn;Assembler;
-Asm
-  POP BP                { Del Stackframe                }
-  XOR AX,AX             { Clear Vars                    }
-  MOV O,AX
-  MOV HT,AX
-  MOV CN,AX
-  MOV AX,C              { Get Cents                     }
-  TEST AX,8000h         { +                             }
-  JZ   @@1
-  NEG AX
-@@1:
-  MOV DX,AX
-  CMP AX,1200
-  JB  @@2
-  XOR DX,DX
-  MOV CX,1200d
-  IDIV CX               { Div->O+ht                     }
-  MOV O,AX
-@@2:
-  MOV AX,DX
-  CMP AX,100
-  JB  @@3
-  XOR DX,DX
-  MOV CX,100d
-  IDIV CX               { Div->ht+cn                    }
-  MOV HT,AX
-@@3:
-  MOV Cn,DX
-  CMP Cn,50d
-  JLE @@4
-  SUB Cn,100d
-  INC HT
-  CMP HT,12d
-  JB  @@4
-  MOV HT,0
-  INC O
-@@4:
-  CMP O,5
-  JLE @@5
-  MOV O,5
-@@5:
-  RET
-End;
+Procedure OHTCn;
+var
+  AX, DX: Integer;
+begin
+  // Clear variables
+  O := 0;
+  HT := 0;
+  CN := 0;
+  
+  // Get absolute value of cents
+  AX := Abs(C);
+  DX := AX;
+  
+  // Calculate octaves (divide by 1200)
+  if AX >= 1200 then begin
+    O := AX div 1200;
+    DX := AX mod 1200;
+  end;
+  
+  // Calculate halftones (divide remainder by 100)
+  AX := DX;
+  if AX >= 100 then begin
+    HT := AX div 100;
+    DX := AX mod 100;
+  end;
+  
+  // Set cents
+  CN := DX;
+  
+  // Round halftones if cents > 50
+  if CN > 50 then begin
+    CN := CN - 100;
+    Inc(HT);
+    if HT >= 12 then begin
+      HT := 0;
+      Inc(O);
+    end;
+  end;
+  
+  // Limit octaves to 5
+  if O > 5 then
+    O := 5;
+end;
 
 Function Oct : String;
 Begin
   IF O=0 Then Begin
-    Oct:='  0ù8 ³'+S1;
+    Oct:='  0ï¿½8 ï¿½'+S1;
   End Else
-    Oct:='  '+S1+''+Char(O+Byte('0'))+'ù8 ³ ';
+    Oct:='  '+S1+''+Char(O+Byte('0'))+'ï¿½8 ï¿½ ';
 End;
 Function Hts : String;
 Begin
@@ -2232,29 +2136,29 @@ Begin
     Else
       s2:=' '+S2;       {wird nicht gebraucht}
   End;
-  Cent:=+S2+'Cent ';
+  Cent:= Cent+S2+'Cent ';
 End;
 Begin
   IF c>50 Then
-    S1:='+'  {'+('}
+    S1:='+'  // +
   Else IF c<-50 Then
-    S1:='-'  {'-('}
+    S1:='-'  // -
   Else
-    S1:=' '; {' ('}
+    S1:=' '; // space
 (*IF c>1199 Then
-    S1:='+'  {'+('}
+    S1:='+'  // +
   Else IF c<-1199 Then
-    S1:='-'  {'-('}
+    S1:='-'  // -
   Else
-    S1:=' '; {' ('}     *)
+    S1:=' '; // space     *)
 
   OHTCn;
   S1:=Oct+HTs+Cent;
-  IF S1='  0ù8 ³ Ä ³+ 0Cent ' Then Begin
+  IF S1='  0ï¿½8 ï¿½ ï¿½ ï¿½+ 0Cent ' Then Begin
   if ctrlF5 then
-    S1:='  NumBlock = Cent ñ ' { ñ = 241 }      {frs Ctrl-F5}
+    S1:='  NumBlock = Cent ï¿½ ' // ï¿½ = 241, fï¿½rs Ctrl-F5
   else
-    S1:=' NumberBlock = Centñ ' { ñ = 241 }     {frs F5}
+    S1:=' NumberBlock = Centï¿½ ' // ï¿½ = 241, fï¿½rs F5
   End;
   IniCenter(S1,21);
   SndGetCentStr:=S1;
