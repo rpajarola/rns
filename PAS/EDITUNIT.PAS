@@ -275,6 +275,7 @@ begin
     MausBereich(0+9, GetMaxX+5, 0+9, GetMaxY);
     MausZeigen;
 
+    Keyresponse := #0;
     while (Response <> ESCAPE) And Not
          ((Response=SPECIALKEY) And (Keyresponse=#85)) do begin
       if not showmenus then begin
