@@ -273,7 +273,6 @@ var c : char;
     EndMlineSav,
     StartMlineSav   : byte;
     a : byte;
-    b,g,r : Integer;
     bc,ec,rc,lc : Boolean;
     s1,s2,s3,s4,s5,s6 : String[10];
     ok : boolean;
@@ -295,9 +294,6 @@ begin
     ChoiceVal[4].Ival:= linecount;
     ChoiceVal[5].tval:= lineattr.linestyle;
 
-    b:=lineattr.Beats;
-    g:=lineattr.Eint;
-    r:=lineattr.resolution;
     for y:=1 to num_choices do
       changed[y]:=false;
     y:= grmaxy - (num_choices * spacing +
