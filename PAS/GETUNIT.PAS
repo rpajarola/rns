@@ -727,7 +727,7 @@ end;
 {***********************************************}
 
 Function GetValidStaff(Var linenum : integer) : Boolean;
-Var i,j      : integer;
+Var i,ii,j      : integer;
     s        : Stringline;
     lineattr : lineattrtype;
 
@@ -753,30 +753,30 @@ Begin
   For i:=linenum downto linenum-4 Do Begin
     IF Page[i,1]='N' Then Begin
       j:=i+1;
-      For i:=j to j+8 Do Begin
-        IF (i<=pagelength) and (Page[i,1]='N') Then Begin
-          if i>=j+4 Then Begin
-            s:=page[i];
+      For ii:=j to j+8 Do Begin
+        IF (ii<=pagelength) and (Page[ii,1]='N') Then Begin
+          if ii>=j+4 Then Begin
+            s:=page[ii];
             GetNoteAttributes(s,lineattr);
             if lineattr.linestyle<>2 Then Begin
-              linenum:=i;
+              linenum:=ii;
               GetValidStaff:=True;
               Exit;
             End Else Begin{if lineattr.linestyle<>2}
               GetvalidStaff:=False;
               Exit;
             End;{if lineattr.linestyle<>2 Else}
-          End Else Begin{if i>=j+5}
+          End Else Begin{if ii>=j+5}
             GetvalidStaff:=False;
             Exit;
-          End;{if i>=j+5 else }
-        End {if page[i,1]='N'}else begin
+          End;{if ii>=j+5 else }
+        End {if page[ii,1]='N'}else begin
           if i>pagelength then begin
             GetValidstaff:=false;
             exit;
           end;
         end;
-      End;{For i:=j to j+10}
+      End;{For ii:=j to j+10}
       linenum:=j+5;
       GetValidStaff:=True;
       Exit;
