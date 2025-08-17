@@ -93,7 +93,6 @@ end;
 Procedure ImeInitCharMenu(c: char);
 
 var i: integer;
-    inblock: string16;
     cshift: char;
 
 begin
@@ -239,8 +238,6 @@ end;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitPrOptionsMenu;
 
-var i: integer;
-
 begin
    ImeIniColors;
    With UsrMenu do
@@ -288,8 +285,6 @@ end;
 
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitSndOptionsMenu;
-
-var i: integer;
 
 begin
    ImeIniColors;
@@ -667,8 +662,6 @@ end;
 Procedure ImeInitTopMenu;
 
 var i: byte;
-    oldstring: string79;
-    st: string;
 begin
    With UsrMenu do
    begin
