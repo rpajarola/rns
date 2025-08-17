@@ -219,8 +219,7 @@ end;
 
 procedure SymHKlammerStart(x, y : integer);
 
-var i: byte;
-    ac : byte;
+var ac : byte;
 begin
    ac:=getcolor;
    PutPixel(x+1,y+2,ac);
@@ -240,8 +239,7 @@ end;
 {******************************************************************}
 procedure SymHKlammerEnd(x, y : integer);
 
-var i: byte;
-    ac : byte;
+var ac : byte;
 
 begin
    ac:=getcolor;
@@ -262,8 +260,7 @@ end;
 {******************************************************************}
 procedure SymVKlammerEvenMid(x, y : integer);
 
-var i: byte;
-    ac : byte;
+var ac : byte;
 begin
 {   Inc(x,7);}
    ac:=getcolor;
@@ -282,8 +279,7 @@ end;
 {******************************************************************}
 procedure SymVKlammerOddMid(x, y : integer);
 
-var i: byte;
-    ac : byte;
+var ac : byte;
 begin
    ac:=GetColor;
    PutPixel(x+1,y-2,ac);
@@ -310,8 +306,7 @@ end;
 {******************************************************************}
 procedure SymVKlammerStart(x, y : integer);
 
-var i: byte;
-    ac : byte;
+var ac : byte;
 
 begin
    ac:=getcolor;
@@ -333,8 +328,7 @@ end;
 {******************************************************************}
 procedure SymVKlammerEnd(x, y : integer);
 
-var i: byte;
-    ac : byte;
+var ac : byte;
 begin
    ac:=getcolor;
    PutPixel(x+1,y-10,ac);
@@ -362,7 +356,7 @@ end;
 {******************************************************************}
 Procedure SymClearChar(x, y: integer);
 
-var i, j : integer;
+var i : integer;
 
 begin
    for i:= 1 to 16 do
