@@ -478,11 +478,9 @@ Procedure Sp2SwapKeyboard;
 
 var y, hy: integer;
     c: char;
-    choicenum: byte;
 
 begin
    ImeIniSwapMenu;
-   choicenum:= 1;
    usrmenu.choiceval[1].tval:=  manset;
    usrmenu.choiceval[2].tval:=  charset;
    usrmenu.choiceval[3].tval:=  blankset+1;
@@ -503,10 +501,8 @@ end;
 Procedure Sp2VisiMenu;
 var y, hy: integer;
     c: char;
-    choicenum: byte;
 begin
    ImeIniVisiMenu;
-   choicenum:=1;
    usrmenu.choiceval[1].tval:=dispspec;
    usrmenu.choiceval[2].tval:=dispgrid;
    usrmenu.choiceval[3].tval:=disphidlines;
