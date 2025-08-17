@@ -175,7 +175,6 @@ Var LSt,RSt : String;
     chbuf   : string16;
     a       : Byte;
     i,j     : integer;
-    oldcolor: byte;
     {zeigt Position auf ML}
 
 Type TBottomInfo = Record
@@ -751,7 +750,6 @@ end;
 
 {*******************************************************************}
 Procedure PagPageFrame;
-var dx : integer;
 begin
   if printeron then begin
     PriSetLineWidth(frwidth);
@@ -837,9 +835,7 @@ end;
 Procedure PagDisplayPage(var tempptr, startptr, lastptr: listptr);
 {Darstellen einer Seite von der gegenw�rtigen Position an}
 
-var inblock : stringline;
-    linec, i : integer;
-    ifile: text;
+var linec, i : integer;
     rptr: listptr;
 
 begin
