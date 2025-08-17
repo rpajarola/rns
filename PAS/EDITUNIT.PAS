@@ -134,8 +134,7 @@ End;
 procedure EdiRythmEdit(instring,bakname: string79; defpagesetup, demloc: boolean);
 
 var
-    i,j,k                                : integer;
-    c                                    : char;
+    i,j                                  : integer;
     Response                             : Response_Type;
     Direction                            : Movement;
     KeyResponse                          : Char;
