@@ -24,10 +24,7 @@ Procedure SatSaveSym;
 
 var c:char;
      i, j : byte;
-     instring: string16;
-     outfile : file of word;
      parfile : file of integer;
-     Attr : Word;
 begin
    assign(parfile,'SYMBOLS.PAR');
    LastFileName:=FExpand('SYMBOLS.PAR');
@@ -53,9 +50,7 @@ end;
 Procedure SatSymbolParam(c: char);
 
 var
-    Bufstr : string79;
-    i, j, mxmin, xmin, xmax, y, hy : integer;
-    cresp: char;
+    i, y, hy : integer;
 
 begin
    ImeInitCharMenu(c);
