@@ -158,7 +158,6 @@ Procedure FilAssignRnsFile(var tfile: text; instring: stringline;
           readf: boolean);
 
 var instr2: stringline;
-    s     : String;
 begin
    instr2:= datadir + '\' + instring + exts;
    if ((not IniFileExist(instr2)) or
@@ -194,7 +193,6 @@ Procedure FilCheckLine(var tempbuffer, inblock: stringline;
  Ist DELLINE true, wird die Zeile gel�scht.}
 
 var tbsav: byte;
-    dumblock: stringline;
 
 begin
    endreached:= false;
@@ -354,11 +352,9 @@ Procedure FilFileToHeap(var infile : text; var actptr, startptr,
 
 var tempptr                      : listptr;
     workdat                      : linerec;
-    inblock,tempbuffer,s,fntfile : stringline;
-    First                        : Boolean;
+    inblock,tempbuffer: stringline;
     version,code                 : Integer;
 begin
-  first:=True;
   if FilNew(lastptr) then begin
     if lastptr<>nil then begin
     {Daten lesen}
@@ -380,6 +376,8 @@ begin
       end else begin
         if copy(inblock,1,7)='VERSION' then begin
           Val(Copy(inblock,9,3),version,code);
+          if code <> 0 then
+              version := 0;
           readln(infile,inblock);
         end else if (inblock[1]='N') or (inblock[1]='T') then begin
           version:=1;
@@ -470,11 +468,9 @@ Procedure FilHeapToFile(var outfile : text; var actptr, startptr,
  dispmem = true ist}
 
 var temptr: listptr;
-    workdat: linerec;
     inblock, tempblock: stringline;
     lineend: byte;
     attr: word;
-    crc : Word;
     fn : String;
 begin
   fn:=UpString(actfilename);
@@ -595,8 +591,7 @@ Procedure FilHeapExtractString(var inblock: stringline; var actptr,
  actptr zeigt neu auf den Nachfolger von inblock.
  Inblock wird geloescht.}
 
-var workdat: linerec;
-    prevptr, nextptr: listptr;
+var prevptr, nextptr: listptr;
     lineend: byte;
     tempbuffer: stringline;
 
@@ -848,12 +843,12 @@ end;
 Function FilFileSelect(prompt,wildcard,dir : string) : string;
 Var instring        : string79;
     ok              : boolean;
-    infile, outfile : text;
     MausX,MausY     : Word;
     Maustaste       : Word;
     MausMenu        : Word;
 Begin
   Mausdunkel;
+  MausMenu := 0;
   MausSetXY(300,90);
 
   SetFillStyle(Solidfill,7);   {Auswahl-Menu}
@@ -929,7 +924,7 @@ Begin
 end;
 Procedure FilUnDelPage(var actptr, startptr, lastptr : listptr);
 var delfil  : text;
-    i,j,k   : integer;
+    i       : integer;
 Begin
   if delpage then begin
     { Aktuelle Seite sichern }
@@ -984,12 +979,12 @@ end;
 
 Procedure FilUnMarkPage;
 
-var linenum,startx,endx,x,y: integer;
+{var linenum,startx,endx,x,y: integer;}
 
 begin
   if pagebuf<>-1 then begin
     pagebuf:=-1;
-    linenum:=2;
+    { linenum:=2; }
     pagrefpage; {einklammern wenn Alternative PagRefClearVal geht!}
 {    PagUnmark;}  {ev. bringt das etwas}
 {    PagRefClearVal(grminx,iniYnow(linenum),grmaxx,iniYnow(linenum));
