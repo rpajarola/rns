@@ -282,13 +282,13 @@ Procedure GetDrawBlock(inblock: stringline; linenum : integer;
 		       var xfirst: integer);
 
 var
-    rxa, rx                          : real;
-    x, xa, xl, dx, y, difx, dify     : integer;
+    rxa                              : real;
+    xa, xl, dx, y, difx, dify        : integer;
     sympary,sterny                   : integer;
     dummy                            : integer;
     vogelx                           : integer absolute y;
-    i,j,k, height                    : integer;
-    c, indexc, lastc, altc,flamc     : char;
+    i,j, height                      : integer;
+    indexc, lastc, flamc             : char;
     eklammerflam, rklammerflam,gflam : boolean;
     vogel                            : byte;
     QuotMark,Sternflam               : boolean;
@@ -540,9 +540,6 @@ Procedure GetDrawBeats(lineattr: lineattrtype; linenum: integer);
 var
     dx,beatlength : integer;
     i, x0, x, y : integer;
-    c : char;
-    notec: integer;
-    solidb: boolean;
 
 begin
   dx:= IniDxValue(lineattr);
@@ -618,12 +615,6 @@ end;
 {**************************************************************}
 Procedure GetDrawDistances(lineattr: lineattrtype; linenum, startx: integer);
 
-var
-    y : integer;
-    rdx,rx0 : real;
-    i : integer;
-    c : char;
-
 begin
 (*   if ((linenum <= pagelength) and
        (GetMainLine(lineattr, linenum) or (dispgrid = 2)) and
@@ -652,9 +643,9 @@ Function GetDrawSymbol(linenum,actposn : integer;UpdateCursor : Boolean) : Boole
  Symbol ausserhalb des Bildschirmes liegt, liefert GetDrawSymbol False zurck}
 
 var
-    rxa, rx      : real;
+    rxa          : real;
     xa, dx, xmin : integer;
-    i,j,k        : integer;
+    i            : integer;
     c,c1         : char;
     inblock      : stringline;
     lineattr     : lineattrtype;
