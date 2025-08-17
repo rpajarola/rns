@@ -244,10 +244,7 @@ end;
 Procedure ComEdReturn(var linenum, actposn, actpost: integer;
                       shiftp, ctrlp : Boolean);
 
-var inblock: stringline;
-    beats, eint : integer;
-    x: integer;
-    i : integer;
+var i : integer;
 begin
   inbuffer:='';
   if shiftp and (not ctrlp) then{Shft Enter}begin
@@ -393,12 +390,7 @@ end;
 {******************************************************}
 Procedure ComEdArrow(Direction : Movement;
                      var linenum, actposn, actpost : integer);
-
-var i,j,k: integer;
-    inblock: stringline;
-    beats, eint : integer;
-    x: integer;
-
+var x: integer;
 begin
    inbuffer:='';
    symbcount:=0;
@@ -577,15 +569,11 @@ Function ComEdKey(var linenum, actposn, actpost: integer;
                    var actptr, startptr, lastptr: listptr;
                    KeyResponse : char;shiftp, ctrlp : Boolean) : Boolean;
 
-var ordc, endy : integer;
+var ordc       : integer;
     Insl,Ins   : integer;
-    Pitch      : Integer;
-    dummyb     : boolean;
-    inserted   : boolean;
     inblock    : stringline;
     v          : string[3];
     i,k,l,m,y  : Integer;
-    a,b        : integer;
 begin
   ComEdKey:=False;
   if ComTestBlock(KeyResponse, linenum, actposn, actpost,actptr,
@@ -729,19 +717,14 @@ Procedure ComEdSpecial(var linenum, actposn, actpost: integer;
 var c,ch,dummyc                   : char;
     SLColor                       : Byte;
     lasts                         : Byte;
-    oldcolor                      : byte;
     i,j,k,result                  : integer;
-    Insl,ins,sta                  : integer;
-    ActLineSav                    : integer;
-    OldLine                       : integer;
-    ordc,beats,eint               : integer;
+    Insl,ins                      : integer;
+    ordc                          : integer;
     x,y                           : integer;
-    col,row,getfreq               : Integer;
     l                             : integer;
     attr                          : word;
     playnext                      : Boolean;
-    inserted                      : boolean;
-    LimitFound,dummyb,temp1,temp2 : Boolean;
+    dummyb,temp1,temp2            : Boolean;
     repline                       : boolean;
     SPic                          : Pointer;
     st                            : String;
@@ -1976,8 +1959,6 @@ End;
 Function ComLinesUpBelong2(linenum : integer) : Byte;
 { Anzahl Linien oberhalb, die zu dieser Linie geh�ren (oder umgekehrt...) }
 { NL: 0, TL: 2 }
-Var inblock : stringline;
-    lineattr: lineattrtype;
 Begin
   IF ComTL(linenum) and not comHorLine(linenum) Then    {!!!}
     ComLinesUpBelong2:=2
