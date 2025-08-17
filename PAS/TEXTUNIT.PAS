@@ -399,6 +399,7 @@ end;
 Procedure TexOctVal(ordc: byte; var strbuf: string4;var i: byte);
 begin
   i:= 4;
+  strbuf:= ' ';
   case ordc of
     040     : strbuf:= '\050'; {'('}
     041     : strbuf:= '\051'; {')'}
@@ -413,11 +414,6 @@ begin
     131     : strbuf:= '\203'; {'É'}
     134     : strbuf:= '\206'; {'Ü'}
     143     : strbuf:= '\217'; {'è'}
-(*
-    204     : strbuf:= ') show Aogonek (';
-    205     : strbuf:= ') show Eogonek (';
-    255     : strbuf:= '\377'; {'ogonek}
-*)
     130     : strbuf:= '\202'; {'Ç'}
     144     : strbuf:= '\220'; {'ê'}
     138     : strbuf:= '\212'; {'ä'}
@@ -459,14 +455,14 @@ begin
     179     : strbuf:= '\263'; {'≥'}
     196     : strbuf:= '\304'; {'ƒ'}
     221     : strbuf:= '\335'; {'›'}
-{   124     : strbuf:= '\174';}{'|'}
 
     248     : strbuf:= '\370'; {'¯'}
      21     : strbuf:= '\025'; {''}
 
-    200..255: strbuf:= ' ';
     else begin
-      strbuf:= chr(ordc);
+      if ordc < 200 then begin
+        strbuf:= chr(ordc);
+      end;
       i:= 1;
     end;
   end;
