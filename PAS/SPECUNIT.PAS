@@ -857,7 +857,6 @@ begin
       begin
          lineins:= 0;
          linepage:= 0;
-         keepblank:= false;
          endreached:= false;
 
          {Einfuellen auf aktuelle Seite, solange Platz vorhanden}
