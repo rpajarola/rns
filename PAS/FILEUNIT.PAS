@@ -11,7 +11,8 @@ uses initsc,
      Titleunit,
      Getunit,
      XCrt,
-     CRCUnit;
+     CRCUnit,
+     SysUtils;
 
 Procedure FilFindPtr(pagenum, linenum: integer; var foundptr,
                      startptr, lastptr: listptr;
@@ -781,24 +782,8 @@ Begin
     GetMem(P2,a);
     BlockRead(F1,P1^,a);
     BlockRead(F2,P2^,a);
-    Asm
-      PUSH DS
-      LDS SI,P1
-      LES DI,P2
-      MOV CX,a
-      SHR CX,1
-      JNC @001
-      CMPSB
-      JNE @002
-@001:
-      REPZ CMPSW
-      JE @003;
-@002:
-      XOR AL,AL
-      MOV OK,AL
-@003:
-      POP DS
-    End;
+    // Compare memory blocks
+    OK := CompareMem(P1, P2, a);
     FreeMem(P1,a);
     FreeMem(P2,a);
     IF L>$FFFF THEN
