@@ -398,7 +398,9 @@ Function IniMausEscape : char;
 Procedure IniMausAssign(maustaste: word; var resp: response_type);
 Procedure IniSwapFrame;
 Procedure IniSwapMenuColors;
-Procedure WSwap(Var a,b);
+Procedure ISwap(Var a,b: INTEGER);
+Procedure WSwap(Var a,b: WORD);
+Procedure BSwap(Var a,b: BYTE);
 Function UpString(VAR Zeile : STRING) : String;
 Procedure Ini3DFrame(X0,Y0,X1,Y1 : Word;F,B : Byte;t : byte);
 Function IniLineEnd(inblock : String) : Integer;
@@ -466,25 +468,30 @@ begin
   IniKeyPressed:= result;
 end;
 {****************************************************}
-Procedure IniSwapColors;Assembler;
+Procedure IniSwapColors;
 {Tauscht die Farben von Setuppage und standard aus}
-Asm
-  MOV AL,LColor
-  XCHG AL,ILColor
-  MOV LColor,AL
-  MOV AL,BkColor
-  XCHG AL,IBKColor
-  MOV BkColor,AL
-  CALL GcuIniCursor;
+var
+  temp: Byte;
+begin
+  // Swap LColor with ILColor
+  temp := LColor;
+  LColor := ILColor;
+  ILColor := temp;
+  
+  // Swap BkColor with IBKColor
+  temp := BkColor;
+  BkColor := IBKColor;
+  IBKColor := temp;
+  
+  GcuIniCursor;
 end;
 {****************************************************}
-Procedure IniCursor (Anfangszeile,Endzeile:byte);Assembler;
-Asm
-  MOV  CH,Anfangszeile
-  MOV  CL,Endzeile
-  MOV  AH,1
-  INT  10h
-End;
+Procedure IniCursor (Anfangszeile,Endzeile:byte);
+begin
+  // TODO: Modern cursor shape control
+  // Original: Sets cursor shape using BIOS INT 10h
+  // Parameters: Anfangszeile (start line), Endzeile (end line)
+end;
 {****************************************************}
 Procedure IniHideCursor;
 begin
@@ -503,8 +510,7 @@ begin
 end;
 {******************************************************}
 Procedure IniCenter(Var instring : String;newlength: byte);
-Var a : Byte;
-   st : String;
+Var st : String;
 Begin
   IF newlength<byte(instring[0]) Then Begin
     instring[0]:=char(newlength);
@@ -685,7 +691,6 @@ begin
 end;
 {**************************************************************}
 Procedure IniLeadBlank(var inblock: stringline);
-var l : integer;
 begin
   while ((length(inblock) > 0) and (inblock[1] = ' ')) do begin
     delete(inblock, 1, 1);
@@ -734,7 +739,6 @@ Procedure IniInversWrite(X, Y : integer; Texts: String79;t : byte);
 var fcolor, bkcolor: byte;
     fills:  fillsettingstype;
     X1,X2,Y1,Y2 : Integer;
-    i : Byte;
     D : Boolean;
 begin
    D:=IstDunkel;
@@ -776,7 +780,6 @@ Procedure IniSpacedWrite(X, Y : integer; Texts: String79;t : byte);
 var fcolor, bkcolor: byte;
     fills:  fillsettingstype;
     X1,X2,Y1,Y2 : Integer;
-    i : Byte;
     d : Boolean;
 begin
   d:=IstDunkel;
@@ -821,8 +824,7 @@ begin
 End;
 {**************************************************************}
 Procedure IniClearLine(X, Y: integer; cllength: integer;BColor : byte);
-var i, xmax: integer;
-    clears: string79;
+var xmax: integer;
 
 begin
   SetFillStyle(solidfill, bcolor);
@@ -985,6 +987,8 @@ begin
 {Wandle den String in einen Integer um}
   if numstring <> '' then begin
     Val( numstring, i, codei );
+    if codei <> 0 then
+        i := 0;
     IniNextNumber:= i;
   end else begin
     IniNextNumber:= 0;
@@ -993,10 +997,7 @@ end;
 {**************************************************************}
 Procedure IniNewPage(var linenum: integer);
 {Neue Seite initialisieren}
-var Response : Response_Type;
-    Direction : Movement;
-    KeyResponse : Char;
-    i,j : integer;
+var i : integer;
 begin
   ClearViewPort;
   For i:= 1 to PageLim do page[i]:='T';
@@ -1149,7 +1150,6 @@ begin
 end;
 {**************************************************************}
 Procedure IniClrCharField( x, y : integer);
-var i,j,k : integer;
 begin
 {L�sche ein Feld von Charactergroesse}
   if x < textmargin+2 then x:= textmargin+2;
@@ -1176,7 +1176,7 @@ Procedure IniCharAdd(var TargetString : stringline; C : Char;
                       PosInString : integer);
 {F�gt den Character C in TargetString auf Position PosInString ein,
  wobei wenn n�tig Blanks hinzugef�gt werden}
-var i,j,k : integer;
+var i : integer;
     ActLength : integer;
 begin
   if PosInString <= StLength then begin
@@ -1248,7 +1248,6 @@ begin
 end;
 {**************************************************************}
 Procedure IniHideColors;
-var infile: text;
 begin
   lcolor:= bkcolor;
   ibkcolor:= bkcolor;
@@ -1305,9 +1304,27 @@ begin
   OldIMenuBkColor := temp;
 end;
 {*************************************************************************}
-Procedure WSwap(Var a,b: Word);
+Procedure ISwap(Var a,b: INTEGER);
+var
+  temp: INTEGER;
+begin
+  temp := a;
+  a := b;
+  b := temp;
+end;
+{*************************************************************************}
+Procedure WSwap(Var a,b: WORD);
 var
   temp: Word;
+begin
+  temp := a;
+  a := b;
+  b := temp;
+end;
+{*************************************************************************}
+Procedure BSwap(Var a,b: BYTE);
+var
+  temp: Byte;
 begin
   temp := a;
   a := b;
@@ -1332,7 +1349,7 @@ Begin
     frNoFrame:;
     frHigh,frLow: Begin
       if t=frHigh then
-        WSwap(F,B);
+        BSwap(F,B);
       For i:=1 To FrameWidth{-1} Do Begin
         SetColor(F);
         Line(x0-i  , Y0-i  , X1+i  ,Y0-i  );{OL-OR}
@@ -1355,21 +1372,21 @@ Begin
 
       SetColor(5);{white}
       Line(X0-1,Y0-1,X1+1,Y0-1);{W:OL-OR}
-      Line(X0-1,Y0  ,X0-1,Y1{+1});{W:OL-UL}
+      Line(X0-1,Y0  ,X0-1,Y1);{W:OL-UL}
     end;
     frL3D : Begin
       SetColor(12);{black}
-      Line(X0-1,Y0-21,X1{+1},Y0-21);{S:OL-OR}
+      Line(X0-1,Y0-21,X1,Y0-21);{S:OL-OR}
       Line(x0-2,Y0-20,X0-2,Y1+20);{S:OL-UL}
-      Line(x0-1,Y1+21,X1{+1},Y1+21);{S:UL-UR}
-      Line(x1{+2}+1,Y0-20,X1{+2}+1,Y1+20);{S:OR-UR}
+      Line(x0-1,Y1+21,X1,Y1+21);{S:UL-UR}
+      Line(x1+1,Y0-20,X1+1,Y1+20);{S:OR-UR}
 
       SetColor(8);{gray}
-      Line(X0-1  ,Y1+20,X1{+1},Y1+20);{G:UL-UR}
-      Line(X1{+1},Y0-19,X1{+1},Y1+20);{G:OR-UR}
+      Line(X0-1  ,Y1+20,X1,Y1+20);{G:UL-UR}
+      Line(X1,Y0-19,X1,Y1+20);{G:OR-UR}
 
       SetColor(5);{white}
-      Line(X0-1,Y0-20,X1{+1}-1,Y0-20);{W:OL-OR}
+      Line(X0-1,Y0-20,X1-1,Y0-20);{W:OL-OR}
       Line(X0-1,Y0-20,X0-1,Y1+19);{W:OL-UL}
     end;
   End;{ case t}
@@ -1520,7 +1537,6 @@ Begin
   DrawTriStateChar(01,'B',SndPlayBeat);
   DrawStateChar(02,'P',(SndPlayPulse and plspace)=0);
   DrawTriStatechar(03,'T',(SndPlayPulse And plPulse)+1);
-{  DrawStateChar(03,'T',(SndPlayPulse And plpulse)=0);}
   DrawStateChar(04,'S',(soundattr And saStaccato)=0);
   DrawStateChar(05,'L',(soundattr And saLegato)=0);
   DrawStateChar(06,'M',(soundchange And saMuffled)=0);
@@ -1528,52 +1544,7 @@ Begin
   DrawStateChar(09,'(',(PlayOptions And poParentheses)=0);
   DrawStateChar(10,'[',(PlayOptions And poBrackets)=0);
   DrawStateChar(11,'{',(PlayOptions And poBraces)=0);
-  DrawStateChar(12,'�',(PlayOptions And poDashSlash)=0);
-
-{  IF SndPlayBeat=1 Then
-    TxtFnt.WriteChar(402,438,'B',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(402,438,'B',AlarmColor,sz8x8,stnormal);
-  IF (SndPlayPulse And plspace)=0 Then
-    TxtFnt.WriteChar(410,438,'P',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(410,438,'P',AlarmColor,sz8x8,stnormal);
-  IF (SndPlayPulse And plpulse)=0 Then
-    TxtFnt.WriteChar(418,438,'T',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(418,438,'T',AlarmColor,sz8x8,stnormal);
-  IF (soundattr And saStaccato)=0 Then
-    TxtFnt.WriteChar(426,438,'S',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(426,438,'S',AlarmColor,sz8x8,stnormal);
-  IF (soundattr And saLegato)=0 Then
-    TxtFnt.WriteChar(434,438,'L',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(434,438,'L',AlarmColor,sz8x8,stnormal);
-  IF (soundchange And saMuffled)=0 Then
-    TxtFnt.WriteChar(442,438,'M',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(442,438,'M',AlarmColor,sz8x8,stnormal);
-  IF (soundchange And saRhythm)=0 Then
-    TxtFnt.WriteChar(450,438,'R',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(450,438,'R',AlarmColor,sz8x8,stnormal);
-  IF (PlayOptions And poParentheses)=0 Then
-    TxtFnt.WriteChar(466,438,'(',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(466,438,'(',AlarmColor,sz8x8,stnormal);
-  IF (PlayOptions And poBrackets)=0 Then
-    TxtFnt.WriteChar(474,438,'[',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(474,438,'[',AlarmColor,sz8x8,stnormal);
-  IF (PlayOptions And poBraces)=0 Then
-    TxtFnt.WriteChar(482,438,'{',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(482,438,'{',AlarmColor,sz8x8,stnormal);
-  IF (PlayOptions And poDashSlash)=0 Then
-    TxtFnt.WriteChar(490,438,'�',ImenuTextColor,sz8x8,stnormal)
-  Else
-    TxtFnt.WriteChar(490,438,'�',AlarmColor,sz8x8,stnormal);}
+  DrawStateChar(12,Chr(167),(PlayOptions And poDashSlash)=0);
 End;
 
 begin
@@ -1584,7 +1555,7 @@ begin
   LastSound:=0;
   FrameWidth:=1;
   FileChanged:=0;
-  TTextFontViewer(TxtFnt).Init('RNS'); {'RNS'}
+  TTextFontViewer(TxtFnt).Init('RNS');
   sndwarning:=1;
   pagebuf:=-1;
   lastbuf:=-1;
