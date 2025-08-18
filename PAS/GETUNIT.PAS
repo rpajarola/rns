@@ -41,7 +41,7 @@ uses symbols,
 
 {****************************************************************}
 Procedure GetClearLines(linenum: integer; var lineup, linedown : integer);
-{sucht bis zur nÑchsten Notenzeile rauf un runter nach Textzeilen
+{sucht bis zur nÔøΩchsten Notenzeile rauf un runter nach Textzeilen
  mit Tabulatoren und setzt lineup auf die obere Zeile, linedown auf
  die unter}
 
@@ -79,8 +79,6 @@ Procedure GetComputeX(var inblock: stringline; var xa, dx : integer;
 
 var
    rx : real;
-   xmin : integer;
-   lineattr : lineattrtype;
 
 begin
    ActNumber:= IniNextNumber(inblock);
@@ -95,8 +93,6 @@ Procedure GetComputeXNoCorr(var inblock: stringline; var xa, dx : integer;
 
 var
    rx : real;
-   xmin : integer;
-   lineattr : lineattrtype;
 
 begin
    ActNumber:= IniNextNumber(inblock);
@@ -107,14 +103,12 @@ end;
 {****************************************************************}
 Procedure GetNotePosX(var x, notec : integer; linenum : integer;
 		      cursormove, left : boolean);
-{Berechnen von xa und NoteCount fÅr die Position x und plaziere Cursor
+{Berechnen von xa und NoteCount fÔøΩr die Position x und plaziere Cursor
  Ist left true, so wird xa <= x, sonst wird es >= x}
 
 var
     rxa, rx : real;
     xa, dx, xmin : integer;
-    i,j,k : integer;
-    c : char;
     inblock : stringline;
     lineattr : lineattrtype;
 
@@ -130,7 +124,7 @@ begin
     left:= true;
   end;
 
-  {inblock solange lîschen, bis xa > x wird}
+  {inblock solange lÔøΩschen, bis xa > x wird}
   while ((length(inblock) > 0) and (xa < x)) do begin
     if IniNumChar(inblock[1]) then begin
     {Abstand berechnen}
@@ -169,10 +163,8 @@ Procedure GetActPosX(var x, notec : integer; linenum : integer;
 {Berechne von x in Abhaengigkeit von NoteCount x und plaziere Cursor}
 
 var
-    rxa, rx : real;
+    rxa : real;
     xa, dx, xmin : integer;
-    i,j,k : integer;
-    c : char;
     inblock : stringline;
     lineattr : lineattrtype;
 
@@ -223,8 +215,7 @@ end;
 Procedure GetNoteBlock(var inblock : stringline; var lineattr: lineattrtype;
 		       linenum: integer);
 
-var i, y : integer;
-    linblock, strbuf: stringline;
+var linblock, strbuf: stringline;
 
 begin
    linblock:= copy(inblock, 1, linemarker);
@@ -256,7 +247,7 @@ end;
 {**************************************************************}
 Procedure GetLine(linenum, startx : integer);
 
-var i, xfirst : integer;
+var xfirst : integer;
     inblock : stringline;
     lineattr : lineattrtype;
 
@@ -287,8 +278,8 @@ var
     sympary,sterny                   : integer;
     dummy                            : integer;
     vogelx                           : integer absolute y;
-    i,j, height                      : integer;
-    indexc, lastc, flamc             : char;
+    i, height                        : integer;
+    indexc, lastc, flamc, c          : char;
     eklammerflam, rklammerflam,gflam : boolean;
     vogel                            : byte;
     QuotMark,Sternflam               : boolean;
@@ -297,7 +288,7 @@ var
 begin
   quotmark:=false;
   sternflam:=false;
-  vogel:=0; { kein Ø oder Æ }
+  vogel:=0; { kein ÔøΩ oder ÔøΩ }
   dx:=IniDxValue(lineattr);
   xfirst:=IniFirstBeatPos(lineattr);
   xa:=IniFirstBeatPos(lineattr) - dx;
@@ -372,9 +363,9 @@ begin
       else if dummy=vogelX+1 then begin
         if vogel<>2 then begin
           if vogel=0 then
-            c:='Æ'
+            c:=Chr(174)  // ¬¨ character
           else if vogel=1 then
-            c:='Ø';
+            c:=Chr(175); // ¬Ø character
           if vogelX=gmaxx then
             inc(vogelX);
           TxtFnt.WriteChar(vogelX-9,IniYnow(Linenum)-13,
@@ -392,7 +383,7 @@ begin
 	  '.' : SymAbsNichts(xa,y);
 	  '/' : Slash(xa,y,rxa);
 	  '\' : SymDotSlash(xa,y,rxa);
-          '›' : SymDotSlash2(xa,y,rxa);
+          Chr(167) : SymDotSlash2(xa,y,rxa);
 	  ' ' : SymLeer(xa,y,rxa);
           '&' : SymEt(xa+difx,y,rxa);
           '"' : SymQuotMark(xa+difx,y,rxa);
@@ -639,8 +630,8 @@ end;
 {***********************************************}
 Function GetDrawSymbol(linenum,actposn : integer;UpdateCursor : Boolean) : Boolean;
 {Zeichne das Symbol in Page[linenum,actposn] an der (hoffentlich)richtigen
- Stelle, wenn UpdateCursor True ist, wird GCXCoord nachgefÅhrt. Falls das
- Symbol ausserhalb des Bildschirmes liegt, liefert GetDrawSymbol False zurÅck}
+ Stelle, wenn UpdateCursor True ist, wird GCXCoord nachgefÔøΩhrt. Falls das
+ Symbol ausserhalb des Bildschirmes liegt, liefert GetDrawSymbol False zurÔøΩck}
 
 var
     rxa          : real;
@@ -649,7 +640,6 @@ var
     c,c1         : char;
     inblock      : stringline;
     lineattr     : lineattrtype;
-    x            : integer;
     difx,dify    : Integer;
 begin
   inblock:= page[linenum];
@@ -673,7 +663,6 @@ begin
     end;
   end;
   {Berechnen von Notec}
-  x:= length(Page[linenum]) - length(inblock);
   inblock:= page[linenum];
   GetNoteBlock(inblock, lineattr, linenum);
   c:=Page[Linenum,actposn];
@@ -706,7 +695,7 @@ begin
     ' ' : SymLeer(xa+difx, IniYnow(linenum)+dify,rxa);
     '/' : Slash(xa+difx, IniYnow(linenum)+dify,rxa);
     '\' : SymDotSlash(xa+difx, IniYnow(linenum)+dify,rxa);
-    '›' : SymDotSlash2(xa+difx, IniYnow(linenum)+dify,rxa);
+    Chr(167) : SymDotSlash2(xa+difx, IniYnow(linenum)+dify,rxa);
     '.' :;
     '&' : SymEt(xa+difx, IniYnow(linenum)+dify,rxa);
     '"' : SymQuotMark(xa+difx, IniYnow(linenum)+dify,rxa); {bei & abgeschr., Peo}
