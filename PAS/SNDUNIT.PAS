@@ -105,7 +105,7 @@ Procedure SndPlay(var itemchars: itemcharstyp;
                   itemcount, timemax: integer;Var wait : Boolean;Playlast : boolean);
 var item, totlength, i: integer;
     r: real;
-    getfreq, idel, isnd: integer;
+    idel, isnd: integer;
     mintime : integer;
     def     : integer;
 
@@ -255,10 +255,9 @@ var lineattr: lineattrtype;
     temp1,temp2 : Boolean;
     st : String;
     SChanged:Boolean;
-    SaveInblock:String;
     saveslinexmin,Saveslinexmax,SaveY : longint;
     auftakt : Boolean;
-    wait,ok : Boolean;
+    wait : Boolean;
     orginblock: String;
     parentheses : integer;
     brackets    : integer;
@@ -498,6 +497,7 @@ var lineattr: lineattrtype;
     {**************************************}
 
 begin
+   Saveslinexmax:=0;
    repeatchar:=false;
    restsndchar:=false;
    lastsound:=0;
@@ -546,7 +546,6 @@ begin
 
       while ((not found) and (length(inblock) > 0)) do begin
          playlast:=false;
-         saveinblock:=inblock;
          SChanged:=False;
          While xKeyPressed Do Begin
             InpC:=XReadKey(temp1, temp2);
@@ -1678,9 +1677,7 @@ Procedure SndSetOptions;
 
 var
     c: char;
-    resp: response_type;
     y, hy: integer;
-    ok: boolean;
 
 begin
    ImeInitSndOptionsMenu;
@@ -1724,9 +1721,8 @@ Procedure SndSoundMenu(var linenum, actposn, actpost: integer;
 
 var dir: movement;
     c: char;
-    resp: response_type;
     choicenum: byte;
-    x, y, hy, i: integer;
+    x, y, hy: integer;
     mausx, mausy, maustaste, mausmenu: word;
     Playnext : Boolean;
     shiftp,ctrlp : Boolean;
@@ -1821,9 +1817,7 @@ Procedure SndPlaySound(var linenum, actposn, actpost: integer;
 var actcolor: byte;
     i,j: integer;
     c: char;
-    InpC : Char;
     tempbuffer, inblock : stringline;
-    St : string;
     endreached, drawline: boolean;
     tbufpos: byte;
     temp1, temp2: boolean;
@@ -2057,9 +2051,7 @@ end;
 Function SndGetCentStr(C : Integer) : String;
 Var O,HT,Cn: Integer;
     S1,S2  : String;
-    corrY  : Byte;
-Const IV : Array[0..11] of string[3] =
-('� �'{+#25},'2b�','2 �','3b�','3 �','4 �','4#�','5 �','6b�','6 �','7b�','7 �');
+Const IV : Array[0..11] of string[4] = ('A ³','2b³','2 ³','3b³','3 ³','4 ³','4#³','5 ³','6b³','6 ³','7b³','7 ³');
 
 Procedure OHTCn;
 var
@@ -2108,13 +2100,13 @@ end;
 Function Oct : String;
 Begin
   IF O=0 Then Begin
-    Oct:='  0�8 �'+S1;
+    Oct:='  0ù8 ³'+S1;
   End Else
-    Oct:='  '+S1+''+Char(O+Byte('0'))+'�8 � ';
+    Oct:='  '+S1+''+Char(O+Byte('0'))+'ù8 ³ ';
 End;
-Function Hts : String;
+Function HTs : String;
 Begin
-  Hts:=IV[HT];
+  HTs:=IV[HT];
 End;
 Function Cent : String;
 Begin
@@ -2136,7 +2128,7 @@ Begin
     Else
       s2:=' '+S2;       {wird nicht gebraucht}
   End;
-  Cent:= Cent+S2+'Cent ';
+  Cent:= S2+'Cent ';
 End;
 Begin
   IF c>50 Then
