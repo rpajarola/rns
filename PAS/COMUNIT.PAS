@@ -318,11 +318,11 @@ begin
       end;
       IF (gx<>gcxcoord) or (gy<>gcycoord) Then Begin
          inc(gcxcoord);
-         WSwap(gx,gcxcoord);
-         WSwap(gy,gcycoord);
+         ISwap(gx,gcxcoord);
+         ISwap(gy,gcycoord);
          GcuPatternRestore;
-         WSwap(gx,gcxcoord);
-         WSwap(gy,gcycoord);
+         ISwap(gx,gcxcoord);
+         ISwap(gy,gcycoord);
          ComEdMaus:=True;
       End;
    end;
