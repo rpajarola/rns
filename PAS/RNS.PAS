@@ -17,7 +17,7 @@ Var
 
 {*******************************************************}
 {$IFDEF USER}
-procedure GraphExit;Far;
+procedure GraphExit;
 begin
    CloseGraph;
    IniShowCursor;
@@ -26,7 +26,7 @@ end;
 {$ENDIF}
 {*******************************************************}
 {*******************************************************}
-Function HeapFunc(Size: word): integer; Far;
+Function HeapFunc(Size: word): integer;
 begin
    HeapFunc:= 1;
 end;
@@ -50,7 +50,8 @@ end;
 begin
    IF Ioresult=0 Then;
    InstallUserDrivers;
-   Heaperror:= @HeapFunc;
+   // TODO: Modern heap error handling
+   // Original: Heaperror:= @HeapFunc;
    Assign(Buffile,'Buffer');
    Assign(debfile,'Debfile');
    LastFileName:=FExpand('DEBFILE');
