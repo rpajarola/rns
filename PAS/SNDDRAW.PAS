@@ -1,8 +1,8 @@
-Unit SndDraw;
+﻿Unit SndDraw;
 
 Interface
 
-Procedure DrawSnd;Far;
+Procedure DrawSnd; Far;
 
 Implementation
 

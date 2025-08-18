@@ -1,75 +1,77 @@
-{$I RNS.H}
+﻿{$I RNS.H}
 Program Rns(Input, Output);
 
 Uses Graph,
-     crt,
-     Dos,
-     initsc,
-     UserInt,
-     EditUnit,
-     menutyp,
-     helpunit,
-     userexit;
+    crt,
+    Dos,
+    initsc,
+    UserInt,
+    EditUnit,
+    menutyp,
+    helpunit,
+    userexit;
 
 
 Var
-    ExitSave : pointer;
+    ExitSave: pointer;
 
 {*******************************************************}
 {$IFDEF USER}
-procedure GraphExit;
-begin
-   CloseGraph;
-   IniShowCursor;
-   ExitProc:= ExitSave;
-end;
+Procedure GraphExit;
+Begin
+    CloseGraph;
+    IniShowCursor;
+    ExitProc := ExitSave;
+End;
 {$ENDIF}
 {*******************************************************}
 {*******************************************************}
 Function HeapFunc(Size: word): integer;
-begin
-   HeapFunc:= 1;
-end;
+Begin
+    HeapFunc := 1;
+End;
 
 Procedure InstallUserDrivers;
-begin
-   TextBackGround(Black);
-   ClrScr;
-   TextColor(White);
-   TextBackGround(Red);
-   GotoXY(1,12);
-   IF RegisterBGIDriver(@EGAVGADriverProc)<0 then begin
-      WriteLn('Error loading VGA graphics driver, program halted');
-      Writeln;
-      WriteLn('Reinstall RHYTHMICS from your original diskette');
-      Halt($FE);
-   end;
-end;
+Begin
+    TextBackGround (Black);
+    ClrScr;
+    TextColor (White);
+    TextBackGround (Red);
+    GotoXY (1, 12);
+    If RegisterBGIDriver (@EGAVGADriverProc) < 0 Then
+    Begin
+        WriteLn ('Error loading VGA graphics driver, program halted');
+        Writeln;
+        WriteLn ('Reinstall RHYTHMICS from your original diskette');
+        Halt ($FE);
+    End;
+End;
 
 {**************************RNS Main**************************}
-begin
-   IF Ioresult=0 Then;
-   InstallUserDrivers;
-   // TODO: Modern heap error handling
-   // Original: Heaperror:= @HeapFunc;
-   Assign(Buffile,'Buffer');
-   Assign(debfile,'Debfile');
-   LastFileName:=FExpand('DEBFILE');
+Begin
+    If Ioresult = 0 Then;
+    InstallUserDrivers;
+    // TODO: Modern heap error handling
+    // Original: Heaperror:= @HeapFunc;
+    Assign (Buffile, 'Buffer');
+    Assign (debfile, 'Debfile');
+    LastFileName := FExpand ('DEBFILE');
    {$I-}
-   Rewrite(debfile);
+    Rewrite (debfile);
    {$I+}
-      if ioresult <> 0 then begin filemode:=0;
-      reset(debfile);
-      filemode:=2;
-   end;
+    If ioresult <> 0 Then
+    Begin filemode := 0;
+        reset (debfile);
+        filemode := 2;
+    End;
 
-   IniIniColors;
+    IniIniColors;
 
-   UseTopMenu;
-   TextBackground(black);
-   TextColor(white);
-   ClrScr;
-   LastFileName:=FExpand(TextRec(Debfile).Name);
-   Close(debfile);
+    UseTopMenu;
+    TextBackground (black);
+    TextColor (white);
+    ClrScr;
+    LastFileName := FExpand (TextRec (Debfile).Name);
+    Close (debfile);
    {$I-}
-end.
+End.

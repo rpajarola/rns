@@ -1,62 +1,62 @@
-{$I RNS.H}
-unit Xcrt;
+﻿{$I RNS.H}
+Unit Xcrt;
 
-interface
+Interface
 
-function XReadKey(var shiftp, ctrlp: boolean): char;
+Function XReadKey(Var shiftp, ctrlp: boolean): char;
 Function XKeyPressed: Boolean;
 Procedure XClearKbd;
 
-implementation
+Implementation
 
-uses Crt;
+Uses Crt;
 
-var lastkey: char;
+Var lastkey: char;
     extended: boolean;
 
-function XReadKey(var shiftp, ctrlp: boolean): char;
-var ch: char;
-begin
-  // TODO: Replace with modern keyboard input API
-  // For now, use basic CRT functions and assume no modifier keys
-  shiftp := False;
-  ctrlp := False;
-  
-  if extended then
-  begin
-    extended := False;
-    XReadKey := lastkey;
-  end
-  else
-  begin
-    ch := ReadKey;
-    // Check for extended keys (function keys, arrow keys, etc.)
-    if ch = #0 then
-    begin
-      extended := True;
-      lastkey := ReadKey; // Get the scan code
-      XReadKey := #0;
-    end
-    else
-      XReadKey := ch;
-  end;
-end;
+Function XReadKey(Var shiftp, ctrlp: boolean): char;
+Var ch: char;
+Begin
+    // TODO: Replace with modern keyboard input API
+    // For now, use basic CRT functions and assume no modifier keys
+    shiftp := False;
+    ctrlp  := False;
+
+    If extended Then
+    Begin
+        extended := False;
+        XReadKey := lastkey;
+    End
+    Else
+    Begin
+        ch := ReadKey;
+        // Check for extended keys (function keys, arrow keys, etc.)
+        If ch = #0 Then
+        Begin
+            extended := True;
+            lastkey  := ReadKey; // Get the scan code
+            XReadKey := #0;
+        End
+        Else
+            XReadKey := ch;
+    End;
+End;
 
 Function XKeyPressed: Boolean;
-begin
-  // TODO: Replace with modern keyboard status API
-  XKeyPressed := KeyPressed or extended;
-end;
+Begin
+    // TODO: Replace with modern keyboard status API
+    XKeyPressed := KeyPressed OR extended;
+End;
 
 Procedure XClearKbd;
-begin
-  // TODO: Replace with modern keyboard buffer clear API
-  // Clear any pending keys
-  while KeyPressed do
-    ReadKey;
-  extended := False;
-end;
+Begin
+    // TODO: Replace with modern keyboard buffer clear API
+    // Clear any pending keys
+    While KeyPressed Do
+        ReadKey;
+    extended := False;
+End;
 
-begin
-   extended := false;
-end.
+Begin
+    extended := false;
+End.

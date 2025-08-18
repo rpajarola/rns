@@ -1,148 +1,148 @@
-Unit grinout;
+ÔªøUnit grinout;
 
-interface
+Interface
 
-uses menutyp,
-     crt,
-     inout,
-     gcurunit,
-     initsc,
-     graph,
-     MousDrv;
-
-
-procedure GrPut_Integer (NUMBER, X, Y, NUM_LENGTH: integer);
-
-procedure GrPut_Real (NUMBER : Real; X, Y, NUM_LENGTH: integer);{New}
-
-procedure GrPut_Prompt (OUT_STRING: string79; X, Y: integer);
-
-procedure GrGet_String (var IN_STRING: STRING16;
-               X, Y, OLDX, STR_LENGTH: integer;
-                            var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                     var KEYRESPONSE : char;
-                             oldwrite: boolean;
-                     var mausx, mausy: word;
-              var maustaste, mausmenu: word;
-                         var changed : boolean);
-procedure GrGet_Spaced_String (var IN_STRING: STRING16;
-               X, Y, OLDX, STR_LENGTH: integer;
-                            var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                     var KEYRESPONSE : char;
-                             oldwrite: boolean;
-                     var mausx, mausy: word;
-              var maustaste, mausmenu: word;
-                         var changed : boolean);
-procedure GrGetUpcase_String (var IN_STRING: STRING16;
-               X, Y, STR_LENGTH: integer;
-                            var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                     var KEYRESPONSE : char;
-                             oldwrite: boolean;
-                     var mausx, mausy: word;
-              var maustaste, mausmenu: word;
-                         var changed : boolean);
-procedure GrGet_Integer (var NUMBER: integer;
-                   IValMin, IValMax: integer;
-             X, Y, OLDX, NUM_LENGTH: integer;
-                          var  RESP: RESPONSE_TYPE;
-                      var DIRECTION: MOVEMENT;
-                    var KeyResponse: char;
-                           oldwrite: boolean;
-                   var mausx, mausy: word;
-            var maustaste, mausmenu: word;
-                         var changed : boolean);
-
-procedure GrGet_Prompted_String (var IN_STRING: STRING16;
-                                    STR_LENGTH: integer;
-                                       STRDESC: char;
-                                  DESCX, DESCY: integer;
-                                       OLDESCX: integer;
-                                        PROMPT: STRING79;
-                                      PRX, PRY: integer;
-                                      prlength: integer;
-                                     var  RESP: RESPONSE_TYPE;
-                                 var DIRECTION: MOVEMENT;
-                               var KeyResponse: char;
-                                      oldwrite: boolean;
-                              var mausx, mausy: word;
-                       var maustaste, mausmenu: word;
-                                  var changed : boolean);
-
-procedure GrGet_Prompted_Spaced_String (var IN_STRING: STRING16;
-                                    STR_LENGTH: integer;
-                                       STRDESC: char;
-                                  DESCX, DESCY: integer;
-                                       OLDESCX: integer;
-                                        PROMPT: STRING79;
-                                      PRX, PRY: integer;
-                                      prlength: integer;
-                                     var  RESP: RESPONSE_TYPE;
-                                 var DIRECTION: MOVEMENT;
-                               var KeyResponse: char;
-                                      oldwrite: boolean;
-                              var mausx, mausy: word;
-                       var maustaste, mausmenu: word;
-                                  var changed : boolean);
-procedure GrGet_Prompted_Real (var RNNUMBER: Real;     {New}
-                            RValMin, RValMax: Real;
-                                  NUM_LENGTH: integer;
-                                     STRDESC: Char;
-                                DESCX, DESCY: integer;
-                                     OLDESCX: integer;
-                                      PROMPT: STRING79;
-                                    PRX, PRY: integer;
-                                    prlength: integer;
-                                   var  RESP: RESPONSE_TYPE;
-                               var DIRECTION: MOVEMENT;
-                             var KeyResponse: char;
-                                    oldwrite: boolean;
-                            var mausx, mausy: word;
-                     var maustaste, mausmenu: word;
-                                var changed : boolean);
-
-procedure GrGet_Prompted_Integer (var INNUMBER: integer;
-                            IValMin, IValMax: integer;
-                                  NUM_LENGTH: integer;
-                                     STRDESC: Char;
-                                DESCX, DESCY: integer;
-                                     OLDESCX: integer;
-                                      PROMPT: STRING79;
-                                    PRX, PRY: integer;
-                                    prlength: integer;
-                                   var  RESP: RESPONSE_TYPE;
-                               var DIRECTION: MOVEMENT;
-                             var KeyResponse: char;
-                                    oldwrite: boolean;
-                            var mausx, mausy: word;
-                     var maustaste, mausmenu: word;
-                                var changed : boolean);
-
-procedure GrGet_Prompted_Toggle (var tval: integer;
-                                 tValMin, tValMax: integer;
-                                 var tstrings: toggletyp;
-                                 NUM_LENGTH: integer;
-                                 STRDESC: Char;
-                                 DESCX, DESCY: integer;
-                                 OLDESCX: integer;
-                                 PROMPT: STRING79;
-                                 PRX, PRY: integer;
-                                 prlength: integer;
-                                 var  RESP: RESPONSE_TYPE;
-                                 var DIRECTION: MOVEMENT;
-                                 var KeyResponse: char;
-                                 var mausx, mausy: word;
-                                 var maustaste, mausmenu: word;
-                                 var changed : boolean);
+Uses menutyp,
+    crt,
+    inout,
+    gcurunit,
+    initsc,
+    graph,
+    MousDrv;
 
 
-implementation
+Procedure GrPut_Integer(NUMBER, X, Y, NUM_LENGTH: integer);
+
+Procedure GrPut_Real(NUMBER: Real; X, Y, NUM_LENGTH: integer);{New}
+
+Procedure GrPut_Prompt(OUT_STRING: string79; X, Y: integer);
+
+Procedure GrGet_String(Var IN_STRING: STRING16;
+    X, Y, OLDX, STR_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KEYRESPONSE: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+Procedure GrGet_Spaced_String(Var IN_STRING: STRING16;
+    X, Y, OLDX, STR_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KEYRESPONSE: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+Procedure GrGetUpcase_String(Var IN_STRING: STRING16;
+    X, Y, STR_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KEYRESPONSE: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+Procedure GrGet_Integer(Var NUMBER: integer;
+    IValMin, IValMax: integer;
+    X, Y, OLDX, NUM_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+
+Procedure GrGet_Prompted_String(Var IN_STRING: STRING16;
+    STR_LENGTH: integer;
+    STRDESC: char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+
+Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: STRING16;
+    STR_LENGTH: integer;
+    STRDESC: char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+Procedure GrGet_Prompted_Real(Var RNNUMBER: Real;     {New}
+    RValMin, RValMax: Real;
+    NUM_LENGTH: integer;
+    STRDESC: Char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+
+Procedure GrGet_Prompted_Integer(Var INNUMBER: integer;
+    IValMin, IValMax: integer;
+    NUM_LENGTH: integer;
+    STRDESC: Char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+
+Procedure GrGet_Prompted_Toggle(Var tval: integer;
+    tValMin, tValMax: integer;
+    Var tstrings: toggletyp;
+    NUM_LENGTH: integer;
+    STRDESC: Char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+
+
+Implementation
 
 {------------------------------------------------------------------}
 
-procedure GrPut_Integer (NUMBER, X, Y, NUM_LENGTH: integer);
+Procedure GrPut_Integer(NUMBER, X, Y, NUM_LENGTH: integer);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm gibt eine Integer-Zahl an einer bestimmten
@@ -158,20 +158,20 @@ BENôTIGTE TYPEN:
     STRING79 - Wird fÅr alle Strings verwendet
 
 ---------------------------------------------------------------------}
-var
-  TEMP_STR: STRING79;
+Var
+    TEMP_STR: STRING79;
 
-begin
+Begin
 
-{ Wandle die Zahl in einen String um und gib den String aus }
+    { Wandle die Zahl in einen String um und gib den String aus }
 
-  Str (NUMBER:NUM_LENGTH, TEMP_STR);
-  IniOutTextXY (X, Y, TEMP_STR);
-end;
+    Str (NUMBER: NUM_LENGTH, TEMP_STR);
+    IniOutTextXY (X, Y, TEMP_STR);
+End;
 
 {------------------------------------------------------------------}
 
-procedure GrPut_Real (NUMBER : Real; X, Y, NUM_LENGTH: integer);
+Procedure GrPut_Real(NUMBER: Real; X, Y, NUM_LENGTH: integer);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm gibt eine Real-Zahl an einer bestimmten
@@ -187,25 +187,25 @@ BENôTIGTE TYPEN:
     STRING79 - Wird fÅr alle Strings verwendet
 
 ---------------------------------------------------------------------}
-var
-  TEMP_STR : STRING79;
-  w        : LongInt;
-begin
+Var
+    TEMP_STR: STRING79;
+    w: LongInt;
+Begin
 
-{ Wandle die Zahl in einen String um und gib den String aus }
+    { Wandle die Zahl in einen String um und gib den String aus }
 
-  w:=Round(NUMBER*1000);
-  Str (w, TEMP_STR);
-  TEMP_STR:=Copy(TEMP_STR,1,Length(TEMP_STR)-3)+'.'+
-            Copy(TEMP_STR,Length(TEMP_STR)-2,3);
-  IF Copy(TEMP_STR,Length(TEMP_STR)-2,3)='000' then
-    TEMP_STR:=Copy(TEMP_STR,1,Length(TEMP_STR)-4);
-  IniOutTextXY (X, Y, TEMP_STR);
-end;
+    w := Round (NUMBER * 1000);
+    Str (w, TEMP_STR);
+    TEMP_STR := Copy (TEMP_STR, 1, Length (TEMP_STR) - 3) + '.' +
+        Copy (TEMP_STR, Length (TEMP_STR) - 2, 3);
+    If Copy (TEMP_STR, Length (TEMP_STR) - 2, 3) = '000' Then
+        TEMP_STR := Copy (TEMP_STR, 1, Length (TEMP_STR) - 4);
+    IniOutTextXY (X, Y, TEMP_STR);
+End;
 
 {------------------------------------------------------------------}
 
-procedure GrPut_Prompt (OUT_STRING: string79; X, Y: integer);
+Procedure GrPut_Prompt(OUT_STRING: string79; X, Y: integer);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm gibt einen String in einer bestimmten
@@ -220,105 +220,104 @@ BENôTIGTE TYPEN:
     STRING79 - Wird fÅr alle Strings verwendet
 
 ---------------------------------------------------------------------}
-begin
+Begin
 
-{ Lîsche die gesamte Zeile und gib den String aus }
+    { Lîsche die gesamte Zeile und gib den String aus }
 
-   IniOutTextXY(X, Y, ClearString);
-   IniOutTextXY(X, Y, OUT_STRING);
-end;
+    IniOutTextXY (X, Y, ClearString);
+    IniOutTextXY (X, Y, OUT_STRING);
+End;
 
 {-------------------------------------------------------------------}
 
-procedure GrGet_Spaced_String (var IN_STRING: STRING16;
-               X, Y, OLDX, STR_LENGTH: integer;
-                            var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                     var KEYRESPONSE : char;
-                             oldwrite: boolean;
-                     var mausx, mausy: word;
-              var maustaste, mausmenu: word;
-                         var changed : boolean);
-const
-  BELL            = 7;        { ASCII Signalton }
-  BACK_SPACE      = 8;        { ASCII RÅckschritt }
-  CARRIAGE_RETURN = 13;       { ASCII WagenrÅcklauf }
-  ESC             = 27;       { ASCII Escape Zeichen }
-  RIGHT_ARROW     = 77;       { IBM Escape Sequenz fÅr Pfeiltaste
+Procedure GrGet_Spaced_String(Var IN_STRING: STRING16;
+    X, Y, OLDX, STR_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KEYRESPONSE: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+Const
+    BELL = 7;        { ASCII Signalton }
+    BACK_SPACE = 8;        { ASCII RÅckschritt }
+    CARRIAGE_RETURN = 13;       { ASCII WagenrÅcklauf }
+    ESC  = 27;       { ASCII Escape Zeichen }
+    RIGHT_ARROW = 77;       { IBM Escape Sequenz fÅr Pfeiltaste
                                  nach rechts }
 
-var
-  OLDSTR : STRING79;          { Originaler String }
-  clstring: string79;
-  shiftp, ctrlp: boolean;
-  mp : word;
-begin
+Var
+    OLDSTR: STRING79;          { Originaler String }
+    clstring: string79;
+    shiftp, ctrlp: boolean;
+    mp: word;
+Begin
 { Gib den String mit den entsprechenden Attributen auf dem
   Bildschirm aus }
-  clstring:= '';
-  IniExpand(clstring, str_length);
-  if oldwrite then begin
-    IniSpacedText (OLDX, Y, ClString,frNoFrame);
-    IniSpacedText (OLDX, Y, IN_STRING,frNoFrame);
-  end;
-  IniSpacedText (X, Y, ClString,frNoFrame);
-  OLDSTR := IN_STRING;
-{ Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
-  IniSpacedText(X,Y,'_',frNoFrame);
-  IniShowCursor;
-  Repeat
-    Get_Response(Resp, Direction, KeyResponse, shiftp, ctrlp,
-                 mausx, mausy, maustaste, mp, mausmenu);
-  Until (Resp<>No_Response) Or (maustaste<>0);
-  IniMausAssign(maustaste, resp);
-  in_string:= '';
-{ Verarbeite jeweils nur ein Zeichen }
-  while (Resp=Key) or (resp=no_response) do begin
-   { Wenn RÅckschritt gedrÅckt wurde, entferne das eingegebene Zeichen }
-    if resp=key then begin
-      if Ord (KeyResponse) = BACK_SPACE then  { RÅckschritt } begin
-        if length (IN_STRING) > 0 then begin
-          Dec(Byte(In_string[0]));
-          Dec(X);
-          IF Length(In_string)<(Str_Length-1) Then
-            IniSpacedText(X, Y, '_ ',frNoFrame)
-          Else
-            IniSpacedText(X, Y, '_',frNoFrame);
-        end;
-      end {if Ord}else begin
-{ PrÅfe ob Pfeiltasten - bestehend aus 2 Zeichen mit ESCAPE als
-  erstem Zeichen - gedrÅckt wurden }
-{ FÅge ein "normales" Zeichen" in den String ein }
-        if Length(IN_STRING) < STR_LENGTH then begin
-          IN_STRING:=IN_STRING+KeyResponse;
-          IF Length(In_string)<Str_Length Then
-            IniSpacedText(X, Y, KeyResponse+'_',frNoFrame)
-          Else
-            IniSpacedText(X, Y, KeyResponse,frNoFrame);
-          Inc(X);
-        end;{if Length(IN_STRING) < STR_LENGTH}
-      end; {if Ord else}
+    clstring := '';
+    IniExpand (clstring, str_length);
+    If oldwrite Then
+    Begin
+        IniSpacedText (OLDX, Y, ClString, frNoFrame);
+        IniSpacedText (OLDX, Y, IN_STRING, frNoFrame);
     End;
-    Get_Response(Resp, Direction, KeyResponse, shiftp, ctrlp,
-                 mausx, mausy, maustaste, mp, mausmenu);
-    IniMausAssign(maustaste, resp);
-  end; {while}
-  if Resp <> Return then
-    in_string:= oldstr
-  else
-    changed:=true;
-  IniHideCursor;
-end;
+    IniSpacedText (X, Y, ClString, frNoFrame);
+    OLDSTR := IN_STRING;
+    { Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
+    IniSpacedText (X, Y, '_', frNoFrame);
+    IniShowCursor;
+    Repeat
+        Get_Response (Resp, Direction, KeyResponse, shiftp, ctrlp,
+            mausx, mausy, maustaste, mp, mausmenu);
+    Until (Resp <> No_Response) OR (maustaste <> 0);
+    IniMausAssign (maustaste, resp);
+    in_string := '';
+    { Verarbeite jeweils nur ein Zeichen }
+    While (Resp = Key) OR (resp = no_response) Do
+    Begin
+        { Wenn RÅckschritt gedrÅckt wurde, entferne das eingegebene Zeichen }
+        If resp = key Then
+            If Ord (KeyResponse) = BACK_SPACE Then  { RÅckschritt } Begin
+                If length (IN_STRING) > 0 Then
+                Begin
+                    Dec (Byte (In_string[0]));
+                    Dec (X);
+                    If Length (In_string) < (Str_Length - 1) Then
+                        IniSpacedText (X, Y, '_ ', frNoFrame)
+                    Else
+                        IniSpacedText (X, Y, '_', frNoFrame);
+                End;
+            End {if Ord}Else If Length (IN_STRING) < STR_LENGTH Then
+            Begin
+                IN_STRING := IN_STRING + KeyResponse;
+                If Length (In_string) < Str_Length Then
+                    IniSpacedText (X, Y, KeyResponse + '_', frNoFrame)
+                Else
+                    IniSpacedText (X, Y, KeyResponse, frNoFrame);
+                Inc (X);
+            End{ PrÅfe ob Pfeiltasten - bestehend aus 2 Zeichen mit ESCAPE als
+  erstem Zeichen - gedrÅckt wurden }{ FÅge ein "normales" Zeichen" in den String ein }{if Length(IN_STRING) < STR_LENGTH}{if Ord else};
+        Get_Response (Resp, Direction, KeyResponse, shiftp, ctrlp,
+            mausx, mausy, maustaste, mp, mausmenu);
+        IniMausAssign (maustaste, resp);
+    End; {while}
+    If Resp <> Return Then
+        in_string := oldstr
+    Else
+        changed := true;
+    IniHideCursor;
+End;
 {-------------------------------------------------------------------}
-procedure GrGet_String (var IN_STRING: STRING16;
-               X, Y, OLDX, STR_LENGTH: integer;
-                            var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                     var KEYRESPONSE : char;
-                             oldwrite: boolean;
-                     var mausx, mausy: word;
-              var maustaste, mausmenu: word;
-                         var changed : boolean);
+Procedure GrGet_String(Var IN_STRING: STRING16;
+    X, Y, OLDX, STR_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KEYRESPONSE: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm liest einen String von einer bestimmten
@@ -349,90 +348,89 @@ ANMERKUNGEN:
 
 -------------------------------------------------------------------}
 
-const
-  BELL            = 7;        { ASCII Signalton }
-  BACK_SPACE      = 8;        { ASCII RÅckschritt }
-  CARRIAGE_RETURN = 13;       { ASCII WagenrÅcklauf }
-  ESC             = 27;       { ASCII Escape Zeichen }
-  RIGHT_ARROW     = 77;       { IBM Escape Sequenz fÅr Pfeiltaste
+Const
+    BELL = 7;        { ASCII Signalton }
+    BACK_SPACE = 8;        { ASCII RÅckschritt }
+    CARRIAGE_RETURN = 13;       { ASCII WagenrÅcklauf }
+    ESC  = 27;       { ASCII Escape Zeichen }
+    RIGHT_ARROW = 77;       { IBM Escape Sequenz fÅr Pfeiltaste
                                  nach rechts }
 
-var
-  OLDSTR : STRING79;          { Originaler String }
-  clstring: string79;
-  shiftp, ctrlp: boolean;
-  mp : word;
-begin
-  x:=x*8-6;
-  y:=y*8+6;
-  oldx:=oldx*8-6;
+Var
+    OLDSTR: STRING79;          { Originaler String }
+    clstring: string79;
+    shiftp, ctrlp: boolean;
+    mp: word;
+Begin
+    x := x * 8 - 6;
+    y := y * 8 + 6;
+    oldx := oldx * 8 - 6;
 { Gib den String mit den entsprechenden Attributen auf dem
   Bildschirm aus }
-  clstring:= '';
-  IniExpand(clstring, str_length);
-  if oldwrite then begin
-    IniInversWrite(OldX,Y,clString,frSmallBar);
-    IniInversWrite(OldX,Y,In_String,frSmallBar);
-  end;
-{### unterscheiden ob Dir-Eingabe oder z.B. Shift-F3, sonst Menu falsch}
-  IniInversWrite(X,Y,ClString,frSmallBar);
-  OLDSTR := IN_STRING;
-{ Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
-  IniInversWrite(X,Y,'_',frSmallBar);
-  IniShowCursor;
-  Repeat
-    Get_Response(Resp, Direction, KeyResponse, shiftp, ctrlp,
-                 mausx, mausy, maustaste, mp, mausmenu);
-  Until (Resp<>No_Response) Or (maustaste<>0);
-  IniMausAssign(maustaste, resp);
-  in_string:= '';
-{ Verarbeite jeweils nur ein Zeichen }
-  while (Resp=Key) or (resp=no_response) do begin
-{ Wenn RÅckschritt gedrÅckt wurde, entferne das eingegebene Zeichen }
-    if resp=key then begin
-      if Ord (KeyResponse) = BACK_SPACE then  { RÅckschritt } begin
-        if length (IN_STRING) > 0 then begin
-          Dec(Byte(In_string[0]));
-          Dec(X,6);
-          IF Length(In_string)<(Str_Length-1) Then
-            IniInversWrite(X,Y,'_ ',frSmallBar)
-          Else
-            IniInversWrite(X,Y,'_',frSmallBar);
-        end;
-      end {if Ord}else begin
-{ PrÅfe ob Pfeiltasten - bestehend aus 2 Zeichen mit ESCAPE als
-  erstem Zeichen - gedrÅckt wurden }
-{ FÅge ein "normales" Zeichen" in den String ein }
-        if Length(IN_STRING) < STR_LENGTH then begin
-          IN_STRING:=IN_STRING+KeyResponse;
-          IF Length(In_string)<Str_Length Then
-            IniInversWrite(X,Y,KeyResponse+'_',frSmallBar)
-          Else
-            IniInversWrite(X,Y, KeyResponse,frSmallBar);
-            Inc(X,6);
-        end;
-      end; {if Ord}
+    clstring := '';
+    IniExpand (clstring, str_length);
+    If oldwrite Then
+    Begin
+        IniInversWrite (OldX, Y, clString, frSmallBar);
+        IniInversWrite (OldX, Y, In_String, frSmallBar);
     End;
-    Get_Response(Resp, Direction, KeyResponse, shiftp, ctrlp,
-                 mausx, mausy, maustaste, mp, mausmenu);
-    IniMausAssign(maustaste, resp);
-  end; {while}
-  if Resp <> Return then
-    in_string:= oldstr
-  else
-    changed:=true;
- IniHideCursor;
-end;
+    {### unterscheiden ob Dir-Eingabe oder z.B. Shift-F3, sonst Menu falsch}
+    IniInversWrite (X, Y, ClString, frSmallBar);
+    OLDSTR := IN_STRING;
+    { Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
+    IniInversWrite (X, Y, '_', frSmallBar);
+    IniShowCursor;
+    Repeat
+        Get_Response (Resp, Direction, KeyResponse, shiftp, ctrlp,
+            mausx, mausy, maustaste, mp, mausmenu);
+    Until (Resp <> No_Response) OR (maustaste <> 0);
+    IniMausAssign (maustaste, resp);
+    in_string := '';
+    { Verarbeite jeweils nur ein Zeichen }
+    While (Resp = Key) OR (resp = no_response) Do
+    Begin
+        { Wenn RÅckschritt gedrÅckt wurde, entferne das eingegebene Zeichen }
+        If resp = key Then
+            If Ord (KeyResponse) = BACK_SPACE Then  { RÅckschritt } Begin
+                If length (IN_STRING) > 0 Then
+                Begin
+                    Dec (Byte (In_string[0]));
+                    Dec (X, 6);
+                    If Length (In_string) < (Str_Length - 1) Then
+                        IniInversWrite (X, Y, '_ ', frSmallBar)
+                    Else
+                        IniInversWrite (X, Y, '_', frSmallBar);
+                End;
+            End {if Ord}Else If Length (IN_STRING) < STR_LENGTH Then
+            Begin
+                IN_STRING := IN_STRING + KeyResponse;
+                If Length (In_string) < Str_Length Then
+                    IniInversWrite (X, Y, KeyResponse + '_', frSmallBar)
+                Else
+                    IniInversWrite (X, Y, KeyResponse, frSmallBar);
+                Inc (X, 6);
+            End{ PrÅfe ob Pfeiltasten - bestehend aus 2 Zeichen mit ESCAPE als
+  erstem Zeichen - gedrÅckt wurden }{ FÅge ein "normales" Zeichen" in den String ein }{if Ord};
+        Get_Response (Resp, Direction, KeyResponse, shiftp, ctrlp,
+            mausx, mausy, maustaste, mp, mausmenu);
+        IniMausAssign (maustaste, resp);
+    End; {while}
+    If Resp <> Return Then
+        in_string := oldstr
+    Else
+        changed := true;
+    IniHideCursor;
+End;
 {-------------------------------------------------------------------}
-procedure GrGetUpcase_String (var IN_STRING: STRING16;
-               X, Y, STR_LENGTH: integer;
-                            var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                     var KEYRESPONSE : char;
-                             oldwrite: boolean;
-                     var mausx, mausy: word;
-              var maustaste, mausmenu: word;
-                         var changed : boolean);
+Procedure GrGetUpcase_String(Var IN_STRING: STRING16;
+    X, Y, STR_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KEYRESPONSE: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm liest einen String von einer bestimmten
@@ -464,82 +462,80 @@ ANMERKUNGEN:
 
 -------------------------------------------------------------------}
 
-const
-  BELL            = 7;        { ASCII Signalton }
-  BACK_SPACE      = 8;        { ASCII RÅckschritt }
-  CARRIAGE_RETURN = 13;       { ASCII WagenrÅcklauf }
-  ESC             = 27;       { ASCII Escape Zeichen }
-  RIGHT_ARROW     = 77;       { IBM Escape Sequenz fÅr Pfeiltaste
+Const
+    BELL = 7;        { ASCII Signalton }
+    BACK_SPACE = 8;        { ASCII RÅckschritt }
+    CARRIAGE_RETURN = 13;       { ASCII WagenrÅcklauf }
+    ESC  = 27;       { ASCII Escape Zeichen }
+    RIGHT_ARROW = 77;       { IBM Escape Sequenz fÅr Pfeiltaste
                                  nach rechts }
 
-var
-  OLDSTR : STRING79;          { Originaler String }
-  clstring: string79;
-  shiftp, ctrlp: boolean;
-  mp : word;
-begin
+Var
+    OLDSTR: STRING79;          { Originaler String }
+    clstring: string79;
+    shiftp, ctrlp: boolean;
+    mp: word;
+Begin
   { Gib den String mit den entsprechenden Attributen auf dem
     Bildschirm aus }
-  clstring:= '';
-  IniExpand(clstring, str_length);
-  if not oldwrite then
-    IniSpacedWrite(X, Y, ClString,frNoFrame)
-  else begin
-    IniSpacedWrite(X, Y, IN_STRING,frNoFrame);
-  end;
-  OLDSTR := IN_STRING;
-{ Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
-  IniInversWrite(X,Y,In_String+'_',frNoFrame);
-  IniShowCursor;
-  Get_Response(Resp, Direction, KeyResponse, shiftp, ctrlp,
-               mausx, mausy, maustaste, mp, mausmenu);
-  IniMausAssign(maustaste, resp);
-{   in_string:= '';}
-{ Verarbeite jeweils nur ein Zeichen }
+    clstring := '';
+    IniExpand (clstring, str_length);
+    If NOT oldwrite Then
+        IniSpacedWrite (X, Y, ClString, frNoFrame)
+    Else IniSpacedWrite (X, Y, IN_STRING, frNoFrame);
+    OLDSTR := IN_STRING;
+    { Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
+    IniInversWrite (X, Y, In_String + '_', frNoFrame);
+    IniShowCursor;
+    Get_Response (Resp, Direction, KeyResponse, shiftp, ctrlp,
+        mausx, mausy, maustaste, mp, mausmenu);
+    IniMausAssign (maustaste, resp);
+    {   in_string:= '';}
+    { Verarbeite jeweils nur ein Zeichen }
 
-  while (Resp=Key) do begin
-{ Wenn RÅckschritt gedrÅckt wurde, entferne das eingegebene Zeichen }
-    if Byte(KeyResponse) = BACK_SPACE then  { RÅckschritt } begin
-      if length (IN_STRING) > 0 then begin
-        Dec(Byte(In_string[0]));
-        IF Length(In_string)<Str_Length-1 Then
-          IniInversWrite(X, Y,In_String+'_ ',frSmallBar)
-        Else
-          IniInversWrite(X, Y,In_String+'_',frSmallBar);
-      end;
-    end {if Byte}else begin
-{ PrÅfe ob Pfeiltasten - bestehend aus 2 Zeichen mit 0 als
+    While (Resp = Key) Do
+    Begin
+        { Wenn RÅckschritt gedrÅckt wurde, entferne das eingegebene Zeichen }
+        If Byte (KeyResponse) = BACK_SPACE Then  { RÅckschritt } Begin
+            If length (IN_STRING) > 0 Then
+            Begin
+                Dec (Byte (In_string[0]));
+                If Length (In_string) < Str_Length - 1 Then
+                    IniInversWrite (X, Y, In_String + '_ ', frSmallBar)
+                Else
+                    IniInversWrite (X, Y, In_String + '_', frSmallBar);
+            End;
+        End {if Byte}Else If Byte (IN_STRING[0]) < STR_LENGTH Then
+        Begin
+            IN_STRING := IN_STRING + UpCase (KeyResponse);
+            If Length (In_string) < Str_Length Then
+                IniInversWrite (X, Y, In_String + '_', frSmallBar)
+            Else
+                IniInversWrite (X, Y, In_String, frSmallBar);
+        End{ PrÅfe ob Pfeiltasten - bestehend aus 2 Zeichen mit 0 als
   erstem Zeichen - gedrÅckt wurden
-  FÅge ein "normales" Zeichen" in den String ein }
-      if Byte(IN_STRING[0]) < STR_LENGTH then begin
-        IN_STRING:=IN_STRING+UpCase(KeyResponse);
-        IF Length(In_string)<Str_Length Then
-          IniInversWrite(X, Y, In_String+'_',frSmallBar)
-        Else
-          IniInversWrite(X, Y, In_String,frSmallBar);
-      end;
-    end; {if Byte Else}
-    Get_Response(Resp, Direction, KeyResponse, shiftp, ctrlp,
-                 mausx, mausy, maustaste, mp, mausmenu);
-    IniMausAssign(maustaste, resp);
-  end; {while}
-  if Resp <>return then
-    in_string:= oldstr
-  else
-    changed:=true;
-  IniHideCursor;
-end;
+  FÅge ein "normales" Zeichen" in den String ein }; {if Byte Else}
+        Get_Response (Resp, Direction, KeyResponse, shiftp, ctrlp,
+            mausx, mausy, maustaste, mp, mausmenu);
+        IniMausAssign (maustaste, resp);
+    End; {while}
+    If Resp <> return Then
+        in_string := oldstr
+    Else
+        changed := true;
+    IniHideCursor;
+End;
 {-------------------------------------------------------------------}
-procedure GrGet_Real (var NUMBER: real;
-                   RValMin, RValMax: real;
-             X, Y, OLDX, NUM_LENGTH: integer;
-                          var  RESP: RESPONSE_TYPE;
-                      var DIRECTION: MOVEMENT;
-                    var KeyResponse: char;
-                           oldwrite: boolean;
-                   var mausx, mausy: word;
-            var maustaste, mausmenu: word;
-                       var changed : boolean);
+Procedure GrGet_Real(Var NUMBER: real;
+    RValMin, RValMax: real;
+    X, Y, OLDX, NUM_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm liest eine Integer-Zahl von einer bestimmten
@@ -562,100 +558,92 @@ PARAMETER:
     STRING79 - Wird fÅr alle Strings verwendet
 -------------------------------------------------------------------}
 
-const
-  BELL = 7;                  { ASCII Signalton }
-var
-  VALCODE        : integer;  { Code fÅr die String-Umwandlung }
-  ORIGINAL_STR,              { Originaler String }
-  TEMP_STR       : string16; { Von Tastatur eingegebener String }
-  TEMP_Real      : real;     { Versuchte Umwandlung des Strings }
-  w              : LongInt;
-begin
-   IniShowCursor;
-   Str (NUMBER, ORIGINAL_STR);
+Const
+    BELL = 7;                  { ASCII Signalton }
+Var
+    VALCODE: integer;  { Code fÅr die String-Umwandlung }
+    ORIGINAL_STR,              { Originaler String }
+    TEMP_STR: string16; { Von Tastatur eingegebener String }
+    TEMP_Real: real;     { Versuchte Umwandlung des Strings }
+    w: LongInt;
+Begin
+    IniShowCursor;
+    Str (NUMBER, ORIGINAL_STR);
 
-   w:=Round(NUMBER*1000);
-   Str (w, ORIGINAL_STR);
-   Original_Str:=Copy(Original_Str,1,Length(Original_Str)-3)+'.'+
-                 Copy(Original_Str,Length(Original_Str)-2,4);
-   IF Copy(ORIGINAL_STR,Length(ORIGINAL_STR)-2,3)='000' then
-      Original_STR:=Copy(ORIGINAL_STR,1,Length(ORIGINAL_STR)-4);
-{ Probiere weiterhin, bis nur noch Ziffern eingegeben werden }
-   repeat
-      TEMP_STR := Original_Str;
-      { Lies die Eingabe als String ein }
-      GrGet_String (TEMP_STR, X, Y, OLDX, NUM_LENGTH,
-                    RESP, DIRECTION, KeyResponse, oldwrite,
-                    mausx, mausy, maustaste, mausmenu,changed);
-      IniMausAssign(maustaste, resp);
-      {Teste ob Eingabe nicht mit Pfeilen oder Escape Abgeschlossen wurde}
-      if (RESP <> Arrow) and (RESP <> Escape) then
-      begin
-         { Entferne Leerzeichen }
-         while (TEMP_STR[1] = ' ') and (Length(TEMP_STR)<>0) do
-            TEMP_STR := copy (TEMP_STR, 2, Length (TEMP_STR));
+    w := Round (NUMBER * 1000);
+    Str (w, ORIGINAL_STR);
+    Original_Str := Copy (Original_Str, 1, Length (Original_Str) - 3) + '.' +
+        Copy (Original_Str, Length (Original_Str) - 2, 4);
+    If Copy (ORIGINAL_STR, Length (ORIGINAL_STR) - 2, 3) = '000' Then
+        Original_STR := Copy (ORIGINAL_STR, 1, Length (ORIGINAL_STR) - 4);
+    { Probiere weiterhin, bis nur noch Ziffern eingegeben werden }
+    Repeat
+        TEMP_STR := Original_Str;
+        { Lies die Eingabe als String ein }
+        GrGet_String (TEMP_STR, X, Y, OLDX, NUM_LENGTH,
+            RESP, DIRECTION, KeyResponse, oldwrite,
+            mausx, mausy, maustaste, mausmenu, changed);
+        IniMausAssign (maustaste, resp);
+        {Teste ob Eingabe nicht mit Pfeilen oder Escape Abgeschlossen wurde}
+        If (RESP <> Arrow) AND (RESP <> Escape) Then
+        Begin
+            { Entferne Leerzeichen }
+            While (TEMP_STR[1] = ' ') AND (Length (TEMP_STR) <> 0) Do
+                TEMP_STR := copy (TEMP_STR, 2, Length (TEMP_STR));
             { Versuche den String in eine Real-Zahl umzuwandeln }
             Val (TEMP_STR, TEMP_Real, VALCODE);
-            IF VALCODE = 0 then
-            begin
-               {Teste ob der Wert im erlaubten Bereich ist}
-               if (TEMP_Real >= RValMin) and (TEMP_Real <= RValMax) then
-               begin
+            If VALCODE = 0 Then
+            Begin
+                {Teste ob der Wert im erlaubten Bereich ist}
+                If (TEMP_Real >= RValMin) AND (TEMP_Real <= RValMax) Then
+                Begin
                   { Wandle den Real in einen String mit entsprechendem
                     Format zurÅck und gib ihn erneut auf dem Bildschirm aus }
-                  NUMBER := TEMP_Real;
-                  if oldwrite then
-                  begin
-                     w:=Round(NUMBER*1000);
-                     Str(w, ORIGINAL_STR);
-                     Original_Str:=Copy(Original_Str,1,Length(Original_Str)-3)+'.'+
-                     Copy(Original_Str,Length(Original_Str)-2,4);
-                     IF Copy(ORIGINAL_STR,Length(ORIGINAL_STR)-2,3)='000' then
-                       Original_STR:=Copy(ORIGINAL_STR,1,Length(ORIGINAL_STR)-4);
-                     IniOutTextXY(OLDX, Y, TEMP_STR);
-                  end;
-               end
-               else {if (TEMP_Real >= RValMin) and (TEMP_Real <= RValMax)}
-               begin
-                  if oldwrite then
-                  begin
-                     VALCODE:=1;
-                     IniOutTextXY(OLDX, Y, ORIGINAL_STR);
-                  end;
-               end  {else if (TEMP_Real >=}
-            end {if VALCODE = 0}
-            else
-            begin
-               if maustaste = 1 then
-               begin
-                  valcode:= 0;
-               end
-               else
-               begin
-                  if oldwrite then
-                  begin
-                     IniOutTextXY(OLDX, Y, ORIGINAL_STR);
-                  end;
-               end;
-            end;
-      end
-      else {if (RESP <> Arrow) and (RESP <> Escape)} begin
-         VALCODE := 0;
-      end;
-   until VALCODE = 0;
-   IniHideCursor;
-end;
+                    NUMBER := TEMP_Real;
+                    If oldwrite Then
+                    Begin
+                        w := Round (NUMBER * 1000);
+                        Str (w, ORIGINAL_STR);
+                        Original_Str := Copy (Original_Str, 1, Length (Original_Str) - 3) + '.' +
+                            Copy (Original_Str, Length (Original_Str) - 2, 4);
+                        If Copy (ORIGINAL_STR, Length (ORIGINAL_STR) - 2, 3) = '000' Then
+                            Original_STR := Copy (ORIGINAL_STR, 1, Length (ORIGINAL_STR) - 4);
+                        IniOutTextXY (OLDX, Y, TEMP_STR);
+                    End;
+                End
+                Else {if (TEMP_Real >= RValMin) and (TEMP_Real <= RValMax)}
+                Begin
+                    If oldwrite Then
+                    Begin
+                        VALCODE := 1;
+                        IniOutTextXY (OLDX, Y, ORIGINAL_STR);
+                    End;
+                End;  {else if (TEMP_Real >=}
+            End {if VALCODE = 0}
+            Else
+            Begin
+                If maustaste = 1 Then
+                    valcode := 0
+                Else
+                If oldwrite Then
+                    IniOutTextXY (OLDX, Y, ORIGINAL_STR);
+            End;
+        End
+        Else {if (RESP <> Arrow) and (RESP <> Escape)} VALCODE := 0;
+    Until VALCODE = 0;
+    IniHideCursor;
+End;
 {-------------------------------------------------------------------}
-procedure GrGet_Integer (var NUMBER: integer;
-                   IValMin, IValMax: integer;
-             X, Y, OLDX, NUM_LENGTH: integer;
-                          var  RESP: RESPONSE_TYPE;
-                      var DIRECTION: MOVEMENT;
-                    var KeyResponse: char;
-                           oldwrite: boolean;
-                   var mausx, mausy: word;
-            var maustaste, mausmenu: word;
-                       var changed : boolean);
+Procedure GrGet_Integer(Var NUMBER: integer;
+    IValMin, IValMax: integer;
+    X, Y, OLDX, NUM_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm liest eine Integer-Zahl von einer bestimmten
@@ -675,134 +663,124 @@ PARAMETER:
  BENôTIGTE TYPEN:
     STRING79 - Wird fÅr alle Strings verwendet
 -------------------------------------------------------------------}
-const
-  BELL = 7;                  { ASCII Signalton }
-var
-  VALCODE        : integer;  { Code fÅr die String-Umwandlung }
-  ORIGINAL_STR,              { Originaler String }
-  TEMP_STR       : string16; { Von Tastatur eingegebener String }
-  TEMP_INT       : integer;  { Versuchte Umwandlung des Strings }
-begin
-   IniShowCursor;
-   Str (NUMBER, ORIGINAL_STR);
-{ Probiere weiterhin, bis nur noch Ziffern eingegeben werden }
-   repeat
-      TEMP_STR := Original_Str;
-      { Lies die Eingabe als String ein }
-      GrGet_String (TEMP_STR, X, Y, OLDX, NUM_LENGTH,
-                    RESP, DIRECTION, KeyResponse, oldwrite,
-                    mausx, mausy, maustaste, mausmenu,changed);
-      IniMausAssign(maustaste, resp);
-      {Teste ob Eingabe nicht mit Pfeilen oder Escape Abgeschlossen wurde}
-      if (RESP <> Arrow) and (RESP <> Escape) then
-      begin
-         { Entferne Leerzeichen }
-         while TEMP_STR[1] = ' ' do
-            TEMP_STR := copy (TEMP_STR, 2, Length (TEMP_STR));
+Const
+    BELL = 7;                  { ASCII Signalton }
+Var
+    VALCODE: integer;  { Code fÅr die String-Umwandlung }
+    ORIGINAL_STR,              { Originaler String }
+    TEMP_STR: string16; { Von Tastatur eingegebener String }
+    TEMP_INT: integer;  { Versuchte Umwandlung des Strings }
+Begin
+    IniShowCursor;
+    Str (NUMBER, ORIGINAL_STR);
+    { Probiere weiterhin, bis nur noch Ziffern eingegeben werden }
+    Repeat
+        TEMP_STR := Original_Str;
+        { Lies die Eingabe als String ein }
+        GrGet_String (TEMP_STR, X, Y, OLDX, NUM_LENGTH,
+            RESP, DIRECTION, KeyResponse, oldwrite,
+            mausx, mausy, maustaste, mausmenu, changed);
+        IniMausAssign (maustaste, resp);
+        {Teste ob Eingabe nicht mit Pfeilen oder Escape Abgeschlossen wurde}
+        If (RESP <> Arrow) AND (RESP <> Escape) Then
+        Begin
+            { Entferne Leerzeichen }
+            While TEMP_STR[1] = ' ' Do
+                TEMP_STR := copy (TEMP_STR, 2, Length (TEMP_STR));
             { Versuche den String in eine Integer-Zahl umzuwandeln }
             Val (TEMP_STR, TEMP_INT, VALCODE);
-            IF VALCODE = 0 then
-            begin
-               {Teste ob der Wert im erlaubten Bereich ist}
-               if (TEMP_INT >= IValMin) and (TEMP_INT <= IValMax) then
-               begin
+            If VALCODE = 0 Then
+            Begin
+                {Teste ob der Wert im erlaubten Bereich ist}
+                If (TEMP_INT >= IValMin) AND (TEMP_INT <= IValMax) Then
+                Begin
                   { Wandle den Integer in einen String mit entsprechendem
                     Format zurÅck und gib ihn erneut auf dem Bildschirm aus }
-                  NUMBER := TEMP_INT;
-                  if oldwrite then
-                  begin
-                     Str (NUMBER:NUM_LENGTH, TEMP_STR);
-                     IniOutTextXY(OLDX, Y, TEMP_STR);
-                  end;
-               end
-               else {if (TEMP_INT >= IValMin) and (TEMP_INT <= IValMax)}
-               begin
-                  if oldwrite then
-                  begin
-                     VALCODE:=1;
-                     IniOutTextXY(OLDX, Y, ORIGINAL_STR);
-                  end;
-               end  {else if (TEMP_INT >=}
-            end {if VALCODE = 0}
-            else
-            begin
-               if maustaste = 1 then
-               begin
-                  valcode:= 0;
-               end
-               else
-               begin
-                  if oldwrite then
-                  begin
-                     IniOutTextXY(OLDX, Y, ORIGINAL_STR);
-                  end;
-               end;
-            end;
-      end
-      else {if (RESP <> Arrow) and (RESP <> Escape)}begin
-        VALCODE := 0;
-     end;
-  until VALCODE = 0;
-  IniHideCursor;
-end;
+                    NUMBER := TEMP_INT;
+                    If oldwrite Then
+                    Begin
+                        Str (NUMBER: NUM_LENGTH, TEMP_STR);
+                        IniOutTextXY (OLDX, Y, TEMP_STR);
+                    End;
+                End
+                Else {if (TEMP_INT >= IValMin) and (TEMP_INT <= IValMax)}
+                Begin
+                    If oldwrite Then
+                    Begin
+                        VALCODE := 1;
+                        IniOutTextXY (OLDX, Y, ORIGINAL_STR);
+                    End;
+                End;  {else if (TEMP_INT >=}
+            End {if VALCODE = 0}
+            Else
+            Begin
+                If maustaste = 1 Then
+                    valcode := 0
+                Else
+                If oldwrite Then
+                    IniOutTextXY (OLDX, Y, ORIGINAL_STR);
+            End;
+        End
+        Else {if (RESP <> Arrow) and (RESP <> Escape)}VALCODE := 0;
+    Until VALCODE = 0;
+    IniHideCursor;
+End;
 
 {-------------------------------------------------------------------}
-procedure GrGet_Toggle (var tval: integer;
-                        tValMin, tValMax: integer;
-                        var tstrings: toggletyp;
-                        DESCX, DESCY: integer;
-                        OLDESCX: integer;
-                        NUM_LENGTH: integer;
-                        var  RESP: RESPONSE_TYPE;
-                        var DIRECTION: MOVEMENT;
-                        var KeyResponse: char;
-                        var mausx, mausy: word;
-                        var maustaste, mausmenu: word;
-                        var changed : boolean);
+Procedure GrGet_Toggle(Var tval: integer;
+    tValMin, tValMax: integer;
+    Var tstrings: toggletyp;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    NUM_LENGTH: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 
-var shiftp, ctrlp: boolean;
-    mp : word;
-begin
-   repeat
-      Get_Response(resp, direction, keyresponse, shiftp, ctrlp,
-                   mausx, mausy, maustaste, mp, mausmenu);
-      IniMausAssign(maustaste, resp);
-      {Testen ob die Eingabe nicht mit Pfeilen oder ESC abgeschlossen wurde}
-      if ((resp <> arrow) and (resp <> escape)) And Not
-      ((resp = no_response) And (maustaste=0)) then
-      begin
-         if (KeyResponse = ' ') Or (maustaste=4) Or ((Maustaste=1)And
-          ((Mausy DIV 8)>=descy-1) And ((Mausy DIV 8)<=descy+1))then
-         begin
-            {gib neuen Wert am Bildschirm aus}
-            if tval + tvalmin <= tvalmax then tval:= tval + 1
-            else tval:= 1;
-            IniExpand(tstrings[tval + tvalmin - 1], fieldlength);
-            Mausdunkel;
-            IniInversText(oldescx, descy, tstrings[tval + tvalmin - 1],frNoFrame);
-            MausZeigen;
-            changed:=true;
-         end;
-      end;
-   until ((resp = arrow) or (resp = escape) or (maustaste = 1));
-end;
+Var shiftp, ctrlp: boolean;
+    mp: word;
+Begin
+    Repeat
+        Get_Response (resp, direction, keyresponse, shiftp, ctrlp,
+            mausx, mausy, maustaste, mp, mausmenu);
+        IniMausAssign (maustaste, resp);
+        {Testen ob die Eingabe nicht mit Pfeilen oder ESC abgeschlossen wurde}
+        If ((resp <> arrow) AND (resp <> escape)) AND NOT
+            ((resp = no_response) AND (maustaste = 0)) Then
+            If (KeyResponse = ' ') OR (maustaste = 4) OR ((Maustaste = 1) AND
+                ((Mausy DIV 8) >= descy - 1) AND ((Mausy DIV 8) <= descy + 1)) Then
+            Begin
+                {gib neuen Wert am Bildschirm aus}
+                If tval + tvalmin <= tvalmax Then tval := tval + 1
+                Else tval := 1;
+                IniExpand (tstrings[tval + tvalmin - 1], fieldlength);
+                Mausdunkel;
+                IniInversText (oldescx, descy, tstrings[tval + tvalmin - 1], frNoFrame);
+                MausZeigen;
+                changed := true;
+            End;
+    Until ((resp = arrow) OR (resp = escape) OR (maustaste = 1));
+End;
 
 {-------------------------------------------------------------------}
-procedure GrGet_Prompted_String (var IN_STRING: STRING16;
-                                    STR_LENGTH: integer;
-                                       STRDESC: char;
-                                  DESCX, DESCY: integer;
-                                       OLDESCX: integer;
-                                        PROMPT: STRING79;
-                                      PRX, PRY: integer;
-                                      prlength: integer;
-                                     var  RESP: RESPONSE_TYPE;
-                                 var DIRECTION: MOVEMENT;
-                               var KeyResponse: char;
-                                      oldwrite: boolean;
-                              var mausx, mausy: word;
-                       var maustaste, mausmenu: word;
-                                  var changed : boolean);
+Procedure GrGet_Prompted_String(Var IN_STRING: STRING16;
+    STR_LENGTH: integer;
+    STRDESC: char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm liest einen String an einer bestimmten
@@ -830,69 +808,69 @@ PARAMETER:
 
 -------------------------------------------------------------------}
 
-begin
+Begin
 
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
    Helligkeit aus und zeige die Benutzeraufforderung an }
 
-  IniSpacedText (DESCX - 1, DESCY, ' ' + STRDESC + ' ',frNoFrame);
-  IniExpand(prompt, prlength);
-  IniInversText (PRX - 1, PRY, ' ' + PROMPT,frLow); {hinterlÑsst RÑnder in Dir-Eingabe ###}
+    IniSpacedText (DESCX - 1, DESCY, ' ' + STRDESC + ' ', frNoFrame);
+    IniExpand (prompt, prlength);
+    IniInversText (PRX - 1, PRY, ' ' + PROMPT, frLow); {hinterlÑsst RÑnder in Dir-Eingabe ###}
 
-{ Nimm die Eingabe vor }
+    { Nimm die Eingabe vor }
 
-  GrGet_String (IN_STRING, DESCX + 2, DESCY, OLDESCX,
-                STR_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
-                mausx, mausy, maustaste, mausmenu,changed);
-end;
+    GrGet_String (IN_STRING, DESCX + 2, DESCY, OLDESCX,
+        STR_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
+        mausx, mausy, maustaste, mausmenu, changed);
+End;
 {-------------------------------------------------------------------}
-procedure GrGet_Prompted_Spaced_String (var IN_STRING: STRING16;
-                                    STR_LENGTH: integer;
-                                       STRDESC: char;
-                                  DESCX, DESCY: integer;
-                                       OLDESCX: integer;
-                                        PROMPT: STRING79;
-                                      PRX, PRY: integer;
-                                      prlength: integer;
-                                     var  RESP: RESPONSE_TYPE;
-                                 var DIRECTION: MOVEMENT;
-                               var KeyResponse: char;
-                                      oldwrite: boolean;
-                              var mausx, mausy: word;
-                       var maustaste, mausmenu: word;
-                                  var changed : boolean);
+Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: STRING16;
+    STR_LENGTH: integer;
+    STRDESC: char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 
-begin
+Begin
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
    Helligkeit aus und zeige die Benutzeraufforderung an }
-  IniSpacedText (DESCX - 1, DESCY, ' ' + STRDESC + ' ',frNoFrame);
-  IniExpand(prompt, prlength);
-  IniSpacedText (PRX - 1, PRY, ' ' + PROMPT,frNoFrame);
+    IniSpacedText (DESCX - 1, DESCY, ' ' + STRDESC + ' ', frNoFrame);
+    IniExpand (prompt, prlength);
+    IniSpacedText (PRX - 1, PRY, ' ' + PROMPT, frNoFrame);
 
-{ Nimm die Eingabe vor }
+    { Nimm die Eingabe vor }
 
-  GrGet_Spaced_String (IN_STRING, DESCX + 2, DESCY, OLDESCX,
-                STR_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
-                mausx, mausy, maustaste, mausmenu,changed);
-end;
+    GrGet_Spaced_String (IN_STRING, DESCX + 2, DESCY, OLDESCX,
+        STR_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
+        mausx, mausy, maustaste, mausmenu, changed);
+End;
 
 {-------------------------------------------------------------}
-procedure GrGet_Prompted_Real (var RNNUMBER: Real;
-                            RValMin, RValMax: Real;
-                                  NUM_LENGTH: integer;
-                                     STRDESC: Char;
-                                DESCX, DESCY: integer;
-                                     OLDESCX: integer;
-                                      PROMPT: STRING79;
-                                    PRX, PRY: integer;
-                                    prlength: integer;
-                                   var  RESP: RESPONSE_TYPE;
-                               var DIRECTION: MOVEMENT;
-                             var KeyResponse: char;
-                                    oldwrite: boolean;
-                            var mausx, mausy: word;
-                     var maustaste, mausmenu: word;
-                                  var changed : boolean);
+Procedure GrGet_Prompted_Real(Var RNNUMBER: Real;
+    RValMin, RValMax: Real;
+    NUM_LENGTH: integer;
+    STRDESC: Char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 
 {
 BESCHREIBUNG:
@@ -900,43 +878,43 @@ BESCHREIBUNG:
     Stelle des Bildschirms ein. Rest siehe bei GrGet_Prompted_String.
 -------------------------------------------------------------------}
 
-begin
+Begin
 
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
    Helligkeit aus und zeige die Benutzeraufforderung an }
 
-  IniInversText (DESCX - 1, DESCY, ' ' + STRDESC + ' ',frNoFrame);
-  IniExpand(prompt, prlength);
-  IniInversText (PRX - 1, PRY, ' ' + PROMPT,frLow);
+    IniInversText (DESCX - 1, DESCY, ' ' + STRDESC + ' ', frNoFrame);
+    IniExpand (prompt, prlength);
+    IniInversText (PRX - 1, PRY, ' ' + PROMPT, frLow);
 
-{ Nimm die Eingabe vor }
+    { Nimm die Eingabe vor }
 
-  GrGet_Real (RNNUMBER, RValMin, RValMax,
-                 DESCX + 2, DESCY, OLDESCX,
-                 NUM_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
-                 mausx, mausy, maustaste, mausmenu,changed);
+    GrGet_Real (RNNUMBER, RValMin, RValMax,
+        DESCX + 2, DESCY, OLDESCX,
+        NUM_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
+        mausx, mausy, maustaste, mausmenu, changed);
 
-end;
+End;
 
 {-------------------------------------------------------------------}
 
 {-------------------------------------------------------------}
-procedure GrGet_Prompted_Integer (var INNUMBER: integer;
-                            IValMin, IValMax: integer;
-                                  NUM_LENGTH: integer;
-                                     STRDESC: Char;
-                                DESCX, DESCY: integer;
-                                     OLDESCX: integer;
-                                      PROMPT: STRING79;
-                                    PRX, PRY: integer;
-                                    prlength: integer;
-                                   var  RESP: RESPONSE_TYPE;
-                               var DIRECTION: MOVEMENT;
-                             var KeyResponse: char;
-                                    oldwrite: boolean;
-                            var mausx, mausy: word;
-                     var maustaste, mausmenu: word;
-                                var changed : boolean);
+Procedure GrGet_Prompted_Integer(Var INNUMBER: integer;
+    IValMin, IValMax: integer;
+    NUM_LENGTH: integer;
+    STRDESC: Char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    oldwrite: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
 
 {
 BESCHREIBUNG:
@@ -944,63 +922,63 @@ BESCHREIBUNG:
     Stelle des Bildschirms ein. Rest siehe bei GrGet_Prompted_String.
 -------------------------------------------------------------------}
 
-begin
+Begin
 
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
    Helligkeit aus und zeige die Benutzeraufforderung an }
 
-  IniInversText (DESCX - 1, DESCY, ' ' + STRDESC + ' ',frNoFrame);
-  IniExpand(prompt, prlength);
-  IniInversText (PRX - 1, PRY, ' ' + PROMPT,frLow);
+    IniInversText (DESCX - 1, DESCY, ' ' + STRDESC + ' ', frNoFrame);
+    IniExpand (prompt, prlength);
+    IniInversText (PRX - 1, PRY, ' ' + PROMPT, frLow);
 
-{ Nimm die Eingabe vor }
+    { Nimm die Eingabe vor }
 
-  GrGet_Integer (INNUMBER, IValMin, IValMax,
-                 DESCX + 2, DESCY, OLDESCX,
-                 NUM_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
-                 mausx, mausy, maustaste, mausmenu,changed);
+    GrGet_Integer (INNUMBER, IValMin, IValMax,
+        DESCX + 2, DESCY, OLDESCX,
+        NUM_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
+        mausx, mausy, maustaste, mausmenu, changed);
 
-end;
+End;
 
 {-------------------------------------------------------------------}
-procedure GrGet_Prompted_Toggle (var tval: integer;
-                                 tValMin, tValMax: integer;
-                                 var tstrings: toggletyp;
-                                 NUM_LENGTH: integer;
-                                 STRDESC: Char;
-                                 DESCX, DESCY: integer;
-                                 OLDESCX: integer;
-                                 PROMPT: STRING79;
-                                 PRX, PRY: integer;
-                                 prlength: integer;
-                                 var  RESP: RESPONSE_TYPE;
-                                 var DIRECTION: MOVEMENT;
-                                 var KeyResponse: char;
-                                 var mausx, mausy: word;
-                                 var maustaste, mausmenu: word;
-                                 var changed : boolean);
-VAR outstring: string79;
+Procedure GrGet_Prompted_Toggle(Var tval: integer;
+    tValMin, tValMax: integer;
+    Var tstrings: toggletyp;
+    NUM_LENGTH: integer;
+    STRDESC: Char;
+    DESCX, DESCY: integer;
+    OLDESCX: integer;
+    PROMPT: STRING79;
+    PRX, PRY: integer;
+    prlength: integer;
+    Var RESP: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    Var mausx, mausy: word;
+    Var maustaste, mausmenu: word;
+    Var changed: boolean);
+Var outstring: string79;
 
-begin
+Begin
 
 { Gib die Beschreibung der vorzunehmenden Eingabe in erhîhter
    Helligkeit aus und zeige die Benutzeraufforderung an }
 
-   IniExpand(tstrings[tval + tvalmin - 1], fieldlength);
-   IniInversText(oldescx, descy, tstrings[tval + tvalmin - 1],frNoFrame);
-   outstring:= '[Spacebar]';
-   IniExpand(outstring, fieldlength);
-   IniInversText (DESCX - 1, DESCY, ' ' + STRDESC + ' ' + outstring,frNoFrame);
-   IniExpand(prompt, prlength);
-   IniInversText (PRX - 1, PRY, ' ' + PROMPT,frLow);
+    IniExpand (tstrings[tval + tvalmin - 1], fieldlength);
+    IniInversText (oldescx, descy, tstrings[tval + tvalmin - 1], frNoFrame);
+    outstring := '[Spacebar]';
+    IniExpand (outstring, fieldlength);
+    IniInversText (DESCX - 1, DESCY, ' ' + STRDESC + ' ' + outstring, frNoFrame);
+    IniExpand (prompt, prlength);
+    IniInversText (PRX - 1, PRY, ' ' + PROMPT, frLow);
 
-   { Nimm die Eingabe vor }
+    { Nimm die Eingabe vor }
 
-   GrGet_Toggle (tval, tvalmin, tvalmax, tstrings,
-                 DESCX + 2, DESCY, OLDESCX, num_length,
-                 RESP, DIRECTION, KEYRESPONSE,
-                 mausx, mausy, maustaste, mausmenu,changed);
+    GrGet_Toggle (tval, tvalmin, tvalmax, tstrings,
+        DESCX + 2, DESCY, OLDESCX, num_length,
+        RESP, DIRECTION, KEYRESPONSE,
+        mausx, mausy, maustaste, mausmenu, changed);
 
-end;
+End;
 
-end.
+End.

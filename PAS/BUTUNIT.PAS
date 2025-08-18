@@ -1,276 +1,269 @@
-unit butunit;
+ï»¿Unit butunit;
 
-interface
+Interface
 
-uses graph,
-     dos,
-     initsc,
-     menutyp,
-     crt,
-     GcuRunit;
+Uses graph,
+    dos,
+    initsc,
+    menutyp,
+    crt,
+    GcuRunit;
 
-type
-   string10 = string[10];
+Type
+    string10 = String[10];
 
-   pbutton = ^tbutton;
-   tbutton = object
-   private
-      x0, x1, y0, y1: integer;
-      resp: response_type;
-      keyresponse: char;
-      mtext: string10;
-   public
-      constructor init(ax0, ax1, ay0, ay1: integer;
-                     aresp:  response_type; akeyresponse: char;
-                     amtext: string10);
-      procedure draw;virtual;
-      function activated(mausx, mausy: integer;
-                         var vresp:  response_type; var vkeyresponse: char):
-                         boolean;
-      Procedure GetSize(Var aX0,aY0,aX1,aY1 : integer);
-      Procedure GetSettings(Var aresp : response_type;var akeyresp : char;
-                            var amtext : string10);
-   end;
+    pbutton = ^tbutton;
+    tbutton = Object
+    Private
+        x0, x1, y0, y1: Integer;
+        resp: response_type;
+        keyresponse: Char;
+        mtext: string10;
+    Public
+        Constructor init(ax0, ax1, ay0, ay1: Integer;
+            aresp: response_type; akeyresponse: Char;
+            amtext: string10);
+        Procedure draw; Virtual;
+        Function activated(mausx, mausy: Integer;
+            Var vresp: response_type; Var vkeyresponse: Char):
+            Boolean;
+        Procedure GetSize(Var aX0, aY0, aX1, aY1: Integer);
+        Procedure GetSettings(Var aresp: response_type; Var akeyresp: Char;
+            Var amtext: string10);
+    End;
 
-   pThreeDButton = ^tThreeDButton;
-   tThreeDButton = object(Tbutton)
-     FColor : Byte;
-     TColor : Byte;
-     constructor init(ax0, ax1, ay0, ay1: integer;
-                      aresp:  response_type; akeyresponse: char;
-                      amtext: string10;aFC,aTC : byte);
-     procedure draw;virtual;
-     procedure frame(c1,c2 : Byte);
-   end;
-   tmenubutton = array[1..10, 1..4] of TThreeDButton;
+    pThreeDButton = ^tThreeDButton;
+    tThreeDButton = Object(Tbutton)
+        FColor: Byte;
+        TColor: Byte;
+        Constructor init(ax0, ax1, ay0, ay1: Integer;
+            aresp: response_type; akeyresponse: Char;
+            amtext: string10; aFC, aTC: Byte);
+        Procedure draw; Virtual;
+        Procedure frame(c1, c2: Byte);
+    End;
+    tmenubutton = Array[1..10, 1..4] Of TThreeDButton;
 
-var
-   vmenubutton: tmenubutton;
-   vpageup, vpagedn, vswap, vexit: TThreeDButton;
+Var
+    vmenubutton: tmenubutton;
+    vpageup, vpagedn, vswap, vexit: TThreeDButton;
 
 
-procedure butdraw;
-procedure butinit;
-Procedure ButActivated(mausx, mausy: integer;
-                       var vresp:  response_type; var vkeyresponse: char);
+Procedure butdraw;
+Procedure butinit;
+Procedure ButActivated(mausx, mausy: Integer;
+    Var vresp: response_type; Var vkeyresponse: Char);
 
-implementation
-
-{*************************************************************}
-constructor TButton.init(ax0, ax1, ay0, ay1: integer;
-                      aresp:  response_type; akeyresponse: char;
-                      amtext: string10);
-begin
-   x0:= ax0;
-   x1:= ax1;
-   y0:= ay0;
-   y1:= ay1;
-   resp:= aresp;
-   keyresponse:= akeyresponse;
-   mtext:= amtext;
-end;
+Implementation
 
 {*************************************************************}
-procedure TButton.draw;
-
-begin
-   bar(x0, y0, x1+2, y1);
-   txtfnt.write(x0+2, (y0+y1) div 2+1, mtext,getcolor,sz6x12,stnormal)
-end;
-
-{*************************************************************}
-function TButton.activated(mausx, mausy: integer;
-                          var vresp:  response_type; var vkeyresponse: char):
-                          boolean;
-var result: boolean;
-
-begin
-   result:= ((mausx > x0-2+charwidth) and (mausx < x1+2+charwidth) and
-             (mausy > y0+charheight) and (mausy < y1+2+charheight));
-   if result then
-   begin
-      vresp:= resp;
-      vkeyresponse:= keyresponse;
-   end;
-   activated:= result;
-end;
+Constructor TButton.init(ax0, ax1, ay0, ay1: Integer;
+    aresp: response_type; akeyresponse: Char;
+    amtext: string10);
+Begin
+    x0 := ax0;
+    x1 := ax1;
+    y0 := ay0;
+    y1 := ay1;
+    resp := aresp;
+    keyresponse := akeyresponse;
+    mtext := amtext;
+End;
 
 {*************************************************************}
-procedure butinit;
+Procedure TButton.draw;
 
-const butsizex = 56;
-      butsizey = 10;
-      butdiffx =  4;
-      butdiffy =  3;
-      butxmarg = 2;
-      butymarg = -1;
-var i, j: word;
-    vresp:  response_type;
-    vkeyresponse: char;
+Begin
+    bar (x0, y0, x1 + 2, y1);
+    txtfnt.write (x0 + 2, (y0 + y1) DIV 2 + 1, mtext, getcolor, sz6x12, stnormal);
+End;
+
+{*************************************************************}
+Function TButton.activated(mausx, mausy: Integer;
+    Var vresp: response_type; Var vkeyresponse: Char):
+Boolean;
+Var result: Boolean;
+
+Begin
+    result := ((mausx > x0 - 2 + charwidth) AND (mausx < x1 + 2 + charwidth) AND
+        (mausy > y0 + charheight) AND (mausy < y1 + 2 + charheight));
+    If result Then
+    Begin
+        vresp := resp;
+        vkeyresponse := keyresponse;
+    End;
+    activated := result;
+End;
+
+{*************************************************************}
+Procedure butinit;
+
+Const butsizex = 56;
+    butsizey = 10;
+    butdiffx = 4;
+    butdiffy = 3;
+    butxmarg = 2;
+    butymarg = -1;
+Var i, j: Word;
+    vresp: response_type;
+    vkeyresponse: Char;
     vmtext: string10;
-    fc,tc: Byte;
+    fc, tc: Byte;
 
-const butmenu : array[1..10,1..4] of string10 =
-(('1  Help  ',
-  'S  Show  ',
-  'C  Print ',
-  'A  BegV{ '),
- ('2 Save   ',
-  '  Save?  ',
-  ' SplitFi ',
-  '  EndV{  '),
- ('3 NoteLn ',
-  '  NLDef  ',
-  ' SplitLn ',
-  '  BegH{  '),
- ('4 Space  ',
-  '  InsPg  ',
-  ' SplitPg ',
-  '  EndH{  '),
- ('5 Play   ',
-  '  Sound  ',
-  ' SymbSnd ',
-  '  VerLn  '),
- ('6 Header ',
-  '  Search ',
-  '  Repeat ',
-  '  Ver'#18'Ln'),
- ('7 CopyLn ',
-  '  Line   '{' Line'},
-  ' PasteLn ',
-  ' Hor3DLn '),
- ('8 MarkBl ',
-  '  Block  ',
-  ' PasteBl ',
-  ' Ver3DLn '),
- ('9 MarkPg ',
-  '  Page   ',
-  ' PastePg ',
-  ' SetupPg '),
- ('10 Table ',
-  ' KeySwap ',
-  '  Fonts  ',
-  '  PgNum  '));
+Const butmenu: Array[1..10, 1..4] Of string10 =
+        (('1  Help  ',
+        'S  Show  ',
+        'C  Print ',
+        'A  BegV{ '),
+        ('2 Save   ',
+        '  Save?  ',
+        ' SplitFi ',
+        '  EndV{  '),
+        ('3 NoteLn ',
+        '  NLDef  ',
+        ' SplitLn ',
+        '  BegH{  '),
+        ('4 Space  ',
+        '  InsPg  ',
+        ' SplitPg ',
+        '  EndH{  '),
+        ('5 Play   ',
+        '  Sound  ',
+        ' SymbSnd ',
+        '  VerLn  '),
+        ('6 Header ',
+        '  Search ',
+        '  Repeat ',
+        '  Ver'#18'Ln'),
+        ('7 CopyLn ',
+        '  Line   '{' Line'},
+        ' PasteLn ',
+        ' Hor3DLn '),
+        ('8 MarkBl ',
+        '  Block  ',
+        ' PasteBl ',
+        ' Ver3DLn '),
+        ('9 MarkPg ',
+        '  Page   ',
+        ' PastePg ',
+        ' SetupPg '),
+        ('10 Table ',
+        ' KeySwap ',
+        '  Fonts  ',
+        '  PgNum  '));
 
-  ButVKeyResp : Array[1..4] OF Byte = (103,93,83,58);
+    ButVKeyResp: Array[1..4] Of Byte = (103, 93, 83, 58);
 
-function ButTopY(n : Byte) : integer;
+    Function ButTopY(n: Byte): Integer;
+    Begin
+        ButTopY := gmaxy - butymarg - (n * (butsizey + butdiffy));
+    End;
+    Function ButBotY(n: Byte): Integer;
+    Begin
+        ButBotY := ButTopY (n) + ButSizeY;
+    End;
+    Function ButLeftX(n: Byte): Integer;
+    Begin
+        If n < 11 Then
+            butleftx := butxmarg + (n - 1) * (butsizex + butdiffx)
+        Else
+            butleftx := butxmarg + (n - 1) * (butsizex + butdiffx){+3};
+    End;
+    Function ButRightX(n: Byte): Integer;
+    Begin
+        If n < 11 Then
+            butrightx := butleftx (n) + butsizex
+        Else
+            butrightx := gmaxx - butxmarg - 2{3};
+    End;
+    Function ButPgX: Integer;
+    Begin
+        ButPgX := (butrightx (11) - butleftx (11) - butdiffx) SHR 1;
+    End;
 Begin
-  ButTopY:=gmaxy-butymarg-(n*(butsizey + butdiffy));
-End;
-function ButBotY(n : Byte) : integer;
-Begin
-  ButBotY:=ButTopY(n)+ButSizeY;
-End;
-function ButLeftX(n : Byte) : integer;
-begin
-  if n<11 then
-    butleftx:=butxmarg+(n-1) * (butsizex + butdiffx)
-  else
-    butleftx:=butxmarg+(n-1) * (butsizex + butdiffx){+3};
-end;
-function ButRightX(n : Byte) : integer;
-begin
-  if n<11 then
-    butrightx:=butleftx(n)+butsizex
-  else
-    butrightx:=gmaxx-butxmarg-2{3};
-end;
-function ButPgX : integer;
-begin
-  ButPgX:=(butrightx(11)-butleftx(11)-butdiffx) shr 1;
-end;
-begin
-   fc:=framecolor+framebkcolor shl 4;
-   tc:=mausmtcolor;
-   for i:= 1 to 10 do
-   begin
-      for j:= 1 to 4 do
-      begin
-         vmtext:=butmenu[i,5-j];                       { Menutext }
-         vresp:= specialkey;                           { Key-Typ  }
-         vkeyresponse:=char(ButVKeyResp[j]+i);         { Scancode }
-         vmenubutton[i,j].init(butleftx(i), butrightx(i),
-                               buttopy(j),  butboty(j),
-                               vresp, vkeyresponse, vmtext,
-                               FC,TC);
+    fc := framecolor + framebkcolor SHL 4;
+    tc := mausmtcolor;
+    For i := 1 To 10 Do
+        For j := 1 To 4 Do
+        Begin
+            vmtext := butmenu[i, 5 - j];                       { Menutext }
+            vresp  := specialkey;                           { Key-Typ  }
+            vkeyresponse := Char (ButVKeyResp[j] + i);         { Scancode }
+            vmenubutton[i, j].init (butleftx (i), butrightx (i),
+                buttopy (j), butboty (j),
+                vresp, vkeyresponse, vmtext,
+                FC, TC);
 
-      end;
-   end;
+        End;
 
-   vpageup.init(butleftx(11),butleftx(11)+butpgx,
-                buttopy(4), butboty(4),
-                specialkey, chr(73), #23 + ' ',
-                FC,TC);
-   vpagedn.init(butleftx(11)+butpgx+butdiffx,butrightx(11),
-                buttopy(4), butboty(4),
-                specialkey, chr(81), ' ' + #22 {+ ' '},
-                FC,TC);
-   vswap.init(butleftx(11),butrightx(11),
-              buttopy(3),  butboty(2),
-              specialkey, chr(133),'  ' + #17 + ' ',
-              FC,TC);
-   vexit.init(butleftx(11),butrightx(11),
-              buttopy(1),butboty(1),
-              specialkey,chr(134),'RefPg',
-              FC,TC);
-end;
+    vpageup.init (butleftx (11), butleftx (11) + butpgx,
+        buttopy (4), butboty (4),
+        specialkey, chr (73), #23 + ' ',
+        FC, TC);
+    vpagedn.init (butleftx (11) + butpgx + butdiffx, butrightx (11),
+        buttopy (4), butboty (4),
+        specialkey, chr (81), ' ' + #22 {+ ' '},
+        FC, TC);
+    vswap.init (butleftx (11), butrightx (11),
+        buttopy (3), butboty (2),
+        specialkey, chr (133), '  ' + #17 + ' ',
+        FC, TC);
+    vexit.init (butleftx (11), butrightx (11),
+        buttopy (1), butboty (1),
+        specialkey, chr (134), 'RefPg',
+        FC, TC);
+End;
 
 {*************************************************************}
-procedure butdraw;
+Procedure butdraw;
 
-var i, j: word;
-    tcol: byte;
+Var i, j: Word;
+    tcol: Byte;
 
-begin
-   tcol:= GetColor;
-   SetColor(12);
-   Line(0,grmaxy+1,gmaxx{-1},grmaxy+1);  {schwarze Linie oberhalb des Mausmenus}
-   Line(0,grmaxy,gmaxx{-1},grmaxy);      {schwarze Linie oberhalb des Mausmenus}
-   SetColor(framecolor{5});
-   Line(0,grmaxy+2,gmaxx-1,grmaxy+2);  {Linie oberhalb des Mausmenus}
-   Line(0,grmaxy+3,0,gmaxy);           {Linie links vom Mausmenu}
-   SetColor(mausmtcolor);
-   SetFillStyle(1, mausmbkcolor);
-   for i:= 1 to 10 do
-   begin
-      for j:= 1 to 4 do
-      begin
-         vmenubutton[i,j].draw;
-      end;
-   end;
-   vpageup.draw;
-   vpagedn.draw;
-   vswap.draw;
-   vexit.draw;
-   SetColor(8);
-    Line(grminx,gmaxy,gmaxx,gmaxy);     {dunkelgraue Linie unterhalb vom Mausmenu}
+Begin
+    tcol := GetColor;
+    SetColor (12);
+    Line (0, grmaxy + 1, gmaxx{-1}, grmaxy + 1);  {schwarze Linie oberhalb des Mausmenus}
+    Line (0, grmaxy, gmaxx{-1}, grmaxy);      {schwarze Linie oberhalb des Mausmenus}
+    SetColor (framecolor{5});
+    Line (0, grmaxy + 2, gmaxx - 1, grmaxy + 2);  {Linie oberhalb des Mausmenus}
+    Line (0, grmaxy + 3, 0, gmaxy);           {Linie links vom Mausmenu}
+    SetColor (mausmtcolor);
+    SetFillStyle (1, mausmbkcolor);
+    For i := 1 To 10 Do
+        For j := 1 To 4 Do
+            vmenubutton[i, j].draw;
+    vpageup.draw;
+    vpagedn.draw;
+    vswap.draw;
+    vexit.draw;
+    SetColor (8);
+    Line (grminx, gmaxy, gmaxx, gmaxy);     {dunkelgraue Linie unterhalb vom Mausmenu}
 
-   SetColor(tcol);
-   SetBkColor(bkcolor);
-end;
+    SetColor (tcol);
+    SetBkColor (bkcolor);
+End;
 
 {*************************************************************}
-Procedure ButActivated(mausx, mausy: integer;
-                       var vresp:  response_type; var vkeyresponse: char);
-var i, j: word;
-    result: boolean;
+Procedure ButActivated(mausx, mausy: Integer;
+    Var vresp: response_type; Var vkeyresponse: Char);
+Var i, j: Word;
+    result: Boolean;
 
-begin
-  result:= false;
-  for i:=1 To 10 Do Begin
-    For j:=1 To 4 Do Begin
-      if vmenubutton[i,j].activated(mausx, mausy, vresp, vkeyresponse) then begin
-        result:=true;
-        break;
-      end;
-    end;
-  end;
+Begin
+    result := false;
+    For i := 1 To 10 Do
+        For j := 1 To 4 Do
+            If vmenubutton[i, j].activated (mausx, mausy, vresp, vkeyresponse) Then
+            Begin
+                result := true;
+                break;
+            End;
 {$IFOPT B+}{$DEFINE BOOL}{$ENDIF}{$B-}
-  result:=result or vpageup.activated(mausx, mausy, vresp, vkeyresponse)
-                 or vpagedn.activated(mausx, mausy, vresp, vkeyresponse)
-                 or vswap.activated(mausx, mausy, vresp, vkeyresponse)
-                 or vexit.activated(mausx, mausy, vresp, vkeyresponse);
+    result := result OR vpageup.activated (mausx, mausy, vresp, vkeyresponse)
+        OR vpagedn.activated (mausx, mausy, vresp, vkeyresponse)
+        OR vswap.activated (mausx, mausy, vresp, vkeyresponse)
+        OR vexit.activated (mausx, mausy, vresp, vkeyresponse);
 {$IFDEF BOOL}{$UNDEF BOOL}{$B+}{$ENDIF}
 {  i:= 1;
   while i <= 10 do begin
@@ -299,55 +292,55 @@ begin
   end;}
 {  IF (VKeyResponse='U') And (VResp=SPECIALKEY) Then
     VResp:=No_Response;}
-  IF (VResp=SPECIALKEY) And (VKeyResponse=#63) Then
-    GcuPatternRestore;
-end;
+    If (VResp = SPECIALKEY) AND (VKeyResponse = #63) Then
+        GcuPatternRestore;
+End;
 
-Procedure TButton.GetSize(Var aX0,aY0,aX1,aY1 : integer);
-begin
-  ax0:=x0;
-  ay0:=y0;
-  ax1:=x1;
-  ay1:=y1;
-end;
+Procedure TButton.GetSize(Var aX0, aY0, aX1, aY1: Integer);
+Begin
+    ax0 := x0;
+    ay0 := y0;
+    ax1 := x1;
+    ay1 := y1;
+End;
 
-Procedure TButton.GetSettings(Var aresp : response_type;var akeyresp : char;
-                            var amtext : string10);
-begin
-  aresp:=resp;
-  akeyresp:=keyresponse;
-  amtext:=mtext;
-end;
+Procedure TButton.GetSettings(Var aresp: response_type; Var akeyresp: Char;
+    Var amtext: string10);
+Begin
+    aresp := resp;
+    akeyresp := keyresponse;
+    amtext := mtext;
+End;
 
-constructor tThreeDButton.init(ax0, ax1, ay0, ay1: integer;
-                      aresp:  response_type; akeyresponse: char;
-                      amtext: string10;aFC,aTC : Byte);
-begin
-  inherited init(ax0, ax1, ay0, ay1, aresp, akeyresponse, amtext);
-  fcolor:=aFC;
-  tcolor:=aTC;
-end;
+Constructor tThreeDButton.init(ax0, ax1, ay0, ay1: Integer;
+    aresp: response_type; akeyresponse: Char;
+    amtext: string10; aFC, aTC: Byte);
+Begin
+    Inherited init (ax0, ax1, ay0, ay1, aresp, akeyresponse, amtext);
+    fcolor := aFC;
+    tcolor := aTC;
+End;
 
-procedure tThreeDButton.draw;
-begin
-  setcolor(tcolor);
-  inherited draw;
-  frame(fcolor and $0F,(fcolor and $f0) shr 4);
-end;
+Procedure tThreeDButton.draw;
+Begin
+    setcolor (tcolor);
+    Inherited draw;
+    frame (fcolor AND $0F, (fcolor AND $f0) SHR 4);
+End;
 
-procedure tThreeDButton.frame(c1,c2 : Byte);
-begin
-  SetColor(12);
-  line(x0-1,y0,x0-1,y1+1);    {Rahmen links}
-  line(x1+3,y0,x1+3,y1+1);    {Rahmen rechts}
-  line(x0,y0-1,x1+2,y0-1);        {Rahmen oben}
-  line(x0+1,y1+2,x1+2,y1+2);  {Rahmen unten}
-  setcolor(c1);
-  line(x0,y0,x0,y1 +1 );        { ³ l}
-  line(x0,y0,x1+2,y0);        { Ä o}
-  setcolor(8{c2});{I'm so sorry!}
-  line(x1+2,y0+1,x1+2,y1+1);  { ³ r}
-  line(x0 +1 ,y1+1,x1+2,y1+1);  { Ä u}
-end;
+Procedure tThreeDButton.frame(c1, c2: Byte);
+Begin
+    SetColor (12);
+    line (x0 - 1, y0, x0 - 1, y1 + 1);    {Rahmen links}
+    line (x1 + 3, y0, x1 + 3, y1 + 1);    {Rahmen rechts}
+    line (x0, y0 - 1, x1 + 2, y0 - 1);        {Rahmen oben}
+    line (x0 + 1, y1 + 2, x1 + 2, y1 + 2);  {Rahmen unten}
+    setcolor (c1);
+    line (x0, y0, x0, y1 + 1);        { left }
+    line (x0, y0, x1 + 2, y0);        { top }
+    setcolor (8{c2});{I'm so sorry!}
+    line (x1 + 2, y0 + 1, x1 + 2, y1 + 1);  { right }
+    line (x0 + 1, y1 + 1, x1 + 2, y1 + 1);  { bottom }
+End;
 
-end.
+End.

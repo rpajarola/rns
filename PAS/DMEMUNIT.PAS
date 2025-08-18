@@ -1,56 +1,56 @@
-unit dmemunit;
+﻿Unit dmemunit;
 
-interface
+Interface
 
-uses dos,
-     graph,
-     initsc;
+Uses dos,
+    graph,
+    initsc;
 
-Procedure DmePlaceWord(x,y : integer; w : word);
-Procedure DmeDispChar(x, y: integer; c : char; blnum: integer);
+Procedure DmePlaceWord(x, y: integer; w: word);
+Procedure DmeDispChar(x, y: integer; c: char; blnum: integer);
 
-implementation
+Implementation
 
-uses helpunit;
-
-{******************************************************************}
-Procedure DmeDispChar(x, y: integer; c : char; blnum: integer);
-
-var i : integer;
-    muster : word;
-
-begin
-  if ((x>=0) and (y>1) and (x<=gmaxx) and (y < (gmaxy - 1))) then begin
-    for i:= 1 to 15 do begin
-      muster:= symarr[c, i, blnum];
-      if y-8+i<=grmaxy Then
-        DmePlaceWord(x - 7, y - 8 + i , muster);
-    end;
-  end;
-end;
+Uses helpunit;
 
 {******************************************************************}
-Procedure DmePlaceWord(x,y : integer; w : word);
+Procedure DmeDispChar(x, y: integer; c: char; blnum: integer);
 
-var acolor: byte;
+Var i: integer;
+    muster: word;
+
+Begin
+    If ((x >= 0) AND (y > 1) AND (x <= gmaxx) AND (y < (gmaxy - 1))) Then
+        For i := 1 To 15 Do
+        Begin
+            muster := symarr[c, i, blnum];
+            If y - 8 + i <= grmaxy Then
+                DmePlaceWord (x - 7, y - 8 + i, muster);
+        End;
+End;
+
+{******************************************************************}
+Procedure DmePlaceWord(x, y: integer; w: word);
+
+Var acolor: byte;
     i: integer;
     bitval: word;
     pixelx: integer;
 
-begin
-   acolor:= getcolor;
-   { Modern Pascal replacement for assembly bit manipulation }
-   bitval := w;
-   for i := 0 to 15 do
-   begin
-     if (bitval and $8000) <> 0 then { Test highest bit }
-     begin
-       pixelx := x + i;
-       if (pixelx > 1) and (pixelx < 639) then
-         PutPixel(pixelx, y, acolor);
-     end;
-     bitval := bitval shl 1; { Shift left for next bit }
-   end;
-end;
+Begin
+    acolor := getcolor;
+    { Modern Pascal replacement for assembly bit manipulation }
+    bitval := w;
+    For i := 0 To 15 Do
+    Begin
+        If (bitval AND $8000) <> 0 Then { Test highest bit }
+        Begin
+            pixelx := x + i;
+            If (pixelx > 1) AND (pixelx < 639) Then
+                PutPixel (pixelx, y, acolor);
+        End;
+        bitval := bitval SHL 1; { Shift left for next bit }
+    End;
+End;
 
-end.
+End.

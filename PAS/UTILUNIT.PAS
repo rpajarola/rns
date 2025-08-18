@@ -1,486 +1,478 @@
-unit utilunit;
+ï»¿Unit utilunit;
 
-interface
+Interface
 
-uses
-   initsc,
-   gcurunit,
-   menutyp,
-   graph;
+Uses
+    initsc,
+    gcurunit,
+    menutyp,
+    graph;
 
-Procedure UtiDelNoteChar(var inblock: stringline; var actpos: integer;
-                         var stbuf: string16);
-Procedure UtiDelNumChar(var inblock: stringline; var actpos : integer);
-Function UtiGetNum(inblock: stringline; actpos : integer) : Integer;
-Procedure UtiCharBegin(var inblock: stringline; var actpos : integer);
-Procedure UtiFindCharEnd(var inblock: stringline; var actpos : integer);
-Procedure UtiComputeDxDy(inblock: stringline; var dx, dy: integer;
-                         charnum: byte; flamchar: char);
-Procedure UtiKlammerZuPos(c: char; var dx: integer; flamchar : char);
-Procedure UtiKlammerAufPos(inblock: stringline; var dx, height: integer; flamchar : char);
-Procedure UtiNextNum(var inblock: stringline; var actpos, numres : integer;
-                     left : boolean);
-Function UtiComputeGroup(c:char; var indexc: char) : integer;
-Function UtiCharReady(var inblock: string16; c:char): boolean;
-Function UtiNumReady(var inblock: string16; c:char): boolean;
-Procedure UtiGetActDistance(var inblock: stringline; actpos: integer;
-                            var strbuf: string16);
+Procedure UtiDelNoteChar(Var inblock: stringline; Var actpos: integer;
+    Var stbuf: string16);
+Procedure UtiDelNumChar(Var inblock: stringline; Var actpos: integer);
+Function UtiGetNum(inblock: stringline; actpos: integer): Integer;
+Procedure UtiCharBegin(Var inblock: stringline; Var actpos: integer);
+Procedure UtiFindCharEnd(Var inblock: stringline; Var actpos: integer);
+Procedure UtiComputeDxDy(inblock: stringline; Var dx, dy: integer;
+    charnum: byte; flamchar: char);
+Procedure UtiKlammerZuPos(c: char; Var dx: integer; flamchar: char);
+Procedure UtiKlammerAufPos(inblock: stringline; Var dx, height: integer; flamchar: char);
+Procedure UtiNextNum(Var inblock: stringline; Var actpos, numres: integer;
+    left: boolean);
+Function UtiComputeGroup(c: char; Var indexc: char): integer;
+Function UtiCharReady(Var inblock: string16; c: char): boolean;
+Function UtiNumReady(Var inblock: string16; c: char): boolean;
+Procedure UtiGetActDistance(Var inblock: stringline; actpos: integer;
+    Var strbuf: string16);
 Function UtiReplaceChars(inblock: stringline): byte;
-Function UtiCheckFlam(var inblock: stringline; actpos: integer): char;
-Function UtiNextChar(inblock : stringline;c : char;p : integer) : integer;
-implementation
+Function UtiCheckFlam(Var inblock: stringline; actpos: integer): char;
+Function UtiNextChar(inblock: stringline; c: char; p: integer): integer;
+Implementation
 
 Uses HelpUnit,
-     Texts;
+    Texts;
 {**************************************************************}
-Function UtiComputeGroup(c:char; var indexc: char) : integer;
+Function UtiComputeGroup(c: char; Var indexc: char): integer;
 {Wird 1 fuer Kleinbuchstaben
       2 fuer shift
       3 fuer alt
       4 fuer &
       0 sonst
       indexc wird die Grundform von c}
-var i: integer;
-begin
-  i:= 0;
-  indexc:= c;
-  case c of
-    'a'..'z' : begin
-      i:= 1;
-    end;
-    'A'..'Z' : begin
-      i:= 2;
-      indexc:= char(byte(c)+32);
-    end;
-    #128..#153 : begin
-      i:= 3;
-      indexc:= char(byte(c)-31);
-    end;
-  end;
-  UtiComputeGroup:=i;
-end;
+Var i: integer;
+Begin
+    i := 0;
+    indexc := c;
+    Case c Of
+        'a'..'z': i := 1;
+        'A'..'Z':
+        Begin
+            i := 2;
+            indexc := char (byte (c) + 32);
+        End;
+        #128..#153:
+        Begin
+            i := 3;
+            indexc := char (byte (c) - 31);
+        End;
+    End;
+    UtiComputeGroup := i;
+End;
 
 {****************************************************************}
 Function UtiFlamPos(inblock: string16): byte;
-{Setzt sich auf den Index des Flamchars, wenn einer in inblock ist}
+    {Setzt sich auf den Index des Flamchars, wenn einer in inblock ist}
 
-var i: byte;
+Var i: byte;
 
-begin
-   i:= Pos('+', inblock);
-   if i = 0 then i:= Pos('=', inblock);
-   if i = 0 then i:= Pos('-', inblock);
-   if i = 0 then i:= Pos('*', inblock);
-   UtiFlamPos:= i;
-end;
+Begin
+    i := Pos ('+', inblock);
+    If i = 0 Then i := Pos ('=', inblock);
+    If i = 0 Then i := Pos ('-', inblock);
+    If i = 0 Then i := Pos ('*', inblock);
+    UtiFlamPos := i;
+End;
 
 {****************************************************************}
 Function UtiReplaceChars(inblock: stringline): byte;
-{Zaehlt die Anzahl Replace-Character in inblock}
-var i, j, k: byte;
-    indexc,c: char;
-begin
-  i:=0;
-  for j:=1 to length(inblock) do begin
-    c:=inblock[j];
-    k:=UtiComputeGroup(c,indexc);
-    if ((k>0)and(sympar[indexc,2,k]=1)and(manset=1))or
-       ((k=0)and(c<>'\')and(c<>'Ý')and(c in spec))  then
-      inc(i);
-  end;
-  UtiReplaceChars:=i;
-end;
+    {Zaehlt die Anzahl Replace-Character in inblock}
+Var i, j, k: byte;
+    indexc, c: char;
+Begin
+    i := 0;
+    For j := 1 To length (inblock) Do
+    Begin
+        c := inblock[j];
+        k := UtiComputeGroup (c, indexc);
+        If ((k > 0) AND (sympar[indexc, 2, k] = 1) AND (manset = 1)) OR
+            ((k = 0) AND (c <> '\') AND (c <> #221) AND (c IN spec)) Then
+            inc (i);
+    End;
+    UtiReplaceChars := i;
+End;
 
 {****************************************************************}
-Function UtiCharReady(var inblock: string16; c:char): boolean;
+Function UtiCharReady(Var inblock: string16; c: char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch das gesamte Zeichen fertig ist}
-var i, j, k: byte;
+Var i, j, k: byte;
     indexc: char;
-    a       : byte;
-begin
-  if ((ininumchar(inblock[1])) or
-     (IniArrow(inblock[1]))) then
-    inblock:= '';
-{Zeichenbuffer voll, oder add-Zeichen schon vorhanden?}
-  if length(inblock) = 16 then
-    c:=#255;
-  k:=UtiComputeGroup(c,indexc);
-  if ((k>0) and (sympar[indexc,2,k]=2)and(pos(c,inblock)>0)) then
-    c:=#255;
-  if c<>#255 then begin
-  {-------------------------------------------------------------------------}
-    if inblock='' then
-      inblock:=c
-    else begin
-    { Klammern }
-      a:=length(inblock);
-      case c of
-        '(','[':begin
-          if manset=2 then begin
-          { add mode }
-            inblock:=inblock+c;
-          end else begin
-          { replace mode }
-            i:=pos('=',inblock);
-            j:=pos('*',inblock);
-            if i<j then
-              i:=j;
-            j:=pos('+',inblock);
-            if i<j then
-              i:=j;
-            j:=pos('-',inblock);
-            if i<j then
-              i:=j;
-            if (i=0) then begin
-              inblock:=c+inblock;
-            end else begin
-              if i<=(a-2) then
-                insert(c,inblock,i+1)
-              else
-                inblock:=inblock+c;
-            end;
-          end;
-        end;
-        ')':begin
-          if inblock[a]='(' then
-            HlpHint(HntEmptyBracket,HintNormalTime)
-          else
-            inblock:=inblock+c;
-        end;
-        ']':begin
-          if inblock[a]='[' then
-            HlpHint(HntEmptyBracket,HintNormalTime)
-          else
-            inblock:=inblock+c;
-        end;
-        '{':begin
-          a:=pos('=',inblock);
-          if (pos('{',inblock)=0) and (a<>0) then
-            Insert('{',inblock,a+1);
-        end;
-        '}':begin
-          a:=pos('=',inblock);
-          if (pos('}',inblock)=0) and (a<>0) then begin
-            if length(inblock)>=a then
-              inc(a);
-            if (pos('{',inblock)<>0) and (length(inblock)>=a) then
-              inc(a);
-            if UtiComputeGroup(inblock[a], indexc)<>0 then
-              inc(a);
-            Insert(c,inblock,a);
-          end else
-            inblock:=inblock+'}';
-        end;
-        else{case} if IniPrintNote(c) then begin
-          if ((k>0)and(sympar[indexc,2,k]=1)) then
-            inblock:=inblock+c
-          else
-            inblock:=c+inblock;
-        end{IniPrintNote(c)} else if c in FlamSet then
-          inblock:=inblock+c;
-      end;{case}
-    end;{inblock='' else }
-  {-------------------------------------------------------------------------}
-  end;{c<>#255}
-  {pruefen ob Zeichen fertig}
-  UtiCharReady:=((UtiReplaceChars(inblock)=1)and(UtiFlamPos(inblock)=0))
-              or (UtiReplaceChars(inblock)=2);
-end;
+    a: byte;
+Begin
+    If ((ininumchar (inblock[1])) OR
+        (IniArrow (inblock[1]))) Then
+        inblock := '';
+    {Zeichenbuffer voll, oder add-Zeichen schon vorhanden?}
+    If length (inblock) = 16 Then
+        c := #255;
+    k := UtiComputeGroup (c, indexc);
+    If ((k > 0) AND (sympar[indexc, 2, k] = 2) AND (pos (c, inblock) > 0)) Then
+        c := #255;
+    If c <> #255 Then
+        If inblock = '' Then
+            inblock := c
+        Else Begin
+            { Klammern }
+            a := length (inblock);
+            Case c Of
+                '(', '[': If manset = 2 Then inblock := inblock + c{ add mode } Else Begin
+                        { replace mode }
+                        i := pos ('=', inblock);
+                        j := pos ('*', inblock);
+                        If i < j Then
+                            i := j;
+                        j := pos ('+', inblock);
+                        If i < j Then
+                            i := j;
+                        j := pos ('-', inblock);
+                        If i < j Then
+                            i := j;
+                        If (i = 0) Then inblock := c + inblock Else If i <= (a - 2) Then
+                            insert (c, inblock, i + 1)
+                        Else
+                            inblock := inblock + c;
+                    End;
+                ')': If inblock[a] = '(' Then
+                        HlpHint (HntEmptyBracket, HintNormalTime)
+                    Else
+                        inblock := inblock + c;
+                ']': If inblock[a] = '[' Then
+                        HlpHint (HntEmptyBracket, HintNormalTime)
+                    Else
+                        inblock := inblock + c;
+                '{':
+                Begin
+                    a := pos ('=', inblock);
+                    If (pos ('{', inblock) = 0) AND (a <> 0) Then
+                        Insert ('{', inblock, a + 1);
+                End;
+                '}':
+                Begin
+                    a := pos ('=', inblock);
+                    If (pos ('}', inblock) = 0) AND (a <> 0) Then
+                    Begin
+                        If length (inblock) >= a Then
+                            inc (a);
+                        If (pos ('{', inblock) <> 0) AND (length (inblock) >= a) Then
+                            inc (a);
+                        If UtiComputeGroup (inblock[a], indexc) <> 0 Then
+                            inc (a);
+                        Insert (c, inblock, a);
+                    End Else
+                        inblock := inblock + '}';
+                End;
+            Else{case} If IniPrintNote (c) Then
+                Begin
+                    If ((k > 0) AND (sympar[indexc, 2, k] = 1)) Then
+                        inblock := inblock + c
+                    Else
+                        inblock := c + inblock;
+                End{IniPrintNote(c)} Else If c IN FlamSet Then
+                    inblock := inblock + c;
+            End;{case}
+        End{-------------------------------------------------------------------------}{inblock='' else }{-------------------------------------------------------------------------};{c<>#255}
+    {pruefen ob Zeichen fertig}
+    UtiCharReady := ((UtiReplaceChars (inblock) = 1) AND (UtiFlamPos (inblock) = 0))
+        OR (UtiReplaceChars (inblock) = 2);
+End;
 
 {****************************************************************}
-Function UtiNumReady(var inblock: string16; c:char): boolean;
+Function UtiNumReady(Var inblock: string16; c: char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch eine Abstandseingabe fertig ist}
-var strbuf: string16;
-begin
-   if (Not(IniNumchar(inblock[1])Or IniArrow(inblock[1])))Then
-     inblock:='';
-   {Zeichen eingeben}
-   if (inblock<>'')and(IniArrow(c)) then
-     inblock:='';
-   inblock:=inblock+c;
-   {pruefen ob Zeichen fertig}
-   strbuf:=inblock;
-   if IniArrow(inblock[1]) then begin
-     Delete(strbuf, 1, 1);
-     if IniDoppel(strbuf[1]) Then
-       Delete(strbuf,1,1);
-   end;
-   if (((strbuf[1] = '0') and (length(strbuf) = 3) and (strbuf[2] > '0')) or
-    {  ((strbuf[1] = '0') and (length(strbuf) = 5) and (strbuf[2] = '0')) or}
-    {  fr 00100 bis 00999, Anzeige funktioniert aber falsch: pageunit.pas 329}
-       ((strbuf[1] >= '1') and (strbuf[1] <= '9'))) then
-     UtiNumReady:= true
-   else
-     UtiNumReady:= false;
-end;
+Var strbuf: string16;
+Begin
+    If (NOT (IniNumchar (inblock[1]) OR IniArrow (inblock[1]))) Then
+        inblock := '';
+    {Zeichen eingeben}
+    If (inblock <> '') AND (IniArrow (c)) Then
+        inblock := '';
+    inblock := inblock + c;
+    {pruefen ob Zeichen fertig}
+    strbuf  := inblock;
+    If IniArrow (inblock[1]) Then
+    Begin
+        Delete (strbuf, 1, 1);
+        If IniDoppel (strbuf[1]) Then
+            Delete (strbuf, 1, 1);
+    End;
+    If (((strbuf[1] = '0') AND (length (strbuf) = 3) AND (strbuf[2] > '0')) OR
+        {  ((strbuf[1] = '0') and (length(strbuf) = 5) and (strbuf[2] = '0')) or}
+        {  fr 00100 bis 00999, Anzeige funktioniert aber falsch: pageunit.pas 329}
+        ((strbuf[1] >= '1') AND (strbuf[1] <= '9'))) Then
+        UtiNumReady := true
+    Else
+        UtiNumReady := false;
+End;
 
 {****************************************************************}
-Function UtiCheckFlam(var inblock: stringline; actpos: integer): char;
-{wird +,-,=,* wenn der actuelle character ein Flam enth„lt}
-var c: char;
-begin
-  c:=' ';
-  while (actpos>1) and (not IniNumChar(inblock[actpos-1])) do
-    dec(actpos);
-  while (length(inblock)>actpos) and
-        (not IniNumChar(inblock[actpos])) do begin
-    if (inblock[actpos] in flamset) then
-      c:=inblock[actpos];
-    inc(actpos);
-  end;
-  UtiCheckFlam:=c;
-end;
+Function UtiCheckFlam(Var inblock: stringline; actpos: integer): char;
+    {wird +,-,=,* wenn der actuelle character ein Flam enth„lt}
+Var c: char;
+Begin
+    c := ' ';
+    While (actpos > 1) AND (NOT IniNumChar (inblock[actpos - 1])) Do
+        dec (actpos);
+    While (length (inblock) > actpos) AND
+        (NOT IniNumChar (inblock[actpos])) Do
+    Begin
+        If (inblock[actpos] IN flamset) Then
+            c := inblock[actpos];
+        inc (actpos);
+    End;
+    UtiCheckFlam := c;
+End;
 
 {****************************************************************}
-Procedure UtiComputeDxDy(inblock: stringline; var dx, dy: integer;
-                         charnum: byte; flamchar: char);
+Procedure UtiComputeDxDy(inblock: stringline; Var dx, dy: integer;
+    charnum: byte; flamchar: char);
 {berechnet dx und dy, je nach der Gr”sse der folgenden Zeichen}
-Const DXDYTab : Array[0..2,0..4] of record
-        dx,dy : integer
-      end =
-(((dx:- 7;dy:- 7),          { - } { 'a'..'z' }
-  (dx:+ 7;dy:- 7),          { + }
-  (dx:  0;dy:-14),          { = }
-  (dx:  0;dy:+16),          { * }
-  (dx:  0;dy:  0)),         {   }
+Const DXDYTab: Array[0..2, 0..4] Of Record
+            dx, dy: integer
+        End =
+        (((dx: -7; dy: -7),          { - } { 'a'..'z' }
+        (dx: +7; dy: -7),          { + }
+        (dx: 0; dy: -14),          { = }
+        (dx: 0; dy: +16),          { * }
+        (dx: 0; dy: 0)),
 
- ((dx:-10;dy:-10),          { - } { 'A'..'Z' }
-  (dx:+10;dy:-10),          { + }
-  (dx:  0;dy:-14),          { = }
-  (dx:  0;dy:+16),          { * }
-  (dx:  0;dy:  0)),         {   }
+        ((dx: -10; dy: -10),          { - } { 'A'..'Z' }
+        (dx: +10; dy: -10),          { + }
+        (dx: 0; dy: -14),          { = }
+        (dx: 0; dy: +16),          { * }
+        (dx: 0; dy: 0)),
 
- ((dx:- 5;dy:- 5),          { - } { alt-a..alt-z }
-  (dx:+ 5;dy:- 5),          { + }
-  (dx:  0;dy:-14),          { = }
-  (dx:  0;dy:+16),          { * }
-  (dx:  0;dy:  0)));        {   }
-Var Size,Flam : Byte;
-    c         : char;
-begin
-  if charnum>length(inblock) then
-    c:='a'
-  else
-    c:=inblock[charnum];
-  if (c in klammerset) and (charnum<length(inblock)) then
-    c:=inblock[charnum+1];
-  if (c<='z')and(c>='a') then
-    Size:=0
-  else if (c<='Z')and(c>='A') then
-    Size:=1
-  else if (length(inblock)<charnum)or(charnum=0) or (c in flamset) or (ininumchar(c)) then
-    Size:=0
-  else
-    Size:=2;
-  case flamchar of
-    '-': Flam:=0;
-    '+': Flam:=1;
-    '=': Flam:=2;
-    '*': Flam:=3;
-    else Flam:=4;
-  end;
-  dx:=DXDYTab[Size,Flam].dx;
-  dy:=DXDYTab[Size,Flam].dy;
-end;
+        ((dx: -5; dy: -5),          { - } { alt-a..alt-z }
+        (dx: +5; dy: -5),          { + }
+        (dx: 0; dy: -14),          { = }
+        (dx: 0; dy: +16),          { * }
+        (dx: 0; dy: 0)));
+Var Size, Flam: Byte;
+    c: char;
+Begin
+    If charnum > length (inblock) Then
+        c := 'a'
+    Else
+        c := inblock[charnum];
+    If (c IN klammerset) AND (charnum < length (inblock)) Then
+        c := inblock[charnum + 1];
+    If (c <= 'z') AND (c >= 'a') Then
+        Size := 0
+    Else If (c <= 'Z') AND (c >= 'A') Then
+        Size := 1
+    Else If (length (inblock) < charnum) OR (charnum = 0) OR (c IN flamset) OR (ininumchar (c)) Then
+        Size := 0
+    Else
+        Size := 2;
+    Case flamchar Of
+        '-': Flam := 0;
+        '+': Flam := 1;
+        '=': Flam := 2;
+        '*': Flam := 3;
+    Else Flam := 4;
+    End;
+    dx := DXDYTab[Size, Flam].dx;
+    dy := DXDYTab[Size, Flam].dy;
+End;
 
 {****************************************************************}
-Procedure UtiKlammerZuPos(c: char; var dx: integer; flamchar : char);
-var dy: integer;
+Procedure UtiKlammerZuPos(c: char; Var dx: integer; flamchar: char);
+Var dy: integer;
     inblock: stringline;
-begin
-  inblock:= c;
-  UtiComputeDxDy(inblock, dx, dy, 1, '+');
-   case flamchar of
-    '-':;
-    '+':dx:=2*dx;
-    '=':;
-    '*':;
-  end;
-end;
+Begin
+    inblock := c;
+    UtiComputeDxDy (inblock, dx, dy, 1, '+');
+    Case flamchar Of
+        '-': ;
+        '+': dx := 2 * dx;
+        '=': ;
+        '*': ;
+    End;
+End;
 
 {****************************************************************}
-Procedure UtiKlammerAufPos(inblock: stringline; var dx, height: integer;flamchar : char);
+Procedure UtiKlammerAufPos(inblock: stringline; Var dx, height: integer; flamchar: char);
 {berechnet die Position fr die Klammer}
-var hy       : integer;
-begin
-  height:=5;
-  UtiComputeDxDy(inblock, dx, hy, 2, '-');
-  case flamchar of
-    '-':dx:=2*dx;
-    '+':;
-    '=':;
-    '*':;
-  end;
-end;
+Var hy: integer;
+Begin
+    height := 5;
+    UtiComputeDxDy (inblock, dx, hy, 2, '-');
+    Case flamchar Of
+        '-': dx := 2 * dx;
+        '+': ;
+        '=': ;
+        '*': ;
+    End;
+End;
 
 {****************************************************************}
-Procedure UtiDelNoteChar(var inblock: stringline; var actpos: integer;
-                         var stbuf: string16);
+Procedure UtiDelNoteChar(Var inblock: stringline; Var actpos: integer;
+    Var stbuf: string16);
 {L”scht einen Character bis zum n„chsten numerischen Character,
  der gel”schte Character kommt in den Buffer stbuf}
-var i : integer;
-begin
-  stbuf:='';
-  inc(actpos);
-  while (inblock[actpos-1]<>'%')and(not IniNumChar(inblock[actpos-1])) do
-    dec(actpos);
-  i:=0;
-  while (actpos+i<=length(inblock))and (not IniNumChar(inblock[actpos+i])) do
-    inc(i);
-  if i<>0 then begin
-    stbuf:=copy(inblock,actpos,i);
-    delete(inblock,actpos,i);
-  end else
-    stbuf:='';
+Var i: integer;
+Begin
+    stbuf := '';
+    inc (actpos);
+    While (inblock[actpos - 1] <> '%') AND (NOT IniNumChar (inblock[actpos - 1])) Do
+        dec (actpos);
+    i := 0;
+    While (actpos + i <= length (inblock)) AND (NOT IniNumChar (inblock[actpos + i])) Do
+        inc (i);
+    If i <> 0 Then
+    Begin
+        stbuf := copy (inblock, actpos, i);
+        delete (inblock, actpos, i);
+    End Else
+        stbuf := '';
 {  while (not IniNumChar(inblock[actpos]))and(length(inblock)>=actpos) do begin
     stbuf:= stbuf + inblock[actpos];
     delete(inblock, actpos, 1);
   end;}
-  if actpos>length(inblock) then begin
-    actpos:=length(inblock)+1;
-    UtiGetActDistance(inblock,actpos,stbuf);
-    inblock:=inblock+stbuf+'.';
-  end else if inblock[actpos] = '%' then
-    inblock:=inblock+'.1.';
-end;
+    If actpos > length (inblock) Then
+    Begin
+        actpos := length (inblock) + 1;
+        UtiGetActDistance (inblock, actpos, stbuf);
+        inblock := inblock + stbuf + '.';
+    End Else If inblock[actpos] = '%' Then
+        inblock := inblock + '.1.';
+End;
 
 {****************************************************************}
-Procedure UtiGetActDistance(var inblock: stringline; actpos: integer;
-                            var strbuf: string16);
+Procedure UtiGetActDistance(Var inblock: stringline; actpos: integer;
+    Var strbuf: string16);
 {Berechnet von actpos aus rueckwaerts die Distanz}
-begin
-  strbuf:='';
-  dec(actpos);
-  while (inblock[actpos]<>'%')and(IniNumChar(inblock[actpos])) do begin
-    strbuf:=inblock[actpos]+strbuf;
-    dec(actpos);
-  end;
-  if strbuf='' then
-    strbuf:='1';
-end;
+Begin
+    strbuf := '';
+    dec (actpos);
+    While (inblock[actpos] <> '%') AND (IniNumChar (inblock[actpos])) Do
+    Begin
+        strbuf := inblock[actpos] + strbuf;
+        dec (actpos);
+    End;
+    If strbuf = '' Then
+        strbuf := '1';
+End;
 {****************************************************************}
-Procedure UtiDelNumChar(var inblock: stringline; var actpos : integer);
+Procedure UtiDelNumChar(Var inblock: stringline; Var actpos: integer);
 {L”scht numerische Zeichen bis zum n„chsten nichtnumerischen Character}
-var i : integer;
-begin
-  i:=0;
-  while (actpos+i<=length(inblock))and(IniNumChar(inblock[actpos+i])) do
-    inc(i);
-  delete(inblock, actpos, i);
-  if actpos>length(inblock) then inblock:=inblock+'.';
-end;
+Var i: integer;
+Begin
+    i := 0;
+    While (actpos + i <= length (inblock)) AND (IniNumChar (inblock[actpos + i])) Do
+        inc (i);
+    delete (inblock, actpos, i);
+    If actpos > length (inblock) Then inblock := inblock + '.';
+End;
 
 {****************************************************************}
-Function UtiGetNum(inblock: stringline; actpos : integer) : Integer;
-Var St   : String;
-    I    : Integer;
-    code : integer;
-begin
-   St:='';
-   InBlock:=copy(inblock,actpos,10);
-   While (Not IniNumChar(inblock[1])) And (inblock[0]<>#0) Do
-     Delete(inblock,1,1);
-   While IniNumChar(inblock[1]) and (inblock[0]<>#0 )Do Begin
-     St:=St+Inblock[1];
-     Delete(inblock,1,1);
-   End;
-   IF inblock[0]=#0 Then Begin
-     UtiGetNum:=0;
-     Exit;
-   End;
-   Val(St,i,code);
-   if code <> 0 then
-     i := 0;
-   UtiGetNum:=i;
-end;
+Function UtiGetNum(inblock: stringline; actpos: integer): Integer;
+Var St: String;
+    I:  Integer;
+    code: integer;
+Begin
+    St := '';
+    InBlock := copy (inblock, actpos, 10);
+    While (NOT IniNumChar (inblock[1])) AND (inblock[0] <> #0) Do
+        Delete (inblock, 1, 1);
+    While IniNumChar (inblock[1]) AND (inblock[0] <> #0) Do
+    Begin
+        St := St + Inblock[1];
+        Delete (inblock, 1, 1);
+    End;
+    If inblock[0] = #0 Then
+    Begin
+        UtiGetNum := 0;
+        Exit;
+    End;
+    Val (St, i, code);
+    If code <> 0 Then
+        i := 0;
+    UtiGetNum := i;
+End;
 
 {****************************************************************}
-Procedure UtiCharBegin(var inblock: stringline; var actpos : integer);
+Procedure UtiCharBegin(Var inblock: stringline; Var actpos: integer);
 {sucht den Beginn des Notenzeichens in Inblock
  an der Stelle actpos}
-begin
-  while (inblock[actpos-1]<>'%')and(not IniNumchar(inblock[actpos-1])) do
-    dec(actpos);
-end;
+Begin
+    While (inblock[actpos - 1] <> '%') AND (NOT IniNumchar (inblock[actpos - 1])) Do
+        dec (actpos);
+End;
 
 {****************************************************************}
-Procedure UtiFindCharEnd(var inblock: stringline; var actpos : integer);
+Procedure UtiFindCharEnd(Var inblock: stringline; Var actpos: integer);
 {sucht das Ende des Notenzeichens in Inblock
  an der Stelle actpos}
-begin
-  while (actpos<length(inblock))and(not IniNumChar(inblock[actpos+1])) do
-    inc(actpos);
-end;
+Begin
+    While (actpos < length (inblock)) AND (NOT IniNumChar (inblock[actpos + 1])) Do
+        inc (actpos);
+End;
 
 {****************************************************************}
-Procedure UtiNextNum(var inblock: stringline; var actpos, numres : integer;
-                     left : boolean);
+Procedure UtiNextNum(Var inblock: stringline; Var actpos, numres: integer;
+    left: boolean);
 {sucht den n„chsten numerischen String in inblock, beginnend bei
  actpos, nach rechts oder links (links: left = true).
  numres wird der Wert des Strings. Actpos wird unmittelbar vor
  das numerische Zeichen gesetzt}
 
-var numstr: string16;
+Var numstr: string16;
     i: byte;
     code: integer;
 
-begin
-   numres:= 0;
-   numstr:= '0';
-   if left then
-   begin
-      UtiCharBegin(inblock, actpos);
-      if IniNumChar(inblock[actpos - 1]) then
-      begin
-         i:= actpos - 1;
-         while IniNumChar(inblock[i - 1]) do
-         begin
-            i:= i - 1;
-         end;
-         numstr:= Copy(inblock, i, actpos - i);
-      end;
-   end
-   else
-   begin
-      UtiFindCharEnd(inblock, actpos);
-      if length(inblock) > actpos then
-      begin
-         i:= actpos + 1;
-         while IniNumChar(inblock[i + 1]) do
-         begin
-            i:= i + 1;
-         end;
-         numstr:= Copy(inblock, actpos + 1, i - actpos);
-      end;
-   end;
-   Val(numstr, numres, code);
-   if code <> 0 then
-       numres := 0;
-end;
-
-Function UtiNextChar(inblock : stringline;c : char;p : integer) : integer;
-var i: integer;
 Begin
-  for i:=p+1 to length(inblock) do
-    if inblock[i]=c then
-      break;
-  if inblock[i]=c then
-    UtiNextChar:=i
-  else
-    UtiNextChar:=0;
-End;
-Function UtiPrevChar(inblock : stringline;c : char;p : integer) : integer;
-var i: integer;
-Begin
-  for i:=p-1 downto 1 do
-    if inblock[i]=c then
-      break;
-  if inblock[i]=c then
-    UtiPrevChar:=i
-  else
-    UtiPrevChar:=0;
+    numres := 0;
+    numstr := '0';
+    If left Then
+    Begin
+        UtiCharBegin (inblock, actpos);
+        If IniNumChar (inblock[actpos - 1]) Then
+        Begin
+            i := actpos - 1;
+            While IniNumChar (inblock[i - 1]) Do
+                i := i - 1;
+            numstr := Copy (inblock, i, actpos - i);
+        End;
+    End
+    Else
+    Begin
+        UtiFindCharEnd (inblock, actpos);
+        If length (inblock) > actpos Then
+        Begin
+            i := actpos + 1;
+            While IniNumChar (inblock[i + 1]) Do
+                i := i + 1;
+            numstr := Copy (inblock, actpos + 1, i - actpos);
+        End;
+    End;
+    Val (numstr, numres, code);
+    If code <> 0 Then
+        numres := 0;
 End;
 
-end.
+Function UtiNextChar(inblock: stringline; c: char; p: integer): integer;
+Var i: integer;
+Begin
+    For i := p + 1 To length (inblock) Do
+        If inblock[i] = c Then
+            break;
+    If inblock[i] = c Then
+        UtiNextChar := i
+    Else
+        UtiNextChar := 0;
+End;
+Function UtiPrevChar(inblock: stringline; c: char; p: integer): integer;
+Var i: integer;
+Begin
+    For i := p - 1 Downto 1 Do
+        If inblock[i] = c Then
+            break;
+    If inblock[i] = c Then
+        UtiPrevChar := i
+    Else
+        UtiPrevChar := 0;
+End;
+
+End.

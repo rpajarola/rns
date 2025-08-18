@@ -1,8 +1,8 @@
-Unit SndInput;
+﻿Unit SndInput;
 
 Interface
 
-Procedure InputSnd;Far;
+Procedure InputSnd; Far;
 
 Implementation
 

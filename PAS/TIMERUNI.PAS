@@ -1,84 +1,84 @@
-Unit TimerUnit;
+﻿Unit TimerUnit;
 
 Interface
 
 Uses SndDraw,
-     SndInput;
+    SndInput;
 
 Type TTimer = Object
-       OldTimer : Pointer;
-       Speed    : Integer;
-       Constructor Init;
-       Destructor Done;virtual;
-       Procedure SetSpeed;virtual;
-       Function GetSpeed : Integer;virtual;
-     End;
+        OldTimer: Pointer;
+        Speed: Integer;
+        Constructor Init;
+        Destructor Done; Virtual;
+        Procedure SetSpeed; Virtual;
+        Function GetSpeed: Integer; Virtual;
+    End;
 
 Implementation
 
-Const Initialized : Boolean = False;
+Const Initialized: Boolean = False;
 
-Procedure TimerISR;Assembler;
+Procedure TimerISR; Assembler;
 Asm
-  NOP
-  NOP
-  NOP
-  NOP
-@@ProcedureStart:
-  PUSH DS
-  PUSH ES
-  PUSHA
-  CALL FAR PTR SndDraw.DrawSnd
-  CALL FAR PTR SndInput.InputSnd
-  POPA
-  POP  ES
-  POP  DS
-  IRET
+    nop
+    nop
+    nop
+    nop
+    @@ProcedureStart:
+    push ds
+    push es
+    pusha
+    call FAR PTR SndDraw.DrawSnd
+    call FAR PTR SndInput.InputSnd
+    popa
+    pop  es
+    pop  ds
+    iret
 End;
 
-Constructor TTimer.Init;Assembler;
+Constructor TTimer.Init; Assembler;
 Asm
-  CMP  [Initialized],0
-  JNZ  @@Abort
-  MOV  [Initialized],1
-  PUSH DS
-  LDS  SI,Self
-  MOV  CS:[Offset TimerISR],SI
-  MOV  CS:[Offset TimerISR+2],DS
-  MOV  AX,03508h
-  INT  21h
-  MOV  [SI].TTimer.OldTimer.Word,ES
-  MOV  [SI].TTimer.OldTimer.Word+2,BX
-  MOV  [SI].TTimer.Speed,1000
-  MOV  AX,02508h
-  MOV  DX,Seg TimerISR
-  MOV  DS,DX
-  MOV  DX,Offset TimerISR+4
-  INT  21h
-  POP  DS
-@@Abort:
+    cmp  [Initialized],0
+    jnz  @@Abort
+    mov  [Initialized],1
+    push ds
+    lds  si,Self
+    mov  cs:[Offset TimerISR],si
+    mov  cs:[Offset TimerISR+2],ds
+    mov  ax,03508h
+    int  21h
+    mov  [si].TTimer.OldTimer.Word,es
+    mov  [si].TTimer.OldTimer.Word+2,bx
+    mov  [si].TTimer.Speed,1000
+    mov  ax,02508h
+    mov  dx,Seg TimerISR
+    mov  ds,dx
+    mov  dx,Offset TimerISR+4
+    int  21h
+    pop  ds
+    @@Abort:
 End;
 
-Destructor TTimer.Done;Assembler;
+Destructor TTimer.Done; Assembler;
 Asm
-  CMP  [Initialized],0
-  JZ   @@Abort
-  MOV  [Initialized],0
-  PUSH DS
-  LDS  SI,Self
-  LDS  DX,[SI].TTimer.OldTimer
-  MOV  AX,2508h
-  INT  21h
-  POP  DS
-@@Abort:
+    cmp  [Initialized],0
+    jz   @@Abort
+    mov  [Initialized],0
+    push ds
+    lds  si,Self
+    lds  dx,[si].TTimer.OldTimer
+    mov  ax,2508h
+    int  21h
+    pop  ds
+    @@Abort:
 End;
 
-Procedure TTimer.SetSpeed;Assembler;
+Procedure TTimer.SetSpeed; Assembler;
 Asm
 End;
 
-Function TTimer.GetSpeed : integer;
+Function TTimer.GetSpeed: integer;
 Begin
-   GetSpeed:=Speed;
+    GetSpeed := Speed;
 End;
 End.

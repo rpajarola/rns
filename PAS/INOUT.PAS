@@ -1,66 +1,66 @@
-  {$R+}               { Range Check        }
-  {$Q+}               { Overflow Check     }
-  {$S+}               { Stack Check        }
-  {$I+}               { IO-Check           }
-  {$A-}               { Word align Data    }
-  {$V-}               { Strict VAR Strings }
-  {$B-}               { Boolean Eval       }
-  {$T-}               { Typed @            }
-  {$P-}               { Open Params        }
-  {$X+}               { Extended Syntax    }
-  {$D-}               { Debug information  }
+Ôªø  {$R+}{ Range Check        }
+  {$Q+}{ Overflow Check     }
+  {$S+}{ Stack Check        }
+  {$I+}{ IO-Check           }
+  {$A-}{ Word align Data    }
+  {$V-}{ Strict VAR Strings }
+  {$B-}{ Boolean Eval       }
+  {$T-}{ Typed @            }
+  {$P-}{ Open Params        }
+  {$X+}{ Extended Syntax    }
+  {$D-}{ Debug information  }
 
-unit inout;
+Unit inout;
 
-interface
+Interface
 
-uses menutyp,
-     xcrt,
-     crt;
+Uses menutyp,
+    xcrt,
+    crt;
 
-procedure Set_Video (ATTRIBUTE: integer);
-procedure Get_Response (var RESPONSE     : RESPONSE_TYPE;
-                        var DIRECTION   : MOVEMENT;
-                        var KeyResponse   : char;
-                        var shiftp, ctrlp: boolean;
-                        var mausx, mausy: word;
-                        var maustaste, mp, mausmenu: word);
-procedure Put_String (COL, LINE : integer; OUT_STRING: STRING79;
-                      ATTRIB: integer);
+Procedure Set_Video(ATTRIBUTE: integer);
+Procedure Get_Response(Var RESPONSE: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    Var shiftp, ctrlp: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mp, mausmenu: word);
+Procedure Put_String(COL, LINE: integer; OUT_STRING: STRING79;
+    ATTRIB: integer);
 
-procedure Put_Centered_String (OUT_STRING: STRING79;
-                             LINE, ATTRIB: integer);
+Procedure Put_Centered_String(OUT_STRING: STRING79;
+    LINE, ATTRIB: integer);
 
 
-implementation
+Implementation
 
-uses initsc,
-     mousdrv;
-
-{***********************************************************}
-procedure Set_Video (ATTRIBUTE: integer);
-
-begin
-   if attribute = 0 then
-   begin
-      TextBackground(tmbk);
-      TextColor(tmtext);
-   end
-   else
-   begin
-      TextBackground(itmbk);
-      TextColor(itmtext);
-   end;
-
-end;
+Uses initsc,
+    mousdrv;
 
 {***********************************************************}
-procedure Get_Response (var RESPONSE     : RESPONSE_TYPE;
-                        var DIRECTION   : MOVEMENT;
-                        var KeyResponse   : char;
-                        var shiftp, ctrlp: boolean;
-                        var mausx, mausy: word;
-                        var maustaste, mp, mausmenu: word);
+Procedure Set_Video(ATTRIBUTE: integer);
+
+Begin
+    If attribute = 0 Then
+    Begin
+        TextBackground (tmbk);
+        TextColor (tmtext);
+    End
+    Else
+    Begin
+        TextBackground (itmbk);
+        TextColor (itmtext);
+    End;
+
+End;
+
+{***********************************************************}
+Procedure Get_Response(Var RESPONSE: RESPONSE_TYPE;
+    Var DIRECTION: MOVEMENT;
+    Var KeyResponse: char;
+    Var shiftp, ctrlp: boolean;
+    Var mausx, mausy: word;
+    Var maustaste, mp, mausmenu: word);
 {
  BESCHREIBUNG:
     Dieses Unterprogramm liest ein Zeichen von der Tastatur ein und
@@ -85,119 +85,105 @@ BEISPIELHAFTER AUFRUF:
 
 -------------------------------------------------------------------}
 
-const
-  BELL            = 7;  { ASCII Signalton }
-  CARRIAGE_RETURN = 13; { ASCII WagenrÅcklauf }
-  ESC             = 27; { ASCII Escape Zeichen }
-  RIGHT_ARROW     = 77; { IBM Escape Sequenz fÅr den
+Const
+    BELL = 7;  { ASCII Signalton }
+    CARRIAGE_RETURN = 13; { ASCII WagenrÅcklauf }
+    ESC  = 27; { ASCII Escape Zeichen }
+    RIGHT_ARROW = 77; { IBM Escape Sequenz fÅr den
                              Pfeil nach rechts }
-  LEFT_ARROW      = 75; { IBM Escape Sequenz fÅr den
+    LEFT_ARROW = 75; { IBM Escape Sequenz fÅr den
                              Pfeil nach links }
-  DOWN_ARROW      = 80; { IBM Escape Sequenz fÅr den
+    DOWN_ARROW = 80; { IBM Escape Sequenz fÅr den
                              Pfeil nach unten }
-  UP_ARROW        = 72; { IBM Escape Sequenz fÅr den
+    UP_ARROW = 72; { IBM Escape Sequenz fÅr den
                              Pfeil nach oben }
 
-var
-  IN_CHAR: char;    { TemporÑre Variable fÅr die Eingabe }
-  tempshift, tempctrl: boolean;
-begin
-   RESPONSE := NO_RESPONSE;
-   DIRECTION := NONE;
-   KeyResponse := ' ';
-   MausZeigen;
+Var
+    IN_CHAR: char;    { TemporÑre Variable fÅr die Eingabe }
+    tempshift, tempctrl: boolean;
+Begin
+    RESPONSE := NO_RESPONSE;
+    DIRECTION := NONE;
+    KeyResponse := ' ';
+    MausZeigen;
 
-   repeat
-      if XKeyPressed then
-      begin
-         IN_CHAR:=xReadKey(shiftp, ctrlp);
+    Repeat
+        If XKeyPressed Then
+        Begin
+            IN_CHAR := xReadKey (shiftp, ctrlp);
 
          { PrÅfe, ob es sich um Pfeiltasten handelt - d.h. eine Eingabe mit
            zwei Zeichen, wobei 0 das erste Zeichen ist }
-         if Ord(IN_CHAR) = 0 then
-         begin
-            RESPONSE := ARROW;
-            IN_CHAR:=xReadKey(tempshift, tempctrl);
-            KeyResponse := IN_CHAR;
+            If Ord (IN_CHAR) = 0 Then
+            Begin
+                RESPONSE := ARROW;
+                IN_CHAR  := xReadKey (tempshift, tempctrl);
+                KeyResponse := IN_CHAR;
 
-            if Ord(IN_CHAR) = LEFT_ARROW then
-            begin
-               DIRECTION := LEFT;
-            end
-            else
-            begin
-               if Ord(IN_CHAR) = RIGHT_ARROW then
-               begin
-                  DIRECTION := RIGHT;
-               end
-               else
-               begin
-                  if Ord(IN_CHAR) = DOWN_ARROW then
-                  begin
-                     DIRECTION := DOWN;
-                  end
-                  else
-                  begin
-                     if Ord(IN_CHAR) = UP_ARROW then
-                     begin
-                        DIRECTION := UP;
-                     end
-                     { Sonst ein Spezialzeichen }
-                     else
-                     begin
+                If Ord (IN_CHAR) = LEFT_ARROW Then
+                    DIRECTION := LEFT
+                Else
+                Begin
+                    If Ord (IN_CHAR) = RIGHT_ARROW Then
+                        DIRECTION := RIGHT
+                    Else
+                    If Ord (IN_CHAR) = DOWN_ARROW Then
+                        DIRECTION := DOWN
+                    Else
+                    If Ord (IN_CHAR) = UP_ARROW Then
+                        DIRECTION := UP
+                    { Sonst ein Spezialzeichen }
+                    Else
+                    Begin
                         RESPONSE := SpecialKey;
                         KeyResponse := IN_CHAR;
-                     end;
-                  end;
-               end;
-            end;
-         end
-         else
-         begin
-            if Ord(IN_CHAR) = CARRIAGE_RETURN then
-            begin
-               RESPONSE := RETURN;
-               KeyResponse := IN_CHAR;
-            end
-            else
-            begin
-               if Ord(IN_CHAR) = ESC then
-               begin
-                  KeyResponse := IN_CHAR;
-                  RESPONSE := ESCAPE;
-               end
-               else
-               begin
-                  RESPONSE := KEY;
-                  KeyResponse := IN_CHAR;
-               end;
-            end;
-         end;
-      end
-      else {if XKeyPressed then}
-      begin
-         {Maustaste gedrÅckt?}
-         MausPosition(mausx, mausy, maustaste, mp, mausmenu);
-         if ((maustaste = 1) and (mausform <> 1)) then
-         begin
-            RESPONSE:= RETURN;
-            keyresponse:= #13;
-         end;
-         if maustaste = 2 then
-         begin
-            RESPONSE:= ESCAPE;
-            keyresponse:= #27;
-         end;
+                    End;
+                End;
+            End
+            Else
+            Begin
+                If Ord (IN_CHAR) = CARRIAGE_RETURN Then
+                Begin
+                    RESPONSE := RETURN;
+                    KeyResponse := IN_CHAR;
+                End
+                Else
+                If Ord (IN_CHAR) = ESC Then
+                Begin
+                    KeyResponse := IN_CHAR;
+                    RESPONSE := ESCAPE;
+                End
+                Else
+                Begin
+                    RESPONSE := KEY;
+                    KeyResponse := IN_CHAR;
+                End;
+            End;
+        End
+        Else {if XKeyPressed then}
+        Begin
+            {Maustaste gedrÅckt?}
+            MausPosition (mausx, mausy, maustaste, mp, mausmenu);
+            If ((maustaste = 1) AND (mausform <> 1)) Then
+            Begin
+                RESPONSE := RETURN;
+                keyresponse := #13;
+            End;
+            If maustaste = 2 Then
+            Begin
+                RESPONSE := ESCAPE;
+                keyresponse := #27;
+            End;
 
-      end;
-   until ((RESPONSE <> NO_RESPONSE) or (maustaste > 0) or (mp>0));
-end;
+        End;
+    Until ((RESPONSE <> NO_RESPONSE) OR (maustaste > 0) OR (mp > 0));
+End;
 
 {------------------------------------------------------------------}
 {------------------------------------------------------------------}
 
-procedure Put_String (COL, LINE : integer; OUT_STRING: STRING79;
-                      ATTRIB: integer);
+Procedure Put_String(COL, LINE: integer; OUT_STRING: STRING79;
+    ATTRIB: integer);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm gibt einen String an einer bestimmten
@@ -217,23 +203,23 @@ BENUTZTE BIBLIOTHEKSPROGRAMME:
     Set_Video - Setzt Bildschirmattribute
 
 ---------------------------------------------------------------------}
-begin
+Begin
 
-{ Setze die Bildschirmattribute und die Cursor-Stellung }
+    { Setze die Bildschirmattribute und die Cursor-Stellung }
 
-  Set_Video(ATTRIB);
-  GotoXY(COL,LINE);
-  write (OUT_STRING);
+    Set_Video (ATTRIB);
+    GotoXY (COL, LINE);
+    write (OUT_STRING);
 
-{ Stelle die normalen Bildschirmattribute wieder her }
+    { Stelle die normalen Bildschirmattribute wieder her }
 
-  Set_Video(0);
-end;
+    Set_Video (0);
+End;
 
 {-------------------------------------------------------------------}
 
-procedure Put_Centered_String (OUT_STRING: STRING79;
-                             LINE, ATTRIB: integer);
+Procedure Put_Centered_String(OUT_STRING: STRING79;
+    LINE, ATTRIB: integer);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm gibt einen String in der Mitte einer anzu-
@@ -262,13 +248,13 @@ BEISPIELHAFTER AUFRUF:
     Die Zentrierung wird dadurch erreicht, da· die Anfangsspalte auf
     40 - LÑnge/2 gesetzt wird.
 ---------------------------------------------------------------------}
-begin
+Begin
 
-{ Berechne die Spaltennummer und gebe den String aus }
+    { Berechne die Spaltennummer und gebe den String aus }
 
-  Put_String (40 - Length (OUT_STRING) div 2, LINE, OUT_STRING, ATTRIB);
-end;
+    Put_String (40 - Length (OUT_STRING) DIV 2, LINE, OUT_STRING, ATTRIB);
+End;
 
 {-------------------------------------------------------------------}
 
-end.
+End.

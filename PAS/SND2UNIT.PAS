@@ -1,17 +1,17 @@
-Unit Snd2Unit;
+﻿Unit Snd2Unit;
 
 Interface
 
 Type TPlayRNS = Object
-       Constructor Init;
-       Destructor Done;virtual;
-       Procedure Play(s : string;x0,y0,x1 : integer);virtual;
-       Procedure Stop;virtual;
-       Procedure Pause;virtual;
-       Procedure Continue;virtual;
-       Function Playing : boolean;virtual;
-       Function Pos : integer;virtual;
-     End;
+        Constructor Init;
+        Destructor Done; Virtual;
+        Procedure Play(s: string; x0, y0, x1: integer); Virtual;
+        Procedure Stop; Virtual;
+        Procedure Pause; Virtual;
+        Procedure Continue; Virtual;
+        Function Playing: boolean; Virtual;
+        Function Pos: integer; Virtual;
+    End;
 
 Implementation
 

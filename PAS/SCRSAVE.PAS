@@ -1,65 +1,67 @@
-Unit ScrSave;
+﻿Unit ScrSave;
 
 Interface
 
-Uses Graph, CRT;
+Uses CRT, Graph;
 
 Procedure SaveScreen;
 
 Implementation
 {$Q-,R-}
-Function LineY(X : Integer;A,B : Real) : Integer;
+Function LineY(X: Integer; A, B: Real): Integer;
 Begin
-  LineY:=Round((X*A)+B);
+    LineY := Round ((X * A) + B);
 End;
-Function KeyPressed : Boolean;
-begin
-  { Modern replacement for assembly keyboard buffer check }
-  { Original checked BIOS keyboard buffer at 0040:001A vs 0040:001C }
-  KeyPressed := CRT.KeyPressed; { Use CRT unit's KeyPressed function }
-end;
+Function KeyPressed: Boolean;
+Begin
+    { Modern replacement for assembly keyboard buffer check }
+    { Original checked BIOS keyboard buffer at 0040:001A vs 0040:001C }
+    KeyPressed := CRT.KeyPressed; { Use CRT unit's KeyPressed function }
+End;
 Procedure SaveScreen;
 Type TImageLine = Record
-       XR,YR    : Word;
-       Line     : Array[0..3,0..79] Of Byte;
+        XR, YR: Word;
+        Line: Array[0..3, 0..79] Of Byte;
     End;
-Var I     : TImageLine;
-    a     : Word;
-    c     : LongInt;
-    L     : LongInt;
-    T     : Array[0..3] OF Byte Absolute L;
+Var I: TImageLine;
+    a: Word;
+    c: LongInt;
+    L: LongInt;
+    T: Array[0..3] Of Byte Absolute L;
 
 Begin
-  SetColor(15);
-  Randomize;
-  I.XR:=639;
-  I.YR:=0;
-  a:=Random(15);
-  if a=0 then
-    inc(a);
-  FillChar(i.line[0],sizeof(i.line[0]),$FF*byte((a and 1)=1));
-  FillChar(i.line[1],sizeof(i.line[1]),$FF*byte((a and 2)=2));
-  FillChar(i.line[2],sizeof(i.line[2]),$FF*byte((a and 4)=4));
-  FillChar(i.line[3],sizeof(i.line[3]),$FF*byte((a and 8)=8));
-  a:=0;
-  While Not KeyPressed Do Begin
-    For c:=0 To $FFFF do;
-    PutImage(0,a,I,XorPut);
-    Inc(a);
-    if a>GetMaxY then begin
-      a:=Random(15);
-      if a=0 then
-        inc(a);
-      FillChar(i.line[0],sizeof(i.line[0]),$FF*byte((a and 1)=1));
-      FillChar(i.line[1],sizeof(i.line[1]),$FF*byte((a and 2)=2));
-      FillChar(i.line[2],sizeof(i.line[2]),$FF*byte((a and 4)=4));
-      FillChar(i.line[3],sizeof(i.line[3]),$FF*byte((a and 8)=8));
-      a:=0;
-    end;
-  End;
-  { Modern replacement for assembly keyboard wait }
-  { Original: INT 16h with AX=0 (wait for keypress) }
-  CRT.ReadKey; { Wait for a key press }
+    SetColor (15);
+    Randomize;
+    I.XR := 639;
+    I.YR := 0;
+    a := Random (15);
+    If a = 0 Then
+        inc (a);
+    FillChar (i.line[0], sizeof (i.line[0]), $FF * byte ((a AND 1) = 1));
+    FillChar (i.line[1], sizeof (i.line[1]), $FF * byte ((a AND 2) = 2));
+    FillChar (i.line[2], sizeof (i.line[2]), $FF * byte ((a AND 4) = 4));
+    FillChar (i.line[3], sizeof (i.line[3]), $FF * byte ((a AND 8) = 8));
+    a := 0;
+    While NOT KeyPressed Do
+    Begin
+        For c := 0 To $FFFF Do ;
+        PutImage (0, a, I, XorPut);
+        Inc (a);
+        If a > GetMaxY Then
+        Begin
+            a := Random (15);
+            If a = 0 Then
+                inc (a);
+            FillChar (i.line[0], sizeof (i.line[0]), $FF * byte ((a AND 1) = 1));
+            FillChar (i.line[1], sizeof (i.line[1]), $FF * byte ((a AND 2) = 2));
+            FillChar (i.line[2], sizeof (i.line[2]), $FF * byte ((a AND 4) = 4));
+            FillChar (i.line[3], sizeof (i.line[3]), $FF * byte ((a AND 8) = 8));
+            a := 0;
+        End;
+    End;
+    { Modern replacement for assembly keyboard wait }
+    { Original: INT 16h with AX=0 (wait for keypress) }
+    CRT.ReadKey; { Wait for a key press }
 End;
 {Procedure SaveScreen;
 Type TImage = Record
