@@ -12,8 +12,11 @@ Uses Crt,
      InitSc;
 var
     OrgExitProc : Pointer;
-    WhereY: Byte Absolute $0000:$0451;
-    WhereX: Byte Absolute $0000:$0450;
+{ WhereY: Byte Absolute $0000:$0451; }
+{ WhereX: Byte Absolute $0000:$0450; }
+{ TODO: implement getting cursor position }
+    WhereY: Byte;
+    WhereX: Byte;
 function HexWord(w: Word) : String;
 const
   hexChars: array [0..$F] of Char =
@@ -102,7 +105,7 @@ Begin
     end;
   ErrorAddress:=St;
 End;
-procedure DebugExit;Far;
+procedure DebugExit;
 Begin
   {if erroraddr=nil then begin}
     ExitProc:=OrgExitProc;
@@ -118,13 +121,12 @@ Begin
   CloseGraph;
   IniShowCursor;
 End;}
-procedure NewExit;FAR;
+procedure NewExit;
 Var St : String[80];
 begin
-   Asm
-     MOV AX,0003
-     INT 10h
-   End;
+   // TODO: Modern text mode setup
+   // Original: INT 10h function 03h - Set 80x25 color text mode
+   ClrScr;
    IF ExitCode=217 Then Begin { Wrong dir }
      Writeln;
      Writeln;
