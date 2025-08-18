@@ -49,10 +49,8 @@ Var XE,XS,XM : integer;
     Y        : integer;
     PS       : integer;
     found    : boolean;
-    c        : integer;
 begin
   IniCharAdd(Page[linenum],#232,actpos);
-  c:=getcolor;
   y:=IniYnow(linenum)-2;
   TexActPosX(xe, actpos, linenum, false);
   { suche Beginn der Klammer }
@@ -532,7 +530,6 @@ var i, iprint, x, y, stringlength, xnote, inote : integer;
     ordc, ib                                    : byte;
     inblock, strbuf                             : stringline;
     done, printit                               : boolean;
-    col                                         : word;
     ih,totw,j                                   : integer;
 {*****************************************}
 Procedure PrintChar;
@@ -761,7 +758,6 @@ Procedure TexInsChar(linenum, actpos: integer);
 
 var StringLength, i : integer;
     x : integer;
-    inblock: stringline;
 
 begin
    if ((not (linestyles in actedit)) or
@@ -791,7 +787,6 @@ Procedure TexDelChar(linenum : integer; var actpos: integer);
 
 var StringLength, i : integer;
     x: integer;
-    inblock:  stringline;
 
 begin
    StringLength:= Length(page[linenum]) - LineMarker;
