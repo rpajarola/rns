@@ -39,9 +39,9 @@ Var
     fs: longint;
     ch: char;
 Begin
-    fnttab[0] := name + '8x8.tft'; {RNS8X8.TFT}
-    fnttab[1] := name + '8x16.tft'; {RNS8X16.TFT}
-    fnttab[2] := name + '6x12.tft'; {RNS8X12.TFT}
+    fnttab[0] := name + '8X8.TFT'; {RNS8X8.TFT}
+    fnttab[1] := name + '8X16.TFT'; {RNS8X16.TFT}
+    fnttab[2] := name + '6X12.TFT'; {RNS8X12.TFT}
     For a := 0 To 2 Do
     Begin
         assign (datei, fnttab[a]);
