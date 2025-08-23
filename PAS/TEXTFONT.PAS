@@ -1,4 +1,6 @@
-﻿Unit Textfont;
+﻿{$I-}
+
+Unit Textfont;
 
 Interface
 
@@ -37,24 +39,42 @@ Var
     fs: longint;
     ch: char;
 Begin
-    fnttab[0] := name + '8x8.tft';
-    fnttab[1] := name + '8x16.tft';
-    fnttab[2] := name + '6x12.tft';
+    fnttab[0] := name + '8x8.tft'; {RNS8X8.TFT}
+    fnttab[1] := name + '8x16.tft'; {RNS8X16.TFT}
+    fnttab[2] := name + '6x12.tft'; {RNS8X12.TFT}
     For a := 0 To 2 Do
     Begin
         assign (datei, fnttab[a]);
         reset (datei);
+        If IOResult <> 0 Then
+        Begin
+            WriteLn('Error: Cannot open font file: ', fnttab[a]);
+            WriteLn('Make sure the font file exists in the current directory.');
+            Halt(2); { Exit with file not found error code }
+        End;
         ch := #0;
         b  := 0;
         While (ch <> #26) Do
         Begin
             read (datei, ch);
+            If IOResult <> 0 Then
+            Begin
+                WriteLn('Error: Cannot read from font file: ', fnttab[a]);
+                close(datei);
+                Halt(100); { Exit with disk read error }
+            End;
             inc (b);
         End;
         fs := filesize (datei) - b;
         For b := 1 To fs Do
         Begin
             read (datei, ch);
+            If IOResult <> 0 Then
+            Begin
+                WriteLn('Error: Cannot read font data from: ', fnttab[a]);
+                close(datei);
+                Halt(100); { Exit with disk read error }
+            End;
             font[a, b] := ch;
         End;
         close (datei);
@@ -134,3 +154,5 @@ End;
 
 
 End.
+
+${I+}
