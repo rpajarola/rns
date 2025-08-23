@@ -11,19 +11,6 @@ Uses Graph,
     helpunit,
     userexit;
 
-
-Var
-    ExitSave: pointer;
-
-{*******************************************************}
-{$IFDEF USER}
-Procedure GraphExit;
-Begin
-    CloseGraph;
-    IniShowCursor;
-    ExitProc := ExitSave;
-End;
-{$ENDIF}
 {*******************************************************}
 {*******************************************************}
 Function HeapFunc(Size: word): integer;

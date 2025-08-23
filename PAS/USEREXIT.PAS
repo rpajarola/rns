@@ -10,29 +10,9 @@ Uses Crt,
     HelpUnit,
     Graph,
     InitSc;
+
 Var
     OrgExitProc: Pointer;
-    { WhereY: Byte Absolute $0000:$0451; }
-    { WhereX: Byte Absolute $0000:$0450; }
-    { TODO: implement getting cursor position }
-    WhereY: Byte;
-    WhereX: Byte;
-Function HexWord(w: Word): String;
-Const
-    hexChars: Array [0..$F] Of Char =
-        '0123456789ABCDEF';
-Begin
-    HexWord := (hexChars[Hi (w) SHR 4] +
-        hexChars[Hi (w) AND $F] +
-        hexChars[Lo (w) SHR 4] +
-        hexChars[Lo (w) AND $F]);
-End;
-Function S(V: Byte): String;
-Var X: String;
-Begin
-    Str (V, X);
-    S := X;
-End;
 
 Function Exitcode2Msg(N: Integer): String;
 Var s: String;
@@ -93,87 +73,20 @@ Begin
     ExitCode2MSg := s;
 End;
 
-Function ErrorAddress(N: Integer; P: Pointer): String;
-Var st: String;
-Begin
-    If st <> '' Then
-        Case ExitCode Of
-            1..99: st := st + 'DOS';
-            100..149: st := st + 'Input/Output';
-            150..199: st := st + 'critical';
-            200..255: st := st + 'non mascable';
-        End;
-    ErrorAddress := St;
-End;
-Procedure DebugExit;
-Begin
-    {if erroraddr=nil then begin}
-    ExitProc := OrgExitProc;
-    CloseGraph;
-    IniShowCursor;
-    exit;
-End;
-{  if HlpAsk('Your program makes shit! '+ExitCode2Msg(ExitCode),
-            ErrorAddress(ExitCode,ErrorAddr),false) Then begin
-
-  end;
-  ExitProc:=OrgExitProc;
-  CloseGraph;
-  IniShowCursor;
-End;}
 Procedure NewExit;
-Var St: String[80];
 Begin
-    // TODO: Modern text mode setup
-    // Original: INT 10h function 03h - Set 80x25 color text mode
-    ClrScr;
-    If ExitCode = 217 Then
-    Begin { Wrong dir }
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        Writeln;
-        WriteLn ('                                                                               ');
-        WriteLn ('     Cannot find file COLORS.RNS                                               ');
-        WriteLn ('     Maybe you are in the wrong directory                                      ');
-        WriteLn ('     Change to your Rhythmics directory and try again                          ');
-        WriteLn ('                                                                               ');
-        ExitCode := 0;
-        ErrorAddr := Nil;
-        Exit;
-    End;
-    TextBackGround (0);
-    ClrScr;
-    TextColor (15);
-    TextBackGround (4);
+    CloseGraph();
+    ClrScr();
+    IniShowCursor;
+    ExitProc := @OrgExitProc;
     If (Exitcode = 0) OR (ErrorAddr = Nil) Then
         Exit;
-    WriteLn;
-    st := ExitCode2Msg (ExitCode);
-    If exitcode <> 0 Then write (St);
-    st := ErrorAddress (ExitCode, ErrorAddr);
-    While St[0] < #80 Do
-    Begin
-        st := St + ' ';
-        If St[0] < #80 Then
-            st := ' ' + St;
-    End;
-    write (St);
-    While WhereX <> 0 Do
-        Write (' ');
-    ExitProc := @OrgExitProc;
-    erroraddr := NIL;
+    WriteLn (ExitCode2Msg (ExitCode));
     halt (exitCode);
 End;
 
 Begin
     OrgExitProc := ExitProc;
-    ExitProc := @DebugExit;
+    ExitProc := @NewExit;
     LastFileName := '';
 End.
