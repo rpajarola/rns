@@ -1,4 +1,6 @@
-﻿Unit TitleUnit;
+﻿{$I RNS.H}
+
+Unit TitleUnit;
 
 Interface
 
@@ -29,14 +31,41 @@ Var licfile: text;
     dummy: stringline;
 Begin
     assign (licfile, 'imie.rns');
-    LastFileName := FExpand ('IMIE.RNS');
     reset (licfile);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn('Error: Cannot open license file: IMIE.RNS');
+        WriteLn('This appears to be a demo version - license file not found.');
+        TitVerify := False;
+        Exit;
+    End;
     readln (licfile, usrname);
     readln (licfile, usrfirstname);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn('Error: Cannot read user information from license file');
+        close(licfile);
+        TitVerify := False;
+        Exit;
+    End;
     For i := 1 To 4 Do
         readln (licfile, dummy);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn('Error: Cannot read license data from license file');
+        close(licfile);
+        TitVerify := False;
+        Exit;
+    End;
     readln (licfile, nsum);
     readln (licfile, ndiff);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn('Error: Cannot read license verification data from license file');
+        close(licfile);
+        TitVerify := False;
+        Exit;
+    End;
     isum := 22;
     idiff := -17;
     j := 1;
