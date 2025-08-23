@@ -1545,7 +1545,7 @@ Begin
     LastSound := 0;
     FrameWidth := 1;
     FileChanged := 0;
-    TTextFontViewer (TxtFnt).Init ('RNS');
+    TTextFontViewer (TxtFnt).Init ('rns');
     sndwarning := 1;
     pagebuf := -1;
     lastbuf := -1;
