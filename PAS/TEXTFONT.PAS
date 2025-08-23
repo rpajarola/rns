@@ -48,9 +48,9 @@ Begin
         reset (datei);
         If IOResult <> 0 Then
         Begin
-            WriteLn('Error: Cannot open font file: ', fnttab[a]);
-            WriteLn('Make sure the font file exists in the current directory.');
-            Halt(2); { Exit with file not found error code }
+            WriteLn ('Error: Cannot open font file: ', fnttab[a]);
+            WriteLn ('Make sure the font file exists in the current directory.');
+            Halt (2); { Exit with file not found error code }
         End;
         ch := #0;
         b  := 0;
@@ -59,9 +59,9 @@ Begin
             read (datei, ch);
             If IOResult <> 0 Then
             Begin
-                WriteLn('Error: Cannot read from font file: ', fnttab[a]);
-                close(datei);
-                Halt(100); { Exit with disk read error }
+                WriteLn ('Error: Cannot read from font file: ', fnttab[a]);
+                close (datei);
+                Halt (100); { Exit with disk read error }
             End;
             inc (b);
         End;
@@ -71,9 +71,9 @@ Begin
             read (datei, ch);
             If IOResult <> 0 Then
             Begin
-                WriteLn('Error: Cannot read font data from: ', fnttab[a]);
-                close(datei);
-                Halt(100); { Exit with disk read error }
+                WriteLn ('Error: Cannot read font data from: ', fnttab[a]);
+                close (datei);
+                Halt (100); { Exit with disk read error }
             End;
             font[a, b] := ch;
         End;
@@ -154,5 +154,4 @@ End;
 
 
 End.
-
 ${I+}

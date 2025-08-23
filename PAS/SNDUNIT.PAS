@@ -2148,7 +2148,7 @@ End;
 Function SndGetCentStr(C: Integer): String;
 Var O, HT, Cn: Integer;
     S1, S2: String;
-Const IV: Array[0..11] Of string[3] = (#196+' '+#179,'2b'+#179, '2 '+#179, '3b'+#179, '3 '+#179, '4 '+#179, '4#'+#179, '5 '+#179, '6b'+#179, '6 '+#179, '7b'+#179, '7 '+#179);
+Const IV: Array[0..11] Of string[3] = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179, '3b' + #179, '3 ' + #179, '4 ' + #179, '4#' + #179, '5 ' + #179, '6b' + #179, '6 ' + #179, '7b' + #179, '7 ' + #179);
 
     Procedure OHTCn;
     Var
@@ -2201,7 +2201,7 @@ Const IV: Array[0..11] Of string[3] = (#196+' '+#179,'2b'+#179, '2 '+#179, '3b'+
     Function Oct: String;
     Begin
         If O = 0 Then Oct := '  0' + #249 + '8 ' + #179 + S1 Else
-            Oct := '  ' + S1 + '' + Char (O + Byte ('0')) + #249 + '8 '+#179+ ' ';
+            Oct := '  ' + S1 + '' + Char (O + Byte ('0')) + #249 + '8 ' + #179 + ' ';
     End;
     Function HTs: String;
     Begin
