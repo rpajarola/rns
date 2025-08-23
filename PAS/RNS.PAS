@@ -20,23 +20,15 @@ End;
 
 Procedure InstallUserDrivers;
 Begin
-    TextBackGround (Black);
-    ClrScr;
-    TextColor (White);
-    TextBackGround (Red);
-    GotoXY (1, 12);
     If RegisterBGIDriver (@EGAVGADriverProc) < 0 Then
     Begin
-        WriteLn ('Error loading VGA graphics driver, program halted');
-        Writeln;
-        WriteLn ('Reinstall RHYTHMICS from your original diskette');
+        WriteLn ('Error loading graphics driver');
         Halt ($FE);
     End;
 End;
 
 {**************************RNS Main**************************}
 Begin
-    If Ioresult = 0 Then;
     InstallUserDrivers;
     // TODO: Modern heap error handling
     // Original: Heaperror:= @HeapFunc;
