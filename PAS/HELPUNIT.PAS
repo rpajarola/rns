@@ -1,4 +1,6 @@
-﻿Unit helpunit;
+{$I RNS.H}
+
+Unit helpunit;
 
 Interface
 
@@ -109,9 +111,7 @@ Begin
     ok := true;
     If NOT IniFileExist (instring) Then
     Begin
-{$I-}
         assign (tfile, instring);
-        LastFileName := FExpand (instring);
         rewrite (tfile);
         I := IOResult;
         If I <> 0 Then
@@ -133,7 +133,6 @@ Begin
             ImpossibleFileName;
             exit;
         End;
-{$I+}
     End;
     Exit;
 End;
