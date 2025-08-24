@@ -1,5 +1,7 @@
 ﻿{$I RNS.H}
+
 Unit Texts;
+
 Interface
 
 Const HntBufempty = 01;
@@ -55,7 +57,13 @@ Const HntBufempty = 01;
     HntEmptyBracket = 61;
     HntCloseBracketFirst = 62;
     HntOpenBracketFirst = 63;
-Const HintTexts: Array[1..63] Of String[66] =
+    HntCannotCreateFile = 64;
+    HntFontFileNotFound = 65;
+    HntCannotReadFile = 66;
+    HntCannotWriteFile = 67;
+    HntCannotOpenTempFile = 68;
+
+Const HintTexts: Array[1..68] Of String =
 
         { Maximal length=66 }
         {01}      (('Buffer empty'),                                         {22,25}
@@ -120,7 +128,12 @@ Const HintTexts: Array[1..63] Of String[66] =
         {60}       ('Finished printing'),
         {61}       ('Can''t make empty brackets'),
         {62}       ('Close open bracket first'),
-        {63}       ('Open bracket first before closing it'));
+        {63}       ('Open bracket first before closing it'),
+        {64}        ('Cannot create file'),
+        {65}('Font file not found'),
+        {66}('Cannot read file'),
+        {67}('Cannot write file'),
+        {68}('Cannot open temp file'));
 
 Implementation
 

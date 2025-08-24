@@ -1,4 +1,6 @@
-ÔªøUnit printunit;
+Ôªø{$I RNS.H}
+
+Unit printunit;
 
 Interface
 
@@ -6,33 +8,32 @@ Uses
     initsc,
     crt,
     DOS,
-    UserExit,
     HelpUnit,
     Texts;
-{Hier werden RÑnder von 2 File-Seiten auf A4 definiert:}
+{Hier werden Raender von 2 File-Seiten auf A4 definiert:}
 {  0.0 Punkte = unterer Blattrand des amerik.Formats!?}
 {2.8 Punkte entsprechen etwa 1mm}
 {unter 63 stellt Epson den untern Rand nicht mehr dar!}
-{RandabstÑnde zu A5 mÅssen sich leider danach richten!}
-{446.5 Punkte = ca. Hîhen-Mitte des A4-Blattes}
-{657.5 Punkte = ca. Hîhen-Mitte der 1.File-Seite}
-{235.5 Punkte = ca. Hîhen-Mitte der 2.File-Seite}
+{Randabstaende zu A5 muessen sich leider danach richten!}
+{446.5 Punkte = ca. Hoehen-Mitte des A4-Blattes}
+{657.5 Punkte = ca. Hoehen-Mitte der 1.File-Seite}
+{235.5 Punkte = ca. Hoehen-Mitte der 2.File-Seite}
 Const cxmin = 46.0;    {links-rechts Verschiebung}{linker  Rand}
     cxmax = 558.0;                               {rechter Rand}
 
     cymaxtop = 829.0; {1.File-Seite Rand oben : Abstand vom untern Blattrand}
     cymintop = 486.0; {1.File-Seite Rand unten: Abstand vom untern Blattrand}
-    {Diff1:  343.0}{Diff1 und Diff 2 mÅssen gleich gross sein *}
+    {Diff1:  343.0}{Diff1 und Diff 2 muessen gleich gross sein *}
 
     cymaxbot = 407.0; {2.File-Seite Rand oben : Abstand vom untern Blattrand}
     cyminbot = 64.0; {2.File-Seite Rand unten: Abstand vom untern Blattrand}
-{Diff2:  343.0}{je grîsser die Differenz desto hîher die File-Seite}
+{Diff2:  343.0}{je groesser die Differenz desto hoeher die File-Seite}
 
 Var psactwidth: real;
     psxmin, psxmax, psymin, psymax: real;
 
-Procedure PriPostscriptinit;
-Procedure PriPostscriptComplete;
+Function PriPostscriptinit: Boolean;
+Function PriPostscriptComplete: Boolean;
 Procedure PriPostscript;
 Function PriXScale(x: integer): real;
 Function PriYScale(y: integer): real;
@@ -53,7 +54,6 @@ Procedure PriClosepath;
 Procedure PriPlaceString(x, y: real; inblock: stringline);
 Procedure PriSwapFont;
 Procedure PriLeftString(instring: stringline; x, y: real);
-Procedure PriComplString(inblock: stringline);
 Procedure PriArc(rx, ry, rad, startw, endw: real; c: char);
 Procedure PriHorizontalKlammer(ixmin, ixmax, iy: integer);
 Procedure PriVerticalKlammer(ix, iymin, iymax: integer);
@@ -75,11 +75,20 @@ Var instring: stringline;
     a, b: integer;
     F: Text;
 Begin
+    { if anything goes wrong, use default font size }
+    Symfontsize := 15;
     Assign (F, 'SYMBOLS.PRN');
     ReSet (F);
+    If IOResult <> 0 Then
+        Exit;
     While NOT eof (f) Do
     Begin
         ReadLn (f, instring);
+        If IOResult <> 0 Then
+        Begin
+            Close (F);
+            exit;
+        End;
         instring := upstring (instring);
         If (pos ('SCALEFONT', instring) <> 0) AND
             (pos ('/SYMBOLFONT', instring) <> 0) Then
@@ -95,10 +104,9 @@ Begin
             Else
                 Symfontsize := a;
             Close (F);
-            Exit;
+            exit;
         End;
     End;
-    Symfontsize := 15;
     Close (F);
 End;
 
@@ -134,10 +142,11 @@ Begin
     PriLine (PriRXscale (x1), PriRYscale (y1));
     PriStroke;
 End;
+
 {******************************************************************}
 Function PriRXScale(x: real): real;
 {Wandelt einen x-real coordinatenwert am Bildschirm in einen
- x-Wert fÅr das Postscriptfile um}
+ x-Wert fuer das Postscriptfile um}
 
 Begin{46+x*512/639}
     PriRXScale := x;{ psxmin + (x - grminx) * (psxmax - psxmin) / (grmaxx - grminx);}
@@ -146,7 +155,7 @@ End;
 {******************************************************************}
 Function PriXScale(x: integer): real;
 {Wandelt einen x-coordinatenwert am Bildschirm in einen
- x-Wert fÅr das Postscriptfile um}
+ x-Wert fuer das Postscriptfile um}
 
 Begin
     PriXScale := PriRXScale (1.0 * x);
@@ -155,7 +164,7 @@ End;
 {******************************************************************}
 Function PriRYScale(y: real): real;
 {Wandelt einen y-real coordinatenwert am Bildschirm in einen
- y-Wert fÅr das Postscriptfile um}
+ y-Wert fuer das Postscriptfile um}
 
 
 Begin{829-y*343/424}
@@ -165,7 +174,7 @@ End;
 {******************************************************************}
 Function PriYScale(y: integer): real;
 {Wandelt einen y-coordinatenwert am Bildschirm in einen
- y-Wert fÅr das Postscriptfile um}
+ y-Wert fuer das Postscriptfile um}
 
 Begin
     PriYScale := PriRYScale (1.0 * y);
@@ -174,7 +183,6 @@ End;
 {***************************}
 Procedure PriString(Var inblock: stringline);
 Begin
-    LastFileName := FExpand (TextRec (psfile).Name);
     writeln (psfile, inblock);
     inblock := '';
 End;
@@ -183,7 +191,6 @@ End;
 Procedure PriPlaceString(x, y: real; inblock: stringline);
 Begin
     PriMove (x, y);
-    LastFileName := FExpand (TextRec (Psfile).Name);
     writeln (psfile, '(', inblock, ') show');
 End;
 
@@ -249,11 +256,6 @@ Begin
     PriString (inblock);
     PriStroke;
 End;
-{
-˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛
-                       primove
-˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛˛
-}
 {***************************}
 Procedure PriMove(rx, ry: real);
 
@@ -303,8 +305,8 @@ Procedure PriSwapFont;
 Var inblock: stringline;
 
 Begin  {in Print-Options zur Auswahl geben}
-{ Font. Bitte dunnot cheinsch. Denn hier (und _nur_ hier) sind ae oe und ue
-  bereits als Ñ î und Å eingebaut.
+{ Font. Pleae do not change. Denn hier (und _nur_ hier) sind ae oe und ue
+  bereits eingebaut.
   Fontwechsel bitte woanders erledigen.
 }
     inblock := '%%IncludeFont: New-Font';
@@ -346,8 +348,8 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
     {Helvetica 8Pt*** proportional *******************************************}
-   {8Pt Helvetica entsprÑche in der Hîhe dem Screen-Font, ist sehr schmal,
-    was fÅr Trommelsprache und Liedsilben gut ist}
+   {8Pt Helvetica entspraeche in der Hoehe dem Screen-Font, ist sehr schmal,
+    was fuer Trommelsprache und Liedsilben gut ist}
     {scheint auch als STANDARD-Font in Frage zu kommen / siehe auch 9Pt}
 {   inblock:= '%%IncludeFont: Helvetica';
    PriString(inblock);
@@ -359,7 +361,7 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
     {Helvetica-Bold 8Pt*** proportional **************************************}
-    {Entspricht in der Hîhe dem Bildschirm-Font, gut leserlich}
+    {Entspricht in der Hoehe dem Bildschirm-Font, gut leserlich}
 {   inblock:= '%%IncludeFont: Helvetica-Bold';
    PriString(inblock);
    inblock:= '%%BeginFont: Helvetica-Bold';
@@ -370,7 +372,7 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
     {Helvetica-Oblique 8Pt*** proportional ***********************************}
-    {Entspricht in der Hîhe dem Bildschirm-Font, gut leserlich}
+    {Entspricht in der Hoehe dem Bildschirm-Font, gut leserlich}
 {   inblock:= '%%IncludeFont: Helvetica-Oblique';
    PriString(inblock);
    inblock:= '%%BeginFont: Helvetica-Oblique';
@@ -381,7 +383,7 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
     {Helvetica-BoldOblique 8Pt*** proportional *******************************}
-    {Entspricht in der Hîhe dem Bildschirm-Font, gut leserlich}
+    {Entspricht in der Hoehe dem Bildschirm-Font, gut leserlich}
 {   inblock:= '%%IncludeFont: Helvetica-BoldOblique';
    PriString(inblock);
    inblock:= '%%BeginFont: Helvetica-BoldOblique';
@@ -404,7 +406,7 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
   *)
     {Helvetica-Bold 9Pt*** proportional **************************************}
-    {Gut fÅr Titel, Index-Seiten, Projektions-Folien etc.}
+    {Gut fuer Titel, Index-Seiten, Projektions-Folien etc.}
 {   inblock:= '%%IncludeFont: Helvetica-Bold';
    PriString(inblock);
    inblock:= '%%BeginFont: Helvetica-Bold';
@@ -415,7 +417,7 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
     {Helvetica 10Pt*** proportional ******************************************}
-    {FÅllt nach rechts am besten aus. Nicht geeignet fÅr CAPITAL words}
+    {Fuellt nach rechts am besten aus. Nicht geeignet fuer CAPITAL words}
 {   inblock:= '%%IncludeFont: Helvetica';
    PriString(inblock);
    inblock:= '%%BeginFont: Helvetica';
@@ -426,8 +428,8 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
     {Courier 8Pt*** nicht proportional ***************************************}
-   {Dieser Font ist etwas fein. Kann aber sehr gut sein fÅr Technik und -
-    Trommelsprache oder Liedersilben. FÅr Lesetext besser Courier-Bold*}
+   {Dieser Font ist etwas fein. Kann aber sehr gut sein fuer Technik und -
+    Trommelsprache oder Liedersilben. Fuer Lesetext besser Courier-Bold*}
     {8Pt entspricht genau der Breite des Bildschirm-Fonts}
 {   inblock:= '%%IncludeFont: Courier';
    PriString(inblock);
@@ -440,7 +442,7 @@ Begin  {in Print-Options zur Auswahl geben}
 }
     {Courier-Bold 8P*** nicht proportional *******************************************************}
    {Courier 8Pt entspricht genau dem Screen-Font-Breite, ist aber kleiner
-    9 oder gar 10Pt entsprÑchen eher der Hîhe, brauchen aber mehr Breite}
+    9 oder gar 10Pt entspraechen eher der Hoehe, brauchen aber mehr Breite}
 {   inblock:= '%%IncludeFont: Courier-Bold';
    PriString(inblock);
    inblock:= '%%BeginFont: Courier-Bold';
@@ -512,13 +514,6 @@ Begin
     PriString (inblock);
     inblock := '(' + instring + ') show';
     PriString (inblock);
-End;
-
-{***************************}
-Procedure PriComplString(inblock: stringline);
-Begin
-    LastFileName := FExpand (TextRec (psfile).Name);
-    writeln (psfile, '(', inblock, ') show');
 End;
 
 {******************************************************************}
@@ -600,7 +595,6 @@ Begin
     inblock := inblock + 'translate';
     PriString (inblock);
 
-    LastFileName := FExpand (TextRec (psfile).Name);
     writeln (psfile, 'gsave');
     writeln (psfile, '%%IncludeFont: New-Font');
     writeln (psfile, '%%BeginFont: New-Font');
@@ -616,7 +610,6 @@ Begin
     writeln (psfile, 'grestore');
 
   {$IFDEF DEMO}{ Geschenk an nicht registrierte User...   ;-)))))))  }
-    LastFileName := FExpand (TextRec (psfile).Name);
     writeln (psfile, 'gsave');
     writeln (psfile, '%%IncludeFont: New-Font');
     writeln (psfile, '%%BeginFont: New-Font');
@@ -637,29 +630,36 @@ Begin
     Begin    { Seite fertig?             }
         inblock := 'showpage';                      { Seite anzeigen            }
         PriString (inblock);
-        PriSetTopMargins;                          { nÑxtes Mal: obere HÑlfte  }
-    End Else PriSetBottomMargins{ nÑxtes Mal: untere HÑlfte };
-    Inc (prpage);                                 { nÑchste Seite             }
+        PriSetTopMargins;                          { naextes Mal: obere Haelfte  }
+    End Else PriSetBottomMargins{ naextes Mal: untere Haelfte };
+    Inc (prpage);                                 { naechste Seite             }
     inblock := 'grestore';
     PriString (inblock);
 End;
 
 {******************************************************************}
-Procedure PriPostscriptinit;
+Function PriPostscriptinit: Boolean;
 {Drucken auf ein Postscript File:
  Initialisierung}
 Var inblock, strbuf: stringline;
     infile: text;
+    filename: string;
 Begin
+    PriPostscriptinit := False; { Default to failure }
     If prfile = 1 Then
-    Begin                      { PS-File îffnen            }
+    Begin                      { PS-File oeffnen            }
         Assign (psfile, psdir + '\' + prfname);
-        LastFileName := FExpand (psdir + '\' + prfname);
+        filename := FExpand (psdir + '\' + prfname);
     End Else Begin
         Assign (psfile, 'psfile');
-        LastFileName := FExpand ('PSFILE');
+        filename := FExpand ('psfile');
     End;
     rewrite (psfile);
+    If IOResult <> 0 Then
+    Begin
+        HlpHint (HntCannotCreateFile, HintWaitEsc);
+        exit;
+    End;
     Writeln (psfile, '%!PS-Adobe-2.0 EPSF-2.0');   { Header schreiben          }
     inblock := '%%BoundingBox:';                   { Boundingbox schreiben     }
     Str (cxmin: 8: 2, strbuf);
@@ -680,10 +680,21 @@ Begin
     writeln (psfile, '%%Creator: RNS');
     writeln (psfile, '%%EndComments');
     Assign (infile, 'symbols.prn');                 { Zeichensatz kopieren      }
-    LastFileName := FExpand ('SYMBOLS.PRN');
-
     reset (infile);
+    If IOResult <> 0 Then
+    Begin
+        close (psfile);
+        HlpHint (HntFontFileNotFound, HintWaitEsc);
+        exit;
+    End;
     readln (infile, inblock);
+    If IOResult <> 0 Then
+    Begin
+        close (infile);
+        close (psfile);
+        HlpHint (HntCannotReadFile, HintWaitEsc);
+        exit;
+    End;
     If inblock = 'nff' Then
         nff := true
     Else {    readln(infile,inblock);readln(infile,inblock);readln(infile,inblock);};
@@ -693,9 +704,21 @@ Begin
     While Pos ('******', inblock) = 0 Do
     Begin
         Readln (infile, inblock);
-        LastFileName := FExpand (psdir + '\' + prfname);
+        If IOResult <> 0 Then
+        Begin
+            close (infile);
+            close (psfile);
+            HlpHint (HntCannotReadFile, HintWaitEsc);
+            exit;
+        End;
         Writeln (psfile, inblock);
-        LastFileName := FExpand ('SYMBOLS.PRN');
+        If IOResult <> 0 Then
+        Begin
+            close (infile);
+            close (psfile);
+            HlpHint (HntCannotWriteFile, HintWaitEsc);
+            exit;
+        End;
     End;
     close (infile);
     priMakeUmlaute (psfile);
@@ -711,19 +734,20 @@ Begin
     PriAddReal (inblock, 0.8);
     inblock := inblock + ' scale';
     PriString (inblock);
+    PriPostscriptinit := True; { Success }
 End;
 {******************************************************************}
-Procedure PriPostscriptComplete;
+Function PriPostscriptComplete: Boolean;
 Var inblock: stringline;
     infile, lst: text;
 Begin
+    PriPostscriptComplete := False; { Default to failure }
     If ((prformat = 2) AND ((prpage MOD prformat) = 0)) Then
     Begin
         PriSetTopMargins;
         inblock := 'showpage';
         PriString (inblock);
     End;
-    LastFileName := FExpand (TextRec (PSFile).Name);
     close (psfile);
     IniIniColors;
     printeron := false;
@@ -731,31 +755,44 @@ Begin
     Begin
         assign (lst, prdevice);
         assign (infile, 'psfile');
-        LastFileName := FExpand ('PSFILE');
         reset (infile);
-        LastFileName := FExpand (TextRec (Lst).Name);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint (HntCannotOpenTempFile, HintWaitEsc);
+            exit;
+        End;
         rewrite (lst);
+        If IOResult <> 0 Then
+        Begin
+            close (infile);
+            HlpHint (HntPrinterError, HintWaitEsc);
+            exit;
+        End;
         While NOT eof (infile) Do
         Begin
-            LastFileName := FExpand ('PSFILE');
             readln (infile, inblock);
-            LastFileName := FExpand (TextRec (Lst).Name);
-      {$I-}
+            If IOResult <> 0 Then
+            Begin
+                close (infile);
+                close (lst);
+                HlpHint (HntCannotReadFile, HintWaitEsc);
+                exit;
+            End;
             writeln (lst, inblock);
             If IOResult <> 0 Then
             Begin
+                close (infile);
+                close (lst);
                 HlpHint (HntPrinterError, HintWaitEsc);
-                Exit;
+                exit;
             End;
-      {$I+}
         End;
-        LastFileName := FExpand (TextRec (Lst).Name);
         Close (Lst);
-        LastFileName := FExpand ('PSFILE');
         Close (infile);
         HlpHint (HntPrintFinished, HintWaitEsc);
     End Else
         HlpHint (HntPrintToFileFinished, HintWaitEsc);
+    PriPostscriptComplete := True; { Success }
 End;
 
 Procedure PriMakeUmlaute(Var psfile: text);
@@ -779,7 +816,7 @@ Begin
     writeln (psfile, '      } ifelse');
     writeln (psfile, '} forall');
     { /Encoding ist read-only                             }
-    { Attribut wird mit copy nicht Åbertragen:            }
+    { Attribut wird mit copy nicht uebertragen:            }
     writeln (psfile, 'newdict /Encoding get dup length array copy');
     writeln (psfile, 'newdict /Encoding 3 -1 roll put');
     { Direkt im dict ersetzen                             }
@@ -841,7 +878,7 @@ Begin
     writeln (psfile, 'Encoding 123 /braceleft put % { ');
     writeln (psfile, 'Encoding 125 /braceright put % } ');
 
-    {ZusÑtzlich: nicht kodierte Zeichen wie Iacute, Egrave etc. PS Seite 844}
+    {Zusaetzlich: nicht kodierte Zeichen wie Iacute, Egrave etc. PS Seite 844}
 
     writeln (psfile, 'end');
     { Newdict definieren                                  }
