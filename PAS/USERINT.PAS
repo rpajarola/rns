@@ -1,4 +1,4 @@
-﻿{$I-}
+﻿{$I RNS.H}
 
 Unit userint;
 
@@ -108,34 +108,26 @@ Var
 Begin
     GetDir (0, actdir);
     Assign (infile, 'config.rns');
-    LastFileName := FExpand ('CONFIG.RNS');
     reset (infile);
-  {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot open config file: CONFIG.RNS');
         WriteLn ('Make sure the config file exists in the current directory.');
         Halt (2);
     End;
-  {$I-}
     readln (infile, datadir);
-  {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read data directory from CONFIG.RNS');
         close (infile);
         Halt (100);
     End;
-  {$I-}
     ChDir (DataDir);
-  {$I+}
     If IOResult <> 0 Then SearchADir (Datadir) Else
         ChDir (ActDir);
-  {$I-}
     readln (infile, colorfile);
     readln (infile, psdir);
     readln (infile, bufdir);
-  {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read configuration data from CONFIG.RNS');
@@ -148,23 +140,19 @@ Begin
         datadir := copy (datadir, 1, b - 1) + copy (datadir, b + 1, length (datadir) - b - 1);
     If NOT IniDirExist (datadir) Then
     Begin
-  {$I-}
         MkDir (datadir);
         If IOResult <> 0 Then RunError (IOResult);
-  {$I+}
     End;
     If psdir = '' Then
         psdir := 'PSFILES';
     If bufdir = '' Then
         bufdir := 'BUFFERS';
-  {$I-}
     If NOT IniDirExist (psdir) Then
         MkDir (psdir);
     If IOResult <> 0 Then RunError (IOResult);
     If NOT IniDirExist (bufdir) Then
         MkDir (bufdir);
     If IOResult <> 0 Then RunError (IOResult);
-  {$I+}
     ChDir (ActDir);
 End;
 
@@ -178,21 +166,17 @@ Var
 Begin
     Assign (outfile, 'config.rns');
     LastFileName := FExpand ('CONFIG.RNS');
-   {$I-}
     rewrite (outfile);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot create config file: CONFIG.RNS');
         WriteLn ('Check write permissions in current directory.');
         Halt (5);
     End;
-   {$I-}
     writeln (outfile, datadir);
     writeln (outfile, colorfile);
     writeln (outfile, psdir);
     writeln (outfile, bufdir);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot write configuration data to CONFIG.RNS');
@@ -220,9 +204,7 @@ Begin
         Halt (2);
     End;
     {Aktuelle Attribute lesen}
-   {$I-}
     readln (infile, inblock);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read setup data from setup file');
@@ -230,7 +212,6 @@ Begin
         Halt (100);
     End;
     GetNoteBlock (inblock, tempattr, 1);
-   {$I-}
     readln (infile, insmusicline);
     actattr := tempattr;
     readln (infile, linecount);
@@ -238,7 +219,6 @@ Begin
         manset, charset, blankset);
     readln (infile, prformat, prdest);
     readln (infile, prfname);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read setup parameters from setup file');
@@ -246,10 +226,8 @@ Begin
         Halt (100);
     End;
     IniLeadBlank (prfname);
-   {$I-}
     readln (infile, prfile);
     readln (infile, prdevice);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read printer settings from setup file');
@@ -257,7 +235,6 @@ Begin
         Halt (100);
     End;
     IniLeadBlank (prdevice);
-   {$I-}
     readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound);
     readln (infile, sndchar);
     readln (infile, sndbeat, sndbeatlength);
@@ -267,7 +244,6 @@ Begin
     readln (infile, ctrlenterofs);
     readln (infile, sndwarning);
     readln (infile, dispslash);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read sound and display settings from setup file');
@@ -300,18 +276,15 @@ Begin
     End;
     {Aktuelle Attribute schreibenlesen}
     LastFileName := FExpand (TextRec (infile).Name);
-   {$I-}
     writeln (infile, '          ',
         actattr.beats: 5, actattr.eint: 5, actattr.resolution: 5,
         actattr.linestyle: 5);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot write setup attributes to setup file');
         close (infile);
         Halt (101);
     End;
-   {$I-}
     writeln (infile, insmusicline);
     writeln (infile, '          ',
         linecount: 5);
@@ -332,7 +305,6 @@ Begin
     writeln (infile, ctrlenterofs: 3);
     writeln (infile, sndwarning: 3);
     writeln (infile, dispslash: 3);
-   {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot write setup data to setup file');
@@ -557,7 +529,7 @@ Begin
                                 datadir := instring;
                                 ok := true;
                             End Else Begin
-                   {$I-}MkDir (instring);{$I+}
+                   MkDir (instring);
                                 If IOResult = 0 Then
                                 Begin
                                     If HlpAreYouSure ('Directory "' + instring + '\" does not exist', hpFileMenu) Then
@@ -778,9 +750,7 @@ Begin
         Halt (2);
     End;
     LastFileName := FExpand (TextRec (Infile).Name);
-  {$I-}
     readln (infile, instring);
-  {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot read from pickfil file');
@@ -802,9 +772,7 @@ Begin
         Halt (5);
     End;
     LastFileName := FExpand (TextRec (infile).Name);
-  {$I-}
     writeln (infile, instring);
-  {$I+}
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot write to pickfil file');
@@ -890,9 +858,7 @@ Begin
                 assign (infile, 'copyr.rns');
             End;
             LastFileName := FExpand (TextRec (Infile).Name);
-      {$I-}
             reset (infile);
-      {$I+}
             If IOResult <> 0 Then
             Begin
                 WriteLn ('Error: Cannot open copyright file: ', String (TextRec (infile).Name));
@@ -902,9 +868,7 @@ Begin
             i := 6;
             While NOT eof (infile) Do
             Begin
-        {$I-}
                 readln (infile, inbuf);
-        {$I+}
                 If IOResult <> 0 Then
                 Begin
                     WriteLn ('Error: Cannot read from copyright file');
@@ -1067,10 +1031,8 @@ Begin
                             End;
                     End;
                     LastFileName := BakName;
-        {$I-}
                     If BakName <> '' Then
                         Erase (BakFile);
-        {$I+}
                     {.........................................................................}
                     {Zur�cksetzungen vor Save beim verlassen des Files}
                     {          soundchange:=(soundchange xor saMuffled) and not saMuffled;}
