@@ -1,4 +1,6 @@
-﻿Unit satunit;
+﻿{$I RNS.H}
+
+Unit satunit;
 
 Interface
 
@@ -12,7 +14,8 @@ Uses menutyp,
     fileunit,
     crt,
     helpunit,
-    UserExit;
+    UserExit,
+    Texts;
 
 
 Procedure SatSymbolParam(c: char);
@@ -27,12 +30,24 @@ Var c: char;
     parfile: File Of integer;
 Begin
     assign (parfile, 'SYMBOLS.PAR');
-    LastFileName := FExpand ('SYMBOLS.PAR');
     reset (parfile);
+    If IOResult <> 0 Then
+    Begin
+        HlpHint(HntCannotOpenFile, HintWaitEsc);
+        Exit;
+    End;
     For c := 'a' To 'z' Do
         For i := 1 To numofpar Do
             For j := 1 To 3 Do
+            Begin
                 write (parfile, sympar[c, i, j]);
+                If IOResult <> 0 Then
+                Begin
+                    close (parfile);
+                    HlpHint(HntCannotWriteFile, HintWaitEsc);
+                    Exit;
+                End;
+            End;
     close (parfile);
 {   instring:= fontfile;
    Delete(instring, length(instring) - 3, 4);
