@@ -1,4 +1,6 @@
-﻿Unit Specunit;
+﻿{$I RNS.H}
+
+Unit Specunit;
 
 Interface
 
@@ -213,9 +215,19 @@ Begin
                         If dummyb Then
                         Begin
                             assign (bfile, bufdir + '\' + instring);
-                            LastFileName := FExpand (bufdir + '\' + instring);
                             rewrite (bfile);
+                            If IOResult <> 0 Then
+                            Begin
+                                HlpHint(HntCannotCreateFile, HintWaitEsc);
+                                Exit;
+                            End;
                             writeln (bfile, '$$$RNSBUFFER$$$');
+                            If IOResult <> 0 Then
+                            Begin
+                                close(bfile);
+                                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                                Exit;
+                            End;
                             If marpartline Then
                                 i := 1
                             Else
@@ -224,6 +236,12 @@ Begin
                                 mstart.mline: 6, mstart.mpos: 6,
                                 mstart.mpag: 6,
                                 mend.mline: 6, mend.mpos: 6, mend.mpag: 6);
+                            If IOResult <> 0 Then
+                            Begin
+                                close(bfile);
+                                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                                Exit;
+                            End;
                             FilHeapToFile (bfile, bufactptr,
                                 bufstartptr, bufendptr, false,
                                 true, false);
@@ -246,13 +264,29 @@ Begin
                     If instring <> '' Then
                         If NOT IniFileExist (bufdir + '\' + instring) Then HlpHint (HntNotExist, HintWaitEsc) Else Begin
                             assign (bfile, bufdir + '\' + instring);
-                            LastFileName := FExpand (bufdir + '\' + instring);
                             reset (bfile);
+                            If IOResult <> 0 Then
+                            Begin
+                                HlpHint(HntCannotOpenFile, HintWaitEsc);
+                                Exit;
+                            End;
                             readln (bfile, inblock);
+                            If IOResult <> 0 Then
+                            Begin
+                                close(bfile);
+                                HlpHint(HntCannotReadFile, HintWaitEsc);
+                                Exit;
+                            End;
                             If (inblock = '$$$RNSBUFFER$$$') Then
                             Begin
                                 readln (bfile, i, mstart.mline, mstart.mpos, mstart.mpag,
                                     mend.mline, mend.mpos, mend.mpag);
+                                If IOResult <> 0 Then
+                                Begin
+                                    close(bfile);
+                                    HlpHint(HntCannotReadFile, HintWaitEsc);
+                                    Exit;
+                                End;
                                 marpartline := (i = 1);
                                 mstart.mpag := -1;
                                 mend.mpag := -1;
@@ -262,7 +296,6 @@ Begin
                                     actptr, startptr, lastptr, dummyb);
                                 Markinit;
                             End Else Begin
-                                LastFileName := FExpand (TextRec (bfile).Name);
                                 close (bfile);
                                 HlpHint (HntNotBlockFile, HintWaitEsc);
                             End;
@@ -364,8 +397,12 @@ Begin
                 FilFindPage (1, i, actptr, startptr, lastptr);
                 For i := 1 To pagecount Do PagRemovePage (actptr, startptr, lastptr);
                 FilHeapToFile (outfile, actptr, startptr, lastptr, true, false, true);
-                LastFileName := FExpand (TextRec (infile).Name);
                 reset (infile);
+                If IOResult <> 0 Then
+                Begin
+                    HlpHint(HntCannotOpenFile, HintWaitEsc);
+                    Exit;
+                End;
                 FilFileToHeap (infile, actptr, startptr, lastptr, ok);
                 FilFindPage (pagecount + 1, i, actptr, startptr, lastptr);
                 While (actptr <> lastptr) Do PagRemovePage (actptr, startptr, lastptr);

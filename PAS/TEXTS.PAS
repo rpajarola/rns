@@ -59,13 +59,13 @@ Const HntBufempty = 01;
     HntOpenBracketFirst = 63;
     HntCannotCreateFile = 64;
     HntFontFileNotFound = 65;
-    HntCannotReadFile = 66;
-    HntCannotWriteFile = 67;
-    HntCannotOpenTempFile = 68;
+    HntCannotOpenFile = 66;
+    HntCannotOpenTempFile = 66;
+    HntCannotReadFile = 68;
+    HntCannotWriteFile = 69;
 
-Const HintTexts: Array[1..68] Of String =
+Const HintTexts: Array[1..69] Of String =
 
-        { Maximal length=66 }
         {01}      (('Buffer empty'),                                         {22,25}
         {02}       ('Cannot move block in to itself'),                       {20,26}
         {03}       ('Cannot copy line into header or footer'),               {0}
@@ -129,11 +129,12 @@ Const HintTexts: Array[1..68] Of String =
         {61}       ('Can''t make empty brackets'),
         {62}       ('Close open bracket first'),
         {63}       ('Open bracket first before closing it'),
-        {64}        ('Cannot create file'),
-        {65}('Font file not found'),
-        {66}('Cannot read file'),
-        {67}('Cannot write file'),
-        {68}('Cannot open temp file'));
+        {64}       ('Cannot create file'),
+        {65}       ('Font file not found'),
+        {65}       ('Cannot open file'),
+        {66}       ('Cannot open temp file'),
+        {68}       ('Cannot read file'),
+        {69}       ('Cannot write file'));
 
 Implementation
 
