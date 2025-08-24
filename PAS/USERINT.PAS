@@ -165,7 +165,6 @@ Var
 
 Begin
     Assign (outfile, 'config.rns');
-    LastFileName := FExpand ('CONFIG.RNS');
     rewrite (outfile);
     If IOResult <> 0 Then
     Begin
@@ -275,7 +274,6 @@ Begin
         Halt (5);
     End;
     {Aktuelle Attribute schreibenlesen}
-    LastFileName := FExpand (TextRec (infile).Name);
     writeln (infile, '          ',
         actattr.beats: 5, actattr.eint: 5, actattr.resolution: 5,
         actattr.linestyle: 5);
@@ -749,7 +747,6 @@ Begin
         WriteLn ('Make sure the pickfil file exists in the data directory.');
         Halt (2);
     End;
-    LastFileName := FExpand (TextRec (Infile).Name);
     readln (infile, instring);
     If IOResult <> 0 Then
     Begin
@@ -771,7 +768,6 @@ Begin
         WriteLn ('Check write permissions in data directory.');
         Halt (5);
     End;
-    LastFileName := FExpand (TextRec (infile).Name);
     writeln (infile, instring);
     If IOResult <> 0 Then
     Begin
@@ -857,7 +853,6 @@ Begin
                 IniOutTextXY (substartx, (substarty + 4) * 2, inbuf);
                 assign (infile, 'copyr.rns');
             End;
-            LastFileName := FExpand (TextRec (Infile).Name);
             reset (infile);
             If IOResult <> 0 Then
             Begin
@@ -1030,7 +1025,6 @@ Begin
                                 End;
                             End;
                     End;
-                    LastFileName := BakName;
                     If BakName <> '' Then
                         Erase (BakFile);
                     {.........................................................................}
