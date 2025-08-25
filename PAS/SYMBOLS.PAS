@@ -1,4 +1,6 @@
-﻿Unit symbols;
+{$I RNS.H}
+
+Unit symbols;
 
 Interface
 
