@@ -111,14 +111,14 @@ Begin
     reset (infile);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot open config file: CONFIG.RNS');
+        WriteLn ('Error: Cannot open config file: config.rns');
         WriteLn ('Make sure the config file exists in the current directory.');
         Halt (2);
     End;
     readln (infile, datadir);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot read data directory from CONFIG.RNS');
+        WriteLn ('Error: Cannot read data directory from config.rns');
         close (infile);
         Halt (100);
     End;
@@ -130,7 +130,7 @@ Begin
     readln (infile, bufdir);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot read configuration data from CONFIG.RNS');
+        WriteLn ('Error: Cannot read configuration data from config.rns');
         close (infile);
         Halt (100);
     End;
@@ -168,7 +168,7 @@ Begin
     rewrite (outfile);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot create config file: CONFIG.RNS');
+        WriteLn ('Error: Cannot create config file: config.rns');
         WriteLn ('Check write permissions in current directory.');
         Halt (5);
     End;
@@ -178,7 +178,7 @@ Begin
     writeln (outfile, bufdir);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot write configuration data to CONFIG.RNS');
+        WriteLn ('Error: Cannot write configuration data to config.rns');
         close (outfile);
         Halt (101);
     End;
