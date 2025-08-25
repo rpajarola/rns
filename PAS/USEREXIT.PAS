@@ -10,9 +10,6 @@ Uses Crt,
     Graph,
     InitSc;
 
-Var
-    OrgExitProc: Pointer;
-
 Function Exitcode2Msg(N: Integer): String;
 Var s: String;
 Begin
@@ -75,9 +72,7 @@ End;
 Procedure NewExit;
 Begin
     CloseGraph();
-    ClrScr();
     IniShowCursor;
-    ExitProc := @OrgExitProc;
     If (Exitcode = 0) OR (ErrorAddr = Nil) Then
         Exit;
     WriteLn (ExitCode2Msg (ExitCode));
@@ -85,6 +80,5 @@ Begin
 End;
 
 Begin
-    OrgExitProc := ExitProc;
     ExitProc := @NewExit;
 End.
