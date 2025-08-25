@@ -1,4 +1,6 @@
-﻿Unit butunit;
+﻿{$I RNS.H}
+
+Unit butunit;
 
 Interface
 
