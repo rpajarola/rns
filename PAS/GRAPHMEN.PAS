@@ -1,4 +1,6 @@
-﻿Unit GraphMenu;
+﻿{$I RNS.H}
+
+Unit GraphMenu;
 
 Interface
 
