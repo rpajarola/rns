@@ -1,4 +1,5 @@
 ﻿{$I RNS.H}
+
 Unit editunit;
 
 Interface
@@ -60,11 +61,15 @@ Begin
     Assign (F1, N1);
     Assign (F2, N2);
     FileMode := 0;
-    LastFileName := FExpand (N1);
     ReSet (F1, 1);
+    If IOResult <> 0 Then Exit;
     FileMode := 1;
-    LastFileName := FExpand (N2);
     ReWrite (F2, 1);
+    If IOResult <> 0 Then
+    Begin
+        Close(F1);
+        Exit;
+    End;
     FileMode := 2;
     S := FileSize (F1);
     If S > 65528 Then
@@ -76,16 +81,15 @@ Begin
     While (S > 0) AND (C <> 0) Do
     Begin
         If S > M Then BlockRead (F1, P^, M, C) Else BlockRead (F1, P^, S, C);
+        If IOResult <> 0 Then Break;
         Dec (S, C);
-        LastFileName := FExpand (N2);
         BlockWrite (F2, P^, C, C1);
+        If IOResult <> 0 Then Break;
         If C1 <> C Then
             C := 0;
-        LastFileName := FExpand (N1);
     End;
     FreeMem (P, M);
     Close (F1);
-    LastFileName := FExpand (N2);
     Close (F2);
 End;
 
@@ -159,13 +163,29 @@ Begin
     Begin
         FilAssignRnsFile (infile, instring, true);
         Reset (infile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            Exit;
+        End;
         instring := instring + exts;
         readln (infile, inblock);
+        If IOResult <> 0 Then
+        Begin
+            close(infile);
+            HlpHint(HntCannotReadFile, HintWaitEsc);
+            Exit;
+        End;
         If inblock = '$$$RNSBUFFER$$$' Then
             bufffile := true
         Else
             bufffile := false;
         ReSet (infile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            Exit;
+        End;
     End Else assign (infile, instring){    if ((demloc) and (Pos('TESTFILE.RNS',instring) = 0)) then begin
       SetFAttr(infile, ReadOnly);
     end else};
@@ -178,36 +198,76 @@ Begin
         actedit := actedit + [setuppage];
         IniSwapColors;
         FilAssignRnsFile (ifile, 'pageset', true);
-        LastFileName := FExpand (TextRec (INFile).Name);
         Rewrite (infile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotCreateFile, HintWaitEsc);
+            Exit;
+        End;
         ReSet (ifile);
+        If IOResult <> 0 Then
+        Begin
+            close(infile);
+            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            Exit;
+        End;
         For linenum := topmargin To pagelength Do
         Begin
-            LastFileName := FExpand (TextRec (IFile).Name);
             Readln (ifile, inblock);
-            LastFileName := FExpand (TextRec (INFile).Name);
+            If IOResult <> 0 Then
+            Begin
+                close(ifile);
+                close(infile);
+                HlpHint(HntCannotReadFile, HintWaitEsc);
+                Exit;
+            End;
             Writeln (infile, inblock);
+            If IOResult <> 0 Then
+            Begin
+                close(ifile);
+                close(infile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
         End;
         Close (infile);
-        LastFileName := FExpand (TextRec (ifile).Name);
         Close (ifile);
     {leeren von Pagefil.rns Dieses File wird nach Abschluss
      des Pagelayout in Sp2Unit zur�ckgeladen}
         Assign (ifile, 'PAGEFIL.RNS');
-        LastFileName := FExpand ('PAGEFIL.RNS');
         rewrite (ifile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotCreateFile, HintWaitEsc);
+            Exit;
+        End;
         close (ifile);
     End;
     If NOT defpagesetup Then
     Begin
-        LastFileName := FExpand (TextRec (Infile).Name);
         reset (infile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            Exit;
+        End;
         readln (infile, inblock);
+        If IOResult <> 0 Then
+        Begin
+            close(infile);
+            HlpHint(HntCannotReadFile, HintWaitEsc);
+            Exit;
+        End;
         If inblock = '$$$RNSBUFFER$$$' Then
             bufffile := true
         Else
             bufffile := false;
         ReSet (infile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            Exit;
+        End;
     End;
     actfilename := instring;
     FilFileToHeap (infile, actptr, startptr, lastptr, ok);
@@ -321,8 +381,12 @@ Begin
         soundattr := soundattr AND NOT saRhythm;
         If defpagesetup Then
         Begin
-            LastFileName := FExpand (TextRec (infile).Name);
             rewrite (infile);
+            If IOResult <> 0 Then
+            Begin
+                HlpHint(HntCannotCreateFile, HintWaitEsc);
+                Exit;
+            End;
             FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
         End Else If EdiSavePossible (actfilename) Then
         Begin
@@ -330,15 +394,25 @@ Begin
             Begin
                 FileChanged := 0;
                 FileMode := 2;
-        {$I-}
                 ReWrite (InFile);
-        {$I+}
                 If IOResult = 0 Then
                 Begin
                     If bufffile Then
                     Begin
                         WriteLn (infile, '$$$RNSBUFFER$$$');
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            Exit;
+                        End;
                         WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            Exit;
+                        End;
 
                         FilHeapToFile (infile, actptr, startptr, lastptr, true, true, false);
                         FilCutBlockFile (FExpand (TextRec (infile).Name));
