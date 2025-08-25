@@ -1,4 +1,6 @@
-﻿Unit musikunit;
+{$I RNS.H}
+
+Unit musikunit;
 
 Interface
 
