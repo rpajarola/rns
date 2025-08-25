@@ -1,4 +1,6 @@
-﻿Unit pageunit;
+﻿{$I RNS.H}
+
+Unit pageunit;
 
 Interface
 
