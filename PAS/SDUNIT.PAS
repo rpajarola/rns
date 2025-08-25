@@ -1,5 +1,5 @@
-﻿{$A+,B-,D+,G+,I+,O-,P-,Q+,R+,S+,T-,V-,X+}
-{$M 16384,0,655360}
+{$I RNS.H}
+
 Unit SDUnit;
 
 Interface
