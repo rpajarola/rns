@@ -34,10 +34,7 @@ Begin
     // Original: Heaperror:= @HeapFunc;
     Assign (Buffile, 'Buffer');
     Assign (debfile, 'Debfile');
-    LastFileName := FExpand ('DEBFILE');
-   {$I-}
     Rewrite (debfile);
-   {$I+}
     If ioresult <> 0 Then
     Begin filemode := 0;
         reset (debfile);
@@ -50,7 +47,5 @@ Begin
     TextBackground (black);
     TextColor (white);
     ClrScr;
-    LastFileName := FExpand (TextRec (Debfile).Name);
     Close (debfile);
-   {$I-}
 End.
