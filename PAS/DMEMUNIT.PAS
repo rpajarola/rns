@@ -1,4 +1,6 @@
-﻿Unit dmemunit;
+﻿{$I RNS.H}
+
+Unit dmemunit;
 
 Interface
 
