@@ -1,9 +1,8 @@
 ﻿{$I RNS.H}
+
 Unit UserExit;
 
 Interface
-
-Var LastFileName: String;
 
 Implementation
 Uses Crt,
@@ -20,23 +19,23 @@ Begin
     Case N Of
         0: s := (' Normal Program termination');
         1: s := (' Invalid function number');
-        2: s := (' File ' + lastfilename + ' missing');
-        3: s := (' Path not found(' + lastfilename + ')');
-        4: s := (' Too many open files(' + lastfilename + ')');
-        5: s := (' File ' + lastfilename + ' access denied');
-        6: s := (' Invalid file handle(' + lastfilename + ')');
-        12: s := (' Invalid file access code(' + lastfilename + ')');
-        15: s := (' Invalid ' + lastfilename + ' drive number');
-        16: s := (' Cannot remove current directory(' + lastfilename + ')');
+        2: s := (' File missing');
+        3: s := (' Path not found');
+        4: s := (' Too many open files');
+        5: s := (' File access denied');
+        6: s := (' Invalid file handle');
+        12: s := (' Invalid file access code');
+        15: s := (' Invalid drive number');
+        16: s := (' Cannot remove current directory');
         17: s := (' Cannot rename across drives');
         18: s := (' No more files');
         24: s := (' Graphics driver error');
         100: s := (' Disk read error,' + #13 + ' Run CHKDSK/F to correct error');
         101: s := (' Disk write error,' + #13 + ' Run CHKDSK/F to correct error');
-        102: s := (' File not assigned ' + lastfilename);
-        103: s := (' File ' + lastfilename + ' not open');
-        104: s := (' File ' + lastfilename + ' not open for input');
-        105: s := (' File ' + lastfilename + ' not open for output');
+        102: s := (' File not assigned');
+        103: s := (' File not open');
+        104: s := (' File not open for input');
+        105: s := (' File not open for output');
         106: s := (' Invalid numeric format');
         150: s := (' Disk is write-protected,' + #13 + ' Remove write-protection');
         151: s := (' Bad drive request struct length');
@@ -88,5 +87,4 @@ End;
 Begin
     OrgExitProc := ExitProc;
     ExitProc := @NewExit;
-    LastFileName := '';
 End.
