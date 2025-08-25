@@ -1,3 +1,5 @@
+{$I RNS.H}
+
 Unit textunit;
 
 Interface
