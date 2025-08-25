@@ -520,7 +520,6 @@ End;
 {***************************}
 procedure PriComplString(inblock: stringline);
 begin
-  LastFileName:=FExpand(TextRec(psfile).Name);
   writeln(psfile,'(', inblock, ') show');
 end;
 
