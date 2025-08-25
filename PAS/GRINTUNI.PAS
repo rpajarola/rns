@@ -1,4 +1,6 @@
-﻿Unit grintunit;
+﻿{$I RNS.H}
+
+Unit grintunit;
 
 Interface
 
