@@ -9,7 +9,7 @@
   {$Q+}               { Overflow Check     }
 {$ENDIF}
   {$S+}               { Stack Check        }
-  {$I+}               { IO-Check           }
+  {$I-}               { No IO-Check        }
   {$A+}               { Word align Data    }
   {$V-}               { Strict VAR Strings }
   {$B-}               { Boolean Eval       }
