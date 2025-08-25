@@ -1,4 +1,5 @@
 ﻿{$I RNS.H}
+
 Unit Comunit;
 
 Interface
@@ -764,10 +765,22 @@ Begin
                     i := pagecount;
                     FilSavePage (1, PageLength, actptr, startptr, lastptr);
                     assign (delfil, 'delpage');
-                    LastFileName := FExpand ('DELPAGE');
                     reset (delfil);
+                    If IOResult <> 0 Then
+                    Begin
+                        HlpHint(HntCannotOpenFile, HintWaitEsc);
+                        Exit;
+                    End;
                     For j := 1 To pagelength Do
+                    Begin
                         readln (delfil, page[j]);
+                        If IOResult <> 0 Then
+                        Begin
+                            close(delfil);
+                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            Exit;
+                        End;
+                    End;
                     PagRefPage;
                     close (delfil);
                     FilFindPage (pagecount, i, actptr, startptr, lastptr);
@@ -776,10 +789,22 @@ Begin
             163:{alt del}Begin{save page to buffer}
                 delpage := true;
                 assign (delfil, 'delpage');
-                LastFileName := FExpand ('DELPAGE');
                 rewrite (delfil);
+                If IOResult <> 0 Then
+                Begin
+                    HlpHint(HntCannotCreateFile, HintWaitEsc);
+                    Exit;
+                End;
                 For i := 1 To pagelength Do
+                Begin
                     writeln (delfil, page[i]);
+                    If IOResult <> 0 Then
+                    Begin
+                        close(delfil);
+                        HlpHint(HntCannotWriteFile, HintWaitEsc);
+                        Exit;
+                    End;
+                End;
                 close (delfil);
                 {goto previous page if this is last page}
                 If actptr = lastptr Then
@@ -841,12 +866,28 @@ Begin
                     End;
                     fileChanged := 0;
                     FilSavePage (1, pagelength, actptr, startptr, lastptr);
-                    LastFileName := FExpand (TextRec (infile).Name);
                     rewrite (infile);
+                    If IOResult <> 0 Then
+                    Begin
+                        HlpHint(HntCannotCreateFile, HintWaitEsc);
+                        Exit;
+                    End;
                     If bufffile Then
                     Begin
                         WriteLn (infile, '$$$RNSBUFFER$$$');
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            Exit;
+                        End;
                         WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            Exit;
+                        End;
                         FilHeapToFile (infile, actptr, startptr, lastptr,
                             false, false, false);
                     End Else
