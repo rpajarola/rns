@@ -1,4 +1,6 @@
-﻿Unit prmunit;
+{$I RNS.H}
+
+Unit prmunit;
 
 Interface
 

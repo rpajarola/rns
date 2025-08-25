@@ -1,4 +1,6 @@
-﻿Unit Mousdrv;
+﻿{$I RNS.H}
+
+Unit Mousdrv;
 
 Interface
 

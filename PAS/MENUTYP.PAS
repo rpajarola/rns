@@ -1,4 +1,6 @@
-﻿Unit MenuTyp;
+﻿{$I RNS.H}
+
+Unit MenuTyp;
 
 Interface
 

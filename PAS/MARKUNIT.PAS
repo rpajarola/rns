@@ -1,4 +1,6 @@
-﻿Unit markunit;
+{$I RNS.H}
+
+Unit markunit;
 
 Interface
 

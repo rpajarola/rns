@@ -1,4 +1,6 @@
-﻿Unit LoadBmp;
+﻿{$I RNS.H}
+
+Unit LoadBmp;
 
 Interface
 

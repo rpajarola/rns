@@ -1,4 +1,6 @@
-﻿Unit imenuunit;
+﻿{$I RNS.H}
+
+Unit imenuunit;
 
 Interface
 
