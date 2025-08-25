@@ -54,6 +54,7 @@ Procedure PriClosepath;
 Procedure PriPlaceString(x, y: real; inblock: stringline);
 Procedure PriSwapFont;
 Procedure PriLeftString(instring: stringline; x, y: real);
+procedure PriComplString(inblock: stringline);
 Procedure PriArc(rx, ry, rad, startw, endw: real; c: char);
 Procedure PriHorizontalKlammer(ixmin, ixmax, iy: integer);
 Procedure PriVerticalKlammer(ix, iymin, iymax: integer);
@@ -515,6 +516,13 @@ Begin
     inblock := '(' + instring + ') show';
     PriString (inblock);
 End;
+
+{***************************}
+procedure PriComplString(inblock: stringline);
+begin
+  LastFileName:=FExpand(TextRec(psfile).Name);
+  writeln(psfile,'(', inblock, ') show');
+end;
 
 {******************************************************************}
 Procedure PriHorizontalKlammer(ixmin, ixmax, iy: integer);
