@@ -1,4 +1,6 @@
-﻿Unit GetUnit;
+﻿{$I RNS.H}
+
+Unit GetUnit;
 
 Interface
 
