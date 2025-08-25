@@ -1,4 +1,6 @@
-﻿Unit gcurunit;
+﻿{$I RNS.H}
+
+Unit gcurunit;
 
 Interface
 
