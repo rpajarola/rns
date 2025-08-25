@@ -1,4 +1,6 @@
-﻿Unit sp2unit;
+﻿{$I RNS.H}
+
+Unit sp2unit;
 
 Interface
 
