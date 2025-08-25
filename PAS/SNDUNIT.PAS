@@ -1,4 +1,5 @@
-﻿{$Q-}
+﻿{$I RNS.H}
+
 Unit sndunit;
 
 Interface
