@@ -1,4 +1,6 @@
-﻿Unit ScrSave;
+﻿{$I RNS.H}
+
+Unit ScrSave;
 
 Interface
 
