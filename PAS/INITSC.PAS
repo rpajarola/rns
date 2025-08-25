@@ -622,11 +622,8 @@ Begin
     If Pos ('.', Instring) <> 0 Then
         Instring := Copy (Instring, 1, Pos ('.', Instring) - 1);
     Assign (F, 'FONTS.RNS');
-    LastFileName := 'FONTS.RNS';
     SFM := FileMode;
-{$I-}
     ReSet (F);
-{$I+}
     FileMode := SFM;
     If IOResult <> 0 Then
     Begin
@@ -663,9 +660,7 @@ Function IniDirExist(instring: string79): boolean;
 Var actdir: string;
 Begin
     GetDir (0, actdir);
-  {$I-}
     ChDir (instring);
-  {$I+}
     If IOResult = 0 Then
     Begin
         ChDir ('..');
@@ -1112,20 +1107,48 @@ Var i, j: integer;
     parfile: File Of integer;
 Begin
     assign (infile, 'symbols.sym');
-    LastFileName := FExpand ('SYMBOLS.SYM');
     reset (infile);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn('Error: Cannot open symbols.sym file');
+        WriteLn('Make sure the file exists in the current directory.');
+        RunError(127);
+    End;
     For c := 'a' To 'z' Do
         For i := 1 To 15 Do
             For j := 1 To 3 Do
+            Begin
                 read (infile, symarr[c, i, j]);
+                If IOResult <> 0 Then
+                Begin
+                    close(infile);
+                    WriteLn('Error: Cannot read data from symbols.sym file');
+                    RunError(127);
+                End;
+            End;
     close (infile);
     assign (parfile, 'symbols.par');
-    LastFileName := FExpand ('SYMBOLS.PAR');
     reset (parfile);
+    If IOResult <> 0 Then
+    Begin
+        close(infile);
+        WriteLn('Error: Cannot open symbols.par file');
+        WriteLn('Make sure the file exists in the current directory.');
+        RunError(127);
+    End;
     For c := 'a' To 'z' Do
         For i := 1 To numofpar Do
             For j := 1 To 3 Do
+            Begin
                 read (parfile, sympar[c, i, j]);
+                If IOResult <> 0 Then
+                Begin
+                    close(parfile);
+                    close(infile);
+                    WriteLn('Error: Cannot read data from symbols.par file');
+                    RunError(127);
+                End;
+            End;
     close (parfile);
 End;
 {**************************************************************}
@@ -1181,11 +1204,13 @@ Procedure IniIniColors;
 Var infile: text;
 Begin
     Assign (infile, 'colors.rns');
-    LastFileName := FExpand ('COLORS.RNS');
-{$I-}
     reset (infile);
-{$I+}
-    If IOResult <> 0 Then RunError (217);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn('Error: Cannot open colors.rns file');
+        WriteLn('Make sure the file exists in the current directory.');
+        RunError(127);
+    End;
     readln (infile, bkcolor);
     readln (infile, lcolor);
     readln (infile, ibkcolor);
@@ -1214,6 +1239,13 @@ Begin
     readln (infile, mausmbkcolor);
     readln (infile, FrameColor);
     readln (infile, FrameBkColor);
+    If IOResult <> 0 Then
+    Begin
+        close(infile);
+        WriteLn('Error: Cannot read color data from colors.rns file');
+        WriteLn('File may be corrupted or incomplete.');
+        RunError(127);
+    End;
     close (infile);
 End;
 {**************************************************************}
