@@ -1,4 +1,6 @@
-﻿Unit grinout;
+{$I RNS.H}
+
+Unit grinout;
 
 Interface
 
