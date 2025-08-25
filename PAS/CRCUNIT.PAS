@@ -1,5 +1,7 @@
-﻿Unit CrcUnit;
-{$I RNS.H}
+﻿{$I RNS.H}
+
+Unit CrcUnit;
+
 Interface
 
 Function GetCRC(fn: String): Word;
