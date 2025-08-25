@@ -1,4 +1,6 @@
-﻿Unit timer;
+﻿{$I RNS.H}
+
+Unit timer;
 
 Interface
 
