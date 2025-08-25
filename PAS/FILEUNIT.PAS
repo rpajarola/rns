@@ -1,4 +1,5 @@
 ﻿{$I RNS.H}
+
 Unit fileunit;
 
 Interface
@@ -107,32 +108,35 @@ Var infile, outfile: File;
 Begin
     assign (infile, FExpand (instring));
     assign (outfile, FExpand (outstring));
-    LastFileName := FExpand (instring);
     FileMode := 0;
-{$I-}
     reset (infile, 1);
-    If IOResult <> 0 Then;
+    If IOResult <> 0 Then
+    Begin
+        HlpHint(HntCannotOpenFile, HintWaitEsc);
+        Exit;
+    End;
     FileMode := 2;
-    LastFileName := FExpand (OutString);
     rewrite (outfile, 1);
-    If IOResult <> 0 Then;
-{$I+}
-    inblocksize := 65536 - 16; { Modern replacement for memavail - use fixed buffer size }
+    If IOResult <> 0 Then
+    Begin
+        close(infile);
+        HlpHint(HntCannotCreateFile, HintWaitEsc);
+        Exit;
+    End;
+    inblocksize := 65536 - 16;
     If inblocksize > filesize (infile) Then
         inblocksize := filesize (infile);
     getmem (inblock, inblocksize);
     If inblock = nil Then
         runerror (217);
     Repeat
-        LastFileName := FExpand (instring);
         blockread (infile, inblock^, inblocksize, inread);
-        LastFileName := FExpand (Outstring);
+        If IOResult <> 0 Then Break;
         blockwrite (outfile, inblock^, inread, inwrite);
+        If IOResult <> 0 Then Break;
     Until (inread = 0) OR (inread <> inwrite);
     freemem (inblock, inblocksize);
-    LastFileName := FExpand (Instring);
     close (infile);
-    LastFileName := FExpand (Outstring);
     close (outfile);
 End;
 
@@ -143,7 +147,6 @@ Var infile: text;
     bufstr: stringline;
 Begin
     Assign (infile, instring);
-    LastFileName := FExpand (instring);
     Reset (infile);
     ReadLn (infile, bufstr);
     close (infile);
@@ -161,16 +164,37 @@ Begin
         (FilWrongVersion (instr2))) Then
         FilCopyFile (instring + exts, instr2);
     Assign (tfile, instr2);
-    LastFileName := FExpand (instr2);
     If readf Then
     Begin
         reset (tfile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            Exit;
+        End;
         readln (tfile);
+        If IOResult <> 0 Then
+        Begin
+            close(tfile);
+            HlpHint(HntCannotReadFile, HintWaitEsc);
+            Exit;
+        End;
     End
     Else
     Begin
         rewrite (tfile);
+        If IOResult <> 0 Then
+        Begin
+            HlpHint(HntCannotCreateFile, HintWaitEsc);
+            Exit;
+        End;
         writeln (tfile, 'version ', versionstring);
+        If IOResult <> 0 Then
+        Begin
+            close(tfile);
+            HlpHint(HntCannotWriteFile, HintWaitEsc);
+            Exit;
+        End;
     End;
 End;
 
@@ -364,6 +388,12 @@ Begin
             If inblock = '$$$RNSBUFFER$$$' Then
             Begin
                 readln (infile);
+                If IOResult <> 0 Then
+                Begin
+                    close(infile);
+                    HlpHint(HntCannotReadFile, HintWaitEsc);
+                    Exit;
+                End;
                 version := 0;
             End Else Begin
                 If copy (inblock, 1, 7) = 'VERSION' Then
@@ -372,6 +402,12 @@ Begin
                     If code <> 0 Then
                         version := 0;
                     readln (infile, inblock);
+                    If IOResult <> 0 Then
+                    Begin
+                        close(infile);
+                        HlpHint(HntCannotReadFile, HintWaitEsc);
+                        Exit;
+                    End;
                 End Else If (inblock[1] = 'N') OR (inblock[1] = 'T') Then version := 1 Else Begin
                     ReadLn (infile, inblock);
                     If (inblock[1] = 'N') OR (inblock[1] = 'T') Then
@@ -397,21 +433,44 @@ Begin
                     Begin
                         fontfile := inblock;  { font+snd...                           }
                         readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound);
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            Exit;
+                        End;
                         readln (infile, sndlengthspm);
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            Exit;
+                        End;
                         IniIniSymbols;
                     End;{case version of 3}
                     4:
                     Begin
                         fontfile := inblock;  { font+snd...                           }
                         readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound, soundattr);
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            Exit;
+                        End;
                         readln (infile, sndlengthspm);
+                        If IOResult <> 0 Then
+                        Begin
+                            close(infile);
+                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            Exit;
+                        End;
                         IniIniSymbols;
                     End;
                 End;{case version}
             End;
             While ((NOT eof (infile)) AND (ok)) Do
             Begin
-                LastFileName := FExpand (TextRec (Infile).Name);
                 readln (infile, inblock);
                 If inblock = '' Then inblock := 'T'{if inblock=''}Else If (inblock[1] <> 'T') AND (inblock[1] <> 'N') Then
                 Begin
@@ -434,7 +493,6 @@ Begin
             End;{while ((not eof(infile)) and (ok))}
             If ok Then FilHeapInsertString (tempbuffer, tempptr, startptr, lastptr,
                     actptr, false);{if ok}
-            LastFileName := FExpand (TextRec (infile).Name);
             close (infile);
         End;{if lastptr<>nil}
     End{if filnew}Else ok := false;
@@ -472,15 +530,46 @@ Begin
         HlpHintFrame (grminx, grmaxy - {32}48, grmaxx, grmaxY);
         txtfnt.write (grminx + 20, grmaxY - 24{13}, HintTexts[HntSavingFile], getcolor, sz8x16, stnormal);
         Delay (250);
-        LastFileName := FExpand (fn);
-        If NOT fileopen Then rewrite (outfile);
+        If NOT fileopen Then 
+        Begin
+            rewrite (outfile);
+            If IOResult <> 0 Then
+            Begin
+                HlpHint(HntCannotCreateFile, HintWaitEsc);
+                Exit;
+            End;
+        End;
         If writeheader Then
         Begin
             WriteLn (Outfile, 'VERSION ' + VersionString);
+            If IOResult <> 0 Then
+            Begin
+                close(outfile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
             WriteLn (Outfile, fontfile);
+            If IOResult <> 0 Then
+            Begin
+                close(outfile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
             writeln (Outfile, sndlength: 5, sndlengthper: 3, sndplaybeat: 3,
                 sndplaypulse: 3, dispsound: 3, soundattr: 3);
+            If IOResult <> 0 Then
+            Begin
+                close(outfile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
             WriteLn (Outfile, sndlengthspm);
+            If IOResult <> 0 Then
+            Begin
+                close(outfile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
         End;
         While temptr <> lastptr Do
         Begin
@@ -490,6 +579,12 @@ Begin
             Begin
                 tempblock := Copy (inblock, 1, lineend - 1);
                 writeln (outfile, tempblock);
+                If IOResult <> 0 Then
+                Begin
+                    close(outfile);
+                    HlpHint(HntCannotWriteFile, HintWaitEsc);
+                    Exit;
+                End;
                 delete (inblock, 1, lineend);
                 lineend := pos (chr (0), inblock);
             End;
@@ -716,18 +811,14 @@ Begin
     FileMode := 0;
     OK := True;
     Assign (F1, FName1);
-    LastfileName := FExpand (FName1);
     ReSet (F1, 1);
     Assign (F2, FName2);
-    LastfileName := FExpand (FName2);
     ReSet (F2, 1);
     L := FileSize (F1);
     If L <> FileSize (F2) Then
     Begin
         FilCompareFiles := False;
-        LastfileName := FExpand (FName1);
         Close (F1);
-        LastfileName := FExpand (FName2);
         Close (F2);
         Exit;
     End;
@@ -854,11 +945,23 @@ Begin
     lastbuf := 2;
     delpage := true;
     assign (delfil, 'delpage');
-    LastFileName := FExpand ('DELPAGE');
     rewrite (delfil);
+    If IOResult <> 0 Then
+    Begin
+        HlpHint(HntCannotCreateFile, HintWaitEsc);
+        Exit;
+    End;
     If (pagebuf = -1) OR (pagebuf = pagecount) Then
         For i := 1 To pagelength Do
-            writeln (delfil, page[i]) Else Begin
+        Begin
+            writeln (delfil, page[i]);
+            If IOResult <> 0 Then
+            Begin
+                close(delfil);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
+        End Else Begin
         oldpage := pagecount;
         { Aktuelle Seite sichern }
         FilSavePage (1, pagelength, actptr, startptr, lastptr);
@@ -866,7 +969,15 @@ Begin
         FilFindPage (pagebuf, Result, actptr, startptr, lastptr);
         PagGetPageFromHeap (actptr, startptr, lastptr, i);
         For i := 1 To pagelength Do
+        Begin
             writeln (delfil, page[i]);
+            If IOResult <> 0 Then
+            Begin
+                close(delfil);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
+        End;
         pagecount := oldpage;
         FilFindPage (pagecount, Result, actptr, startptr, lastptr);
     End;
@@ -902,7 +1013,6 @@ Begin
         PagGetSetupPage (actptr, startptr, lastptr);
         { und delpage hineinschreiben }
         assign (delfil, 'delpage');
-        LastFileName := FExpand ('DELPAGE');
         ReSet (delfil);
         For i := 1 To pagelength Do
             ReadLn (delfil, page[i]);
@@ -926,7 +1036,6 @@ Begin
         PagGetSetupPage (actptr, startptr, lastptr);
         FilFindPage (pagecount, i, actptr, startptr, lastptr);
         assign (copyfile, 'COPYPAGE');
-        LastFileName := FExpand ('COPYPAGE');
         ReSet (copyfile);
         For i := 1 To pagelength Do
             ReadLn (copyfile, page[i]);
@@ -979,18 +1088,38 @@ Var Copyfile: Text;
     oldpage:  integer;
 Begin
     copypage := true;
-    LastFileName := FExpand ('COPYPAGE');
     assign (copyfile, 'COPYPAGE');
     rewrite (Copyfile);
+    If IOResult <> 0 Then
+    Begin
+        HlpHint(HntCannotCreateFile, HintWaitEsc);
+        Exit;
+    End;
     If pagebuf = -1 Then
         For i := 1 To pagelength Do
-            writeln (Copyfile, page[i]) Else Begin
+        Begin
+            writeln (Copyfile, page[i]);
+            If IOResult <> 0 Then
+            Begin
+                close(copyfile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
+        End Else Begin
         oldpage := pagecount;
         FilSavePage (1, pagelength, actptr, startptr, lastptr);
         FilFindPage (pagebuf, Result, actptr, startptr, lastptr);
         PagGetPageFromHeap (actptr, startptr, lastptr, i);
         For i := 1 To pagelength Do
+        Begin
             writeln (copyfile, page[i]);
+            If IOResult <> 0 Then
+            Begin
+                close(copyfile);
+                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                Exit;
+            End;
+        End;
         FilSavePage (1, pagelength, actptr, startptr, lastptr);
         FilFindPage (oldpage, Result, actptr, startptr, lastptr);
         PagGetPageFromHeap (actptr, startptr, lastptr, i);
