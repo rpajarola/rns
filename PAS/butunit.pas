@@ -12,26 +12,24 @@ Uses graph,
     GcuRunit;
 
 Type
-    string10 = String[10];
-
     pbutton = ^tbutton;
     tbutton = Object
     Private
         x0, x1, y0, y1: Integer;
         resp: response_type;
         keyresponse: Char;
-        mtext: string10;
+        mtext: string;
     Public
         Constructor init(ax0, ax1, ay0, ay1: Integer;
             aresp: response_type; akeyresponse: Char;
-            amtext: string10);
+            amtext: string);
         Procedure draw; Virtual;
         Function activated(mausx, mausy: Integer;
             Var vresp: response_type; Var vkeyresponse: Char):
             Boolean;
         Procedure GetSize(Var aX0, aY0, aX1, aY1: Integer);
         Procedure GetSettings(Var aresp: response_type; Var akeyresp: Char;
-            Var amtext: string10);
+            Var amtext: string);
     End;
 
     pThreeDButton = ^tThreeDButton;
@@ -40,7 +38,7 @@ Type
         TColor: Byte;
         Constructor init(ax0, ax1, ay0, ay1: Integer;
             aresp: response_type; akeyresponse: Char;
-            amtext: string10; aFC, aTC: Byte);
+            amtext: string; aFC, aTC: Byte);
         Procedure draw; Virtual;
         Procedure frame(c1, c2: Byte);
     End;
@@ -61,7 +59,7 @@ Implementation
 {*************************************************************}
 Constructor TButton.init(ax0, ax1, ay0, ay1: Integer;
     aresp: response_type; akeyresponse: Char;
-    amtext: string10);
+    amtext: string);
 Begin
     x0 := ax0;
     x1 := ax1;
@@ -109,10 +107,10 @@ Const butsizex = 56;
 Var i, j: Word;
     vresp: response_type;
     vkeyresponse: Char;
-    vmtext: string10;
+    vmtext: string;
     fc, tc: Byte;
 
-Const butmenu: Array[1..10, 1..4] Of string10 =
+Const butmenu: Array[1..10, 1..4] Of string =
         (('1  Help  ',
         'S  Show  ',
         'C  Print ',
@@ -307,7 +305,7 @@ Begin
 End;
 
 Procedure TButton.GetSettings(Var aresp: response_type; Var akeyresp: Char;
-    Var amtext: string10);
+    Var amtext: string);
 Begin
     aresp := resp;
     akeyresp := keyresponse;
@@ -316,7 +314,7 @@ End;
 
 Constructor tThreeDButton.init(ax0, ax1, ay0, ay1: Integer;
     aresp: response_type; akeyresponse: Char;
-    amtext: string10; aFC, aTC: Byte);
+    amtext: string; aFC, aTC: Byte);
 Begin
     Inherited init (ax0, ax1, ay0, ay1, aresp, akeyresponse, amtext);
     fcolor := aFC;

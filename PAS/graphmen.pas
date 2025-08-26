@@ -187,7 +187,6 @@ PARAMETER:
                Auswahl stehen soll
 
 BEN�TIGTE TYPENVEREINBARUNGEN:
-    STRING79      - Wird f�r alle Strings verwendet
     MENU_REC      - Record mit den Men�-Informationen
     RESPONSE_TYPE - Typ der Eingabe (von Get_Respsonse)
     MOVEMENT      - Richtung der eingegebenen Pfeiltasten
