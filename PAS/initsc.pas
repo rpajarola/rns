@@ -202,7 +202,7 @@ Type stringline = string[255];
 Var ThePalette: TDACTable;
     PalSteps: TRealDAC;
     symbcount: byte;   {das wievielte Zeichen wird angezeigt(f�r pagshowcurposistances}
-    infile, debfile: text;
+    infile: text;
     GraphDriver: integer;
     GraphMode: integer;
     ErrCode:  integer;
