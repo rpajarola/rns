@@ -176,7 +176,7 @@ Var LSt, RSt: String;
     NL, NR: Byte;
     Col, Row: String;
     c: char;
-    chbuf: string16;
+    chbuf: string;
     a: Byte;
     i, j: integer;
     {zeigt Position auf ML}
@@ -295,15 +295,15 @@ Begin
             End;{case getflam of}
             col := ' ' + col + ' Hz [Tab] ';
         End;{if getflam else}
-        If col[0] < #19 Then       {Zentrieren}
+        If Length (col) < 19 Then       {Zentrieren}
             col := ' ' + col;
-        While col[0] < #19 Do
+        While Length (col) < 19 Do
         Begin
             col := col + ' ';
-            If col[0] < #19 Then
+            If Length (col) < 19 Then
                 col := ' ' + col;
         End;{while col}
-        col[0] := #19;
+        SetLength (col, 19);
         Case Page[linenum, actposn] Of
             ' ': Col := '  0 Hz pause mark  ';
             ',': Col := '  0 Hz  time mark  ';
@@ -363,7 +363,7 @@ Begin
                 Lst := '  ' + Lst[2];
             If (L = 2) {and (Lst[1]<>'1')} Then
                 Lst := '0' + Lst;
-            If Lst[0] <> #3 Then
+            If Length (Lst) <> 3 Then
                 Lst := ' ' + Lst;
             {  if Lst='  1' then Lst:= '  1';  }
             If Lst = '   ' Then
@@ -387,7 +387,7 @@ Begin
                 Rst := Rst[1] + '  ';
             If (L = 2) {and (Rst[1]<>'1')} Then
                 Rst := '0' + Rst;
-            If Rst[0] <> #3 Then
+            If Length (Rst) <> 3 Then
                 Rst := Rst + ' ';
             If Rst = '   ' Then Rst := '..?';
         End Else Begin
@@ -404,17 +404,17 @@ Begin
                 eint := ' ' + copy (eint, 1, 2);
 
             Str (ActPost - 10, Col);
-            If Byte (Col[0]) = 1 Then
+            If Length (Col) = 1 Then
                 Col := '    '
-            Else If Byte (Col[0]) = 2 Then
+            Else If Length (Col) = 2 Then
                 Col := '    ';
-            Col[0]  := #4;
+            SetLength (Col, 4);
             Str (Linenum, Row);
-            If Byte (Row[0]) = 1 Then
+            If Length (Row) = 1 Then
                 Row := ' 0' + Row + ' '
-            Else If Byte (Row[0]) = 2 Then
+            Else If Length (Row) = 2 Then
                 Row := ' ' + Row + ' ';
-            Row[0]  := #4;
+            SetLength (Row, 4);
 
             If CorrY <> 2{1} Then
                 IniSpacedText (gmaxx DIV (2 * charwidth) - 3,
@@ -429,18 +429,18 @@ Begin
 
         {damit die y-Position der ML gleichzeitig richtig angezeigt wird:}
         Str (ActPost - 10, Col);
-        If Byte (Col[0]) = 1 Then
+        If Length (Col) = 1 Then
             Col := '    '
-        Else If Byte (Col[0]) = 2 Then
+        Else If Length (Col) = 2 Then
             Col := '    ';
-        Col[0]  := #4;
+        SetLength (Col, 4);
         Str (Linenum, Row);
-        If Byte (Row[0]) = 1 Then
+        If Length (Row) = 1 Then
             {      Row:='  '+Row + ' '  }
             Row := '  ' + Row + 'X'
-        Else If Byte (Row[0]) = 2 Then
+        Else If Length (Row) = 2 Then
             Row := ' ' + Row + 'X';
-        Row[0]  := #4;
+        SetLength (Row, 4);
 
         If (corry = 0) {or (addcent=0) } Then
             col := ' ' + LSt + ' ' + chbuf + ' ' + RSt + ' '
@@ -465,17 +465,17 @@ Begin
         If Page[linenum][1] = 'T' Then
         Begin
             Str (ActPost - 10, Col);
-            If Byte (Col[0]) = 1 Then
+            If Length (Col) = 1 Then
                 Col := ' 0' + Col + ' '
-            Else If Byte (Col[0]) = 2 Then
+            Else If Length (Col) = 2 Then
                 Col := ' ' + Col + ' ';
-            Col[0]  := #4;
+            SetLength (Col, 4);
             Str (Linenum, Row);
-            If Byte (Row[0]) = 1 Then
+            If Length (Row) = 1 Then
                 Row := ' 0' + Row + ' '
-            Else If Byte (Row[0]) = 2 Then
+            Else If Length (Row) = 2 Then
                 Row := ' ' + Row + ' ';
-            Row[0]  := #4;
+            SetLength (Row, 4);
             IniSpacedText (gmaxx DIV (3 * charwidth) - 24,
                 gmaxy DIV charheight - 5,
                 ' ' + #25 + Row + '�' + Col + #26 + ' ', frLow);
@@ -588,7 +588,7 @@ Begin
             dec (actpost);
         If actpost < linemarker + 2 Then
             actpost := linemarker + 2;
-        page[linenum, 0] := char (actpost - 1);
+        SetLength (page[linenum], actpost - 1);
         TexActPosX (Xa, actpost, linenum, true);
     End;
 End;
@@ -660,7 +660,7 @@ Begin
         If sndlengthspm = 0 Then sndlengthspm := 80;
         w := Round (1000 * sndlengthspm);
         Str ((w / 1000): 5: 3, St);
-        While St[0] < #8 Do
+        While Length (St) < 8 Do
             St := ' ' + st;
         Case sndlengthper Of
             1: st := St + '  B';
@@ -681,10 +681,10 @@ Begin
             St := actfilename;
             St := Copy (St, 1, x - 1) + Copy (St, x + 1, Length (St) - x);
             St := ' ' + St;
-            If St[0] > Char (itemlength + 2) Then
+            If Length (St) > itemlength + 2 Then
                 Repeat
-                    Dec (Byte (St[0]));
-                Until (St[Byte (St[0]) + 1]) = '.';
+                    SetLength (St, Length (St) - 1)
+                Until (St[Length (St) + 1]) = '.';
             IniExpand (St, itemlength + 2);
             UpString (St);
             IniSpacedText (gmaxx DIV charwidth - 22,
@@ -744,26 +744,26 @@ End;
 {*******************************************************************}
 Function PagEmptyPage(Var tempptr, startptr, lastptr: listptr): boolean;
     {Testen, ob die n�chste Seite im Heap leer ist}
-Var result, endreached: boolean;
+Var res, endreached: boolean;
     i, tbufpos: byte;
     inblock, tempbuf: stringline;
     tempsav: listptr;
 Begin
-    result := true;
+    res := true;
     i := topmargin;
     tbufpos := 0;
     tempbuf := '';
     tempsav := tempptr;
 
-    While ((result) AND (i <= pagelength)) Do
+    While ((res) AND (i <= pagelength)) Do
     Begin
         FilCheckLine (tempbuf, inblock, tempptr, startptr, lastptr,
             tbufpos, endreached, true, false);
         {leere Zeile oder Fuss/Kopftext Zeile}
-        If ((IniEmptyLine (inblock)) OR (inblock[4] = 'F')) Then i := i + 1 Else result := false;
+        If ((IniEmptyLine (inblock)) OR (inblock[4] = 'F')) Then i := i + 1 Else res := false;
     End;
     tempptr := tempsav;
-    PagEmptyPage := result;
+    PagEmptyPage := res;
 End;
 
 {*******************************************************************}

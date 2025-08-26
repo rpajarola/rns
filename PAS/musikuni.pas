@@ -19,7 +19,7 @@ Procedure MusGetPattern(Var IN_STRING: STRINGLINE;
 Procedure MusGetPromptedPattern(Var IN_STRING: STRINGLINE;
     STRDESC: char;
     DESCX, DESCY: integer;
-    PROMPT: STRING79;
+    PROMPT: STRING;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -38,7 +38,7 @@ Uses getunit,
 Procedure MusGetPromptedPattern(Var IN_STRING: STRINGLINE;
     STRDESC: char;
     DESCX, DESCY: integer;
-    PROMPT: STRING79;
+    PROMPT: STRING;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;

@@ -597,7 +597,7 @@ End;
 Procedure ImeInitBeatMenu;
 
 Var i: integer;
-    inblock: string16;
+    inblock: string;
 
 Begin
     {Beat-Menu initialisieren}
@@ -672,7 +672,7 @@ Begin
         Choices := 'FDSPCQ          ';
 
         Descriptions[1] := 'F - ' + upstring (datadir) + '\ Files            ';
-        Descriptions[1][0] := #24;
+        SetLength (Descriptions[1], 24);
         Descriptions[2] := 'D - Directories         ';
         Descriptions[3] := 'S - Symbol Fonts        ';
         Descriptions[4] := 'P - Page Layout         ';

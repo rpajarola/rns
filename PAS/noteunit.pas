@@ -65,7 +65,7 @@ Begin
 End;
 {****************************************************************}
 Procedure NotDelNote(linenum: integer; Var actpos: integer);
-Var stbuf: string16;
+Var stbuf: string;
 Begin
     UtiDelNoteChar (page[linenum], actpos, stbuf);
     UtiDelNumChar (page[linenum], actpos);
@@ -359,7 +359,7 @@ Begin
                 End; { else if i = 0 then }
                 If Left Then
                     ComEdArrow (movement (left), linenum, actpos, actpos)
-                Else If Byte (page[linenum, 0]) - actpos - 2 >= Byte (inbuffer[0]) Then
+                Else If Length (page[linenum]) - actpos - 2 >= Length (inbuffer) Then
                     ComEdArrow (movement (right), linenum, actpos, actpos);
                 GetLine (linenum, grminx);
                 ref := refNoRef;

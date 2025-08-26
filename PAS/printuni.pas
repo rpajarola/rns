@@ -54,7 +54,7 @@ Procedure PriClosepath;
 Procedure PriPlaceString(x, y: real; inblock: stringline);
 Procedure PriSwapFont;
 Procedure PriLeftString(instring: stringline; x, y: real);
-procedure PriComplString(inblock: stringline);
+Procedure PriComplString(inblock: stringline);
 Procedure PriArc(rx, ry, rad, startw, endw: real; c: char);
 Procedure PriHorizontalKlammer(ixmin, ixmax, iy: integer);
 Procedure PriVerticalKlammer(ix, iymin, iymax: integer);
@@ -518,10 +518,10 @@ Begin
 End;
 
 {***************************}
-procedure PriComplString(inblock: stringline);
-begin
-  writeln(psfile,'(', inblock, ') show');
-end;
+Procedure PriComplString(inblock: stringline);
+Begin
+    writeln (psfile, '(', inblock, ') show');
+End;
 
 {******************************************************************}
 Procedure PriHorizontalKlammer(ixmin, ixmax, iy: integer);

@@ -33,7 +33,7 @@ Begin
     reset (parfile);
     If IOResult <> 0 Then
     Begin
-        HlpHint(HntCannotOpenFile, HintWaitEsc);
+        HlpHint (HntCannotOpenFile, HintWaitEsc);
         Exit;
     End;
     For c := 'a' To 'z' Do
@@ -44,7 +44,7 @@ Begin
                 If IOResult <> 0 Then
                 Begin
                     close (parfile);
-                    HlpHint(HntCannotWriteFile, HintWaitEsc);
+                    HlpHint (HntCannotWriteFile, HintWaitEsc);
                     Exit;
                 End;
             End;

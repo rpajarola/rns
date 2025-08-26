@@ -1,4 +1,4 @@
-{$I RNS.H}
+﻿{$I RNS.H}
 
 Unit prmunit;
 
@@ -28,6 +28,7 @@ Uses
 {******************************************************************}
 Procedure PrmSetOptions;
 Var c: char;
+    sval: string;
     y, hy: integer;
     ok: boolean;
     m: boolean;
@@ -49,7 +50,9 @@ Begin
     If (pos (':', Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1]) = 0) Then prfile := 1 Else prfile := 0;
     If prfile = 1 Then
     Begin
-        IniLeadBlank (UsrMenu.ChoiceVal[3].sval);
+        sval := UsrMenu.ChoiceVal[3].sval;
+        IniLeadBlank (sval);
+        UsrMenu.ChoiceVal[3].sval := sval;
         If pos ('.', UsrMenu.ChoiceVal[3].sval) = 0 Then UsrMenu.ChoiceVal[3].sval := UsrMenu.ChoiceVal[3].sval + '.eps';
         HlpTestFileName (psdir + '\' + UsrMenu.ChoiceVal[3].sval,
             ok, grminx, grmaxx, y);

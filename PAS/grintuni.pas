@@ -25,14 +25,14 @@ Implementation
 (*Procedure GriBeatMenuDisp(linenum: integer;var startptr, lastptr : listptr);
 
 var c : char;
-    Bufstr : string79;
+    Bufstr : string;
     i, j, y, hy : integer;
     inblock, bufline : stringline;
     lineattr,tempattr: lineattrtype;
     a : byte;
     b,g,r : Integer;
     bc,ec,rc,lc : Boolean;
-    s1,s2,s3,s4,s5,s6 : String[10];
+    s1,s2,s3,s4,s5,s6 : String;
     ok : boolean;
     lines,linee,pages,pagee : integer;
     bufactptr,bufstartptr,bufendptr : listptr;
@@ -268,7 +268,7 @@ end;
 Procedure GriBeatMenuDisp(linenum: integer);
 
 Var c: char;
-    Bufstr: string79;
+    Bufstr: string;
     i, y, hy: integer;
     inblock, bufline: stringline;
     lineattr, tempattr: lineattrtype;
@@ -276,7 +276,7 @@ Var c: char;
     StartMlineSav: byte;
     a: byte;
     bc, ec, rc, lc: Boolean;
-    s1, s2, s3, s4, s5, s6: String[10];
+    s1, s2, s3, s4, s5, s6: String;
     ok: boolean;
 Begin
     ImeInitBeatMenu;

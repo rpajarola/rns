@@ -34,8 +34,8 @@ Begin
     reset (licfile);
     If IOResult <> 0 Then
     Begin
-        WriteLn('Error: Cannot open license file: IMIE.RNS');
-        WriteLn('This appears to be a demo version - license file not found.');
+        WriteLn ('Error: Cannot open license file: IMIE.RNS');
+        WriteLn ('This appears to be a demo version - license file not found.');
         TitVerify := False;
         Exit;
     End;
@@ -43,8 +43,8 @@ Begin
     readln (licfile, usrfirstname);
     If IOResult <> 0 Then
     Begin
-        WriteLn('Error: Cannot read user information from license file');
-        close(licfile);
+        WriteLn ('Error: Cannot read user information from license file');
+        close (licfile);
         TitVerify := False;
         Exit;
     End;
@@ -52,8 +52,8 @@ Begin
         readln (licfile, dummy);
     If IOResult <> 0 Then
     Begin
-        WriteLn('Error: Cannot read license data from license file');
-        close(licfile);
+        WriteLn ('Error: Cannot read license data from license file');
+        close (licfile);
         TitVerify := False;
         Exit;
     End;
@@ -61,8 +61,8 @@ Begin
     readln (licfile, ndiff);
     If IOResult <> 0 Then
     Begin
-        WriteLn('Error: Cannot read license verification data from license file');
-        close(licfile);
+        WriteLn ('Error: Cannot read license verification data from license file');
+        close (licfile);
         TitVerify := False;
         Exit;
     End;

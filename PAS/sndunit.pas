@@ -295,7 +295,7 @@ Var lineattr: lineattrtype;
         If sndlengthper = 1 Then actlength := sndlength Else
             actlength := sndlength DIV lineattr.beats;
         Str (sndlengthspm: 4: 3, st);
-        While st[0] < #8 Do
+        While Length (st) < 8 Do
             st := ' ' + st;
         IniSpacedText (65, gmaxy DIV charheight - 3, st, frNoFrame);
     End;
@@ -505,7 +505,7 @@ Begin
     OrgInblock := Inblock;
     auftakt := False;
     Wait := True;
-    If ((inblock[1] = 'N') AND (inblock[5] <> 'H') AND (inblock[0] > #35)) Then
+    If ((inblock[1] = 'N') AND (inblock[5] <> 'H') AND (Length (inblock) > 35)) Then
     Begin
         savey := 0;
         PlaySuccess := True;
@@ -1342,7 +1342,7 @@ Begin
                     If SChanged Then
                     Begin
                         Str (sndlengthspm: 4: 3, st);
-                        While st[0] < #8 Do
+                        While Length (st) < 8 Do
                             st := ' ' + st;
                         IniSpacedText (65, gmaxy DIV charheight - 3, st, frNoFrame);
                     End;
@@ -1824,7 +1824,7 @@ Procedure SndSoundMenu(Var linenum, actposn, actpost: integer;
 Var dir: movement;
     c: char;
     choicenum: byte;
-    x, y, hy: integer;
+    y, hy: integer;
     mausx, mausy, maustaste, mausmenu: word;
     Playnext: Boolean;
     shiftp, ctrlp: Boolean;
@@ -1846,7 +1846,6 @@ Begin
         GrGet_Menu_Response (hfminx, hy, usrmenu, c, dir, choicenum,
             mausx, mausy, maustaste, mausmenu,
             false, 0);
-        x := hfminx + usrmenu.menu_width + 16;
         c := UpCase (c);
         PagRefPage;
 
@@ -1881,7 +1880,7 @@ Begin
 
 
             Str (sndlengthspm: 4: 3, st);
-            While st[0] < #8 Do
+            While Length (st) < 8 Do
                 st := ' ' + st;
             If SndLengthPer = 1 Then
                 st := st + '   BPM '
@@ -2149,7 +2148,7 @@ End;
 Function SndGetCentStr(C: Integer): String;
 Var O, HT, Cn: Integer;
     S1, S2: String;
-Const IV: Array[0..11] Of string[3] = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179, '3b' + #179, '3 ' + #179, '4 ' + #179, '4#' + #179, '5 ' + #179, '6b' + #179, '6 ' + #179, '7b' + #179, '7 ' + #179);
+Const IV: Array[0..11] Of String = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179, '3b' + #179, '3 ' + #179, '4 ' + #179, '4#' + #179, '5 ' + #179, '6b' + #179, '6 ' + #179, '7b' + #179, '7 ' + #179);
 
     Procedure OHTCn;
     Var
@@ -2245,11 +2244,12 @@ Begin
 
     OHTCn;
     S1 := Oct + HTs + Cent;
-    If S1 = '  0�8 � � �+ 0Cent ' Then
+    { TODO: fix this }
+    If S1 = '  0' + #195 + #185 + '8 ' + #194 + #179 + ' ' + #195 + #132 + ' ' + #194 + #179 + '0Cent ' Then
         If ctrlF5 Then
-            S1 := '  NumBlock = Cent � ' // � = 241, f�rs Ctrl-F5
+            S1 := '  NumBlock = Cent ' + #241 + ' ' // f�rs Ctrl-F5
         Else
-            S1 := ' NumberBlock = Cent� '// � = 241, f�rs F5
+            S1 := ' NumberBlock = Cent' + #241 + ' '// f�rs F5
     ;
     IniCenter (S1, 21);
     SndGetCentStr := S1;

@@ -85,7 +85,7 @@ Var dir: movement;
     c: char;
     choicenum: byte;
     y, hy, i, endy: integer;
-    instring: string16;
+    instring: string;
     dummyb: boolean;
     bfile: text;
     inblock: stringline;
@@ -218,14 +218,14 @@ Begin
                             rewrite (bfile);
                             If IOResult <> 0 Then
                             Begin
-                                HlpHint(HntCannotCreateFile, HintWaitEsc);
+                                HlpHint (HntCannotCreateFile, HintWaitEsc);
                                 Exit;
                             End;
                             writeln (bfile, '$$$RNSBUFFER$$$');
                             If IOResult <> 0 Then
                             Begin
-                                close(bfile);
-                                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                                close (bfile);
+                                HlpHint (HntCannotWriteFile, HintWaitEsc);
                                 Exit;
                             End;
                             If marpartline Then
@@ -238,8 +238,8 @@ Begin
                                 mend.mline: 6, mend.mpos: 6, mend.mpag: 6);
                             If IOResult <> 0 Then
                             Begin
-                                close(bfile);
-                                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                                close (bfile);
+                                HlpHint (HntCannotWriteFile, HintWaitEsc);
                                 Exit;
                             End;
                             FilHeapToFile (bfile, bufactptr,
@@ -267,14 +267,14 @@ Begin
                             reset (bfile);
                             If IOResult <> 0 Then
                             Begin
-                                HlpHint(HntCannotOpenFile, HintWaitEsc);
+                                HlpHint (HntCannotOpenFile, HintWaitEsc);
                                 Exit;
                             End;
                             readln (bfile, inblock);
                             If IOResult <> 0 Then
                             Begin
-                                close(bfile);
-                                HlpHint(HntCannotReadFile, HintWaitEsc);
+                                close (bfile);
+                                HlpHint (HntCannotReadFile, HintWaitEsc);
                                 Exit;
                             End;
                             If (inblock = '$$$RNSBUFFER$$$') Then
@@ -283,8 +283,8 @@ Begin
                                     mend.mline, mend.mpos, mend.mpag);
                                 If IOResult <> 0 Then
                                 Begin
-                                    close(bfile);
-                                    HlpHint(HntCannotReadFile, HintWaitEsc);
+                                    close (bfile);
+                                    HlpHint (HntCannotReadFile, HintWaitEsc);
                                     Exit;
                                 End;
                                 marpartline := (i = 1);
@@ -372,7 +372,7 @@ End;
 Procedure SpeSplitFile(Var actptr, startptr, lastptr: listptr);
 {schreibt von der n�chsten Seite an alles in ein neues File}
 
-Var instring: string16;
+Var instring: string;
     ok: boolean;
     outfile: text;
     i:  integer;
@@ -400,7 +400,7 @@ Begin
                 reset (infile);
                 If IOResult <> 0 Then
                 Begin
-                    HlpHint(HntCannotOpenFile, HintWaitEsc);
+                    HlpHint (HntCannotOpenFile, HintWaitEsc);
                     Exit;
                 End;
                 FilFileToHeap (infile, actptr, startptr, lastptr, ok);

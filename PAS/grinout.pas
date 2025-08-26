@@ -1,4 +1,4 @@
-{$I RNS.H}
+ï»¿{$I RNS.H}
 
 Unit grinout;
 
@@ -17,9 +17,9 @@ Procedure GrPut_Integer(NUMBER, X, Y, NUM_LENGTH: integer);
 
 Procedure GrPut_Real(NUMBER: Real; X, Y, NUM_LENGTH: integer);{New}
 
-Procedure GrPut_Prompt(OUT_STRING: string79; X, Y: integer);
+Procedure GrPut_Prompt(OUT_STRING: string; X, Y: integer);
 
-Procedure GrGet_String(Var IN_STRING: STRING16;
+Procedure GrGet_String(Var IN_STRING: String;
     X, Y, OLDX, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
     Var DIRECTION: MOVEMENT;
@@ -28,7 +28,7 @@ Procedure GrGet_String(Var IN_STRING: STRING16;
     Var mausx, mausy: word;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
-Procedure GrGet_Spaced_String(Var IN_STRING: STRING16;
+Procedure GrGet_Spaced_String(Var IN_STRING: String;
     X, Y, OLDX, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
     Var DIRECTION: MOVEMENT;
@@ -37,7 +37,7 @@ Procedure GrGet_Spaced_String(Var IN_STRING: STRING16;
     Var mausx, mausy: word;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
-Procedure GrGetUpcase_String(Var IN_STRING: STRING16;
+Procedure GrGetUpcase_String(Var IN_STRING: String;
     X, Y, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
     Var DIRECTION: MOVEMENT;
@@ -57,12 +57,12 @@ Procedure GrGet_Integer(Var NUMBER: integer;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
 
-Procedure GrGet_Prompted_String(Var IN_STRING: STRING16;
+Procedure GrGet_Prompted_String(Var IN_STRING: String;
     STR_LENGTH: integer;
     STRDESC: char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -73,12 +73,12 @@ Procedure GrGet_Prompted_String(Var IN_STRING: STRING16;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
 
-Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: STRING16;
+Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: String;
     STR_LENGTH: integer;
     STRDESC: char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -94,7 +94,7 @@ Procedure GrGet_Prompted_Real(Var RNNUMBER: Real;     {New}
     STRDESC: Char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -111,7 +111,7 @@ Procedure GrGet_Prompted_Integer(Var INNUMBER: integer;
     STRDESC: Char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -129,7 +129,7 @@ Procedure GrGet_Prompted_Toggle(Var tval: integer;
     STRDESC: Char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -157,11 +157,11 @@ PARAMETER:
                            (rechtsbndig) [2-80]
 
 BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 
 ---------------------------------------------------------------------}
 Var
-    TEMP_STR: STRING79;
+    TEMP_STR: String;
 
 Begin
 
@@ -186,11 +186,11 @@ PARAMETER:
                            (rechtsbndig) [2-80]
 
 BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 
 ---------------------------------------------------------------------}
 Var
-    TEMP_STR: STRING79;
+    TEMP_STR: String;
     w: LongInt;
 Begin
 
@@ -207,7 +207,7 @@ End;
 
 {------------------------------------------------------------------}
 
-Procedure GrPut_Prompt(OUT_STRING: string79; X, Y: integer);
+Procedure GrPut_Prompt(OUT_STRING: string; X, Y: integer);
 {
 BESCHREIBUNG:
     Dieses Unterprogramm gibt einen String in einer bestimmten
@@ -219,7 +219,7 @@ PARAMETER:
     X, Y                  - Position
 
 BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 
 ---------------------------------------------------------------------}
 Begin
@@ -232,7 +232,7 @@ End;
 
 {-------------------------------------------------------------------}
 
-Procedure GrGet_Spaced_String(Var IN_STRING: STRING16;
+Procedure GrGet_Spaced_String(Var IN_STRING: String;
     X, Y, OLDX, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
     Var DIRECTION: MOVEMENT;
@@ -250,8 +250,8 @@ Const
                                  nach rechts }
 
 Var
-    OLDSTR: STRING79;          { Originaler String }
-    clstring: string79;
+    OLDSTR: String;          { Originaler String }
+    clstring: string;
     shiftp, ctrlp: boolean;
     mp: word;
 Begin
@@ -283,7 +283,7 @@ Begin
             If Ord (KeyResponse) = BACK_SPACE Then  { Rckschritt } Begin
                 If length (IN_STRING) > 0 Then
                 Begin
-                    Dec (Byte (In_string[0]));
+                    SetLength (In_string, Length (In_String) - 1);
                     Dec (X);
                     If Length (In_string) < (Str_Length - 1) Then
                         IniSpacedText (X, Y, '_ ', frNoFrame)
@@ -311,7 +311,7 @@ Begin
     IniHideCursor;
 End;
 {-------------------------------------------------------------------}
-Procedure GrGet_String(Var IN_STRING: STRING16;
+Procedure GrGet_String(Var IN_STRING: String;
     X, Y, OLDX, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
     Var DIRECTION: MOVEMENT;
@@ -338,7 +338,7 @@ PARAMETER:
     KeyResponse (Ausgabe)   - Zuletzt gedrcktes Zeichen
 
  BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 
 
 ANMERKUNGEN:
@@ -359,8 +359,8 @@ Const
                                  nach rechts }
 
 Var
-    OLDSTR: STRING79;          { Originaler String }
-    clstring: string79;
+    OLDSTR: String;          { Originaler String }
+    clstring: string;
     shiftp, ctrlp: boolean;
     mp: word;
 Begin
@@ -396,7 +396,7 @@ Begin
             If Ord (KeyResponse) = BACK_SPACE Then  { Rckschritt } Begin
                 If length (IN_STRING) > 0 Then
                 Begin
-                    Dec (Byte (In_string[0]));
+                    SetLength (In_string, Length (In_String) - 1);
                     Dec (X, 6);
                     If Length (In_string) < (Str_Length - 1) Then
                         IniInversWrite (X, Y, '_ ', frSmallBar)
@@ -424,7 +424,7 @@ Begin
     IniHideCursor;
 End;
 {-------------------------------------------------------------------}
-Procedure GrGetUpcase_String(Var IN_STRING: STRING16;
+Procedure GrGetUpcase_String(Var IN_STRING: String;
     X, Y, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
     Var DIRECTION: MOVEMENT;
@@ -452,7 +452,7 @@ PARAMETER:
     KeyResponse (Ausgabe)   - Zuletzt gedrcktes Zeichen
 
  BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 
 
 ANMERKUNGEN:
@@ -473,8 +473,8 @@ Const
                                  nach rechts }
 
 Var
-    OLDSTR: STRING79;          { Originaler String }
-    clstring: string79;
+    OLDSTR: String;          { Originaler String }
+    clstring: string;
     shiftp, ctrlp: boolean;
     mp: word;
 Begin
@@ -501,13 +501,13 @@ Begin
         If Byte (KeyResponse) = BACK_SPACE Then  { Rckschritt } Begin
             If length (IN_STRING) > 0 Then
             Begin
-                Dec (Byte (In_string[0]));
+                SetLength (In_string, Length (In_String) - 1);
                 If Length (In_string) < Str_Length - 1 Then
                     IniInversWrite (X, Y, In_String + '_ ', frSmallBar)
                 Else
                     IniInversWrite (X, Y, In_String + '_', frSmallBar);
             End;
-        End {if Byte}Else If Byte (IN_STRING[0]) < STR_LENGTH Then
+        End {if Byte}Else If Length (In_String) < STR_LENGTH Then
         Begin
             IN_STRING := IN_STRING + UpCase (KeyResponse);
             If Length (In_string) < Str_Length Then
@@ -557,7 +557,7 @@ PARAMETER:
     KeyResponse (Ausgabe)   - Zuletzt gedrcktes Zeichen
 
  BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 -------------------------------------------------------------------}
 
 Const
@@ -565,7 +565,7 @@ Const
 Var
     VALCODE: integer;  { Code fr die String-Umwandlung }
     ORIGINAL_STR,              { Originaler String }
-    TEMP_STR: string16; { Von Tastatur eingegebener String }
+    TEMP_STR: string;  { Von Tastatur eingegebener String }
     TEMP_Real: real;     { Versuchte Umwandlung des Strings }
     w: LongInt;
 Begin
@@ -663,14 +663,14 @@ PARAMETER:
     DIRECTION (Ausgabe)      - Richtung der Pfeiltaste
     KeyResponse (Ausgabe)   - Zuletzt gedrcktes Zeichen
  BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 -------------------------------------------------------------------}
 Const
     BELL = 7;                  { ASCII Signalton }
 Var
-    VALCODE: integer;  { Code fr die String-Umwandlung }
-    ORIGINAL_STR,              { Originaler String }
-    TEMP_STR: string16; { Von Tastatur eingegebener String }
+    VALCODE: integer;   { Code fr die String-Umwandlung }
+    ORIGINAL_STR,       { Originaler String }
+    TEMP_STR: string;   { Von Tastatur eingegebener String }
     TEMP_INT: integer;  { Versuchte Umwandlung des Strings }
 Begin
     IniShowCursor;
@@ -768,12 +768,12 @@ Begin
 End;
 
 {-------------------------------------------------------------------}
-Procedure GrGet_Prompted_String(Var IN_STRING: STRING16;
+Procedure GrGet_Prompted_String(Var IN_STRING: String;
     STR_LENGTH: integer;
     STRDESC: char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -806,7 +806,7 @@ PARAMETER:
     KeyResponse (Ausgabe)    - Zuletzt gedrcktes Zeichen
 
  BEN™TIGTE TYPEN:
-    STRING79 - Wird fr alle Strings verwendet
+    String - Wird fr alle Strings verwendet
 
 -------------------------------------------------------------------}
 
@@ -826,12 +826,12 @@ Begin
         mausx, mausy, maustaste, mausmenu, changed);
 End;
 {-------------------------------------------------------------------}
-Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: STRING16;
+Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: String;
     STR_LENGTH: integer;
     STRDESC: char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -863,7 +863,7 @@ Procedure GrGet_Prompted_Real(Var RNNUMBER: Real;
     STRDESC: Char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -907,7 +907,7 @@ Procedure GrGet_Prompted_Integer(Var INNUMBER: integer;
     STRDESC: Char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -950,7 +950,7 @@ Procedure GrGet_Prompted_Toggle(Var tval: integer;
     STRDESC: Char;
     DESCX, DESCY: integer;
     OLDESCX: integer;
-    PROMPT: STRING79;
+    PROMPT: String;
     PRX, PRY: integer;
     prlength: integer;
     Var RESP: RESPONSE_TYPE;
@@ -959,7 +959,7 @@ Procedure GrGet_Prompted_Toggle(Var tval: integer;
     Var mausx, mausy: word;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
-Var outstring: string79;
+Var outstring: string;
 
 Begin
 

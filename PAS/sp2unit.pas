@@ -63,7 +63,7 @@ Procedure Sp2HeaderFooterToBuffer(Var tempptr, startptr, lastptr,
 Var i, k, pagec: integer;
     tbufpos: byte;
     tempbuf: stringline;
-    strbuf:  string4;
+    strbuf:  string;
 
 Begin
     tbufpos := 0;
@@ -229,13 +229,13 @@ Var dir: movement;
     resp: response_type;
     choicenum: byte;
     x, y, hy: integer;
-    instring, rstring: string16;
+    instring, rstring: string;
     s: string;
     b: boolean;
     mausx, mausy, maustaste, mausmenu: word;
     changed: boolean;
     {***************************************}
-    Procedure SearchTextInput(dy: integer; prompt: string; Var tstring: string16);
+    Procedure SearchTextInput(dy: integer; prompt: string; Var tstring: string);
     Begin
         tstring := '';
         s := '';

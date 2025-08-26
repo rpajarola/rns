@@ -1,4 +1,4 @@
-{$I RNS.H}
+ï»¿{$I RNS.H}
 
 Unit utilunit;
 
@@ -11,7 +11,7 @@ Uses
     graph;
 
 Procedure UtiDelNoteChar(Var inblock: stringline; Var actpos: integer;
-    Var stbuf: string16);
+    Var stbuf: string);
 Procedure UtiDelNumChar(Var inblock: stringline; Var actpos: integer);
 Function UtiGetNum(inblock: stringline; actpos: integer): Integer;
 Procedure UtiCharBegin(Var inblock: stringline; Var actpos: integer);
@@ -23,10 +23,10 @@ Procedure UtiKlammerAufPos(inblock: stringline; Var dx, height: integer; flamcha
 Procedure UtiNextNum(Var inblock: stringline; Var actpos, numres: integer;
     left: boolean);
 Function UtiComputeGroup(c: char; Var indexc: char): integer;
-Function UtiCharReady(Var inblock: string16; c: char): boolean;
-Function UtiNumReady(Var inblock: string16; c: char): boolean;
+Function UtiCharReady(Var inblock: string; c: char): boolean;
+Function UtiNumReady(Var inblock: string; c: char): boolean;
 Procedure UtiGetActDistance(Var inblock: stringline; actpos: integer;
-    Var strbuf: string16);
+    Var strbuf: string);
 Function UtiReplaceChars(inblock: stringline): byte;
 Function UtiCheckFlam(Var inblock: stringline; actpos: integer): char;
 Function UtiNextChar(inblock: stringline; c: char; p: integer): integer;
@@ -63,7 +63,7 @@ Begin
 End;
 
 {****************************************************************}
-Function UtiFlamPos(inblock: string16): byte;
+Function UtiFlamPos(inblock: string): byte;
     {Setzt sich auf den Index des Flamchars, wenn einer in inblock ist}
 
 Var i: byte;
@@ -95,7 +95,7 @@ Begin
 End;
 
 {****************************************************************}
-Function UtiCharReady(Var inblock: string16; c: char): boolean;
+Function UtiCharReady(Var inblock: string; c: char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch das gesamte Zeichen fertig ist}
 Var i, j, k: byte;
@@ -180,10 +180,10 @@ Begin
 End;
 
 {****************************************************************}
-Function UtiNumReady(Var inblock: string16; c: char): boolean;
+Function UtiNumReady(Var inblock: string; c: char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch eine Abstandseingabe fertig ist}
-Var strbuf: string16;
+Var strbuf: string;
 Begin
     If (NOT (IniNumchar (inblock[1]) OR IniArrow (inblock[1]))) Then
         inblock := '';
@@ -310,7 +310,7 @@ End;
 
 {****************************************************************}
 Procedure UtiDelNoteChar(Var inblock: stringline; Var actpos: integer;
-    Var stbuf: string16);
+    Var stbuf: string);
 {L”scht einen Character bis zum n„chsten numerischen Character,
  der gel”schte Character kommt in den Buffer stbuf}
 Var i: integer;
@@ -343,7 +343,7 @@ End;
 
 {****************************************************************}
 Procedure UtiGetActDistance(Var inblock: stringline; actpos: integer;
-    Var strbuf: string16);
+    Var strbuf: string);
 {Berechnet von actpos aus rueckwaerts die Distanz}
 Begin
     strbuf := '';
@@ -376,14 +376,14 @@ Var St: String;
 Begin
     St := '';
     InBlock := copy (inblock, actpos, 10);
-    While (NOT IniNumChar (inblock[1])) AND (inblock[0] <> #0) Do
+    While (NOT IniNumChar (inblock[1])) AND (Length (inblock) <> 0) Do
         Delete (inblock, 1, 1);
-    While IniNumChar (inblock[1]) AND (inblock[0] <> #0) Do
+    While IniNumChar (inblock[1]) AND (Length (inblock) <> 0) Do
     Begin
         St := St + Inblock[1];
         Delete (inblock, 1, 1);
     End;
-    If inblock[0] = #0 Then
+    If Length (inblock) = 0 Then
     Begin
         UtiGetNum := 0;
         Exit;
@@ -420,7 +420,7 @@ Procedure UtiNextNum(Var inblock: stringline; Var actpos, numres: integer;
  numres wird der Wert des Strings. Actpos wird unmittelbar vor
  das numerische Zeichen gesetzt}
 
-Var numstr: string16;
+Var numstr: string;
     i: byte;
     code: integer;
 

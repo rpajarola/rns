@@ -322,7 +322,7 @@ Begin
 End;
 
 {************************************************************}
-Procedure UseFileName(Var instring: string79; Var c: char;
+Procedure UseFileName(Var instring: String; Var c: char;
     Var mausx, mausy, maustaste, mausmenu: word);
 
 Var
@@ -330,7 +330,7 @@ Var
     dir: movement;
     KeyResp: Char;
     ok: boolean;
-    oldstring: string79;
+    oldstring: String;
     demloc: boolean;
     changed: boolean;
 Begin
@@ -448,8 +448,8 @@ Var
     dir: movement;
     KeyResp: Char;
     ok, demloc: boolean;
-    instring: string79;
-    actdir: string79;
+    instring: String;
+    actdir: String;
     b: byte;
     st: string;
     changed: boolean;
@@ -594,8 +594,7 @@ Begin
         If (b = length (datadir)) AND (b <> 0) Then
             datadir := copy (datadir, 1, b - 1) + copy (datadir, b + 1, length (datadir) - b - 1);
         instring := datadir;
-        st := ' Loading Directory ' + datadir + '\                                             ';
-        st[0] := #57;
+        st := ' Loading Directory ' + datadir + ' ';
         IniSpacedText (substartx, topendy * 2, st, frHigh);
         UseGetConfig;
         datadir := instring;
@@ -609,7 +608,7 @@ Const hy = 25;
 
 Var
     ok: boolean;
-    instring: string79;
+    instring: String;
 
 Begin
     maustaste := 0;
@@ -652,7 +651,7 @@ Const hy = 25;
 
 Var
     ok: boolean;
-    instring: string79;
+    instring: String;
 Begin
     maustaste := 0;
 
@@ -795,11 +794,11 @@ Var
     i: integer;
     b: byte;
     c: char;
-    instring, inbuf: string79;
+    instring, inbuf: String;
     choicenum: byte;
     infile, bakfile: text;
     st: string;
-    bakname: String79;
+    bakname: String;
     mausx, mausy, maustaste, mausmenu: word;
     mx, my, mt, mm: Word;
     changed: boolean;
@@ -946,7 +945,7 @@ Begin
                         false, demoversion);
                     Mauszeigen;
                     IniSwapMenuColors;
-                    st := copy (fontfile, 1, byte (fontfile[0]) - 3) + 'PAR';
+                    st := copy (fontfile, 1, Length (fontfile) - 3) + 'PAR';
                     IniHideCursor;
                     If NOT FilCompareFiles (st, 'SYMBOLS.PAR') Then
                     Begin
@@ -972,17 +971,17 @@ Begin
                   des Strings}
                                 While IniFileexist (st) Do
                                 Begin
-                                    c := St[0];
+                                    c := Char (Length (St));
                                     If (St[Byte (c) - 4] < '0') OR (St[Byte (c) - 4] > '9') Then
                                     Begin
                                         b := Pos ('-', St);
                                         If b <> 0 Then
-                                            St := Copy (St, 1, b - 1) + Copy (St, b + 1, Byte (st[0]) - b);
+                                            St := Copy (St, 1, b - 1) + Copy (St, b + 1, Length (st) - b);
                                         b := Pos ('.', St);
-                                        If St[0] > #12 Then
+                                        If Length (St) > 12 Then
                                             St[8] := '2'
                                         Else
-                                            St := Copy (St, 1, b - 1) + '2' + Copy (St, b, Byte (St[0]) - b + 1);
+                                            St := Copy (St, 1, b - 1) + '2' + Copy (St, b, Length (St) - b + 1);
                                     End{IF St[...<'1'} Else If (St[Byte (c) - 4] <> '9') Then Inc (St[Byte (c) - 4]){IF St[...<>'9'} Else If (St[Byte (c) - 5] < '0') OR (St[Byte (c) - 5] > '9') Then
                                     Begin
                                         st[Byte (c) - 5] := '1';
@@ -1018,7 +1017,7 @@ Begin
                                                     St := Copy (St, 1, Pos ('.', st)) + 'PAR';
                                             End{IF Pos('.',St)<>0}Else Begin
                                                 Resp := Key;
-                                                If St[0] > #8 Then
+                                                If Length (St) > 8 Then
                                                     st := Copy (St, 1, 8) + '.PAR'
                                                 Else
                                                     St := St + '.PAR';

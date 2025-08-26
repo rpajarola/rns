@@ -20,20 +20,20 @@ Uses Graph,
 Procedure HlpCommandTable;
 Procedure HlpSymbolTable;
 Procedure HlpHint(hintnum: integer; WaitTime: Integer);
-Function HlpAreYouSure(hinttext: string79; position: byte): boolean;
-Function HlpAskYesEsc(hinttext, choicetext: string79; position: byte): boolean;
-Function HlpAsk(hinttext, choicetext: string79; position: byte;
+Function HlpAreYouSure(hinttext: string; position: byte): boolean;
+Function HlpAskYesEsc(hinttext, choicetext: string; position: byte): boolean;
+Function HlpAsk(hinttext, choicetext: string; position: byte;
     Resp: TCharSet): char;
-Function HlpAskAny(Hinttext, choicetext: string79; position: byte): Char;
+Function HlpAskAny(Hinttext, choicetext: string; position: byte): Char;
 
-Function HlpGetFileName(Var instring: string16; extn: string16; x, y: word): Boolean;
+Function HlpGetFileName(Var instring: string; extn: string; x, y: word): Boolean;
 Procedure HlpTestFileName(instring: stringline; Var ok: boolean;
     x, xmax, y: integer);
-Procedure HlpText(x, xmax, y: integer; hinttext: string79; escwait: boolean);
-Procedure HlpBottomLine(hinttext: string79);
+Procedure HlpText(x, xmax, y: integer; hinttext: string; escwait: boolean);
+Procedure HlpBottomLine(hinttext: string);
 Procedure HlpHintFrame(hintminx, hintminy, hintmaxx, hintmaxy: integer);
 Function HlpTxtAreYouSure(x, xmax, y: integer;
-    hinttext: string79): boolean;
+    hinttext: string): boolean;
 Procedure HlpSymbolSelect(Var c: char);
 Procedure HlpDemoText(x, xmax, y: integer);
 
@@ -48,7 +48,7 @@ Uses pageunit,
     Texts;
 
 {******************************************************}
-Procedure HlpBottomLine(hinttext: string79);
+Procedure HlpBottomLine(hinttext: string);
 
 Var x, y: integer;
 
@@ -138,7 +138,7 @@ Begin
 End;
 
 {******************************************************}
-Function HlpGetFileName(Var instring: string16; extn: string16; x, y: word): Boolean;
+Function HlpGetFileName(Var instring: string; extn: string; x, y: word): Boolean;
 
 Var resp: Response_Type;
     dir: movement;
@@ -181,10 +181,10 @@ Begin
 End;
 
 {******************************************************}
-Procedure HlpText(x, xmax, y: integer; hinttext: string79; escwait: boolean);
+Procedure HlpText(x, xmax, y: integer; hinttext: string; escwait: boolean);
 
 Var c: char;
-    outstring: string79;
+    outstring: string;
     temp1, temp2: boolean;
 
 Begin
@@ -266,7 +266,7 @@ Begin
 End;
 
 {******************************************************}
-Function HlpAreYouSure(hinttext: string79; position: byte): boolean;
+Function HlpAreYouSure(hinttext: string; position: byte): boolean;
 
 Begin
     {### Unterscheiden, damit Dir/File does not exist tiefer stehen kann}
@@ -282,7 +282,7 @@ Begin
     End;{Case HlpAsk of }
 End;
 {******************************************************}
-Function HlpAskYesEsc(hinttext, choicetext: string79; position: byte): boolean;
+Function HlpAskYesEsc(hinttext, choicetext: string; position: byte): boolean;
 Begin
     Case HlpAsk (hinttext, choicetext, position, ['Y', #13, #27, #73]) Of
         'Y': HlpAskYesEsc := True;
@@ -291,7 +291,7 @@ Begin
         #73: HlpAskYesEsc := False;
     End;{Case HlpAsk of }
 End;
-Function HlpAsk(hinttext, choicetext: string79; position: byte;
+Function HlpAsk(hinttext, choicetext: string; position: byte;
     Resp: TCharSet): char;
 Var c: char;
     ymax: integer;
@@ -327,7 +327,7 @@ End;
 
 {******************************************************}
 
-Function HlpAskAny(Hinttext, choicetext: string79; position: byte): Char;
+Function HlpAskAny(Hinttext, choicetext: string; position: byte): Char;
 Var Resp: TCharSet;
 Begin
     Resp := [#0..#$FF] - [' '];
@@ -335,10 +335,10 @@ Begin
 End;
 {******************************************************}
 Function HlpTxtAreYouSure(x, xmax, y: integer;
-    hinttext: string79): boolean;
+    hinttext: string): boolean;
 
 Var c: char;
-    outstring: string79;
+    outstring: string;
     temp1, temp2: boolean;
 
 Begin
@@ -504,7 +504,7 @@ Const nminx = 0;         { Screen frame                 }
     altofs2 = 80;
 
 Var i: byte;
-    textst1, textst2, textst3, textst4, stri: string79;
+    textst1, textst2, textst3, textst4, stri: string;
 Begin
     SetBkColor (7{menubkcolor}); {bei einer andern Farbe mÅssten Schatten rechts und unten definiert werden!}
     {-----------}

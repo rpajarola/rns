@@ -718,7 +718,7 @@ Var c, ch, dummyc: char;
         Begin
             actposn := comMusicStart (st);
 { IF Pos('/',St)<>0 Then
-    Byte(St[0]):=Pos('/',St);}
+    Length(St):=Pos('/',St);}
             While ((actposn <= length (st)) AND (UtiComputeGroup (st[actposn], c) = 0)) Do
                 inc (actposn);
             ValidLine := (actposn <= length (st)) AND (GetDrawSymbol (lnum, actposn, false));
@@ -768,7 +768,7 @@ Begin
                     reset (delfil);
                     If IOResult <> 0 Then
                     Begin
-                        HlpHint(HntCannotOpenFile, HintWaitEsc);
+                        HlpHint (HntCannotOpenFile, HintWaitEsc);
                         Exit;
                     End;
                     For j := 1 To pagelength Do
@@ -776,8 +776,8 @@ Begin
                         readln (delfil, page[j]);
                         If IOResult <> 0 Then
                         Begin
-                            close(delfil);
-                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            close (delfil);
+                            HlpHint (HntCannotReadFile, HintWaitEsc);
                             Exit;
                         End;
                     End;
@@ -792,7 +792,7 @@ Begin
                 rewrite (delfil);
                 If IOResult <> 0 Then
                 Begin
-                    HlpHint(HntCannotCreateFile, HintWaitEsc);
+                    HlpHint (HntCannotCreateFile, HintWaitEsc);
                     Exit;
                 End;
                 For i := 1 To pagelength Do
@@ -800,8 +800,8 @@ Begin
                     writeln (delfil, page[i]);
                     If IOResult <> 0 Then
                     Begin
-                        close(delfil);
-                        HlpHint(HntCannotWriteFile, HintWaitEsc);
+                        close (delfil);
+                        HlpHint (HntCannotWriteFile, HintWaitEsc);
                         Exit;
                     End;
                 End;
@@ -869,7 +869,7 @@ Begin
                     rewrite (infile);
                     If IOResult <> 0 Then
                     Begin
-                        HlpHint(HntCannotCreateFile, HintWaitEsc);
+                        HlpHint (HntCannotCreateFile, HintWaitEsc);
                         Exit;
                     End;
                     If bufffile Then
@@ -877,15 +877,15 @@ Begin
                         WriteLn (infile, '$$$RNSBUFFER$$$');
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc);
                             Exit;
                         End;
                         WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc);
                             Exit;
                         End;
                         FilHeapToFile (infile, actptr, startptr, lastptr,
@@ -964,7 +964,7 @@ Begin
 
                 IniSpacedText (65, 54, ' / * = LPMBPM ', frHigh);
                 Str (sndlengthspm: 4: 3, st);
-                While st[0] < #8 Do
+                While Length (st) < 8 Do
                     st := ' ' + st;
                 If SndLengthPer = 1 Then
                     st := st + '   BPM '
@@ -1286,7 +1286,7 @@ Begin
                 If gcxcoord > IniLineEnd (page[linenum]) Then
                     PagCursorRight (linenum, actposn, actpost);
                 i := comstart (inblock, actposn);
-                page[linenum, 0] := char (i - 1);
+                SetLength (page[linenum], i - 1);
                 page[linenum] := page[linenum] + '.';
                 pagrefclearval (grminx, iniynow (linenum - 5), grmaxx, iniynow (linenum + 3));
                 inblock := copy (inblock, i, length (inblock) - i + 2);
@@ -1296,7 +1296,7 @@ Begin
                     page[linenum] := st;
                     exit;
                 End;
-                page[linenum, 0] := char (commusicstart (page[linenum]) + 1);
+                SetLength (page[linenum], commusicstart (page[linenum]) + 1);
                 page[linenum] := page[linenum] + inblock;
             End;
             97: {ctrl F4 split page}Begin
@@ -2066,8 +2066,8 @@ Begin
         ComUsedTL := False;
         Exit;
     End;
-    While page[linenum, byte (page[linenum, 0])] = ' ' Do
-        dec (byte (page[linenum, 0]));
+    While page[linenum, Length (page[linenum])] = ' ' Do
+        SetLength (page[linenum], Length (page[linenum]) - 1);
     If Length (Page[linenum]) < linemarker Then
         ComUsedTL := False
     Else
@@ -2180,7 +2180,7 @@ Var st: String;
     a:  Byte;
 Const chiffres: Set Of Char = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 Begin
-    a := Byte (Page[linenum, 0]);
+    a := Length (Page[linenum]);
     st := '';
     While (NOT (Page[linenum, a] IN chiffres)) AND (a <> 0) Do
         dec (a);
@@ -2231,9 +2231,9 @@ Begin
 End;{Func CopyLine}
 Function LineUsed(Linenum: Byte): Boolean;
 Begin
-    While (Page[Linenum, 0] <> #9) AND (Page[Linenum, Byte (Page[Linenum, 0])] = ' ') Do
-        Dec (Byte (Page[Linenum, 0]));
-    If Page[Linenum, 0] > #9 Then
+    While (Length (Page[Linenum]) <> 9) AND (Page[Linenum, Length (Page[Linenum])] = ' ') Do
+        SetLength (Page[linenum], Length (Page[linenum]) - 1);
+    If Length (Page[Linenum]) > 9 Then
         LineUsed := True
     Else
         LineUsed := False;

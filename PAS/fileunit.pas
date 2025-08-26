@@ -112,15 +112,15 @@ Begin
     reset (infile, 1);
     If IOResult <> 0 Then
     Begin
-        HlpHint(HntCannotOpenFile, HintWaitEsc);
+        HlpHint (HntCannotOpenFile, HintWaitEsc);
         Exit;
     End;
     FileMode := 2;
     rewrite (outfile, 1);
     If IOResult <> 0 Then
     Begin
-        close(infile);
-        HlpHint(HntCannotCreateFile, HintWaitEsc);
+        close (infile);
+        HlpHint (HntCannotCreateFile, HintWaitEsc);
         Exit;
     End;
     inblocksize := 65536 - 16;
@@ -169,14 +169,14 @@ Begin
         reset (tfile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc);
             Exit;
         End;
         readln (tfile);
         If IOResult <> 0 Then
         Begin
-            close(tfile);
-            HlpHint(HntCannotReadFile, HintWaitEsc);
+            close (tfile);
+            HlpHint (HntCannotReadFile, HintWaitEsc);
             Exit;
         End;
     End
@@ -185,14 +185,14 @@ Begin
         rewrite (tfile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotCreateFile, HintWaitEsc);
+            HlpHint (HntCannotCreateFile, HintWaitEsc);
             Exit;
         End;
         writeln (tfile, 'version ', versionstring);
         If IOResult <> 0 Then
         Begin
-            close(tfile);
-            HlpHint(HntCannotWriteFile, HintWaitEsc);
+            close (tfile);
+            HlpHint (HntCannotWriteFile, HintWaitEsc);
             Exit;
         End;
     End;
@@ -390,8 +390,8 @@ Begin
                 readln (infile);
                 If IOResult <> 0 Then
                 Begin
-                    close(infile);
-                    HlpHint(HntCannotReadFile, HintWaitEsc);
+                    close (infile);
+                    HlpHint (HntCannotReadFile, HintWaitEsc);
                     Exit;
                 End;
                 version := 0;
@@ -404,8 +404,8 @@ Begin
                     readln (infile, inblock);
                     If IOResult <> 0 Then
                     Begin
-                        close(infile);
-                        HlpHint(HntCannotReadFile, HintWaitEsc);
+                        close (infile);
+                        HlpHint (HntCannotReadFile, HintWaitEsc);
                         Exit;
                     End;
                 End Else If (inblock[1] = 'N') OR (inblock[1] = 'T') Then version := 1 Else Begin
@@ -435,15 +435,15 @@ Begin
                         readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound);
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotReadFile, HintWaitEsc);
                             Exit;
                         End;
                         readln (infile, sndlengthspm);
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotReadFile, HintWaitEsc);
                             Exit;
                         End;
                         IniIniSymbols;
@@ -454,15 +454,15 @@ Begin
                         readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound, soundattr);
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotReadFile, HintWaitEsc);
                             Exit;
                         End;
                         readln (infile, sndlengthspm);
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotReadFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotReadFile, HintWaitEsc);
                             Exit;
                         End;
                         IniIniSymbols;
@@ -474,7 +474,7 @@ Begin
                 readln (infile, inblock);
                 If inblock = '' Then inblock := 'T'{if inblock=''}Else If (inblock[1] <> 'T') AND (inblock[1] <> 'N') Then
                 Begin
-                    While (inblock[0] > #0) AND (inblock[1] = ' ') Do
+                    While (Length (inblock) > 0) AND (inblock[1] = ' ') Do
                         delete (inblock, 1, 1);
                     If inblock = '' Then
                         inblock := 'T';
@@ -530,12 +530,12 @@ Begin
         HlpHintFrame (grminx, grmaxy - {32}48, grmaxx, grmaxY);
         txtfnt.write (grminx + 20, grmaxY - 24{13}, HintTexts[HntSavingFile], getcolor, sz8x16, stnormal);
         Delay (250);
-        If NOT fileopen Then 
+        If NOT fileopen Then
         Begin
             rewrite (outfile);
             If IOResult <> 0 Then
             Begin
-                HlpHint(HntCannotCreateFile, HintWaitEsc);
+                HlpHint (HntCannotCreateFile, HintWaitEsc);
                 Exit;
             End;
         End;
@@ -544,30 +544,30 @@ Begin
             WriteLn (Outfile, 'VERSION ' + VersionString);
             If IOResult <> 0 Then
             Begin
-                close(outfile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (outfile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
             WriteLn (Outfile, fontfile);
             If IOResult <> 0 Then
             Begin
-                close(outfile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (outfile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
             writeln (Outfile, sndlength: 5, sndlengthper: 3, sndplaybeat: 3,
                 sndplaypulse: 3, dispsound: 3, soundattr: 3);
             If IOResult <> 0 Then
             Begin
-                close(outfile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (outfile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
             WriteLn (Outfile, sndlengthspm);
             If IOResult <> 0 Then
             Begin
-                close(outfile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (outfile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
         End;
@@ -581,8 +581,8 @@ Begin
                 writeln (outfile, tempblock);
                 If IOResult <> 0 Then
                 Begin
-                    close(outfile);
-                    HlpHint(HntCannotWriteFile, HintWaitEsc);
+                    close (outfile);
+                    HlpHint (HntCannotWriteFile, HintWaitEsc);
                     Exit;
                 End;
                 delete (inblock, 1, lineend);
@@ -849,7 +849,7 @@ End;
 
 Procedure FilFontSelect;
 
-(*Var instring        : string79;
+(*Var instring        : String;
     ok              : boolean;
     infile, outfile : text;
     MausX,MausY     : Word;
@@ -897,7 +897,7 @@ Begin
 End;
 
 Function FilFileSelect(prompt, wildcard, dir: string): string;
-Var instring: string79;
+Var instring: String;
     ok: boolean;
     MausX, MausY: Word;
     Maustaste: Word;
@@ -948,7 +948,7 @@ Begin
     rewrite (delfil);
     If IOResult <> 0 Then
     Begin
-        HlpHint(HntCannotCreateFile, HintWaitEsc);
+        HlpHint (HntCannotCreateFile, HintWaitEsc);
         Exit;
     End;
     If (pagebuf = -1) OR (pagebuf = pagecount) Then
@@ -957,8 +957,8 @@ Begin
             writeln (delfil, page[i]);
             If IOResult <> 0 Then
             Begin
-                close(delfil);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (delfil);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
         End Else Begin
@@ -973,8 +973,8 @@ Begin
             writeln (delfil, page[i]);
             If IOResult <> 0 Then
             Begin
-                close(delfil);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (delfil);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
         End;
@@ -1092,7 +1092,7 @@ Begin
     rewrite (Copyfile);
     If IOResult <> 0 Then
     Begin
-        HlpHint(HntCannotCreateFile, HintWaitEsc);
+        HlpHint (HntCannotCreateFile, HintWaitEsc);
         Exit;
     End;
     If pagebuf = -1 Then
@@ -1101,8 +1101,8 @@ Begin
             writeln (Copyfile, page[i]);
             If IOResult <> 0 Then
             Begin
-                close(copyfile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (copyfile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
         End Else Begin
@@ -1115,8 +1115,8 @@ Begin
             writeln (copyfile, page[i]);
             If IOResult <> 0 Then
             Begin
-                close(copyfile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (copyfile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
         End;
@@ -1142,7 +1142,7 @@ Begin
         If inblock[1] = 'T' Then
         Begin
             While inblock[length (inblock)] = ' ' Do
-                dec (byte (inblock[0]));
+                SetLength (inblock, Length (inblock) - 1);
             If inblock <> 'T' Then
                 j := i;
         End Else

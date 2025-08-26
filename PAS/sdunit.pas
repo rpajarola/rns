@@ -13,16 +13,16 @@ Uses InitSc,
     MousDrv,
     XCrt;
 Procedure SdUSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
-    Var instring: string79; Mask: String16;
-    dir: string79; Dirorfile: Boolean;
+    Var instring: string; Mask: String;
+    dir: string; Dirorfile: Boolean;
     x, y: integer; Cols, rows: Byte;
     Var mausx, mausy, maustaste: Word; actmenu: word;
     selX, selY: integer; GoUp: Boolean);
 
 Implementation
 Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
-    Var instring: string79; Mask: String16;
-    dir: string79; Dirorfile: Boolean;
+    Var instring: string; Mask: String;
+    dir: string; Dirorfile: Boolean;
     x, y: integer; Cols, rows: Byte;
     Var mausx, mausy, maustaste: Word; actmenu: word;
     selX, selY: integer; GoUp: Boolean);
@@ -191,7 +191,7 @@ Var Cancel: Boolean Absolute Disponly;
         b: Byte;
         D: SearchRec;
         at: byte;
-        m: string16;
+        m: string;
     Begin
         SelEntry := 0;
         Page := 0;

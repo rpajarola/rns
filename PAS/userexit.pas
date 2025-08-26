@@ -71,7 +71,7 @@ End;
 
 Procedure NewExit;
 Begin
-    CloseGraph();
+    CloseGraph ();
     IniShowCursor;
     If (Exitcode = 0) OR (ErrorAddr = Nil) Then
         Exit;

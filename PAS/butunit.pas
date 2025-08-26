@@ -84,17 +84,17 @@ End;
 Function TButton.activated(mausx, mausy: Integer;
     Var vresp: response_type; Var vkeyresponse: Char):
 Boolean;
-Var result: Boolean;
+Var res: Boolean;
 
 Begin
-    result := ((mausx > x0 - 2 + charwidth) AND (mausx < x1 + 2 + charwidth) AND
+    res := ((mausx > x0 - 2 + charwidth) AND (mausx < x1 + 2 + charwidth) AND
         (mausy > y0 + charheight) AND (mausy < y1 + 2 + charheight));
-    If result Then
+    If res Then
     Begin
         vresp := resp;
         vkeyresponse := keyresponse;
     End;
-    activated := result;
+    activated := res;
 End;
 
 {*************************************************************}

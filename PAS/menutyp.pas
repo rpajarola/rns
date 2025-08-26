@@ -8,8 +8,6 @@ Const FieldLength = 12;
     ClearString = '                ';
 
 Type
-    string79 = string[79];
-    string16 = string[79];
     ENTRY_TYPE = integer;
     KEY_TYPE = integer;
     OTHER_TYPE = integer;
@@ -23,11 +21,11 @@ Type
             'o': (c: char);
             'i': (IVal, IValMin, IValMax: Integer);
             'r': (RVal, RValMin, RValMax: Real);
-            's': (SVal: String16);
+            's': (SVal: ShortString);
             't': (TVal, TValMin, TValMax: Integer);    {Toggle-Parameter}
     End;
 
-    ToggleTyp = Array [1..16] Of String16;
+    ToggleTyp = Array [1..16] Of String;
 
     Menuattrtyp = Record
         highliteline: boolean; {true wenn die ganze Zeile
@@ -40,10 +38,10 @@ Type
         MENU_WIDTH: integer;
         spacing: integer;
         CHOICES: Array [1..16] Of char;
-        DESCRIPTIONS: Array [1..16] Of STRING79;
-        TITLE: STRING79;
+        DESCRIPTIONS: Array [1..16] Of STRING;
+        TITLE: STRING;
         ChoiceVal: Array [1..16] Of ChoiceTyp;
-        ChoiceDesc: Array [1..16] Of STRING79;
+        ChoiceDesc: Array [1..16] Of STRING;
         menuattr: menuattrtyp;
         changed: Array [1..16] Of boolean;
     End;

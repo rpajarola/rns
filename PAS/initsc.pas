@@ -148,8 +148,7 @@ Const
         (' ', ',', '.'),
         (',', ' ', '.'));
 
-Type stringline = string[255];
-    string4 = string[80];
+Type stringline = string;
     KeyEntry = (invalid, one, numeric, character, curupdown, plus,
         postplus, other);
     ArrowTyp = (noarr, leftarr, rightarr);
@@ -205,7 +204,7 @@ Var ThePalette: TDACTable;
     infile: text;
     GraphDriver: integer;
     GraphMode: integer;
-    ErrCode:  integer;
+    ErrCode: integer;
     heapmark: pointer;
 
     curcolor, gridcolor: byte;
@@ -268,7 +267,7 @@ Var ThePalette: TDACTable;
     TOP_Line, Left_Col, Valcol: integer;
     stabxmin, stabxmax, stabymin, stabymax: integer;
     sxmin, sxmax, symin, symax: integer;
-    datadir, fontfile, colorfile: string16;
+    datadir, fontfile, colorfile: string;
 
     searchstring: stringline;
     searchtyp: char;
@@ -284,7 +283,7 @@ Var ThePalette: TDACTable;
     marpartline:  boolean;
 
     actedit: Set Of editvariants;
-    inbuffer: string16; {Buffer fuer eingegebene Zeichen}
+    inbuffer: string; {Buffer fuer eingegebene Zeichen}
     bufstartptr, bufactptr, bufendptr: listptr;
     refxmin, refxmax, refymin, refymax: integer;
     hintminx, hintminy, hintmaxx, hintmaxy: integer;
@@ -293,9 +292,9 @@ Var ThePalette: TDACTable;
 
     prformat: byte; {1 = 1 page per sheet, 2 = 2 pages per sheet}
     prpage, prdest: integer;
-    prfname: string16;
+    prfname: string;
     prfile: integer; {1 wenn auf file geschrieben wird}
-    prdevice: string16;
+    prdevice: string;
 
     paused: boolean;    {pause?}
     sndlength: integer; {l�nge pro beat}
@@ -331,12 +330,12 @@ Var ThePalette: TDACTable;
     Logo: pbmp16;
     SymFontSize: Byte;
     psfile: text;
-    psdir, bufdir: string79;
+    psdir, bufdir: string;
     ShowSlashes: byte;
     nff:  boolean;
 
-Procedure IniOutTextXY(X, Y: integer; Texts: String79);
-Procedure IniWriteXY(X, Y: integer; Texts: String79);
+Procedure IniOutTextXY(X, Y: integer; Texts: String);
+Procedure IniWriteXY(X, Y: integer; Texts: String);
 Function IniAltChar(c: char): char;
 Procedure IniGetSymbols;
 Procedure InitScreen;
@@ -354,10 +353,10 @@ Function IniNumChar(c: char): Boolean;
 Function IniArrow(c: char): Boolean;
 Function IniDoppel(c: char): Boolean;
 Procedure IniGraphXY(Var X, Y: integer);
-Procedure IniInversWrite(X, Y: integer; Texts: String79; T: Byte);
-Procedure IniSpacedWrite(X, Y: integer; Texts: String79; T: Byte);
-Procedure IniInversText(X, Y: integer; Texts: String79; T: Byte);
-Procedure IniSpacedText(X, Y: integer; Texts: String79; T: Byte);
+Procedure IniInversWrite(X, Y: integer; Texts: String; T: Byte);
+Procedure IniSpacedWrite(X, Y: integer; Texts: String; T: Byte);
+Procedure IniInversText(X, Y: integer; Texts: String; T: Byte);
+Procedure IniSpacedText(X, Y: integer; Texts: String; T: Byte);
 Procedure IniClearLine(X, Y: integer; cllength: integer;
     BColor: byte);
 Procedure IniClearSpacedLine(X, Y: integer; cllength: integer;
@@ -368,9 +367,9 @@ Function IniEmptyLine(inblock: stringline): boolean;
 Function IniLeftMargin: integer;
 Procedure IniTrailBlank(Var inblock: stringline);
 Procedure IniLeadBlank(Var inblock: stringline);
-Function IniUserFontFile(instring: string79): boolean;
-Function IniFileExist(instring: string79): boolean;
-Function IniDirExist(instring: string79): boolean;
+Function IniUserFontFile(instring: string): boolean;
+Function IniFileExist(instring: string): boolean;
+Function IniDirExist(instring: string): boolean;
 Function IniBytes(x, y: integer): integer;
 Procedure IniGraphMode;
 Procedure IniRefInit;
@@ -384,7 +383,7 @@ Function IniHeaderFooterLine(linenum: integer): boolean;
 Function IniMinFooter: integer;
 Function IniHeaderEnd: integer;
 Function IniFooterEnd: integer;
-Procedure IniExpand(Var instring: string79; newlength: byte);
+Procedure IniExpand(Var instring: string; newlength: byte);
 Procedure IniCenter(Var instring: String; newlength: byte);
 Function IniTabChar(c: char): boolean;
 Procedure IniShowCursor;
@@ -434,23 +433,23 @@ Function IniKeyPressed: boolean;
 Const skipset:
         Set Of byte = [59, 60, 62, 67, 73, 81, 89, 118, 132];
 Var c: char;
-    result: boolean;
+    res: boolean;
     mausx, mausy, maustaste, mp, mausmenu: word;
 Begin
-    If nextresponse = no_response Then result := false Else result := true;
+    If nextresponse = no_response Then res := false Else res := true;
     If ((nextresponse = no_response) AND (xKeyPressed)) Then
     Begin
         c := xreadkey (nextshift, nextctrl);
         If c = #27 Then
         Begin
-            result := true;
+            res := true;
             nextresponse := escape;
         End Else If c = #0 Then
         Begin
             c := xreadkey (nextshift, nextctrl);
             If byte (c) IN skipset Then
             Begin
-                result := true;
+                res := true;
                 nextresponse := specialkey;
                 nextkey := c;
             End;
@@ -461,11 +460,11 @@ Begin
         MausPosition (mausx, mausy, maustaste, mp, mausmenu);
         If maustaste = 7 Then
         Begin
-            result := true;
+            res := true;
             nextresponse := escape;
         End;
     End;
-    IniKeyPressed := result;
+    IniKeyPressed := res;
 End;
 {****************************************************}
 Procedure IniSwapColors;
@@ -502,7 +501,7 @@ Procedure IniShowCursor;
 Begin
 End;
 {******************************************************}
-Procedure IniExpand(Var instring: string79; newlength: byte);
+Procedure IniExpand(Var instring: string; newlength: byte);
 Begin
     // Expand string to newlength by padding with spaces if needed
     While Length (instring) < newlength Do
@@ -512,14 +511,14 @@ End;
 Procedure IniCenter(Var instring: String; newlength: byte);
 Var st: String;
 Begin
-    If newlength < byte (instring[0]) Then
+    If newlength < Length (instring) Then
     Begin
-        instring[0] := char (newlength);
+        SetLength (instring, newlength);
         Exit;
     End;
     FillChar (St[1], Newlength, ' ');
-    Move (instring[1], st[(newlength - Byte (instring[0])) SHR 1 + 1], Byte (instring[0]));
-    st[0] := char (newlength);
+    Move (instring[1], st[(newlength - Length (instring)) SHR 1 + 1], Length (instring));
+    SetLength (st, newlength);
     instring := st;
 End;
 {******************************************************}
@@ -567,7 +566,7 @@ End;
 Function IniAltChar(c: char): char;
 {Umwandeln eines Alt-Characters in den Bereich 128..153,
  wobei alphabetisch geordnet wird}
-Var str: string79;
+Var str: string;
 Begin
     str := 'qwertyuiop    asdfghjkl     zxcvbnm';
     IniAltChar := char (Byte (str[Byte (c) - 15]) + 31);
@@ -612,11 +611,11 @@ Begin
     Inibytes := $2000 * (y MOD 4) + 90 * (y SHR 2) + (x SHR 3);
 End;
 {******************************************************}
-Function IniUserFontFile(instring: string79): boolean;
+Function IniUserFontFile(instring: string): boolean;
     { testet, ob das File mit dem Namen instring ein User-File ist }
 Var F: Text;
     SFM: Integer;
-    St: String79;
+    St: String;
 Begin
     Instring := UpString (instring);
     If Pos ('.', Instring) <> 0 Then
@@ -646,7 +645,7 @@ Begin
     Close (f);
 End;
 {******************************************************}
-Function IniFileExist(instring: string79): boolean;
+Function IniFileExist(instring: string): boolean;
     { testet, ob unter dem Namen instring schon ein File auf dem Directory existiert }
 Var FileInfo: SearchRec;
 Begin
@@ -655,7 +654,7 @@ Begin
 End;
 
 {******************************************************}
-Function IniDirExist(instring: string79): boolean;
+Function IniDirExist(instring: string): boolean;
     { testet, ob unter dem Namen instring schon ein Directory existiert }
 Var actdir: string;
 Begin
@@ -676,7 +675,7 @@ Begin
     l := length (inblock);
     While ((l > 0) AND (inblock[l] = ' ')) Do
     Begin
-        dec (byte (inblock[0]));
+        SetLength (inblock, Length (inblock) - 1);
         dec (l);
     End;
 End;
@@ -695,7 +694,7 @@ Begin
     IniLeftMargin := margin;
 End;
 {**************************************************************}
-Procedure IniOutTextXY(X, Y: integer; Texts: String79);
+Procedure IniOutTextXY(X, Y: integer; Texts: String);
 Var T: Boolean;
 Begin
     t := IstDunkel;
@@ -707,7 +706,7 @@ Begin
     If NOT T Then MausZeigen;
 End;
 {**************************************************************}
-Procedure IniWriteXY(X, Y: integer; Texts: String79);
+Procedure IniWriteXY(X, Y: integer; Texts: String);
 Var T: Boolean;
 Begin
     t := IstDunkel;
@@ -724,7 +723,7 @@ Begin
     y := y * charheight + 6;
 End;
 {**************************************************************}
-Procedure IniInversWrite(X, Y: integer; Texts: String79; t: byte);
+Procedure IniInversWrite(X, Y: integer; Texts: String; t: byte);
 Var fcolor, bkcolor: byte;
     fills: fillsettingstype;
     X1, X2, Y1, Y2: Integer;
@@ -767,7 +766,7 @@ Begin
     If NOT D Then MausZeigen;
 End;
 {**************************************************************}
-Procedure IniSpacedWrite(X, Y: integer; Texts: String79; t: byte);
+Procedure IniSpacedWrite(X, Y: integer; Texts: String; t: byte);
 Var fcolor, bkcolor: byte;
     fills: fillsettingstype;
     X1, X2, Y1, Y2: Integer;
@@ -803,13 +802,13 @@ Begin
     If NOT d Then MausZeigen;
 End;
 {**************************************************************}
-Procedure IniInversText(X, Y: integer; Texts: String79; t: Byte);
+Procedure IniInversText(X, Y: integer; Texts: String; t: Byte);
 Begin
     IniGraphXY (x, y);
     IniInversWrite (x, y, texts, t);
 End;
 {**************************************************************}
-Procedure IniSpacedText(X, Y: integer; Texts: String79; t: byte);
+Procedure IniSpacedText(X, Y: integer; Texts: String; t: byte);
 Begin
     IniGraphXY (x, y);
     IniSpacedWrite (x, y, texts, t);
@@ -1110,9 +1109,9 @@ Begin
     reset (infile);
     If IOResult <> 0 Then
     Begin
-        WriteLn('Error: Cannot open symbols.sym file');
-        WriteLn('Make sure the file exists in the current directory.');
-        RunError(127);
+        WriteLn ('Error: Cannot open symbols.sym file');
+        WriteLn ('Make sure the file exists in the current directory.');
+        RunError (127);
     End;
     For c := 'a' To 'z' Do
         For i := 1 To 15 Do
@@ -1121,9 +1120,9 @@ Begin
                 read (infile, symarr[c, i, j]);
                 If IOResult <> 0 Then
                 Begin
-                    close(infile);
-                    WriteLn('Error: Cannot read data from symbols.sym file');
-                    RunError(127);
+                    close (infile);
+                    WriteLn ('Error: Cannot read data from symbols.sym file');
+                    RunError (127);
                 End;
             End;
     close (infile);
@@ -1131,10 +1130,10 @@ Begin
     reset (parfile);
     If IOResult <> 0 Then
     Begin
-        close(infile);
-        WriteLn('Error: Cannot open symbols.par file');
-        WriteLn('Make sure the file exists in the current directory.');
-        RunError(127);
+        close (infile);
+        WriteLn ('Error: Cannot open symbols.par file');
+        WriteLn ('Make sure the file exists in the current directory.');
+        RunError (127);
     End;
     For c := 'a' To 'z' Do
         For i := 1 To numofpar Do
@@ -1143,10 +1142,10 @@ Begin
                 read (parfile, sympar[c, i, j]);
                 If IOResult <> 0 Then
                 Begin
-                    close(parfile);
-                    close(infile);
-                    WriteLn('Error: Cannot read data from symbols.par file');
-                    RunError(127);
+                    close (parfile);
+                    close (infile);
+                    WriteLn ('Error: Cannot read data from symbols.par file');
+                    RunError (127);
                 End;
             End;
     close (parfile);
@@ -1207,9 +1206,9 @@ Begin
     reset (infile);
     If IOResult <> 0 Then
     Begin
-        WriteLn('Error: Cannot open colors.rns file');
-        WriteLn('Make sure the file exists in the current directory.');
-        RunError(127);
+        WriteLn ('Error: Cannot open colors.rns file');
+        WriteLn ('Make sure the file exists in the current directory.');
+        RunError (127);
     End;
     readln (infile, bkcolor);
     readln (infile, lcolor);
@@ -1241,10 +1240,10 @@ Begin
     readln (infile, FrameBkColor);
     If IOResult <> 0 Then
     Begin
-        close(infile);
-        WriteLn('Error: Cannot read color data from colors.rns file');
-        WriteLn('File may be corrupted or incomplete.');
-        RunError(127);
+        close (infile);
+        WriteLn ('Error: Cannot read color data from colors.rns file');
+        WriteLn ('File may be corrupted or incomplete.');
+        RunError (127);
     End;
     close (infile);
 End;

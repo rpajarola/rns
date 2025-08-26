@@ -206,7 +206,7 @@ Var
 
     Procedure HighLite(VideoVal: Integer);
 
-    Var outstring: string79;
+    Var outstring: String;
         xpos: integer;
   { Ein kleines Unterprogramm um aktuelle Wahl hervorzuheben
     bzw. die verlassene Wahl wieder in normaler Schrift darzustellen
@@ -426,7 +426,7 @@ PARAMETER:
 
 Var
     CURRENT_CHOICE, pry: integer;
-
+    SVal: String;
     RESP: RESPONSE_TYPE;  { Tastatur-Eingabe - siehe Get_Response }
     DIR:  MOVEMENT;        { Eingegebene Richtung der Pfeiltaste }
     KeyResponse: Char;
@@ -440,7 +440,7 @@ Var
     und die Eingabe-Felder vorzugeben
     ViedoVal: Schrifttyp der aktuellen Anzeige }
 
-    Var outstring: string79;
+    Var outstring: String;
 
     Begin
         Mausdunkel;
@@ -493,7 +493,7 @@ Begin
             { �bernimm die nach dem Prompt eingegebene Antwort }
             Case ChoiceVal[Current_Choice].TypIdent Of
                 'o': ;
-                {New}      'r': GrGet_Prompted_Real (
+                'r': GrGet_Prompted_Real (
                         ChoiceVal[Current_Choice].RVal,
                         ChoiceVal[Current_Choice].RValMin,
                         ChoiceVal[Current_Choice].RValMax,
@@ -519,7 +519,10 @@ Begin
                         pry, menu_width,
                         RESP, DIR, KeyResponse, true,
                         mausx, mausy, maustaste, mausmenu, changed[current_choice]);
-                's': GrGet_Prompted_String (ChoiceVal[Current_Choice].SVal,
+                's':
+                Begin
+                    SVal := ChoiceVal[Current_Choice].SVal;
+                    GrGet_Prompted_String (Sval,
                         FieldLength, '>',
                         ValCol + (FieldLength + 1),
                         TOP_LINE + CURRENT_CHOICE * SPACING,
@@ -529,6 +532,8 @@ Begin
                         pry, menu_width,
                         RESP, DIR, KeyResponse, true,
                         mausx, mausy, maustaste, mausmenu, changed[current_choice]);
+                    ChoiceVal[Current_Choice].SVal := Sval;
+                End;
                 't': GrGet_Prompted_Toggle (
                         ChoiceVal[Current_Choice].TVal,
                         ChoiceVal[Current_Choice].TValMin,

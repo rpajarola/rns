@@ -28,7 +28,7 @@ Uses
     UserExit,
     Texts;
 
-Procedure EdiRythmEdit(instring, bakname: string79; defpagesetup, demloc: boolean);
+Procedure EdiRythmEdit(instring, bakname: string; defpagesetup, demloc: boolean);
 Function EdiSavePossible(fn: String): Boolean;
 Implementation
 
@@ -67,7 +67,7 @@ Begin
     ReWrite (F2, 1);
     If IOResult <> 0 Then
     Begin
-        Close(F1);
+        Close (F1);
         Exit;
     End;
     FileMode := 2;
@@ -128,7 +128,7 @@ Begin
     End;
 End;
 {******************************************************}
-Procedure EdiRythmEdit(instring, bakname: string79; defpagesetup, demloc: boolean);
+Procedure EdiRythmEdit(instring, bakname: string; defpagesetup, demloc: boolean);
 
 Var
     i, j: integer;
@@ -165,15 +165,15 @@ Begin
         Reset (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc);
             Exit;
         End;
         instring := instring + exts;
         readln (infile, inblock);
         If IOResult <> 0 Then
         Begin
-            close(infile);
-            HlpHint(HntCannotReadFile, HintWaitEsc);
+            close (infile);
+            HlpHint (HntCannotReadFile, HintWaitEsc);
             Exit;
         End;
         If inblock = '$$$RNSBUFFER$$$' Then
@@ -183,7 +183,7 @@ Begin
         ReSet (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc);
             Exit;
         End;
     End Else assign (infile, instring){    if ((demloc) and (Pos('TESTFILE.RNS',instring) = 0)) then begin
@@ -201,14 +201,14 @@ Begin
         Rewrite (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotCreateFile, HintWaitEsc);
+            HlpHint (HntCannotCreateFile, HintWaitEsc);
             Exit;
         End;
         ReSet (ifile);
         If IOResult <> 0 Then
         Begin
-            close(infile);
-            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            close (infile);
+            HlpHint (HntCannotOpenFile, HintWaitEsc);
             Exit;
         End;
         For linenum := topmargin To pagelength Do
@@ -216,17 +216,17 @@ Begin
             Readln (ifile, inblock);
             If IOResult <> 0 Then
             Begin
-                close(ifile);
-                close(infile);
-                HlpHint(HntCannotReadFile, HintWaitEsc);
+                close (ifile);
+                close (infile);
+                HlpHint (HntCannotReadFile, HintWaitEsc);
                 Exit;
             End;
             Writeln (infile, inblock);
             If IOResult <> 0 Then
             Begin
-                close(ifile);
-                close(infile);
-                HlpHint(HntCannotWriteFile, HintWaitEsc);
+                close (ifile);
+                close (infile);
+                HlpHint (HntCannotWriteFile, HintWaitEsc);
                 Exit;
             End;
         End;
@@ -238,7 +238,7 @@ Begin
         rewrite (ifile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotCreateFile, HintWaitEsc);
+            HlpHint (HntCannotCreateFile, HintWaitEsc);
             Exit;
         End;
         close (ifile);
@@ -248,14 +248,14 @@ Begin
         reset (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc);
             Exit;
         End;
         readln (infile, inblock);
         If IOResult <> 0 Then
         Begin
-            close(infile);
-            HlpHint(HntCannotReadFile, HintWaitEsc);
+            close (infile);
+            HlpHint (HntCannotReadFile, HintWaitEsc);
             Exit;
         End;
         If inblock = '$$$RNSBUFFER$$$' Then
@@ -265,7 +265,7 @@ Begin
         ReSet (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint(HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc);
             Exit;
         End;
     End;
@@ -384,7 +384,7 @@ Begin
             rewrite (infile);
             If IOResult <> 0 Then
             Begin
-                HlpHint(HntCannotCreateFile, HintWaitEsc);
+                HlpHint (HntCannotCreateFile, HintWaitEsc);
                 Exit;
             End;
             FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
@@ -402,15 +402,15 @@ Begin
                         WriteLn (infile, '$$$RNSBUFFER$$$');
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc);
                             Exit;
                         End;
                         WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
                         If IOResult <> 0 Then
                         Begin
-                            close(infile);
-                            HlpHint(HntCannotWriteFile, HintWaitEsc);
+                            close (infile);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc);
                             Exit;
                         End;
 

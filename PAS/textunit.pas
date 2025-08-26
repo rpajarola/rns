@@ -1,4 +1,4 @@
-{$I RNS.H}
+ï»¿{$I RNS.H}
 
 Unit textunit;
 
@@ -323,7 +323,7 @@ Function TexTabWidth(x, linenum, ordc: integer;
  Die y-koordinate bleibt unver„ndert.
  Der Funktionswert wird gleich der Schrittweite des Tabulators}
 Var i: byte;
-    notec, result: integer;
+    notec, res: integer;
 Begin
     {Suche Notenzeile}
     If ordc < 200 Then
@@ -336,22 +336,22 @@ Begin
         While ((i <= pagelength) AND (page[i, 1] <> 'N')) Do
             i := i + 1;
     End;
-    If ((i < topmargin) OR (i > pagelength)) Then result := 6{Keine Notenzeile gefunden}{ standard charwidth } Else Begin
+    If ((i < topmargin) OR (i > pagelength)) Then res := 6{Keine Notenzeile gefunden}{ standard charwidth } Else Begin
         xnote := x + 4;
         GetNotePosX (xnote, notec, i, false, false);
         If xnote < x Then
         Begin
             {Keine Noten rechts der gegenwaertigen Position}
-            result := 6;
+            res := 6;
             totw := 6;
         End Else Begin
             totw := xnote - x - 3;
-            result := totw MOD 6;
+            res  := totw MOD 6;
         End;
-        If result = 0 Then
-            result := 6;
+        If res = 0 Then
+            res := 6;
     End;
-    TexTabWidth := result - 1;
+    TexTabWidth := res - 1;
     If cursormove Then GcuMoveCursor (xnote - 12, gcycoord);
 End;
 
@@ -366,7 +366,7 @@ Begin
 End;
 
 {****************************************************************}
-Procedure TexOctVal(ordc: byte; Var strbuf: string4; Var i: byte);
+Procedure TexOctVal(ordc: byte; Var strbuf: string; Var i: byte);
 Begin
     i := 4;
     strbuf := ' ';
@@ -457,7 +457,7 @@ Var i, xp, xn, tw: integer;
     {************************}
     Procedure AddChar(incinote: boolean);
     Var idiff: byte;
-        strbuf: string4;
+        strbuf: string;
     Begin
         TexOctval (Byte (page[linenum, istart + i]), strbuf, idiff);
         inblock := inblock + strbuf;
@@ -505,7 +505,7 @@ Var i, iprint, x, y, stringlength, xnote, inote: integer;
     {*****************************************}
     Procedure PrintChar;
     {schreibt ein Zeichen}
-    Var strbuf: string4;
+    Var strbuf: string;
         ordc: byte;
     Begin
         If printit Then

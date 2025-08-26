@@ -15,10 +15,10 @@ Procedure Get_Response(Var RESPONSE: RESPONSE_TYPE;
     Var shiftp, ctrlp: boolean;
     Var mausx, mausy: word;
     Var maustaste, mp, mausmenu: word);
-Procedure Put_String(COL, LINE: integer; OUT_STRING: STRING79;
+Procedure Put_String(COL, LINE: integer; OUT_STRING: STRING;
     ATTRIB: integer);
 
-Procedure Put_Centered_String(OUT_STRING: STRING79;
+Procedure Put_Centered_String(OUT_STRING: STRING;
     LINE, ATTRIB: integer);
 
 
@@ -172,7 +172,7 @@ End;
 {------------------------------------------------------------------}
 {------------------------------------------------------------------}
 
-Procedure Put_String(COL, LINE: integer; OUT_STRING: STRING79;
+Procedure Put_String(COL, LINE: integer; OUT_STRING: STRING;
     ATTRIB: integer);
 {
 BESCHREIBUNG:
@@ -187,7 +187,7 @@ PARAMETER:
     ATTRIBUTE (Eingabe)  - Bildschirmattribute [0-7]
 
 BENôTIGTE TYPEN:
-    STRING79 - Wird fÅr alle Strings verwendet
+    STRING - Wird fÅr alle Strings verwendet
 
 BENUTZTE BIBLIOTHEKSPROGRAMME:
     Set_Video - Setzt Bildschirmattribute
@@ -208,7 +208,7 @@ End;
 
 {-------------------------------------------------------------------}
 
-Procedure Put_Centered_String(OUT_STRING: STRING79;
+Procedure Put_Centered_String(OUT_STRING: STRING;
     LINE, ATTRIB: integer);
 {
 BESCHREIBUNG:
@@ -222,7 +222,7 @@ PARAMETER:
     ATTRIBUTE (Eingabe)  - Bildschirmattribute [0-7]
 
  BENôTIGTE TYPEN:
-    STRING79 - Wird fÅr alle Strings verwendet
+    STRING - Wird fÅr alle Strings verwendet
 
 BENUTZTE BIBLIOTHEKSPROGRAMME:
     Put_String - Gibt einen String an einer bestimmten Bildschirm-
