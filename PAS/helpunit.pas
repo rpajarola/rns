@@ -229,6 +229,18 @@ Var ymaxframe: integer;
     SC: Byte;
     HintText: String;
 Begin
+    Case HintNum Of
+        HntDivNotPossible: HintText := 'Division ' + HintS1 + ':' + HintS2 + ' not possible';{HntDivNotPossible}
+        HntPrintToFileFinished: HintText := HintTexts[HintNum] + ' ' + prfname + ' in ' + FExpand (psdir);
+    Else
+        HintText := HintTexts[HintNum];
+    End;{Case}
+    If grmaxy = 0 Then
+        {we're in text mode}
+    Begin
+        WriteLn (HintText);
+        Exit;
+    End;
     SC := GetColor;
     If WaitTime = 0 Then
         ymaxframe := 48
@@ -241,12 +253,6 @@ Begin
             GetImage (GrMinX, grmaxy - ymaxframe - 1, GrMaxX, grmaxy + 1, SPic^);
     End;
     HlpHintFrame (grminx, grmaxy - ymaxframe, Grmaxx, grmaxy);
-    Case HintNum Of
-        HntDivNotPossible: HintText := 'Division ' + HintS1 + ':' + HintS2 + ' not possible';{HntDivNotPossible}
-        HntPrintToFileFinished: HintText := HintTexts[HintNum] + ' ' + prfname + ' in ' + FExpand (psdir);
-    Else
-        HintText := HintTexts[HintNum];
-    End;{Case}
     txtfnt.write (grminx + 16, grmaxy - ymaxframe + 2 * charheight, hinttext, getcolor, sz8x16, stnormal);
     If WaitTime = 0 Then
     Begin
