@@ -117,12 +117,7 @@ Begin
     End;
     readln (infile, datadir);
     If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read data directory from config.rns');
-        close (infile);
-        Halt (100);
-    End;
-    ChDir (DataDir);
+        ChDir (DataDir);
     If IOResult <> 0 Then SearchADir (Datadir) Else
         ChDir (ActDir);
     readln (infile, colorfile);
@@ -141,7 +136,11 @@ Begin
     If NOT IniDirExist (datadir) Then
     Begin
         MkDir (datadir);
-        If IOResult <> 0 Then RunError (IOResult);
+        If IOResult <> 0 Then
+        Begin
+            WriteLn ('Error: Cannot create datadir ', datadir);
+            Halt (100);
+        End;
     End;
     If psdir = '' Then
         psdir := 'PSFILES';
@@ -149,10 +148,19 @@ Begin
         bufdir := 'BUFFERS';
     If NOT IniDirExist (psdir) Then
         MkDir (psdir);
-    If IOResult <> 0 Then RunError (IOResult);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn ('Error: Cannot create psdir ', psdir);
+        Halt (100);
+
+    End;
     If NOT IniDirExist (bufdir) Then
         MkDir (bufdir);
-    If IOResult <> 0 Then RunError (IOResult);
+    If IOResult <> 0 Then
+    Begin
+        WriteLn ('Error: Cannot create bufdir ', bufdir);
+        Halt (100);
+    End;
     ChDir (ActDir);
 End;
 
@@ -527,7 +535,7 @@ Begin
                                 datadir := instring;
                                 ok := true;
                             End Else Begin
-                   MkDir (instring);
+                                MkDir (instring);
                                 If IOResult = 0 Then
                                 Begin
                                     If HlpAreYouSure ('Directory "' + instring + '\" does not exist', hpFileMenu) Then
