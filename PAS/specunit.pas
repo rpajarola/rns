@@ -90,6 +90,7 @@ Var dir: movement;
     bfile: text;
     inblock: stringline;
     mausx, mausy, maustaste, mausmenu: word;
+    filename: string;
 
 Begin
     ImeIniBlockMenu;
@@ -151,7 +152,7 @@ Begin
                         actptr, startptr, lastptr, dummyb);
 {          SpeMoveBlock(linenum, actposn, actpost, actptr,
                         startptr, lastptr);}
-                End Else HlpHint (HntNoMarkedArea, HintWaitEsc);
+                End Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
             'D': If mend.mpag <> -1 Then
                 Begin
@@ -191,12 +192,12 @@ Begin
                     End Else Begin
                         PagRefPage;
                     End;
-                End Else HlpHint (HntNoMarkedArea, HintWaitEsc);
+                End Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
             'W':
             Begin
       {$IFDEF DEMO}
-                HlpHint (HntDemoBuf, 0);
+                HlpHint (HntDemoBuf, 0, []);
       {$ELSE}
                 If mend.mpag <> -1 Then
                 Begin
@@ -214,18 +215,19 @@ Begin
                                 dummyb := false;
                         If dummyb Then
                         Begin
-                            assign (bfile, bufdir + '\' + instring);
+			    filename :=bufdir + '\' + instring;
+                            assign (bfile, filename);
                             rewrite (bfile);
                             If IOResult <> 0 Then
                             Begin
-                                HlpHint (HntCannotCreateFile, HintWaitEsc);
+                                HlpHint (HntCannotCreateFile, HintWaitEsc, [filename]);
                                 Exit;
                             End;
                             writeln (bfile, '$$$RNSBUFFER$$$');
                             If IOResult <> 0 Then
                             Begin
                                 close (bfile);
-                                HlpHint (HntCannotWriteFile, HintWaitEsc);
+                                HlpHint (HntCannotWriteFile, HintWaitEsc, [filename]);
                                 Exit;
                             End;
                             If marpartline Then
@@ -239,7 +241,7 @@ Begin
                             If IOResult <> 0 Then
                             Begin
                                 close (bfile);
-                                HlpHint (HntCannotWriteFile, HintWaitEsc);
+                                HlpHint (HntCannotWriteFile, HintWaitEsc, [filename]);
                                 Exit;
                             End;
                             FilHeapToFile (bfile, bufactptr,
@@ -248,33 +250,36 @@ Begin
                             PagUnmark;
                         End;
                     End; {if HlpGetFileName(instring) then }
-                End {if mstart.mpage }Else HlpHint (HntNoMarkedArea, HintWaitEsc);
+                End {if mstart.mpage }Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
       {$ENDIF}
             End;
 
             'R':
             Begin
       {$IFDEF DEMO}
-                HlpHint (HntDemoBuf, 0);
+                HlpHint (HntDemoBuf, 0, []);
       {$ELSE}
                 If mstart.mpag = -1 Then
                 Begin
                     Mausbereich (GrMinX + 1, GrMinX + 20 * 8, GrMinY, GrMaxY);
                     instring := FilFileSelect ('Select Bufferfile', '*.buf', bufdir);
                     If instring <> '' Then
-                        If NOT IniFileExist (bufdir + '\' + instring) Then HlpHint (HntNotExist, HintWaitEsc) Else Begin
-                            assign (bfile, bufdir + '\' + instring);
+		    	filename :=bufdir + '\' + instring;
+                        If NOT IniFileExist (filename) Then
+			HlpHint (HntNotExist, HintWaitEsc, [filename])
+			Else Begin
+                            assign (bfile, filename);
                             reset (bfile);
                             If IOResult <> 0 Then
                             Begin
-                                HlpHint (HntCannotOpenFile, HintWaitEsc);
+                                HlpHint (HntCannotOpenFile, HintWaitEsc, [filename]);
                                 Exit;
                             End;
                             readln (bfile, inblock);
                             If IOResult <> 0 Then
                             Begin
                                 close (bfile);
-                                HlpHint (HntCannotReadFile, HintWaitEsc);
+                                HlpHint (HntCannotReadFile, HintWaitEsc, [filename]);
                                 Exit;
                             End;
                             If (inblock = '$$$RNSBUFFER$$$') Then
@@ -284,7 +289,7 @@ Begin
                                 If IOResult <> 0 Then
                                 Begin
                                     close (bfile);
-                                    HlpHint (HntCannotReadFile, HintWaitEsc);
+                                    HlpHint (HntCannotReadFile, HintWaitEsc, [filename]);
                                     Exit;
                                 End;
                                 marpartline := (i = 1);
@@ -297,10 +302,10 @@ Begin
                                 Markinit;
                             End Else Begin
                                 close (bfile);
-                                HlpHint (HntNotBlockFile, HintWaitEsc);
+                                HlpHint (HntNotBlockFile, HintWaitEsc, [filename]);
                             End;
                         End; {if HlpGetFileName(instring) then }
-                End Else {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc);
+                End Else {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []);
       {$ENDIF}
             End; {'R'}
 
@@ -376,14 +381,19 @@ Var instring: string;
     ok: boolean;
     outfile: text;
     i:  integer;
+    filename:string;
 
 Begin
-    If ((actptr = startptr) OR (actptr = lastptr)) Then HlpHint (HntSplitFirstPage, HintWaitEsc) Else{if startptr = actptr then }Begin
+    If ((actptr = startptr) OR (actptr = lastptr)) Then
+    HlpHint (HntSplitFirstPage, HintWaitEsc, [])
+    Else{if startptr = actptr then }
+    Begin
         {Filenamen abfragen}
         ok := true;
         If HlpGetFileName (instring, '.RNS', 0, 0) Then
         Begin
-            If IniFileExist (datadir + '/' + instring) Then
+	    filename :=datadir + '/' + instring;
+            If IniFileExist (filename) Then
                 If NOT HlpAreYouSure ('File already exists - overwrite?', hpEdit) Then ok := false;
             If ok Then
             Begin
@@ -400,7 +410,7 @@ Begin
                 reset (infile);
                 If IOResult <> 0 Then
                 Begin
-                    HlpHint (HntCannotOpenFile, HintWaitEsc);
+                    HlpHint (HntCannotOpenFile, HintWaitEsc, [filename]);
                     Exit;
                 End;
                 FilFileToHeap (infile, actptr, startptr, lastptr, ok);
@@ -536,7 +546,7 @@ Begin
         PagCursorLeft (linenum, actposn, actpost);
     End { if actptr <> lastptr then }
     Else
-        HlpHint (HntOnLastPage, HintWaitEsc);
+        HlpHint (HntOnLastPage, HintWaitEsc, []);
 End;
 
 {******************************************************}
@@ -678,7 +688,7 @@ Begin
                 inserted := true;
                 SpeLineInsert (linenum, insmusicline);
             End Else Begin
-                HlpHint (HntNotEnoughSpace, HintWaitEsc);
+                HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
                 inserted := false;
             End;
         End Else Begin
@@ -689,11 +699,12 @@ Begin
                 inserted := true;
                 For i := 1 To linecount Do SpeLineInsert (linenum + i - 1, insmusicline);
             End Else Begin
-                HlpHint (HntNotEnoughSpace, HintWaitEsc);
+                HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
                 inserted := false;
             End;
         End;
-    End Else HlpHint (HntDistanceToSmall, HintWaitEsc);
+    End Else
+        HlpHint (HntDistanceToSmall, HintWaitEsc, []);
     {Seite wiederherstellen}
     If inserted Then
     Begin
@@ -729,7 +740,7 @@ Begin
         PagCursorLeft (linenum, actpost, i);
     End
     Else
-        HlpHint (HntNotEnoughSpace, HintWaitEsc);
+        HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
 End;
 
 {******************************************************}
@@ -749,7 +760,7 @@ Begin
     blocklength := mend.mline - mstart.mline + 1 + (mend.mpag - mstart.mpag) * pagelength;
     If (blocklength < pagelength) AND (linenum + blocklength > pagelength) Then
     Begin
-        HlpHint (HntNotEnoughSpace, HintWaitEsc);
+        HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
         Exit;
     End;
     linenow := pagecount * pagelength + linenum + blocklength;
@@ -768,7 +779,7 @@ Begin
         delfirst := 2; { if marpartline then }
 
     Case delfirst Of
-        0: HlpHint (HntBufItself, HintWaitEsc);
+        0: HlpHint (HntBufItself, HintWaitEsc, []);
         1:
         Begin
             MarDeleteBlock (actptr, startptr, lastptr);
@@ -820,7 +831,7 @@ Begin
                 tbufpos, endreached, true, false);
             {Testen, ob nicht eine Textzeile in eine Notenzeile kopiert wird}
             If page[linenum, 1] <> inblock[1] Then
-                HlpHint (HntIncorrectNote, HintWaitEsc)
+                HlpHint (HntIncorrectNote, HintWaitEsc, [])
             Else {  if page[linenum, 1] <> inblock[1] then }
             Begin
                 delete (inblock, mend.mpos + 1, length (inblock));
@@ -929,7 +940,7 @@ Begin
         End; { else if marpartline then }
     End
     Else { if bufstartptr <> bufendptr then }
-        HlpHint (HntBufEmpty, HintWaitEsc); {else  if bufstartptr <> bufendptr then}
+        HlpHint (HntBufEmpty, HintWaitEsc, []); {else  if bufstartptr <> bufendptr then}
 End;
 
 Function SpeDelPossible(Linenum: Integer): Boolean;

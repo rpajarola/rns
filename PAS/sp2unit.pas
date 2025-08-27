@@ -184,12 +184,12 @@ Begin
 
         If NOT foundflag Then
         Begin
-            HlpHint (HntNotFound, HintWaitEsc);
+            HlpHint (HntNotFound, HintWaitEsc, [searchstring]);
             PagCursorLeft (linenum, actposn, actpost);
         End;
     End {if searchstring <> ''}
     Else
-        HlpHint (HntNoSearchText, HintWaitEsc);
+        HlpHint (HntNoSearchText, HintWaitEsc, []);
     Sp2SearchString := foundflag;
 End;
 
@@ -596,7 +596,7 @@ Var i, imax: byte;
 Begin
     imax := IniMaxHeader;
     If (linenum > imax) Then
-        HlpHint (HntHeaderHalfPage, HintWaitEsc)
+        HlpHint (HntHeaderHalfPage, HintWaitEsc, [])
     Else
     Begin
         For i := linenum To imax Do
@@ -622,7 +622,7 @@ Var i, imin: byte;
 Begin
     imin := IniMinFooter;
     If (linenum < imin) Then
-        HlpHint (HntFooterHalfPage, HintWaitEsc)
+        HlpHint (HntFooterHalfPage, HintWaitEsc, [])
     Else
     Begin
         For i := imin To linenum Do

@@ -315,7 +315,6 @@ Var ThePalette: TDACTable;
     addcent: integer;
     mulcent: real;
     LastSound: integer;
-    HintS1, HintS2: String[8];
     FrameWidth: Byte;
     FileChanged: Byte;
     CtrlEnterOfs: Byte;

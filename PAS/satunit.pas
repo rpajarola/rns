@@ -29,11 +29,11 @@ Var c: char;
     i, j: byte;
     parfile: File Of integer;
 Begin
-    assign (parfile, 'SYMBOLS.PAR');
+    assign (parfile, 'symbols.par');
     reset (parfile);
     If IOResult <> 0 Then
     Begin
-        HlpHint (HntCannotOpenFile, HintWaitEsc);
+        HlpHint (HntCannotOpenFile, HintWaitEsc, ['symbols.par']);
         Exit;
     End;
     For c := 'a' To 'z' Do
@@ -44,7 +44,7 @@ Begin
                 If IOResult <> 0 Then
                 Begin
                     close (parfile);
-                    HlpHint (HntCannotWriteFile, HintWaitEsc);
+                    HlpHint (HntCannotWriteFile, HintWaitEsc, ['symbols.par']);
                     Exit;
                 End;
             End;

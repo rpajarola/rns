@@ -136,11 +136,11 @@ Begin
                             inblock := inblock + c;
                     End;
                 ')': If inblock[a] = '(' Then
-                        HlpHint (HntEmptyBracket, HintNormalTime)
+                        HlpHint (HntEmptyBracket, HintNormalTime, [])
                     Else
                         inblock := inblock + c;
                 ']': If inblock[a] = '[' Then
-                        HlpHint (HntEmptyBracket, HintNormalTime)
+                        HlpHint (HntEmptyBracket, HintNormalTime, [])
                     Else
                         inblock := inblock + c;
                 '{':

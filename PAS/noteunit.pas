@@ -175,7 +175,7 @@ Begin
                                     break;
                                 If (page[linenum, i] = '(') OR (page[linenum, i] = '[') Then
                                 Begin
-                                    HlpHint (HntCloseBracketFirst, HintNormalTime);
+                                    HlpHint (HntCloseBracketFirst, HintNormalTime, []);
                                     exit;{not allowed!!!}
                                 End;
                                 If (page[linenum, i] = '%') Then
@@ -188,7 +188,7 @@ Begin
                                 If (page[linenum, i] = '(') OR (page[linenum, i] = '[') OR
                                     (page[linenum, i] = ']') Then
                                 Begin
-                                    HlpHint (HntOpenBracketFirst, HintNormalTime);
+                                    HlpHint (HntOpenBracketFirst, HintNormalTime, []);
                                     exit;{not allowed!!!}
                                 End;
                             End;{')'}
@@ -199,7 +199,7 @@ Begin
                                 If (page[linenum, i] = '(') OR (page[linenum, i] = '[') OR
                                     (page[linenum, i] = ')') Then
                                 Begin
-                                    HlpHint (HntOpenBracketFirst, HintNormalTime);
+                                    HlpHint (HntOpenBracketFirst, HintNormalTime, []);
                                     exit;{not allowed!!!}
                                 End;
                             End;{']'}
@@ -277,7 +277,7 @@ Begin
                             nosound;
                         End;
                 End Else {if (length(page[linenum]...}
-                    HlpHint (HntTooManyChars, HintWaitEsc);
+                    HlpHint (HntTooManyChars, HintWaitEsc, []);
             End;{ else if ordc=8}
         End Else{if (not(IniNumChar(c)...}If UtiNumReady (inbuffer, c) Then
         Begin
@@ -306,7 +306,7 @@ Begin
                         GetClearLines (linenum, clinemin, clinemax);
                     End; {if (length(page[linenum]) + length(inbuffer)) }
                 End Else{if x < gcxcoord}Begin
-                    HlpHint (HntOutOfView, HintWaitEsc);
+                    HlpHint (HntOutOfView, HintWaitEsc, []);
                 End;
             End Else {not IniArrow(inbuffer[1])} Begin
                 arrow := true;
@@ -339,9 +339,7 @@ Begin
                     Val (inbuffer, j, k);
                     If ((j MOD i) <> 0) Then
                     Begin
-                        Str (j, HintS1);
-                        Str (i, HintS2);
-                        HlpHint (HntDivNotPossible, HintWaitEsc);
+                        HlpHint (HntDivNotPossible, HintWaitEsc, [j, i]);
                     End Else { if (j mod i) <> 0 then } Begin
                         k := j DIV i;
                         {Abstand k mal einfuegen}
@@ -354,7 +352,7 @@ Begin
                             insert (inbuffer, page[linenum], actpos);
                             For i := 1 To k - 1 Do insert (inbuffer + '.', page[linenum], actpos);
                             GetClearLines (linenum, clinemin, clinemax);
-                        End Else hlphint (HntTooManyChars, HintWaitEsc);
+                        End Else hlphint (HntTooManyChars, HintWaitEsc, []);
                     End; { else if (j mod i) <> 0 then }
                 End; { else if i = 0 then }
                 If Left Then

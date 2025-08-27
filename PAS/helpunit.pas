@@ -1,4 +1,4 @@
-{$I RNS.H}
+﻿{$I RNS.H}
 
 Unit helpunit;
 
@@ -7,7 +7,6 @@ Interface
 Uses Graph,
     GcurUnit,
     Graphmenu,
-    {     Dispmenu,}
     inout,
     menutyp,
     dos,
@@ -15,11 +14,12 @@ Uses Graph,
     xcrt,
     imenuunit,
     InitSc,
-    UserExit;
+    UserExit,
+    SysUtils;
 
 Procedure HlpCommandTable;
 Procedure HlpSymbolTable;
-Procedure HlpHint(hintnum: integer; WaitTime: Integer);
+Procedure HlpHint(HintTextFmt: String; WaitTime: Integer; Const Args: Array Of Const);
 Function HlpAreYouSure(hinttext: string; position: byte): boolean;
 Function HlpAskYesEsc(hinttext, choicetext: string; position: byte): boolean;
 Function HlpAsk(hinttext, choicetext: string; position: byte;
@@ -222,21 +222,16 @@ Begin
 End;
 
 {******************************************************}
-Procedure HlpHint(hintnum: integer; WaitTime: Integer);
+Procedure HlpHint(HintTextFmt: String; WaitTime: Integer; Const Args: Array Of Const);
 
 Var ymaxframe: integer;
     SPic: Pointer;
     SC: Byte;
     HintText: String;
 Begin
-    Case HintNum Of
-        HntDivNotPossible: HintText := 'Division ' + HintS1 + ':' + HintS2 + ' not possible';{HntDivNotPossible}
-        HntPrintToFileFinished: HintText := HintTexts[HintNum] + ' ' + prfname + ' in ' + FExpand (psdir);
-    Else
-        HintText := HintTexts[HintNum];
-    End;{Case}
+    HintText := Format (HintTextFmt, Args);
+
     If grmaxy = 0 Then
-        {we're in text mode}
     Begin
         WriteLn (HintText);
         Exit;

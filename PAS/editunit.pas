@@ -102,17 +102,17 @@ Begin
         SetFAttr(infile, ReadOnly);}
         crcNIL:
         Begin
-            HlpHint (HntDemoNIL, 0);
+            HlpHint (HntDemoNIL, 0, []);
             EdiCheckDemoFileName := False;
         End;
         crcNOK: If pos ('TESTFILE.RNS', instring) = 0 Then
             Begin
-                HlpHint (HntDemoCRC, 0);
+                HlpHint (HntDemoCRC, 0, []);
                 EdiCheckDemoFileName := False;
             End Else Begin
                 HlpAsk ('Demoversion: TESTFILE.RNS has been changed, restoring previous one',
                     'Press [Enter] to continue', hpEdit, [#13]);
-                {        HlpHint(HntDemoCRCTestfile,0);}
+                {        HlpHint(HntDemoCRCTestfile,0, []);}
                 If isCRCOK ('DEMODIR\DEMOTEST.PRE') Then
                 Begin
                     EdiCopyFile ('DEMODIR\DEMOTEST.PRE', 'DEMODIR\TESTFILE.RNS');
@@ -127,6 +127,14 @@ Begin
             End;
     End;
 End;
+
+Function SlashSeparated(prev, next: String): String;
+Begin
+    If next = '' Then SlashSeparated := prev
+    Else If prev = '' Then SlashSeparated := next
+    Else SlashSeparated := prev + ' / ' + next;
+End;
+
 {******************************************************}
 Procedure EdiRythmEdit(instring, bakname: string; defpagesetup, demloc: boolean);
 
@@ -146,6 +154,7 @@ Var
     mausx, mausy, maustaste, mp, mausmenu: word;
     attr: word;
     Savepat: boolean;
+    Hide: string;
 
 Begin
     soundattr := 0;
@@ -165,7 +174,7 @@ Begin
         Reset (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc, [instring]);
             Exit;
         End;
         instring := instring + exts;
@@ -173,7 +182,7 @@ Begin
         If IOResult <> 0 Then
         Begin
             close (infile);
-            HlpHint (HntCannotReadFile, HintWaitEsc);
+            HlpHint (HntCannotReadFile, HintWaitEsc, [instring]);
             Exit;
         End;
         If inblock = '$$$RNSBUFFER$$$' Then
@@ -183,7 +192,7 @@ Begin
         ReSet (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc, [instring]);
             Exit;
         End;
     End Else assign (infile, instring){    if ((demloc) and (Pos('TESTFILE.RNS',instring) = 0)) then begin
@@ -201,14 +210,14 @@ Begin
         Rewrite (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotCreateFile, HintWaitEsc);
+            HlpHint (HntCannotCreateFile, HintWaitEsc, ['pageset']);
             Exit;
         End;
         ReSet (ifile);
         If IOResult <> 0 Then
         Begin
             close (infile);
-            HlpHint (HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc, ['pageset']);
             Exit;
         End;
         For linenum := topmargin To pagelength Do
@@ -218,7 +227,7 @@ Begin
             Begin
                 close (ifile);
                 close (infile);
-                HlpHint (HntCannotReadFile, HintWaitEsc);
+                HlpHint (HntCannotReadFile, HintWaitEsc, ['pageset']);
                 Exit;
             End;
             Writeln (infile, inblock);
@@ -226,7 +235,7 @@ Begin
             Begin
                 close (ifile);
                 close (infile);
-                HlpHint (HntCannotWriteFile, HintWaitEsc);
+                HlpHint (HntCannotWriteFile, HintWaitEsc, ['pageset']);
                 Exit;
             End;
         End;
@@ -238,7 +247,7 @@ Begin
         rewrite (ifile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotCreateFile, HintWaitEsc);
+            HlpHint (HntCannotCreateFile, HintWaitEsc, ['pageset']);
             Exit;
         End;
         close (ifile);
@@ -248,14 +257,14 @@ Begin
         reset (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc, ['pageset']);
             Exit;
         End;
         readln (infile, inblock);
         If IOResult <> 0 Then
         Begin
             close (infile);
-            HlpHint (HntCannotReadFile, HintWaitEsc);
+            HlpHint (HntCannotReadFile, HintWaitEsc, ['pageset']);
             Exit;
         End;
         If inblock = '$$$RNSBUFFER$$$' Then
@@ -265,7 +274,7 @@ Begin
         ReSet (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotOpenFile, HintWaitEsc);
+            HlpHint (HntCannotOpenFile, HintWaitEsc, ['pageset']);
             Exit;
         End;
     End;
@@ -299,24 +308,24 @@ Begin
         GcuCursorClear;
         GcuPatternRestore;
         PagDisplayPage (actptr, startptr, lastptr);
-        i := HntHideBase;
         j := 1000;
+        Hide := '';
         If DispSpec = 2 Then
         Begin
-            i := i + HntDispSpec;
+            Hide := SlashSeparated (Hide, 'Nonprintings');
             j := 0;
         End;
         If DispGrid = 1 Then
-            i := i + HntDispGrid;
+            Hide := SlashSeparated (Hide, 'Grids');
         If DispHidLines = 2 Then
-            i := i + HntDispHidLines;
+            Hide := SlashSeparated (Hide, 'Helplines');
         If DispCurs = 3 Then
         Begin
-            i := i + HntDispCurs;
+            Hide := SlashSeparated (Hide, 'Cursor');
             j := 0;
         End;
-        If i <> HntHideBase Then
-            HlpHint (i, j);
+        If Hide <> '' Then
+            HlpHint (HntDisp, j, [Hide]);
         If (linestyles IN actedit) Then linenum := linestyletop Else linenum := TopMargin + 1;
         PagCursorLeft (linenum, actposn, actpost);
         GcuCursorRestore;
@@ -384,7 +393,7 @@ Begin
             rewrite (infile);
             If IOResult <> 0 Then
             Begin
-                HlpHint (HntCannotCreateFile, HintWaitEsc);
+                HlpHint (HntCannotCreateFile, HintWaitEsc, [instring]);
                 Exit;
             End;
             FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
@@ -403,14 +412,14 @@ Begin
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc, [instring]);
                             Exit;
                         End;
                         WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc, [instring]);
                             Exit;
                         End;
 
@@ -422,9 +431,9 @@ Begin
                 End Else Begin
                     GetFAttr (infile, attr);
                     If attr AND ReadOnly <> 0 Then
-                        HlpHint (HntReadOnly, HintWaitEsc)
+                        HlpHint (HntReadOnly, HintWaitEsc, [instring])
                     Else
-                        HlpHint (HntFileAccesDenied, HintWaitEsc);
+                        HlpHint (HntFileAccesDenied, HintWaitEsc, [instring]);
                 End;
             End;
         End Else Begin

@@ -105,14 +105,14 @@ Begin
     If mstart.mpag <> -1 Then
     Begin
         ComKeyGrant := false;
-        HlpHint (HntUnmarkBlockFirst, HintWaitEsc);
+        HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []);
         Exit;
     End;
 
     If ((IniHeaderFooterLine (linenum)) AND (ordc = 127)) Then
     Begin
         ComKeyGrant := false;
-        HlpHint (HntNotAvailableHeader, HintWaitEsc);
+        HlpHint (HntNotAvailableHeader, HintWaitEsc, []);
         Exit;
     End;
     If ordc = 26 Then ComKeyGrant := false;
@@ -191,28 +191,28 @@ Begin
     If (pagebuf <> -1) AND (ordc IN pagemarknocommands) Then
     Begin
         ComSpecGrant := false;
-        HlpHint (HntUnmarkPageFirst, HintWaitEsc);
+        HlpHint (HntUnmarkPageFirst, HintWaitEsc, []);
         Exit;
     End;
 
     If (mstart.mpag <> -1) AND (ordc IN marknocommands) Then
     Begin
         ComSpecGrant := false;
-        HlpHint (HntUnmarkBlockFirst, HintWaitEsc);
+        HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []);
         Exit;
     End;
 
     If (setuppage IN actedit) AND (ordc IN pagenocommands) Then
     Begin
         ComSpecGrant := false;
-        HlpHint (HntNotAvailableLayout, HintWaitEsc);
+        HlpHint (HntNotAvailableLayout, HintWaitEsc, []);
         Exit;
     End;
 
     If (IniHeaderFooterLine (linenum)) AND (ordc IN markset) Then
     Begin
         ComSpecGrant := false;
-        HlpHint (HntNotAvailableHeader, HintWaitEsc);
+        HlpHint (HntNotAvailableHeader, HintWaitEsc, []);
         Exit;
     End;
 End;
@@ -320,7 +320,7 @@ Begin
         If (gx <> gcxcoord) OR (gy <> gcycoord) Then
         Begin
             inc (gcxcoord);
-            ISwap (gx, gcxcoord);
+	    ISwap (gx, gcxcoord);
             ISwap (gy, gcycoord);
             GcuPatternRestore;
             ISwap (gx, gcxcoord);
@@ -573,7 +573,7 @@ Begin
             10:{ctrl Enter} Begin
                 If Mstart.MPag <> -1 Then
                 Begin
-                    HlpHint (HntUnMarkBlockFirst, HintWaitEsc);
+                    HlpHint (HntUnMarkBlockFirst, HintWaitEsc, []);
                     Exit;
                 End;{If Mstart.MPag...}
                 If page[linenum, 1] = 'T' Then
@@ -632,7 +632,7 @@ Begin
                     PagRefClearVal (0, IniYnow (linenum - comsysheight (linenum) - 2),
                         GetMaxX, GrMaxY - 9);
                     PagCursorLeft (linenum, actposn, actpost);
-                End Else HlpHint (HntNotEnoughSpace, HintWaitEsc);
+                End Else HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
             End;
 
             127: If mstart.mpag = -1 Then
@@ -736,7 +736,7 @@ Var c, ch, dummyc: char;
         If lnum = linenum Then
         Begin
             inc (linenum);
-            hlpHint (HntlineEmpty, HintNormalTime);
+            hlpHint (HntlineEmpty, HintNormalTime, []);
             SearchFirst := False;
             Exit;
         End;
@@ -768,7 +768,7 @@ Begin
                     reset (delfil);
                     If IOResult <> 0 Then
                     Begin
-                        HlpHint (HntCannotOpenFile, HintWaitEsc);
+                        HlpHint (HntCannotOpenFile, HintWaitEsc, []);
                         Exit;
                     End;
                     For j := 1 To pagelength Do
@@ -777,7 +777,7 @@ Begin
                         If IOResult <> 0 Then
                         Begin
                             close (delfil);
-                            HlpHint (HntCannotReadFile, HintWaitEsc);
+                            HlpHint (HntCannotReadFile, HintWaitEsc, []);
                             Exit;
                         End;
                     End;
@@ -792,7 +792,7 @@ Begin
                 rewrite (delfil);
                 If IOResult <> 0 Then
                 Begin
-                    HlpHint (HntCannotCreateFile, HintWaitEsc);
+                    HlpHint (HntCannotCreateFile, HintWaitEsc, []);
                     Exit;
                 End;
                 For i := 1 To pagelength Do
@@ -801,7 +801,7 @@ Begin
                     If IOResult <> 0 Then
                     Begin
                         close (delfil);
-                        HlpHint (HntCannotWriteFile, HintWaitEsc);
+                        HlpHint (HntCannotWriteFile, HintWaitEsc, []);
                         Exit;
                     End;
                 End;
@@ -869,7 +869,7 @@ Begin
                     rewrite (infile);
                     If IOResult <> 0 Then
                     Begin
-                        HlpHint (HntCannotCreateFile, HintWaitEsc);
+                        HlpHint (HntCannotCreateFile, HintWaitEsc, [actfilename]);
                         Exit;
                     End;
                     If bufffile Then
@@ -878,14 +878,14 @@ Begin
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
                             Exit;
                         End;
                         WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc);
+                            HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
                             Exit;
                         End;
                         FilHeapToFile (infile, actptr, startptr, lastptr,
@@ -1011,7 +1011,7 @@ Begin
 
             65: {F7: copy line (to Ctrl-F7-Buffer)}Begin
                 saveln := page[linenum];
-                HlpHint (HntSavingLine, HintNormalTime);
+                HlpHint (HntSavingLine, HintNormalTime, []);
                 repline := false;
             End;
 
@@ -1101,7 +1101,7 @@ Begin
                     ActFilename := UpString (actfilename);
                     If demoversion AND (pagecount >= 4) AND
                         (actfilename = 'DEMODIR\TESTFILE.RNS') Then
-                        hlphint (hntdemonewpage, hintwaitesc)
+                        hlphint (hntdemonewpage, hintwaitesc, [])
                     Else If ((actptr <> lastptr) OR
                         (HlpAreYouSure ('New page?'{ + ': [Enter] to continue, [PgUp] to cancel - or:'}, hpEdit))) Then PagShowPage (linenum, actposn, actpost, actptr,
                             startptr, lastptr,
@@ -1333,7 +1333,7 @@ Begin
                     ComEdReturn (i, actposn, actpost, false, false);
                 If page[linenum, 1] <> 'N' Then
                 Begin
-                    hlpHint (HntpageEmpty, HintNormalTime);
+                    hlpHint (HntpageEmpty, HintNormalTime, []);
                     Exit;
                 End;
                 If NOT SearchFirst (st, linenum, actposn) Then
@@ -1565,7 +1565,7 @@ Begin
                     y := IniYnow (linenum - 6);
                     PagRefClearVal (0, y, GetMaxX, grmaxy - 1);
                     PagCursorLeft (linenum, actposn, actpost);
-                End Else HlpHint (HntNotEnoughSpace, HintWaitEsc);
+                End Else HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
                 repline := false;
             End;{ctrl f7}
 
@@ -1624,7 +1624,7 @@ Begin
                         Begin{Ctrl-Alt-Enter}
                             If Mstart.MPag <> -1 Then
                             Begin
-                                HlpHint (HntUnMarkBlockFirst, HintWaitEsc);
+                                HlpHint (HntUnMarkBlockFirst, HintWaitEsc, []);
                                 Exit;
                             End;{If Mstart.MPag...}
                             If page[linenum, 1] = 'T' Then
@@ -1670,7 +1670,7 @@ Begin
                                 PagRefClearVal (0, IniYnow (linenum - 2),
                                     GetMaxX, GrMaxY - 9);
                                 PagCursorLeft (linenum, actposn, actpost);
-                            End Else HlpHint (HntNotEnoughSpace, HintWaitEsc);
+                            End Else HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
 
                         End{if shiftp and not ctrlp}{IF ctrlp and (not shiftp)};{IF if shiftp and not ctrlp else}
                     End;{if not(shiftp or ctrlp)}
@@ -2203,7 +2203,7 @@ Var inblock: stringline;
 Begin
     If (Des > PageLength) OR (Des < 1) OR (Src > PageLength) OR (Src < 1) Then
     Begin
-        HlpHint (HntOutOfRange, HintWaitEsc);
+        HlpHint (HntOutOfRange, HintWaitEsc, []);
         CopyLine := False;
         Exit;
     End;
@@ -2214,7 +2214,7 @@ Begin
             inblock := inblock + Searchlastchiffre (Src);{NL einf�gen}
         If Page[Des, 4] <> ' ' Then
         Begin
-            HlpHint (HntCopyLineToHeader, HintWaitEsc);
+            HlpHint (HntCopyLineToHeader, HintWaitEsc, []);
             CopyLine := False;
             Exit;
         End;
@@ -2224,7 +2224,7 @@ Begin
     If LineUsed (Des) Then
     Begin
         If SpeSpaceInPage (1) Then SpeLineInsert (Des, inblock) Else Begin
-            HlpHint (HntNotEnoughSpace, HintWaitEsc);
+            HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
         End;
     End Else
         Page[Des] := inblock;

@@ -664,7 +664,7 @@ Begin
     rewrite (psfile);
     If IOResult <> 0 Then
     Begin
-        HlpHint (HntCannotCreateFile, HintWaitEsc);
+        HlpHint (HntCannotCreateFile, HintWaitEsc, ['psfile']);
         exit;
     End;
     Writeln (psfile, '%!PS-Adobe-2.0 EPSF-2.0');   { Header schreiben          }
@@ -691,7 +691,7 @@ Begin
     If IOResult <> 0 Then
     Begin
         close (psfile);
-        HlpHint (HntFontFileNotFound, HintWaitEsc);
+        HlpHint (HntFontFileNotFound, HintWaitEsc, ['symbols.prn']);
         exit;
     End;
     readln (infile, inblock);
@@ -699,7 +699,7 @@ Begin
     Begin
         close (infile);
         close (psfile);
-        HlpHint (HntCannotReadFile, HintWaitEsc);
+        HlpHint (HntCannotReadFile, HintWaitEsc, ['symbols.prn']);
         exit;
     End;
     If inblock = 'nff' Then
@@ -715,7 +715,7 @@ Begin
         Begin
             close (infile);
             close (psfile);
-            HlpHint (HntCannotReadFile, HintWaitEsc);
+            HlpHint (HntCannotReadFile, HintWaitEsc, ['symbols.prn']);
             exit;
         End;
         Writeln (psfile, inblock);
@@ -723,7 +723,7 @@ Begin
         Begin
             close (infile);
             close (psfile);
-            HlpHint (HntCannotWriteFile, HintWaitEsc);
+            HlpHint (HntCannotWriteFile, HintWaitEsc, ['symbols.prn']);
             exit;
         End;
     End;
@@ -765,14 +765,14 @@ Begin
         reset (infile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotOpenTempFile, HintWaitEsc);
+            HlpHint (HntCannotOpenTempFile, HintWaitEsc, []);
             exit;
         End;
         rewrite (lst);
         If IOResult <> 0 Then
         Begin
             close (infile);
-            HlpHint (HntPrinterError, HintWaitEsc);
+            HlpHint (HntPrinterError, HintWaitEsc, [prdevice]);
             exit;
         End;
         While NOT eof (infile) Do
@@ -782,7 +782,7 @@ Begin
             Begin
                 close (infile);
                 close (lst);
-                HlpHint (HntCannotReadFile, HintWaitEsc);
+                HlpHint (HntCannotReadFile, HintWaitEsc, ['psfile']);
                 exit;
             End;
             writeln (lst, inblock);
@@ -790,28 +790,20 @@ Begin
             Begin
                 close (infile);
                 close (lst);
-                HlpHint (HntPrinterError, HintWaitEsc);
+                HlpHint (HntPrinterError, HintWaitEsc, [prdevice]);
                 exit;
             End;
         End;
         Close (Lst);
         Close (infile);
-        HlpHint (HntPrintFinished, HintWaitEsc);
+        HlpHint (HntPrintFinished, HintWaitEsc, [prdevice]);
     End Else
-        HlpHint (HntPrintToFileFinished, HintWaitEsc);
+        HlpHint (HntPrintToFileFinished, HintWaitEsc, ['psfile']);
     PriPostscriptComplete := True; { Success }
 End;
 
 Procedure PriMakeUmlaute(Var psfile: text);
 Begin
-(*
-  writeln(psfile,'/Aogonek % Aogonek');
-  writeln(psfile,'{ currentpoint exch 3.5 add exch (A) show currentpoint 3 index 3 index moveto pop pop (\377) show moveto');
-  writeln(psfile,'} def');
-  writeln(psfile,'/Eogonek % Eogonek');
-  writeln(psfile,'{ currentpoint exch 3.5 add exch (E) show currentpoint 3 index 3 index moveto pop pop (\377) show moveto');
-  writeln(psfile,'} def');
-*)
     { Umlaute in Schrift einsetzen                        }
     writeln (psfile, '/Helvetica findfont dup maxlength dict');
     { Kopieren aller Elemente bis auf FID:                }

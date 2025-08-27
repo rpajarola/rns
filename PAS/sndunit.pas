@@ -1766,7 +1766,6 @@ Begin
         If Sndchar = 'L' Then
         Begin
             c := #27;
-            {            HlpHint(HntLineEmpty, HintNormalTime);}
             playnext := true;
         End;
     End;
@@ -1952,7 +1951,7 @@ Begin
                 filbufclear;
                 MarMarkToBuffer (actptr, startptr, lastptr);
             End Else Begin
-                HlpHint (HntPageEmpty, HintNormalTime);
+                HlpHint (HntPageEmpty, HintNormalTime, []);
                 c := #27;
                 playnext := False;
                 linenum := savelinenum;
@@ -2037,7 +2036,12 @@ Begin
             j := 0;
             If NOT Menu Then
                 PagRefPage;
-            If bufstartptr = bufendptr Then HlpHint (HntBufEmpty, HintNormalTime) Else {if bufstartptr = bufendptr then} If marpartline Then HlpHint (HntCantPlayPart, HintWaitEsc) Else {if marpartline then}Begin
+            If bufstartptr = bufendptr Then
+	    HlpHint (HntBufEmpty, HintNormalTime, [])
+	    Else {if bufstartptr = bufendptr then} If
+	    marpartline Then
+	    HlpHint (HntCantPlayPart, HintWaitEsc, [])
+	    Else {if marpartline then}Begin
                 endreached := true;
                 If ((mstart.mpag = pagecount) AND
                     (mend.mpag = pagecount)) Then drawline := true Else drawline := false;
@@ -2059,7 +2063,7 @@ Begin
                     If endreached AND (j = 0) Then
                     Begin
                         c := #27;
-                        HlpHint (HntBufEmpty, HintNormalTime);
+                        HlpHint (HntBufEmpty, HintNormalTime, []);
                     End;
                     SndPlayLine (inblock, i, drawline, playnext, c, savesndchar);
                     i := i + 1;
@@ -2081,7 +2085,7 @@ Begin
                     Begin
                         PlayNext := False;
                         c := #27;
-                        HlpHint (HntPageEmpty, HintNormalTime);
+                        HlpHint (HntPageEmpty, HintNormalTime, []);
                     End;
                     setcolor (actcolor);
                     { if (page[i,5]<>'H') and(page[i,1]='N') then  }

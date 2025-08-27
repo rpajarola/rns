@@ -253,7 +253,7 @@ Var Cancel: Boolean Absolute Disponly;
     Delay(HintNormalTime);} Else If EntryC = MaxEntries Then
         Begin
             If DosError = 0 Then
-                HlpHint (HntTooManyFiles, HintNormalTime);
+                HlpHint (HntTooManyFiles, HintNormalTime, []);
         End Else
             Dec (EntryC);
         QSort (EntryC);
