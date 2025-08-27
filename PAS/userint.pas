@@ -198,7 +198,7 @@ Procedure UseGetSetup;
 {Liest das setup-file}
 
 Var infile: text;
-    inblock: stringline;
+    inblock: string;
     tempattr: lineattrtype;
 
 Begin
@@ -206,7 +206,7 @@ Begin
     {Check if file was opened successfully}
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot open setup file');
+        WriteLn ('Error: Cannot open setup.cfg');
         WriteLn ('Make sure the setup file exists in the data directory.');
         Halt (2);
     End;
@@ -214,7 +214,7 @@ Begin
     readln (infile, inblock);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot read setup data from setup file');
+        WriteLn ('Error: Cannot read setup data from setup.cfg');
         close (infile);
         Halt (100);
     End;
@@ -228,7 +228,7 @@ Begin
     readln (infile, prfname);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot read setup parameters from setup file');
+        WriteLn ('Error: Cannot read setup parameters from setup.cfg');
         close (infile);
         Halt (100);
     End;
@@ -237,7 +237,7 @@ Begin
     readln (infile, prdevice);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot read printer settings from setup file');
+        WriteLn ('Error: Cannot read printer settings from setup.cfg');
         close (infile);
         Halt (100);
     End;
@@ -253,7 +253,7 @@ Begin
     readln (infile, dispslash);
     If IOResult <> 0 Then
     Begin
-        WriteLn ('Error: Cannot read sound and display settings from setup file');
+        WriteLn ('Error: Cannot read sound and display settings from setup.cfg');
         close (infile);
         Halt (100);
     End;
