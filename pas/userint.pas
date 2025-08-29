@@ -616,10 +616,10 @@ Begin
                   (sdymin-1)*16, (sdymax+sdymin-1)*16+8, 3);}
     maustaste := 0;
     ok := false;
-    SduSodir (True, ok, false, instring, '*.FNT', '', false,
+    SduSodir (True, ok, false, instring, '*.fnt', '', false,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, 3, 0, 0, True);
-    SduSodir (False, ok, true, instring, '*.FNT', '', false,
+    SduSodir (False, ok, true, instring, '*.fnt', '', false,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, 3, 0, 0, False);
     If ok Then
@@ -881,9 +881,9 @@ Begin
                     EdiRythmEdit (ConcatPaths ([datadir, instring]), bakname, false);
                     Mauszeigen;
                     IniSwapMenuColors;
-                    st := copy (fontfile, 1, Length (fontfile) - 3) + 'PAR';
+                    st := copy (fontfile, 1, Length (fontfile) - 3) + 'par';
                     IniHideCursor;
-                    If NOT FilCompareFiles (st, 'SYMBOLS.PAR') Then
+                    If NOT FilCompareFiles (st, 'symbols.par') Then
                     Begin
                         HlpHintFrame (grminx, grmaxy - 48, Grmaxx, grmaxy);
                         txtfnt.write (grminx + 24, grmaxy - 48 + 2 * charheight,
@@ -927,7 +927,7 @@ Begin
                                         Inc (Byte (St[Byte (c) - 5]));
                                         St[Byte (c) - 4] := '0';
                                     End Else
-                                        st := ''{IF St[...<'1' else}{IF ST[... <>'9' else};{IF ST[... <'1' else}
+                                        st := ''
                                 End;{While}
                                 Repeat
                                     IniInversWrite (456, 402, '              ', frLow);
@@ -941,30 +941,30 @@ Begin
                                         {msetaste,-menu} mt, mm,
                                         changed);
                                     If Resp <> Escape Then
-                                        If Pos ('.PAR', St) = 0 Then
+                                        If Pos ('.par', St) = 0 Then
                                             If Pos ('.', St) <> 0 Then
                                             Begin
                                                 Resp := Key;
                                                 If Pos ('.', St) > 9 Then
                                                 Begin
                                                     St := Copy (St, 1, 8);
-                                                    St := St + '.PAR';
+                                                    St := St + '.par';
                                                 End{Pos('.',St)>9} Else
-                                                    St := Copy (St, 1, Pos ('.', st)) + 'PAR';
+                                                    St := Copy (St, 1, Pos ('.', st)) + 'par';
                                             End{IF Pos('.',St)<>0}Else Begin
                                                 Resp := Key;
                                                 If Length (St) > 8 Then
-                                                    st := Copy (St, 1, 8) + '.PAR'
+                                                    st := Copy (St, 1, 8) + '.par'
                                                 Else
-                                                    St := St + '.PAR';
-                                            End{IF Pos('.',St)<>0 Else}{Pos('.PAR',St)<>0};{IF Resp<>Escape}
+                                                    St := St + '.par';
+                                            End
                                 Until ((Resp = Return) AND ((NOT IniFileExist (St)) OR IniUserFontFile (st))) OR (Resp = ESCAPE);
                                 If Resp = Return Then
                                 Begin
-                                    FilCopyFile ('SYMBOLS.PAR', ST);
+                                    FilCopyFile ('symbols.par', ST);
                                     St := Copy (St, 1, Pos ('.', St) - 1);
-                                    FilCopyFile ('SYMBOLS.SYM', ST + '.SYM');
-                                    FilCopyFile ('SYMBOLS.PRN', ST + '.FNT');
+                                    FilCopyFile ('symbols.sym', ST + '.sym');
+                                    FilCopyFile ('symbols.prn', ST + '.fnt');
                                 End;
                             End;
                     End;

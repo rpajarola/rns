@@ -83,12 +83,12 @@ Procedure FilFindeErstBestenFont(Var instring: stringline);
 
 Var sr: SearchRec;
 Begin
-    FindFirst ('.\*.fnt', $3F, SR);
+    FindFirst ('*.fnt', $3F, SR);
     If IOResult <> 0 Then
     Begin
         WriteLn;
         WriteLn;
-        WriteLn (^g^g^g, 'No *.FNT found');
+        WriteLn (^g^g^g, 'No *.fnt found');
         Halt (24);
     End
     Else
@@ -869,9 +869,9 @@ begin
   MausBereichAdd(GrMinX+2,GrMinX+20*8,GrMinY+2,GrMaxY-1,3);
   maustaste:=0;
   ok:=false;
-  SduSodir(True,ok, False, instring,'*.FNT','',false,
+  SduSodir(True,ok, False, instring,'*.fnt','',false,
            22,45,22,1, mausx, mausy, maustaste, mausmenu, 0, 0,false);
-  SduSodir(False,ok, True, instring,'*.FNT','',false,
+  SduSodir(False,ok, True, instring,'*.fnt','',false,
            22,45,22,1, mausx, mausy, maustaste, 3, 0, 0,false);
   IF Ok Then Begin
     fontfile:= instring;
@@ -881,7 +881,7 @@ begin
 end;*)
 Var s: string;
 Begin
-    s := FilFileSelect ('Select Symbolfont', '*.FNT', '');
+    s := FilFileSelect ('Select Symbolfont', '*.fnt', '');
     If s <> '' Then
     Begin
         fontfile := s;
