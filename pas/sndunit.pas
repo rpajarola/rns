@@ -2037,11 +2037,11 @@ Begin
             If NOT Menu Then
                 PagRefPage;
             If bufstartptr = bufendptr Then
-	    HlpHint (HntBufEmpty, HintNormalTime, [])
-	    Else {if bufstartptr = bufendptr then} If
-	    marpartline Then
-	    HlpHint (HntCantPlayPart, HintWaitEsc, [])
-	    Else {if marpartline then}Begin
+                HlpHint (HntBufEmpty, HintNormalTime, [])
+            Else {if bufstartptr = bufendptr then} If
+            marpartline Then
+                HlpHint (HntCantPlayPart, HintWaitEsc, [])
+            Else {if marpartline then}Begin
                 endreached := true;
                 If ((mstart.mpag = pagecount) AND
                     (mend.mpag = pagecount)) Then drawline := true Else drawline := false;

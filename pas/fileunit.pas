@@ -12,7 +12,6 @@ Uses initsc,
     Titleunit,
     Getunit,
     XCrt,
-    CRCUnit,
     SysUtils;
 
 Procedure FilFindPtr(pagenum, linenum: integer; Var foundptr,
@@ -153,11 +152,11 @@ Begin
 End;
 
 {****************************************************}
-Function  FilAssignCfgFile( Var cfgfile: text; basename: string; readf: boolean): string;
+Function FilAssignCfgFile(Var cfgfile: text; basename: string; readf: boolean): string;
 
 Var filepath: stringline;
 Begin
-FilAssignCfgFile:= '';
+    FilAssignCfgFile := '';
     filepath := ConcatPaths ([datadir, basename + '.cfg']);
     If ((NOT IniFileExist (filepath)) OR
         (FilWrongVersion (filepath))) Then
@@ -195,7 +194,7 @@ FilAssignCfgFile:= '';
             Exit;
         End;
     End;
-FilAssignCfgFile:= filepath;
+    FilAssignCfgFile := filepath;
 End;
 
 
@@ -591,10 +590,6 @@ Begin
         End;
     End;
     close (outfile);
-  {$IFDEF DEMO}
-    CRC := GetCRC (fn);
-    SetCRCFileEntry (fn, crc);
-  {$ENDIF}
 End;
 
 {*********************************************************}
@@ -923,7 +918,7 @@ Begin
     maustaste := 0;
     ok := false;
     If dir <> '' Then
-        dir := IncludeTrailingPathDelimiter(dir);
+        dir := IncludeTrailingPathDelimiter (dir);
     SduSodir (True, ok, False, instring, wildcard, dir, false,
         22, 45, 22, 1, mausx, mausy, maustaste, mausmenu, 0, 0, false);
     SduSodir (False, ok, True, instring, wildcard, dir, false,

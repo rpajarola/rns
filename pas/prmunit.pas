@@ -55,7 +55,7 @@ Begin
         IniLeadBlank (sval);
         UsrMenu.ChoiceVal[3].sval := sval;
         If pos ('.', UsrMenu.ChoiceVal[3].sval) = 0 Then UsrMenu.ChoiceVal[3].sval := UsrMenu.ChoiceVal[3].sval + '.eps';
-        HlpTestFileName (ConcatPaths([psdir, UsrMenu.ChoiceVal[3].sval]),
+        HlpTestFileName (ConcatPaths ([psdir, UsrMenu.ChoiceVal[3].sval]),
             ok, grminx, grmaxx, y);
         If ok Then prfname := UsrMenu.ChoiceVal[3].sval;
     End Else prdevice := Copy (Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1], 1, 4);
@@ -132,8 +132,8 @@ Var spagecount: integer;
     inblock: stringline;
     n: integer;
 Begin
-    If (NOT (prfile = 1)) OR (NOT IniFileExist (ConcatPaths([psdir, prfname]))) OR
-        HlpAreYouSure ('File: "' + ConcatPaths([psdir, prfname]) + '" already exists, overwrite?', hpEdit) Then
+    If (NOT (prfile = 1)) OR (NOT IniFileExist (ConcatPaths ([psdir, prfname]))) OR
+        HlpAreYouSure ('File: "' + ConcatPaths ([psdir, prfname]) + '" already exists, overwrite?', hpEdit) Then
     Begin
         n := filnumpages (actptr, startptr, lastptr);
         PriPostscriptinit;
@@ -216,8 +216,8 @@ Begin
                     Printpages (linenum, actposn, actpost, actptr, startptr, lastptr, list);
                 End;
             End;
-            'P': If (NOT (prfile = 1)) OR (NOT IniFileExist (ConcatPaths([psdir, prfname]))) OR
-                    (HlpAreYouSure ('File: "' + ConcatPaths([psdir, prfname]) +
+            'P': If (NOT (prfile = 1)) OR (NOT IniFileExist (ConcatPaths ([psdir, prfname]))) OR
+                    (HlpAreYouSure ('File: "' + ConcatPaths ([psdir, prfname]) +
                     '" already exists, overwrite?', hpEdit)) Then
                 Begin
                     PriPostscriptinit;

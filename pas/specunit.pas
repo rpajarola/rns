@@ -197,9 +197,6 @@ Begin
 
             'W':
             Begin
-      {$IFDEF DEMO}
-                HlpHint (HntDemoBuf, 0, []);
-      {$ELSE}
                 If mend.mpag <> -1 Then
                 Begin
                     MarMarkToBuffer (actptr, startptr, lastptr);
@@ -211,12 +208,12 @@ Begin
                         choicenum * usrmenu.SPACING) + 1) Then
                     Begin
                         dummyb := true;
-                        If IniFileExist (ConcatPaths([bufdir, instring])) Then
+                        If IniFileExist (ConcatPaths ([bufdir, instring])) Then
                             If NOT HlpAreYouSure ('File already exists, overwrite?', hpEdit) Then
                                 dummyb := false;
                         If dummyb Then
                         Begin
-			    filename :=ConcatPaths([bufdir, instring]);
+                            filename := ConcatPaths ([bufdir, instring]);
                             assign (bfile, filename);
                             rewrite (bfile);
                             If IOResult <> 0 Then
@@ -252,62 +249,57 @@ Begin
                         End;
                     End; {if HlpGetFileName(instring) then }
                 End {if mstart.mpage }Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
-      {$ENDIF}
             End;
 
             'R':
             Begin
-      {$IFDEF DEMO}
-                HlpHint (HntDemoBuf, 0, []);
-      {$ELSE}
                 If mstart.mpag = -1 Then
                 Begin
                     Mausbereich (GrMinX + 1, GrMinX + 20 * 8, GrMinY, GrMaxY);
                     instring := FilFileSelect ('Select Bufferfile', '*.buf', bufdir);
                     If instring <> '' Then
-		    	filename :=ConcatPaths([bufdir, instring]);
-                        If NOT IniFileExist (filename) Then
-			HlpHint (HntNotExist, HintWaitEsc, [filename])
-			Else Begin
-                            assign (bfile, filename);
-                            reset (bfile);
-                            If IOResult <> 0 Then
-                            Begin
-                                HlpHint (HntCannotOpenFile, HintWaitEsc, [filename]);
-                                Exit;
-                            End;
-                            readln (bfile, inblock);
+                        filename := ConcatPaths ([bufdir, instring]);
+                    If NOT IniFileExist (filename) Then
+                        HlpHint (HntNotExist, HintWaitEsc, [filename])
+                    Else Begin
+                        assign (bfile, filename);
+                        reset (bfile);
+                        If IOResult <> 0 Then
+                        Begin
+                            HlpHint (HntCannotOpenFile, HintWaitEsc, [filename]);
+                            Exit;
+                        End;
+                        readln (bfile, inblock);
+                        If IOResult <> 0 Then
+                        Begin
+                            close (bfile);
+                            HlpHint (HntCannotReadFile, HintWaitEsc, [filename]);
+                            Exit;
+                        End;
+                        If (inblock = '$$$RNSBUFFER$$$') Then
+                        Begin
+                            readln (bfile, i, mstart.mline, mstart.mpos, mstart.mpag,
+                                mend.mline, mend.mpos, mend.mpag);
                             If IOResult <> 0 Then
                             Begin
                                 close (bfile);
                                 HlpHint (HntCannotReadFile, HintWaitEsc, [filename]);
                                 Exit;
                             End;
-                            If (inblock = '$$$RNSBUFFER$$$') Then
-                            Begin
-                                readln (bfile, i, mstart.mline, mstart.mpos, mstart.mpag,
-                                    mend.mline, mend.mpos, mend.mpag);
-                                If IOResult <> 0 Then
-                                Begin
-                                    close (bfile);
-                                    HlpHint (HntCannotReadFile, HintWaitEsc, [filename]);
-                                    Exit;
-                                End;
-                                marpartline := (i = 1);
-                                mstart.mpag := -1;
-                                mend.mpag := -1;
-                                FilFileToHeap (bfile, bufactptr,
-                                    bufstartptr, bufendptr, dummyb);
-                                SpeInsertBuffer (linenum, actposn, actpost,
-                                    actptr, startptr, lastptr, dummyb);
-                                Markinit;
-                            End Else Begin
-                                close (bfile);
-                                HlpHint (HntNotBlockFile, HintWaitEsc, [filename]);
-                            End;
-                        End; {if HlpGetFileName(instring) then }
+                            marpartline := (i = 1);
+                            mstart.mpag := -1;
+                            mend.mpag := -1;
+                            FilFileToHeap (bfile, bufactptr,
+                                bufstartptr, bufendptr, dummyb);
+                            SpeInsertBuffer (linenum, actposn, actpost,
+                                actptr, startptr, lastptr, dummyb);
+                            Markinit;
+                        End Else Begin
+                            close (bfile);
+                            HlpHint (HntNotBlockFile, HintWaitEsc, [filename]);
+                        End;
+                    End; {if HlpGetFileName(instring) then }
                 End Else {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []);
-      {$ENDIF}
             End; {'R'}
 
             'I': {Collect Header/Footer}Begin
@@ -382,18 +374,18 @@ Var instring: string;
     ok: boolean;
     outfile: text;
     i:  integer;
-    filename:string;
+    filename: string;
 
 Begin
     If ((actptr = startptr) OR (actptr = lastptr)) Then
-    HlpHint (HntSplitFirstPage, HintWaitEsc, [])
+        HlpHint (HntSplitFirstPage, HintWaitEsc, [])
     Else{if startptr = actptr then }
     Begin
         {Filenamen abfragen}
         ok := true;
         If HlpGetFileName (instring, '.RNS', 0, 0) Then
         Begin
-	    filename :=datadir + '/' + instring;
+            filename := datadir + '/' + instring;
             If IniFileExist (filename) Then
                 If NOT HlpAreYouSure ('File already exists - overwrite?', hpEdit) Then ok := false;
             If ok Then

@@ -773,7 +773,7 @@ Begin
                 If lineattr.linestyle = 2 Then
                     GetDrawBeats (lineattr, i);
             End Else
-                titgettext (i, startx);
+                TitGetText (i, startx);
 End;
 
 {***********************************************}

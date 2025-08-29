@@ -320,7 +320,7 @@ Begin
         If (gx <> gcxcoord) OR (gy <> gcycoord) Then
         Begin
             inc (gcxcoord);
-	    ISwap (gx, gcxcoord);
+            ISwap (gx, gcxcoord);
             ISwap (gy, gcycoord);
             GcuPatternRestore;
             ISwap (gx, gcxcoord);
@@ -846,66 +846,53 @@ Begin
                 GetImage (GrMinX, grmaxy - 49,
                     GrMaxX, grmaxy, SPic^);
                 HlpHintFrame (grminx, grmaxy - 48, grmaxx, grmaxy);
-                If EdiSavePossible (actfilename) Then
+                GetFAttr (infile, attr);
+                If (attr AND readonly) <> 0 Then
                 Begin
-                    GetFAttr (infile, attr);
-                    If (attr AND readonly) <> 0 Then
-                    Begin
-                        txtfnt.Write (grminx + 20, grmaxy - 32,
-                            'Read only file, changes will not be saved!',
-                            getcolor, sz8x16, stnormal);
-                        txtfnt.Write (grminx + 20, grmaxy - 16,
-                            'Press any key to continue',
-                            getcolor, sz8x16, stnormal);
-                        xClearKbd;
-                        Repeat Until KeyPressed;
-                        xClearKbd;
-                        PutImage (GrMinX, grmaxy - 49, SPic^, NormalPut);
-                        FreeMem (Spic, ImageSize (grminx, grmaxy - 49, grmaxx, grmaxy));
-                        Exit;
-                    End;
-                    fileChanged := 0;
-                    FilSavePage (1, pagelength, actptr, startptr, lastptr);
-                    rewrite (infile);
-                    If IOResult <> 0 Then
-                    Begin
-                        HlpHint (HntCannotCreateFile, HintWaitEsc, [actfilename]);
-                        Exit;
-                    End;
-                    If bufffile Then
-                    Begin
-                        WriteLn (infile, '$$$RNSBUFFER$$$');
-                        If IOResult <> 0 Then
-                        Begin
-                            close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
-                            Exit;
-                        End;
-                        WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
-                        If IOResult <> 0 Then
-                        Begin
-                            close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
-                            Exit;
-                        End;
-                        FilHeapToFile (infile, actptr, startptr, lastptr,
-                            false, false, false);
-                    End Else
-                        FilHeapToFile (infile, actptr, startptr, lastptr,
-                            false, false, true);
-                    FilFindPage (pagecount, result, actptr, startptr, lastptr);
-                    PagRemovePage (actptr, startptr, lastptr);
-                End Else Begin
-                    txtfnt.write (grminx + 20, grmaxy - 32,
-                        'Demoversion: not saved',
+                    txtfnt.Write (grminx + 20, grmaxy - 32,
+                        'Read only file, changes will not be saved!',
                         getcolor, sz8x16, stnormal);
-                    txtfnt.write (grminx + 20, grmaxy - 16,
+                    txtfnt.Write (grminx + 20, grmaxy - 16,
                         'Press any key to continue',
                         getcolor, sz8x16, stnormal);
-                    XClearKbd;
+                    xClearKbd;
                     Repeat Until KeyPressed;
-                    XClearKbd;
+                    xClearKbd;
+                    PutImage (GrMinX, grmaxy - 49, SPic^, NormalPut);
+                    FreeMem (Spic, ImageSize (grminx, grmaxy - 49, grmaxx, grmaxy));
+                    Exit;
                 End;
+                fileChanged := 0;
+                FilSavePage (1, pagelength, actptr, startptr, lastptr);
+                rewrite (infile);
+                If IOResult <> 0 Then
+                Begin
+                    HlpHint (HntCannotCreateFile, HintWaitEsc, [actfilename]);
+                    Exit;
+                End;
+                If bufffile Then
+                Begin
+                    WriteLn (infile, '$$$RNSBUFFER$$$');
+                    If IOResult <> 0 Then
+                    Begin
+                        close (infile);
+                        HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
+                        Exit;
+                    End;
+                    WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
+                    If IOResult <> 0 Then
+                    Begin
+                        close (infile);
+                        HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
+                        Exit;
+                    End;
+                    FilHeapToFile (infile, actptr, startptr, lastptr,
+                        false, false, false);
+                End Else
+                    FilHeapToFile (infile, actptr, startptr, lastptr,
+                        false, false, true);
+                FilFindPage (pagecount, result, actptr, startptr, lastptr);
+                PagRemovePage (actptr, startptr, lastptr);
                 PutImage (GrMinX, grmaxy - 49, SPic^, NormalPut);
                 FreeMem (Spic, ImageSize (grminx, grmaxy - 49, grmaxx, grmaxy));
             End;
@@ -1099,10 +1086,7 @@ Begin
                         actptr, startptr, lastptr, pagecount + 1, true);
                 End Else Begin
                     ActFilename := UpString (actfilename);
-                    If demoversion AND (pagecount >= 4) AND
-                        (actfilename = 'DEMODIR\TESTFILE.RNS') Then
-                        hlphint (hntdemonewpage, hintwaitesc, [])
-                    Else If ((actptr <> lastptr) OR
+                    If ((actptr <> lastptr) OR
                         (HlpAreYouSure ('New page?'{ + ': [Enter] to continue, [PgUp] to cancel - or:'}, hpEdit))) Then PagShowPage (linenum, actposn, actpost, actptr,
                             startptr, lastptr,
                             pagecount + 1, true) Else
@@ -1269,14 +1253,13 @@ Begin
                 repline := false;
             End;
 
-            95: {Ctrl F2: split file}If{$IFDEF DEMO}false OR{$ENDIF}(NOT demoversion) Then
-                Begin
-                    FileChanged := 1;
-                    pagesav := pagecount;
-                    SpeSplitFile (actptr, startptr, lastptr);
-                    pagecount := pagesav - 1;
-                    PagRefPage;
-                End;
+            95: {Ctrl F2: split file}Begin
+                FileChanged := 1;
+                pagesav := pagecount;
+                SpeSplitFile (actptr, startptr, lastptr);
+                pagecount := pagesav - 1;
+                PagRefPage;
+            End;
 
             96: {Ctrl F3: split line}Begin
                 inblock := page[linenum];

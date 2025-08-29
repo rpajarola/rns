@@ -26,8 +26,6 @@ Uses menutyp,
     Texts,
     SysUtils;
 
-Var demoversion: boolean;
-
 Procedure UseTopMenu;
 
 Implementation
@@ -332,7 +330,6 @@ Var
     KeyResp: Char;
     ok: boolean;
     oldstring: String;
-    demloc: boolean;
     changed: boolean;
 Begin
     MausBereichAdd (8 * substartx, 8 * subendx,
@@ -343,7 +340,7 @@ Begin
         8 * (substarty + 4) + 1, (sdymax + sdymin + 2) * 16, 3);
     IniSpacedText (substartx, substarty + 1,{Rahmen zeichnen}
         ' Active File [max 8 (.rns)]:                             ', frLow);
-    If NOT IniFileExist (ConcatPaths([datadir, instring])) Then
+    If NOT IniFileExist (ConcatPaths ([datadir, instring])) Then
         instring := '';
     oldstring := instring;
     c := chr (0);
@@ -351,10 +348,9 @@ Begin
     IniSpacedText (substartx, (subendy - 1) * 2,
         ' [Enter] (last name) - new name, cursor+[Enter] or [Esc] '
         , frLow);
-    SduSodir (True, ok, false, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter(datadir), false,
+    SduSodir (True, ok, false, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (datadir), false,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, mausmenu, 0, 0, true);
-    demloc := demoversion;
     Mauszeigen;
     Repeat
         maustaste := 0;
@@ -418,22 +414,14 @@ Begin
                 If pos ('.', instring) = 0 Then
                     instring := instring + '.RNS';
                 If ok Then     { G�ltiger Filename? }
-                    HlpTestFileName (ConcatPaths([datadir, instring]), ok,
+                    HlpTestFileName (ConcatPaths ([datadir, instring]), ok,
                         substartx, subendx, substarty + 6);
-                If ok Then
-                    If NOT IniFileExist (ConcatPaths([datadir, instring])) Then
-                        If demloc Then instring := 'TESTFILE.RNS'{                       ok:= false;
-                       HlpDemoText(substartx, subendx, substarty + 6);} Else ok := HlpAreYouSure ('File ' + ConcatPaths([datadir, instring]) + ' does not exist', hpFileMenu){if not IniFileExist(datadir + '\' +instring) then}; {if ok then}
-{                 if not ok then
-                   SduSodir(True, ok, false, instring,'*.RNS', datadir+'\',false,
-                    sdxmin*8-4,sdymin*16-8,sdymax,sdcol,
-                    mausx,mausy,maustaste,3,0,0,true);}
             End;
             arrow: If dir = down Then
-                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter(datadir),
+                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (datadir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
-            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter(datadir),
+            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (datadir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
         End; {case resp of}
@@ -448,10 +436,10 @@ Var
     resp: response_type;
     dir: movement;
     KeyResp: Char;
-    ok, demloc: boolean;
+    ok: boolean;
     instring: String;
     actdir: String;
-    b: byte;
+    b:  byte;
     st: string;
     changed: boolean;
 Begin
@@ -470,10 +458,9 @@ Begin
     SduSodir (True, ok, false, instring, '*.*', '', true,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, 3, 0, 0, True);
-    demloc := demoversion;
     datadir := upstring (datadir);
     Repeat
-        instring := IncludeTrailingPathDelimiter(datadir);
+        instring := IncludeTrailingPathDelimiter (datadir);
         GrGet_Prompted_Spaced_String (instring, fieldlength, '>',
             substartx + 30 + fieldlength, substarty + 1,
             substartx + 28,
@@ -483,101 +470,101 @@ Begin
             resp, dir, Keyresp, true,
             mausx, mausy, maustaste, mausmenu, changed);
         Instring := UpString (Instring);
-	ExcludeTrailingPathDelimiter(instring);
+        ExcludeTrailingPathDelimiter (instring);
         ok := false;
         IniMausAssign (maustaste, resp);
 
-        If demloc Then ok := true Else Case resp Of
-                escape: ok := true;
-                return:
+        Case resp Of
+            escape: ok := true;
+            return:
+            Begin
+                IniLeadBlank (instring);
+                If ((mausmenu = 2) OR (maustaste = 0)) Then
                 Begin
-                    IniLeadBlank (instring);
-                    If ((mausmenu = 2) OR (maustaste = 0)) Then
+                    If instring = '' Then
                     Begin
-                        If instring = '' Then
-                        Begin
+                        instring := datadir;
+                        ok := true;
+                    End Else If instring = '..' Then
+                    Begin
+                        getdir (0, actdir);
+                        If Length (actdir) <= 3 Then
+                            instring := datadir + IncludeTrailingPathDelimiter ('..');
+                        ok := true;
+                    End Else If instring = '.' Then
+                    Begin
+                        instring := datadir;
+                        ok := true;
+                    End Else If instring = '\' Then
+                    Begin
+                        { XXX }
+                        instring := '\';
+                        ok := true;
+                    End Else If pos (':', instring) = 2 Then
+                    Begin
+                        instring := '';
+                        ok := false;
+                        HlpText (substartx, subendx, substarty + 6, 'Illegal name for data directory', true);
+                        SduSodir (true, ok, false, instring, '*.*', '', true,
+                            sdxmin * 8 - 4, sdymin * 16 - 8, sdymax,
+                            sdcol, mausx, mausy, maustaste, 3, 0, 0, true);
+                    End Else Begin
+                        If (pos (':', instring) <> 0) OR
+                            (pos ('\', instring) <> 0) OR
+                            (pos (#9, instring) <> 0) OR
+                            ((pos ('.', instring) = pos ('\', instring) + 1)) OR
+                            ((pos ('.', instring) = pos ('\', instring) - 1)) OR
+                            (pos ('..', instring) <> 0) OR
+                            (pos ('*', instring) <> 0) OR
+                            (pos ('?', instring) <> 0) Then
                             instring := datadir;
-                            ok := true;
-                        End Else If instring = '..' Then
+                        If (instring <> '') AND IniDirExist (instring) Then
                         Begin
-                            getdir (0, actdir);
-                            If Length (actdir) <= 3 Then
-                                instring := datadir + IncludeTrailingPathDelimiter('..');
+                            datadir := instring;
                             ok := true;
-                        End Else If instring = '.' Then
-                        Begin
-                            instring := datadir;
-                            ok := true;
-                        End Else If instring = '\' Then
-                        Begin
-			    { XXX }
-                            instring := '\';
-                            ok := true;
-                        End Else If pos (':', instring) = 2 Then
-                        Begin
-                            instring := '';
-                            ok := false;
-                            HlpText (substartx, subendx, substarty + 6, 'Illegal name for data directory', true);
-                            SduSodir (true, ok, false, instring, '*.*', '', true,
-                                sdxmin * 8 - 4, sdymin * 16 - 8, sdymax,
-                                sdcol, mausx, mausy, maustaste, 3, 0, 0, true);
                         End Else Begin
-                            If (pos (':', instring) <> 0) OR
-                                (pos ('\', instring) <> 0) OR
-                                (pos (#9, instring) <> 0) OR
-                                ((pos ('.', instring) = pos ('\', instring) + 1)) OR
-                                ((pos ('.', instring) = pos ('\', instring) - 1)) OR
-                                (pos ('..', instring) <> 0) OR
-                                (pos ('*', instring) <> 0) OR
-                                (pos ('?', instring) <> 0) Then
-                                instring := datadir;
-                            If (instring <> '') AND IniDirExist (instring) Then
+                            MkDir (instring);
+                            If IOResult = 0 Then
                             Begin
-                                datadir := instring;
-                                ok := true;
-                            End Else Begin
-                                MkDir (instring);
-                                If IOResult = 0 Then
+                                If HlpAreYouSure ('Directory "' + instring + '\" does not exist', hpFileMenu) Then
                                 Begin
-                                    If HlpAreYouSure ('Directory "' + instring + '\" does not exist', hpFileMenu) Then
-                                    Begin
-                                        datadir := instring;
-                                        ok := true;
-                                    End Else Begin
-                                        RmDir (instring);
-                                        SduSodir (true, ok, false, instring, '*.*', '', true,
-                                            sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
-                                            mausx, mausy, maustaste, 3, 0, 0, true);
-                                    End;
+                                    datadir := instring;
+                                    ok := true;
                                 End Else Begin
-                                    {                      SduClearWin(sdxmin, sdymin, sdxmax, sdymax);}
-                                    HlpText (substartx, subendx, substarty + 6,
-                                        'Illegal name for data directory', true);
+                                    RmDir (instring);
                                     SduSodir (true, ok, false, instring, '*.*', '', true,
                                         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
-                                        mausx, mausy, maustaste, 3, 0, 0, True);
+                                        mausx, mausy, maustaste, 3, 0, 0, true);
                                 End;
-                            End;{if inidirexist else}
-                        End{if pos(':'...=2 else};{if instring = '\' else}
-                    End {if mausmenu = 2}Else If mausmenu = 3 Then
-                    Begin
-                        SduSodir (false, ok, true, instring, '*.*', '', true,
-                            sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
-                            mausx, mausy, maustaste, 3, 0, 0, True);
-                        If ok Then datadir := instring;
-                    End Else Begin
-                        ok := true;
-                        resp := escape;
-                    End;
-                End;{case of return}
-                arrow: If dir = down Then
-                    Begin
-                        SduSodir (false, ok, true, instring, '*.*', '', true,
-                            sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
-                            mausx, mausy, maustaste, 3, 0, 0, True);
-                        If ok Then datadir := instring;
-                    End;{case of arrow}
-            End{case resp of}; {else if demoversion}
+                            End Else Begin
+                                {                      SduClearWin(sdxmin, sdymin, sdxmax, sdymax);}
+                                HlpText (substartx, subendx, substarty + 6,
+                                    'Illegal name for data directory', true);
+                                SduSodir (true, ok, false, instring, '*.*', '', true,
+                                    sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
+                                    mausx, mausy, maustaste, 3, 0, 0, True);
+                            End;
+                        End;{if inidirexist else}
+                    End{if pos(':'...=2 else};{if instring = '\' else}
+                End {if mausmenu = 2}Else If mausmenu = 3 Then
+                Begin
+                    SduSodir (false, ok, true, instring, '*.*', '', true,
+                        sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
+                        mausx, mausy, maustaste, 3, 0, 0, True);
+                    If ok Then datadir := instring;
+                End Else Begin
+                    ok := true;
+                    resp := escape;
+                End;
+            End;{case of return}
+            arrow: If dir = down Then
+                Begin
+                    SduSodir (false, ok, true, instring, '*.*', '', true,
+                        sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
+                        mausx, mausy, maustaste, 3, 0, 0, True);
+                    If ok Then datadir := instring;
+                End;{case of arrow}
+        End;{case resp of}
 
     Until ok;
     If resp = ESCAPE Then
@@ -815,7 +802,6 @@ Begin
     c := ' ';
     mausmenu := 0;
     choicenum := 1;
-    demoversion := NOT (IniFileExist ('imie.rns') AND TitVerify);
     ImeInitTopmenu;
     Repeat
         SetFillStyle (SolidFill, MenuBkColor);
@@ -835,55 +821,6 @@ Begin
         If c <> 'F' Then
         Begin
             logo^.display (192, 150); {192,175}
-            SetColor (12);
-            If demoversion Then
-            Begin
-                inbuf := '                          ';
-                IniExpand (inbuf, subendx - substartx - 2);
-                IniOutTextXY (substartx, (substarty + 3) * 2, inbuf);
-                inbuf := '                         D E M O - V E R S I O N ';
-                IniExpand (inbuf, subendx - substartx - 2);
-                IniOutTextXY (substartx, (substarty + 4) * 2, inbuf);
-                assign (infile, 'copyd.rns');
-                If NOT IniDirExist ('demodir') Then
-                    mkdir ('demodir');
-                datadir := 'demodir';
-                chdir (datadir);
-                If NOT IniFileExist ('testfile.rns') Then
-                    FilCopyFile (ConcatPaths(['..', 'testfile.rns']), 'testfile.rns');
-                ChDir ('..');
-            End Else Begin
-                inbuf := '                          ';
-                IniExpand (inbuf, subendx - substartx - 2);
-                IniOutTextXY (substartx, (substarty + 3) * 2, inbuf);
-                inbuf := '  L I C E N S E D  V E R S I O N  ' + usrfirstname + ' ' + usrname;
-                IniCenter (inbuf, 74);
-                IniOutTextXY (substartx, (substarty + 4) * 2, inbuf);
-                assign (infile, 'copyr.rns');
-            End;
-            reset (infile);
-            If IOResult <> 0 Then
-            Begin
-                WriteLn ('Error: Cannot open copyright file: ', String (TextRec (infile).Name));
-                WriteLn ('Make sure the copyright file exists.');
-                Halt (2);
-            End;
-            i := 6;
-            While NOT eof (infile) Do
-            Begin
-                readln (infile, inbuf);
-                If IOResult <> 0 Then
-                Begin
-                    WriteLn ('Error: Cannot read from copyright file');
-                    close (infile);
-                    Halt (100);
-                End;
-                IniExpand (inbuf, subendx - substartx - 2);
-                IniOutTextXY (substartx, (substarty + i + 2) * 2, ' ' + inbuf);
-                i := i + 1;
-            End;
-            close (infile);
-            SetColor (12);
             MausGrafik (1);
             MausBereich (1, (substartX - 3) * Charwidth - 3, 42, GrmaxY + 14);
             MausSetXY (102, 90);
@@ -892,7 +829,6 @@ Begin
                 maustaste := 0;
                 mausmenu  := 0;
             End;
-            {    IniFadeIn;}
             IniSetAllDACRegs (ThePalette);
             {    if c <> 'F' then begin}
             Repeat
@@ -926,23 +862,23 @@ Begin
                 Begin
                     UseSetPickFil (instring);
                     UseGetSetup;
-                    If IniFileExist (ConcatPaths([datadir, instring])) Then
+                    If IniFileExist (ConcatPaths ([datadir, instring])) Then
                     Begin
                         If Pos ('.', instring) = 0 Then
                         Begin
-                            FilCopyFile (ConcatPaths([datadir, instring]), ConcatPaths([datadir, instring + '.bak']));
-                            Assign (Bakfile, ConcatPaths([datadir, instring + '.bak']));
+                            FilCopyFile (ConcatPaths ([datadir, instring]), ConcatPaths ([datadir, instring + '.bak']));
+                            Assign (Bakfile, ConcatPaths ([datadir, instring + '.bak']));
                         End Else Begin
-                            FilCopyFile (ConcatPaths([datadir, instring]), ConcatPaths([datadir,
+                            FilCopyFile (ConcatPaths ([datadir, instring]), ConcatPaths ([datadir,
                                 Copy (instring, 1, Pos ('.', instring)) + 'bak']));
-                            Assign (Bakfile, ConcatPaths([datadir, Copy (instring, 1,
+                            Assign (Bakfile, ConcatPaths ([datadir, Copy (instring, 1,
                                 Pos ('.', instring)) + 'bak']));
                         End;
-                        BakName := ConcatPaths([datadir, Copy (instring, 1, Pos ('.', instring)) + 'BAK']); { Modern file name access }
+                        BakName := ConcatPaths ([datadir, Copy (instring, 1, Pos ('.', instring)) + 'BAK']); { Modern file name access }
                     End Else
                         BakName := '';
                     IniSwapMenuColors;
-                    EdiRythmEdit (ConcatPaths([datadir, instring]), bakname, false, demoversion);
+                    EdiRythmEdit (ConcatPaths ([datadir, instring]), bakname, false);
                     Mauszeigen;
                     IniSwapMenuColors;
                     st := copy (fontfile, 1, Length (fontfile) - 3) + 'PAR';
@@ -1056,7 +992,7 @@ Begin
                 actedit := actedit + [setuppage, defsetuppage];
                 IniSwapColors;
                 IniSwapMenuColors;
-                EdiRythmEdit ('pageset', '', true, false);
+                EdiRythmEdit ('pageset', '', true);
                 IniSwapMenuColors;
                 IniSwapColors;
                 actedit := actedit - [setuppage, defsetuppage];
@@ -1127,6 +1063,4 @@ Begin
     Until c = 'Q';
 End;
 
-Begin
-    demoversion := true;
 End.

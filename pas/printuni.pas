@@ -617,18 +617,6 @@ Begin
                  '    N O T A T I O N    S Y S T E M) show');  }
     writeln (psfile, 'grestore');
 
-  {$IFDEF DEMO}{ Geschenk an nicht registrierte User...   ;-)))))))  }
-    writeln (psfile, 'gsave');
-    writeln (psfile, '%%IncludeFont: New-Font');
-    writeln (psfile, '%%BeginFont: New-Font');
-    writeln (psfile, '/New-Font findfont 125 scalefont setfont');
-    writeln (psfile, '%%EndFont');
-    writeln (psfile, '45 20 moveto');
-    writeln (psfile, '27.5 rotate');
-    writeln (psfile, '.3 setgray');
-    writeln (psfile, '(SPECIMEN) show');
-    writeln (psfile, 'grestore');
-  {$ENDIF}
     writeln (psfile);
     If nff Then
         writeln (psfile, '/Helvetica-Bold findfont 12 scalefont setfont');
@@ -656,8 +644,8 @@ Begin
     PriPostscriptinit := False; { Default to failure }
     If prfile = 1 Then
     Begin                      { PS-File oeffnen            }
-        Assign (psfile, ConcatPaths([psdir, prfname]));
-        filename := FExpand (ConcatPaths([psdir, prfname]));
+        Assign (psfile, ConcatPaths ([psdir, prfname]));
+        filename := FExpand (ConcatPaths ([psdir, prfname]));
     End Else Begin
         Assign (psfile, 'psfile');
         filename := FExpand ('psfile');

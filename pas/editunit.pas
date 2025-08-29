@@ -28,30 +28,11 @@ Uses
     UserExit,
     Texts;
 
-Procedure EdiRythmEdit(instring, bakname: string; defpagesetup, demloc: boolean);
-Function EdiSavePossible(fn: String): Boolean;
+Procedure EdiRythmEdit(instring, bakname: string; defpagesetup: boolean);
 Implementation
 
-Uses mousdrv,
-    CRCUnit;
+Uses mousdrv;
 
-Const crcOK = 0;
-    crcNIL  = 1;
-    crcNOK  = 2;
-
-
-Function EdiCheckCRC(instring: String): Byte;
-Var crc: Word;
-Begin
-    If GetCRCFileEntry (instring, crc) Then
-    Begin
-        If GetCRC (instring) = crc Then
-            EdiCheckCRC := crcOK
-        Else
-            EdiCheckCRC := crcNOK;
-    End Else
-        EdiCheckCRC := crcNIL;
-End;
 Procedure EdiCopyFile(N1, N2: String);
 Var P: Pointer;
     S: LongInt;
@@ -93,41 +74,6 @@ Begin
     Close (F2);
 End;
 
-Function EdiCheckDemoFileName(instring: String; Var f: Text): Boolean;
-    { Check if file is in list and CRC ok }
-Begin
-    instring := UpString (instring);
-    Case EdiCheckCRC (instring) Of
-        crcOK: EdiCheckDemoFileName := True;{      if pos('TESTFILE.RNS',instring)=0 Then
-        SetFAttr(infile, ReadOnly);}
-        crcNIL:
-        Begin
-            HlpHint (HntDemoNIL, 0, []);
-            EdiCheckDemoFileName := False;
-        End;
-        crcNOK: If pos ('TESTFILE.RNS', instring) = 0 Then
-            Begin
-                HlpHint (HntDemoCRC, 0, []);
-                EdiCheckDemoFileName := False;
-            End Else Begin
-                HlpAsk ('Demoversion: TESTFILE.RNS has been changed, restoring previous one',
-                    'Press [Enter] to continue', hpEdit, [#13]);
-                {        HlpHint(HntDemoCRCTestfile,0, []);}
-                If isCRCOK ('DEMODIR\DEMOTEST.PRE') Then
-                Begin
-                    EdiCopyFile ('DEMODIR\DEMOTEST.PRE', 'DEMODIR\TESTFILE.RNS');
-                    SetCRCFileEntry ('DEMODIR\TESTFILE.RNS', GetCRC ('DEMODIR\TESTFILE.RNS'));
-                    EdiCheckDemoFileName := True;
-                End Else If isCRCOK ('TESTFILE.RNS') Then
-                Begin
-                    EdiCopyFile ('TESTFILE.RNS', 'DEMODIR\TESTFILE.RNS');
-                    SetCRCFileEntry ('DEMODIR\TESTFILE.RNS', GetCRC ('DEMODIR\TESTFILE.RNS'));
-                    EdiCheckDemoFileName := True;
-                End Else EdiCheckDemoFileName := False;
-            End;
-    End;
-End;
-
 Function SlashSeparated(prev, next: String): String;
 Begin
     If next = '' Then SlashSeparated := prev
@@ -136,7 +82,7 @@ Begin
 End;
 
 {******************************************************}
-Procedure EdiRythmEdit(instring, bakname: string; defpagesetup, demloc: boolean);
+Procedure EdiRythmEdit(instring, bakname: string; defpagesetup: boolean);
 
 Var
     j: integer;
@@ -166,8 +112,6 @@ Begin
     actpost  := 1;
     vtimer.init;
     If defsetuppage IN actedit Then firstpage := 0;
-  {$IFNDEF DEMO }If demLOC Then {$ENDIF}
-        If NOT EdiCheckDemoFileName (instring, infile) Then Exit;
     If defpagesetup Then
     Begin
         FilAssignCfgFile (infile, instring, true);
@@ -195,9 +139,7 @@ Begin
             HlpHint (HntCannotOpenFile, HintWaitEsc, [instring]);
             Exit;
         End;
-    End Else assign (infile, instring){    if ((demloc) and (Pos('TESTFILE.RNS',instring) = 0)) then begin
-      SetFAttr(infile, ReadOnly);
-    end else};
+    End Else assign (infile, instring);
 
     If ((NOT IniFileExist (instring)) AND
         (NOT (defsetuppage IN actedit))) Then
@@ -397,68 +339,45 @@ Begin
                 Exit;
             End;
             FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
-        End Else If EdiSavePossible (actfilename) Then
+        End Else If FileChanged = 2 Then
         Begin
-            If FileChanged = 2 Then
+            FileChanged := 0;
+            FileMode := 2;
+            ReWrite (InFile);
+            If IOResult = 0 Then
             Begin
-                FileChanged := 0;
-                FileMode := 2;
-                ReWrite (InFile);
-                If IOResult = 0 Then
+                If bufffile Then
                 Begin
-                    If bufffile Then
+                    WriteLn (infile, '$$$RNSBUFFER$$$');
+                    If IOResult <> 0 Then
                     Begin
-                        WriteLn (infile, '$$$RNSBUFFER$$$');
-                        If IOResult <> 0 Then
-                        Begin
-                            close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc, [instring]);
-                            Exit;
-                        End;
-                        WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
-                        If IOResult <> 0 Then
-                        Begin
-                            close (infile);
-                            HlpHint (HntCannotWriteFile, HintWaitEsc, [instring]);
-                            Exit;
-                        End;
-
-                        FilHeapToFile (infile, actptr, startptr, lastptr, true, true, false);
-                        FilCutBlockFile (FExpand (TextRec (infile).Name));
-                    End Else Begin
-                        FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
+                        close (infile);
+                        HlpHint (HntCannotWriteFile, HintWaitEsc, [instring]);
+                        Exit;
                     End;
+                    WriteLn (infile, '    -1    -1    -1    -1    -1    -1    -1');
+                    If IOResult <> 0 Then
+                    Begin
+                        close (infile);
+                        HlpHint (HntCannotWriteFile, HintWaitEsc, [instring]);
+                        Exit;
+                    End;
+
+                    FilHeapToFile (infile, actptr, startptr, lastptr, true, true, false);
+                    FilCutBlockFile (FExpand (TextRec (infile).Name));
                 End Else Begin
-                    GetFAttr (infile, attr);
-                    If attr AND ReadOnly <> 0 Then
-                        HlpHint (HntReadOnly, HintWaitEsc, [instring])
-                    Else
-                        HlpHint (HntFileAccesDenied, HintWaitEsc, [instring]);
+                    FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
                 End;
+            End Else Begin
+                GetFAttr (infile, attr);
+                If attr AND ReadOnly <> 0 Then
+                    HlpHint (HntReadOnly, HintWaitEsc, [instring])
+                Else
+                    HlpHint (HntFileAccesDenied, HintWaitEsc, [instring]);
             End;
-        End Else Begin
-            HlpHintFrame (grminx, grmaxy - 48, grmaxx, grmaxy);
-            txtfnt.write (grminx + 20, grmaxy - 32,
-                'Demoversion: not saved',
-                getcolor, sz8x16, stnormal);
-            txtfnt.write (grminx + 20, grmaxy - 16,
-                'Press any key to continue',
-                getcolor, sz8x16, stnormal);
-            XClearKbd;
-            Repeat Until KeyPressed;
-            XClearKbd;
         End;
-        FilBufClear;
-        MarkInit;
     End;
-  {$IFDEF DEMO}
-    EdiCopyFile ('DEMODIR\TESTFILE.RNS', 'DEMODIR\DEMOTEST.PRE');
-    SetCRCFileEntry ('DEMODIR\DEMOTEST.PRE', GetCRC ('DEMODIR\DEMOTEST.PRE'))
-  {$ENDIF};
     Mausdunkel;
 End;
-Function EdiSavePossible(fn: String): Boolean;
-Begin
-    EdiSavePossible :={$IFNDEF DEMO}((IniFileExist ('imie.rns')) AND TitVerify) OR{$ENDIF}(pos ('TESTFILE.RNS', fn) <> 0);
-End;
+
 End.

@@ -35,7 +35,6 @@ Procedure HlpHintFrame(hintminx, hintminy, hintmaxx, hintmaxy: integer);
 Function HlpTxtAreYouSure(x, xmax, y: integer;
     hinttext: string): boolean;
 Procedure HlpSymbolSelect(Var c: char);
-Procedure HlpDemoText(x, xmax, y: integer);
 
 Implementation
 
@@ -205,20 +204,6 @@ Begin
     Else
         Delay (800);
     IniClearLine (x, y, length (outstring), bkcolor);
-End;
-
-{******************************************************}
-Procedure HlpDemoText(x, xmax, y: integer);
-
-Begin
-    Mausdunkel;
-    HlpHintFrame (grminx + 171, grmaxy - 22, grmaxx, grmaxy + 32);
-    txtfnt.write (grminx + 208, grmaxy - 5,
-        'Not possible to open NEW files in Demo-Version',
-        getcolor, sz8x16, stnormal);
-    txtfnt.write (grminx + 208, grmaxy + 15,
-        'Press [Esc] to continue and open TESTFILE.RNS',
-        getcolor, sz8x16, stnormal);
 End;
 
 {******************************************************}
