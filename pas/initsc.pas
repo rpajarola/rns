@@ -154,9 +154,9 @@ Type stringline = string;
     Editvariants = (setuppage, defsetuppage, linestyles);
 
     {bitmap: Buchstabe, Zeile (1 word pro zeile), Normal/Ctrl/Alt/}
-    SymArrTyp = Array['a'..'z', 1..15, 1..3] Of word;
+    SymArrTyp = Array['a'..'z', 1..15, 1..3] Of uint16;
     { Symparameter: Buchstabe,?,nor,ctrl,alt}
-    SymParamTyp = Array['a'..'z', 1..numofpar, 1..3] Of integer;
+    SymParamTyp = Array['a'..'z', 1..numofpar, 1..3] Of int16;
         {parameter 1: y-shift
                    2: replace/add  1 = replace, 2 = add
                    3: sound frequency
@@ -1100,8 +1100,9 @@ End;
 Procedure IniGetSymbols;
 Var i, j: integer;
     c: char;
-    infile: File Of word;
-    parfile: File Of integer;
+    infile: File Of uint16;
+    parfile: File Of int16;
+
 Begin
     assign (infile, 'symbols.sym');
     reset (infile);
@@ -1115,7 +1116,7 @@ Begin
         For i := 1 To 15 Do
             For j := 1 To 3 Do
             Begin
-                read (infile, symarr[c, i, j]);
+                read (infile, SymArr[c, i, j]);
                 If IOResult <> 0 Then
                 Begin
                     close (infile);
@@ -1137,7 +1138,7 @@ Begin
         For i := 1 To numofpar Do
             For j := 1 To 3 Do
             Begin
-                read (parfile, sympar[c, i, j]);
+                read (parfile, SymPar[c, i, j]);
                 If IOResult <> 0 Then
                 Begin
                     close (parfile);
