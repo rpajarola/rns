@@ -13,7 +13,8 @@ Uses
     UserExit,
     Dos,
     Comunit,
-    mousdrv;
+    mousdrv,
+    SysUtils;
 
 Procedure SpeInsNoteLine(Var linenum, actposn: integer;
     Var tempptr, startptr, lastptr: listptr);
@@ -210,12 +211,12 @@ Begin
                         choicenum * usrmenu.SPACING) + 1) Then
                     Begin
                         dummyb := true;
-                        If IniFileExist (bufdir + '\' + instring) Then
+                        If IniFileExist (ConcatPaths([bufdir, instring])) Then
                             If NOT HlpAreYouSure ('File already exists, overwrite?', hpEdit) Then
                                 dummyb := false;
                         If dummyb Then
                         Begin
-			    filename :=bufdir + '\' + instring;
+			    filename :=ConcatPaths([bufdir, instring]);
                             assign (bfile, filename);
                             rewrite (bfile);
                             If IOResult <> 0 Then
@@ -264,7 +265,7 @@ Begin
                     Mausbereich (GrMinX + 1, GrMinX + 20 * 8, GrMinY, GrMaxY);
                     instring := FilFileSelect ('Select Bufferfile', '*.buf', bufdir);
                     If instring <> '' Then
-		    	filename :=bufdir + '\' + instring;
+		    	filename :=ConcatPaths([bufdir, instring]);
                         If NOT IniFileExist (filename) Then
 			HlpHint (HntNotExist, HintWaitEsc, [filename])
 			Else Begin

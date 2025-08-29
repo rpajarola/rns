@@ -9,7 +9,8 @@ Uses
     crt,
     DOS,
     HelpUnit,
-    Texts;
+    Texts,
+    SysUtils;
 {Hier werden Raender von 2 File-Seiten auf A4 definiert:}
 {  0.0 Punkte = unterer Blattrand des amerik.Formats!?}
 {2.8 Punkte entsprechen etwa 1mm}
@@ -655,8 +656,8 @@ Begin
     PriPostscriptinit := False; { Default to failure }
     If prfile = 1 Then
     Begin                      { PS-File oeffnen            }
-        Assign (psfile, psdir + '\' + prfname);
-        filename := FExpand (psdir + '\' + prfname);
+        Assign (psfile, ConcatPaths([psdir, prfname]));
+        filename := FExpand (ConcatPaths([psdir, prfname]));
     End Else Begin
         Assign (psfile, 'psfile');
         filename := FExpand ('psfile');

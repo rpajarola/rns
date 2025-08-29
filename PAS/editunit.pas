@@ -139,7 +139,7 @@ End;
 Procedure EdiRythmEdit(instring, bakname: string; defpagesetup, demloc: boolean);
 
 Var
-    i, j: integer;
+    j: integer;
     Response: Response_Type;
     Direction: Movement;
     KeyResponse: Char;
@@ -170,14 +170,14 @@ Begin
         If NOT EdiCheckDemoFileName (instring, infile) Then Exit;
     If defpagesetup Then
     Begin
-        FilAssignRnsFile (infile, instring, true);
+        FilAssignCfgFile (infile, instring, true);
         Reset (infile);
         If IOResult <> 0 Then
         Begin
             HlpHint (HntCannotOpenFile, HintWaitEsc, [instring]);
             Exit;
         End;
-        instring := instring + exts;
+        instring := instring + '.cfg';
         readln (infile, inblock);
         If IOResult <> 0 Then
         Begin
@@ -206,7 +206,7 @@ Begin
         pagesav := 1;
         actedit := actedit + [setuppage];
         IniSwapColors;
-        FilAssignRnsFile (ifile, 'pageset', true);
+        FilAssignCfgFile (ifile, 'pageset', true);
         Rewrite (infile);
         If IOResult <> 0 Then
         Begin

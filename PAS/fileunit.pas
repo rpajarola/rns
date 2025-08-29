@@ -44,8 +44,7 @@ Procedure FilCheckLine(Var tempbuffer, inblock: stringline;
     Var tbufpos: byte; Var endreached: boolean;
     skip: boolean; delline: boolean);
 Procedure FilCopyFile(instring, outstring: stringline);
-Procedure FilAssignRnsFile(Var tfile: text; instring: stringline;
-    readf: boolean);
+Function FilAssignCfgFile(Var cfgfile: text; basename: string; readf: boolean): string;
 Procedure FilFindeErstBestenFont(Var instring: stringline);
 Function FilCompareFiles(FName1, FName2: String): Boolean;
 Procedure FilFontSelect;
@@ -154,48 +153,49 @@ Begin
 End;
 
 {****************************************************}
-Procedure FilAssignRnsFile(Var tfile: text; instring: stringline;
-    readf: boolean);
+Function  FilAssignCfgFile( Var cfgfile: text; basename: string; readf: boolean): string;
 
-Var instr2: stringline;
+Var filepath: stringline;
 Begin
-    instr2 := datadir + '\' + instring + exts;
-    If ((NOT IniFileExist (instr2)) OR
-        (FilWrongVersion (instr2))) Then
-        FilCopyFile (instring + exts, instr2);
-    Assign (tfile, instr2);
+FilAssignCfgFile:= '';
+    filepath := ConcatPaths ([datadir, basename + '.cfg']);
+    If ((NOT IniFileExist (filepath)) OR
+        (FilWrongVersion (filepath))) Then
+        FilCopyFile (basename + '.cfg', filepath);
+    Assign (cfgfile, filepath);
     If readf Then
     Begin
-        reset (tfile);
+        reset (cfgfile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotOpenFile, HintWaitEsc, [instr2]);
+            HlpHint (HntCannotOpenFile, HintWaitEsc, [filepath]);
             Exit;
         End;
-        readln (tfile);
+        readln (cfgfile);
         If IOResult <> 0 Then
         Begin
-            close (tfile);
-            HlpHint (HntCannotReadFile, HintWaitEsc, [instr2]);
+            close (cfgfile);
+            HlpHint (HntCannotReadFile, HintWaitEsc, [filepath]);
             Exit;
         End;
     End
     Else
     Begin
-        rewrite (tfile);
+        rewrite (cfgfile);
         If IOResult <> 0 Then
         Begin
-            HlpHint (HntCannotCreateFile, HintWaitEsc, [instr2]);
+            HlpHint (HntCannotCreateFile, HintWaitEsc, [filepath]);
             Exit;
         End;
-        writeln (tfile, 'version ', versionstring);
+        writeln (cfgfile, 'version ', versionstring);
         If IOResult <> 0 Then
         Begin
-            close (tfile);
-            HlpHint (HntCannotWriteFile, HintWaitEsc, [instr2]);
+            close (cfgfile);
+            HlpHint (HntCannotWriteFile, HintWaitEsc, [filepath]);
             Exit;
         End;
     End;
+FilAssignCfgFile:= filepath;
 End;
 
 
@@ -923,7 +923,7 @@ Begin
     maustaste := 0;
     ok := false;
     If dir <> '' Then
-        dir := dir + '\';
+        dir := IncludeTrailingPathDelimiter(dir);
     SduSodir (True, ok, False, instring, wildcard, dir, false,
         22, 45, 22, 1, mausx, mausy, maustaste, mausmenu, 0, 0, false);
     SduSodir (False, ok, True, instring, wildcard, dir, false,

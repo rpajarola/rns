@@ -15,7 +15,6 @@ Uses
 
 Const
     versionstring = '004';
-    exts = '.cfg';
 
     LineMarker = 9;
       {1: N=Notenlinie T=Textlinie
@@ -1149,6 +1148,7 @@ Begin
             End;
     close (parfile);
 End;
+
 {**************************************************************}
 Function IniEmptyLine(inblock: stringline): boolean;
 Begin
@@ -1255,10 +1255,10 @@ Begin
     instring := fontfile;
     FilCopyFile (instring, 'symbols.prn');
     Delete (instring, length (instring) - 3, 4);
-    instring := instring + '.SYM';
+    instring := instring + '.sym';
     FilCopyFile (instring, 'symbols.sym');
     Delete (instring, length (instring) - 3, 4);
-    instring := instring + '.PAR';
+    instring := instring + '.par';
     FilCopyFile (instring, 'symbols.par');
     IniGetSymbols;
 End;

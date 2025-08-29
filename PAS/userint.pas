@@ -23,7 +23,8 @@ Uses menutyp,
     crt,
     UserExit,
     Strings,
-    Texts;
+    Texts,
+    SysUtils;
 
 Var demoversion: boolean;
 
@@ -92,7 +93,7 @@ Procedure UseGetConfig;
 {Liest die Configuration aus dem File CONFIG.rns}
 
     Procedure SearchADir(Var S: String);
-    Var F: SearchRec;
+    Var F: TSearchRec;
     Begin
         S := '*.*';
         FindFirst (S, Directory, F);
@@ -202,7 +203,7 @@ Var infile: text;
     tempattr: lineattrtype;
 
 Begin
-    FilAssignRnsFile (infile, 'setup', true);
+    FilAssignCfgFile (infile, 'setup', true);
     {Check if file was opened successfully}
     If IOResult <> 0 Then
     Begin
@@ -273,7 +274,7 @@ Procedure UseSaveSetup;
 Var infile: text;
 
 Begin
-    FilAssignRnsFile (infile, 'setup', false);
+    FilAssignCfgFile (infile, 'setup', false);
     {Check if file was opened successfully}
     If IOResult <> 0 Then
     Begin
@@ -342,7 +343,7 @@ Begin
         8 * (substarty + 4) + 1, (sdymax + sdymin + 2) * 16, 3);
     IniSpacedText (substartx, substarty + 1,{Rahmen zeichnen}
         ' Active File [max 8 (.rns)]:                             ', frLow);
-    If NOT IniFileExist (datadir + '\' + instring) Then
+    If NOT IniFileExist (ConcatPaths([datadir, instring])) Then
         instring := '';
     oldstring := instring;
     c := chr (0);
@@ -350,7 +351,7 @@ Begin
     IniSpacedText (substartx, (subendy - 1) * 2,
         ' [Enter] (last name) - new name, cursor+[Enter] or [Esc] '
         , frLow);
-    SduSodir (True, ok, false, instring, '*.RNS *.BUF', datadir + '\', false,
+    SduSodir (True, ok, false, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter(datadir), false,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, mausmenu, 0, 0, true);
     demloc := demoversion;
@@ -417,22 +418,22 @@ Begin
                 If pos ('.', instring) = 0 Then
                     instring := instring + '.RNS';
                 If ok Then     { G�ltiger Filename? }
-                    HlpTestFileName (datadir + '\' + instring, ok,
+                    HlpTestFileName (ConcatPaths([datadir, instring]), ok,
                         substartx, subendx, substarty + 6);
                 If ok Then
-                    If NOT IniFileExist (datadir + '\' + instring) Then
+                    If NOT IniFileExist (ConcatPaths([datadir, instring])) Then
                         If demloc Then instring := 'TESTFILE.RNS'{                       ok:= false;
-                       HlpDemoText(substartx, subendx, substarty + 6);} Else ok := HlpAreYouSure ('File ' + datadir + '\' + instring + ' does not exist', hpFileMenu){if not IniFileExist(datadir + '\' +instring) then}; {if ok then}
+                       HlpDemoText(substartx, subendx, substarty + 6);} Else ok := HlpAreYouSure ('File ' + ConcatPaths([datadir, instring]) + ' does not exist', hpFileMenu){if not IniFileExist(datadir + '\' +instring) then}; {if ok then}
 {                 if not ok then
                    SduSodir(True, ok, false, instring,'*.RNS', datadir+'\',false,
                     sdxmin*8-4,sdymin*16-8,sdymax,sdcol,
                     mausx,mausy,maustaste,3,0,0,true);}
             End;
             arrow: If dir = down Then
-                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', datadir + '\',
+                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter(datadir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
-            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', datadir + '\',
+            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter(datadir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
         End; {case resp of}
@@ -472,7 +473,7 @@ Begin
     demloc := demoversion;
     datadir := upstring (datadir);
     Repeat
-        instring := datadir + '\';
+        instring := IncludeTrailingPathDelimiter(datadir);
         GrGet_Prompted_Spaced_String (instring, fieldlength, '>',
             substartx + 30 + fieldlength, substarty + 1,
             substartx + 28,
@@ -482,8 +483,7 @@ Begin
             resp, dir, Keyresp, true,
             mausx, mausy, maustaste, mausmenu, changed);
         Instring := UpString (Instring);
-        If pos ('\', instring) = length (instring) Then
-            instring := copy (instring, 1, length (instring) - 1);
+	ExcludeTrailingPathDelimiter(instring);
         ok := false;
         IniMausAssign (maustaste, resp);
 
@@ -502,7 +502,7 @@ Begin
                         Begin
                             getdir (0, actdir);
                             If Length (actdir) <= 3 Then
-                                instring := datadir + '..\';
+                                instring := datadir + IncludeTrailingPathDelimiter('..');
                             ok := true;
                         End Else If instring = '.' Then
                         Begin
@@ -510,6 +510,7 @@ Begin
                             ok := true;
                         End Else If instring = '\' Then
                         Begin
+			    { XXX }
                             instring := '\';
                             ok := true;
                         End Else If pos (':', instring) = 2 Then
@@ -746,7 +747,7 @@ End;
 Procedure UseGetPickFil(Var Instring: Stringline);
 Var infile: text;
 Begin
-    FilAssignRnsFile (infile, 'pickfil', true);
+    FilAssignCfgFile (infile, 'pickfil', true);
     {Check if file was opened successfully}
     If IOResult <> 0 Then
     Begin
@@ -767,7 +768,7 @@ End;
 Procedure UseSetPickFil(Instring: Stringline);
 Var infile: text;
 Begin
-    FilAssignRnsFile (infile, 'pickfil', false);
+    FilAssignCfgFile (infile, 'pickfil', false);
     {Check if file was opened successfully}
     If IOResult <> 0 Then
     Begin
@@ -849,7 +850,7 @@ Begin
                 datadir := 'demodir';
                 chdir (datadir);
                 If NOT IniFileExist ('testfile.rns') Then
-                    FilCopyFile ('..\testfile.rns', 'testfile.rns');
+                    FilCopyFile (ConcatPaths(['..', 'testfile.rns']), 'testfile.rns');
                 ChDir ('..');
             End Else Begin
                 inbuf := '                          ';
@@ -925,24 +926,23 @@ Begin
                 Begin
                     UseSetPickFil (instring);
                     UseGetSetup;
-                    If IniFileExist (datadir + '\' + instring) Then
+                    If IniFileExist (ConcatPaths([datadir, instring])) Then
                     Begin
                         If Pos ('.', instring) = 0 Then
                         Begin
-                            FilCopyFile (datadir + '\' + instring, datadir + '\' + instring + '.BAK');
-                            Assign (Bakfile, datadir + '\' + instring + '.BAK');
+                            FilCopyFile (ConcatPaths([datadir, instring]), ConcatPaths([datadir, instring + '.bak']));
+                            Assign (Bakfile, ConcatPaths([datadir, instring + '.bak']));
                         End Else Begin
-                            FilCopyFile (datadir + '\' + instring, datadir + '\' +
-                                Copy (instring, 1, Pos ('.', instring)) + 'BAK');
-                            Assign (Bakfile, datadir + '\' + Copy (instring, 1,
-                                Pos ('.', instring)) + 'BAK');
+                            FilCopyFile (ConcatPaths([datadir, instring]), ConcatPaths([datadir,
+                                Copy (instring, 1, Pos ('.', instring)) + 'bak']));
+                            Assign (Bakfile, ConcatPaths([datadir, Copy (instring, 1,
+                                Pos ('.', instring)) + 'bak']));
                         End;
-                        BakName := datadir + '\' + Copy (instring, 1, Pos ('.', instring)) + 'BAK'; { Modern file name access }
+                        BakName := ConcatPaths([datadir, Copy (instring, 1, Pos ('.', instring)) + 'BAK']); { Modern file name access }
                     End Else
                         BakName := '';
                     IniSwapMenuColors;
-                    EdiRythmEdit (datadir + '\' + instring, bakname,
-                        false, demoversion);
+                    EdiRythmEdit (ConcatPaths([datadir, instring]), bakname, false, demoversion);
                     Mauszeigen;
                     IniSwapMenuColors;
                     st := copy (fontfile, 1, Length (fontfile) - 3) + 'PAR';
