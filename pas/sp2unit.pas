@@ -4,12 +4,11 @@ Unit sp2unit;
 
 Interface
 
-Uses dos,
+Uses 
     crt,
     initsc,
     imenuunit,
-    graph,
-    UserExit;
+    graph;
 
 Procedure Sp2MarkFooter(linenum: integer);
 Procedure Sp2MarkHeader(linenum: integer);

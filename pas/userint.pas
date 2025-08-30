@@ -21,7 +21,6 @@ Uses menutyp,
     sdunit,
     titleunit,
     crt,
-    UserExit,
     Strings,
     Texts,
     SysUtils;

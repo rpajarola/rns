@@ -9,12 +9,10 @@ Uses menutyp,
     grinout,
     imenuunit,
     initsc,
-    dos,
     graph,
     fileunit,
     crt,
     helpunit,
-    UserExit,
     Texts;
 
 

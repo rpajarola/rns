@@ -5,12 +5,10 @@ Unit imenuunit;
 Interface
 
 Uses
-    dos,
     crt,
     graph,
     gcurunit,
-    menutyp,
-    UserExit;
+    menutyp;
 
 Procedure ImeInitSymbolMenus;
 Procedure ImeInitBeatMenu;

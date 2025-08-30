@@ -10,8 +10,6 @@ Uses
     menutyp,
     Imenuunit,
     crt,
-    UserExit,
-    Dos,
     Comunit,
     mousdrv,
     SysUtils;

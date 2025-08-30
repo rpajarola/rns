@@ -4,8 +4,7 @@ Unit dmemunit;
 
 Interface
 
-Uses dos,
-    graph,
+Uses graph,
     initsc;
 
 Procedure DmePlaceWord(x, y: integer; w: word);

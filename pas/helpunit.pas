@@ -9,12 +9,10 @@ Uses Graph,
     Graphmenu,
     inout,
     menutyp,
-    dos,
     Crt,
     xcrt,
     imenuunit,
     InitSc,
-    UserExit,
     SysUtils;
 
 Procedure HlpCommandTable;

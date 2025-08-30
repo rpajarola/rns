@@ -9,7 +9,6 @@ Uses
     dos,
     xcrt,
     crt,
-    UserExit,
     TextFont,
     loadbmp,
     SysUtils;

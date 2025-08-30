@@ -31,7 +31,6 @@ Uses
     utilunit,
     fileunit,
     graph,
-    DOS,
     gcurunit,
     comunit,
     Texts,

@@ -5,7 +5,6 @@ Unit fileunit;
 Interface
 
 Uses initsc,
-    UserExit,
     MenuTyp,
     MousDrv,
     PageUnit,

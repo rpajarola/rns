@@ -5,10 +5,8 @@ Unit butunit;
 Interface
 
 Uses graph,
-    dos,
     initsc,
     menutyp,
-    crt,
     GcuRunit;
 
 Type

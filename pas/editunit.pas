@@ -9,7 +9,6 @@ Uses
     GCurUnit,
     Symbols,
     GetUnit,
-    TitleUnit,
     InitSc,
     menutyp,
     inout,
@@ -25,7 +24,6 @@ Uses
     dos,
     crt,
     xcrt,
-    UserExit,
     Texts;
 
 Procedure EdiRythmEdit(instring, bakname: string; defpagesetup: boolean);

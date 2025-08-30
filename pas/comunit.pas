@@ -13,7 +13,6 @@ Uses
     crt,
     getunit,
     dos,
-    UserExit,
     SndUnit,
     MousDrv,
     ScrSave;

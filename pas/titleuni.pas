@@ -7,9 +7,7 @@ Interface
 Uses symbols,
     initsc,
     textunit,
-    graph,
-    UserExit,
-    Dos;
+    graph;
 
 Procedure TitGetText(linenum, startx: integer);
 
