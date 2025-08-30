@@ -11,7 +11,8 @@ Uses
     crt,
     UserExit,
     TextFont,
-    loadbmp;
+    loadbmp,
+    SysUtils;
 
 Const
     versionstring = '004';
@@ -645,7 +646,7 @@ End;
 {******************************************************}
 Function IniFileExist(instring: string): boolean;
     { testet, ob unter dem Namen instring schon ein File auf dem Directory existiert }
-Var FileInfo: SearchRec;
+Var FileInfo: TRawbyteSearchRec;
 Begin
     FindFirst (instring, AnyFile, FileInfo);
     IniFileExist := (DosError = 0);
@@ -1098,55 +1099,30 @@ Begin
 End;
 {**************************************************************}
 Procedure IniGetSymbols;
-Var i, j: integer;
-    c: char;
-    infile: File Of uint16;
-    parfile: File Of int16;
-
+Var res: SmallInt;
+    symfile: File;
+    parfile: File;
 Begin
-    assign (infile, 'symbols.sym');
-    reset (infile);
+    assign (symfile, 'symbols.sym');
+    reset (symfile, 2);
     If IOResult <> 0 Then
     Begin
         WriteLn ('Error: Cannot open symbols.sym file');
         WriteLn ('Make sure the file exists in the current directory.');
         RunError (127);
     End;
-    For c := 'a' To 'z' Do
-        For i := 1 To 15 Do
-            For j := 1 To 3 Do
-            Begin
-                read (infile, SymArr[c, i, j]);
-                If IOResult <> 0 Then
-                Begin
-                    close (infile);
-                    WriteLn ('Error: Cannot read data from symbols.sym file');
-                    RunError (127);
-                End;
-            End;
-    close (infile);
+    BlockRead(symfile, SymArr, 26*15*3, res);
+    close (symfile);
+
     assign (parfile, 'symbols.par');
-    reset (parfile);
+    reset (parfile, 2);
     If IOResult <> 0 Then
     Begin
-        close (infile);
         WriteLn ('Error: Cannot open symbols.par file');
         WriteLn ('Make sure the file exists in the current directory.');
         RunError (127);
     End;
-    For c := 'a' To 'z' Do
-        For i := 1 To numofpar Do
-            For j := 1 To 3 Do
-            Begin
-                read (parfile, SymPar[c, i, j]);
-                If IOResult <> 0 Then
-                Begin
-                    close (parfile);
-                    close (infile);
-                    WriteLn ('Error: Cannot read data from symbols.par file');
-                    RunError (127);
-                End;
-            End;
+    BlockRead(parfile, SymPar, 26*numofpar*3, res);
     close (parfile);
 End;
 
@@ -1249,18 +1225,12 @@ Begin
 End;
 {**************************************************************}
 Procedure IniIniSymbols;
-Var instring: stringline;
 Begin
     If NOT IniFileExist (fontfile) Then
         FilFindeErstBestenFont (fontfile);
-    instring := fontfile;
-    FilCopyFile (instring, 'symbols.prn');
-    Delete (instring, length (instring) - 3, 4);
-    instring := instring + '.sym';
-    FilCopyFile (instring, 'symbols.sym');
-    Delete (instring, length (instring) - 3, 4);
-    instring := instring + '.par';
-    FilCopyFile (instring, 'symbols.par');
+    FilCopyFile (fontfile, 'symbols.prn');
+    FilCopyFile (ChangeFileExt(fontfile, '.sym'), 'symbols.sym');
+    FilCopyFile (ChangeFileExt(fontfile, '.par'), 'symbols.par');
     IniGetSymbols;
 End;
 {**************************************************************}
