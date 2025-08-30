@@ -30,7 +30,6 @@ End;
 {**************************RNS Main**************************}
 Begin
     InstallUserDrivers;
-    Assign (Buffile, 'Buffer');
     IniIniColors;
     UseTopMenu;
     TextBackground (black);

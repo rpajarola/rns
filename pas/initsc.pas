@@ -256,8 +256,6 @@ Var ThePalette: TDACTable;
     linecount: integer;
     yzeropos: integer;
 
-    buffile: text;
-
     gmaxx, gmaxy: integer;
 
     GrMinX, GrMaxX, GrMinY, GrMaxY: integer;
