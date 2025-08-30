@@ -42,7 +42,7 @@ Procedure FilCheckLine(Var tempbuffer, inblock: stringline;
     Var tempptr, startptr, lastptr: listptr;
     Var tbufpos: byte; Var endreached: boolean;
     skip: boolean; delline: boolean);
-Procedure FilCopyFile(instring, outstring: stringline);
+Procedure FilCopyFile(infilename, outfilename: stringline);
 Function FilAssignCfgFile(Var cfgfile: text; basename: string; readf: boolean): string;
 Procedure FilFindeErstBestenFont(Var instring: stringline);
 Function FilCompareFiles(FName1, FName2: String): Boolean;
@@ -96,42 +96,52 @@ Begin
 End;
 
 {****************************************************}
-Procedure FilCopyFile(instring, outstring: stringline);
+Procedure FilCopyFile(infilename, outfilename: stringline);
 
 Var infile, outfile: File;
-    inblock: pointer;
-    inblocksize: word;
-    inread, inwrite: word;
+    inblock: ^byte;
+    inblocksize: integer;
+    inread, inwrite: integer;
 
 Begin
-    assign (infile, FExpand (instring));
-    assign (outfile, FExpand (outstring));
-    FileMode := 0;
+    assign (infile, FExpand (infilename));
+    assign (outfile, FExpand (outfilename));
+    FileMode := fmOpenRead;
     reset (infile, 1);
     If IOResult <> 0 Then
     Begin
-        HlpHint (HntCannotOpenFile, HintWaitEsc, [instring]);
+        HlpHint (HntCannotOpenFile, HintWaitEsc, [infilename]);
         Exit;
     End;
-    FileMode := 2;
+    inblocksize := 32768;
+    If inblocksize > filesize (infile) Then
+        inblocksize := filesize (infile);
+    getmem (inblock, inblocksize);
+    If inblock = nil Then Begin
+        close(infile);
+	HlpHint(HntOutOfMemory, HintWaitEsc, []);
+	Exit;
+    End;
+
+    FileMode := fmOpenReadWrite;
     rewrite (outfile, 1);
     If IOResult <> 0 Then
     Begin
         close (infile);
-        HlpHint (HntCannotCreateFile, HintWaitEsc, [outstring]);
+        HlpHint (HntCannotCreateFile, HintWaitEsc, [outfilename]);
         Exit;
     End;
-    inblocksize := 65536 - 16;
-    If inblocksize > filesize (infile) Then
-        inblocksize := filesize (infile);
-    getmem (inblock, inblocksize);
-    If inblock = nil Then
-        runerror (217);
     Repeat
         blockread (infile, inblock^, inblocksize, inread);
-        If IOResult <> 0 Then Break;
+        If IOResult <> 0 Then Begin
+	    HlpHint(HntCannotReadFile, HintWaitEsc, [infilename]);
+	    Break;
+	End;
         blockwrite (outfile, inblock^, inread, inwrite);
-        If IOResult <> 0 Then Break;
+        If IOResult <> 0 Then Begin
+	    HlpHint(HntCannotWriteFile,HintWaitEsc, [outfilename]);
+	    Break;
+	End;
     Until (inread = 0) OR (inread <> inwrite);
     freemem (inblock, inblocksize);
     close (infile);
