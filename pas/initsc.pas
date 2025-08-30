@@ -257,6 +257,7 @@ Var ThePalette: TDACTable;
 
     gmaxx, gmaxy: integer;
 
+    GrInitialized: boolean = false;
     GrMinX, GrMaxX, GrMinY, GrMaxY: integer;
     UsrMenu, Symbolmenu1, Symbolmenu2: Menu_Rec;
     togglestring: toggletyp;
