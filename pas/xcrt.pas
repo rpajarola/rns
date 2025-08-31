@@ -9,13 +9,17 @@ Procedure XClearKbd;
 
 Implementation
 
-Uses Crt;
+Uses
+    Crt;
 
-Var lastkey: char;
+Var
+    lastkey: char;
     extended: boolean;
 
+
 Function XReadKey(Var shiftp, ctrlp: boolean): char;
-Var ch: char;
+Var
+    ch: char;
 Begin
     // TODO: Replace with modern keyboard input API
     // For now, use basic CRT functions and assume no modifier keys
@@ -42,11 +46,13 @@ Begin
     End;
 End;
 
+
 Function XKeyPressed: Boolean;
 Begin
     // TODO: Replace with modern keyboard status API
     XKeyPressed := KeyPressed OR extended;
 End;
+
 
 Procedure XClearKbd;
 Begin

@@ -4,7 +4,8 @@ Unit userint;
 
 Interface
 
-Uses menutyp,
+Uses
+    menutyp,
     inout,
     graphmenu,
     grinout,
@@ -31,13 +32,16 @@ Procedure UseTopMenu;
 
 Implementation
 
-Uses grintunit,
+Uses
+    grintunit,
     mousdrv,
     fileunit;
 
-Type PTextBuf = ^TTextBuf;
-    TTextBuf  = Array[0..127] Of Char;
-    TTextRec  = Record
+Type
+    PTextBuf = ^TTextBuf;
+    TTextBuf = Array[0..127] Of Char;
+
+    TTextRec = Record
         Handle: Word;
         Mode: Word;
         BufSize: Word;
@@ -53,7 +57,8 @@ Type PTextBuf = ^TTextBuf;
         Buffer: TTextBuf;
     End;
 
-Const topstartx = 2;
+Const
+    topstartx = 2;
     topstarty = 1;
     topendx = 21;
     topendy = 29;
@@ -67,7 +72,8 @@ Const topstartx = 2;
     sdymax = 22;
     sdcol = 3;
 
-Var CLS, CLE: byte;
+Var
+    CLS, CLE: byte;
 
 {******************************************************}
 
@@ -79,6 +85,7 @@ Begin
     CLE := 0; { Save current cursor end line }
     { Stub: Cursor visibility control not implemented }
 End;
+
 {********************************************************}
 
 Procedure RestoreCursor;
@@ -92,7 +99,8 @@ End;
 Procedure UseGetSetup;
 {Liest das setup-file}
 
-Var infile: text;
+Var
+    infile: text;
     inblock: string;
     tempattr: lineattrtype;
 
@@ -165,7 +173,8 @@ End;
 Procedure UseSaveSetup;
 {speichert das Setup-File}
 
-Var infile: text;
+Var
+    infile: text;
 
 Begin
     FilAssignCfgFile (infile, 'setup', false);
@@ -317,12 +326,14 @@ Begin
                     SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (RnsConfig.DataDir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
-            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (RnsConfig.DataDir),
+            specialkey: If KeyResp = #81 Then
+                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (RnsConfig.DataDir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
         End; {case resp of}
     Until ok;
-    If resp = ESCAPE Then c := #27;
+    If resp = ESCAPE Then
+        c := #27;
 End;
 
 {************************************************************}
@@ -385,7 +396,8 @@ Begin
                     Begin
                         instring := RnsConfig.DataDir;
                         ok := true;
-                    End Else Begin
+                    End Else
+                    Begin
                         If (pos (':', instring) <> 0) OR
                             (pos ('\', instring) <> 0) OR
                             (pos (#9, instring) <> 0) OR
@@ -399,7 +411,8 @@ Begin
                         Begin
                             RnsConfig.DataDir := instring;
                             ok := true;
-                        End Else Begin
+                        End Else
+                        Begin
                             MkDir (instring);
                             If IOResult = 0 Then
                             Begin
@@ -407,13 +420,15 @@ Begin
                                 Begin
                                     RnsConfig.DataDir := instring;
                                     ok := true;
-                                End Else Begin
+                                End Else
+                                Begin
                                     RmDir (instring);
                                     SduSodir (true, ok, false, instring, '*.*', '', true,
                                         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                                         mausx, mausy, maustaste, 3, 0, 0, true);
                                 End;
-                            End Else Begin
+                            End Else
+                            Begin
                                 {                      SduClearWin(sdxmin, sdymin, sdxmax, sdymax);}
                                 HlpText (substartx, subendx, substarty + 6,
                                     'Illegal name for data directory', true);
@@ -428,8 +443,10 @@ Begin
                     SduSodir (false, ok, true, instring, '*.*', '', true,
                         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, True);
-                    If ok Then RnsConfig.DataDir := instring;
-                End Else Begin
+                    If ok Then
+                        RnsConfig.DataDir := instring;
+                End Else
+                Begin
                     ok := true;
                     resp := escape;
                 End;
@@ -439,7 +456,8 @@ Begin
                     SduSodir (false, ok, true, instring, '*.*', '', true,
                         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, True);
-                    If ok Then RnsConfig.DataDir := instring;
+                    If ok Then
+                        RnsConfig.DataDir := instring;
                 End;{case of arrow}
         End;{case resp of}
 
@@ -463,7 +481,8 @@ End;
 {************************************************************}
 Procedure UseFontSelect(Var mausx, mausy, maustaste, mausmenu: word);
 
-Const hy = 25;
+Const
+    hy = 25;
 
 Var
     ok: boolean;
@@ -499,14 +518,16 @@ Begin
         IniIniSymbols;
         Window (substartx + 1, substarty + 3, subendx - 1, subendy - 3);
         Window (1, 1, 80, 25);
-        If ok Then UseSaveSetup{PEO}{PEO};
+        If ok Then
+            UseSaveSetup{PEO}{PEO};
     End;
 End;
 
 {************************************************************}
 Procedure UseColorSelect(Var mausx, mausy, maustaste, mausmenu: word);
 
-Const hy = 25;
+Const
+    hy = 25;
 
 Var
     ok: boolean;
@@ -540,6 +561,7 @@ Begin
         FilCopyFile (instring, 'colors.rns');
     End;
 End;
+
 
 Procedure DrawTopMenuLines(C: Char);
 Begin
@@ -601,9 +623,12 @@ Begin
      je nach zuerst gew. Colors}
     End;
 End;
+
 {******************************************************}
+
 Procedure UseGetPickFil(Var Instring: Stringline);
-Var infile: text;
+Var
+    infile: text;
 Begin
     FilAssignCfgFile (infile, 'pickfil', true);
     {Check if file was opened successfully}
@@ -622,9 +647,12 @@ Begin
     End;
     close (infile);
 End;
+
 {******************************************************}
+
 Procedure UseSetPickFil(Instring: Stringline);
-Var infile: text;
+Var
+    infile: text;
 Begin
     FilAssignCfgFile (infile, 'pickfil', false);
     {Check if file was opened successfully}
@@ -643,7 +671,9 @@ Begin
     End;
     close (infile);
 End;
+
 {******************************************************}
+
 Procedure UseTopMenu;
 
 Var
@@ -685,7 +715,8 @@ Begin
             {      bar( 10,61,159,110);}{l�scht nur 1.Button des Hauptmenus: wegen Dir\}
             { ClearDevice;}{alternativ zur den bars}
             ImeInitTopmenu; {damit richtiger Pfad 1.button Hauptmenu gezeigt wird}
-        End Else IniPalBlank (0, 0, 0);
+        End Else
+            IniPalBlank (0, 0, 0);
         DrawTopMenuLines (c);
         SetColor (12);
         GrDisplay_Menu (topstartx, topstarty, usrmenu, 1);
@@ -727,13 +758,15 @@ Begin
                     dir, choicenum,
                     mausx, mausy, maustaste, mausmenu, false, 1);
                 c := UpCase (c);
-                If c = #27 Then {          IniSetDACReg(1,$3F,$3F,$3F);
+                If c = #27 Then
+{          IniSetDACReg(1,$3F,$3F,$3F);
           Delay(300);
           IniSetAllDACRegs(ThePalette);
           choicenum:=usrmenu.num_choices;};
             Until (c = 'F') OR (c = 'D') OR (c = 'S') OR (c = 'P') OR (c = 'C') OR (c = 'Q');
         End;
-        While KeyPressed Do ReadKey;
+        While KeyPressed Do
+            ReadKey;
         Mausbereich (172, 628, 1, 438);
         Case c Of
             'F':
@@ -757,7 +790,8 @@ Begin
                         Begin
                             FilCopyFile (ConcatPaths ([RnsConfig.DataDir, instring]), ConcatPaths ([RnsConfig.DataDir, instring + '.bak']));
                             Assign (Bakfile, ConcatPaths ([RnsConfig.DataDir, instring + '.bak']));
-                        End Else Begin
+                        End Else
+                        Begin
                             FilCopyFile (ConcatPaths ([RnsConfig.DataDir, instring]), ConcatPaths ([RnsConfig.DataDir,
                                 Copy (instring, 1, Pos ('.', instring)) + 'bak']));
                             Assign (Bakfile, ConcatPaths ([RnsConfig.DataDir, Copy (instring, 1,
@@ -807,7 +841,9 @@ Begin
                                             St[8] := '2'
                                         Else
                                             St := Copy (St, 1, b - 1) + '2' + Copy (St, b, Length (St) - b + 1);
-                                    End{IF St[...<'1'} Else If (St[Byte (c) - 4] <> '9') Then Inc (St[Byte (c) - 4]){IF St[...<>'9'} Else If (St[Byte (c) - 5] < '0') OR (St[Byte (c) - 5] > '9') Then
+                                    End{IF St[...<'1'} Else If (St[Byte (c) - 4] <> '9') Then
+                                        Inc (St[Byte (c) - 4]){IF St[...<>'9'}
+                                    Else If (St[Byte (c) - 5] < '0') OR (St[Byte (c) - 5] > '9') Then
                                     Begin
                                         st[Byte (c) - 5] := '1';
                                         st[Byte (c) - 4] := '0';
@@ -840,7 +876,8 @@ Begin
                                                     St := St + '.par';
                                                 End{Pos('.',St)>9} Else
                                                     St := Copy (St, 1, Pos ('.', st)) + 'par';
-                                            End{IF Pos('.',St)<>0}Else Begin
+                                            End{IF Pos('.',St)<>0}Else
+                                            Begin
                                                 Resp := Key;
                                                 If Length (St) > 8 Then
                                                     st := Copy (St, 1, 8) + '.par'
@@ -910,7 +947,8 @@ Begin
                     IniIniColors;
                     c := 'F';
                     IniSwapMenuColors;
-                End Else Begin
+                End Else
+                Begin
                     choicenum := 1;
                     c := #1;
                 End;

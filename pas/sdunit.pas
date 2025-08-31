@@ -1,10 +1,11 @@
-{$I RNS.H}
+ï»¿{$I RNS.H}
 
 Unit SDUnit;
 
 Interface
 
-Uses InitSc,
+Uses
+    InitSc,
     MenuTyp,
     Dos,
     Helpunit,
@@ -22,6 +23,7 @@ Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
 
 Implementation
 
+
 Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
     Var instring: string; Mask: String;
     dir: string; Dirorfile: Boolean;
@@ -29,7 +31,8 @@ Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
     Var mausx, mausy, maustaste: Word; actmenu: word;
     selX, selY: integer; GoUp: Boolean);
 
-Const CursorUp = #72;
+Const
+    CursorUp = #72;
     CursorDown = #80;
     Cursorleft = #75;
     CursorRight = #77;
@@ -46,17 +49,20 @@ Const CursorUp = #72;
     MaxR = 3;
     MaxEntries = 511;
 
-Type  TEntry = Record
+Type
+    TEntry = Record
         Attrib: Byte;
         Used: Boolean;
         Name: String[8];
         Ext:  String[3];
     End;
     PFilePage = ^TFilePage;
+
     TFilePage = Record
         Entries: Array[0..511] Of TEntry;
     End;
-Var Cancel: Boolean Absolute Disponly;
+Var
+    Cancel: Boolean Absolute Disponly;
     Files: PFilePage;
     EntryC: Word;
     SelEntry: Word;
@@ -65,6 +71,8 @@ Var Cancel: Boolean Absolute Disponly;
     Shift, Ctrl: Boolean;
     MausMenu: Word;
     Mp: Word;
+
+
     Procedure QSort(N: INTEGER);
 (* Sortierroutine, die nach dem Verfahren des Quicksort arbeitet.
    Sie arbeitet in Abh„ngigkeit des Parameters ORDER auf den ver-
@@ -75,43 +83,55 @@ Var Cancel: Boolean Absolute Disponly;
             Kleiner := i1.name < i2.name;
         End;
 
+
         Procedure Swap(i1, j1: INTEGER);
         (* Vertauschen von zwei Arrayeintr„gen *)
-        Var tmp: TEntry;
+        Var
+            tmp: TEntry;
         Begin
             tmp := Files^.entries[i1];
             Files^.entries[i1] := Files^.entries[j1];
             Files^.entries[j1] := tmp;
         End;
 
+
         Procedure Sortiere(l, r: INTEGER);
         (* Quicksort-Routine *)
-        Var i, j: INTEGER;
+        Var
+            i, j: INTEGER;
             M: TEntry;
         Begin
             i := l;                (* Startwert fr linken Laufindex  *)
             j := r;                (* Startwert fr rechten LAufindex *)
             M := Files^.Entries[(l + r) DIV 2]; (* Mittelelement *)
             Repeat
-                While Kleiner (files^.Entries[i], M) Do INC (i);
-                While Kleiner (M, files^.Entries[j]) Do DEC (j);
+                While Kleiner (files^.Entries[i], M) Do
+                    INC (i);
+                While Kleiner (M, files^.Entries[j]) Do
+                    DEC (j);
                 If i <= j Then
                 Begin
-                    If i <> j Then Swap (i, j);  (* Nur Tausch, wenn Indizes *)
+                    If i <> j Then
+                        Swap (i, j);  (* Nur Tausch, wenn Indizes *)
                     INC (i);                     (* nicht auf gleiches Elem. *)
                     DEC (j);                     (* zeigen *)
                 End;
             Until i > j;
-            If l < j Then Sortiere (l, j);   (* rekursive Aufrufe *)
-            If i < r Then Sortiere (i, r);
+            If l < j Then
+                Sortiere (l, j);   (* rekursive Aufrufe *)
+            If i < r Then
+                Sortiere (i, r);
         End;
+
     Begin
         If N > 0 Then
             Sortiere (0, N);
     End;
 
+
     Procedure Init;
-    Var i: Integer;
+    Var
+        i: Integer;
         b: Byte;
         D: SearchRec;
         at: byte;
@@ -143,7 +163,8 @@ Var Cancel: Boolean Absolute Disponly;
             Begin
                 m := mask;
                 mask := '';
-            End Else Begin
+            End Else
+            Begin
                 m := copy (mask, 1, pos (' ', mask));
                 delete (mask, 1, pos (' ', mask));
             End;
@@ -163,7 +184,8 @@ Var Cancel: Boolean Absolute Disponly;
                             Begin
                                 Name := Copy (D.Name, 1, b - 1);
                                 Ext  := Copy (D.Name, b + 1, byte (d.Name[0]) - b);
-                            End Else Begin
+                            End Else
+                            Begin
                                 Name := D.Name;
                                 Ext  := '';
                             End;
@@ -172,9 +194,11 @@ Var Cancel: Boolean Absolute Disponly;
                 FindNext (D);
             End;
         End;{ while mask<>'' }
-        If EntryC = 0 Then cancel := True{    HlpText(substartx, subendx, substarty + 6,
+        If EntryC = 0 Then
+            cancel := True{    HlpText(substartx, subendx, substarty + 6,
            'No files found', true);
-    Delay(HintNormalTime);} Else If EntryC = MaxEntries Then
+    Delay(HintNormalTime);}
+        Else If EntryC = MaxEntries Then
         Begin
             If DosError = 0 Then
                 HlpHint (HntTooManyFiles, HintNormalTime, []);
@@ -182,10 +206,13 @@ Var Cancel: Boolean Absolute Disponly;
             Dec (EntryC);
         QSort (EntryC);
     End;
+
+
     Procedure Done;
     Begin
         Dispose (Files);
     End;
+
 
     Function GetNr(AX, AY, Page: integer): word;
         { maxentries+1 wenn nichts, maxentries+2 wenn pgdn und maxentries+3 wenn pgdn}
@@ -222,8 +249,11 @@ Var Cancel: Boolean Absolute Disponly;
         End;
         GetNr := (AX DIV 19) * Cols + AY + page;
     End;
+
+
     Procedure ShowNr(Nr: Word);
-    Var s: String;
+    Var
+        s: String;
         AX, AY: Integer;
     Begin
         With Files^.Entries[Nr] Do
@@ -246,15 +276,19 @@ Var Cancel: Boolean Absolute Disponly;
         Ay := Ay + Y + 8;
         If (Nr = SelEntry) AND ShowSel Then
             IniSpacedWrite (Ax, Ay, s, frHigh)
-        Else Begin
+        Else
+        Begin
             SetFillStyle (1, 7); {11=gepunktet,13=lila} {(Solidfill,7);}
             Bar (ax - 3, ay - charheight, ax + 13 * charwidth + 1, ay + charheight + 1);
             SetColor (12);
             txtfnt.write (ax, ay, s, 12, sz8x8, stnormal);
         End;
     End;
+
+
     Procedure ShowPage;
-    Var SaveColor: Byte;
+    Var
+        SaveColor: Byte;
         i: Byte;
         X0, X1, Y0, Y1: integer;
     Begin
@@ -282,20 +316,29 @@ Var Cancel: Boolean Absolute Disponly;
         SetColor (SaveColor);
         If (EntryC - Page) >= Cols * Rows Then
             For i := 0 To Cols * Rows - 1 Do
-                ShowNr (i + Page) Else For i := 0 To (EntryC MOD (Cols * Rows)) Do
+                ShowNr (i + Page)
+        Else
+            For i := 0 To (EntryC MOD (Cols * Rows)) Do
                 ShowNr (i + Page);
     End;
+
+
     Procedure CalcPage;
     Begin
         Page := SelEntry - (SelEntry MOD (Cols * Rows));
     End;
+
+
     Procedure ShowAll;
     Begin
         CalcPage;
         ShowPage;
     End;
+
+
     Procedure SetSel(Nr, c: Integer);
-    Var Temp: Word;
+    Var
+        Temp: Word;
     Begin
         If (C = -1) AND (Nr = 0) Then
         Begin
@@ -346,7 +389,9 @@ Begin
         Repeat
             MausZeigen;
             c := ' ';
-            If XKeyPressed Then c := XReadKey (Shift, Ctrl) Else If Maustaste = 0 Then
+            If XKeyPressed Then
+                c := XReadKey (Shift, Ctrl)
+            Else If Maustaste = 0 Then
             Begin
                 MausPosition (mausx, mausy, maustaste, mp, mausmenu);
                 If mausmenu = actmenu Then
@@ -436,7 +481,8 @@ Begin
                         Cancel := False;
                         Maustaste := 0;
                         Mauszeigen;
-                    End Else Begin
+                    End Else
+                    Begin
                         selected := False;
                         cancel := True;
                     End;
@@ -447,4 +493,5 @@ Begin
     Mauszeigen;
     Done;
 End;
+
 End.

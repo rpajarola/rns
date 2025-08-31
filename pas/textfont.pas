@@ -4,7 +4,8 @@ Unit Textfont;
 
 Interface
 
-Const sz8x8 = 0;    { Sizes }
+Const
+    sz8x8 = 0;    { Sizes }
     sz8x16 = 1;
     sz6x12 = 2;
     stNormal = $00;
@@ -15,8 +16,10 @@ Const sz8x8 = 0;    { Sizes }
     stHigh = $10;
     stLow = $20;
 
-Type TTextFont = Array[0..2, 1..4200] Of char;
+Type
+    TTextFont = Array[0..2, 1..4200] Of char;
     PTextFontViewer = ^TTextFont;
+
     TTextFontViewer = Object
         Font: TTextFont;
         Constructor Init(Name: String);
@@ -29,7 +32,9 @@ Type TTextFont = Array[0..2, 1..4200] Of char;
 
 Implementation
 
-Uses Graph;
+Uses
+    Graph;
+
 
 Constructor TTextFontViewer.Init(Name: String);
 Var
@@ -81,9 +86,11 @@ Begin
     End;
 End;
 
+
 Destructor TTextFontViewer.Done;
 Begin
 End;
+
 
 Procedure TTextFontViewer.WriteChar(X, Y: Word; Ch: Char; Color: Byte; Size: Integer; Style: Byte);
 { stNormal stBold stDouble stItalic stUndeline stHigh stLow }
@@ -92,7 +99,12 @@ Var
 
 Begin
     {  if (Style and stItalic)<>0 then x:=x+6;}
-    If size = sz8x8 Then dec (Y, 9) Else If size = sz8x16 Then dec (Y, 9) Else If size = sz6x12 Then dec (Y, 7);
+    If size = sz8x8 Then
+        dec (Y, 9)
+    Else If size = sz8x16 Then
+        dec (Y, 9)
+    Else If size = sz6x12 Then
+        dec (Y, 7);
     charstart := Byte (ch) * Byte (font[size, 2]) + 3;
     xmin := x + 1;
     xmax := x + Byte (font[size, 1]);
@@ -118,7 +130,8 @@ Begin
                             PutPixel (b + 1, a + 1, Color);
                         End;
                     End;
-                End Else Begin
+                End Else
+                Begin
                     PutPixel (2 * b, 2 * a, Color);
                     If (Style AND stBold) <> 0 Then
                     Begin
@@ -135,6 +148,7 @@ Begin
         inc (charstart);
     End;
 End;
+
 
 Procedure TTextFontViewer.Write(X, Y: Word; St: String; Color: Byte; Size: Integer; Style: Byte);
 Var

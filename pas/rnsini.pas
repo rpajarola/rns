@@ -5,13 +5,16 @@ Unit RnsIni;
 Interface
 
 { The global configuration }
-Type TRnsConfig = Record
+Type
+    TRnsConfig = Record
         DataDir: String;        { Where to look for files }
         ColorFile: String;   { The color schema }
         PSDir: String;       { Where to write .ps files when printing to file }
         BufDir: String;      { scratch dir for buffers }
     End;
-Var RnsConfig: TRnsConfig;
+
+Var
+    RnsConfig: TRnsConfig;
 
 { Load global configuration from rns.ini }
 Procedure RnsIniLoadConfig();
@@ -20,9 +23,12 @@ Procedure RnsIniLoadConfig();
 Procedure RnsIniSaveConfig();
 
 { Per directory setup.ini }
-Type TRnsSetup = Record
+Type
+    TRnsSetup = Record
     End;
-Var RnsSetup: TRnsSetup;
+
+Var
+    RnsSetup: TRnsSetup;
 
 { Load per directory setup from rns.ini }
 Procedure RnsIniLoadSetup();
@@ -32,13 +38,20 @@ Procedure RnsIniSaveSetup();
 
 Implementation
 
-Uses IniFiles, SysUtils;
+Uses
+    IniFiles,
+    SysUtils;
 
-Const RnsConfigFilename = 'rns.ini';
-Const RnsSetupFilename = 'setup.ini';
+Const
+    RnsConfigFilename = 'rns.ini';
+
+Const
+    RnsSetupFilename = 'setup.ini';
+
 
 Procedure RnsIniLoadConfig();
-Var rnsIniFile: TIniFile;
+Var
+    rnsIniFile: TIniFile;
 Begin
     rnsIniFile := TIniFile.Create (RnsConfigFilename);
     RnsConfig.DataDir := rnsIniFile.ReadString ('main', 'DataDir', 'demodir');
@@ -53,8 +66,10 @@ Begin
         CreateDir (RnsConfig.PSDir);
 End;
 
+
 Procedure RnsIniSaveConfig();
-Var rnsIniFile: TIniFile;
+Var
+    rnsIniFile: TIniFile;
 Begin
     rnsIniFile := TIniFile.Create (RnsConfigFilename);
     rnsIniFile.WriteString ('main', 'DataDir', RnsConfig.DataDir);
@@ -64,16 +79,20 @@ Begin
     rnsIniFile.Free ();
 End;
 
+
 Procedure RnsIniLoadSetup();
-Var rnsIniFile: TIniFile;
+Var
+    rnsIniFile: TIniFile;
 Begin
     rnsIniFile := TIniFile.Create (RnsSetupFilename);
     {RnsSetup.Foo :=rnsIniFile.ReadString('main', 'DataDir', 'demodir');}
     rnsIniFile.Free ();
 End;
 
+
 Procedure RnsIniSaveSetup();
-Var rnsIniFile: TIniFile;
+Var
+    rnsIniFile: TIniFile;
 Begin
     rnsIniFile := TIniFile.Create (RnsSetupFilename);
     {rnsIniFile.WriteString('main', 'BufDir', RnsConfig.BufDir);}

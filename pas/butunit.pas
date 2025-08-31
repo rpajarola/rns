@@ -4,13 +4,15 @@ Unit butunit;
 
 Interface
 
-Uses graph,
+Uses
+    graph,
     initsc,
     menutyp,
     GcuRunit;
 
 Type
     pbutton = ^tbutton;
+
     tbutton = Object
     Private
         x0, x1, y0, y1: Integer;
@@ -31,6 +33,7 @@ Type
     End;
 
     pThreeDButton = ^tThreeDButton;
+
     tThreeDButton = Object(Tbutton)
         FColor: Byte;
         TColor: Byte;
@@ -80,7 +83,8 @@ End;
 Function TButton.activated(mausx, mausy: Integer;
     Var vresp: response_type; Var vkeyresponse: Char):
 Boolean;
-Var res: Boolean;
+Var
+    res: Boolean;
 
 Begin
     res := ((mausx > x0 - 2 + charwidth) AND (mausx < x1 + 2 + charwidth) AND
@@ -96,19 +100,22 @@ End;
 {*************************************************************}
 Procedure butinit;
 
-Const butsizex = 56;
+Const
+    butsizex = 56;
     butsizey = 10;
     butdiffx = 4;
     butdiffy = 3;
     butxmarg = 2;
     butymarg = -1;
-Var i, j: Word;
+Var
+    i, j: Word;
     vresp: response_type;
     vkeyresponse: Char;
     vmtext: string;
     fc, tc: Byte;
 
-Const butmenu: Array[1..10, 1..4] Of string =
+Const
+    butmenu: Array[1..10, 1..4] Of string =
         (('1  Help  ',
         'S  Show  ',
         'C  Print ',
@@ -152,14 +159,19 @@ Const butmenu: Array[1..10, 1..4] Of string =
 
     ButVKeyResp: Array[1..4] Of Byte = (103, 93, 83, 58);
 
+
     Function ButTopY(n: Byte): Integer;
     Begin
         ButTopY := gmaxy - butymarg - (n * (butsizey + butdiffy));
     End;
+
+
     Function ButBotY(n: Byte): Integer;
     Begin
         ButBotY := ButTopY (n) + ButSizeY;
     End;
+
+
     Function ButLeftX(n: Byte): Integer;
     Begin
         If n < 11 Then
@@ -167,6 +179,8 @@ Const butmenu: Array[1..10, 1..4] Of string =
         Else
             butleftx := butxmarg + (n - 1) * (butsizex + butdiffx){+3};
     End;
+
+
     Function ButRightX(n: Byte): Integer;
     Begin
         If n < 11 Then
@@ -174,10 +188,13 @@ Const butmenu: Array[1..10, 1..4] Of string =
         Else
             butrightx := gmaxx - butxmarg - 2{3};
     End;
+
+
     Function ButPgX: Integer;
     Begin
         ButPgX := (butrightx (11) - butleftx (11) - butdiffx) SHR 1;
     End;
+
 Begin
     fc := framecolor + framebkcolor SHL 4;
     tc := mausmtcolor;
@@ -215,7 +232,8 @@ End;
 {*************************************************************}
 Procedure butdraw;
 
-Var i, j: Word;
+Var
+    i, j: Word;
     tcol: Byte;
 
 Begin
@@ -245,7 +263,8 @@ End;
 {*************************************************************}
 Procedure ButActivated(mausx, mausy: Integer;
     Var vresp: response_type; Var vkeyresponse: Char);
-Var i, j: Word;
+Var
+    i, j: Word;
     result: Boolean;
 
 Begin
@@ -294,6 +313,7 @@ Begin
         GcuPatternRestore;
 End;
 
+
 Procedure TButton.GetSize(Var aX0, aY0, aX1, aY1: Integer);
 Begin
     ax0 := x0;
@@ -302,6 +322,7 @@ Begin
     ay1 := y1;
 End;
 
+
 Procedure TButton.GetSettings(Var aresp: response_type; Var akeyresp: Char;
     Var amtext: string);
 Begin
@@ -309,6 +330,7 @@ Begin
     akeyresp := keyresponse;
     amtext := mtext;
 End;
+
 
 Constructor tThreeDButton.init(ax0, ax1, ay0, ay1: Integer;
     aresp: response_type; akeyresponse: Char;
@@ -319,12 +341,14 @@ Begin
     tcolor := aTC;
 End;
 
+
 Procedure tThreeDButton.draw;
 Begin
     setcolor (tcolor);
     Inherited draw;
     frame (fcolor AND $0F, (fcolor AND $f0) SHR 4);
 End;
+
 
 Procedure tThreeDButton.frame(c1, c2: Byte);
 Begin

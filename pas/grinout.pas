@@ -4,7 +4,8 @@ Unit grinout;
 
 Interface
 
-Uses menutyp,
+Uses
+    menutyp,
     crt,
     inout,
     gcurunit,
@@ -280,7 +281,8 @@ Begin
     Begin
         { Wenn R…kschritt gedr…kt wurde, entferne das eingegebene Zeichen }
         If resp = key Then
-            If Ord (KeyResponse) = BACK_SPACE Then  { R…kschritt } Begin
+            If Ord (KeyResponse) = BACK_SPACE Then  { R…kschritt }
+            Begin
                 If length (IN_STRING) > 0 Then
                 Begin
                     SetLength (In_string, Length (In_String) - 1);
@@ -310,7 +312,9 @@ Begin
         changed := true;
     IniHideCursor;
 End;
+
 {-------------------------------------------------------------------}
+
 Procedure GrGet_String(Var IN_STRING: String;
     X, Y, OLDX, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
@@ -393,7 +397,8 @@ Begin
     Begin
         { Wenn R…kschritt gedr…kt wurde, entferne das eingegebene Zeichen }
         If resp = key Then
-            If Ord (KeyResponse) = BACK_SPACE Then  { R…kschritt } Begin
+            If Ord (KeyResponse) = BACK_SPACE Then  { R…kschritt }
+            Begin
                 If length (IN_STRING) > 0 Then
                 Begin
                     SetLength (In_string, Length (In_String) - 1);
@@ -423,7 +428,9 @@ Begin
         changed := true;
     IniHideCursor;
 End;
+
 {-------------------------------------------------------------------}
+
 Procedure GrGetUpcase_String(Var IN_STRING: String;
     X, Y, STR_LENGTH: integer;
     Var RESP: RESPONSE_TYPE;
@@ -484,7 +491,8 @@ Begin
     IniExpand (clstring, str_length);
     If NOT oldwrite Then
         IniSpacedWrite (X, Y, ClString, frNoFrame)
-    Else IniSpacedWrite (X, Y, IN_STRING, frNoFrame);
+    Else
+        IniSpacedWrite (X, Y, IN_STRING, frNoFrame);
     OLDSTR := IN_STRING;
     { Lies das erste Zeichen ein. Verwende bei RETURN den alten String }
     IniInversWrite (X, Y, In_String + '_', frNoFrame);
@@ -498,7 +506,8 @@ Begin
     While (Resp = Key) Do
     Begin
         { Wenn R…kschritt gedr…kt wurde, entferne das eingegebene Zeichen }
-        If Byte (KeyResponse) = BACK_SPACE Then  { R…kschritt } Begin
+        If Byte (KeyResponse) = BACK_SPACE Then  { R…kschritt }
+        Begin
             If length (IN_STRING) > 0 Then
             Begin
                 SetLength (In_string, Length (In_String) - 1);
@@ -527,7 +536,9 @@ Begin
         changed := true;
     IniHideCursor;
 End;
+
 {-------------------------------------------------------------------}
+
 Procedure GrGet_Real(Var NUMBER: real;
     RValMin, RValMax: real;
     X, Y, OLDX, NUM_LENGTH: integer;
@@ -631,11 +642,14 @@ Begin
                     IniOutTextXY (OLDX, Y, ORIGINAL_STR);
             End;
         End
-        Else {if (RESP <> Arrow) and (RESP <> Escape)} VALCODE := 0;
+        Else
+            {if (RESP <> Arrow) and (RESP <> Escape)} VALCODE := 0;
     Until VALCODE = 0;
     IniHideCursor;
 End;
+
 {-------------------------------------------------------------------}
+
 Procedure GrGet_Integer(Var NUMBER: integer;
     IValMin, IValMax: integer;
     X, Y, OLDX, NUM_LENGTH: integer;
@@ -723,7 +737,8 @@ Begin
                     IniOutTextXY (OLDX, Y, ORIGINAL_STR);
             End;
         End
-        Else {if (RESP <> Arrow) and (RESP <> Escape)}VALCODE := 0;
+        Else
+            {if (RESP <> Arrow) and (RESP <> Escape)}VALCODE := 0;
     Until VALCODE = 0;
     IniHideCursor;
 End;
@@ -742,7 +757,8 @@ Procedure GrGet_Toggle(Var tval: integer;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
 
-Var shiftp, ctrlp: boolean;
+Var
+    shiftp, ctrlp: boolean;
     mp: word;
 Begin
     Repeat
@@ -756,8 +772,10 @@ Begin
                 ((Mausy DIV 8) >= descy - 1) AND ((Mausy DIV 8) <= descy + 1)) Then
             Begin
                 {gib neuen Wert am Bildschirm aus}
-                If tval + tvalmin <= tvalmax Then tval := tval + 1
-                Else tval := 1;
+                If tval + tvalmin <= tvalmax Then
+                    tval := tval + 1
+                Else
+                    tval := 1;
                 IniExpand (tstrings[tval + tvalmin - 1], fieldlength);
                 Mausdunkel;
                 IniInversText (oldescx, descy, tstrings[tval + tvalmin - 1], frNoFrame);
@@ -825,7 +843,9 @@ Begin
         STR_LENGTH, RESP, DIRECTION, KEYRESPONSE, oldwrite,
         mausx, mausy, maustaste, mausmenu, changed);
 End;
+
 {-------------------------------------------------------------------}
+
 Procedure GrGet_Prompted_Spaced_String(Var IN_STRING: String;
     STR_LENGTH: integer;
     STRDESC: char;
@@ -959,7 +979,8 @@ Procedure GrGet_Prompted_Toggle(Var tval: integer;
     Var mausx, mausy: word;
     Var maustaste, mausmenu: word;
     Var changed: boolean);
-Var outstring: string;
+Var
+    outstring: string;
 
 Begin
 

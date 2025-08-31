@@ -27,12 +27,16 @@ Uses
     Texts;
 
 Procedure EdiRythmEdit(instring, bakname: string; defpagesetup: boolean);
+
 Implementation
 
-Uses mousdrv;
+Uses
+    mousdrv;
+
 
 Procedure EdiCopyFile(N1, N2: String);
-Var P: Pointer;
+Var
+    P: Pointer;
     S: LongInt;
     C, C1, M: Word;
     F1, F2: File;
@@ -41,7 +45,8 @@ Begin
     Assign (F2, N2);
     FileMode := 0;
     ReSet (F1, 1);
-    If IOResult <> 0 Then Exit;
+    If IOResult <> 0 Then
+        Exit;
     FileMode := 1;
     ReWrite (F2, 1);
     If IOResult <> 0 Then
@@ -59,11 +64,16 @@ Begin
     C := 1;
     While (S > 0) AND (C <> 0) Do
     Begin
-        If S > M Then BlockRead (F1, P^, M, C) Else BlockRead (F1, P^, S, C);
-        If IOResult <> 0 Then Break;
+        If S > M Then
+            BlockRead (F1, P^, M, C)
+        Else
+            BlockRead (F1, P^, S, C);
+        If IOResult <> 0 Then
+            Break;
         Dec (S, C);
         BlockWrite (F2, P^, C, C1);
-        If IOResult <> 0 Then Break;
+        If IOResult <> 0 Then
+            Break;
         If C1 <> C Then
             C := 0;
     End;
@@ -72,11 +82,15 @@ Begin
     Close (F2);
 End;
 
+
 Function SlashSeparated(prev, next: String): String;
 Begin
-    If next = '' Then SlashSeparated := prev
-    Else If prev = '' Then SlashSeparated := next
-    Else SlashSeparated := prev + ' / ' + next;
+    If next = '' Then
+        SlashSeparated := prev
+    Else If prev = '' Then
+        SlashSeparated := next
+    Else
+        SlashSeparated := prev + ' / ' + next;
 End;
 
 {******************************************************}
@@ -109,7 +123,8 @@ Begin
     actposn  := 1;
     actpost  := 1;
     vtimer.init;
-    If defsetuppage IN actedit Then firstpage := 0;
+    If defsetuppage IN actedit Then
+        firstpage := 0;
     If defpagesetup Then
     Begin
         FilAssignCfgFile (infile, instring, true);
@@ -137,7 +152,8 @@ Begin
             HlpHint (HntCannotOpenFile, HintWaitEsc, [instring]);
             Exit;
         End;
-    End Else assign (infile, instring);
+    End Else
+        assign (infile, instring);
 
     If ((NOT IniFileExist (instring)) AND
         (NOT (defsetuppage IN actedit))) Then
@@ -234,7 +250,8 @@ Begin
         ok := False;
         While NOT OK Do
             ok := (ReadKey <> #27);
-        While KeyPressed Do ReadKey;
+        While KeyPressed Do
+            ReadKey;
         Mausdunkel;
     End;
     If ok Then
@@ -266,7 +283,10 @@ Begin
         End;
         If Hide <> '' Then
             HlpHint (HntDisp, j, [Hide]);
-        If (linestyles IN actedit) Then linenum := linestyletop Else linenum := TopMargin + 1;
+        If (linestyles IN actedit) Then
+            linenum := linestyletop
+        Else
+            linenum := TopMargin + 1;
         PagCursorLeft (linenum, actposn, actpost);
         GcuCursorRestore;
         MausInstall;
@@ -278,9 +298,13 @@ Begin
         While (Response <> ESCAPE) AND NOT
             ((Response = SPECIALKEY) AND (Keyresponse = #85)) Do
         Begin
-            If NOT showmenus Then PagShowCurPosDistances (Linenum, ActPosn, ActPost, 0);
-            If nextresponse = no_response Then Get_Response (Response, Direction, KeyResponse, shiftp, ctrlp,
-                    mausx, mausy, maustaste, mp, mausmenu) Else Begin
+            If NOT showmenus Then
+                PagShowCurPosDistances (Linenum, ActPosn, ActPost, 0);
+            If nextresponse = no_response Then
+                Get_Response (Response, Direction, KeyResponse, shiftp, ctrlp,
+                    mausx, mausy, maustaste, mp, mausmenu)
+            Else
+            Begin
                 response := nextresponse;
                 keyresponse := nextkey;
                 nextresponse := NO_RESPONSE;
@@ -296,7 +320,8 @@ Begin
                     linenum, actposn, actpost);
                 ComMouseAssign (mausx, mausy, maustaste,
                     Response, KeyResponse, shiftp, ctrlp);
-            End Else Begin
+            End Else
+            Begin
                 GcuPatternRestore;
                 SavePat := True;
             End;
@@ -363,10 +388,12 @@ Begin
 
                     FilHeapToFile (infile, actptr, startptr, lastptr, true, true, false);
                     FilCutBlockFile (FExpand (TextRec (infile).Name));
-                End Else Begin
+                End Else
+                Begin
                     FilHeapToFile (infile, actptr, startptr, lastptr, true, true, true);
                 End;
-            End Else Begin
+            End Else
+            Begin
                 GetFAttr (infile, attr);
                 If attr AND ReadOnly <> 0 Then
                     HlpHint (HntReadOnly, HintWaitEsc, [instring])

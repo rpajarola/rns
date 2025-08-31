@@ -216,11 +216,13 @@ Begin
     CurrentBkColor := Black; // Default background color
 End;
 
+
 Procedure CloseGraph;
 Begin
     // TODO: Cleanup modern graphics system
     GraphInitialized := False;
 End;
+
 
 Function RegisterBGIDriver(Driver: Pointer): Integer;
 Begin
@@ -235,10 +237,12 @@ Begin
     CurrentColor := Color;
 End;
 
+
 Function GetColor: Word;
 Begin
     GetColor := CurrentColor;
 End;
+
 
 Procedure SetBkColor(Color: Word);
 Begin
@@ -246,31 +250,37 @@ Begin
     CurrentBkColor := Color;
 End;
 
+
 Function GetBkColor: Word;
 Begin
     GetBkColor := CurrentBkColor;
 End;
+
 
 Procedure SetFillStyle(Pattern, Color: Word);
 Begin
     // TODO: Set fill pattern and color in modern graphics system
 End;
 
+
 Procedure ClearDevice;
 Begin
     // TODO: Clear screen in modern graphics system
 End;
+
 
 Procedure PutPixel(X, Y: Integer; Color: Word);
 Begin
     // TODO: Draw pixel in modern graphics system
 End;
 
+
 Function GetPixel(X, Y: Integer): Word;
 Begin
     // TODO: Get pixel color from modern graphics system
     GetPixel := 0;
 End;
+
 
 Procedure Line(X1, Y1, X2, Y2: Integer);
 Begin
@@ -279,30 +289,36 @@ Begin
     CurrentY := Y2;
 End;
 
+
 Procedure Rectangle(X1, Y1, X2, Y2: Integer);
 Begin
     // TODO: Draw rectangle in modern graphics system
 End;
+
 
 Procedure Bar(X1, Y1, X2, Y2: Integer);
 Begin
     // TODO: Draw filled rectangle in modern graphics system
 End;
 
+
 Procedure Bar3D(X1, Y1, X2, Y2: Integer; Depth: Word; Top: Boolean);
 Begin
     // TODO: Draw 3D filled rectangle in modern graphics system
 End;
+
 
 Procedure Circle(X, Y: Integer; Radius: Word);
 Begin
     // TODO: Draw circle in modern graphics system
 End;
 
+
 Procedure OutText(Const TextString: String);
 Begin
     // TODO: Draw text at current position in modern graphics system
 End;
+
 
 Procedure OutTextXY(X, Y: Integer; Const TextString: String);
 Begin
@@ -319,11 +335,13 @@ Begin
     ImageSize := (Abs (X2 - X1) + 1) * (Abs (Y2 - Y1) + 1) * 2; // Rough estimate
 End;
 
+
 Procedure GetImage(X1, Y1, X2, Y2: Integer; Var BitMap);
 Begin
     // TODO: Capture screen image in modern graphics system
     // Original: Captures rectangular screen area to buffer
 End;
+
 
 Procedure PutImage(X, Y: Integer; Var BitMap; BitBlt: Word);
 Begin
@@ -331,11 +349,13 @@ Begin
     // Original: Displays image buffer to screen with specified blend mode
 End;
 
+
 Procedure ClearViewPort;
 Begin
     // TODO: Clear current viewport in modern graphics system
     // Original: Clears the current graphics viewport
 End;
+
 
 Procedure SetViewPort(X1, Y1, X2, Y2: Integer; Clip: Boolean);
 Begin
@@ -343,11 +363,13 @@ Begin
     // Original: Sets clipping rectangle for graphics output
 End;
 
+
 Procedure SetPalette(ColorNum: Word; Color: Shortint);
 Begin
     // TODO: Set palette entry in modern graphics system
     // Original: Sets EGA/VGA palette register
 End;
+
 
 Procedure SetLineStyle(LineStyle: Word; Pattern: Word; Thickness: Word);
 Begin
@@ -362,27 +384,32 @@ Begin
     GetMaxX := 639; // VGA resolution
 End;
 
+
 Function GetMaxY: Integer;
 Begin
     // TODO: Get maximum Y coordinate from modern graphics system
     GetMaxY := 479; // VGA resolution
 End;
 
+
 Function GetX: Integer;
 Begin
     GetX := CurrentX;
 End;
+
 
 Function GetY: Integer;
 Begin
     GetY := CurrentY;
 End;
 
+
 Procedure MoveTo(X, Y: Integer);
 Begin
     CurrentX := X;
     CurrentY := Y;
 End;
+
 
 Procedure MoveRel(Dx, Dy: Integer);
 Begin
@@ -395,6 +422,7 @@ Function GraphResult: Integer;
 Begin
     GraphResult := 0; // No error
 End;
+
 
 Function GraphErrorMsg(ErrorCode: Integer): String;
 Begin
@@ -411,11 +439,13 @@ Begin
     // Original: Sets horizontal and vertical text alignment
 End;
 
+
 Procedure SetTextStyle(Font, Direction, CharSize: Integer);
 Begin
     // TODO: Set text font style in modern graphics system
     // Original: Sets font type, direction, and character size
 End;
+
 
 Function TextWidth(Const TextString: String): Integer;
 Begin
@@ -423,6 +453,7 @@ Begin
     // Original: Returns pixel width of text string
     TextWidth := Length (TextString) * 8; // Rough estimate: 8 pixels per character
 End;
+
 
 Function TextHeight(Const TextString: String): Integer;
 Begin

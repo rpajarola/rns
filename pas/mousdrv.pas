@@ -4,12 +4,14 @@ Unit Mousdrv;
 
 Interface
 
-Var Mausexist: boolean;
+Var
+    Mausexist: boolean;
     Mausform:  byte;
 
-Const MseOK = 1;
+Const
+    MseOK = 1;
     MseBlock = 2;
-    MseEsc  = 4;
+    MseEsc = 4;
 
 Procedure MausInstall;
 Procedure MausZeigen;
@@ -25,7 +27,8 @@ Procedure MausPos(Var cursorx, cursory, taste, mausmenu: Word);
 
 Implementation
 
-Var Dunkel: Boolean;
+Var
+    Dunkel: Boolean;
     mausposx, mausposy: word;
 
 {******************************************************}

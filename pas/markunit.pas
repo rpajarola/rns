@@ -1,4 +1,4 @@
-{$I RNS.H}
+яЛП{$I RNS.H}
 
 Unit markunit;
 
@@ -21,12 +21,14 @@ Procedure MarkInverse(lstart, lend, mstartx, mendx: integer);
 
 Implementation
 
-Uses textunit,
+Uses
+    textunit,
     fileunit,
     utilunit,
     specunit,
     pageunit,
     getunit;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
@@ -34,7 +36,8 @@ Procedure MarRemoveFromHeap(Var heapsptr, heapeptr,
     actptr, startptr, lastptr: listptr);
 {Entfernt von heapsptr bis und ohne heapeptr vom Heap}
 
-Var tempptr, prevptr: listptr;
+Var
+    tempptr, prevptr: listptr;
 
 Begin
     Repeat
@@ -43,31 +46,37 @@ Begin
         heapsptr := heapsptr^.next;
         heapsptr^.last := prevptr;
         prevptr^.next := heapsptr;
-        If startptr = tempptr Then startptr := heapsptr;
-        If actptr = tempptr Then actptr := heapsptr;
+        If startptr = tempptr Then
+            startptr := heapsptr;
+        If actptr = tempptr Then
+            actptr := heapsptr;
         dispose (tempptr);
         tempptr := heapsptr;
     Until tempptr = heapeptr;
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
 Procedure MarDeleteBlock(Var actptr, startptr, lastptr: listptr);
 {lscht den Markierten Block}
 
-Var heapfptr: listptr;
+Var
+    heapfptr: listptr;
     eline, j: byte;
     lpage, emptyline: integer;
     endreached: boolean;
     tempbuf, inblock: stringline;
     tbufpos: byte;
     i: integer;
+
                                                                               {
     нннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннн}
 
     Procedure MarEmptyLines(Var heapptr: listptr; Var emptyl: integer);
 
-    Var i: integer;
+    Var
+        i: integer;
 
     Begin
         If emptyl > 0 Then
@@ -81,6 +90,7 @@ Var heapfptr: listptr;
             emptyl := 0;
         End;
     End;
+
                                                                               {
     нннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннн}
 
@@ -94,7 +104,8 @@ Var heapfptr: listptr;
         Begin
             FilCheckLine (tempbuf, inblock, heapptr, startptr, lastptr,
                 tbufpos, endreached, true, delflag);
-            If delflag Then emptyl := emptyl + 1;
+            If delflag Then
+                emptyl := emptyl + 1;
         End Else
         Begin
             MarEmptyLines (heapptr, emptyl);
@@ -107,6 +118,7 @@ Var heapfptr: listptr;
             FilStringSeparate (tempbuf, heapptr, startptr, lastptr, tbufpos);
         End;
     End;
+
                                                                               {
     нннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннн}
 
@@ -127,11 +139,13 @@ Begin
 
         {Anzahl ganze Seiten zum Loeschen berechnen}
         lpage := mend.mpag - mstart.mpag - 1;
-        If lpage < 0 Then lpage := 0;
+        If lpage < 0 Then
+            lpage := 0;
 
         {letzte Zeile auf erster Seite bestimmen}
         If mstart.mpag = mend.mpag Then
-            eline := mend.mline Else
+            eline := mend.mline
+        Else
         Begin
             eline := pagelength;
         End;
@@ -178,10 +192,12 @@ Begin
     End Else  {if not marpartline}
     If mstart.mpag = pagecount Then
         delete (page[mstart.mline], mstart.mpos,
-            mend.mpos - mstart.mpos + 1) Else {if mstart.mpage = pagecount then}
+            mend.mpos - mstart.mpos + 1)
+    Else {if mstart.mpage = pagecount then}
     Begin
         If pagecount < mstart.mpag Then
-            i := mstart.mpag - 1 Else
+            i := mstart.mpag - 1
+        Else
             i := mstart.mpag;
         FilFindPtr (i, mstart.mline, heapfptr,
             startptr, lastptr, false);
@@ -191,22 +207,26 @@ Begin
             heapfptr, false);
     End{Teil einer Zeile lschen}{else if mstart.mpag = pagecount then}; {else if marpartline }
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
 Procedure MarMarkToBuffer(actptr, startptr, lastptr: listptr);
 {Kopiert den markierten Teil in den Buffer}
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
     bufsptr, bufeptr: listptr;
     sline, eline, i: byte;
+
                                                                               {
     нннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннн}
 
     Procedure MarPtrToBuf;
     {Kopiert von bufsptr bis bufeptr in den buffer}
 
-    Var tempptr: listptr;
+    Var
+        tempptr: listptr;
         count, tbufpos: byte;
         endreached, ok1, ok2: boolean;
         tempbuf: stringline;
@@ -223,7 +243,8 @@ Var inblock: stringline;
             FilCheckLine (tempbuf, inblock, tempptr, startptr, lastptr,
                 tbufpos, endreached, true, false);
             If ok1 Then
-                ok2 := ((bufeptr <> tempptr) OR (endreached)) Else
+                ok2 := ((bufeptr <> tempptr) OR (endreached))
+            Else
                 ok1 := (bufeptr = tempptr);
             If NOT (ok1 AND ok2) Then
             Begin
@@ -242,6 +263,7 @@ Var inblock: stringline;
         Until (ok1 AND ok2);
         FilHeapSqueeze (bufactptr, bufstartptr, bufendptr, false);
     End;
+
                                                                                {
     нннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннн}
 
@@ -257,8 +279,10 @@ Begin
         FilFindPtr (mstart.mpag, mstart.mline, bufsptr, startptr, lastptr,
             false);
         {Suche endpointer}
-        If pagecount > mend.mpag Then FilFindPtr (mend.mpag, mend.mline, bufeptr, startptr, lastptr,
-                true) Else
+        If pagecount > mend.mpag Then
+            FilFindPtr (mend.mpag, mend.mline, bufeptr, startptr, lastptr,
+                true)
+        Else
             bufeptr := actptr;
         {Kopiere in Buffer}
         MarPtrToBuf;
@@ -267,14 +291,19 @@ Begin
     If ((pagecount >= mstart.mpag) AND (pagecount <= mend.mpag)) Then
     Begin
         {erste Zeile}
-        If pagecount > mstart.mpag Then sline := topmargin Else
+        If pagecount > mstart.mpag Then
+            sline := topmargin
+        Else
             sline := mstart.mline;
         {letzte Zeile}
-        If pagecount < mend.mpag Then eline := pagelength Else
+        If pagecount < mend.mpag Then
+            eline := pagelength
+        Else
             eline := mend.mline;
         {Kopieren in den Buffer}
         For i := sline To eline Do
-            If NOT IniHeaderFooterLine (i) Then FilHeapInsertString (page[i] + chr (0), bufactptr, bufstartptr, bufendptr,
+            If NOT IniHeaderFooterLine (i) Then
+                FilHeapInsertString (page[i] + chr (0), bufactptr, bufstartptr, bufendptr,
                     bufactptr, false);
         FilHeapSqueeze (bufactptr, bufstartptr, bufendptr, false);
     End; { if ((pagecount >= mstart.mpag) and (pagecount <= mend.mpag)) }
@@ -282,7 +311,9 @@ Begin
     {Bereich nach der aktuellen Seite}
     If pagecount < mend.mpag Then
     Begin
-        If pagecount >= mstart.mpag Then bufsptr := actptr Else
+        If pagecount >= mstart.mpag Then
+            bufsptr := actptr
+        Else
             FilFindPtr (mstart.mpag - 1, mstart.mline, bufsptr,
                 startptr, lastptr, false);
         FilFindPtr (mend.mpag - 1, mend.mline, bufeptr, startptr, lastptr,
@@ -291,6 +322,7 @@ Begin
         MarPtrToBuf;
     End;
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
@@ -309,13 +341,15 @@ Begin
         switch := true;
     End;
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
 Procedure MarkDrawLine(i1, i2, j1: integer; firstswitch: boolean);
 {zeichnet einen Balken am linken Rand/rechten Rand}
 
-Var j2, i: integer;
+Var
+    j2, i: integer;
     switch: boolean;
 
 Begin
@@ -332,7 +366,8 @@ End;
 
 Procedure MarkInverse(lstart, lend, mstartx, mendx: integer);
 
-Var i, i1, i2, j1, j2: integer;
+Var
+    i, i1, i2, j1, j2: integer;
     switch: boolean;
 
 Begin
@@ -348,9 +383,12 @@ Begin
         j2 := mendx;
 
     switch := true;
-    If j2 = j1 + 7 Then switch := false;
-    If marpartline Then switch := false;
-    If page[lstart, 1] = 'T' Then switch := false;
+    If j2 = j1 + 7 Then
+        switch := false;
+    If marpartline Then
+        switch := false;
+    If page[lstart, 1] = 'T' Then
+        switch := false;
 
     MarSwitchStyle (switch);
     For i := i1 To i2 Do
@@ -475,13 +513,15 @@ Begin
         End;
     End; { if lend > lstart then }
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
 Procedure MarkStart(actpos, linenum, nowpage: integer);
 {Starte Block}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     mstart.mline := linenum;
@@ -492,13 +532,15 @@ Begin
     mstart.mpos := i;
     mstart.mxcoord := gcxcoord - (actpos - i + 1) * char2width;
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
 Procedure MarkEnd(actpos, linenum, nowpage: integer);
 {Beende Block}
 
-Var i, x: integer;
+Var
+    i, x: integer;
     mpos, mline, mpag: integer;
 Begin
     If ((mstart.mpag < nowpage) OR
@@ -522,7 +564,8 @@ Begin
             mend.mpag  := nowpage;
             mend.mpos  := actpos;
             If page[linenum, 1] = 'N' Then
-                While IniNumChar (page[linenum, mend.mpos + 1]) Do mend.mpos := mend.mpos + 1;
+                While IniNumChar (page[linenum, mend.mpos + 1]) Do
+                    mend.mpos := mend.mpos + 1;
             mend.mxcoord := gcxcoord + char2width - 1;
             marpartline  := true;
         End;
@@ -539,12 +582,14 @@ Begin
         gcxcoord := i;
     End;
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 
 Procedure MarkDisplay;
 
-Var leftx, rightx, topl, botl: integer;
+Var
+    leftx, rightx, topl, botl: integer;
     oldcolor: byte;
 
 Begin
@@ -598,6 +643,7 @@ Begin
     End; { if ((dispspec > 0) or (setuppage in actedit)) then }
     SetLineStyle (0, 1, 1);
 End;
+
                                                                               {
 лллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл}
 

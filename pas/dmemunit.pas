@@ -4,7 +4,8 @@ Unit dmemunit;
 
 Interface
 
-Uses graph,
+Uses
+    graph,
     initsc;
 
 Procedure DmePlaceWord(x, y: integer; w: word);
@@ -12,12 +13,14 @@ Procedure DmeDispChar(x, y: integer; c: char; blnum: integer);
 
 Implementation
 
-Uses helpunit;
+Uses
+    helpunit;
 
 {******************************************************************}
 Procedure DmeDispChar(x, y: integer; c: char; blnum: integer);
 
-Var i: integer;
+Var
+    i: integer;
     muster: word;
 
 Begin
@@ -33,7 +36,8 @@ End;
 {******************************************************************}
 Procedure DmePlaceWord(x, y: integer; w: word);
 
-Var acolor: byte;
+Var
+    acolor: byte;
     i: integer;
     bitval: word;
     pixelx: integer;

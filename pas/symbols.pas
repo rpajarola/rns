@@ -1,10 +1,11 @@
-{$I RNS.H}
+Ôªø{$I RNS.H}
 
 Unit symbols;
 
 Interface
 
-Uses Graph,
+Uses
+    Graph,
     GcurUnit,
     InitSc;
 
@@ -12,7 +13,8 @@ Const
     topy = 60;
     klammerrad = 3;
 
-Type xfirsttyp = Array[1..3] Of integer;
+Type
+    xfirsttyp = Array[1..3] Of integer;
 
 Procedure SymAbsNichts(x, y: integer);
 Procedure SymNichts(ix, iy: integer; x: real);
@@ -48,9 +50,11 @@ Procedure SymGKlammerZu(x, y, height: integer);
 Procedure SymEt(ix, iy: integer; x: real);
 Procedure SymQuotMark(ix, iy: integer; x: real);
 Procedure SymRepQuotMark(ix, iy: integer; x: real);
+
 Implementation
 
-Uses Helpunit,
+Uses
+    Helpunit,
     Dmemunit,
     Graphmenu,
     Printunit;
@@ -116,8 +120,10 @@ Begin
         PutPixel (x + 1, y + 4, lcolor);
     End;
 End;
+
                                                                               {
 ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ}
+
 Procedure SymNorKlammerZu(x, y, height: integer);
 
 Begin
@@ -142,8 +148,10 @@ Begin
         PutPixel (x - 1, y + 4, lcolor);
     End;
 End;
+
                                                                               {
 ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ}
+
 Procedure SymEckKlammerAuf(x, y, height: integer);
 
 Begin
@@ -166,8 +174,10 @@ Begin
         PutPixel (x + 1, y + 4, lcolor);
     End;
 End;
+
                                                                               {
 ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ}
+
 Procedure SymEckKlammerZu(x, y, height: integer);
 
 Begin
@@ -193,7 +203,8 @@ End;
 
 {******************************************************************}
 Procedure SymHKlammerNormMid(x, y: integer);
-Var ac: Byte;
+Var
+    ac: Byte;
 Begin
     ac := GetColor;
     PutPixel (x - 2, y + 4, ac);
@@ -211,7 +222,8 @@ End;
 
 {******************************************************************}
 Procedure SymHKlammerSmallMid(x, y: integer);
-Var ac: byte;
+Var
+    ac: byte;
 Begin
     ac := getcolor;
     PutPixel (x + 2, y + 4, ac);
@@ -225,9 +237,11 @@ Begin
     PutPixel (x, y + 4, GetBkColor);
 End;
 
+
 Procedure SymHKlammerStart(x, y: integer);
 
-Var ac: byte;
+Var
+    ac: byte;
 Begin
     ac := getcolor;
     PutPixel (x + 1, y + 2, ac);
@@ -247,7 +261,8 @@ End;
 {******************************************************************}
 Procedure SymHKlammerEnd(x, y: integer);
 
-Var ac: byte;
+Var
+    ac: byte;
 
 Begin
     ac := getcolor;
@@ -268,7 +283,8 @@ End;
 {******************************************************************}
 Procedure SymVKlammerEvenMid(x, y: integer);
 
-Var ac: byte;
+Var
+    ac: byte;
 Begin
     {   Inc(x,7);}
     ac := getcolor;
@@ -287,7 +303,8 @@ End;
 {******************************************************************}
 Procedure SymVKlammerOddMid(x, y: integer);
 
-Var ac: byte;
+Var
+    ac: byte;
 Begin
     ac := GetColor;
     PutPixel (x + 1, y - 2, ac);
@@ -314,7 +331,8 @@ End;
 {******************************************************************}
 Procedure SymVKlammerStart(x, y: integer);
 
-Var ac: byte;
+Var
+    ac: byte;
 
 Begin
     ac := getcolor;
@@ -336,7 +354,8 @@ End;
 {******************************************************************}
 Procedure SymVKlammerEnd(x, y: integer);
 
-Var ac: byte;
+Var
+    ac: byte;
 Begin
     ac := getcolor;
     PutPixel (x + 1, y - 10, ac);
@@ -364,7 +383,8 @@ End;
 {******************************************************************}
 Procedure SymClearChar(x, y: integer);
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     For i := 1 To 16 Do
@@ -394,7 +414,8 @@ End;
 {******************************************************************}
 Procedure DistanceMark(x0, y0, x1: real; xfirst, GridNum: integer);
 
-Var xloc, lxloc: integer;
+Var
+    xloc, lxloc: integer;
     iy0: integer;
     rx, rdx: real;
     i: integer;
@@ -420,7 +441,8 @@ Begin
             PriStroke;
             rx := rx + rdx;
         End;
-    End Else Begin
+    End Else
+    Begin
         If rdx < 2 Then
             rdx := 2;
         i := 1;
@@ -460,7 +482,8 @@ Begin
     Begin
         PriSetLineWidth (tnwidth);
         PriDrawLine (x0 - 1, y0, x1, y0);
-    End Else Begin
+    End Else
+    Begin
         SetLineStyle (4, $AAAA, 1);
         Line (x0, y0, x1, y0);
         SetLineStyle (SolidLn, 0, 1);
@@ -477,7 +500,8 @@ Begin
         PriSetDash (dtwidth, 2.0);
         PriDrawLine (x0 - 1, y0, x1, y0);
         PriReSetDash;
-    End Else Begin
+    End Else
+    Begin
         SetLineStyle (4, $4444, 1);
         Line (x0, y0, x1, y0);
         SetLineStyle (SolidLn, 0, 1);
@@ -488,7 +512,8 @@ End;
 
 Procedure SymStaffLine(x0, y0, x1: integer);
 
-Var i: Byte;
+Var
+    i: Byte;
 Begin
     If PrinterOn Then
     Begin
@@ -501,7 +526,8 @@ Begin
             PriStroke;
             {      PriDrawLine(x0, y0-i*5, x1, y0-i*5);}
         End;
-    End Else Begin
+    End Else
+    Begin
         SetLineStyle (4, $AAAA, 1);
         For i := 0 To 4 Do
             Line (x0, y0 - i * 5, x1, y0 - i * 5);
@@ -512,7 +538,8 @@ End;
 {******************************************************************}
 Procedure SymInvisibleLine(x0, y0, x1: integer);
 
-Var oldcolor: byte;
+Var
+    oldcolor: byte;
 
 Begin
     If disphidlines = 2 Then
@@ -535,18 +562,22 @@ Begin
     Begin
         PriSetLineWidth (niwidth);
         PrirDrawLine (x, iy, x, iy - 2);  {-3}
-    End Else Begin
+    End Else
+    Begin
         ClearLine (ix, iy, ix);
         Line (ix, iy, ix, iy - 2);       {-3}
     End;
 End;
+
 {******************************************************************}
+
 Procedure SymAbsNichts(x, y: integer);
 Begin
     If X > 638 Then
         Exit;
     ClearLine (x, y, x);
-    If dispspec = 1 Then PutPixel (x, y - 4, speccolor);
+    If dispspec = 1 Then
+        PutPixel (x, y - 4, speccolor);
 End;
 
 {******************************************************************}
@@ -556,12 +587,16 @@ Begin
     Begin
         PriSetLineWidth (lswidth);
         PrirDrawLine (x, iy + 3, x, iy - 3);
-    End Else Line (ix, iy + 3, ix, iy - 3);
+    End Else
+        Line (ix, iy + 3, ix, iy - 3);
 End;
+
 {******************************************************************}
+
 Procedure Beat(x, y, beatlength: integer; solidb: boolean);
 
-Var dy: integer;
+Var
+    dy: integer;
 Begin
     dy := 6;
     If PrinterOn Then
@@ -605,7 +640,8 @@ Begin
     Begin
         PriSetLineWidth (0.5);
         PrirDrawLine (x - 3, iy - 8, x + 3, iy + 8);
-    End Else Begin
+    End Else
+    Begin
         SetLineStyle (SolidLn, 0, 1);
 
         Line (ix - 4, iy - 8, ix - 4, iy - 8);
@@ -633,13 +669,16 @@ Begin
         PriSetDash (3.0, 1.0);
         PrirDrawLine (x - 8, iy + 8, x + 8, iy - 8);
         PriReSetDash;
-    End Else Begin
+    End Else
+    Begin
         SetLineStyle (4, $BBBB, 1);
         Line (ix - 8, iy + 8, ix + 8, iy - 8);
         SetLineStyle (SolidLn, 0, 1);
     End;
 End;
+
 {******************************************************************}
+
 Procedure SymGKlammerAuf(x, y, height: integer);
 
 Begin
@@ -655,7 +694,8 @@ Begin
         PriDrawLine (x, y + 1, x, y + 3); {›}
         PriArc (PriXScale (x + klammerrad), PriYScale (y + 3),
             SymKlammerRadius (x), 180.0, 240.0, ' ');
-    End Else Begin
+    End Else
+    Begin
         PutPixel (x + 1, y - height + 1, lcolor);
         Line (x, y - height + 2, x, y - 1);
         PutPixel (x - 1, y, lcolor);
@@ -663,7 +703,9 @@ Begin
         PutPixel (x + 1, y + 4, lcolor);
     End;
 End;
+
 {******************************************************************}
+
 Procedure SymGKlammerZu(x, y, height: integer);
 
 Begin
@@ -679,7 +721,8 @@ Begin
         PriDrawLine (x, y + 1, x, y + 3);
         PriArc (PriXScale (x - klammerrad), PriYScale (y + 3),
             SymKlammerRadius (x), 0.0, 300.0, 'n');
-    End Else Begin
+    End Else
+    Begin
         PutPixel (x - 1, y - height + 1, lcolor);
         Line (x, y - height + 2, x, y - 1);
         PutPixel (x + 1, y, lcolor);
@@ -687,24 +730,31 @@ Begin
         PutPixel (x - 1, y + 4, lcolor);
     End;
 End;
+
 {******************************************************************}
+
 Procedure SymEt(ix, iy: integer; x: real);
-Const yofs = 6;
+Const
+    yofs = 6;
     blen = 1;
 Begin
     If PrinterOn Then
     Begin
         PriSetLineWidth (3);
         PrirDrawLine (x - 1.5, iy - 6, x + 1.5, iy - 6);
-    End Else Begin
+    End Else
+    Begin
         line (ix - 1, iy - 7, ix + 1, iy - 7);
         line (ix - 1, iy - 6, ix + 1, iy - 6);
         line (ix - 1, iy - 5, ix + 1, iy - 5);
     End;
 End;
+
 {******************************************************************}
+
 Procedure SymQuotMark(ix, iy: integer; x: real);
-Const yofs = 6;
+Const
+    yofs = 6;
     blen = 1;
 Begin
     If PrinterOn Then
@@ -712,21 +762,25 @@ Begin
         PriSetLineWidth (1);
         PrirDrawLine (x - 1.2, iy - 7, x - 1.2, iy - 3); {stimmt ev. noch nicht ganz!}
         PrirDrawLine (x + 1.4, iy - 7, x + 1.4, iy - 3);
-    End Else Begin
+    End Else
+    Begin
         line (ix - 2, iy - 7, ix - 2, iy - 3);
         line (ix - 1, iy - 7, ix - 1, iy - 3);
         line (ix + 1, iy - 7, ix + 1, iy - 3);
         line (ix + 2, iy - 7, ix + 2, iy - 3);       {dick, oberhalb der Linie}
     End;
 End;
+
 {******************************************************************}
+
 Procedure SymRepQuotMark(ix, iy: integer; x: real);
 Begin
     If PrinterOn Then
     Begin
         PriSetLineWidth (1);
         PrirDrawLine (x, iy - 3, x, iy - 5);
-    End Else line (ix, iy - 3, ix, iy - 5){dÅnn, auf der Linie};
+    End Else
+        line (ix, iy - 3, ix, iy - 5){dÅnn, auf der Linie};
 End;
 
 End.

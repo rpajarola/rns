@@ -32,7 +32,8 @@ Procedure Sp2HeaderFooterToBuffer(Var tempptr, startptr, lastptr,
 
 Implementation
 
-Uses specunit,
+Uses
+    specunit,
     helpunit,
     fileunit,
     graphmenu,
@@ -45,21 +46,27 @@ Uses specunit,
     pageunit,
     Texts,
     mousdrv;
+
 {*********************************************************}
+
 Function UpString(S: String): String;
-Var a: Byte;
+Var
+    a: Byte;
 Begin
     For a := 1 To Length (s) Do
         S[a] := UpCase (S[a]);
     UpString := S;
 End;
+
 {*********************************************************}
+
 Procedure Sp2HeaderFooterToBuffer(Var tempptr, startptr, lastptr,
     bufactptr, bufstartptr, bufendptr:
     listptr);
 {Versorgen aller Header und Footer in den Buffer}
 
-Var i, k, pagec: integer;
+Var
+    i, k, pagec: integer;
     tbufpos: byte;
     tempbuf: stringline;
     strbuf:  string;
@@ -101,7 +108,8 @@ Function Sp2SearchString(Var linenum, actposn, actpost: integer;
  searchtyp, beginnend mit der gegenwaertigen Position
  wird true falls der String gefunden wurde}
 
-Var x: integer;
+Var
+    x: integer;
     ipos, iline, ipage: integer;
     inblock, testline, tempbuffer: stringline;
     foundflag, endreached: boolean;
@@ -140,7 +148,9 @@ Var x: integer;
         End; {if testline [1] = searchtyp then}
         iline := iline + 1;
         ipos  := linemarker + 1;
-    End; {Sp2TestOneLine}
+    End;
+
+    {Sp2TestOneLine}
     {+++++++++++++++++++++++++++++++++++++++++++++++++++}
 
 
@@ -197,7 +207,8 @@ End;
 Procedure Sp2ReplaceString(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 
-Var b: byte;
+Var
+    b: byte;
     ipos: integer;
 
 Begin
@@ -216,14 +227,16 @@ Begin
         insert (replacestring, page[linenum], ipos);
         PagRefClearVal (0, IniYnow (linenum - 1), gmaxX,
             IniYnow (linenum + 2));
-    End Else GcuPatternRestore;
+    End Else
+        GcuPatternRestore;
 End;
 
 {*****************************************************************}
 Procedure Sp2SearchAndReplace(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 
-Var dir: movement;
+Var
+    dir: movement;
     c: char;
     resp: response_type;
     choicenum: byte;
@@ -233,7 +246,9 @@ Var dir: movement;
     b: boolean;
     mausx, mausy, maustaste, mausmenu: word;
     changed: boolean;
+
     {***************************************}
+
     Procedure SearchTextInput(dy: integer; prompt: string; Var tstring: string);
     Begin
         tstring := '';
@@ -246,8 +261,10 @@ Var dir: movement;
             false,                       { OldWrite            }
             mausx, mausy, maustaste, mausmenu, changed);
         IniMausAssign (maustaste, resp);
-        If resp = return Then c := #27
-        Else c := ' ';
+        If resp = return Then
+            c := #27
+        Else
+            c := ' ';
     End;
 
     {***************************************}
@@ -260,8 +277,10 @@ Var dir: movement;
             x + 220, y + 24,{+dy*8}          { DescX,DescY       }
             ' ' + prompt, x - 86, y + 38 + dy * 8,  { Prompt, PRX,PRY   }
             15, resp, c);               { prlen,resp,keyresp}
-        If resp = return Then c := chr (27)
-        Else c := ' ';
+        If resp = return Then
+            c := chr (27)
+        Else
+            c := ' ';
     End;
 
     {**********************************}
@@ -275,6 +294,7 @@ Var dir: movement;
             Sp2ReplaceString (linenum, actposn, actpost, actptr, startptr, lastptr);
         End;
     End;
+
     {**********************************}
 
 Begin
@@ -352,7 +372,8 @@ Begin
                 End;
             End;
         End; {case c of}
-        If pos (c, usrmenu.choices) > 0 Then c := chr (27);
+        If pos (c, usrmenu.choices) > 0 Then
+            c := chr (27);
     Until (c = chr (27));
 
 End;
@@ -361,7 +382,8 @@ End;
 Procedure Sp2PageCommands(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 
-Var dir: movement;
+Var
+    dir: movement;
     c: char;
     resp: response_type;
     choicenum: byte;
@@ -370,7 +392,8 @@ Var dir: movement;
     changed: boolean;
 Begin
     ImeIniPageMenu;
-    If mstart.mpag <> -1 Then usrmenu.num_choices := {1}2;
+    If mstart.mpag <> -1 Then
+        usrmenu.num_choices := {1}2;
     choicenum := 1;
     maustaste := 0;
     mausdunkel;
@@ -405,7 +428,8 @@ Begin
                     c := #27
                 Else
                     c := ' ';
-                If i <> pagecount Then PagShowPage (linenum, actposn, actpost,
+                If i <> pagecount Then
+                    PagShowPage (linenum, actposn, actpost,
                         actptr, startptr, lastptr, i, true);
             End;
             'F': PagShowPage (linenum, actposn, actpost,
@@ -448,14 +472,16 @@ Begin
             'D': fildelpage (actptr, startptr, lastptr);{Delete page}{save page to buffer}
             'U': filundelpage (actptr, startptr, lastptr);{Undelete page} {case c of}
         End;
-        If pos (c, usrmenu.choices) > 0 Then c := #27;
+        If pos (c, usrmenu.choices) > 0 Then
+            c := #27;
     Until (c = #27);
 End;
 
 {*****************************************************************}
 Procedure Sp2SwapKeyboard;
 
-Var y, hy: integer;
+Var
+    y, hy: integer;
     c: char;
 
 Begin
@@ -478,7 +504,8 @@ End;
 
 {*****************************************************************}
 Procedure Sp2VisiMenu;
-Var y, hy: integer;
+Var
+    y, hy: integer;
     c: char;
 Begin
     ImeIniVisiMenu;
@@ -504,7 +531,8 @@ End;
 {*****************************************************************}
 Procedure Sp2SetHeaderFooter(linenum: integer);
 
-Var dir: movement;
+Var
+    dir: movement;
     c: char;
     choicenum: byte;
     y, hy: integer;
@@ -558,7 +586,8 @@ End;
 {*****************************************************************}
 Procedure Sp2UnMarkFooter;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     i := pagelength;
@@ -574,7 +603,8 @@ End;
 {*****************************************************************}
 Procedure Sp2UnMarkHeader;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     i := topmargin;
@@ -590,7 +620,8 @@ End;
 {*****************************************************************}
 Procedure Sp2MarkHeader(linenum: integer);
 
-Var i, imax: byte;
+Var
+    i, imax: byte;
 
 Begin
     imax := IniMaxHeader;
@@ -616,7 +647,8 @@ End;
 {*****************************************************************}
 Procedure Sp2MarkFooter(linenum: integer);
 
-Var i, imin: byte;
+Var
+    i, imin: byte;
 
 Begin
     imin := IniMinFooter;

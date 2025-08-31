@@ -30,10 +30,13 @@ Procedure ImeInitLineMenu;
 
 Implementation
 
-Uses initsc,
+Uses
+    initsc,
     fileunit,
     Userint;
+
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+
 Procedure ImeIniColors;
 
 Begin
@@ -44,7 +47,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitSymbolMenus;
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     SetColor (symtabcolor);
@@ -93,7 +97,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitCharMenu(c: char);
 
-Var i: integer;
+Var
+    i: integer;
     cshift: char;
 
 Begin
@@ -147,7 +152,8 @@ End;
 
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeIniVisiMenu;
-Var i: integer;
+Var
+    i: integer;
 Begin
     ImeIniColors;
     With UsrMenu Do
@@ -197,7 +203,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeIniSwapMenu;
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     ImeIniColors;
@@ -423,7 +430,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitSearchMenu;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     ImeIniColors;
@@ -440,14 +448,16 @@ Begin
         Descriptions[3] := 'search  Pattern';
         Descriptions[2] := 'Change  text   ';
         Descriptions[1] := 'Replace pattern';
-        For i := 1 To Num_choices Do ChoiceVal[i].TypIdent := 'o';
+        For i := 1 To Num_choices Do
+            ChoiceVal[i].TypIdent := 'o';
     End; {With usrmenu}
 End;
 
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeIniBlockMenu;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     ImeIniColors;
@@ -483,7 +493,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeIniPageMenu;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     ImeIniColors;
@@ -536,7 +547,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitPrintMenu;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     ImeIniColors;
@@ -565,7 +577,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitSoundMenu;
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     ImeIniColors;
@@ -595,7 +608,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitBeatMenu;
 
-Var i: integer;
+Var
+    i: integer;
     inblock: string;
 
 Begin
@@ -656,7 +670,8 @@ End;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure ImeInitTopMenu;
 
-Var i: byte;
+Var
+    i: byte;
 Begin
     With UsrMenu Do
     Begin
@@ -736,7 +751,8 @@ end;
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 
 Procedure ImeInitLineMenu;
-Var i: byte;
+Var
+    i: byte;
 Begin
     ImeIniColors;
     With UsrMenu Do
@@ -758,7 +774,8 @@ Begin
         Descriptions[6] := 'Delete    line (cut to spec.buffer)  [Ctrl] +[' + #23 + '-]';
         Descriptions[7] := 'Undelete  line (paste  spec.buffer)  [Shift]+[Ins]';
 
-        For i := 1 To Num_choices Do ChoiceVal[i].TypIdent := 'o';
+        For i := 1 To Num_choices Do
+            ChoiceVal[i].TypIdent := 'o';
     End;
 End;
 

@@ -4,7 +4,8 @@ Unit sndunit;
 
 Interface
 
-Uses initsc;
+Uses
+    initsc;
 
 Procedure SndSoundMenu(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
@@ -39,13 +40,17 @@ Uses
     MarkUnit,
     StrUtils;
 
-Const cfllength = 30;
+Const
+    cfllength = 30;
     itemmax = 10;
 
-Type itemcharstyp = Array[1..itemmax] Of Record
+Type
+    itemcharstyp = Array[1..itemmax] Of Record
         length, pitch: integer;
     End;
-Const  M = 1731.23404905852;
+
+Const
+    M = 1731.23404905852;
 
 {******************************************************************}
 
@@ -68,6 +73,7 @@ Begin
   {$R+}
   {$ENDIF}
 End;
+
 {******************************************************************}
 
 Procedure SndUpdateMulCent;
@@ -91,7 +97,8 @@ End;
 
 {******************************************************************}
 Procedure SndDraw(Var slinexmin, slinexmax, y: longint; Var wait: boolean);
-Var sslinexmin, sslinexmax: integer;
+Var
+    sslinexmin, sslinexmax: integer;
 Begin
     sslinexmax := slinexmax;
     sslinexmin := slinexmax;
@@ -109,11 +116,13 @@ End;
 {******************************************************************}
 Procedure SndPlay(Var itemchars: itemcharstyp;
     itemcount, timemax: integer; Var wait: Boolean; Playlast: boolean);
-Var item, totlength, i: integer;
+Var
+    item, totlength, i: integer;
     r: real;
     idel, isnd: integer;
     mintime: integer;
     def: integer;
+
 
     Procedure XSound(v: integer; m: real);
     Begin
@@ -126,7 +135,9 @@ Var item, totlength, i: integer;
 {$R+}
 {$ENDIF}
     End;
-Const flamlength = 20;
+
+Const
+    flamlength = 20;
 Begin
     If NOT wait Then
         exit;
@@ -256,9 +267,11 @@ Procedure SndPlayLine(inblock: stringline; Var linenum: integer;
     Var SaveSndChar: Char);
 {spielt die Zeile inblock}
 
-Const itemmax = 10;
+Const
+    itemmax = 10;
 
-Var lineattr: lineattrtype;
+Var
+    lineattr: lineattrtype;
     itemchars, saveitemchars: itemcharstyp;
     itemcount, saveitemcount: integer;
     imenubkcolor: integer;
@@ -285,21 +298,28 @@ Var lineattr: lineattrtype;
     leaveout: integer;
     restsndchar: boolean;
     repeatchar: boolean;
+
     {******************************************************************}
+
     Procedure SndUpdateSndlength(sndlengthspm: real;
         Var sndlength, actlength: integer;
         Sndlengthper: Byte);
-    Var St: String;
+    Var
+        St: String;
     Begin
         sndlength := Round (60000 / sndlengthspm);
-        If sndlengthper = 1 Then actlength := sndlength Else
+        If sndlengthper = 1 Then
+            actlength := sndlength
+        Else
             actlength := sndlength DIV lineattr.beats;
         Str (sndlengthspm: 4: 3, st);
         While Length (st) < 8 Do
             st := ' ' + st;
         IniSpacedText (65, gmaxy DIV charheight - 3, st, frNoFrame);
     End;
+
     {**************************************}
+
     Procedure SndIncItemCount;
 
     Begin
@@ -309,7 +329,8 @@ Var lineattr: lineattrtype;
 
     {**************************************}
     Procedure SndProcItem;
-    Var a, b: integer;
+    Var
+        a, b: integer;
     Begin
         k := UtiComputeGroup (inblock[1], indexc);
         { normal sound? }
@@ -328,7 +349,8 @@ Var lineattr: lineattrtype;
                 Begin
                     itemchars[itemcount].length := cfllength;
                     flam := ' ';
-                End Else Begin
+                End Else
+                Begin
                     itemchars[itemcount].length := sympar[indexc, 4, k];
                 End;
                 lastsound := itemchars[itemcount].pitch;
@@ -343,10 +365,13 @@ Var lineattr: lineattrtype;
             End;
             If leaveout > 0 Then
                 dec (leaveout);
-        End Else { if (k > 0) then } Case inblock[1] Of
+        End Else
+            { if (k > 0) then } Case inblock[1] Of
                 '/': inblock := '';
                 #189: If ((playOptions AND poDashSlash) = 0) Then
-                        If slinexmin < IniFirstBeatPos (lineattr) Then wait := False Else If auftakt Then
+                        If slinexmin < IniFirstBeatPos (lineattr) Then
+                            wait := False
+                        Else If auftakt Then
                         Begin
                             If ((sndchar = 'L') AND (c <> #27)) Then
                                 inblock := '';
@@ -374,7 +399,8 @@ Var lineattr: lineattrtype;
                         SndIncItemCount;
                         itemchars[itemcount].pitch := sndpulse;
                         itemchars[itemcount].length := sndpulselength;
-                    End Else found := true;
+                    End Else
+                        found := true;
                 End;
                 ' ':
                 Begin
@@ -390,7 +416,8 @@ Var lineattr: lineattrtype;
                         itemchars[itemcount].pitch := sndpulse;
                         itemchars[itemcount].length := sndpulselength;
                         playlast := true;
-                    End Else Begin
+                    End Else
+                    Begin
                         found := true;
                         playlast := false;
                     End;
@@ -398,7 +425,10 @@ Var lineattr: lineattrtype;
                 '+', '-': flam := '-';
                 '=': If (braces > 0) OR (inblock[2] = '{') Then
                     Begin
-                        If (playOptions AND poBraces) <> 0 Then leaveout := 2 Else Begin
+                        If (playOptions AND poBraces) <> 0 Then
+                            leaveout := 2
+                        Else
+                        Begin
                             leaveout := 1;
                         End;
                     End Else
@@ -450,7 +480,9 @@ Var lineattr: lineattrtype;
         If timemax < 0 Then
             timemax := 0;
     End;
+
     {*************************************}
+
     Procedure SndAddBeat;
     { check if beat should be played and add a beat sound if approp.}
     Begin
@@ -472,7 +504,9 @@ Var lineattr: lineattrtype;
         rlength := rlength - actlength;
         blength := round (rlength);
     End;
+
     {**************************************}
+
     Procedure SndDrawPlay;
     Begin
         repeatchar := false;
@@ -487,10 +521,12 @@ Var lineattr: lineattrtype;
             PlayLast := false;
             If slinexmin < IniFirstBeatPos (lineattr) Then
                 Auftakt := True;
-            If drawline {And (Not Paused) } Then SndDraw (slinexmin, slinexmax, y, wait);
+            If drawline {And (Not Paused) } Then
+                SndDraw (slinexmin, slinexmax, y, wait);
         End;
         itemcount := 0;
     End;
+
     {**************************************}
 
 Begin
@@ -517,11 +553,15 @@ Begin
         slinexmin := IniFirstBeatPos (lineattr) - dx;
         slinexmax := slinexmin;
         rlinexmax := slinexmax;
-        If sndlengthper = 1 Then actlength := sndlength Else Begin
+        If sndlengthper = 1 Then
+            actlength := sndlength
+        Else
+        Begin
             actlength := sndlength DIV lineattr.beats;
         End;
         y := IniYNow (linenum);
-        While inblock[1] <> '%' Do delete (inblock, 1, 1);
+        While inblock[1] <> '%' Do
+            delete (inblock, 1, 1);
         delete (inblock, 1, 1);
 
         {Suche Beginn: 1. Beat oder 1. Vorschlag}
@@ -679,7 +719,8 @@ Begin
                                 'play   ', frNoFrame);
                             IniSpacedText (2, gmaxy DIV charheight - 1,
                                 ' =Symbol ' + #26 + '=step ', frHigh);
-                        End Else Begin
+                        End Else
+                        Begin
                             IniSpacedText (12, gmaxy DIV charheight - 5,
                                 'pause  ', frNoFrame);
                             IniSpacedText (2, gmaxy DIV charheight - 1,
@@ -695,7 +736,8 @@ Begin
                                 sndlengthspm := (sndlengthspm / lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'LPM', frNoFrame);
                                 SChanged := True;
-                            End Else IniSpacedText (65, gmaxy DIV charheight - 3,
+                            End Else
+                                IniSpacedText (65, gmaxy DIV charheight - 3,
                                     ' raise  ', frNoFrame);
                     '*': If Sndlengthper <> 1 Then
                             If sndlengthspm * lineattr.beats <= SndMaxSpm Then
@@ -705,7 +747,8 @@ Begin
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'BPM', frNoFrame);
                                 SChanged := True;
                                 {  end; }
-                            End Else IniSpacedText (65, gmaxy DIV charheight - 3,
+                            End Else
+                                IniSpacedText (65, gmaxy DIV charheight - 3,
                                     ' lower  ', frNoFrame);
                     '.':
                     Begin  {or Del, wenn NumLock off}
@@ -850,7 +893,8 @@ Begin
 
                 End;{Case}
             End;{While XKeyPressed}
-            If SChanged Then SndUpDateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+            If SChanged Then
+                SndUpDateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
             If IniMausEscape = #27 Then
             Begin
                 c := #27;
@@ -879,7 +923,8 @@ Begin
                     found := true;
                     SndAddBeat;
                 End;
-            End Else SndProcItem;
+            End Else
+                SndProcItem;
         End; {while ((not found) and (length(inblock) > 0))}
 
         While length (inblock) > 0 Do
@@ -996,7 +1041,9 @@ Begin
                                 #82:
                                 Begin{Insert}
                                     sndlengthspm := Round (sndlengthspm);
-                                    If sndlengthper = 1 Then actlength := sndlength Else
+                                    If sndlengthper = 1 Then
+                                        actlength := sndlength
+                                    Else
                                         actlength := sndlength DIV lineattr.beats;
                                     SChanged := True;
                                 End;
@@ -1187,7 +1234,8 @@ Begin
                                     sndlengthspm := (sndlengthspm / lineattr.beats);
                                     IniSpacedText (76, gmaxy DIV charheight - 3, 'LPM', frNoFrame);
                                     SChanged := True;
-                                End Else IniSpacedText (65, gmaxy DIV charheight - 3,
+                                End Else
+                                    IniSpacedText (65, gmaxy DIV charheight - 3,
                                         ' raise  ', frNoFrame);
                         '*': If Sndlengthper <> 1 Then
                                 If sndlengthspm * lineattr.beats <= SndMaxSpm Then
@@ -1196,12 +1244,15 @@ Begin
                                     sndlengthspm := (sndlengthspm * lineattr.beats);
                                     IniSpacedText (76, gmaxy DIV charheight - 3, 'BPM', frNoFrame);
                                     SChanged := True;
-                                End Else IniSpacedText (65, gmaxy DIV charheight - 3,
+                                End Else
+                                    IniSpacedText (65, gmaxy DIV charheight - 3,
                                         ' lower  ', frNoFrame);
                         '.':
                         Begin  {or Del, wenn NumLock off}
                             sndlengthspm := Round (sndlengthspm);
-                            If sndlengthper = 1 Then actlength := sndlength Else
+                            If sndlengthper = 1 Then
+                                actlength := sndlength
+                            Else
                                 actlength := sndlength DIV lineattr.beats;
                             SChanged := True;
                         End;
@@ -1461,7 +1512,9 @@ Begin
                             #82:
                             Begin{Insert}
                                 sndlengthspm := Round (sndlengthspm);
-                                If sndlengthper = 1 Then actlength := sndlength Else
+                                If sndlengthper = 1 Then
+                                    actlength := sndlength
+                                Else
                                     actlength := sndlength DIV lineattr.beats;
                                 SChanged := True;
                             End;
@@ -1589,7 +1642,8 @@ Begin
                                 'play   ', frNoFrame);
                             IniSpacedText (2, gmaxy DIV charheight - 1,
                                 ' =Symbol ' + #26 + '=step ', frHigh);
-                        End Else Begin
+                        End Else
+                        Begin
                             IniSpacedText (12, gmaxy DIV charheight - 5,
                                 'pause  ', frNoFrame);
                             IniSpacedText (2, gmaxy DIV charheight - 1,
@@ -1605,7 +1659,8 @@ Begin
                                 sndlengthspm := (sndlengthspm / lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'LPM', frNoFrame);
                                 SChanged := True;
-                            End Else IniSpacedText (65, gmaxy DIV charheight - 3,
+                            End Else
+                                IniSpacedText (65, gmaxy DIV charheight - 3,
                                     ' raise  ', frNoFrame);
                     '*': If Sndlengthper <> 1 Then
                             If sndlengthspm * lineattr.beats <= SndMaxSpm Then
@@ -1614,7 +1669,8 @@ Begin
                                 sndlengthspm := (sndlengthspm * lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'BPM', frNoFrame);
                                 SChanged := True;
-                            End Else IniSpacedText (65, gmaxy DIV charheight - 3,
+                            End Else
+                                IniSpacedText (65, gmaxy DIV charheight - 3,
                                     ' lower  ', frNoFrame);
                     '.':
                     Begin  {or Del, wenn Numlock off}
@@ -1699,7 +1755,8 @@ Begin
                 If SaveSlinexmax < slinexmin Then
                     SaveSlinexmax := slinexmin;
             End;
-            If SChanged Then SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+            If SChanged Then
+                SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
             If IniMausEscape = #27 Then
             Begin
                 c := #27;
@@ -1759,9 +1816,11 @@ Begin
                         SndDrawPlay;
                     End;
                 End;
-            End Else SndProcItem{if IniNumChar(inblock[1])};
+            End Else
+                SndProcItem{if IniNumChar(inblock[1])};
         End; {while length(inblock) > 0 do}
-    End Else Begin {if inblock[1] = 'N' then}
+    End Else
+    Begin {if inblock[1] = 'N' then}
         playnext := false;
         If Sndchar = 'L' Then
         Begin
@@ -1770,7 +1829,8 @@ Begin
         End;
     End;
     NoSound;
-    If restsndchar Then sndchar := savesndchar;
+    If restsndchar Then
+        sndchar := savesndchar;
 End;
 
 {******************************************************************}
@@ -1782,7 +1842,8 @@ Var
 
 Begin
     ImeInitSndOptionsMenu;
-    If sndlengthspm = 0 Then sndlengthspm := 60000 / sndlength;{New}
+    If sndlengthspm = 0 Then
+        sndlengthspm := 60000 / sndlength;{New}
     UsrMenu.ChoiceVal[1].rval := sndlengthspm;{New}
     UsrMenu.ChoiceVal[2].Tval := sndlengthper;
     UsrMenu.ChoiceVal[3].Tval := sndplaybeat;
@@ -1820,7 +1881,8 @@ Procedure SndSoundMenu(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     Menu: boolean);
 
-Var dir: movement;
+Var
+    dir: movement;
     c: char;
     choicenum: byte;
     y, hy: integer;
@@ -1887,7 +1949,8 @@ Begin
                 st := st + '   LPM ';
             IniSpacedText (65, gmaxy DIV charheight - 3, st, frLow);
             Repeat
-                While xkeypressed Do xreadkey (shiftp, ctrlp);
+                While xkeypressed Do
+                    xreadkey (shiftp, ctrlp);
                 SndPlaySound (linenum, actposn, actpost,
                     actptr, startptr, lastptr, true, playnext);
                 If PlayNext Then
@@ -1911,7 +1974,8 @@ Procedure SndPlaySound(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     Menu: boolean; Var Playnext: Boolean);
 
-Var actcolor: byte;
+Var
+    actcolor: byte;
     i, j: integer;
     c: char;
     tempbuffer, inblock: stringline;
@@ -1943,14 +2007,16 @@ Begin
     If sndchar <> 'F' Then
     Begin
         linenum := 0;
-        While (page[linenum, 1] <> 'N') AND (linenum <> pagelength + 1) Do inc (linenum);
+        While (page[linenum, 1] <> 'N') AND (linenum <> pagelength + 1) Do
+            inc (linenum);
         If linenum >= pagelength Then
             If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then
             Begin
                 sndchar := 'B';
                 filbufclear;
                 MarMarkToBuffer (actptr, startptr, lastptr);
-            End Else Begin
+            End Else
+            Begin
                 HlpHint (HntPageEmpty, HintNormalTime, []);
                 c := #27;
                 playnext := False;
@@ -1982,7 +2048,8 @@ Begin
     If (NOT Menu) AND (sndchar <> 'F') Then
     Begin
         sndchar := 'L';
-        If (Page[Linenum, 1] <> 'N') Then sndchar := 'P';
+        If (Page[Linenum, 1] <> 'N') Then
+            sndchar := 'P';
         If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then
         Begin
             sndchar := 'B';
@@ -2041,10 +2108,14 @@ Begin
             Else {if bufstartptr = bufendptr then} If
             marpartline Then
                 HlpHint (HntCantPlayPart, HintWaitEsc, [])
-            Else {if marpartline then}Begin
+            Else {if marpartline then}
+            Begin
                 endreached := true;
                 If ((mstart.mpag = pagecount) AND
-                    (mend.mpag = pagecount)) Then drawline := true Else drawline := false;
+                    (mend.mpag = pagecount)) Then
+                    drawline := true
+                Else
+                    drawline := false;
                 While c <> chr (27) Do
                 Begin
                     If endreached Then
@@ -2067,7 +2138,8 @@ Begin
                     End;
                     SndPlayLine (inblock, i, drawline, playnext, c, savesndchar);
                     i := i + 1;
-                    If playnext Then playnext := False{savesndchar:='L';};
+                    If playnext Then
+                        playnext := False{savesndchar:='L';};
                 End; {while c <> chr(27) do}
             End{else if marpartline then}; {else if bufstartptr = bufendptr then}
         End;
@@ -2149,10 +2221,14 @@ Begin
         playNext := False;
 End;
 
+
 Function SndGetCentStr(C: Integer): String;
-Var O, HT, Cn: Integer;
+Var
+    O, HT, Cn: Integer;
     S1, S2: String;
-Const IV: Array[0..11] Of String = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179, '3b' + #179, '3 ' + #179, '4 ' + #179, '4#' + #179, '5 ' + #179, '6b' + #179, '6 ' + #179, '7b' + #179, '7 ' + #179);
+Const
+    IV: Array[0..11] Of String = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179, '3b' + #179, '3 ' + #179, '4 ' + #179, '4#' + #179, '5 ' + #179, '6b' + #179, '6 ' + #179, '7b' + #179, '7 ' + #179);
+
 
     Procedure OHTCn;
     Var
@@ -2202,15 +2278,22 @@ Const IV: Array[0..11] Of String = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179,
             O := 5;
     End;
 
+
     Function Oct: String;
     Begin
-        If O = 0 Then Oct := '  0' + #249 + '8 ' + #179 + S1 Else
+        If O = 0 Then
+            Oct := '  0' + #249 + '8 ' + #179 + S1
+        Else
             Oct := '  ' + S1 + '' + Char (O + Byte ('0')) + #249 + '8 ' + #179 + ' ';
     End;
+
+
     Function HTs: String;
     Begin
         HTs := IV[HT];
     End;
+
+
     Function Cent: String;
     Begin
         Str (Abs (Cn): 2, S2);
@@ -2232,6 +2315,7 @@ Const IV: Array[0..11] Of String = (#196 + ' ' + #179, '2b' + #179, '2 ' + #179,
             s2 := ' ' + S2{wird nicht gebraucht};
         Cent := S2 + 'Cent ';
     End;
+
 Begin
     If c > 50 Then
         S1 := '+'  // +
@@ -2258,4 +2342,5 @@ Begin
     S1 := PadCenter (S1, 21);
     SndGetCentStr := S1;
 End;
+
 End.

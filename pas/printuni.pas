@@ -11,6 +11,7 @@ Uses
     HelpUnit,
     Texts,
     SysUtils;
+
 {Hier werden Raender von 2 File-Seiten auf A4 definiert:}
 {  0.0 Punkte = unterer Blattrand des amerik.Formats!?}
 {2.8 Punkte entsprechen etwa 1mm}
@@ -19,7 +20,8 @@ Uses
 {446.5 Punkte = ca. Hoehen-Mitte des A4-Blattes}
 {657.5 Punkte = ca. Hoehen-Mitte der 1.File-Seite}
 {235.5 Punkte = ca. Hoehen-Mitte der 2.File-Seite}
-Const cxmin = 46.0;    {links-rechts Verschiebung}{linker  Rand}
+Const
+    cxmin = 46.0;    {links-rechts Verschiebung}{linker  Rand}
     cxmax = 558.0;                               {rechter Rand}
 
     cymaxtop = 829.0; {1.File-Seite Rand oben : Abstand vom untern Blattrand}
@@ -30,7 +32,8 @@ Const cxmin = 46.0;    {links-rechts Verschiebung}{linker  Rand}
     cyminbot = 64.0; {2.File-Seite Rand unten: Abstand vom untern Blattrand}
 {Diff2:  343.0}{je groesser die Differenz desto hoeher die File-Seite}
 
-Var psactwidth: real;
+Var
+    psactwidth: real;
     psxmin, psxmax, psymin, psymax: real;
 
 Function PriPostscriptinit: Boolean;
@@ -68,12 +71,14 @@ Procedure PriDrawFrame(x0, y0, x1, y1: integer);
 
 Implementation
 
-Uses pageunit;
+Uses
+    pageunit;
 
 
 {*************************************************************}
 Procedure PriGetFontHeight;
-Var instring: stringline;
+Var
+    instring: stringline;
     a, b: integer;
     F: Text;
 Begin
@@ -135,7 +140,9 @@ Begin
     PriLine (PriXscale (x1), PriYscale (y1));
     PriStroke;
 End;
+
 {******************************************************************}
+
 Procedure PriRDrawLine(x0, y0, x1, y1: real);
 {Schreibt eine Line mit Displaycoordinaten in das Postscriptfile}
 Begin
@@ -199,7 +206,8 @@ End;
 {***************************}
 Procedure PriAddreal(Var inblock: stringline; r: real);
 
-Var rstring: string[16];
+Var
+    rstring: string[16];
 
 Begin
     Str (r: 6: 3, rstring);
@@ -209,7 +217,8 @@ End;
 {***************************}
 Procedure PriLine(rx, ry: real);
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := '';
@@ -222,7 +231,8 @@ End;
 {***************************}
 Procedure PriSetDash(llength, distlength: real);
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := '[';
@@ -235,16 +245,20 @@ End;
 {***************************}
 Procedure PriReSetDash;
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := '[] 0.0 setdash';
     PriString (inblock);
 End;
+
 {***************************}
+
 Procedure PriArc(rx, ry, rad, startw, endw: real; c: char);
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     PriNewPath;
@@ -258,10 +272,13 @@ Begin
     PriString (inblock);
     PriStroke;
 End;
+
 {***************************}
+
 Procedure PriMove(rx, ry: real);
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := '';
@@ -274,7 +291,8 @@ End;
 {***************************}
 Procedure PriClosepath;
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := ' closepath ';
@@ -284,7 +302,8 @@ End;
 {***************************}
 Procedure PriStroke;
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := ' stroke ';
@@ -294,17 +313,20 @@ End;
 {***************************}
 Procedure PriNewpath;
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     inblock := ' newpath ';
     PriString (inblock);
 End;
+
 {****************************************************************************}
 
 Procedure PriSwapFont;
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin  {in Print-Options zur Auswahl geben}
 { Font. Pleae do not change. Denn hier (und _nur_ hier) sind ae oe und ue
@@ -455,10 +477,12 @@ Begin  {in Print-Options zur Auswahl geben}
    PriString(inblock);
 }
 End;
+
 {****************************************************************************}
 
 Procedure PriSetLineWidth(thick: real);
-Var inblock: stringline;
+Var
+    inblock: stringline;
 Begin
     If ((psactwidth < (thick - 0.01)) OR (psactwidth > (thick + 0.01))) Then
     Begin
@@ -472,7 +496,8 @@ End;
 
 {***************************}
 Procedure PriWriteChar(c: char; x, y: real);
-Var inblock: stringline;
+Var
+    inblock: stringline;
 Begin
     inblock := '';
     PriMove (PriRXScale (x) - ({Symfontsize/2}7.5), PriRYScale (y) - ({Symfontsize/2}7.5));
@@ -482,7 +507,8 @@ End;
 
 {***************************}
 Procedure PriWriteSym(c: char; x, y: real);
-Var inblock: stringline;
+Var
+    inblock: stringline;
     ch: string;
 Begin
     If nff Then
@@ -497,12 +523,16 @@ Begin
         End; {case}
         inblock := 'Sym' + ch;
         PriString (inblock);
-    End Else PriWriteChar (c, x, y);
+    End Else
+        PriWriteChar (c, x, y);
 End;
+
 {***************************}
+
 Procedure PriLeftString(instring: stringline; x, y: real);
 {linken Teil eines Strings schreiben}
-Var inblock: stringline;
+Var
+    inblock: stringline;
 Begin
     inblock := ' (' + instring + ') stringwidth pop ';
     PriString (inblock);
@@ -527,8 +557,10 @@ End;
 {******************************************************************}
 Procedure PriHorizontalKlammer(ixmin, ixmax, iy: integer);
 {Drucken einer geschweiften Klammer}
-Const delta = 1.5;{4.0}
-Var xmin, xmax, x, y: real;
+Const
+    delta = 1.5;{4.0}
+Var
+    xmin, xmax, x, y: real;
 Begin
     xmin := PriXScale (ixmin);
     xmax := PriXScale (ixmax);
@@ -553,8 +585,10 @@ End;
 {******************************************************************}
 Procedure PriVerticalKlammer(ix, iymin, iymax: integer);
 {Drucken einer geschweiften Klammer}
-Const delta = 1.5;{4.0}
-Var ymin, ymax, x, y: real;
+Const
+    delta = 1.5;{4.0}
+Var
+    ymin, ymax, x, y: real;
 Begin
     ymin := PriYScale (iymin);
     ymax := PriYScale (iymax);
@@ -579,7 +613,8 @@ End;
 {******************************************************************}
 Procedure PriPostscript;
 {Drucken auf ein Postscript File.}
-Var inblock: stringline;
+Var
+    inblock: stringline;
 Begin
     If NOT nff Then
     Begin
@@ -627,7 +662,8 @@ Begin
         inblock := 'showpage';                      { Seite anzeigen            }
         PriString (inblock);
         PriSetTopMargins;                          { naextes Mal: obere Haelfte  }
-    End Else PriSetBottomMargins{ naextes Mal: untere Haelfte };
+    End Else
+        PriSetBottomMargins{ naextes Mal: untere Haelfte };
     Inc (prpage);                                 { naechste Seite             }
     inblock := 'grestore';
     PriString (inblock);
@@ -637,7 +673,8 @@ End;
 Function PriPostscriptinit: Boolean;
 {Drucken auf ein Postscript File:
  Initialisierung}
-Var inblock, strbuf: stringline;
+Var
+    inblock, strbuf: stringline;
     infile: text;
     filename: string;
 Begin
@@ -646,7 +683,8 @@ Begin
     Begin                      { PS-File oeffnen            }
         Assign (psfile, ConcatPaths ([psdir, prfname]));
         filename := FExpand (ConcatPaths ([psdir, prfname]));
-    End Else Begin
+    End Else
+    Begin
         Assign (psfile, 'psfile');
         filename := FExpand ('psfile');
     End;
@@ -664,7 +702,8 @@ Begin
     Begin
         Str (cymintop: 8: 2, strbuf);
         inblock := inblock + strbuf;
-    End Else Begin
+    End Else
+    Begin
         Str (cyminbot: 8: 2, strbuf);
         inblock := inblock + strbuf;
     End;
@@ -693,7 +732,8 @@ Begin
     End;
     If inblock = 'nff' Then
         nff := true
-    Else {    readln(infile,inblock);readln(infile,inblock);readln(infile,inblock);};
+    Else
+        {    readln(infile,inblock);readln(infile,inblock);readln(infile,inblock);};
     If NOT nff Then
         PriGetFontHeight;
     inblock := '';
@@ -732,9 +772,12 @@ Begin
     PriString (inblock);
     PriPostscriptinit := True; { Success }
 End;
+
 {******************************************************************}
+
 Function PriPostscriptComplete: Boolean;
-Var inblock: stringline;
+Var
+    inblock: stringline;
     infile, lst: text;
 Begin
     PriPostscriptComplete := False; { Default to failure }
@@ -790,6 +833,7 @@ Begin
         HlpHint (HntPrintToFileFinished, HintWaitEsc, ['psfile']);
     PriPostscriptComplete := True; { Success }
 End;
+
 
 Procedure PriMakeUmlaute(Var psfile: text);
 Begin
@@ -888,4 +932,5 @@ Begin
     PriStroke;
     writeln (psfile, '0 setlinecap');
 End;
+
 End.

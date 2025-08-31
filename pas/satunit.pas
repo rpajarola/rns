@@ -4,7 +4,8 @@ Unit satunit;
 
 Interface
 
-Uses menutyp,
+Uses
+    menutyp,
     graphmenu,
     grinout,
     imenuunit,
@@ -20,10 +21,13 @@ Procedure SatSymbolParam(c: char);
 Procedure SatSaveSym;
 
 Implementation
+
 {******************************************************}
+
 Procedure SatSaveSym;
 
-Var c: char;
+Var
+    c: char;
     i, j: byte;
     parfile: File Of integer;
 Begin

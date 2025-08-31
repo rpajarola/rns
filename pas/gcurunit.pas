@@ -4,21 +4,25 @@ Unit gcurunit;
 
 Interface
 
-Uses graph,
+Uses
+    graph,
     xcrt,
     crt,
     Mousdrv;
 
-Const CursorXSize = 9;
+Const
+    CursorXSize = 9;
     CursorYSize = 13;
     CurGridXStep = 6;
     CurGridYStep = 8;
     CurGridXS = 640 DIV CurGridXStep;
     CurGridYS = 424 DIV CurGridYStep;
 
-Type CursorArr = Array[0..CursorXSize, 0..CursorYSize] Of word;
+Type
+    CursorArr = Array[0..CursorXSize, 0..CursorYSize] Of word;
 
-Var PatternSave, GraphCursor: CursorArr;
+Var
+    PatternSave, GraphCursor: CursorArr;
     gcxcoord, gcycoord: integer;
     dispcurs: byte; {1= display cursor, 2 = display cursor and grid
                      3= dont display cursor}
@@ -35,15 +39,21 @@ Procedure GcuPatternStore;{save pattern}
 
 Implementation
 
-Uses initsc;
+Uses
+    initsc;
 
-Var CursorIsOn: Boolean;
+Var
+    CursorIsOn: Boolean;
+
 {**************************************************************}
+
 Function GcuRightMargin: integer;
 Begin
     GcuRightMargin := 0;
 End;
+
 {**************************************************************}
+
 Procedure MinMax(Var imin, imax, jmin, jmax: integer);
 Begin
     imax := gcxcoord + (CursorXSize DIV 2);
@@ -64,16 +74,20 @@ End;
 
 {**************************************************************}
 Function GcuGridPosX(i: integer): integer;
-Var a: integer;
+Var
+    a: integer;
 Begin
     a := grminx - 2 + i * curgridxstep;
     If (a > grmaxx) OR (a < 1) Then
         a := 4;
     GcuGridPosX := a;
 End;
+
 {**************************************************************}
+
 Function GcuGridPosY(i: integer): integer;
-Var a: Integer;
+Var
+    a: Integer;
 Begin
     a := grminy - 5 + i * curgridystep;
     If (A > grmaxY) OR (a < 2) Then
@@ -83,11 +97,13 @@ End;
 
 {**************************************************************}
 Procedure GcuPatternStore;
-Var i, j, imin, imax, jmin, jmax: integer;
+Var
+    i, j, imin, imax, jmin, jmax: integer;
     b: Boolean;
 Begin
     b := NOT istdunkel;
-    If b Then mausdunkel;
+    If b Then
+        mausdunkel;
     MinMax (imin, imax, jmin, jmax);
 
     For j := jmin To jmax Do
@@ -102,12 +118,14 @@ Begin
         For i := 1 To curgridys Do
             curgridy[i] := GetPixel (gcxcoord, GcuGridPosY (i));
     End;
-    If b Then mauszeigen;
+    If b Then
+        mauszeigen;
 End;
 
 {**************************************************************}
 Procedure GcuCursorClear;
-Var i, j, imin, imax, jmin, jmax: integer;
+Var
+    i, j, imin, imax, jmin, jmax: integer;
 Begin
     MinMax (imin, imax, jmin, jmax);
     For j := jmin To jmax Do
@@ -124,14 +142,16 @@ End;
 
 {**************************************************************}
 Procedure GcuPatternRestore;
-Var i, j, imin, imax, jmin, jmax: integer;
+Var
+    i, j, imin, imax, jmin, jmax: integer;
     b: Boolean;
 Begin
     If NOT CursorIsOn Then
         Exit;
     CursorIsOn := False;
     b := NOT istdunkel;
-    If b Then mausdunkel;
+    If b Then
+        mausdunkel;
     MinMax (imin, imax, jmin, jmax);
     For j := jmin To jmax Do
         For i := imin To imax Do
@@ -144,17 +164,20 @@ Begin
         For i := 1 To curgridys Do
             PutPixel (gcxcoord, GcuGridPosY (i), curgridy[i]);
     End;
-    If b Then mauszeigen;
+    If b Then
+        mauszeigen;
 End;
 
 {**************************************************************}
 Procedure GcuDrawCursor;
 
-Var i, j, imin, imax, jmin, jmax, icorr, jcorr: integer;
+Var
+    i, j, imin, imax, jmin, jmax, icorr, jcorr: integer;
     b: Boolean;
 Begin
     b := NOT istdunkel;
-    If b Then mausdunkel;
+    If b Then
+        mausdunkel;
     If NOT CursorisOn Then
         GcuPatternStore;
     CursorIsOn := True;
@@ -181,7 +204,8 @@ Begin
                 AND (jmin < GetmaxY - 56) Then
                 PutPixel (i, jmin, GraphCursor[CursorXSize SHR 1, CursorYSize SHR 1]);
     End;
-    If b Then mauszeigen;
+    If b Then
+        mauszeigen;
 End;
 
 {**************************************************************}
@@ -200,7 +224,8 @@ End;
 
 {**************************************************************}
 Procedure GcuIniCursor;
-Var i, j, k, pfeil: integer;
+Var
+    i, j, k, pfeil: integer;
 Begin
     {initialisiere Cursor-Bild}
     For i := 0 To CursorYSize Do

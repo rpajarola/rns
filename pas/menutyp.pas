@@ -4,7 +4,8 @@ Unit MenuTyp;
 
 Interface
 
-Const FieldLength = 12;
+Const
+    FieldLength = 12;
     ClearString = '                ';
 
 Type

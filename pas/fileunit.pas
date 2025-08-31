@@ -57,16 +57,20 @@ Procedure FilUnMarkPage;
 Procedure FilCutBlockFile(Name: String);
 Function FilNumPages(actptr, startptr, lastptr: listptr): integer;
 Function FilFileSelect(prompt, wildcard, dir: string): string;
+
 Implementation
 
-Uses helpunit,
+Uses
+    helpunit,
     dos,
     Graph,
     crt,
     Texts,
     SdUnit,
     Markunit;
+
 {****************************************************}
+
 Function FilNew(Var lptr: listptr): boolean;
 Begin
     new (lptr);
@@ -82,7 +86,8 @@ End;
 {****************************************************}
 Procedure FilFindeErstBestenFont(Var instring: stringline);
 
-Var sr: SearchRec;
+Var
+    sr: SearchRec;
 Begin
     FindFirst (ConcatPaths (['fonts', '*.fnt']), $3F, SR);
     If IOResult <> 0 Then
@@ -99,7 +104,8 @@ End;
 {****************************************************}
 Procedure FilCopyFile(infilename, outfilename: stringline);
 
-Var infile, outfile: File;
+Var
+    infile, outfile: File;
     inblock: ^byte;
     inblocksize: integer;
     inread, inwrite: integer;
@@ -155,7 +161,8 @@ End;
 {****************************************************}
 Function FilWrongVersion(instring: stringline): Boolean;
 
-Var infile: text;
+Var
+    infile: text;
     bufstr: stringline;
 Begin
     Assign (infile, instring);
@@ -168,7 +175,8 @@ End;
 {****************************************************}
 Function FilAssignCfgFile(Var cfgfile: text; basename: string; readf: boolean): string;
 
-Var filepath: stringline;
+Var
+    filepath: stringline;
 Begin
     FilAssignCfgFile := '';
     filepath := ConcatPaths ([RnsConfig.DataDir, basename + '.cfg']);
@@ -224,7 +232,8 @@ Procedure FilCheckLine(Var tempbuffer, inblock: stringline;
  Ist skip true, wird die Zeile �bersprungen, sonst nur angezeigt in inblock
  Ist DELLINE true, wird die Zeile gel�scht.}
 
-Var tbsav: byte;
+Var
+    tbsav: byte;
 
 Begin
     endreached := false;
@@ -264,8 +273,10 @@ Begin
         End;
         tbufpos := tbsav;
     End;
-    If NOT skip Then tbufpos := tbsav;
-    If length (inblock) < linemarker Then inblock := inblock + '         ';
+    If NOT skip Then
+        tbufpos := tbsav;
+    If length (inblock) < linemarker Then
+        inblock := inblock + '         ';
 End;
 
 {*********************************************************}
@@ -274,7 +285,8 @@ Procedure FilStringSeparate(Var tempbuffer: stringline;
     Var tbufpos: byte);
 {An der Stelle tbufpos in tempbuffer wird der String aufgebrochen}
 
-Var prevptr, nextptr: listptr;
+Var
+    prevptr, nextptr: listptr;
 
 Begin
     If ((length (tempbuffer) > tbufpos) AND (tbufpos > 0)) Then
@@ -321,7 +333,8 @@ End;
 Procedure FilBufClear;
 {Leeren eines Buffer}
 
-Var bufptr: listptr;
+Var
+    bufptr: listptr;
 
 Begin
     bufptr := bufstartptr;
@@ -344,7 +357,8 @@ Procedure FilFindPtr(pagenum, linenum: integer; Var foundptr,
  lastinclude = true heisst, dass die letzte Zeile noch �bersprungen
                wird}
 
-Var inblock, dummyblock: stringline;
+Var
+    inblock, dummyblock: stringline;
     actline, linepos: byte;
     i: integer;
     endreached: boolean;
@@ -363,7 +377,8 @@ Begin
             lastptr, linepos, endreached, true, false);
         actline := actline + 1;
     End;
-    If lastinclude Then FilCheckLine (inblock, dummyblock, foundptr,
+    If lastinclude Then
+        FilCheckLine (inblock, dummyblock, foundptr,
             startptr, lastptr,
             linepos, endreached, true, false);
 
@@ -376,7 +391,8 @@ Procedure FilFileToHeap(Var infile: text; Var actptr, startptr,
     lastptr: listptr; Var ok: boolean);
 {Kopiert das File infile auf den Heap und initialisiert die Pointer}
 
-Var tempptr: listptr;
+Var
+    tempptr: listptr;
     workdat: linerec;
     inblock, tempbuffer: stringline;
     version, code: Integer;
@@ -408,7 +424,8 @@ Begin
                     Exit;
                 End;
                 version := 0;
-            End Else Begin
+            End Else
+            Begin
                 If copy (inblock, 1, 7) = 'VERSION' Then
                 Begin
                     Val (Copy (inblock, 9, 3), version, code);
@@ -421,14 +438,18 @@ Begin
                         HlpHint (HntCannotReadFile, HintWaitEsc, [actfilename]);
                         Exit;
                     End;
-                End Else If (inblock[1] = 'N') OR (inblock[1] = 'T') Then version := 1 Else Begin
+                End Else If (inblock[1] = 'N') OR (inblock[1] = 'T') Then
+                    version := 1
+                Else
+                Begin
                     ReadLn (infile, inblock);
                     If (inblock[1] = 'N') OR (inblock[1] = 'T') Then
                     Begin
                         ReSet (infile);
                         ReadLn (infile, inblock);
                         Version := 2;
-                    End Else Begin
+                    End Else
+                    Begin
                         ReSet (infile);
                         ReadLn (infile, inblock);
                         version := 3;
@@ -485,7 +506,9 @@ Begin
             While ((NOT eof (infile)) AND (ok)) Do
             Begin
                 readln (infile, inblock);
-                If inblock = '' Then inblock := 'T'{if inblock=''}Else If (inblock[1] <> 'T') AND (inblock[1] <> 'N') Then
+                If inblock = '' Then
+                    inblock := 'T'{if inblock=''}
+                Else If (inblock[1] <> 'T') AND (inblock[1] <> 'N') Then
                 Begin
                     While (Length (inblock) > 0) AND (inblock[1] = ' ') Do
                         delete (inblock, 1, 1);
@@ -493,7 +516,10 @@ Begin
                         inblock := 'T';
                     If (inblock[1] <> 'T') AND (inblock[1] <> 'N') Then
                         If HlpAskYesEsc ('File contains illegal data!',
-                            'Press [Y] to continue, [ESC] to cancel', hpFileMenu) Then inblock := 'T        ' + inblock{if hlpaskyesesc}Else ok := false;{if inblock[1]<>'T'...}
+                            'Press [Y] to continue, [ESC] to cancel', hpFileMenu) Then
+                            inblock := 'T        ' + inblock{if hlpaskyesesc}
+                        Else
+                            ok := false;{if inblock[1]<>'T'...}
                 End;{if(inblock[1]<>'T') and (inblock[1]<>'N')}
                 If ok AND ((inblock[1] = 'T') OR (inblock[1] = 'N')) Then
                     If (length (tempbuffer) + length (inblock) >= 255) Then
@@ -502,13 +528,16 @@ Begin
                         FilHeapInsertString (tempbuffer, tempptr, startptr, lastptr,
                             actptr, false);
                         tempbuffer := inblock + #0;
-                    End Else tempbuffer := tempbuffer + inblock + #0{Noch Platz im Buffer, Buffer weiter f�llen};{if(inblock[1]='T')or(inblock[1]='N')}
+                    End Else
+                        tempbuffer := tempbuffer + inblock + #0{Noch Platz im Buffer, Buffer weiter f�llen};{if(inblock[1]='T')or(inblock[1]='N')}
             End;{while ((not eof(infile)) and (ok))}
-            If ok Then FilHeapInsertString (tempbuffer, tempptr, startptr, lastptr,
+            If ok Then
+                FilHeapInsertString (tempbuffer, tempptr, startptr, lastptr,
                     actptr, false);{if ok}
             close (infile);
         End;{if lastptr<>nil}
-    End{if filnew}Else ok := false;
+    End{if filnew}Else
+        ok := false;
 End;
 
 {*********************************************************}
@@ -518,7 +547,8 @@ Procedure FilHeapToFile(Var outfile: text; Var actptr, startptr,
 {Kopiert den Heap auf das File infile und gibt den Speicher frei falls
  dispmem = true ist}
 
-Var temptr: listptr;
+Var
+    temptr: listptr;
     inblock, tempblock: stringline;
     lineend: byte;
     attr: word;
@@ -535,9 +565,11 @@ Begin
             'Press any key to continue',
             getcolor, sz8x16, stnormal);
         XClearKbd;
-        Repeat Until KeyPressed;
+        Repeat
+        Until KeyPressed;
         XClearKbd;
-    End Else Begin
+    End Else
+    Begin
         HlpHint (HntSavingFile, 250, [actfilename]);
         If NOT fileopen Then
         Begin
@@ -598,7 +630,8 @@ Begin
                 lineend := pos (chr (0), inblock);
             End;
             temptr := temptr^.next;
-            If dispmem Then dispose (temptr^.last);
+            If dispmem Then
+                dispose (temptr^.last);
         End;
     End;
     close (outfile);
@@ -612,7 +645,8 @@ Procedure FilHeapInsertString(inblock: stringline; Var nowptr, firstptr,
  sonst bleibt es unver�ndert
  ist nowptr = actptr, so wird auf jeden Fall ein neuer Pointer kreiert}
 
-Var workdat: linerec;
+Var
+    workdat: linerec;
     tempptr, prevptr: listptr;
 
 Begin
@@ -649,10 +683,13 @@ Begin
             tempptr^.next := nowptr;
             tempptr^.last := prevptr;
             nowptr^.last := tempptr;
-            If prevptr <> nil Then prevptr^.next := tempptr;
-            If tempptr^.next = firstptr Then firstptr := tempptr;
+            If prevptr <> nil Then
+                prevptr^.next := tempptr;
+            If tempptr^.next = firstptr Then
+                firstptr := tempptr;
         End; { else if firstptr = nil then }
-        If newactptr Then nowptr := tempptr;
+        If newactptr Then
+            nowptr := tempptr;
     End{if filnew}{ else if ((not newactptr) and}; { else if ((newactptr) and }
 End;
 
@@ -663,7 +700,8 @@ Procedure FilHeapExtractString(Var inblock: stringline; Var actptr,
  actptr zeigt neu auf den Nachfolger von inblock.
  Inblock wird geloescht.}
 
-Var prevptr, nextptr: listptr;
+Var
+    prevptr, nextptr: listptr;
     lineend: byte;
     tempbuffer: stringline;
 
@@ -695,7 +733,8 @@ Procedure FilHeapSqueeze(Var actptr, startptr, endptr: listptr;
     trailblank: boolean);
 {Heap auf maximale Stringl�nge verdichten}
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
     lineend: byte;
     t1ptr, t2ptr: listptr;
 
@@ -735,12 +774,14 @@ Procedure FilSavePage(FirstLine, LastLine: integer; Var tempptr,
 {Versorgen der Seite von firstline bis lastline
  tempptr zeigt auf das Ende der Seite}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     For i := firstline To lastline Do
     Begin
-        If page[i, 1] = 'T' Then IniTrailBlank (page[i]);
+        If page[i, 1] = 'T' Then
+            IniTrailBlank (page[i]);
         FilHeapInsertString (page[i] + chr (0), tempptr, startptr, lastptr,
             tempptr, false);
     End;
@@ -751,7 +792,8 @@ End;
 Procedure FilFindPage(Pagenumber: integer; Var Actpage: integer;
     Var tempptr, startptr, lastptr: listptr);
 
-Var actline, i: integer;
+Var
+    actline, i: integer;
     inblock, dummyblock: stringline;
     linepos: byte;
     endreached: boolean;
@@ -792,7 +834,8 @@ Procedure FilSkipPage(Var tempptr, startptr, lastptr: listptr);
 {Springt auf die n�chste Seite im Heap, und holt die aktuelle
  aus dem Heap}
 
-Var actline: integer;
+Var
+    actline: integer;
 
 Begin
     actline := topmargin;
@@ -804,8 +847,10 @@ Begin
         End;
 End;
 
+
 Function FilCompareFiles(FName1, FName2: String): Boolean;
-Var P1, P2: Pointer;
+Var
+    P1, P2: Pointer;
     F1, F2: File;
     L: LongInt;
     A: Word;
@@ -852,6 +897,7 @@ Begin
     Close (F2);
 End;
 
+
 Procedure FilFontSelect;
 
 (*Var instring        : String;
@@ -891,7 +937,8 @@ begin
   End;
   PagRefPage;
 end;*)
-Var s: string;
+Var
+    s: string;
 Begin
     s := FilFileSelect ('Select Symbolfont', '*.fnt', '');
     If s <> '' Then
@@ -901,8 +948,10 @@ Begin
     End;
 End;
 
+
 Function FilFileSelect(prompt, wildcard, dir: string): string;
-Var instring: String;
+Var
+    instring: String;
     ok: boolean;
     MausX, MausY: Word;
     Maustaste: Word;
@@ -942,8 +991,10 @@ Begin
     PagRefPage;
 End;
 
+
 Procedure FilDelPage(Var actptr, startptr, lastptr: listptr);
-Var delfil: Text;
+Var
+    delfil: Text;
     i, result: integer;
     oldpage: integer;
 Begin
@@ -966,7 +1017,8 @@ Begin
                 HlpHint (HntCannotWriteFile, HintWaitEsc, ['delpage']);
                 Exit;
             End;
-        End Else Begin
+        End Else
+    Begin
         oldpage := pagecount;
         { Aktuelle Seite sichern }
         FilSavePage (1, pagelength, actptr, startptr, lastptr);
@@ -996,15 +1048,19 @@ Begin
         PageCount := Result;
         IniNewPage (i{dummy});{parameter sollte linenum sein, wird aber nicht ber�cksichtigt}
         PagGetPageFromHeap (actptr, startptr, lastptr, i);
-    End Else Begin
+    End Else
+    Begin
         PagGetSetupPage (actptr, startptr, lastptr);
         pagecount := 1;
     End;
     PagRefPage;
     FilUnMarkPage;
 End;
+
+
 Procedure FilUnDelPage(Var actptr, startptr, lastptr: listptr);
-Var delfil: text;
+Var
+    delfil: text;
     i: integer;
 Begin
     If delpage Then
@@ -1033,8 +1089,11 @@ Begin
         FilUnMarkPage;
     End;
 End;
+
+
 Procedure FilPastePage(Var actptr, startptr, lastptr: listptr);
-Var copyfile: Text;
+Var
+    copyfile: Text;
     i: integer;
 Begin
     If pagebuf <> -1 Then
@@ -1054,6 +1113,7 @@ Begin
         filUnMarkPage;
     End;
 End;
+
 
 Procedure FilMarkPage;
 Begin
@@ -1093,7 +1153,8 @@ End;
 {������������������������ FilCopyPage ����������������������������������������}
 
 Procedure FilCopyPage(Var actptr, startptr, lastptr: listptr);
-Var Copyfile: Text;
+Var
+    Copyfile: Text;
     i, result: integer;
     oldpage:  integer;
 Begin
@@ -1115,7 +1176,8 @@ Begin
                 HlpHint (HntCannotWriteFile, HintWaitEsc, ['COPYPAGE']);
                 Exit;
             End;
-        End Else Begin
+        End Else
+    Begin
         oldpage := pagecount;
         FilSavePage (1, pagelength, actptr, startptr, lastptr);
         FilFindPage (pagebuf, Result, actptr, startptr, lastptr);
@@ -1137,15 +1199,18 @@ Begin
     close (copyfile);
 End;
 
+
 Procedure FilCutBlockFile(Name: String);
-Var F1, F2: Text;
+Var
+    F1, F2: Text;
     i, j: Integer;
     inblock: String;
 Begin
     Assign (F1, Name);
     ReSet (F1);
     Assign (F2, 'TEMP.RNS');
-    i := 0;j := 0;
+    i := 0;
+    j := 0;
     While NOT EoF (F1) Do
     Begin
         ReadLn (F1, InBlock);
@@ -1165,7 +1230,8 @@ Begin
     ReadLn (F1);
     WriteLn (F2, Inblock);
     WriteLn (F2, 0: 5, 1: 5, 1: 5, 1: 5, (j MOD 52) + 1: 5, 1: 5, (j DIV 52) + 1: 5);
-    If j > 53 Then j := j - 52;
+    If j > 53 Then
+        j := j - 52;
     For i := 2 To j Do
     Begin
         ReadLn (F1, InBlock);
@@ -1177,9 +1243,11 @@ Begin
     Rename (F2, Name);
 End;
 
+
 Function FilNumPages(actptr, startptr, lastptr: listptr): integer;
     { Anzahl Seiten }
-Var i: integer;
+Var
+    i: integer;
     actpage: integer;
     tempptr: listptr;
 Begin
@@ -1190,6 +1258,7 @@ Begin
     Until i <> actpage;
     FilNumPages := i - 1;
 End;
+
 Begin
     FilBufStart;
 End.

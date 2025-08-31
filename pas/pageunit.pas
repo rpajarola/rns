@@ -36,7 +36,10 @@ Procedure PagReadPage(Var tempptr, startptr, lastptr: listptr;
     Var tempbuf: stringline; Var tbufpos: byte);
 
 Procedure PagShowCurPosDistances(Linenum, ActPosn, ActPost: Byte; CorrY: Byte);
-Var beats, eint, resolution: string;
+
+Var
+    beats, eint, resolution: string;
+
 Procedure PagBottomFrame;
 Procedure PagPutSearchBottomLine;
 Function paggetfreq(c: char): Integer;
@@ -44,7 +47,8 @@ Function paggetfreq(c: char): Integer;
 
 Implementation
 
-Uses Symbols,
+Uses
+    Symbols,
     GCurUnit,
     GetUnit,
     Textunit,
@@ -57,12 +61,14 @@ Uses Symbols,
 
 {*******************************************************************}
 Procedure PagShowCurPosDistances(Linenum, ActPosn, ActPost: Byte; CorrY: Byte);
-Var beats, eint, resolution: string;
+Var
+    beats, eint, resolution: string;
 
     {Zeigt Cusorposition auf Text- und Musiklinien}
 
     Function GetN(St: String; P, X: Byte): Byte;
-    Var a: Byte;
+    Var
+        a: Byte;
         c: Char;
 
     Begin
@@ -83,7 +89,8 @@ Var beats, eint, resolution: string;
                         Exit;
                     End;{'%'}
                 End;{Case}
-            End{For} Else For a := P To Length (St) Do
+            End{For} Else
+            For a := P To Length (St) Do
             Begin
                 c := St[a];
                 Case C Of
@@ -102,9 +109,11 @@ Var beats, eint, resolution: string;
         GetN := 0;
     End;{Func}
 
+
     Function GetL(St: String; P, X: Byte): Byte;
 
-    Var c: Char;
+    Var
+        c: Char;
         b: Byte;
         Code: integer;
     Begin
@@ -120,7 +129,8 @@ Var beats, eint, resolution: string;
             c := St[P - 1]
         Else If p < $FF Then
             c := St[P + 1]
-        Else Begin
+        Else
+        Begin
             GetL := 0;
             Exit;
         End;
@@ -148,15 +158,18 @@ Var beats, eint, resolution: string;
             Getadd := false;
     End;
 
+
     Function nextavail(linenum, actposn: Integer): Boolean;
     Begin
         nextavail := paggetfreq (page[linenum, actposn + 1]) <> 32767;
     End;
 
+
     Function lastavail(linenum, actposn: Integer): Boolean;
     Begin
         lastavail := paggetfreq (page[linenum, actposn - 1]) <> 32767;
     End;
+
 
     Function getflam(linenum, actposn: Integer): Byte;
     Begin
@@ -169,9 +182,11 @@ Var beats, eint, resolution: string;
         End;{case else}
     End;
 
-Const NonChars: Set Of Char = ['(', ')', '[', ']', '-', '+', '='];
+Const
+    NonChars: Set Of Char = ['(', ')', '[', ']', '-', '+', '='];
 
-Var LSt, RSt: String;
+Var
+    LSt, RSt: String;
     L: Byte;
     NL, NR: Byte;
     Col, Row: String;
@@ -181,12 +196,14 @@ Var LSt, RSt: String;
     i, j: integer;
     {zeigt Position auf ML}
 
-Type TBottomInfo = Record
+Type
+    TBottomInfo = Record
         S: String[20];
         H: Boolean;
     End;
 
-Const KeySwap: Array[0..2, 1..2, 1..2] Of TBottomInfo =
+Const
+    KeySwap: Array[0..2, 1..2, 1..2] Of TBottomInfo =
         ((((S: '                    '; H: False),   {0,1,1}
         (S: ' KeySwap:Symbolsize '; H: True)),  {0,1,2}
         ((S: ' KeySwap:Cumulating '; H: True),   {0,2,1}
@@ -224,7 +241,10 @@ Begin
         Begin
             If symbcount <> 0 Then
                 For a := 0 To symbcount Do
-                    If nextavail (linenum, actposn) Then inc (actposn) Else Begin{if nextavail}
+                    If nextavail (linenum, actposn) Then
+                        inc (actposn)
+                    Else
+                    Begin{if nextavail}
                         i := symbcount - 1;
                         symbcount := symbcount MOD (a + 1);
                         If i <> symbcount - 1 Then
@@ -238,7 +258,8 @@ Begin
                     If getadd (linenum, actposn) Then
                     Begin   {Add vom CSym aus?}
                         col := ' add';
-                        If nextavail (linenum, actposn) AND getadd (linenum, actposn + 1) Then col := col + 's'{Mehrere?};{if nextavail}
+                        If nextavail (linenum, actposn) AND getadd (linenum, actposn + 1) Then
+                            col := col + 's'{Mehrere?};{if nextavail}
                     End;{if getadd}
                     i := paggetfreq (page[linenum, actposn]);
                     str (i: 5, row);
@@ -246,8 +267,10 @@ Begin
                         col := row + ' Hz' + col;
                 End;{if paggetfreq}
                 If (symbcount <> 0) OR nextavail (linenum, actposn) OR
-                    lastavail (linenum, actposn) Then col := col + ' [Tab]  '{ ' [('+#24+')Tab]  '}{zu lang in gewissen F�llen};
-            End{if corry<>2} Else Begin
+                    lastavail (linenum, actposn) Then
+                    col := col + ' [Tab]  '{ ' [('+#24+')Tab]  '}{zu lang in gewissen F�llen};
+            End{if corry<>2} Else
+            Begin
                 i := paggetfreq (page[linenum, actposn]);
                 str (i: 5, col);
                 If (mulcent > 1) Then
@@ -274,9 +297,11 @@ Begin
                         row := ' �' + row + 'Hz ';
                     col := col + 'Hz ' + row;
                 End;{ if mulcent<>1}
-                If (mulcent = 1) Then col := col + 'Hz';
+                If (mulcent = 1) Then
+                    col := col + 'Hz';
             End;{if corry<>2 else }
-        End Else Begin{if getflam}
+        End Else
+        Begin{if getflam}
             symbcount := symbcount AND 1;
             str (paggetfreq (page[linenum, actposn + 1 + (symbcount XOR 1)]): 5, row);
             Case getflam (linenum, actposn) Of
@@ -324,15 +349,26 @@ Begin
     c := Page[linenum, actposn + 1];
     If NOT Odd (symbcount) Then
     Begin
-        If Page[linenum, actposn - 1] IN nonChars Then c := Page[linenum, actposn + 1] Else Begin
+        If Page[linenum, actposn - 1] IN nonChars Then
+            c := Page[linenum, actposn + 1]
+        Else
+        Begin
             c := Page[linenum, actposn];
         End;
-    End Else If Page[linenum, actposn] IN nonChars Then c := Page[linenum, actposn + 1] Else c := Page[linenum, actposn];
+    End Else If Page[linenum, actposn] IN nonChars Then
+        c := Page[linenum, actposn + 1]
+    Else
+        c := Page[linenum, actposn];
     actposn := i;
     If Page[linenum, 1] = 'N' Then
     Begin
         If (charset = 2) Then
-            If (('a' <= c) AND (c <= 'z')) Then c := Char (Byte (c) - 32) Else {if (('a' <= c) and (c <= 'z')) then}If (('A' <= c) AND (c <= 'Z')) Then c := Char (Byte (c) + 63) Else If ((#128 <= c) AND (c <= #153)) Then c := Char (Byte (c) - 31){else if (('a' <= c) and (c <= 'z')) then}; {if charset = 2 then}
+            If (('a' <= c) AND (c <= 'z')) Then
+                c := Char (Byte (c) - 32)
+            Else {if (('a' <= c) and (c <= 'z')) then}If (('A' <= c) AND (c <= 'Z')) Then
+                c := Char (Byte (c) + 63)
+            Else If ((#128 <= c) AND (c <= #153)) Then
+                c := Char (Byte (c) - 31){else if (('a' <= c) and (c <= 'z')) then}; {if charset = 2 then}
         If blankset = 2 Then
             If c = ',' Then
                 c := ' '
@@ -368,7 +404,8 @@ Begin
             {  if Lst='  1' then Lst:= '  1';  }
             If Lst = '   ' Then
                 Lst := ' � ';
-        End Else Begin
+        End Else
+        Begin
             LSt := ' � ';
         End;
         {Anzeige nach rechts}
@@ -389,8 +426,10 @@ Begin
                 Rst := '0' + Rst;
             If Length (Rst) <> 3 Then
                 Rst := Rst + ' ';
-            If Rst = '   ' Then Rst := '..?';
-        End Else Begin
+            If Rst = '   ' Then
+                Rst := '..?';
+        End Else
+        Begin
             RSt := '..?';
         End;
         If linenum <> 0 Then
@@ -444,7 +483,8 @@ Begin
 
         If (corry = 0) {or (addcent=0) } Then
             col := ' ' + LSt + ' ' + chbuf + ' ' + RSt + ' '
-        Else Begin
+        Else
+        Begin
             str (abs (Round (addcent)): 4, col);
             If addcent > 0 Then
                 col := '+' + col
@@ -461,7 +501,8 @@ Begin
             col, frLow);
 
         {zeigt x/y-Position}
-    End{if Page[linenum,1]='N'} Else Begin
+    End{if Page[linenum,1]='N'} Else
+    Begin
         If Page[linenum][1] = 'T' Then
         Begin
             Str (ActPost - 10, Col);
@@ -525,15 +566,18 @@ End;{proc 1}
 Procedure PagUnMark;
 {Unmark and refresh page}
 
-Var refmin, refmax: byte;
+Var
+    refmin, refmax: byte;
     mx: integer;
 
 Begin
     refmin := topmargin;
     refmax := pagelength;
     mx := mstart.mxcoord;
-    If pagecount = mstart.mpag Then refmin := mstart.mline;
-    If pagecount = mend.mpag Then refmax := mend.mline;
+    If pagecount = mstart.mpag Then
+        refmin := mstart.mline;
+    If pagecount = mend.mpag Then
+        refmax := mend.mline;
 
     If ((pagecount >= mstart.mpag) AND
         (pagecount <= mend.mpag)) Then
@@ -567,7 +611,8 @@ Begin
         GetNoteBlock (inblock, lineattr, linenum);
         Xa := IniFirstBeatPos (lineattr);
         GetNotePosX (Xa, actposn, linenum, true, true);
-    End Else Begin
+    End Else
+    Begin
         actpost := linemarker + 2;
         TexActPosX (Xa, actpost, linenum, true);
     End;
@@ -575,13 +620,15 @@ End;
 
 {*******************************************************************}
 Procedure PagCursorRight(linenum: integer; Var actposn, actpost: integer);
-Var xa: integer;
+Var
+    xa: integer;
 Begin
     If Page[linenum, 1] = 'N' Then
     Begin
         xa := IniLineEnd (page[linenum]);
         GetNotePosX (Xa, actposn, linenum, true, false);
-    End Else Begin
+    End Else
+    Begin
         xa := gmaxX - Gcurightmargin;
         actpost := length (page[linenum]) + 1;
         While (page[linenum, actpost - 1] = ' ') AND (actpost > linemarker + 1) Do
@@ -621,17 +668,23 @@ Begin
     IniSpacedText (57, 58, '                       ', frLow);
 
 End;
+
 {*******************************************************************}
+
 Procedure PagPutSearchBottomLine;
 Begin
     PagEmptyBottomLine;
 End;
+
 {*******************************************************************}
+
 Procedure PagPutBottomLine;
 
-Const itemlength = 21;
+Const
+    itemlength = 21;
 
-Var inblock: stringline;
+Var
+    inblock: stringline;
     i: longint;
     x: byte;
     St: String;
@@ -641,7 +694,8 @@ Var inblock: stringline;
     Procedure PagPutFileHint(hinttext: string);
     {Kleines Proceduerchen um den File-Name hinzuschreiben}
 
-    Var x, y: integer;
+    Var
+        x, y: integer;
         { var actpage: integer; }
     Begin
         y := gmaxy DIV charheight - 2;
@@ -657,7 +711,8 @@ Begin
             gmaxy DIV charheight - 1,
             ' [F1] = HELP ', fr3D);
 
-        If sndlengthspm = 0 Then sndlengthspm := 80;
+        If sndlengthspm = 0 Then
+            sndlengthspm := 80;
         w := Round (1000 * sndlengthspm);
         Str ((w / 1000): 5: 3, St);
         While Length (St) < 8 Do
@@ -694,10 +749,14 @@ Begin
 
         If setuppage IN actedit Then
         Begin
-            If defsetuppage IN actedit Then PagPutFileHint (' PAGEDEFAULT ') Else Begin
+            If defsetuppage IN actedit Then
+                PagPutFileHint (' PAGEDEFAULT ')
+            Else
+            Begin
                 PagPutFileHint (' SETUP  PAGE ');
             End;
-        End Else Begin
+        End Else
+        Begin
             Str (PageCount: 3, inblock);{Sorry wegen des Missbrauchs deines inblockes}
             IniSpacedText (gmaxx DIV 16 - 37,
                 gmaxy DIV charheight - 3,
@@ -713,7 +772,8 @@ Begin
         Str (pagecount: 3, inblock);
         inblock := ' Printing page ' + inblock;
         HlpBottomLine (inblock);
-    End Else ButDraw;
+    End Else
+        ButDraw;
 End;
 
 {*************************************************************************}
@@ -732,7 +792,8 @@ Begin
     Begin
         PriSetLineWidth (frwidth);
         PriDrawFrame (grminx, grminy, grmaxx, grmaxy);
-    End Else Begin
+    End Else
+    Begin
         SetColor (5);
         Line (grminx, grminy, grminx, grmaxy); { � l}
         Line (grminx, grminy, grmaxx, grminy); { � o}
@@ -744,7 +805,8 @@ End;
 {*******************************************************************}
 Function PagEmptyPage(Var tempptr, startptr, lastptr: listptr): boolean;
     {Testen, ob die n�chste Seite im Heap leer ist}
-Var res, endreached: boolean;
+Var
+    res, endreached: boolean;
     i, tbufpos: byte;
     inblock, tempbuf: stringline;
     tempsav: listptr;
@@ -760,7 +822,10 @@ Begin
         FilCheckLine (tempbuf, inblock, tempptr, startptr, lastptr,
             tbufpos, endreached, true, false);
         {leere Zeile oder Fuss/Kopftext Zeile}
-        If ((IniEmptyLine (inblock)) OR (inblock[4] = 'F')) Then i := i + 1 Else res := false;
+        If ((IniEmptyLine (inblock)) OR (inblock[4] = 'F')) Then
+            i := i + 1
+        Else
+            res := false;
     End;
     tempptr := tempsav;
     PagEmptyPage := res;
@@ -785,7 +850,8 @@ End;
 Procedure PagGetPageFromHeap(Var tempptr, startptr, lastptr: listptr;
     Var linec: integer);
 {Kopieren einer Seite aus dem Heap in den Page-Array}
-Var inblock: stringline;
+Var
+    inblock: stringline;
 
 Begin
     If tempptr <> lastptr Then
@@ -794,7 +860,8 @@ Begin
         Repeat
             FilHeapExtractString (inblock, tempptr, startptr, lastptr);
             page[linec] := inblock;
-            While length (page[linec]) < linemarker Do page[linec] := page[linec] + ' ';
+            While length (page[linec]) < linemarker Do
+                page[linec] := page[linec] + ' ';
             If (page[linec, 1] <> 'N') AND (page[linec, 1] <> 'T') Then
                 page[linec, 1] := 'T';
             inc (linec);
@@ -811,7 +878,8 @@ End;
 Procedure PagDisplayPage(Var tempptr, startptr, lastptr: listptr);
 {Darstellen einer Seite von der gegenw�rtigen Position an}
 
-Var linec, i: integer;
+Var
+    linec, i: integer;
     rptr: listptr;
 
 Begin
@@ -819,7 +887,10 @@ Begin
     PagPageFrame;
     PagPutBottomLine;
     {Seite lesen}
-    If tempptr <> lastptr Then PagGetPageFromHeap (tempptr, startptr, lastptr, linec) Else { if tempptr <> lastptr then} PagGetSetupPage (rptr, startptr, lastptr); { else if tempptr <> lastptr then}
+    If tempptr <> lastptr Then
+        PagGetPageFromHeap (tempptr, startptr, lastptr, linec)
+    Else
+        { if tempptr <> lastptr then} PagGetSetupPage (rptr, startptr, lastptr); { else if tempptr <> lastptr then}
     linec := pagelength;
 
     {Seite anzeigen}
@@ -839,7 +910,8 @@ End;
 
 {*******************************************************************}
 Procedure PagGetSetupPage(Var tempptr, startptr, lastptr: listptr);
-Var tempbuf: stringline;
+Var
+    tempbuf: stringline;
     i: integer;
     endreached: boolean;
     tbufpos: byte;
@@ -859,7 +931,8 @@ End;
 Procedure PagReadPage(Var tempptr, startptr, lastptr: listptr;
     Var tempbuf: stringline; Var tbufpos: byte);
 {liest eine Seite aus dem heap, ohne den Heap zu ver�ndern}
-Var i: integer;
+Var
+    i: integer;
     endreached: boolean;
 Begin
     For i := topmargin To pagelength Do
@@ -876,21 +949,30 @@ End;
 {*******************************************************************}
 Procedure PagRefClearVal(clearxmin, clearymin, clearxmax, clearymax: integer);
 Begin
-    If clearxmin < refxmin Then refxmin := clearxmin;
-    If clearxmax > refxmax Then refxmax := clearxmax;
-    If clearymin < refymin Then refymin := clearymin;
-    If clearymax > refymax Then refymax := clearymax;
-    If refxmin < 0 Then refxmin := 0;
-    If refymin < 0 Then refymin := 0;
-    If refxmax > grmaxx Then refxmax := grmaxx;
-    If refymax > grmaxy Then refymax := grmaxy;
+    If clearxmin < refxmin Then
+        refxmin := clearxmin;
+    If clearxmax > refxmax Then
+        refxmax := clearxmax;
+    If clearymin < refymin Then
+        refymin := clearymin;
+    If clearymax > refymax Then
+        refymax := clearymax;
+    If refxmin < 0 Then
+        refxmin := 0;
+    If refymin < 0 Then
+        refymin := 0;
+    If refxmax > grmaxx Then
+        refxmax := grmaxx;
+    If refymax > grmaxy Then
+        refymax := grmaxy;
 End;
 
 {*******************************************************************}
 Procedure PagRefreshPage(clearxmin, clearymin,
     clearxmax, clearymax: integer);
 {Darstellen einer Seite aus dem Page-Buffer}
-Var i: integer;
+Var
+    i: integer;
     reflinemin, reflinemax: integer;
     testinp: boolean;
 Begin
@@ -910,7 +992,8 @@ Begin
         PagPageFrame;
         reflinemin := (clearymin DIV linethick) - 4;
         reflinemax := (clearymax DIV linethick) + 4;
-        If reflinemin < topmargin Then reflinemin := topmargin;
+        If reflinemin < topmargin Then
+            reflinemin := topmargin;
         If reflinemax > pagelength Then
             reflinemax := pagelength;
         If clearymax > grmaxy Then
@@ -941,7 +1024,8 @@ Procedure PagShowPage(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     PageNumber: integer; savenow: boolean);
 {Darstellen der Seite PAGENUMBER}
-Var Result: integer;
+Var
+    Result: integer;
 Begin
     If savenow Then
         FilSavePage (1, PageLength, actptr, startptr, lastptr);
@@ -951,6 +1035,7 @@ Begin
     PagDisplayPage (actptr, startptr, lastptr);
     PagCursorLeft (linenum, actposn, actpost);
 End;
+
 
 Procedure PagBottomFrame;
 Begin
@@ -962,10 +1047,29 @@ Begin
     Line (0, grmaxy + 3, 0, gmaxy);
 End;
 
+
 Function paggetfreq(c: char): Integer;
-Var a: Integer;
+Var
+    a: Integer;
 Begin
-    If (soundchange AND saRhythm) <> 0 Then a := RhythmFreq Else If (c IN ['A'..'Z']) Then a := Sympar[Char (Byte (c) + 32), 3, 2] Else If (c IN ['a'..'z']) Then a := Sympar[c, 3, 1] Else If (c IN [Chr (161)..Chr (191)]) Then a := Sympar[Char (Byte (c) - 31), 3, 3] Else If (c IN [' ', '.', ',']) Then a := 0 Else If (c IN ['+', '-', '=', '*']) Then a := 0 Else If (c IN ['/', Chr (167), '\']) Then a := 0 Else If (c IN ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']) Then a := 32767 Else a := 0;
+    If (soundchange AND saRhythm) <> 0 Then
+        a := RhythmFreq
+    Else If (c IN ['A'..'Z']) Then
+        a := Sympar[Char (Byte (c) + 32), 3, 2]
+    Else If (c IN ['a'..'z']) Then
+        a := Sympar[c, 3, 1]
+    Else If (c IN [Chr (161)..Chr (191)]) Then
+        a := Sympar[Char (Byte (c) - 31), 3, 3]
+    Else If (c IN [' ', '.', ',']) Then
+        a := 0
+    Else If (c IN ['+', '-', '=', '*']) Then
+        a := 0
+    Else If (c IN ['/', Chr (167), '\']) Then
+        a := 0
+    Else If (c IN ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']) Then
+        a := 32767
+    Else
+        a := 0;
     paggetfreq := a;
 End;
 

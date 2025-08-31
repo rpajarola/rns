@@ -66,6 +66,7 @@ Function Searchlastchiffre(linenum: Integer): String;
 Function CopyLine(Src, Des: Integer): Boolean;
 Function LineUsed(Linenum: Byte): Boolean;
 Function ComHorLine(linenum: integer): Boolean;
+
 Implementation
 
 Uses
@@ -91,14 +92,16 @@ Uses
     userint,
     EditUnit;
 
-Var CursorKilled: Boolean;
+Var
+    CursorKilled: Boolean;
     Cursorlinestart, cursorlineend: Byte;
 
 {******************************************************}
 Function ComKeyGrant(Var c: char; linenum: integer): boolean;
     {testet, ob ein Normales Zeichen c zur Zeit erlaubt ist}
 
-Var ordc: byte absolute c;
+Var
+    ordc: byte absolute c;
 Begin
     ComKeyGrant := True;
     If mstart.mpag <> -1 Then
@@ -114,12 +117,16 @@ Begin
         HlpHint (HntNotAvailableHeader, HintWaitEsc, []);
         Exit;
     End;
-    If ordc = 26 Then ComKeyGrant := false;
+    If ordc = 26 Then
+        ComKeyGrant := false;
 End;
+
 {******************************************************}
+
 Function ComTestBlock(c: Char; Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr): Boolean;
-Var dummyb: Boolean;
+Var
+    dummyb: Boolean;
 Begin
     ComTestBlock := False;
     If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then
@@ -160,7 +167,8 @@ End;
 Function ComSpecGrant(c: char; linenum: integer): boolean;
     {testet, ob ein Spezialzeichen c zur Zeit erlaubt ist}
 
-Const marknocommands:          { w�hrend Markierung nicht erlaubt }
+Const
+    marknocommands:          { w�hrend Markierung nicht erlaubt }
         Set Of byte = [61{F3}, 62{F4}, 64{F6}, 67{F9},
         82{INS}, 83{DEL},
         87{shft f4}, 90{shft F7}, 92{shft F9},
@@ -183,7 +191,8 @@ Const marknocommands:          { w�hrend Markierung nicht erlaubt }
         91,
         146{ctrl ins}];
 
-Var Ordc: Byte absolute c;
+Var
+    Ordc: Byte absolute c;
 Begin
     ComSpecGrant := true;
 
@@ -250,10 +259,12 @@ End;
 Procedure ComEdReturn(Var linenum, actposn, actpost: integer;
     shiftp, ctrlp: Boolean);
 
-Var i: integer;
+Var
+    i: integer;
 Begin
     inbuffer := '';
-    If shiftp AND (NOT ctrlp) Then{Shft Enter}Begin
+    If shiftp AND (NOT ctrlp) Then{Shft Enter}
+    Begin
         If linenum < Pagelength - 1 Then
             inc (linenum, 2)
         Else
@@ -266,7 +277,8 @@ Begin
         End;
         If NOT (linenum IN [1..pagelength]) Then
             linenum := 1;
-    End Else If NOT (shiftp OR ctrlp) Then{Nur Enter}Begin
+    End Else If NOT (shiftp OR ctrlp) Then{Nur Enter}
+    Begin
         If linenum >= pagelength Then
             i := pagelength - 1;
         For i := linenum To pagelength Do
@@ -291,7 +303,8 @@ End;
 Function ComEdMaus(mausx, mausy, maustaste: word;
     Var linenum, actposn, actpost: integer): Boolean;
 
-Var x: integer;
+Var
+    x: integer;
     gx, gy: integer;
 Begin
     ComEdMaus := False;
@@ -343,7 +356,10 @@ Begin
     Case maustaste Of
 
         1: If mausy > grmaxy Then
-                If showmenus Then ButActivated (mausx + 8, mausy + 8, response, keyresponse) Else Begin
+                If showmenus Then
+                    ButActivated (mausx + 8, mausy + 8, response, keyresponse)
+                Else
+                Begin
                     Response := SPECIALKEY;
                     If mausx > 118 Then
                         KeyResponse := #133
@@ -389,7 +405,8 @@ End;
 {******************************************************}
 Procedure ComEdArrow(Direction: Movement;
     Var linenum, actposn, actpost: integer);
-Var x: integer;
+Var
+    x: integer;
 Begin
     inbuffer := '';
     symbcount := 0;
@@ -405,7 +422,8 @@ Begin
                 If page[linenum, 1] = 'T' Then
                 Begin
                     IniTrailBlank (page[linenum]);
-                    If actpost < 11 Then actpost := 11;
+                    If actpost < 11 Then
+                        actpost := 11;
                 End;
                 If page[linenum, 1] = 'N' Then
                 Begin
@@ -415,9 +433,11 @@ Begin
                 Begin
                     x := gcxcoord;
                     TexTxtPosX (x, actpost, linenum, true);
-                    If actpost < 11 Then actpost := 11;
+                    If actpost < 11 Then
+                        actpost := 11;
                     TexActPosX (x, actpost, linenum, true);
-                End Else TexActPosX (x, actpost, linenum, true);
+                End Else
+                    TexActPosX (x, actpost, linenum, true);
             End;
             lastentry := curupdown;
         End; {UP}
@@ -430,7 +450,8 @@ Begin
                 If page[linenum, 1] = 'T' Then
                 Begin
                     IniTrailBlank (page[linenum]);
-                    If actpost < 11 Then actpost := 11;
+                    If actpost < 11 Then
+                        actpost := 11;
                 End;
                 Case page[linenum, 1] Of
 
@@ -445,7 +466,8 @@ Begin
                         Begin
                             x := gcxcoord;
                             TexTxtPosX (x, actpost, linenum, true);
-                            If actpost < 11 Then actpost := 11;
+                            If actpost < 11 Then
+                                actpost := 11;
                             TexActPosX (x, actpost, linenum, true);
                         End
                         Else
@@ -510,9 +532,12 @@ Begin
     If ((linenum > topmargin) AND (page[linenum + 2, 1] = 'N')) Then
         GetLine (linenum + 2, gcxcoord - 20);
 End;
+
 {***********************************************}
+
 Procedure ComDelToSoLn(Var linenum, actposn, actpost: Integer);
-Var inblock: stringline;
+Var
+    inblock: stringline;
     i, l: integer;
 Begin
     inbuffer := '';
@@ -522,7 +547,8 @@ Begin
         i := commusicstart (inblock);
         If (copy (inblock, i, 2) = '.1') AND ((inblock[i + 2] < '0') OR (inblock[i + 2] > '9')) Then
             inc (i, 2)
-        Else Begin
+        Else
+        Begin
             i := comnext (inblock, i);
             If inblock[comstart (inblock, comnext (inblock, i))] = '.' Then
             Begin
@@ -536,7 +562,8 @@ Begin
         page[linenum] := inblock;
         actposn := i;
         GetActPosX (l, actposn, linenum, true);
-    End {if inblock} Else Begin
+    End {if inblock} Else
+    Begin
         PagRefClearVal (grminx, iniynow (linenum - 5), grmaxx, iniynow (linenum + 3));
         i := linemarker;
         While inblock[i] = ' ' Do
@@ -550,12 +577,15 @@ Begin
         TexActPosX (l, actpost, linenum, true);
     End;{if inblock else}
 End;
+
 {***********************************************}
+
 Function ComEdKey(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     KeyResponse: char; shiftp, ctrlp: Boolean): Boolean;
 
-Var ordc: integer;
+Var
+    ordc: integer;
     Insl, Ins: integer;
     inblock: stringline;
     v: string[3];
@@ -569,7 +599,8 @@ Begin
     Begin
         ordc := Byte (KeyResponse);
         Case ordc Of
-            10:{ctrl Enter} Begin
+            10:{ctrl Enter}
+            Begin
                 If Mstart.MPag <> -1 Then
                 Begin
                     HlpHint (HntUnMarkBlockFirst, HintWaitEsc, []);
@@ -599,7 +630,8 @@ Begin
                     ins := 0;
                 If ComInsPossible (Ins) Then
                 Begin
-                    For l := 1 To Ins Do SpeInsTextLine (i, actpost, actptr, startptr,
+                    For l := 1 To Ins Do
+                        SpeInsTextLine (i, actpost, actptr, startptr,
                             lastptr, false);
                     For l := 0 To (ComSysHeight (Linenum) - 1) Do
                     Begin
@@ -631,7 +663,8 @@ Begin
                     PagRefClearVal (0, IniYnow (linenum - comsysheight (linenum) - 2),
                         GetMaxX, GrMaxY - 9);
                     PagCursorLeft (linenum, actposn, actpost);
-                End Else HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
+                End Else
+                    HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
             End;
 
             127: If mstart.mpag = -1 Then
@@ -646,10 +679,16 @@ Begin
                     arrowentry := noarr;
                     inbuffer  := '';
                 End;{Ctrl BS: -}
-        Else If shiftp AND (ordc = 8) Then{Shift BS} ComDelToSoLn (linenum, actposn, actpost) Else Begin
+        Else If shiftp AND (ordc = 8) Then
+                {Shift BS} ComDelToSoLn (linenum, actposn, actpost)
+            Else
+            Begin
                 comedkey := True;
                 FileChanged := 1;
-                If (page[linenum, 1] = 'N') Then NotEdNoteLine (linenum, actposn, KeyResponse) Else Begin
+                If (page[linenum, 1] = 'N') Then
+                    NotEdNoteLine (linenum, actposn, KeyResponse)
+                Else
+                Begin
                     TexEdTextLine (linenum, actpost, KeyResponse);
                     getredraw (linenum, gcxcoord - 18, gcxcoord);
                     ComLineRep (linenum); {neu f�r TAB PEO}
@@ -691,7 +730,8 @@ Procedure ComEdSpecial(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     Var KeyResponse: char; shiftp, ctrlp: boolean);
 
-Var c, ch, dummyc: char;
+Var
+    c, ch, dummyc: char;
     SLColor: Byte;
     lasts: Byte;
     i, j, k, result: integer;
@@ -710,9 +750,13 @@ Var c, ch, dummyc: char;
     lineattr: lineattrtype;
     lastsnd: integer;
 
+
     Function SearchFirst(Var st: String; Var linenum, actposn: Integer): Boolean;
-    Var c: char;
+    Var
+        c: char;
         lnum: integer;
+
+
         Function ValidLine: Boolean;
         Begin
             actposn := comMusicStart (st);
@@ -722,6 +766,7 @@ Var c, ch, dummyc: char;
                 inc (actposn);
             ValidLine := (actposn <= length (st)) AND (GetDrawSymbol (lnum, actposn, false));
         End;
+
     Begin
         lnum := linenum;
         dec (linenum);
@@ -741,6 +786,7 @@ Var c, ch, dummyc: char;
         End;
         linenum := lnum;
     End;
+
 
     Procedure SwapColor;
     Begin
@@ -785,7 +831,8 @@ Begin
                     FilFindPage (pagecount, i, actptr, startptr, lastptr);
                     PagRefPage;
                 End;
-            163:{alt del}Begin{save page to buffer}
+            163:{alt del}
+            Begin{save page to buffer}
                 delpage := true;
                 assign (delfil, 'delpage');
                 rewrite (delfil);
@@ -808,21 +855,28 @@ Begin
                 {goto previous page if this is last page}
                 If actptr = lastptr Then
                     pagecount := pagecount - 1;
-                If pagecount > 0 Then PagShowPage (linenum, actposn, actpost, actptr,
-                        startptr, lastptr, pagecount, false){show new page, dont save this page} Else Begin
+                If pagecount > 0 Then
+                    PagShowPage (linenum, actposn, actpost, actptr,
+                        startptr, lastptr, pagecount, false){show new page, dont save this page}
+                Else
+                Begin
                     PagGetSetupPage (actptr, startptr, lastptr);
                     pagecount := 1;
                     PagRefPage;
                 End;
             End;
-            15: {shift tab}Begin
+            15: {shift tab}
+            Begin
                 FileChanged := 1;
-                If page[linenum, 1] = 'T' Then TexEdTextLine (linenum, actpost, chr (240)) Else If page[linenum, 1] = 'N' Then
+                If page[linenum, 1] = 'T' Then
+                    TexEdTextLine (linenum, actpost, chr (240))
+                Else If page[linenum, 1] = 'N' Then
                     If symbcount > 0 Then
                         dec (symbcount);
             End;
 
-            59: {F1: this help table}Begin
+            59: {F1: this help table}
+            Begin
                 SetViewPort (0, 0, GetMaxX, GetMaxY, true);
                 ClearViewPort;
                 HlpCommandTable;
@@ -838,7 +892,8 @@ Begin
                 repline := false;
             End;
 
-            60:  {F2: save file}Begin
+            60:  {F2: save file}
+            Begin
                 XClearKbd;
                 GetMem (SPic, ImageSize (grminx, grmaxy - 49,
                     grMaxX, grmaxy));
@@ -855,7 +910,8 @@ Begin
                         'Press any key to continue',
                         getcolor, sz8x16, stnormal);
                     xClearKbd;
-                    Repeat Until KeyPressed;
+                    Repeat
+                    Until KeyPressed;
                     xClearKbd;
                     PutImage (GrMinX, grmaxy - 49, SPic^, NormalPut);
                     FreeMem (Spic, ImageSize (grminx, grmaxy - 49, grmaxx, grmaxy));
@@ -896,14 +952,16 @@ Begin
                 FreeMem (Spic, ImageSize (grminx, grmaxy - 49, grmaxx, grmaxy));
             End;
 
-            61: {F3: noteline insert} Begin
+            61: {F3: noteline insert}
+            Begin
                 FileChanged := 1;
                 SpeInsNoteLine (linenum, actposn, actptr, startptr, lastptr);
                 PagCursorLeft (linenum, actposn, actpost);
                 repline := false;
             End;
 
-            62: {F4: emptyline insert}Begin
+            62: {F4: emptyline insert}
+            Begin
                 FileChanged := 1;
                 SpeInsTextLine (linenum, actpost, actptr, startptr,
                     lastptr, false);
@@ -911,7 +969,8 @@ Begin
                 repline := false; {sonst gibts Doppellinien wegen ComLineRep PEO}
             End;
 
-            63: {F5: sound play}Begin
+            63: {F5: sound play}
+            Begin
                 For i := linenum To pagelength Do
                     If page[i, 1] = 'N' Then
                         break;
@@ -968,7 +1027,8 @@ Begin
                 End;
                 If playnext Then
                     Repeat
-                        While xkeypressed Do xreadkey (temp1, temp2);
+                        While xkeypressed Do
+                            xreadkey (temp1, temp2);
                         SndPlaySound (linenum, actposn, actpost,
                             actptr, startptr, lastptr, false, playnext);
                         If PlayNext Then
@@ -989,19 +1049,22 @@ Begin
                 repline := false;
             End;
 
-            64: {F6: header + footer}Begin
+            64: {F6: header + footer}
+            Begin
                 FileChanged := 1;
                 Sp2SetHeaderFooter (linenum);
                 repline := false;
             End;
 
-            65: {F7: copy line (to Ctrl-F7-Buffer)}Begin
+            65: {F7: copy line (to Ctrl-F7-Buffer)}
+            Begin
                 saveln := page[linenum];
                 HlpHint (HntSavingLine, HintNormalTime, []);
                 repline := false;
             End;
 
-            66: {F8: mark/undo block}Begin
+            66: {F8: mark/undo block}
+            Begin
                 If mstart.mpag = -1 Then
                 Begin
                     MarkStart (IniPos (linenum, actposn, actpost),
@@ -1012,7 +1075,8 @@ Begin
                     MarkEnd (IniPos (linenum, actposn, actpost),
                         linenum, pagecount);
                     MarkDisplay;
-                End Else Begin
+                End Else
+                Begin
                     PagUnmark;
                     {  PagRefPage; }
                     PagRefClearVal (grminx, iniYnow (linenum), grmaxx, iniYnow (linenum));
@@ -1020,12 +1084,17 @@ Begin
                 repline := false;
             End;
 
-            67: {F9: mark/undo page}Begin
-                If pagebuf = -1 Then filmarkpage Else filunmarkpage;
+            67: {F9: mark/undo page}
+            Begin
+                If pagebuf = -1 Then
+                    filmarkpage
+                Else
+                    filunmarkpage;
                 repline := false;
             End;
 
-            68: {F10: symbols table}Begin
+            68: {F10: symbols table}
+            Begin
                 c := 'a';
                 temp1 := false;
                 While (c <> chr (27)) Do
@@ -1038,42 +1107,55 @@ Begin
                         temp1 := true;
                     End;
                 End;
-                If temp1 Then SatSaveSym;
+                If temp1 Then
+                    SatSaveSym;
                 PagRefPage;
                 repline := false;
             End;
 
-            133: {F11: StatusBar/MouseMenu}Begin
+            133: {F11: StatusBar/MouseMenu}
+            Begin
                 showmenus := NOT showmenus;
                 setlinestyle (solidln, 0, 1);
-                If showmenus Then ButDraw Else PagPutBottomLine;
+                If showmenus Then
+                    ButDraw
+                Else
+                    PagPutBottomLine;
                 repline := false;
             End;
 
-            134: {F12: Refresh Page}Begin
+            134: {F12: Refresh Page}
+            Begin
                 PagRefPage;
                 repline := false;
             End;
 
-            71: {home: begin of line}Begin
+            71: {home: begin of line}
+            Begin
                 PagCursorLeft (linenum, actposn, actpost);
                 repline := false;
             End;
 
-            73: {PgUp: previous page} Begin
-                If shiftp Then SpeJoinPage (linenum, actposn, actpost,
-                        actptr, startptr, lastptr) Else If PageCount > 1 Then PagShowPage (linenum, actposn, actpost, actptr,
+            73: {PgUp: previous page}
+            Begin
+                If shiftp Then
+                    SpeJoinPage (linenum, actposn, actpost,
+                        actptr, startptr, lastptr)
+                Else If PageCount > 1 Then
+                    PagShowPage (linenum, actposn, actpost, actptr,
                         startptr, lastptr,
                         pagecount - 1, true);
                 repline := false;
             End;
 
-            79: {End: end of line}Begin
+            79: {End: end of line}
+            Begin
                 PagCursorRight (linenum, actposn, actpost);
                 repline := false;
             End;
 
-            81: {PgDn: next page} Begin
+            81: {PgDn: next page}
+            Begin
                 If shiftp Then
                 Begin{ shift PdDn}
                     FilSavePage (1, PageLength, actptr, startptr, lastptr);
@@ -1083,26 +1165,34 @@ Begin
                     PagCursorLeft (linenum, actposn, actpost);
                     PagShowPage (linenum, actposn, actpost,
                         actptr, startptr, lastptr, pagecount + 1, true);
-                End Else Begin
+                End Else
+                Begin
                     ActFilename := UpString (actfilename);
                     If ((actptr <> lastptr) OR
-                        (HlpAreYouSure ('New page?'{ + ': [Enter] to continue, [PgUp] to cancel - or:'}, hpEdit))) Then PagShowPage (linenum, actposn, actpost, actptr,
+                        (HlpAreYouSure ('New page?'{ + ': [Enter] to continue, [PgUp] to cancel - or:'}, hpEdit))) Then
+                        PagShowPage (linenum, actposn, actpost, actptr,
                             startptr, lastptr,
-                            pagecount + 1, true) Else
+                            pagecount + 1, true)
+                    Else
                         pagrefpage;
                 End;
                 repline := false;
             End;
 
-            82: {Insert: symb/char insert}Begin
+            82: {Insert: symb/char insert}
+            Begin
                 FileChanged := 1;
                 If NOT shiftp Then
                 Begin
-                    If page[linenum, 1] = 'T' Then TexInsChar (linenum, actpost) Else { if page[linenum,1]='T'} Begin
+                    If page[linenum, 1] = 'T' Then
+                        TexInsChar (linenum, actpost)
+                    Else { if page[linenum,1]='T'}
+                    Begin
                         NotInsNote (linenum, actposn);
                         PagRefClearVal (gcxcoord - 25, IniYnow (linenum - 5), gmaxX, IniYnow (linenum + 3));
                     End;
-                End Else {if not shiftp}Begin
+                End Else {if not shiftp}
+                Begin
                     SpeInsTextLine (linenum, actpost,
                         actptr, startptr, lastptr, true);
                     PagCursorLeft (linenum, actposn, actpost);
@@ -1111,20 +1201,28 @@ Begin
                 repline := false;
             End;
 
-            83: {Delete: sym/char delete}Begin
+            83: {Delete: sym/char delete}
+            Begin
                 FileChanged := 1;
                 inbuffer := '';
                 If NOT shiftp Then
                 Begin
-                    If page[linenum, 1] = 'T' Then TexDelChar (linenum, actpost) Else { if page[linenum,1] = 'T' then } Begin
+                    If page[linenum, 1] = 'T' Then
+                        TexDelChar (linenum, actpost)
+                    Else { if page[linenum,1] = 'T' then }
+                    Begin
                         NotDelNote (linenum, actposn);
                         If gcxcoord <= gmaxx Then
                             PagRefClearVal (gcxcoord - 25, IniYnow (linenum - 5), gmaxX, IniYnow (linenum + 3))
                         Else
                             PagRefClearVal (gmaxx - 25, IniYnow (linenum - 5), gmaxX, IniYnow (linenum + 3));
                     End;
-                End Else{shift del: Delete to end of line}Begin
-                    If page[linenum, 1] = 'T' Then TexDelToEOL (linenum, actpost) Else { if page[linenum,1] = 'T' then } Begin
+                End Else{shift del: Delete to end of line}
+                Begin
+                    If page[linenum, 1] = 'T' Then
+                        TexDelToEOL (linenum, actpost)
+                    Else { if page[linenum,1] = 'T' then }
+                    Begin
                         If gcxcoord > IniLineEnd (page[linenum]) Then
                             PagCursorRight (linenum, actposn, actpost);
                         NotDelToEOL (linenum, actposn);
@@ -1140,20 +1238,23 @@ Begin
                             PagRefClearVal (gcxcoord - 25, IniYnow (linenum - 5), gmaxX - 1, IniYnow (i))
                         Else
                             PagRefClearVal (gmaxx - 25, IniYnow (linenum - 5), gmaxX - 1, IniYnow (i));
-                    End Else Begin
+                    End Else
+                    Begin
                         TexClearLine (linenum, gcxcoord - 6);
                         getredraw (linenum, gcxcoord - 12, grmaxx);
                     End;
                 End;
             End;
 
-            84: {Shift F1: show / hide}Begin
+            84: {Shift F1: show / hide}
+            Begin
                 Sp2VisiMenu;
                 PagRefPage;
                 repline := false;
             End;
 
-            85: {Shift F2: (save as or quit) Save Y/N}Begin
+            85: {Shift F2: (save as or quit) Save Y/N}
+            Begin
                 If FileChanged = 1 Then
                 Begin
                     GetMem (SPic, ImageSize (grminx, grmaxy - 49,
@@ -1174,8 +1275,10 @@ Begin
                         Else If C = #0 Then
                         Begin
                             c := XReadKey (temp1, temp2);
-                            If C = #73 Then c := #27;
-                            If C = #81 Then c := 'Y';
+                            If C = #73 Then
+                                c := #27;
+                            If C = #81 Then
+                                c := 'Y';
                         End Else
                             c := UpCase (C);
                     Until (C = 'Y') OR (C = 'N') OR (C = #27);
@@ -1190,12 +1293,14 @@ Begin
                 repline := false;
             End;
 
-            86: {Shift F3: noteline define}Begin
+            86: {Shift F3: noteline define}
+            Begin
                 SpeEdLineAttr (linenum, actposn, actpost, startptr, lastptr);
                 repline := false;
             End;
 
-            87: {Shift F4: insert page}Begin
+            87: {Shift F4: insert page}
+            Begin
                 i := pagecount;
                 FilSavePage (1, PageLength, actptr, startptr, lastptr);
                 PagGetSetupPage (actptr, startptr, lastptr);
@@ -1204,7 +1309,8 @@ Begin
                 repline := false;
             End;
 
-            88: {Shift F5: sound options}Begin
+            88: {Shift F5: sound options}
+            Begin
                 CtrlF5 := False;
                 SndSoundMenu (linenum, actposn, actpost,
                     actptr, startptr, lastptr, true);
@@ -1212,47 +1318,54 @@ Begin
                 repline := false;
             End;
 
-            89: {Shift F6: search + replace}Begin
+            89: {Shift F6: search + replace}
+            Begin
                 FileChanged := 1;
                 Sp2SearchAndReplace (linenum, actposn, actpost, actptr,
                     startptr, lastptr);
                 repline := false;
             End;
 
-            90: {Shift F7: line commands}Begin
+            90: {Shift F7: line commands}
+            Begin
                 SpeLineCommands (linenum, actposn, actpost, actptr,
                     startptr, lastptr);
                 repline := false;
             End;
 
-            91: {Shift F8: block commands}Begin
+            91: {Shift F8: block commands}
+            Begin
                 FileChanged := 1;
                 SpeBlockCommands (linenum, actposn, actpost, actptr,
                     startptr, lastptr, ' ');
                 repline := false;
             End;
 
-            92: {Shift F9: page commands}Begin
+            92: {Shift F9: page commands}
+            Begin
                 FileChanged := 1;
                 Sp2PageCommands (linenum, actposn, actpost, actptr,
                     startptr, lastptr);
                 repline := false;
             End;
 
-            93: {Shift F10: swap keyboard}Begin
+            93: {Shift F10: swap keyboard}
+            Begin
                 Sp2SwapKeyboard;
                 PagRefPage;
                 repline := false;
             End;
 
-            94: {Ctrl F1: print menu}Begin
+            94: {Ctrl F1: print menu}
+            Begin
                 PrmPrintMenu (linenum, actposn, actpost,
                     actptr, startptr, lastptr);
                 PagRefPage;
                 repline := false;
             End;
 
-            95: {Ctrl F2: split file}Begin
+            95: {Ctrl F2: split file}
+            Begin
                 FileChanged := 1;
                 pagesav := pagecount;
                 SpeSplitFile (actptr, startptr, lastptr);
@@ -1260,7 +1373,8 @@ Begin
                 PagRefPage;
             End;
 
-            96: {Ctrl F3: split line}Begin
+            96: {Ctrl F3: split line}
+            Begin
                 inblock := page[linenum];
                 st := inblock;
                 If inblock[1] <> 'N' Then
@@ -1281,12 +1395,14 @@ Begin
                 SetLength (page[linenum], commusicstart (page[linenum]) + 1);
                 page[linenum] := page[linenum] + inblock;
             End;
-            97: {ctrl F4 split page}Begin
+            97: {ctrl F4 split page}
+            Begin
                 SpeSplitPage (linenum, actposn, actpost,
                     actptr, startptr, lastptr);
                 repline := false;
             End;
-            98: {Ctrl F5: Play Symbol}Begin
+            98: {Ctrl F5: Play Symbol}
+            Begin
                 CtrlF5 := True;
                 Paused := False;
                 lastS  := 0;
@@ -1527,7 +1643,8 @@ Begin
                 PagPutBottomLine;
                 repline := false;
             End;
-            99: {Ctrl F6: search repeat}Begin
+            99: {Ctrl F6: search repeat}
+            Begin
                 dummyb := Sp2SearchString (linenum, actposn, actpost,
                     actptr, startptr, lastptr);
                 If ((dummyb) AND (replaceflag)) Then
@@ -1547,7 +1664,8 @@ Begin
                     y := IniYnow (linenum - 6);
                     PagRefClearVal (0, y, GetMaxX, grmaxy - 1);
                     PagCursorLeft (linenum, actposn, actpost);
-                End Else HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
+                End Else
+                    HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
                 repline := false;
             End;{ctrl f7}
 
@@ -1595,7 +1713,8 @@ Begin
                             While (Page[i, 1] <> 'N') AND (i >= linenum) Do
                                 dec (i){unterste NL suchen};{if i>linenum}
                         linenum := i;
-                    End Else Begin{if not(shiftp or ctrlp)}
+                    End Else
+                    Begin{if not(shiftp or ctrlp)}
                         If shiftp AND (NOT ctrlp) Then
                         Begin{shft-Alt-Enter}
                             If linenum > 2 Then
@@ -1631,12 +1750,14 @@ Begin
                             Begin
                                 ins := 0;
                                 insl := linenum - ComSpaceBetweenNeed (l, linenum) - comsysheight (linenum);
-                            End Else insl := i + ComSpaceBetweenNeed (i, linenum) + 1;
+                            End Else
+                                insl := i + ComSpaceBetweenNeed (i, linenum) + 1;
 
 
                             If ComInsPossible (Ins) Then
                             Begin
-                                For x := 1 To Ins Do SpeInsTextLine (k - 1, actpost, actptr, startptr,
+                                For x := 1 To Ins Do
+                                    SpeInsTextLine (k - 1, actpost, actptr, startptr,
                                         lastptr, false);
                                 linenum := linenum + ins;
                                 For x := 0 To (ComSysHeight (Linenum)) - 1 Do
@@ -1652,14 +1773,16 @@ Begin
                                 PagRefClearVal (0, IniYnow (linenum - 2),
                                     GetMaxX, GrMaxY - 9);
                                 PagCursorLeft (linenum, actposn, actpost);
-                            End Else HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
+                            End Else
+                                HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
 
                         End{if shiftp and not ctrlp}{IF ctrlp and (not shiftp)};{IF if shiftp and not ctrlp else}
                     End;{if not(shiftp or ctrlp)}
                     PagCursorleft (linenum, actposn, actpost);
                     LastEntry := other;
                     arrowentry := noarr;
-                End Else Begin{IF KeyResponse=#28}
+                End Else
+                Begin{IF KeyResponse=#28}
                     FileChanged := 1;
                     c := IniAltChar (KeyResponse);
                     ComEdKey (linenum, actposn, actpost,
@@ -1684,7 +1807,8 @@ Begin
                         inc (Linenum);
                         inc (gcycoord, 8);
                     End;
-                End Else If page[linenum, 1] = 'N' Then NotSysStart (linenum);
+                End Else If page[linenum, 1] = 'N' Then
+                    NotSysStart (linenum);
                 repline := false;
             End;
 
@@ -1694,7 +1818,8 @@ Begin
                 Begin
                     FileChanged := 1;
                     TexEndVKlammer (linenum, actpost, gcxcoord - char2width);
-                End Else If page[linenum, 1] = 'N' Then NotSysEnd (linenum);
+                End Else If page[linenum, 1] = 'N' Then
+                    NotSysEnd (linenum);
                 repline := false;
             End;
 
@@ -1773,12 +1898,14 @@ Begin
                     FileChanged := 1;
                     TexEdTextLine (linenum, actpost, chr (235));
                 End;
-            140: {Alt F12: ScreenSave} Begin
+            140: {Alt F12: ScreenSave}
+            Begin
                 SaveScreen;
                 PagRefPage;
                 repline := false;
             End;
-            117: {Ctrl End: end of page} Begin
+            117: {Ctrl End: end of page}
+            Begin
                 linenum := pagelength;
                 PagCursorLeft (linenum, actposn, actpost);
                 repline := false;
@@ -1841,7 +1968,9 @@ Begin
             Begin
                 inbuffer := '';
                 FileChanged := 1;
-                If pagebuf <> -1 Then fildelpage (actptr, startptr, lastptr) Else If mstart.mpag <> -1 Then
+                If pagebuf <> -1 Then
+                    fildelpage (actptr, startptr, lastptr)
+                Else If mstart.mpag <> -1 Then
                 Begin
                     SpeBlockCommands (linenum, actposn, actpost, actptr,
                         startptr, lastptr, 'D');
@@ -1853,10 +1982,12 @@ Begin
         If repline Then
             ComLineRep (linenum);
         arrowentry := noarr;
-        If ((ord (KeyResponse) < 16) OR (ord (KeyResponse) > 50)) Then LastEntry := other;
+        If ((ord (KeyResponse) < 16) OR (ord (KeyResponse) > 50)) Then
+            LastEntry := other;
     End; { if ComSpecGrant }
     nosound;
 End; { SPECIALKEY }
+
 
 Procedure ComSysEnd(Var Linenum: Integer);
 Begin
@@ -1865,6 +1996,8 @@ Begin
     While (Page[Linenum + 1, 1] = 'N') AND (Linenum <= Pagelength) Do
         Inc (Linenum);
 End;
+
+
 Procedure ComSysStart(Var Linenum: Integer);
 Begin
     If Page[Linenum, 1] <> 'N' Then
@@ -1873,8 +2006,10 @@ Begin
         Dec (Linenum);
 End;
 
+
 Function ComSysHeight(Linenum: integer): Integer;
-Var i: Integer;
+Var
+    i: Integer;
 Begin
     i := 1;
     While (Page[Linenum - 1, 1] = 'N') AND (Linenum > 0) Do
@@ -1884,13 +2019,18 @@ Begin
     ComSysHeight := i;
 End;
 
+
 Function ComSpaceUpNeed(linenum: integer): Byte;
 { Anzahl der freien linien, die beim einf�gen einer NL mittel ctrl-enter
   oder ctrl-f3 nach oben ben�tigt werden}
-Var inblock: stringline;
+Var
+    inblock: stringline;
     lineattr: lineattrtype;
 Begin
-    If ComTL (linenum) Then ComSpaceUpNeed := 1 Else Begin
+    If ComTL (linenum) Then
+        ComSpaceUpNeed := 1
+    Else
+    Begin
         inblock := page[linenum];
         GetNoteAttributes (inblock, lineattr);
         Case lineattr.linestyle Of
@@ -1902,13 +2042,19 @@ Begin
         End;
     End;
 End;
+
+
 Function ComSpaceDownNeed(linenum: integer): Byte;
 { Anzahl der freien linien, die beim einf�gen einer NL mittels ctrl-enter
   oder ctrl-f3 nach unten ben�tigt werden}
-Var inblock: stringline;
+Var
+    inblock: stringline;
     lineattr: lineattrtype;
 Begin
-    If ComTL (linenum) Then ComSpaceDownNeed := 1 Else Begin
+    If ComTL (linenum) Then
+        ComSpaceDownNeed := 1
+    Else
+    Begin
         inblock := page[linenum];
         GetNoteAttributes (inblock, lineattr);
         Case lineattr.linestyle Of
@@ -1921,8 +2067,10 @@ Begin
     End;
 End;
 
+
 Function ComSpaceBetweenNeed(l1, l2: integer): Byte;
-Var s1, s2: integer;
+Var
+    s1, s2: integer;
 Begin
     s1 := ComSpaceDownNeed (l1);
     s2 := ComSpaceUpNeed (l2);
@@ -1932,6 +2080,8 @@ Begin
         dec (s1);
     ComSpaceBetweenNeed := s1;
 End;
+
+
 Function ComSpaceBetween(l1, l2: integer): byte;
 Begin
     l1 := abs (l1 - l2);
@@ -1940,6 +2090,8 @@ Begin
     Else
         ComSpaceBetween := 0;
 End;
+
+
 Function ComLinesUpBelong2(linenum: integer): Byte;
     { Anzahl Linien oberhalb, die zu dieser Linie geh�ren (oder umgekehrt...) }
     { NL: 0, TL: 2 }
@@ -1949,12 +2101,15 @@ Begin
     Else
         ComlinesUpBelong2 := 0;
 End;
+
+
 Function ComLinesDownBelong2(linenum: integer): Byte;
 { Anzahl der Linien unterhalb, die unabh�ngig von deren Art zu dieser Linie
   geh�ren k�nnen
   leere TL: 1, benutzte TL: 2, NL: Falls n�chste Linie auch NL, dann 1,
   sonst je nach Linientyp }
-Var inblock: stringline;
+Var
+    inblock: stringline;
     lineattr: lineattrtype;
 Begin
     If ComTL (linenum) Then
@@ -1963,7 +2118,10 @@ Begin
             ComLinesDownBelong2 := 2
         Else
             ComLinesDownBelong2 := 1;
-    End Else If ComNL (linenum + 1) Then ComLinesDownBelong2 := 1 Else Begin
+    End Else If ComNL (linenum + 1) Then
+        ComLinesDownBelong2 := 1
+    Else
+    Begin
         inblock := page[linenum];
         GetNoteAttributes (inblock, lineattr);
         Case lineattr.linestyle Of
@@ -1976,12 +2134,14 @@ Begin
     End;
 End;
 
+
 Function ComLineBelong2(linenum: integer): Byte;
 { 0 wenn linenum nicht zur n�chstoberen Linie geh�rt,
   sonst Anzahl der Linien unterhalb, die zu dieser geh�ren k�nnen,
   Notenlinie: immer 0,
   tl: 0, falls zuviele Linien oberhalb leer, 1, falls Linie leer, sonst 2}
-Var i: integer;
+Var
+    i: integer;
 Begin
     If comNL (linenum) Then
     Begin
@@ -1996,13 +2156,16 @@ Begin
         End;
     ComLineBelong2 := 0;
 End;
+
+
 Function comskiplinesDown(linenum: integer): integer;
 { Anzahl der zu ueberspringenden linien, falls unterhalb eine NL eingef�gt
   werden soll
   linenum=nummer der NL
   i=z�hler,b=temp
 }
-Var i, a, b: integer;
+Var
+    i, a, b: integer;
 Begin
     i := 1;
     a := ComLinesDownBelong2 (linenum);
@@ -2020,6 +2183,8 @@ Begin
         dec (i);
     comskiplinesdown := i - 1;
 End;
+
+
 Function comskiplinesUp(linenum: integer): integer;
 { Anzahl der zu ueberspringenden linien
   linenum=nummer der NL
@@ -2030,16 +2195,22 @@ Begin
     Else
         comskiplinesUp := 0;
 End;
+
+
 Function ComNL(linenum: integer): Boolean;
     {NL?}
 Begin
     ComNL := page[linenum, 1] = 'N';
 End;
+
+
 Function ComTL(linenum: integer): Boolean;
     {TL?}
 Begin
     ComTL := page[linenum, 1] = 'T';
 End;
+
+
 Function ComUsedTL(linenum: integer): Boolean;
     { TL & nicht leer}
 Begin
@@ -2055,10 +2226,14 @@ Begin
     Else
         ComUsedTL := True;
 End;
+
+
 Function ComUsedL(linenum: integer): Boolean;
 Begin
     ComUsedL := ComNL (linenum) OR ComUsedTL (linenum);
 End;
+
+
 Function ComNextLine(linenum: integer): integer;
 Begin
     Repeat
@@ -2066,6 +2241,8 @@ Begin
     Until (Linenum > PageLength) OR ComUsedL (linenum);
     ComNextLine := Linenum;
 End;
+
+
 Function ComPrevLine(linenum: integer): integer;
 Begin
     Repeat
@@ -2073,6 +2250,8 @@ Begin
     Until (linenum = 0) OR ComNL (linenum) OR ComUsedTL (linenum);
     ComPrevLine := Linenum;
 End;
+
+
 Function ComInsPossible(num: integer): Boolean;
 Begin
     If num > pagelength Then
@@ -2092,6 +2271,8 @@ Begin
     End;
     ComInsPossible := True;
 End;
+
+
 Function ComMusicStart(inblock: Stringline): Byte;
     { Data Start }
 Begin
@@ -2100,6 +2281,8 @@ Begin
     Else
         ComMusicStart := pos ('%', inblock) + 1;
 End;
+
+
 Function ComStart(inblock: Stringline; actposn: Byte): Byte;
     { Anfangsposition der Note, auf die actposn zeigt }
 Begin
@@ -2107,7 +2290,8 @@ Begin
         actposn := length (inblock);
     If inblock[1] <> 'N' Then
         ComStart := 0
-    Else Begin
+    Else
+    Begin
         While (actposn < length (inblock)) AND NOT (inblock[actposn] IN notes) Do
             inc (actposn);
         While (actposn > 0) AND (inblock[actposn - 1] IN Notes) Do
@@ -2118,12 +2302,15 @@ Begin
             comstart := commusicstart (inblock);
     End;
 End;
+
+
 Function ComEnd(inblock: StringLine; Actposn: Byte): Byte;
     { Ende der Note, auf die actposn zeigt }
 Begin
     If inblock[1] <> 'N' Then
         ComEnd := 0
-    Else Begin
+    Else
+    Begin
         While (actposn < length (inblock)) AND NOT (inblock[actposn] IN notes) Do
             inc (actposn);
         While (actposn < length (inblock)) AND (inblock[actposn + 1] IN Notes) Do
@@ -2134,10 +2321,13 @@ Begin
             comend := 0;
     End;
 End;
+
+
 Function ComLen(inblock: StringLine; ActPosn: Byte): Byte;
 Begin
     ComLen := ComEnd (inblock, actposn) - ComStart (inblock, actposn);
 End;
+
 
 Function comnext(inblock: stringline; actposn: Byte): Byte;
 Begin
@@ -2147,6 +2337,8 @@ Begin
     actposn := comstart (inblock, actposn);
     comnext := actposn;
 End;
+
+
 Function comprev(inblock: stringline; actposn: Byte): byte;
 Begin
     actposn := comstart (inblock, actposn);
@@ -2157,10 +2349,14 @@ Begin
     actposn := comstart (inblock, actposn);
     comprev := actposn;
 End;
+
+
 Function Searchlastchiffre(linenum: Integer): String;
-Var st: String;
+Var
+    st: String;
     a:  Byte;
-Const chiffres: Set Of Char = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+Const
+    chiffres: Set Of Char = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 Begin
     a := Length (Page[linenum]);
     st := '';
@@ -2180,8 +2376,11 @@ Begin
     End;{while}
     Searchlastchiffre := St;
 End;
+
+
 Function CopyLine(Src, Des: Integer): Boolean;
-Var inblock: stringline;
+Var
+    inblock: stringline;
 Begin
     If (Des > PageLength) OR (Des < 1) OR (Src > PageLength) OR (Src < 1) Then
     Begin
@@ -2200,17 +2399,23 @@ Begin
             CopyLine := False;
             Exit;
         End;
-    End{ if page[src]='N'} Else inblock := page[src];
+    End{ if page[src]='N'} Else
+        inblock := page[src];
     Inblock[4] := ' ';
     CopyLine := TRUE;
     If LineUsed (Des) Then
     Begin
-        If SpeSpaceInPage (1) Then SpeLineInsert (Des, inblock) Else Begin
+        If SpeSpaceInPage (1) Then
+            SpeLineInsert (Des, inblock)
+        Else
+        Begin
             HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
         End;
     End Else
         Page[Des] := inblock;
 End;{Func CopyLine}
+
+
 Function LineUsed(Linenum: Byte): Boolean;
 Begin
     While (Length (Page[Linenum]) <> 9) AND (Page[Linenum, Length (Page[Linenum])] = ' ') Do
@@ -2221,8 +2426,10 @@ Begin
         LineUsed := False;
 End;
 
+
 Function ComHorLine(linenum: integer): Boolean;
 Begin
     ComHorLine := pos (#233, page[linenum]) <> 0;
 End;
+
 End.

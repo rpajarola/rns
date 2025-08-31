@@ -4,7 +4,8 @@ Unit GraphMenu;
 
 Interface
 
-Uses MenuTyp,
+Uses
+    MenuTyp,
     crt,
     GrInOut,
     Initsc,
@@ -30,15 +31,19 @@ Procedure GrGet_Menu_Values(startx, starty, endy: integer;
 
 Implementation
 
-Uses mousdrv;
+Uses
+    mousdrv;
+
 
 Procedure GrDisplay_Frame(startx, starty, endx, endy: integer;
     topline, endline: boolean);
 
-Const dx = 0;
+Const
+    dx = 0;
     dy = 1;
 
-Var actcolor: byte;
+Var
+    actcolor: byte;
     m: boolean;
 Begin
     m := NOT istdunkel;
@@ -141,7 +146,8 @@ Begin
                         outstring := ' ' + choices[i] + ' - ' + descriptions[i] + ' ';
                         IniSpacedText (LEFT_COL - 1, ActLine, outstring, fr3D);
                     End;{ case keyright of 2 }
-                End{case keyright} Else IniOutTextXY (LEFT_COL - 1, ActLine, DESCRIPTIONS[I]){if ChoiceVal[i].TypIdent = 'o' };
+                End{case keyright} Else
+                IniOutTextXY (LEFT_COL - 1, ActLine, DESCRIPTIONS[I]){if ChoiceVal[i].TypIdent = 'o' };
             Case ChoiceVal[i].TypIdent Of
                 'o': ;
                 'r': GrPut_Real (ChoiceVal[i].RVal,
@@ -203,9 +209,11 @@ Var
     shiftp, ctrlp: boolean;
     mp: Word;
 
+
     Procedure HighLite(VideoVal: Integer);
 
-    Var outstring: String;
+    Var
+        outstring: String;
         xpos: integer;
   { Ein kleines Unterprogramm um aktuelle Wahl hervorzuheben
     bzw. die verlassene Wahl wieder in normaler Schrift darzustellen
@@ -219,7 +227,10 @@ Var
         GrDispInit (startx, starty, menu);
         With MENU Do
             Case keyright Of
-                1: If videoval = 1 Then IniInversText (LEFT_COL - 1, TOP_LINE + CURRENT_CHOICE * SPACING, ' ' + DESCRIPTIONS[CURRENT_CHOICE], frL3D + frSmallBar) Else Begin{ if videoval=1 }
+                1: If videoval = 1 Then
+                        IniInversText (LEFT_COL - 1, TOP_LINE + CURRENT_CHOICE * SPACING, ' ' + DESCRIPTIONS[CURRENT_CHOICE], frL3D + frSmallBar)
+                    Else
+                    Begin{ if videoval=1 }
                         IniSwapMenuColors;
                         j := imenubkcolor;
                         l := imenutextcolor;
@@ -236,7 +247,8 @@ Var
                     Begin
                         outstring := choices[current_choice] + ' - ' + descriptions[current_choice];
                         xpos := -1;
-                    End Else Begin{ if menuattr.highliteline }
+                    End Else
+                    Begin{ if menuattr.highliteline }
                         outstring := ' ' + DESCRIPTIONS[CURRENT_CHOICE];
                         xpos := 4;
                         IniClearLine (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
@@ -251,7 +263,8 @@ Var
                             length (outstring), menubkcolor);
                         IniOutTextXY (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
                             outstring);
-                    End Else IniInversText (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
+                    End Else
+                        IniInversText (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
                             outstring, frHigh){ if videoval =0 };{ if videoval =0 else}
                 End;{ case keyright of 0}
                 2:
@@ -260,7 +273,8 @@ Var
                     Begin
                         outstring := ' ' + choices[current_choice] + ' - ' + descriptions[current_choice] + ' ';
                         xpos := -1;
-                    End Else Begin{ if menuattr.highliteline }
+                    End Else
+                    Begin{ if menuattr.highliteline }
                         outstring := ' ' + DESCRIPTIONS[CURRENT_CHOICE];
                         xpos := 4;
                         IniClearLine (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
@@ -269,8 +283,11 @@ Var
                             outstring, frNoFrame);
                     End;{ if menuattr.highliteline else }
                     IniExpand (outstring, menu_width);
-                    If VideoVal = 0 Then IniSpacedText (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
-                            outstring, fr3D) Else Begin{ if videoval =0 }
+                    If VideoVal = 0 Then
+                        IniSpacedText (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
+                            outstring, fr3D)
+                    Else
+                    Begin{ if videoval =0 }
                         IniSwapMenuColors;
                         IniSpacedText (LEFT_COL + xpos, TOP_LINE + CURRENT_CHOICE * SPACING,
                             outstring, fr3D);
@@ -314,7 +331,8 @@ Begin
 
                 Until (RESP <> NO_Response) OR (Maustaste > 0) OR (Mp = 1);
                 s := current_choice;
-            End Else MausPressedPosition (mausx, mausy);
+            End Else
+                MausPressedPosition (mausx, mausy);
             maustaste := maustaste OR mp;
             If (maustaste = 1) Then
             Begin
@@ -404,7 +422,9 @@ Begin
     Mausdunkel;
     Highlite (0);
 End;
+
 { ------------------------------------------------------------------}
+
 Procedure GrGet_Menu_Values(startx, starty, endy: integer;
     Var MENU: MENU_Rec;
     Var USERS_CHOICE: char);
@@ -432,6 +452,7 @@ Var
     ACTLINE, y: integer;
     mausx, mausy, maustaste, mausmenu: word;
 
+
     Procedure HighLite(VideoVal: Integer);
 
   { Ein kleines Unterprogramm um aktuelle Wahl hervorzuheben
@@ -439,7 +460,8 @@ Var
     und die Eingabe-Felder vorzugeben
     ViedoVal: Schrifttyp der aktuellen Anzeige }
 
-    Var outstring: String;
+    Var
+        outstring: String;
 
     Begin
         Mausdunkel;
@@ -447,8 +469,11 @@ Var
         Begin
             outstring := ' ' + DESCRIPTIONS[Current_Choice];
             IniExpand (outstring, menu_width + 1);
-            If VideoVal = 1 Then IniInversText (LEFT_COL - 1, TOP_LINE + CURRENT_CHOICE * SPACING,
-                    outstring, frHigh) Else Begin
+            If VideoVal = 1 Then
+                IniInversText (LEFT_COL - 1, TOP_LINE + CURRENT_CHOICE * SPACING,
+                    outstring, frHigh)
+            Else
+            Begin
                 IniClearLine (Left_col - 1, ActLine,
                     menu_width + 1, menubkcolor);
                 IniOutTextXY (LEFT_COL - 1, ActLine, outstring);
@@ -558,7 +583,8 @@ Begin
                 y := mausy;
                 CURRENT_CHOICE := ((y DIV 8) - starty -
                     menu.menuattr.firstline + 1) DIV spacing;
-                If CURRENT_CHOICE < 1 Then CURRENT_CHOICE := 1;
+                If CURRENT_CHOICE < 1 Then
+                    CURRENT_CHOICE := 1;
                 If CURRENT_CHOICE > NUM_CHOICES Then
                     CURRENT_CHOICE := NUM_CHOICES;
             End;

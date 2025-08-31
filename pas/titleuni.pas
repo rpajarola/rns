@@ -4,7 +4,8 @@ Unit TitleUnit;
 
 Interface
 
-Uses symbols,
+Uses
+    symbols,
     initsc,
     textunit,
     graph;
@@ -16,7 +17,8 @@ Implementation
 {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 Procedure TitGetText(linenum, startx: integer);
 Begin
-    If (linenum >= 0) AND (linenum <= pagelim) AND (page[linenum, 1] = 'T') Then TexDrawLine (linenum, startx);
+    If (linenum >= 0) AND (linenum <= pagelim) AND (page[linenum, 1] = 'T') Then
+        TexDrawLine (linenum, startx);
 End;
 
 End.

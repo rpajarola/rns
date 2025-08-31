@@ -74,14 +74,16 @@ Uses
     Texts,
     NoteUnit;
 
-Var RErr: Boolean;
+Var
+    RErr: Boolean;
 
 {*****************************************************************}
 Procedure SpeBlockCommands(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     inchar: char);
 
-Var dir: movement;
+Var
+    dir: movement;
     c: char;
     choicenum: byte;
     y, hy, i, endy: integer;
@@ -110,9 +112,11 @@ Begin
                 choicenum, mausx, mausy, maustaste,
                 mausmenu, false, 0);
             c := UpCase (c);
-        End Else c := inchar;
+        End Else
+            c := inchar;
         Case c Of
-            'S': {start block}Begin
+            'S': {start block}
+            Begin
                 MarkStart (IniPos (linenum, actposn, actpost),
                     linenum, pagecount);
                 MarkDisplay;
@@ -122,10 +126,14 @@ Begin
                     i := mstart.mxcoord;
                     MarkEnd (IniPos (linenum, actposn, actpost),
                         linenum, pagecount);
-                    If pagecount = mstart.mpag Then PagRefClearVal (i - 3,
-                            IniYnow (mstart.mline - 1), i + 9, IniYnow (mstart.mline + 1)) Else MarkDisplay;
+                    If pagecount = mstart.mpag Then
+                        PagRefClearVal (i - 3,
+                            IniYnow (mstart.mline - 1), i + 9, IniYnow (mstart.mline + 1))
+                    Else
+                        MarkDisplay;
                 End;
-            'U': {Shift F3: Unmark}Begin
+            'U': {Shift F3: Unmark}
+            Begin
                 FileChanged := 1;
                 SpeInsertBuffer (linenum, actposn, actpost, actptr,
                     startptr, lastptr, dummyb);
@@ -152,7 +160,8 @@ Begin
                         actptr, startptr, lastptr, dummyb);
 {          SpeMoveBlock(linenum, actposn, actpost, actptr,
                         startptr, lastptr);}
-                End Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
+                End Else
+                    HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
             'D': If mend.mpag <> -1 Then
                 Begin
@@ -189,10 +198,12 @@ Begin
                     Begin
                         endy := IniYnow (linenum + 1);
                         PagRefClearVal (0, 0, gmaxX, endy);
-                    End Else Begin
+                    End Else
+                    Begin
                         PagRefPage;
                     End;
-                End Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
+                End Else
+                    HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
             'W':
                 If mend.mpag <> -1 Then
@@ -246,7 +257,8 @@ Begin
                             PagUnmark;
                         End;
                     End; {if HlpGetFileName(instring) then }
-                End {if mstart.mpage }Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
+                End {if mstart.mpage }Else
+                    HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
             'R':
                 If mstart.mpag = -1 Then
@@ -257,7 +269,8 @@ Begin
                         filename := ConcatPaths ([bufdir, instring]);
                     If NOT IniFileExist (filename) Then
                         HlpHint (HntNotExist, HintWaitEsc, [filename])
-                    Else Begin
+                    Else
+                    Begin
                         assign (bfile, filename);
                         reset (bfile);
                         If IOResult <> 0 Then
@@ -290,14 +303,17 @@ Begin
                             SpeInsertBuffer (linenum, actposn, actpost,
                                 actptr, startptr, lastptr, dummyb);
                             Markinit;
-                        End Else Begin
+                        End Else
+                        Begin
                             close (bfile);
                             HlpHint (HntNotBlockFile, HintWaitEsc, [filename]);
                         End;
                     End; {if HlpGetFileName(instring) then }
-                End Else {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []); {'R'}
+                End Else
+                    {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []); {'R'}
 
-            'I': {Collect Header/Footer}Begin
+            'I': {Collect Header/Footer}
+            Begin
                 FilSavePage (1, PageLength, actptr, startptr, lastptr);
                 Sp2HeaderFooterToBuffer (actptr, startptr, lastptr,
                     bufactptr, bufstartptr,
@@ -317,7 +333,8 @@ Procedure SpeInsEmptyLines(Var lineins: integer;
     Var actptr, startptr, lastptr: listptr);
 {Fuegt lineins leere Zeilen in den Heap}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     For i := 1 To lineins Do
@@ -329,7 +346,8 @@ End;
 Procedure SpeInsFooter(Var actptr, startptr, lastptr: listptr);
 {Fuegt den Footer in den Heap ein}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     i := pagelength;
@@ -348,7 +366,8 @@ End;
 Procedure SpeInsHeader(Var actptr, startptr, lastptr: listptr);
 {Fuegt den Header in den Heap ein}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     i := topmargin;
@@ -365,7 +384,8 @@ End;
 Procedure SpeSplitFile(Var actptr, startptr, lastptr: listptr);
 {schreibt von der n�chsten Seite an alles in ein neues File}
 
-Var instring: string;
+Var
+    instring: string;
     ok: boolean;
     outfile: text;
     i:  integer;
@@ -382,7 +402,8 @@ Begin
         Begin
             filename := ConcatPaths ([RnsConfig.DataDir, instring]);
             If IniFileExist (filename) Then
-                If NOT HlpAreYouSure ('File already exists - overwrite?', hpEdit) Then ok := false;
+                If NOT HlpAreYouSure ('File already exists - overwrite?', hpEdit) Then
+                    ok := false;
             If ok Then
             Begin
                 FilSavePage (topmargin, pagelength, actptr,
@@ -393,7 +414,8 @@ Begin
                 FilHeapToFile (infile, actptr, startptr, lastptr,
                     false, false, true);
                 FilFindPage (1, i, actptr, startptr, lastptr);
-                For i := 1 To pagecount Do PagRemovePage (actptr, startptr, lastptr);
+                For i := 1 To pagecount Do
+                    PagRemovePage (actptr, startptr, lastptr);
                 FilHeapToFile (outfile, actptr, startptr, lastptr, true, false, true);
                 reset (infile);
                 If IOResult <> 0 Then
@@ -403,7 +425,8 @@ Begin
                 End;
                 FilFileToHeap (infile, actptr, startptr, lastptr, ok);
                 FilFindPage (pagecount + 1, i, actptr, startptr, lastptr);
-                While (actptr <> lastptr) Do PagRemovePage (actptr, startptr, lastptr);
+                While (actptr <> lastptr) Do
+                    PagRemovePage (actptr, startptr, lastptr);
                 FilHeapToFile (infile, actptr, startptr, lastptr, false, false, true);
                 FilFindPage (pagecount, i, actptr, startptr, lastptr);
                 PagGetPageFromHeap (actptr, startptr, lastptr, i);
@@ -417,7 +440,8 @@ Procedure SpeLineToBuf(linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 {Versorgt eine Zeile in den Buffer}
 
-Var apos: integer;
+Var
+    apos: integer;
 
 Begin
     MarkInit;
@@ -434,7 +458,8 @@ Procedure SpeSplitPage(linenum: integer; Var actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 {Unterteilt die Seite an der Cursorposition}
 
-Var i, lineins, linepage: integer;
+Var
+    i, lineins, linepage: integer;
     tempptr: listptr;
 
 Begin
@@ -470,7 +495,8 @@ Procedure SpeJoinPage(linenum: integer; Var actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 {Schiebt die n�chste Seite an die gegenw�rtige}
 
-Var i, lineins, linepage: integer;
+Var
+    i, lineins, linepage: integer;
     tempptr: listptr;
     inblock, tempbuffer: stringline;
     endreached: boolean;
@@ -555,7 +581,8 @@ Begin
     i := topmargin;
     While ((i < linenum) AND (page[i, 1] <> 'N')) Do
         i := i + 1;
-    If i = linenum Then PagRefPage;
+    If i = linenum Then
+        PagRefPage;
 
     PagCursorLeft (linenum, actposn, actpost);
 End;
@@ -575,7 +602,8 @@ End;
 Function SpeSpaceInPage(lines: integer): boolean;
     {true, wenn Platz fuer lines linien auf der Seite vorhanden ist.}
 
-Var i: integer;
+Var
+    i: integer;
     lmax: byte;
 
 Begin
@@ -586,7 +614,8 @@ Begin
     End;
     i := 0;
     lmax := IniFooterEnd;
-    While ((i <= lines) AND (IniEmptyLine (page[lmax - i]))) Do inc (i);
+    While ((i <= lines) AND (IniEmptyLine (page[lmax - i]))) Do
+        inc (i);
     SpeSpaceInPage := i >= lines;
 End;
 
@@ -594,7 +623,8 @@ End;
 Procedure SpeLineInsert(linenum: integer; inblock: stringline);
 {F�gt eine Zeile an der Stelle Linenum ein}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     For i := IniFooterEnd Downto (linenum + 1) Do
@@ -628,7 +658,8 @@ End;
 {******************************************************}
 Procedure SpeNoteRight(linenum: integer; Var actpos: integer);
 
-Var x: integer;
+Var
+    x: integer;
 
 Begin
     While (actpos < length (page[linenum])) AND
@@ -658,7 +689,8 @@ End;
 {******************************************************}
 Procedure SpeInsNoteLine(Var linenum, actposn: integer;
     Var tempptr, startptr, lastptr: listptr);
-Var i: integer;
+Var
+    i: integer;
     inblock: stringline;
     inserted: boolean;
     lineattr: lineattrtype;
@@ -675,18 +707,22 @@ Begin
                 actposn := length (insmusicline);
                 inserted := true;
                 SpeLineInsert (linenum, insmusicline);
-            End Else Begin
+            End Else
+            Begin
                 HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
                 inserted := false;
             End;
-        End Else Begin
+        End Else
+        Begin
             If ((SpeSpaceInPage (linecount)) AND ((linenum + linecount - 1) <= pagelength)) Then
             Begin
                 {Notenlinie ins Page-Array schreiben}
                 actposn := length (insmusicline);
                 inserted := true;
-                For i := 1 To linecount Do SpeLineInsert (linenum + i - 1, insmusicline);
-            End Else Begin
+                For i := 1 To linecount Do
+                    SpeLineInsert (linenum + i - 1, insmusicline);
+            End Else
+            Begin
                 HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
                 inserted := false;
             End;
@@ -706,7 +742,8 @@ Procedure SpeInsTextLine(linenum: integer; Var actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     delflag: boolean);
 
-Var i, y: integer;
+Var
+    i, y: integer;
     inblock: stringline;
 
 Begin
@@ -735,7 +772,8 @@ End;
 Procedure SpeMoveBlock(linenum: integer; Var actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 
-Var linenow, markstart, markend, nowpos: integer;
+Var
+    linenow, markstart, markend, nowpos: integer;
     delfirst: byte; {0 = invalid, 1 = delete first, 2 = insert first}
     pageswap: boolean;
     blocklength: integer;
@@ -759,11 +797,16 @@ Begin
     If marpartline Then
     Begin
         nowpos := IniPos (linenum + blocklength, actposn, actpost);
-        If ((linenow <> markstart) OR (nowpos < mstart.mpos)) Then delfirst := 1 Else Begin
+        If ((linenow <> markstart) OR (nowpos < mstart.mpos)) Then
+            delfirst := 1
+        Else
+        Begin
             If (nowpos > mend.mpos) Then
                 delfirst := 2;
         End;
-    End Else If (linenow - blocklength) < markstart Then delfirst := 1 Else If (linenow - blocklength) > markend Then
+    End Else If (linenow - blocklength) < markstart Then
+        delfirst := 1
+    Else If (linenow - blocklength) > markend Then
         delfirst := 2; { if marpartline then }
 
     Case delfirst Of
@@ -781,7 +824,8 @@ Begin
                 actptr, startptr, lastptr, pageswap);
             MarDeleteBlock (actptr, startptr, lastptr);
             MarkInit;
-            If pageswap Then SpeJoinPage (linenum + blocklength, actposn, actpost,
+            If pageswap Then
+                SpeJoinPage (linenum + blocklength, actposn, actpost,
                     actptr, startptr, lastptr);
             If NOT marpartline Then
                 PagRefPage;
@@ -804,7 +848,8 @@ Var
     tbufpos: byte;
 
 Begin
-    If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then MarMarkToBuffer (actptr, startptr, lastptr);
+    If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then
+        MarMarkToBuffer (actptr, startptr, lastptr);
     If bufstartptr <> bufendptr Then
     Begin
         bufactptr := bufstartptr;
@@ -827,7 +872,9 @@ Begin
                 apos := IniPos (linenum, actposn, actpost);
 
                 If page[linenum, 1] = 'T' Then
-                    IniTrailBlank (inblock) Else apos := ComStart (page[linenum], apos);
+                    IniTrailBlank (inblock)
+                Else
+                    apos := ComStart (page[linenum], apos);
                 insert (inblock, page[linenum], apos);
                 PagRefClearVal (0, IniYnow (linenum - 2),
                     GetMaxX, IniYnow (linenum + 1));
@@ -931,8 +978,10 @@ Begin
         HlpHint (HntBufEmpty, HintWaitEsc, []); {else  if bufstartptr <> bufendptr then}
 End;
 
+
 Function SpeDelPossible(Linenum: Integer): Boolean;
-Var i: Integer;
+Var
+    i: Integer;
     a: Integer;
 Begin
     a :={4}3;
@@ -958,14 +1007,17 @@ Begin
     SpeDelPossible := True;
 End;
 
+
 Function SpeInsPossible(Linenum: Integer; T: Integer; Var InsL, Ins: Byte;
     Num: Byte; D: Boolean; U: Boolean): Boolean;
-Var Up, Dn: Integer;
+Var
+    Up, Dn: Integer;
 
 Begin
     If Linenum + Num > 53 Then
         SpeInsPossible := False
-    Else Begin
+    Else
+    Begin
         Ins := 0;
         InsL := Linenum;
         Up  := SpeLinesFree (Linenum, True);
@@ -986,23 +1038,31 @@ Begin
             InsL := Linenum + T - Up;
             Ins  := T - Up;
         End;
-        If Dn < SpeMinSpace (Page[Linenum + Dn]) Then Ins := SpeMinSpace (Page[Linenum + Dn]) - Dn;
+        If Dn < SpeMinSpace (Page[Linenum + Dn]) Then
+            Ins := SpeMinSpace (Page[Linenum + Dn]) - Dn;
         SpeInsPossible := SpeSpaceInPage (Ins);
     End;
 End;
 
+
 Function SpeLinesFree(Linenum: Integer; Up: Boolean): Integer;
-Var i: Integer;
+Var
+    i: Integer;
 Begin
     i := 1;
     If Up Then
         While NOT SpeLineUsed (Linenum - i) Do
-            Inc (i) Else While NOT SpeLineUsed (Linenum + i) Do
+            Inc (i)
+    Else
+        While NOT SpeLineUsed (Linenum + i) Do
             Inc (i);
     SpeLinesFree := i;
 End;
 
+
 Function SpeLineUsed(Linenum: Integer): Boolean;
+
+
     Function TextLength(S: String): Byte;
     Var
         i: Integer;
@@ -1014,6 +1074,7 @@ Function SpeLineUsed(Linenum: Integer): Boolean;
             Dec (i);
         TextLength := i;
     End;
+
 Begin
     If (Linenum < 1) OR (Linenum > PageLength) Then
     Begin
@@ -1024,6 +1085,7 @@ Begin
     SpeLineUsed := (Page[Linenum, 1] = 'N') OR (TextLength (Page[Linenum]) > 11);
 End;
 
+
 Function SpeMinSpace(Instring: StringLine): Integer;
 Begin
     If Instring[1] = 'T' Then
@@ -1033,8 +1095,11 @@ Begin
     Else
         SpeMinSpace := 1;
 End;
+
+
 Function SpeprevNotLine(Linenum: Integer): Integer;
-Var i: Integer;
+Var
+    i: Integer;
 Begin
     If Linenum > Pagelength Then
         Linenum := Pagelength - 1;
@@ -1051,8 +1116,11 @@ Begin
         i := 0;
     SpeprevNotLine := i;
 End;
+
+
 Function SpeNextNotLine(Linenum: Integer): Integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     If Linenum < 1 Then
         Linenum := 1;
@@ -1073,7 +1141,8 @@ End;
 Procedure SpeLineCommands(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
 
-Var dir: movement;
+Var
+    dir: movement;
     c, inchar: char;
     choicenum: byte;
     y, hy: integer;
@@ -1139,7 +1208,8 @@ Begin
                     inchar, true, false);
             End;{ case c of 'D'}
         End; {case c of}
-        If pos (c, usrmenu.choices) > 0 Then c := chr (27);
+        If pos (c, usrmenu.choices) > 0 Then
+            c := chr (27);
     Until ((c = chr (27)) OR (inchar <> ' '));
 End;
 

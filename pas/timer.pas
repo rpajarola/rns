@@ -24,8 +24,12 @@ Function TimActTime: longint;
 
 Implementation
 
-Uses dos, SysUtils;
+Uses
+    dos,
+    SysUtils;
+
 {**********************************************************}
+
 Procedure TimGetTime(Var acttime: longint);
 Begin
     { Modern replacement for DOS interrupt timer }
@@ -70,7 +74,8 @@ End;
 {**********************************************************}
 Procedure ttimer.init;
 
-Var i: word;
+Var
+    i: word;
 
 Begin
     For i := 1 To ntimer Do

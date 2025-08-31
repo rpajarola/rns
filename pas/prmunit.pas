@@ -26,9 +26,12 @@ Uses
     mousdrv,
     grinout,
     fileunit;
+
 {******************************************************************}
+
 Procedure PrmSetOptions;
-Var c: char;
+Var
+    c: char;
     sval: string;
     y, hy: integer;
     ok: boolean;
@@ -48,29 +51,38 @@ Begin
     GrGet_Menu_Values (hfminx, hy, hfmaxy, UsrMenu, c);
     prformat := UsrMenu.ChoiceVal[1].tval;
     prdest := UsrMenu.ChoiceVal[2].tval;
-    If (pos (':', Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1]) = 0) Then prfile := 1 Else prfile := 0;
+    If (pos (':', Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1]) = 0) Then
+        prfile := 1
+    Else
+        prfile := 0;
     If prfile = 1 Then
     Begin
         sval := UsrMenu.ChoiceVal[3].sval;
         IniLeadBlank (sval);
         UsrMenu.ChoiceVal[3].sval := sval;
-        If pos ('.', UsrMenu.ChoiceVal[3].sval) = 0 Then UsrMenu.ChoiceVal[3].sval := UsrMenu.ChoiceVal[3].sval + '.eps';
+        If pos ('.', UsrMenu.ChoiceVal[3].sval) = 0 Then
+            UsrMenu.ChoiceVal[3].sval := UsrMenu.ChoiceVal[3].sval + '.eps';
         HlpTestFileName (ConcatPaths ([psdir, UsrMenu.ChoiceVal[3].sval]),
             ok, grminx, grmaxx, y);
-        If ok Then prfname := UsrMenu.ChoiceVal[3].sval;
-    End Else prdevice := Copy (Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1], 1, 4);
+        If ok Then
+            prfname := UsrMenu.ChoiceVal[3].sval;
+    End Else
+        prdevice := Copy (Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1], 1, 4);
     If m Then
         mauszeigen;
 End;
+
 {******************************************************************}
 {******************************************************************}
 
-Type TPageList = Array[0..255] Of integer;
+Type
+    TPageList = Array[0..255] Of integer;
 
 {******************************************************************}
 
 Procedure String2List(S: String; Var List: TPageList);
-Var i, j, k: integer;
+Var
+    i, j, k: integer;
     r: boolean;
 Begin
     r := false;
@@ -92,7 +104,8 @@ Begin
                     inc (i);
                 End;
                 r := false;
-            End Else Begin
+            End Else
+            Begin
                 List[i] := k;
                 inc (i);
             End;
@@ -108,7 +121,8 @@ Begin
             r := true;
             If i = 0 Then
                 inc (i);
-        End Else Begin                    { separator                     }
+        End Else
+        Begin                    { separator                     }
             r := false;
             delete (s, 1, 1);
         End;
@@ -127,7 +141,8 @@ Procedure Printpages(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
     list: TPageList);
 
-Var spagecount: integer;
+Var
+    spagecount: integer;
     i: integer;
     inblock: stringline;
     n: integer;
@@ -176,7 +191,8 @@ End;
 {******************************************************************}
 Procedure PrmPrintMenu(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
-Var dir: movement;
+Var
+    dir: movement;
     c: char;
     resp: response_type;
     choicenum: byte;

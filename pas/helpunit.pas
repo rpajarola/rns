@@ -4,7 +4,8 @@ Unit helpunit;
 
 Interface
 
-Uses Graph,
+Uses
+    Graph,
     GcurUnit,
     Graphmenu,
     inout,
@@ -36,7 +37,8 @@ Procedure HlpSymbolSelect(Var c: char);
 
 Implementation
 
-Uses pageunit,
+Uses
+    pageunit,
     sdunit,
     symbols,
     Dmemunit,
@@ -47,7 +49,8 @@ Uses pageunit,
 {******************************************************}
 Procedure HlpBottomLine(hinttext: string);
 
-Var x, y: integer;
+Var
+    x, y: integer;
 
 Begin
     PagClearBottomLine;
@@ -84,8 +87,10 @@ End;
 Procedure HlpTestFileName(instring: stringline; Var ok: boolean;
     x, xmax, y: integer);
 {testet instring auf einen gÅltigen textstring}
+
     Procedure ImpossibleFilename;
-    Var P: Pointer;
+    Var
+        P: Pointer;
     Begin
         ok := false;
         Mauszeigen;
@@ -98,11 +103,14 @@ Procedure HlpTestFileName(instring: stringline; Var ok: boolean;
         txtfnt.write (grminx + 16, grmaxy + 14,
             'Press [Esc] to continue ',
             getcolor, sz8x16, stnormal);
-        Repeat Until IniMausEscape = #27;
+        Repeat
+        Until IniMausEscape = #27;
         Mausdunkel;
         PutImage (grminx, grmaxy - 22, P^, CopyPut);
     End;
-Var tfile: text;
+
+Var
+    tfile: text;
     i: Integer;
 Begin
     ok := true;
@@ -137,7 +145,8 @@ End;
 {******************************************************}
 Function HlpGetFileName(Var instring: string; extn: string; x, y: word): Boolean;
 
-Var resp: Response_Type;
+Var
+    resp: Response_Type;
     dir: movement;
     c: char;
     ok: boolean;
@@ -173,14 +182,17 @@ Begin
 
         End; {case resp of}
     Until ok;
-    If resp = escape Then HlpGetFileName := false
-    Else HlpGetFileName := true;
+    If resp = escape Then
+        HlpGetFileName := false
+    Else
+        HlpGetFileName := true;
 End;
 
 {******************************************************}
 Procedure HlpText(x, xmax, y: integer; hinttext: string; escwait: boolean);
 
-Var c: char;
+Var
+    c: char;
     outstring: string;
     temp1, temp2: boolean;
 
@@ -207,7 +219,8 @@ End;
 {******************************************************}
 Procedure HlpHint(HintTextFmt: String; WaitTime: Integer; Const Args: Array Of Const);
 
-Var ymaxframe: integer;
+Var
+    ymaxframe: integer;
     SPic: Pointer;
     SC: Byte;
     HintText: String;
@@ -236,8 +249,10 @@ Begin
     Begin
         txtfnt.write (grminx + 16, grmaxy - ymaxframe + 4 * charheight,
             'Press [Esc] to continue', getcolor, sz8x16, stnormal);
-        Repeat Until IniMausEscape = #27;
-    End Else Delay (WaitTime);
+        Repeat
+        Until IniMausEscape = #27;
+    End Else
+        Delay (WaitTime);
     PutImage (GrMinX, grmaxy - ymaxframe - 1, SPic^, NormalPut);  {???}
     FreeMem (Spic, ImageSize (grminx, grmaxy - ymaxframe - 1, grmaxx, grmaxy + 1)); {???}
     SetColor (SC);
@@ -259,7 +274,9 @@ Begin
         #73: HlpAreYouSure := False;
     End;{Case HlpAsk of }
 End;
+
 {******************************************************}
+
 Function HlpAskYesEsc(hinttext, choicetext: string; position: byte): boolean;
 Begin
     Case HlpAsk (hinttext, choicetext, position, ['Y', #13, #27, #73]) Of
@@ -269,9 +286,12 @@ Begin
         #73: HlpAskYesEsc := False;
     End;{Case HlpAsk of }
 End;
+
+
 Function HlpAsk(hinttext, choicetext: string; position: byte;
     Resp: TCharSet): char;
-Var c: char;
+Var
+    c: char;
     ymax: integer;
     SPic: Pointer;
     m: Boolean;
@@ -279,7 +299,8 @@ Var c: char;
 Begin
     XClearKbd;
     m := NOT istdunkel;
-    If m Then Mausdunkel;
+    If m Then
+        Mausdunkel;
     Case position Of
         hpEdit: ymax := grmaxy;
         hpUp: ymax := grminy + 7;
@@ -300,22 +321,27 @@ Begin
     Mausdunkel;
     PutImage (grminx, ymax - 49, SPic^, Normalput);
     FreeMem (SPic, mem);
-    If M Then Mauszeigen;
+    If M Then
+        Mauszeigen;
 End;
 
 {******************************************************}
 
 Function HlpAskAny(Hinttext, choicetext: string; position: byte): Char;
-Var Resp: TCharSet;
+Var
+    Resp: TCharSet;
 Begin
     Resp := [#0..#$FF] - [' '];
     HlpAskAny := HlpAsk (hinttext, choicetext, position, resp);
 End;
+
 {******************************************************}
+
 Function HlpTxtAreYouSure(x, xmax, y: integer;
     hinttext: string): boolean;
 
-Var c: char;
+Var
+    c: char;
     outstring: string;
     temp1, temp2: boolean;
 
@@ -333,14 +359,17 @@ Begin
     IniClearLine (x, y, length (outstring), bkcolor);
     IniClearLine (x, y + 1, length (outstring), bkcolor);
 
-    If c = chr (27) Then HlpTxtAreYouSure := false
-    Else HlpTxtAreYouSure := true;
+    If c = chr (27) Then
+        HlpTxtAreYouSure := false
+    Else
+        HlpTxtAreYouSure := true;
 End;
 
 {******************************************************}
 Procedure HlpSymbolTable;
 
-Var y, i, blnum: integer;
+Var
+    y, i, blnum: integer;
     acolor: byte;
     sgrmaxy: Integer;
 Begin
@@ -387,7 +416,8 @@ End;
 {******************************************************}
 Procedure HlpSymbolSelect(Var c: char);
 
-Var symbolnum, choicenum: byte;
+Var
+    symbolnum, choicenum: byte;
     movedir: movement;
     mausx, mausy, maustaste, mausmenu: word;
     SMBKC: Byte;
@@ -429,7 +459,8 @@ End;
 {******************************************************}
 Procedure HlpCommandTable;
 
-Const xmin = 1;
+Const
+    xmin = 1;
     xmax = 80;
     ymin = 1;
     ymax = 30;
@@ -442,7 +473,8 @@ Const xmin = 1;
     MinX = 0;
     MinY = 0;
     { * * * * * * * * }
-Const nminx = 0;         { Screen frame                 }
+Const
+    nminx = 0;         { Screen frame                 }
     nminy = 0;
     nmaxx = 639;
     nmaxy = 479;
@@ -481,7 +513,8 @@ Const nminx = 0;         { Screen frame                 }
     altofs1 = 64;
     altofs2 = 80;
 
-Var i: byte;
+Var
+    i: byte;
     textst1, textst2, textst3, textst4, stri: string;
 Begin
     SetBkColor (7{menubkcolor}); {bei einer andern Farbe mÅssten Schatten rechts und unten definiert werden!}
@@ -857,4 +890,5 @@ Begin
         IniOutTextXY (tminx + TA + 1, tminy + (i * 2), textst4);
     End;
 End;
+
 End.

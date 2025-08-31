@@ -1,10 +1,11 @@
-{$I RNS.H}
+﻿{$I RNS.H}
 
 Unit musikunit;
 
 Interface
 
-Uses menutyp,
+Uses
+    menutyp,
     graphmenu,
     crt,
     gcurunit,
@@ -28,7 +29,8 @@ Procedure MusGetPromptedPattern(Var IN_STRING: STRINGLINE;
 
 Implementation
 
-Uses getunit,
+Uses
+    getunit,
     symbols,
     noteunit,
     pageunit,
@@ -98,7 +100,8 @@ Begin
             Beat (xfirst, yzeropos, 12, false);
         End;
         linenum := 0;
-        If inblock = '.' Then PagCursorLeft (linenum, actposn, actpost);
+        If inblock = '.' Then
+            PagCursorLeft (linenum, actposn, actpost);
         GcuCursorRestore;
         PagShowCurPosDistances (Linenum, ActPosn, ActPost, 0);
 
@@ -159,7 +162,8 @@ Begin
             delete (in_string, actposn, 1);
             actposn := actposn - 1;
         Until NOT IniNumChar (in_string[actposn]);
-    If in_string = '.' Then in_string := '';
+    If in_string = '.' Then
+        in_string := '';
     DispCurs := OldDispCurs;
 End;
 

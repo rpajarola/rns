@@ -1,10 +1,11 @@
-{$I RNS.H}
+﻿{$I RNS.H}
 
 Unit inout;
 
 Interface
 
-Uses menutyp,
+Uses
+    menutyp,
     xcrt,
     crt;
 
@@ -24,7 +25,8 @@ Procedure Put_Centered_String(OUT_STRING: STRING;
 
 Implementation
 
-Uses initsc,
+Uses
+    initsc,
     mousdrv;
 
 {***********************************************************}

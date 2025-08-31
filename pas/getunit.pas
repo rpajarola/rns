@@ -31,7 +31,8 @@ Procedure GetDrawSystems(lineattr: lineattrtype; linenum: integer);
 
 Implementation
 
-Uses symbols,
+Uses
+    symbols,
     TitleUnit,
     GCurUnit,
     UtilUnit,
@@ -47,7 +48,8 @@ Procedure GetClearLines(linenum: integer; Var lineup, linedown: integer);
  mit Tabulatoren und setzt lineup auf die obere Zeile, linedown auf
  die unter}
 
-Var i: integer;
+Var
+    i: integer;
 
 Begin
     lineup := linenum - 2;
@@ -84,6 +86,8 @@ Begin
     If (xa > GetMaxX - GcuRightMargin) Then
         xa := getmaxX - gcurightmargin + 1;
 End;
+
+
 Procedure GetComputeXNoCorr(Var inblock: stringline; Var xa, dx: integer;
     Var rxa: real);
 
@@ -96,7 +100,9 @@ Begin
     rxa := rxa + rx;
     xa := trunc (rxa * 1000 + 0.5) DIV 1000;
 End;
+
 {****************************************************************}
+
 Procedure GetNotePosX(Var x, notec: integer; linenum: integer;
     cursormove, left: boolean);
 {Berechnen von xa und NoteCount f�r die Position x und plaziere Cursor
@@ -131,7 +137,8 @@ Begin
                 xmin := xa;
             If x < xmin Then
                 x := xmin;
-        End Else delete (inblock, 1, 1);
+        End Else
+            delete (inblock, 1, 1);
     {Berechnen von Notec}
     Notec := length (Page[linenum]) - length (inblock);
     If ((left) AND (Xa > x)) Then
@@ -144,7 +151,8 @@ Begin
     End Else If length (inblock) > 0 Then
         notec := notec + 1;
     {Cursor plazieren, wenn verlangt}
-    If cursormove Then GcuMoveCursor (Xa, IniYnow (linenum) + CharHeight);
+    If cursormove Then
+        GcuMoveCursor (Xa, IniYnow (linenum) + CharHeight);
     {x wird auf die aktuelle Position gesetzt}
     x := xa;
 End;
@@ -175,11 +183,13 @@ Begin
             GetComputeX (inblock, xa, dx, rxa);
             If xmin < IniLeftMargin Then
                 xmin := xa;
-        End Else delete (inblock, 1, 1);
+        End Else
+            delete (inblock, 1, 1);
     {Berechnen von Notec}
     Notec := length (Page[linenum]) - length (inblock);
     {Cursor plazieren, wenn verlangt}
-    If cursormove Then GcuMoveCursor (Xa, IniYnow (linenum) + CharHeight);
+    If cursormove Then
+        GcuMoveCursor (Xa, IniYnow (linenum) + CharHeight);
     x := xa;
 End;
 
@@ -203,7 +213,8 @@ End;
 Procedure GetNoteBlock(Var inblock: stringline; Var lineattr: lineattrtype;
     linenum: integer);
 
-Var linblock, strbuf: stringline;
+Var
+    linblock, strbuf: stringline;
 
 Begin
     linblock := copy (inblock, 1, linemarker);
@@ -221,7 +232,10 @@ Begin
     If linenum > 0 Then
     Begin
         page[linenum] := linblock + inblock;
-        If lineattr.linestyle = 5 Then page[linenum, 5] := 'H' Else page[linenum, 5] := ' ';
+        If lineattr.linestyle = 5 Then
+            page[linenum, 5] := 'H'
+        Else
+            page[linenum, 5] := ' ';
     End;
 
     While ((length (inblock) > 0) AND (inblock[1] <> '%')) Do
@@ -232,7 +246,8 @@ End;
 {**************************************************************}
 Procedure GetLine(linenum, startx: integer);
 
-Var xfirst: integer;
+Var
+    xfirst: integer;
     inblock: stringline;
     lineattr: lineattrtype;
 
@@ -338,7 +353,8 @@ Begin
                 {TESTING}
                 AND (pos (' ', tempstr) = 0) AND (pos ('&', tempstr) = 0) Then
                 {          quotmark:=false};
-        End Else { if numchar(inblock[1]) }Begin
+        End Else { if numchar(inblock[1]) }
+        Begin
             { * * * * * * * * * * }
             vogelX := IniLineEnd (Page[linenum]);
             If xa > vogelX Then
@@ -369,7 +385,8 @@ Begin
                 c := inblock[1];
                 y := IniYnow (linenum);
                 Case c Of
-                    ',': If length (inblock) > 1 Then SymNichts (xa, y, rxa);
+                    ',': If length (inblock) > 1 Then
+                            SymNichts (xa, y, rxa);
                     '.': SymAbsNichts (xa, y);
                     '/': Slash (xa, y, rxa);
                     '\': SymDotSlash (xa, y, rxa);
@@ -385,14 +402,16 @@ Begin
                             { Kleine Klammer unten }
                             UtiKlammerAufPos (inblock, difx, height, flamc);
                             SymNorKlammerAuf (xa + difx, y + sterny, height);
-                        End Else Begin
+                        End Else
+                        Begin
                             rklammerflam := true;
                             If inblock[3] = ')' Then
                             Begin
                                 { kleine Klammer oben }
                                 SymNorKlammerAuf (xa + difx - charwidth, y + sterny + dify, 5);
                                 gflam := false;
-                            End Else Begin
+                            End Else
+                            Begin
                                 { grosse Klammer }
                                 gflam := true;
                                 KlY := IniYNow (linenum) + 5 - (y + sterny + dify);
@@ -408,7 +427,8 @@ Begin
                             { kleine Klammer unten }
                             UtiKlammerZuPos (lastc, dummy, flamc);
                             SymNorKlammerZu (xa + difx + dummy, y + sterny + dify, height);
-                        End Else Begin
+                        End Else
+                        Begin
                             rklammerflam := false;
                             If gflam Then
                             Begin
@@ -421,13 +441,15 @@ Begin
                                 Else
                                     SymNorKlammerZu (xa + charwidth, IniYNow (linenum), KlY);
                                 KlY := 0;
-                            End Else SymNorKlammerZu (xa + difx + charwidth, y + sterny + dify, 5){ kleine Klammer oben };
+                            End Else
+                                SymNorKlammerZu (xa + difx + charwidth, y + sterny + dify, 5){ kleine Klammer oben };
                         End;
                     '[': If flamc = ' ' Then
                         Begin
                             UtiKlammerAufPos (inblock, difx, height, flamc);
                             SymEckKlammerAuf (xa + difx, y, height);
-                        End Else Begin
+                        End Else
+                        Begin
                             eklammerflam := true;
                             SymEckKlammerAuf (xa + difx - charwidth, y, 5);
                         End;
@@ -435,7 +457,8 @@ Begin
                         Begin
                             UtiKlammerZuPos (lastc, difx, flamc);
                             SymEckKlammerZu (xa + difx, y, height);
-                        End Else Begin
+                        End Else
+                        Begin
                             eklammerflam := false;
                             SymEckKlammerZu (xa + difx + charwidth, y, 5);
                         End;
@@ -470,7 +493,8 @@ Begin
                         Begin
                             sternflam := true;
                             delete (inblock, 2, 1);
-                        End Else Begin
+                        End Else
+                        Begin
                             sternflam := false;
                             sterny := 0;
                         End;
@@ -487,7 +511,8 @@ Begin
             If ((xfirst > xa) AND (inblock[1] <> '.')) Then
             Begin
                 xfirst := xa;
-                If xfirst < grminx Then xfirst := grminx;
+                If xfirst < grminx Then
+                    xfirst := grminx;
             End;
             delete (inblock, 1, 1);
         End{ if numchar(inblock[1]) else}; { while length(inblock) > 0 do }
@@ -531,7 +556,8 @@ Begin
         4: SymDottedLine (x0, y, GetMaxX - GcuRightMargin + drightmargin);
         5: SymInvisibleLine (x0, y, GetMaxX - GcuRightMargin + drightmargin);
     End;
-    If (lineattr.linestyle <> 5) Then { not a helpline } Begin
+    If (lineattr.linestyle <> 5) Then { not a helpline }
+    Begin
         x0 := IniFirstBeatPos (lineattr) - dx;
         Case lineattr.linestyle Of
             1: Beatlength := 12;
@@ -616,7 +642,9 @@ Begin
       end;
    end;*)
 End;
+
 {***********************************************}
+
 Function GetDrawSymbol(linenum, actposn: integer; UpdateCursor: Boolean): Boolean;
 {Zeichne das Symbol in Page[linenum,actposn] an der (hoffentlich)richtigen
  Stelle, wenn UpdateCursor True ist, wird GCXCoord nachgef�hrt. Falls das
@@ -644,7 +672,8 @@ Begin
             GetComputeX (inblock, xa, dx, rxa);
             If xmin < IniLeftMargin Then
                 xmin := xa;
-        End Else Begin
+        End Else
+        Begin
             delete (inblock, 1, 1);
             If inblock = '' Then
             Begin
@@ -661,7 +690,8 @@ Begin
         GetDrawSymbol := True;
         If updatecursor Then
             gcxcoord := Xa;
-    End Else Begin
+    End Else
+    Begin
         GetDrawSymbol := False;
         Exit;
     End;
@@ -674,7 +704,10 @@ Begin
         c1 := page[linenum, i];
         inc (i);
     Until (c1 = '+') OR (c1 = '-') OR (c1 = '=') OR (c1 = '*') OR (i >= actposn);
-    If (c1 = '+') OR (c1 = '-') OR (c1 = '=') OR (c1 = '*') Then UtiComputeDxdy (page[linenum], difx, dify, actposn, c1) Else Begin
+    If (c1 = '+') OR (c1 = '-') OR (c1 = '=') OR (c1 = '*') Then
+        UtiComputeDxdy (page[linenum], difx, dify, actposn, c1)
+    Else
+    Begin
         difx := 0;
         dify := 0;
     End;
@@ -696,7 +729,8 @@ End;
 {***********************************************}
 
 Function GetValidStaff(Var linenum: integer): Boolean;
-Var i, ii, j: integer;
+Var
+    i, ii, j: integer;
     s: Stringline;
     lineattr: lineattrtype;
 
@@ -705,7 +739,8 @@ Begin
     Begin
         s := page[linenum];
         getnoteattributes (s, lineattr);
-    End Else lineattr := actattr{IF page[linenum,1]='N'};{IF page[linenum,1]='N' Else}
+    End Else
+        lineattr := actattr{IF page[linenum,1]='N'};{IF page[linenum,1]='N' Else}
     If lineattr.linestyle <> 2 Then
     Begin
         GetValidstaff := True;
@@ -737,11 +772,13 @@ Begin
                             linenum := ii;
                             GetValidStaff := True;
                             Exit;
-                        End Else Begin{if lineattr.linestyle<>2}
+                        End Else
+                        Begin{if lineattr.linestyle<>2}
                             GetvalidStaff := False;
                             Exit;
                         End;{if lineattr.linestyle<>2 Else}
-                    End Else Begin{if ii>=j+5}
+                    End Else
+                    Begin{if ii>=j+5}
                         GetvalidStaff := False;
                         Exit;
                     End;{if ii>=j+5 else }
@@ -758,8 +795,10 @@ Begin
         linenum := pagelength;
 End;
 
+
 Procedure GetReDraw(linenum, startx, endx: integer);
-Var i, xfirst: integer;
+Var
+    i, xfirst: integer;
     inblock: stringline;
     lineattr: lineattrtype;
 Begin
@@ -778,7 +817,8 @@ End;
 
 {***********************************************}
 Procedure GetDrawSystems(lineattr: lineattrtype; linenum: integer);
-Var offs: integer;
+Var
+    offs: integer;
 Begin
     If lineattr.linestyle = 2 Then
         offs := -20
@@ -789,7 +829,10 @@ Begin
         If page[linenum, 2] = 'S' Then
         Begin
             PriSetLineWidth (2);
-            If NotFindSysEnd (linenum) = linenum Then PriDrawLine (1, IniYNow (linenum) + offs, 1, IniYNow (linenum) + 5) Else Begin
+            If NotFindSysEnd (linenum) = linenum Then
+                PriDrawLine (1, IniYNow (linenum) + offs, 1, IniYNow (linenum) + 5)
+            Else
+            Begin
                 PriDrawLine (1, IniYNow (linenum) + offs, 1, IniYNow (NotFindSysEnd (linenum)));
             End;
         End Else If page[linenum, 2] = 'E' Then
@@ -803,7 +846,8 @@ Begin
         Begin
             Line (2, IniYNow (linenum) + offs, 2, IniYNow (linenum) + 5);
             Line (3, IniYNow (linenum) + offs, 3, IniYNow (linenum) + 5);
-        End Else Begin
+        End Else
+        Begin
             Line (2, IniYNow (linenum) + offs, 2, IniYNow (NotFindSysEnd (linenum)));
             Line (3, IniYNow (linenum) + offs, 3, IniYNow (NotFindSysEnd (linenum)));
         End;
@@ -813,5 +857,6 @@ Begin
         Line (3, IniYNow (linenum) - 5, 3, IniYNow (linenum));
     End;
 End;
+
 Begin
 End.

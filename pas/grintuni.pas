@@ -4,7 +4,8 @@ Unit grintunit;
 
 Interface
 
-Uses menutyp,
+Uses
+    menutyp,
     graphmenu,
     grinout,
     imenuunit,
@@ -266,7 +267,8 @@ end;
 {******************************************************}
 Procedure GriBeatMenuDisp(linenum: integer);
 
-Var c: char;
+Var
+    c: char;
     Bufstr: string;
     i, y, hy: integer;
     inblock, bufline: stringline;
@@ -285,7 +287,8 @@ Begin
         Begin
             inblock := page[linenum];
             GetNoteBlock (inblock, lineattr, linenum);
-        End Else Begin
+        End Else
+        Begin
             {      insmusicline:= 'N           1 0 480 3 %.1.';}
             inblock := insmusicline;
             GetNoteBlock (inblock, lineattr, 0);
@@ -427,7 +430,8 @@ Begin
                         changed[3] := false;
                     End;
                 End;{case}
-            End Else Begin
+            End Else
+            Begin
                 lineattr.beats := tempattr.beats;
                 lineattr.resolution := tempattr.resolution;
             End;
@@ -462,7 +466,8 @@ Begin
                         rc := changed[3];
                     End;
                 End;{case}
-            End Else lineattr.eint := tempattr.eint;
+            End Else
+                lineattr.eint := tempattr.eint;
             lineattr.linestyle := tempattr.linestyle;
         Until ok;
 
@@ -483,7 +488,10 @@ Begin
         End;
         For linenum := StartMlineSav To EndMlineSav Do
         Begin
-            If page[linenum, 1] = 'N' Then inblock := Page[linenum] Else inblock := insmusicline;
+            If page[linenum, 1] = 'N' Then
+                inblock := Page[linenum]
+            Else
+                inblock := insmusicline;
 
             bufline := copy (inblock, 1, linemarker);
             delete (inblock, 1, LineMarker);
@@ -524,7 +532,9 @@ Begin
                 insmusicline  := bufline;
         End;{For MEnd.MLine Downto MStart.MLine Do}
         linenum := a;
-        If startmlinesav <> endmlinesav Then pagunmark;
+        If startmlinesav <> endmlinesav Then
+            pagunmark;
     End; {With BeatMenu do}
 End;
+
 End.

@@ -29,25 +29,32 @@ Procedure TexWordLeft(Var Linenum, Actpos: Integer);
 Procedure TexWordRight(Var Linenum, Actpos: Integer);
 Function TexGetText(Linenum: Integer): String;
 Procedure TexSetText(Linenum: Integer; S: String);
+
 Implementation
 
-Uses getunit,
+Uses
+    getunit,
     printunit,
     titleunit;
-Const yshift = -3.0;
+
+Const
+    yshift = -3.0;
 
 {******************************************************}
 Procedure TexDelToEOL(linenum, actpos: integer);
-Var x: integer;
+Var
+    x: integer;
 Begin
     Delete (page[linenum], actpos + 1, length (page[linenum]));
     page[linenum, actpos] := ' ';
     TexActPosX (x, actpos, linenum, false);
 End;
 
+
 Procedure TexEndHKlammer(linenum: integer; actpos: integer);
 {Ende einer waagrechten Klammer}
-Var XE, XS, XM: integer;
+Var
+    XE, XS, XM: integer;
     Y: integer;
     PS: integer;
     found: boolean;
@@ -68,7 +75,8 @@ Begin
     Begin
         TexActPosX (XS, PS, linenum, false);
         PriHorizontalKlammer (XS - 4, XE + 4, y + 4);
-    End Else Begin
+    End Else
+    Begin
         SymHKlammerEnd (xe, y);
         If found Then
         Begin
@@ -76,14 +84,20 @@ Begin
             SetLineStyle (solidln, 0, 1);
             Line (XS + 4, y + 4, XE - 4, y + 4);
             xm := (XS + XE) SHR 1;
-            If (XE - XS) < 8 Then SymHKlammerSmallMid (xm, y){ Klammern zu nahe beieinander } Else SymHKlammerNormMid (xm, y);
+            If (XE - XS) < 8 Then
+                SymHKlammerSmallMid (xm, y){ Klammern zu nahe beieinander }
+            Else
+                SymHKlammerNormMid (xm, y);
         End;
     End;
 End;
+
 {******************************************************}
+
 Procedure TexEndVKlammer(linenum, actpos, x: integer);
 {Ende einer senkrechten Klammer}
-Var sline, midline, i: byte;
+Var
+    sline, midline, i: byte;
     foundflag: boolean;
 Begin
     SetLineStyle (solidln, 0, 1);
@@ -94,7 +108,10 @@ Begin
     Repeat
         If ((page[sline, 1] = 'T') AND
             (length (page[sline]) >= actpos) AND
-            (page[sline, actpos] = chr (229))) Then foundflag := true Else dec (sline);
+            (page[sline, actpos] = chr (229))) Then
+            foundflag := true
+        Else
+            dec (sline);
     Until ((foundflag) OR (sline < topmargin));
     {flle Zeichen fr Klammer ein}
     If foundflag Then
@@ -102,25 +119,31 @@ Begin
         TexActPosX (x, actpos, linenum, false);
         midline := (sline + linenum) SHR 1;
         For i := (sline + 1) To midline - 1 Do
-            If abs (sline - linenum) > 2 Then SymVKlammerCont (x - 8, IniYnow (i));
+            If abs (sline - linenum) > 2 Then
+                SymVKlammerCont (x - 8, IniYnow (i));
         If ((2 * midline) = (sline + linenum)) Then
         Begin
             SymVKlammerEvenMid (x - 1, IniYnow (midline));
             If abs (sline - linenum) > 2 Then
                 SymVKlammerCont (x - 8, IniYnow (midline + 1));
-        End Else Begin
+        End Else
+        Begin
             If abs (sline - linenum) > 2 Then
                 SymVKlammerCont (x - 8, IniYnow (midline));
             SymVKlammerOddMid (x - 1, IniYnow (midline) + 4);
         End;
         If abs (sline - linenum) > 2 Then
-            For i := midline + 2 To linenum - 1 Do SymVKlammerCont (x - 8, IniYnow (i));
-        If printeron Then PriVerticalKlammer (x, IniYnow (linenum - 1) + linethick DIV 2,
+            For i := midline + 2 To linenum - 1 Do
+                SymVKlammerCont (x - 8, IniYnow (i));
+        If printeron Then
+            PriVerticalKlammer (x, IniYnow (linenum - 1) + linethick DIV 2,
                 IniYnow (sline + 1) - linethick DIV 2);
-    End Else inc (x, 4);
+    End Else
+        inc (x, 4);
     If abs (sline - linenum) > 2 Then
         SymVKlammerEnd (x - 1, IniYnow (linenum))
-    Else Begin
+    Else
+    Begin
         PutPixel (x + 3, IniYnow (linenum) - 4, getcolor);
         PutPixel (x + 4, IniYnow (linenum) - 4, getcolor);
         PutPixel (x + 4, IniYnow (linenum) - 3, getcolor);
@@ -130,10 +153,14 @@ End;
 
 {***************************************************************}
 Procedure TexHorizontalLine(linenum, x: integer);
-Var oldcolor: byte;
+Var
+    oldcolor: byte;
 Begin
-    If printeron Then MainLine (IniLeftMargin, IniYnow (linenum) + 1,
-            GetMaxX - GcuRightMargin + drightmargin, hlwidth) Else Begin
+    If printeron Then
+        MainLine (IniLeftMargin, IniYnow (linenum) + 1,
+            GetMaxX - GcuRightMargin + drightmargin, hlwidth)
+    Else
+    Begin
         oldcolor := GetColor;
         SetColor (12);
         MainLine (IniLeftMargin, IniYnow (linenum) + 1,
@@ -152,18 +179,22 @@ End;
 
 {***************************************************************}
 Procedure TexVerticalLine(linenum, x: integer; hfinclude: boolean; threeD: Boolean);
-Var y0, y1, i: integer;
+Var
+    y0, y1, i: integer;
     oldcolor:  byte;
 Begin
     If hfinclude Then
     Begin
         y0 := 1;
         y1 := IniYBottomMargin;
-    End Else Begin
+    End Else
+    Begin
         i := linenum;
         While ((i >= 0) AND (pos (chr (233), page[i]) = 0)) Do
             dec (i);
-        If i <= 0 Then y0 := 1 Else If printeron Then
+        If i <= 0 Then
+            y0 := 1
+        Else If printeron Then
             y0 := IniYnow (i) + 1
         Else
             y0 := IniYnow (i) + 3;
@@ -186,7 +217,8 @@ Begin
         If y1 >= IniYBottomMargin - 1 Then
             y1 := IniYBottomMargin + 1;
         PriDrawLine (x + 1, y0, x + 1, y1 - 1);
-    End Else Begin
+    End Else
+    Begin
         oldcolor := GetColor;
         If threeD Then
         Begin
@@ -196,7 +228,8 @@ Begin
             SetColor (5);
             SetLineStyle (Solidln, 1, 0);
             line (x + 2, y0, x + 2, y1 - 1);
-        End Else Begin
+        End Else
+        Begin
             SetColor (lcolor);
             SetLineStyle (4, $AAAA, 1);
             Line (x + 1, y0 - 1, x + 1, y1);
@@ -216,17 +249,22 @@ End;
 {****************************************************************}
 Procedure TexTxtPosX(Var x, actpost: integer; linenum: integer;
     cursormove: boolean);
-Var inblock: stringline;
+Var
+    inblock: stringline;
     xa, lxa, xnote: integer;
     totw: integer;
 Begin
-    While length (page[linenum]) < (linemarker + 1) Do page[linenum] := page[linenum] + ' ';
+    While length (page[linenum]) < (linemarker + 1) Do
+        page[linenum] := page[linenum] + ' ';
     inblock := page[linenum];
     delete (inblock, 1, linemarker);
     xa := textmargin;
-    If x < xa Then x := xa + 1;
-    If x > GetMaxX - Gcurightmargin Then x := GetMaxX - Gcurightmargin;
-    If ((linestyles IN actedit) AND (x > (IniLeftMargin + labellength * 6))) Then x := IniLeftMargin + labellength * 6;
+    If x < xa Then
+        x := xa + 1;
+    If x > GetMaxX - Gcurightmargin Then
+        x := GetMaxX - Gcurightmargin;
+    If ((linestyles IN actedit) AND (x > (IniLeftMargin + labellength * 6))) Then
+        x := IniLeftMargin + labellength * 6;
     Repeat
         lxa := xa;
         If length (inblock) = 0 Then
@@ -234,7 +272,10 @@ Begin
             inblock := ' ';
             page[linenum] := page[linenum] + ' ';
         End;
-        If NOT IniTabChar (inblock[1]) Then xa := xa + 6 Else xa := xa + TexTabWidth (xa, linenum, ord (inblock[1]), false, xnote, totw);
+        If NOT IniTabChar (inblock[1]) Then
+            xa := xa + 6
+        Else
+            xa := xa + TexTabWidth (xa, linenum, ord (inblock[1]), false, xnote, totw);
         If (xa > GetMaxX - GcuRightMargin) Then
             xa := GetMaxX - GcuRightMargin;
         delete (inblock, 1, 1);
@@ -250,14 +291,17 @@ End;
 Procedure TexActPosX(Var x, actpost: integer; linenum: integer;
     cursormove: boolean);
 {Berechnet x in Funktion von ActPost}
-Var inblock: stringline;
+Var
+    inblock: stringline;
     temppos, dx, xnote: integer;
     totw: integer;
 Begin
     temppos := linemarker + 1;
-    If actpost < temppos Then actpost := temppos;
+    If actpost < temppos Then
+        actpost := temppos;
     If ((linestyles IN actedit) AND
-        (actpost > labellength + linemarker)) Then actpost := labellength + linemarker;
+        (actpost > labellength + linemarker)) Then
+        actpost := labellength + linemarker;
     While length (page[linenum]) < actpost Do
         page[linenum] := page[linenum] + ' ';
     inblock := page[linenum];
@@ -268,7 +312,10 @@ Begin
     Begin
         If length (inblock) = 0 Then
             inblock := ' ';
-        If NOT IniTabChar (inblock[1]) Then dx := 6 Else dx := TexTabWidth (x + 8, linenum, ord (inblock[1]), false, xnote, totw);
+        If NOT IniTabChar (inblock[1]) Then
+            dx := 6
+        Else
+            dx := TexTabWidth (x + 8, linenum, ord (inblock[1]), false, xnote, totw);
         If inblock[1] = #235 Then
             Inc (x, 2 * dx);
         x := x + dx;
@@ -279,12 +326,14 @@ Begin
     If (x > GetMaxX - GcuRightMargin) Then
         x := GetMaxX - GcuRightMargin;
     x := x + 12;
-    If cursormove Then GcuMoveCursor (x, IniYnow (linenum) + CharHeight + 2);
+    If cursormove Then
+        GcuMoveCursor (x, IniYnow (linenum) + CharHeight + 2);
 End;
 
 {****************************************************************}
 Procedure TexClearLine(linenum, startx: integer);
-Var y, endx: integer;
+Var
+    y, endx: integer;
 Begin
     If startx <= 0 Then
         startx := 1;
@@ -322,7 +371,8 @@ Function TexTabWidth(x, linenum, ordc: integer;
  true, so wird der cursor in x-Richtung auf diese Position verschoben.
  Die y-koordinate bleibt unver„ndert.
  Der Funktionswert wird gleich der Schrittweite des Tabulators}
-Var i: byte;
+Var
+    i: byte;
     notec, res: integer;
 Begin
     {Suche Notenzeile}
@@ -331,12 +381,16 @@ Begin
         i := linenum - 1;
         While ((i >= topmargin) AND (page[i, 1] <> 'N')) Do
             dec (i);
-    End Else Begin                { geshifteter Tabulator }
+    End Else
+    Begin                { geshifteter Tabulator }
         i := linenum + 1;
         While ((i <= pagelength) AND (page[i, 1] <> 'N')) Do
             i := i + 1;
     End;
-    If ((i < topmargin) OR (i > pagelength)) Then res := 6{Keine Notenzeile gefunden}{ standard charwidth } Else Begin
+    If ((i < topmargin) OR (i > pagelength)) Then
+        res := 6{Keine Notenzeile gefunden}{ standard charwidth }
+    Else
+    Begin
         xnote := x + 4;
         GetNotePosX (xnote, notec, i, false, false);
         If xnote < x Then
@@ -344,7 +398,8 @@ Begin
             {Keine Noten rechts der gegenwaertigen Position}
             res := 6;
             totw := 6;
-        End Else Begin
+        End Else
+        Begin
             totw := xnote - x - 3;
             res  := totw MOD 6;
         End;
@@ -352,7 +407,8 @@ Begin
             res := 6;
     End;
     TexTabWidth := res - 1;
-    If cursormove Then GcuMoveCursor (xnote - 12, gcycoord);
+    If cursormove Then
+        GcuMoveCursor (xnote - 12, gcycoord);
 End;
 
 {******************************************************************}
@@ -431,7 +487,8 @@ Begin
 
     Else
     Begin
-        If ordc < 200 Then strbuf := chr (ordc);
+        If ordc < 200 Then
+            strbuf := chr (ordc);
         i := 1;
     End;
     End;
@@ -448,15 +505,21 @@ Procedure TexGetString(linenum, istart, x, xnote: integer;
   iprint = wird um length(inblock) INKREMENTIERT (<>length(inblock)!!!)
   inblock= n„chstes wort nach page[linenum,istart]
 }
-Var i, xp, xn, tw: integer;
+Var
+    i, xp, xn, tw: integer;
+
     {************************}
+
     Function GoOn: Boolean;
     Begin
         GoOn := length (page[linenum]) >= (istart + i);
     End;
+
     {************************}
+
     Procedure AddChar(incinote: boolean);
-    Var idiff: byte;
+    Var
+        idiff: byte;
         strbuf: string;
     Begin
         TexOctval (Byte (page[linenum, istart + i]), strbuf, idiff);
@@ -466,6 +529,7 @@ Var i, xp, xn, tw: integer;
         inc (i);
         inc (iprint);
     End;
+
     {******************************}
 Begin
     inc (istart);
@@ -489,7 +553,8 @@ Begin
         AddChar (true);
     End;
     {Bis zum naechsten Blank in inblock lesen}
-    While (NOT TexWordEnd (page[linenum], istart + i)) Do AddChar (false);
+    While (NOT TexWordEnd (page[linenum], istart + i)) Do
+        AddChar (false);
     If inblock = '' Then
         inote := 0;
 End;
@@ -497,15 +562,19 @@ End;
 {****************************************************************}
 Procedure TexDrawLine(linenum, startx: integer);
 
-Var i, iprint, x, y, stringlength, xnote, inote: integer;
+Var
+    i, iprint, x, y, stringlength, xnote, inote: integer;
     ordc, ib: byte;
     inblock, strbuf: stringline;
     done, printit: boolean;
     ih, totw, j: integer;
+
     {*****************************************}
+
     Procedure PrintChar;
     {schreibt ein Zeichen}
-    Var strbuf: string;
+    Var
+        strbuf: string;
         ordc: byte;
     Begin
         If printit Then
@@ -518,10 +587,13 @@ Var i, iprint, x, y, stringlength, xnote, inote: integer;
                 inblock := inblock + strbuf;
                 inc (iprint);
             End;{while (not TexWordEnd(page[linenum],iprint+linemarker))}
-            If inblock <> '' Then PriPlaceString (PriXScale (x), PriYScale (y) + yshift,
+            If inblock <> '' Then
+                PriPlaceString (PriXScale (x), PriYScale (y) + yshift,
                     inblock);{if inblock<>''}
         End;{if printit}
-    End;{subproc PrintChar}
+    End;
+
+    {subproc PrintChar}
     {*******************************}
 Begin
     x := textmargin;
@@ -572,7 +644,8 @@ Begin
                                             length (inblock));
                                         PriComplString (strbuf);
                                     End;{if inote<length(inblock)}
-                                End Else {if inote>0} PriPlaceString (PriXScale (xnote),
+                                End Else
+                                    {if inote>0} PriPlaceString (PriXScale (xnote),
                                         PriYScale (y) + yshift,
                                         inblock); {if inote>0 else }
                             End; {if printit}
@@ -603,7 +676,8 @@ Begin
                     232: {beende waagrechte Klammer}TexEndHKlammer (linenum, i + linemarker);
                     233: {Horizontale Linie}TexHorizontalLine (linenum, x);
                     234: {Verticale Linie}TexVerticalLine (linenum, x + char2width - 1, true, false);
-                    235: {Seitennummer}Begin
+                    235: {Seitennummer}
+                    Begin
                         If setuppage IN actedit Then
                             inblock := '...'
                         Else
@@ -620,7 +694,8 @@ Begin
                                 PriYScale (y) + yshift,
                                 inblock);
                             iprint := iprint + 1;
-                        End {if printit}Else Begin
+                        End {if printit}Else
+                        Begin
                             txtfnt.write (x + 1, y, inblock, getcolor, sz6x12, stnormal);
                             If dispspec = 1 Then
                             Begin
@@ -662,9 +737,13 @@ End;{proc texdrawline}
 
 {****************************************************************}
 Procedure TexEdTextLine(linenum: integer; Var actpos: integer; c: char);
-Var x, ordc, i, j, blanks, maxchr, totw: integer;
+Var
+    x, ordc, i, j, blanks, maxchr, totw: integer;
 Begin
-    If (linestyles IN actedit) Then maxchr := labellength + linemarker Else maxchr := Stlength;
+    If (linestyles IN actedit) Then
+        maxchr := labellength + linemarker
+    Else
+        maxchr := Stlength;
     ordc := ord (c);
     If ordc = 8 Then
     Begin
@@ -675,7 +754,8 @@ Begin
             actpos := actpos - 1;
             x := gcxcoord - charwidth;
             TexClearLine (linenum, x - 13);
-            If (actpos <= length (page[linenum])) Then IniCharAdd (Page[linenum], chr (32), actpos);
+            If (actpos <= length (page[linenum])) Then
+                IniCharAdd (Page[linenum], chr (32), actpos);
             GetRedraw (linenum, grminX, grmaxX);
             TexActPosX (x, actpos, linenum, true);
         End;
@@ -684,7 +764,10 @@ Begin
     Begin
         x := gcxcoord {- 6} - 3;
         If ((NOT IniTabChar (page[linenum, actpos])) AND
-            (NOT IniTabChar (c))) Then IniClrCharField (x, IniYnow (linenum)) Else TexClearLine (linenum, x - char2width);
+            (NOT IniTabChar (c))) Then
+            IniClrCharField (x, IniYnow (linenum))
+        Else
+            TexClearLine (linenum, x - char2width);
         IniCharAdd (Page[linenum], c, actpos);
         GetRedraw (linenum, x - 9, x + 9); {x+7?}
         actpos := actpos + 1;
@@ -700,7 +783,8 @@ Begin
                 blanks := maxchr - length (page[linenum]);
                 actpos := maxchr;
             End;
-            For i := 1 To blanks Do page[linenum] := page[linenum] + ' ';
+            For i := 1 To blanks Do
+                page[linenum] := page[linenum] + ' ';
         End;
         TexActPosX (x, actpos, linenum, true);
     End{if length(Page[linenum]) < StLength }; {else if ordc = 8}
@@ -709,7 +793,8 @@ End;
 {****************************************************************}
 Procedure TexInsChar(linenum, actpos: integer);
 
-Var StringLength, i: integer;
+Var
+    StringLength, i: integer;
     x: integer;
 
 Begin
@@ -717,8 +802,10 @@ Begin
         (length (page[linenum]) < (labellength + linemarker))) Then
     Begin
         x := gcxcoord - 2 * CharWidth;
-        If Pos (chr (smallblankup), page[linenum]) > 0 Then x := grminx;
-        If Pos (chr (smallblankdown), page[linenum]) > 0 Then x := grminx;
+        If Pos (chr (smallblankup), page[linenum]) > 0 Then
+            x := grminx;
+        If Pos (chr (smallblankdown), page[linenum]) > 0 Then
+            x := grminx;
         TexClearLine (linenum, x);
         StringLength := Length (page[Linenum]) - LineMarker;
         If StringLength < StLength Then
@@ -736,7 +823,8 @@ End;
 {****************************************************************}
 Procedure TexDelChar(linenum: integer; Var actpos: integer);
 
-Var StringLength, i: integer;
+Var
+    StringLength, i: integer;
     x: integer;
 
 Begin
@@ -748,14 +836,18 @@ Begin
         For i := actpos To StringLength + LineMarker Do
             page[linenum, i] := page[linenum, i + 1];
         x := gcxcoord - 2 * CharWidth;
-        If Pos (chr (smallblankup), page[linenum]) > 0 Then x := grminx;
-        If Pos (chr (smallblankdown), page[linenum]) > 0 Then x := grminx;
+        If Pos (chr (smallblankup), page[linenum]) > 0 Then
+            x := grminx;
+        If Pos (chr (smallblankdown), page[linenum]) > 0 Then
+            x := grminx;
         TexClearLine (linenum, x);
         delete (page[linenum], StringLength + 1 + LineMarker, 1);
         GetRedraw (linenum, x - 2 * charwidth, grmaxX);
     End;
 End;
+
 {****************************************************************}
+
 Function SkipChar(C: Char): Boolean;
 Begin
     SkipChar := (C = ' ') OR
@@ -771,9 +863,12 @@ Begin
         (C = #236) OR {A-F8}
         (C = #237);   {AF10}
 End;
+
 {****************************************************************}
+
 Procedure TexWordLeft(Var Linenum, Actpos: Integer);
-Var x, sl: Integer;
+Var
+    x, sl: Integer;
     s: String;
     f: Boolean;
 Begin
@@ -815,9 +910,12 @@ Begin
     linenum := sl;
     TexActPosX (x, actpos, linenum, true);
 End;
+
 {****************************************************************}
+
 Procedure TexWordRight(Var Linenum, Actpos: Integer);
-Var x, sl: Integer;
+Var
+    x, sl: Integer;
     s: String;
     f, f2: Boolean;
 Begin
@@ -855,17 +953,23 @@ Begin
     linenum := sl;
     TexActPosX (x, actpos, linenum, true);
 End;
+
 {****************************************************************}
+
 Function TexGetText(Linenum: Integer): String;
-Var s: String;
+Var
+    s: String;
 Begin
     s := Copy (Page[linenum], 11, length (page[linenum]) - linemarker);
     IniTrailBlank (S);
     TexGetText := s;
 End;
+
 {****************************************************************}
+
 Procedure TexSetText(Linenum: Integer; S: String);
 Begin
     Page[Linenum] := Copy (Page[linenum], 1, 11) + S;
 End;
+
 End.

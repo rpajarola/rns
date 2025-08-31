@@ -1,7 +1,8 @@
 ﻿{$I RNS.H}
 Program Rns(Input, Output);
 
-Uses InitSc,
+Uses
+    InitSc,
     UserInt;
 
 Begin

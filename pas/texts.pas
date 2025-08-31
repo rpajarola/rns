@@ -4,7 +4,8 @@ Unit Texts;
 
 Interface
 
-Const HntBufempty = 'Buffer empty';
+Const
+    HntBufempty = 'Buffer empty';
     HntBufItself = 'Cannot move block in to itself';
     HntCopyLineToHeader = 'Cannot copy line into header or footer';
     HntDistanceToSmall = 'Distance too small';

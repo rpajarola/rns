@@ -20,9 +20,11 @@ Function NotFindSysEnd(linenum: integer): integer;
 Function NotIsSys(linenum: integer): char;
 Function NotNextLine(linenum: integer): integer;
 Function NotPrevLine(linenum: integer): integer;
+
 Implementation
 
-Uses pageunit,
+Uses
+    pageunit,
     symbols,
     initsc,
     menutyp,
@@ -45,9 +47,12 @@ Begin
     Delete (page[linenum], actpos + 1, length (page[linenum]));
     page[linenum, actpos] := '.';
 End;
+
 {****************************************************************}
+
 Procedure NotInsNote(linenum: integer; Var actpos: integer);
-Var inblock: stringline;
+Var
+    inblock: stringline;
     i: integer;
 Begin
     inblock := page[linenum];
@@ -55,7 +60,8 @@ Begin
     While ((length (inblock) > 0) AND (NOT IniNumchar (inblock[1]))) Do
         delete (inblock, 1, 1);
     i := IniNextNumber (inblock);
-    If i = 0 Then i := 1;
+    If i = 0 Then
+        i := 1;
     str (i, inblock);
     inblock := '.' + inblock;
     UtiCharBegin (page[linenum], actpos);
@@ -63,9 +69,12 @@ Begin
     PagRefClearVal (gcxcoord - 25, IniYnow (linenum - 2),
         GetmaxX, IniYnow (linenum + 1));
 End;
+
 {****************************************************************}
+
 Procedure NotDelNote(linenum: integer; Var actpos: integer);
-Var stbuf: string;
+Var
+    stbuf: string;
 Begin
     UtiDelNoteChar (page[linenum], actpos, stbuf);
     UtiDelNumChar (page[linenum], actpos);
@@ -77,7 +86,8 @@ End;
 {****************************************************************}
 Procedure NotEdNoteLine(linenum: integer; Var actpos: integer; c: char);
 
-Var i, j, k, ordc: integer;
+Var
+    i, j, k, ordc: integer;
     inblock, strbuf: stringline;
     lineattr: lineattrtype;
     x, deltax, clearendx: integer;
@@ -86,16 +96,21 @@ Var i, j, k, ordc: integer;
     indexc: char;
     oldx: integer;
     ref:  Byte;
-Const EdSnd = 50;
+Const
+    EdSnd = 50;
+
     {**********************}
+
     Procedure NotRemZero;
     Begin
         While ((length (inbuffer) > 0) AND (inbuffer[1] = '0')) Do
             delete (inbuffer, 1, 1);
     End;
+
     {**********************}
 
-Const refSmall = 0;
+Const
+    refSmall = 0;
     refNormal = 1;
     refNoRef = 2;
 
@@ -115,7 +130,8 @@ Begin
             #15: If symbcount > 1 Then
                     dec (symbcount);
         End;
-    End Else Begin
+    End Else
+    Begin
         deltax := 25; {Default clear region}
         clinemin := linenum - 3;
         clinemax := linenum + 1;
@@ -159,10 +175,12 @@ Begin
                 UtiDelNumChar (page[linenum], actpos);
                 clearendx := GetMaxX;
                 ref := refNormal;
-            End Else {if ordc = 8 then} Begin
+            End Else {if ordc = 8 then}
+            Begin
                 If (length (page[linenum]) + length (inbuffer)) < stlength Then
                 Begin
-                    If (linestyles IN actedit) Then c := '.';
+                    If (linestyles IN actedit) Then
+                        c := '.';
                     If (actpos < length (page[linenum])) OR (x >= grmaxx) Then
                         ref := refNormal
                     Else
@@ -247,7 +265,8 @@ Begin
                         { add oder replace }
                     End Else If (UtiReplaceChars (c) > 0) OR (reallymoveright) Then
                         moveright := true
-                    Else Begin
+                    Else
+                    Begin
                         moveright := false;
                         If NOT (c IN flamset) Then
                             inbuffer := strbuf;
@@ -291,8 +310,10 @@ Begin
                     If (length (page[linenum]) + length (inbuffer)) < stlength Then
                     Begin
                         If NOT ((actpos = length (page[linenum])) AND
-                            (ininumchar (page[linenum, actpos]))) Then UtiCharBegin (page[linenum], actpos);
-                        While IniNumChar (page[linenum, actpos - 1]) Do Dec (Actpos);
+                            (ininumchar (page[linenum, actpos]))) Then
+                            UtiCharBegin (page[linenum], actpos);
+                        While IniNumChar (page[linenum, actpos - 1]) Do
+                            Dec (Actpos);
                         UtiDelNumChar (page[linenum], actpos);
                         {Fuege neue(n) Character ein}
                         If (Length (page[linenum]) <= StLength) Then
@@ -305,10 +326,12 @@ Begin
                         SpeNoteRight (linenum, actpos);
                         GetClearLines (linenum, clinemin, clinemax);
                     End; {if (length(page[linenum]) + length(inbuffer)) }
-                End Else{if x < gcxcoord}Begin
+                End Else {if x < gcxcoord}
+                Begin
                     HlpHint (HntOutOfView, HintWaitEsc, []);
                 End;
-            End Else {not IniArrow(inbuffer[1])} Begin
+            End Else {not IniArrow(inbuffer[1])}
+            Begin
                 arrow := true;
                 left  := (inbuffer[1] = '<');
                 delete (inbuffer, 1, 1);
@@ -318,8 +341,10 @@ Begin
                     If Left Then
                     Begin
                         UtiCharBegin (page[linenum], actpos);
-                        While IniNumChar (page[linenum, actpos - 1]) Do Dec (actpos);
-                    End Else UtiFindCharEnd (Page[linenum], actpos);
+                        While IniNumChar (page[linenum, actpos - 1]) Do
+                            Dec (actpos);
+                    End Else
+                        UtiFindCharEnd (Page[linenum], actpos);
                     Val (Copy (inbuffer, 2, length (inbuffer) - 1), i, k);
                     Str (i * UtiGetNum (Page[linenum], actpos), inbuffer);
                     If inbuffer = '0' Then
@@ -334,23 +359,32 @@ Begin
                 If i = 0 Then
                 Begin
                     If ((NOT left) AND ((Length (page[linenum]) + length (inbuffer))
-                        < StLength)) Then page[linenum] := page[linenum] + inbuffer + '.';
-                End Else{ if i = 0 then }Begin
+                        < StLength)) Then
+                        page[linenum] := page[linenum] + inbuffer + '.';
+                End Else{ if i = 0 then }
+                Begin
                     Val (inbuffer, j, k);
                     If ((j MOD i) <> 0) Then
-                        HlpHint (HntDivNotPossible, HintWaitEsc, [j, i]) Else { if (j mod i) <> 0 then } Begin
+                        HlpHint (HntDivNotPossible, HintWaitEsc, [j, i])
+                    Else { if (j mod i) <> 0 then }
+                    Begin
                         k := j DIV i;
                         {Abstand k mal einfuegen}
                         If left Then
-                            While IniNumChar (page[linenum, actpos - 1]) Do actpos := actpos - 1 Else { if left then }actpos := actpos + 1; { else if left then }
+                            While IniNumChar (page[linenum, actpos - 1]) Do
+                                actpos := actpos - 1
+                        Else
+                            { if left then }actpos := actpos + 1; { else if left then }
                         If (length (page[linenum]) + k * (length (inbuffer) + 1)
                             < stlength) Then
                         Begin
                             UtiDelNumChar (page[linenum], actpos);
                             insert (inbuffer, page[linenum], actpos);
-                            For i := 1 To k - 1 Do insert (inbuffer + '.', page[linenum], actpos);
+                            For i := 1 To k - 1 Do
+                                insert (inbuffer + '.', page[linenum], actpos);
                             GetClearLines (linenum, clinemin, clinemax);
-                        End Else hlphint (HntTooManyChars, HintWaitEsc, []);
+                        End Else
+                            hlphint (HntTooManyChars, HintWaitEsc, []);
                     End; { else if (j mod i) <> 0 then }
                 End; { else if i = 0 then }
                 If Left Then
@@ -377,8 +411,10 @@ Begin
             End {if gcx...}Else If (gcxcoord = grmaxx) Then
                 If (((sndwarning - 1) AND 2) = 2) Then{oder am Ende des Bildschirms?}
                     IniLineEndSound (1){am Ende des Strings?}{if gcx... else};
-        If oldx > x Then oldx := x;
-        If oldx > grmaxx Then oldx := grmaxx;
+        If oldx > x Then
+            oldx := x;
+        If oldx > grmaxx Then
+            oldx := grmaxx;
         If ref = refSmall Then
             deltax := 4;
         inblock := page[linenum];
@@ -405,7 +441,9 @@ Begin
         page[linenum, 2] := 'S';{*S*tart}
     PagRefClearVal (0, IniYNow (linenum - 1), 3, IniYNow (NotFindSysEnd (linenum) + 1));
 End;
+
 {****************************************************************}
+
 Procedure NotSysEnd(linenum: integer);
 Begin
     If page[linenum, 2] = 'E' Then
@@ -417,7 +455,8 @@ End;
 
 {****************************************************************}
 Function NotFindSysStart(linenum: integer): integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     For i := linenum - 1 Downto 1 Do
         If page[i, 1] = 'N' Then
@@ -430,7 +469,8 @@ End;
 
 {****************************************************************}
 Function NotFindSysEnd(linenum: integer): integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     For i := linenum + 1 To pagelength Do
         If page[i, 1] = 'N' Then
@@ -440,14 +480,19 @@ Begin
         i := linenum;
     NotFindSysEnd := i;
 End;
+
 {****************************************************************}
+
 Function NotIsSys(linenum: integer): char;
 Begin
     NotIsSys := page[linenum, 2];
 End;
+
 {****************************************************************}
+
 Function NotNextLine(linenum: integer): integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     For i := linenum + 1 To pagelength Do
         If page[i, 1] = 'N' Then
@@ -456,9 +501,12 @@ Begin
         i := linenum;
     NotNextLine := i;
 End;
+
 {****************************************************************}
+
 Function NotPrevLine(linenum: integer): integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     For i := linenum - 1 Downto 1 Do
         If page[i, 1] = 'N' Then
@@ -467,4 +515,5 @@ Begin
         i := linenum;
     NotPrevLine := i;
 End;
+
 End.

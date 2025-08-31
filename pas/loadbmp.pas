@@ -4,8 +4,10 @@ Unit LoadBmp;
 
 Interface
 
-Type PBMP16 = ^TBMP16;
-    TBMP16  = Object
+Type
+    PBMP16 = ^TBMP16;
+
+    TBMP16 = Object
         XRes, YRes: Word;
         Data: Pointer;
         Constructor Load(FileName: String);
@@ -17,13 +19,16 @@ Procedure VGA16PutPixel(X, Y: Word; C: Byte);
 
 Implementation
 
+
 Constructor TBMP16.Load(FileName: String);
-Type BitMap_File = Record
+Type
+    BitMap_File = Record
         bfType: Array[0..1] Of Char;
         bfSize: LongInt;
         Res0: Array[0..3] Of Byte;
         bfOffs: LongInt;
     End;
+
     BitMap_Info = Record
         biSize: LongInt;
         biWidth: LongInt;
@@ -37,7 +42,8 @@ Type BitMap_File = Record
         biClrUsed: LongInt;
         biClrImp: LongInt;
     End;
-Var F: File;
+Var
+    F: File;
     Header: BitMap_File;
     Info: BitMap_Info;
     Code: Word;
@@ -115,16 +121,21 @@ Begin
     Close (F);
 End;
 
+
 Destructor TBMP16.Done;
 Begin
     XRes := (XRes + 3) AND $FFFC;
     FreeMem (Data, XRes * YRes);
 End;
+
+
 Procedure VGA16PutPixel(X, Y: Word; C: Byte);
 Begin
     // TODO: Replace with modern graphics pixel drawing API
     // Original: Direct VGA hardware pixel manipulation at 0A000h
 End;
+
+
 Procedure TBMP16.Display(XS, YS: Word);
 Begin
     // TODO: Replace with modern graphics bitmap display API

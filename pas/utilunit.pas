@@ -30,11 +30,15 @@ Procedure UtiGetActDistance(Var inblock: stringline; actpos: integer;
 Function UtiReplaceChars(inblock: stringline): byte;
 Function UtiCheckFlam(Var inblock: stringline; actpos: integer): char;
 Function UtiNextChar(inblock: stringline; c: char; p: integer): integer;
+
 Implementation
 
-Uses HelpUnit,
+Uses
+    HelpUnit,
     Texts;
+
 {**************************************************************}
+
 Function UtiComputeGroup(c: char; Var indexc: char): integer;
 {Wird 1 fuer Kleinbuchstaben
       2 fuer shift
@@ -42,7 +46,8 @@ Function UtiComputeGroup(c: char; Var indexc: char): integer;
       4 fuer &
       0 sonst
       indexc wird die Grundform von c}
-Var i: integer;
+Var
+    i: integer;
 Begin
     i := 0;
     indexc := c;
@@ -66,20 +71,25 @@ End;
 Function UtiFlamPos(inblock: string): byte;
     {Setzt sich auf den Index des Flamchars, wenn einer in inblock ist}
 
-Var i: byte;
+Var
+    i: byte;
 
 Begin
     i := Pos ('+', inblock);
-    If i = 0 Then i := Pos ('=', inblock);
-    If i = 0 Then i := Pos ('-', inblock);
-    If i = 0 Then i := Pos ('*', inblock);
+    If i = 0 Then
+        i := Pos ('=', inblock);
+    If i = 0 Then
+        i := Pos ('-', inblock);
+    If i = 0 Then
+        i := Pos ('*', inblock);
     UtiFlamPos := i;
 End;
 
 {****************************************************************}
 Function UtiReplaceChars(inblock: stringline): byte;
     {Zaehlt die Anzahl Replace-Character in inblock}
-Var i, j, k: byte;
+Var
+    i, j, k: byte;
     indexc, c: char;
 Begin
     i := 0;
@@ -98,7 +108,8 @@ End;
 Function UtiCharReady(Var inblock: string; c: char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch das gesamte Zeichen fertig ist}
-Var i, j, k: byte;
+Var
+    i, j, k: byte;
     indexc: char;
     a: byte;
 Begin
@@ -114,11 +125,15 @@ Begin
     If c <> #255 Then
         If inblock = '' Then
             inblock := c
-        Else Begin
+        Else
+        Begin
             { Klammern }
             a := length (inblock);
             Case c Of
-                '(', '[': If manset = 2 Then inblock := inblock + c{ add mode } Else Begin
+                '(', '[': If manset = 2 Then
+                        inblock := inblock + c{ add mode }
+                    Else
+                    Begin
                         { replace mode }
                         i := pos ('=', inblock);
                         j := pos ('*', inblock);
@@ -130,7 +145,9 @@ Begin
                         j := pos ('-', inblock);
                         If i < j Then
                             i := j;
-                        If (i = 0) Then inblock := c + inblock Else If i <= (a - 2) Then
+                        If (i = 0) Then
+                            inblock := c + inblock
+                        Else If i <= (a - 2) Then
                             insert (c, inblock, i + 1)
                         Else
                             inblock := inblock + c;
@@ -183,7 +200,8 @@ End;
 Function UtiNumReady(Var inblock: string; c: char): boolean;
 {gibt das Zeichen c in den Buffer inblock und wird true,
  wenn dadurch eine Abstandseingabe fertig ist}
-Var strbuf: string;
+Var
+    strbuf: string;
 Begin
     If (NOT (IniNumchar (inblock[1]) OR IniArrow (inblock[1]))) Then
         inblock := '';
@@ -211,7 +229,8 @@ End;
 {****************************************************************}
 Function UtiCheckFlam(Var inblock: stringline; actpos: integer): char;
     {wird +,-,=,* wenn der actuelle character ein Flam enthÑlt}
-Var c: char;
+Var
+    c: char;
 Begin
     c := ' ';
     While (actpos > 1) AND (NOT IniNumChar (inblock[actpos - 1])) Do
@@ -230,9 +249,11 @@ End;
 Procedure UtiComputeDxDy(inblock: stringline; Var dx, dy: integer;
     charnum: byte; flamchar: char);
 {berechnet dx und dy, je nach der Grîsse der folgenden Zeichen}
-Const DXDYTab: Array[0..2, 0..4] Of Record
+Const
+    DXDYTab: Array[0..2, 0..4] Of Record
             dx, dy: integer
-        End =
+        End
+    =
         (((dx: -7; dy: -7),          { - } { 'a'..'z' }
         (dx: +7; dy: -7),          { + }
         (dx: 0; dy: -14),          { = }
@@ -250,7 +271,8 @@ Const DXDYTab: Array[0..2, 0..4] Of Record
         (dx: 0; dy: -14),          { = }
         (dx: 0; dy: +16),          { * }
         (dx: 0; dy: 0)));
-Var Size, Flam: Byte;
+Var
+    Size, Flam: Byte;
     c: char;
 Begin
     If charnum > length (inblock) Then
@@ -280,7 +302,8 @@ End;
 
 {****************************************************************}
 Procedure UtiKlammerZuPos(c: char; Var dx: integer; flamchar: char);
-Var dy: integer;
+Var
+    dy: integer;
     inblock: stringline;
 Begin
     inblock := c;
@@ -296,7 +319,8 @@ End;
 {****************************************************************}
 Procedure UtiKlammerAufPos(inblock: stringline; Var dx, height: integer; flamchar: char);
 {berechnet die Position fÅr die Klammer}
-Var hy: integer;
+Var
+    hy: integer;
 Begin
     height := 5;
     UtiComputeDxDy (inblock, dx, hy, 2, '-');
@@ -313,7 +337,8 @@ Procedure UtiDelNoteChar(Var inblock: stringline; Var actpos: integer;
     Var stbuf: string);
 {Lîscht einen Character bis zum nÑchsten numerischen Character,
  der gelîschte Character kommt in den Buffer stbuf}
-Var i: integer;
+Var
+    i: integer;
 Begin
     stbuf := '';
     inc (actpos);
@@ -356,21 +381,26 @@ Begin
     If strbuf = '' Then
         strbuf := '1';
 End;
+
 {****************************************************************}
+
 Procedure UtiDelNumChar(Var inblock: stringline; Var actpos: integer);
 {Lîscht numerische Zeichen bis zum nÑchsten nichtnumerischen Character}
-Var i: integer;
+Var
+    i: integer;
 Begin
     i := 0;
     While (actpos + i <= length (inblock)) AND (IniNumChar (inblock[actpos + i])) Do
         inc (i);
     delete (inblock, actpos, i);
-    If actpos > length (inblock) Then inblock := inblock + '.';
+    If actpos > length (inblock) Then
+        inblock := inblock + '.';
 End;
 
 {****************************************************************}
 Function UtiGetNum(inblock: stringline; actpos: integer): Integer;
-Var St: String;
+Var
+    St: String;
     I:  Integer;
     code: integer;
 Begin
@@ -420,7 +450,8 @@ Procedure UtiNextNum(Var inblock: stringline; Var actpos, numres: integer;
  numres wird der Wert des Strings. Actpos wird unmittelbar vor
  das numerische Zeichen gesetzt}
 
-Var numstr: string;
+Var
+    numstr: string;
     i: byte;
     code: integer;
 
@@ -454,8 +485,10 @@ Begin
         numres := 0;
 End;
 
+
 Function UtiNextChar(inblock: stringline; c: char; p: integer): integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     For i := p + 1 To length (inblock) Do
         If inblock[i] = c Then
@@ -465,8 +498,11 @@ Begin
     Else
         UtiNextChar := 0;
 End;
+
+
 Function UtiPrevChar(inblock: stringline; c: char; p: integer): integer;
-Var i: integer;
+Var
+    i: integer;
 Begin
     For i := p - 1 Downto 1 Do
         If inblock[i] = c Then
