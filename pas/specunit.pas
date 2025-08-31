@@ -5,15 +5,7 @@ Unit Specunit;
 Interface
 
 Uses
-    RnsIni,
-    Graph,
-    InitSc,
-    menutyp,
-    Imenuunit,
-    crt,
-    Comunit,
-    mousdrv,
-    SysUtils;
+    InitSc;
 
 Procedure SpeInsNoteLine(Var linenum, actposn: integer;
     Var tempptr, startptr, lastptr: listptr);
@@ -59,6 +51,14 @@ Implementation
 Uses
     GCurUnit,
     Symbols,
+    RnsIni,
+    Graph,
+    menutyp,
+    Imenuunit,
+    crt,
+    Comunit,
+    mousdrv,
+    SysUtils,
     GetUnit,
     TitleUnit,
     Textunit,
@@ -158,8 +158,6 @@ Begin
                     PagUnMark;
                     SpeInsertBuffer (linenum, actposn, actpost,
                         actptr, startptr, lastptr, dummyb);
-{          SpeMoveBlock(linenum, actposn, actpost, actptr,
-                        startptr, lastptr);}
                 End Else
                     HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
@@ -217,7 +215,7 @@ Begin
                         choicenum * usrmenu.SPACING) + 1) Then
                     Begin
                         dummyb := true;
-                        If IniFileExist (ConcatPaths ([bufdir, instring])) Then
+                        If FileExists (ConcatPaths ([bufdir, instring])) Then
                             If NOT HlpAreYouSure ('File already exists, overwrite?', hpEdit) Then
                                 dummyb := false;
                         If dummyb Then
@@ -267,7 +265,7 @@ Begin
                     instring := FilFileSelect ('Select Bufferfile', '*.buf', bufdir);
                     If instring <> '' Then
                         filename := ConcatPaths ([bufdir, instring]);
-                    If NOT IniFileExist (filename) Then
+                    If NOT FileExists (filename) Then
                         HlpHint (HntNotExist, HintWaitEsc, [filename])
                     Else
                     Begin
@@ -401,7 +399,7 @@ Begin
         If HlpGetFileName (instring, '.RNS', 0, 0) Then
         Begin
             filename := ConcatPaths ([RnsConfig.DataDir, instring]);
-            If IniFileExist (filename) Then
+            If FileExists (filename) Then
                 If NOT HlpAreYouSure ('File already exists - overwrite?', hpEdit) Then
                     ok := false;
             If ok Then

@@ -146,7 +146,7 @@ Var
     inblock: stringline;
     n: integer;
 Begin
-    If (NOT (prfile = 1)) OR (NOT IniFileExist (ConcatPaths ([psdir, prfname]))) OR
+    If (NOT (prfile = 1)) OR (NOT FileExists (ConcatPaths ([psdir, prfname]))) OR
         HlpAreYouSure ('File: "' + ConcatPaths ([psdir, prfname]) + '" already exists, overwrite?', hpEdit) Then
     Begin
         n := filnumpages (actptr, startptr, lastptr);
@@ -231,7 +231,7 @@ Begin
                     Printpages (linenum, actposn, actpost, actptr, startptr, lastptr, list);
                 End;
             End;
-            'P': If (NOT (prfile = 1)) OR (NOT IniFileExist (ConcatPaths ([psdir, prfname]))) OR
+            'P': If (NOT (prfile = 1)) OR (NOT FileExists (ConcatPaths ([psdir, prfname]))) OR
                     (HlpAreYouSure ('File: "' + ConcatPaths ([psdir, prfname]) +
                     '" already exists, overwrite?', hpEdit)) Then
                 Begin

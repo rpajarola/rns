@@ -5,16 +5,7 @@ Unit helpunit;
 Interface
 
 Uses
-    Graph,
-    GcurUnit,
-    Graphmenu,
-    inout,
-    menutyp,
-    Crt,
-    xcrt,
-    imenuunit,
-    InitSc,
-    SysUtils;
+    InitSc;
 
 Procedure HlpCommandTable;
 Procedure HlpSymbolTable;
@@ -26,7 +17,7 @@ Function HlpAsk(hinttext, choicetext: string; position: byte;
 Function HlpAskAny(Hinttext, choicetext: string; position: byte): Char;
 
 Function HlpGetFileName(Var instring: string; extn: string; x, y: word): Boolean;
-Procedure HlpTestFileName(instring: stringline; Var ok: boolean;
+Procedure HlpTestFileName(instring: string; Var ok: boolean;
     x, xmax, y: integer);
 Procedure HlpText(x, xmax, y: integer; hinttext: string; escwait: boolean);
 Procedure HlpBottomLine(hinttext: string);
@@ -39,10 +30,19 @@ Implementation
 
 Uses
     pageunit,
+    SysUtils,
     sdunit,
     symbols,
     Dmemunit,
     mousdrv,
+    Graph,
+    GcurUnit,
+    Graphmenu,
+    inout,
+    menutyp,
+    Crt,
+    xcrt,
+    imenuunit,
     grinout,
     Texts;
 
@@ -84,7 +84,7 @@ Begin
 End;
 
 {******************************************************}
-Procedure HlpTestFileName(instring: stringline; Var ok: boolean;
+Procedure HlpTestFileName(instring: string; Var ok: boolean;
     x, xmax, y: integer);
 {testet instring auf einen gÅltigen textstring}
 
@@ -114,7 +114,7 @@ Var
     i: Integer;
 Begin
     ok := true;
-    If NOT IniFileExist (instring) Then
+    If NOT FileExists (instring) Then
     Begin
         assign (tfile, instring);
         rewrite (tfile);

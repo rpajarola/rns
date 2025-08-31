@@ -367,8 +367,6 @@ Procedure IniSetViewPort(x1, y1, x2, y2: integer);
 Function IniEmptyLine(inblock: stringline): boolean;
 Function IniLeftMargin: integer;
 Function IniUserFontFile(instring: string): boolean;
-Function IniFileExist(instring: string): boolean;
-Function IniDirExist(instring: string): boolean;
 Function IniBytes(x, y: integer): integer;
 Procedure IniGraphMode;
 Procedure IniRefInit;
@@ -672,34 +670,6 @@ Begin
         End;
     End;
     Close (f);
-End;
-
-{******************************************************}
-
-Function IniFileExist(instring: string): boolean;
-    { testet, ob unter dem Namen instring schon ein File auf dem Directory existiert }
-Var
-    FileInfo: TRawbyteSearchRec;
-Begin
-    FindFirst (instring, AnyFile, FileInfo);
-    IniFileExist := (DosError = 0);
-End;
-
-{******************************************************}
-Function IniDirExist(instring: string): boolean;
-    { testet, ob unter dem Namen instring schon ein Directory existiert }
-Var
-    actdir: string;
-Begin
-    GetDir (0, actdir);
-    ChDir (instring);
-    If IOResult = 0 Then
-    Begin
-        ChDir ('..');
-        IniDirExist := true;
-    End Else
-        IniDirExist := false;
-    ChDir (ActDir);
 End;
 
 {**************************************************************}
@@ -1353,9 +1323,9 @@ End;
 
 Procedure IniIniSymbols;
 Begin
-    If NOT IniFileExist (fontfile) Then
-        FilFindeErstBestenFont (fontfile);
-    FilCopyFile (fontfile, 'symbols.prn');
+    If NOT FileExists (fontfile) Then
+        fontfile := 'perc.fnt';
+    FilCopyFile (fontfile, 'symbols.prn'); {different file extension!}
     FilCopyFile (ChangeFileExt (fontfile, '.sym'), 'symbols.sym');
     FilCopyFile (ChangeFileExt (fontfile, '.par'), 'symbols.par');
     IniGetSymbols;
@@ -1607,6 +1577,7 @@ Begin
     // TODO: Set complete palette with modern graphics API
     // Original: Set all 256 VGA DAC registers from aPalette array
 End;
+
 
 Procedure IniDrawSoundState;
 

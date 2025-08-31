@@ -4,10 +4,15 @@ Unit editunit;
 
 Interface
 
+Procedure EdiRythmEdit(instring, bakname: string; defpagesetup: boolean);
+
+Implementation
+
 Uses
     Graph,
     GCurUnit,
     Symbols,
+    SysUtils,
     GetUnit,
     InitSc,
     menutyp,
@@ -24,13 +29,7 @@ Uses
     dos,
     crt,
     xcrt,
-    Texts;
-
-Procedure EdiRythmEdit(instring, bakname: string; defpagesetup: boolean);
-
-Implementation
-
-Uses
+    Texts,
     mousdrv;
 
 
@@ -155,7 +154,7 @@ Begin
     End Else
         assign (infile, instring);
 
-    If ((NOT IniFileExist (instring)) AND
+    If ((NOT FileExists (instring)) AND
         (NOT (defsetuppage IN actedit))) Then
     Begin
         firstpage := 0;

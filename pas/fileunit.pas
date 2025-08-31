@@ -5,15 +5,7 @@ Unit fileunit;
 Interface
 
 Uses
-    RnsIni,
-    initsc,
-    MenuTyp,
-    MousDrv,
-    PageUnit,
-    Titleunit,
-    Getunit,
-    XCrt,
-    SysUtils;
+    InitSc;
 
 Procedure FilFindPtr(pagenum, linenum: integer; Var foundptr,
     startptr, lastptr: listptr;
@@ -45,7 +37,6 @@ Procedure FilCheckLine(Var tempbuffer, inblock: stringline;
     skip: boolean; delline: boolean);
 Procedure FilCopyFile(infilename, outfilename: stringline);
 Function FilAssignCfgFile(Var cfgfile: text; basename: string; readf: boolean): string;
-Procedure FilFindeErstBestenFont(Var instring: stringline);
 Function FilCompareFiles(FName1, FName2: String): Boolean;
 Procedure FilFontSelect;
 Procedure FilDelPage(Var actptr, startptr, lastptr: listptr);
@@ -61,6 +52,14 @@ Function FilFileSelect(prompt, wildcard, dir: string): string;
 Implementation
 
 Uses
+    RnsIni,
+    MenuTyp,
+    MousDrv,
+    PageUnit,
+    Titleunit,
+    Getunit,
+    XCrt,
+    SysUtils,
     helpunit,
     dos,
     Graph,
@@ -81,24 +80,6 @@ Begin
     End
     Else
         FilNew := true;
-End;
-
-{****************************************************}
-Procedure FilFindeErstBestenFont(Var instring: stringline);
-
-Var
-    sr: SearchRec;
-Begin
-    FindFirst (ConcatPaths (['fonts', '*.fnt']), $3F, SR);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn;
-        WriteLn;
-        WriteLn (^g^g^g, 'No *.fnt found');
-        Halt (24);
-    End
-    Else
-        instring := sr.name;
 End;
 
 {****************************************************}
@@ -180,7 +161,7 @@ Var
 Begin
     FilAssignCfgFile := '';
     filepath := ConcatPaths ([RnsConfig.DataDir, basename + '.cfg']);
-    If ((NOT IniFileExist (filepath)) OR
+    If ((NOT FileExists (filepath)) OR
         (FilWrongVersion (filepath))) Then
         FilCopyFile (basename + '.cfg', filepath);
     Assign (cfgfile, filepath);

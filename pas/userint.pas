@@ -4,7 +4,12 @@ Unit userint;
 
 Interface
 
+Procedure UseTopMenu();
+
+Implementation
+
 Uses
+    grintunit,
     menutyp,
     inout,
     graphmenu,
@@ -24,17 +29,10 @@ Uses
     crt,
     Strings,
     Texts,
-    SysUtils,
-    StrUtils,
-    RnsIni;
-
-Procedure UseTopMenu;
-
-Implementation
-
-Uses
-    grintunit,
+    RnsIni,
     mousdrv,
+    StrUtils,
+    SysUtils,
     fileunit;
 
 Type
@@ -245,7 +243,7 @@ Begin
         8 * (substarty + 4) + 1, (sdymax + sdymin + 2) * 16, 3);
     IniSpacedText (substartx, substarty + 1,{Rahmen zeichnen}
         ' Active File [max 8 (.rns)]:                             ', frLow);
-    If NOT IniFileExist (ConcatPaths ([RnsConfig.DataDir, instring])) Then
+    If NOT FileExists (ConcatPaths ([RnsConfig.DataDir, instring])) Then
         instring := '';
     oldstring := instring;
     c := chr (0);
@@ -407,7 +405,7 @@ Begin
                             (pos ('*', instring) <> 0) OR
                             (pos ('?', instring) <> 0) Then
                             instring := RnsConfig.DataDir;
-                        If (instring <> '') AND IniDirExist (instring) Then
+                        If (instring <> '') AND DirectoryExists (instring) Then
                         Begin
                             RnsConfig.DataDir := instring;
                             ok := true;
@@ -436,7 +434,7 @@ Begin
                                     sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                                     mausx, mausy, maustaste, 3, 0, 0, True);
                             End;
-                        End;{if inidirexist else}
+                        End;{if DirectoryExists else}
                     End{if pos(':'...=2 else};{if instring = '\' else}
                 End {if mausmenu = 2}Else If mausmenu = 3 Then
                 Begin
@@ -783,7 +781,7 @@ Begin
                 Begin
                     UseSetPickFil (instring);
                     UseGetSetup;
-                    If IniFileExist (ConcatPaths ([RnsConfig.DataDir, instring])) Then
+                    If FileExists (ConcatPaths ([RnsConfig.DataDir, instring])) Then
                     Begin
                         If Pos ('.', instring) = 0 Then
                         Begin
@@ -820,14 +818,14 @@ Begin
                         c := #27;
                     Case C Of
                         #27: ;
-                        #13, 'Y': If IniFileExist (St) Then
+                        #13, 'Y': If FileExists (St) Then
                             Begin
                                 HlpHintFrame (grminx, grmaxy - 48, Grmaxx, grmaxy);
                                 txtfnt.write (grminx + 20, grmaxy - 42 + 2 * charheight,
                                     {'File '+}st + ' already exists, enter new name:', getcolor, sz8x16, stnormal);
                  {suche ein Zahl im string und schreibe eine as Ende
                   des Strings}
-                                While IniFileexist (st) Do
+                                While FileExists (st) Do
                                 Begin
                                     c := Char (Length (St));
                                     If (St[Byte (c) - 4] < '0') OR (St[Byte (c) - 4] > '9') Then
@@ -883,7 +881,7 @@ Begin
                                                 Else
                                                     St := St + '.par';
                                             End
-                                Until ((Resp = Return) AND ((NOT IniFileExist (St)) OR IniUserFontFile (st))) OR (Resp = ESCAPE);
+                                Until ((Resp = Return) AND ((NOT FileExists (St)) OR IniUserFontFile (st))) OR (Resp = ESCAPE);
                                 If Resp = Return Then
                                 Begin
                                     FilCopyFile ('symbols.par', ST);
