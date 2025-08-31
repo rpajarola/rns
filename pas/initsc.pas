@@ -403,11 +403,8 @@ Procedure Ini3DFrame(X0, Y0, X1, Y1: Word; F, B: Byte; t: byte);
 Function IniLineEnd(inblock: String): Integer;
 Procedure IniLineEndSound(Level: Byte);
 Procedure IniInitPalette;
-Procedure IniFadeOut;
-Procedure IniFadeIn;
 Procedure IniSetDACReg(n, r, g, b: byte);
 Procedure IniSetAllDACRegs(aPalette: TDACTable);
-Procedure IniPalBlank(r, g, b: byte);
 Procedure IniDrawSoundState;
 
 Implementation
@@ -631,9 +628,6 @@ Begin
     InitScreen;
     GcuIniCursor;
     IniInitPalette;
-    IniPalBlank (0, 0, 0);
-    // TODO: Modern graphics mode setup
-    // Original: VGA mode register setup
 End;
 
 {******************************************************}
@@ -1613,72 +1607,6 @@ Begin
     // TODO: Set complete palette with modern graphics API
     // Original: Set all 256 VGA DAC registers from aPalette array
 End;
-
-
-Procedure IniFadeOut;
-Var
-    a, b: byte;
-    ActPalette: TDACTable;
-Begin
-    ActPalette := ThePalette;
-    For b := 0 To $3F Do
-        For a := 0 To $FF Do
-            With ActPalette[a] Do
-            Begin
-                If r > 0 Then
-                    dec (r);
-                If g > 0 Then
-                    dec (g);
-                If b > 0 Then
-                    dec (b);
-                IniSetDACReg (a, R, G, B);
-            End;
-End;
-
-
-Procedure IniPalBlank(r, g, b: byte);
-Var
-    ActPalette: TDACTable;
-    a: byte;
-Begin
-    For a := 0 To $FF Do
-    Begin
-        ActPalette[a].r := r;
-        ActPalette[a].g := g;
-        ActPalette[a].b := b;
-    End;
-    IniSetAllDACRegs (actpalette);
-End;
-
-
-Procedure IniFadeIn;
-Var
-    a, b: byte;
-    ActPalette: TDACTable;
-    RealPalette: TRealDAC;
-Begin
-    FillChar (actpalette, sizeof (actpalette), 0);
-    For a := 0 To $FF Do
-    Begin
-        realpalette[a].r := 0;
-        realpalette[a].b := 0;
-        realpalette[a].g := 0;
-    End;
-    For b := 0 To $7E Do
-        For a := 0 To $FF Do
-            With ActPalette[a] Do
-            Begin
-                realpalette[a].r := realpalette[a].r + palsteps[a].r;
-                realpalette[a].g := realpalette[a].r + palsteps[a].g;
-                realpalette[a].b := realpalette[a].r + palsteps[a].b;
-                r := round (realpalette[a].r);
-                g := round (realpalette[a].g);
-                b := round (realpalette[a].b);
-                IniSetDACReg (a, R, G, B);
-            End;
-    IniSetAllDACRegs (ThePalette);
-End;
-
 
 Procedure IniDrawSoundState;
 

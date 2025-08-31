@@ -715,8 +715,7 @@ Begin
             {      bar( 10,61,159,110);}{l�scht nur 1.Button des Hauptmenus: wegen Dir\}
             { ClearDevice;}{alternativ zur den bars}
             ImeInitTopmenu; {damit richtiger Pfad 1.button Hauptmenu gezeigt wird}
-        End Else
-            IniPalBlank (0, 0, 0);
+        End;
         DrawTopMenuLines (c);
         SetColor (12);
         GrDisplay_Menu (topstartx, topstarty, usrmenu, 1);
