@@ -381,7 +381,6 @@ Function IniMinFooter: integer;
 Function IniHeaderEnd: integer;
 Function IniFooterEnd: integer;
 Procedure IniExpand(Var instring: string; newlength: byte);
-Procedure IniCenter(Var instring: String; newlength: byte);
 Function IniTabChar(c: char): boolean;
 Procedure IniShowCursor;
 Procedure IniHideCursor;
@@ -503,20 +502,6 @@ Begin
     // Expand string to newlength by padding with spaces if needed
     While Length (instring) < newlength Do
         instring := instring + ' ';
-End;
-{******************************************************}
-Procedure IniCenter(Var instring: String; newlength: byte);
-Var st: String;
-Begin
-    If newlength < Length (instring) Then
-    Begin
-        SetLength (instring, newlength);
-        Exit;
-    End;
-    FillChar (St[1], Newlength, ' ');
-    Move (instring[1], st[(newlength - Length (instring)) SHR 1 + 1], Length (instring));
-    SetLength (st, newlength);
-    instring := st;
 End;
 {******************************************************}
 Function IniTabChar(c: char): boolean;

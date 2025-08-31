@@ -24,6 +24,7 @@ Uses menutyp,
     Strings,
     Texts,
     SysUtils,
+    StrUtils,
     RnsIni;
 
 Procedure UseTopMenu;
@@ -696,7 +697,7 @@ Begin
             IniExpand (inbuf, subendx - substartx - 2);
             IniOutTextXY (substartx, (substarty + 3) * 2, inbuf);
             inbuf := '  L I C E N S E D  V E R S I O N  ' + usrfirstname + ' ' + usrname;
-            IniCenter (inbuf, 74);
+            inbuf := PadCenter (inbuf, 74);
             IniOutTextXY (substartx, (substarty + 4) * 2, inbuf);
             assign (infile, 'copyr.rns');
             reset (infile);

@@ -36,7 +36,8 @@ Uses
     Texts,
     Mousdrv,
     Specunit,
-    MarkUnit;
+    MarkUnit,
+    StrUtils;
 
 Const cfllength = 30;
     itemmax = 10;
@@ -2254,7 +2255,7 @@ Begin
         Else
             S1 := ' NumberBlock = Cent' + #241 + ' '// f�rs F5
     ;
-    IniCenter (S1, 21);
+    S1 := PadCenter (S1, 21);
     SndGetCentStr := S1;
 End;
 End.
