@@ -12,7 +12,8 @@ Uses InitSc,
     Graph,
     MousDrv,
     XCrt;
-Procedure SdUSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
+
+Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
     Var instring: string; Mask: String;
     dir: string; Dirorfile: Boolean;
     x, y: integer; Cols, rows: Byte;
@@ -20,6 +21,7 @@ Procedure SdUSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
     selX, selY: integer; GoUp: Boolean);
 
 Implementation
+
 Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
     Var instring: string; Mask: String;
     dir: string; Dirorfile: Boolean;
@@ -68,85 +70,7 @@ Var Cancel: Boolean Absolute Disponly;
    Sie arbeitet in AbhÑngigkeit des Parameters ORDER auf den ver-
    schiedenen Array-Feldern. *)
 
-        Function Kleiner(i1, i2: TEntry): BOOLEAN;{Assembler;
-   (* Vergleich zweier Arrayelemete in AbhÑngigkeit der
-      von der gewÅnschten Recordkomponente.
-   *)
-   Asm
-     PUSH DS
-     CLD
-     LES DI,I1
-     LDS SI,I2
-     ADD SI,Offset TEntry.Name
-     ADD DI,Offset TEntry.Name
-     LODSB
-     MOV CL,AL
-     XOR CH,CH
-     REPE CMPSB
-     DEC SI
-     DEC DI
-
-     PUSH DS
-     PUSH SI
-     PUSH CX
-     CALL Near Ptr @CHIFFRES
-     ADD  SP,6
-
-     OR   AX,AX
-     JZ   @NOTACHIFFRE
-     PUSH AX
-
-     PUSH ES
-     PUSH DI
-     PUSH CX
-     CALL Near Ptr @CHIFFRES
-     ADD  SP,6
-
-     POP  BX
-     OR   AX,AX
-     JZ   @NOTACHIFFRE
-     CMP  AL,BL
-     JE   @NOTACHIFFRE
-     JMP  @COMP
-   @NOTACHIFFRE:
-     LODSB
-     MOV BL,ES:[DI]
-   @COMP:
-     CMP AL,BL
-     JB  @B
-     XOR AX,AX
-     JMP @A
-   @B:
-     MOV AX,1
-   @A:
-     POP  DS
-     JMP  @END
-  @CHIFFRES:
-    PUSH BP
-    MOV  BP,SP
-    PUSH DS
-    PUSH SI
-    PUSH CX
-    MOV  CL,SS:[BP+06h]
-    XOR  CH,CH
-    LDS  SI,SS:[BP+08h]
-  @L:
-    LODSB
-    CMP  AL,'0'
-    JB @F
-    CMP  AL,'9'
-    JA @F
-    LOOP @L
-  @F:
-    MOV  AL,SS:[BP+06h]
-    SUB  AL,CL
-    POP  CX
-    POP  SI
-    PUSH DS
-    POP  BP
-    RETN
-  @END:
-   End;}
+        Function Kleiner(i1, i2: TEntry): BOOLEAN;
         Begin
             Kleiner := i1.name < i2.name;
         End;
