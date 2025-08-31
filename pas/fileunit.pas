@@ -116,10 +116,11 @@ Begin
     If inblocksize > filesize (infile) Then
         inblocksize := filesize (infile);
     getmem (inblock, inblocksize);
-    If inblock = nil Then Begin
-        close(infile);
-	HlpHint(HntOutOfMemory, HintWaitEsc, []);
-	Exit;
+    If inblock = nil Then
+    Begin
+        close (infile);
+        HlpHint (HntOutOfMemory, HintWaitEsc, []);
+        Exit;
     End;
 
     FileMode := fmOpenReadWrite;
@@ -132,15 +133,17 @@ Begin
     End;
     Repeat
         blockread (infile, inblock^, inblocksize, inread);
-        If IOResult <> 0 Then Begin
-	    HlpHint(HntCannotReadFile, HintWaitEsc, [infilename]);
-	    Break;
-	End;
+        If IOResult <> 0 Then
+        Begin
+            HlpHint (HntCannotReadFile, HintWaitEsc, [infilename]);
+            Break;
+        End;
         blockwrite (outfile, inblock^, inread, inwrite);
-        If IOResult <> 0 Then Begin
-	    HlpHint(HntCannotWriteFile,HintWaitEsc, [outfilename]);
-	    Break;
-	End;
+        If IOResult <> 0 Then
+        Begin
+            HlpHint (HntCannotWriteFile, HintWaitEsc, [outfilename]);
+            Break;
+        End;
     Until (inread = 0) OR (inread <> inwrite);
     freemem (inblock, inblocksize);
     close (infile);

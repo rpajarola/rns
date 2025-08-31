@@ -214,7 +214,7 @@ Var ymaxframe: integer;
 Begin
     HintText := Format (HintTextFmt, Args);
 
-    If not grInitialized Then
+    If NOT grInitialized Then
     Begin
         WriteLn (HintText);
         Exit;

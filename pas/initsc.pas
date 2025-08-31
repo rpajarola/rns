@@ -260,7 +260,7 @@ Var ThePalette: TDACTable;
     GrInitialized: boolean = false;
     GrMinX, GrMaxX, GrMinY, GrMaxY: integer;
     UsrMenu, Symbolmenu1, Symbolmenu2: Menu_Rec;
-    togglestring: toggletyp;
+    togglestring:  toggletyp;
     hfminx, hfminy, hfmaxx, hfmaxy: integer;
     TOP_Line, Left_Col, Valcol: integer;
     stabxmin, stabxmax, stabymin, stabymax: integer;
@@ -1109,7 +1109,7 @@ Begin
         WriteLn ('Make sure the file exists in the current directory.');
         RunError (127);
     End;
-    BlockRead(symfile, SymArr, 26*15*3, res);
+    BlockRead (symfile, SymArr, 26 * 15 * 3, res);
     close (symfile);
 
     assign (parfile, 'symbols.par');
@@ -1120,7 +1120,7 @@ Begin
         WriteLn ('Make sure the file exists in the current directory.');
         RunError (127);
     End;
-    BlockRead(parfile, SymPar, 26*numofpar*3, res);
+    BlockRead (parfile, SymPar, 26 * numofpar * 3, res);
     close (parfile);
 End;
 
@@ -1227,8 +1227,8 @@ Begin
     If NOT IniFileExist (fontfile) Then
         FilFindeErstBestenFont (fontfile);
     FilCopyFile (fontfile, 'symbols.prn');
-    FilCopyFile (ChangeFileExt(fontfile, '.sym'), 'symbols.sym');
-    FilCopyFile (ChangeFileExt(fontfile, '.par'), 'symbols.par');
+    FilCopyFile (ChangeFileExt (fontfile, '.sym'), 'symbols.sym');
+    FilCopyFile (ChangeFileExt (fontfile, '.par'), 'symbols.par');
     IniGetSymbols;
 End;
 {**************************************************************}

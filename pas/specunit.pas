@@ -194,7 +194,6 @@ Begin
                 End Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
 
             'W':
-            Begin
                 If mend.mpag <> -1 Then
                 Begin
                     MarMarkToBuffer (actptr, startptr, lastptr);
@@ -247,10 +246,8 @@ Begin
                         End;
                     End; {if HlpGetFileName(instring) then }
                 End {if mstart.mpage }Else HlpHint (HntNoMarkedArea, HintWaitEsc, []);
-            End;
 
             'R':
-            Begin
                 If mstart.mpag = -1 Then
                 Begin
                     Mausbereich (GrMinX + 1, GrMinX + 20 * 8, GrMinY, GrMaxY);
@@ -297,8 +294,7 @@ Begin
                             HlpHint (HntNotBlockFile, HintWaitEsc, [filename]);
                         End;
                     End; {if HlpGetFileName(instring) then }
-                End Else {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []);
-            End; {'R'}
+                End Else {if mstart.mpag = -1 then} HlpHint (HntUnmarkBlockFirst, HintWaitEsc, []); {'R'}
 
             'I': {Collect Header/Footer}Begin
                 FilSavePage (1, PageLength, actptr, startptr, lastptr);

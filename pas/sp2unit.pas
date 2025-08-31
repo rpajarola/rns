@@ -4,7 +4,7 @@ Unit sp2unit;
 
 Interface
 
-Uses 
+Uses
     crt,
     initsc,
     imenuunit,

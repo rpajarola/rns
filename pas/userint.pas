@@ -926,7 +926,7 @@ Begin
                                         Inc (Byte (St[Byte (c) - 5]));
                                         St[Byte (c) - 4] := '0';
                                     End Else
-                                        st := ''
+                                        st := '';
                                 End;{While}
                                 Repeat
                                     IniInversWrite (456, 402, '              ', frLow);

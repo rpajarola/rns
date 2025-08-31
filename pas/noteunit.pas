@@ -338,9 +338,7 @@ Begin
                 End Else{ if i = 0 then }Begin
                     Val (inbuffer, j, k);
                     If ((j MOD i) <> 0) Then
-                    Begin
-                        HlpHint (HntDivNotPossible, HintWaitEsc, [j, i]);
-                    End Else { if (j mod i) <> 0 then } Begin
+                        HlpHint (HntDivNotPossible, HintWaitEsc, [j, i]) Else { if (j mod i) <> 0 then } Begin
                         k := j DIV i;
                         {Abstand k mal einfuegen}
                         If left Then
