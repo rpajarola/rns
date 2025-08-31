@@ -90,6 +90,7 @@ Uses
     dmemunit,
     Texts,
     userint,
+    SysUtils,
     EditUnit;
 
 Var
@@ -421,7 +422,7 @@ Begin
                 Dec (linenum);
                 If page[linenum, 1] = 'T' Then
                 Begin
-                    IniTrailBlank (page[linenum]);
+                    page[linenum] := TrimRight (page[linenum]);
                     If actpost < 11 Then
                         actpost := 11;
                 End;
@@ -449,7 +450,7 @@ Begin
                 Inc (linenum);
                 If page[linenum, 1] = 'T' Then
                 Begin
-                    IniTrailBlank (page[linenum]);
+                    page[linenum] := TrimRight (page[linenum]);
                     If actpost < 11 Then
                         actpost := 11;
                 End;

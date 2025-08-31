@@ -5,8 +5,7 @@ Unit prmunit;
 Interface
 
 Uses
-    initsc,
-    SysUtils;
+    InitSc;
 
 Procedure PrmPrintMenu(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr);
@@ -15,6 +14,7 @@ Procedure PrmPrintMenu(Var linenum, actposn, actpost: integer;
 Implementation
 
 Uses
+    SysUtils,
     imenuunit,
     printunit,
     pageunit,
@@ -57,8 +57,7 @@ Begin
         prfile := 0;
     If prfile = 1 Then
     Begin
-        sval := UsrMenu.ChoiceVal[3].sval;
-        IniLeadBlank (sval);
+        sval := TrimLeft (UsrMenu.ChoiceVal[3].sval);
         UsrMenu.ChoiceVal[3].sval := sval;
         If pos ('.', UsrMenu.ChoiceVal[3].sval) = 0 Then
             UsrMenu.ChoiceVal[3].sval := UsrMenu.ChoiceVal[3].sval + '.eps';

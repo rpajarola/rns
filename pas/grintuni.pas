@@ -21,6 +21,9 @@ Procedure GriBeatMenuDisp(linenum: integer);
 
 Implementation
 
+Uses
+    SysUtils;
+
 {******************************************************}
 (*Procedure GriBeatMenuDisp(linenum: integer;var startptr, lastptr : listptr);
 
@@ -87,7 +90,7 @@ begin
       str(Tempattr.eint,s2);
       str(Tempattr.resolution,s3);
       s4:=ToggleString[TempAttr.linestyle];
-      IniTrailBlank(S4);
+      s4:=TrimRight (S4);
       if ((pagebuf<>-1) or (mstart.mpag<>-1)) and
         (mstart.mline<>mend.mline) then begin
         if bc then begin
@@ -327,7 +330,7 @@ Begin
             str (Tempattr.eint, s2);
             str (Tempattr.resolution, s3);
             s4 := ToggleString[TempAttr.linestyle];
-            IniTrailBlank (S4);
+            s4 := TrimRight (S4);
             If ((pagebuf <> -1) OR (mstart.mpag <> -1)) AND
                 (mstart.mline <> mend.mline) Then
             Begin

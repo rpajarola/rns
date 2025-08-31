@@ -366,8 +366,6 @@ Function IniLnow(ynow: integer): integer;
 Procedure IniSetViewPort(x1, y1, x2, y2: integer);
 Function IniEmptyLine(inblock: stringline): boolean;
 Function IniLeftMargin: integer;
-Procedure IniTrailBlank(Var inblock: stringline);
-Procedure IniLeadBlank(Var inblock: stringline);
 Function IniUserFontFile(instring: string): boolean;
 Function IniFileExist(instring: string): boolean;
 Function IniDirExist(instring: string): boolean;
@@ -708,27 +706,6 @@ Begin
     End Else
         IniDirExist := false;
     ChDir (ActDir);
-End;
-
-{**************************************************************}
-Procedure IniTrailBlank(Var inblock: stringline);
-Var
-    l: integer;
-Begin
-    l := length (inblock);
-    While ((l > 0) AND (inblock[l] = ' ')) Do
-    Begin
-        SetLength (inblock, Length (inblock) - 1);
-        dec (l);
-    End;
-End;
-
-{**************************************************************}
-
-Procedure IniLeadBlank(Var inblock: stringline);
-Begin
-    While ((length (inblock) > 0) AND (inblock[1] = ' ')) Do
-        delete (inblock, 1, 1);
 End;
 
 {**************************************************************}
@@ -1268,7 +1245,7 @@ End;
 {**************************************************************}
 Function IniEmptyLine(inblock: stringline): boolean;
 Begin
-    IniTrailBlank (inblock);
+    inblock := TrimRight (inblock);
     IniEmptyLine := ((inblock = '') OR
         ((inblock[1] <> 'N')
         AND (length (inblock) <= linemarker)));

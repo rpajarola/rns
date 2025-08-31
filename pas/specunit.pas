@@ -872,7 +872,7 @@ Begin
                 apos := IniPos (linenum, actposn, actpost);
 
                 If page[linenum, 1] = 'T' Then
-                    IniTrailBlank (inblock)
+                    inblock := TrimRight (inblock)
                 Else
                     apos := ComStart (page[linenum], apos);
                 insert (inblock, page[linenum], apos);

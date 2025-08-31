@@ -135,7 +135,7 @@ Begin
         close (infile);
         Halt (100);
     End;
-    IniLeadBlank (prfname);
+    prfname := TrimLeft (prfname);
     readln (infile, prfile);
     readln (infile, prdevice);
     If IOResult <> 0 Then
@@ -144,7 +144,7 @@ Begin
         close (infile);
         Halt (100);
     End;
-    IniLeadBlank (prdevice);
+    prdevice := TrimLeft (prdevice);
     readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound);
     readln (infile, sndchar);
     readln (infile, sndbeat, sndbeatlength);
@@ -315,7 +315,7 @@ Begin
                         ok := false
                     Else
                         instring := oldstring;
-                IniLeadBlank (instring);
+                instring := TrimLeft (instring);
                 If pos ('.', instring) = 0 Then
                     instring := instring + '.RNS';
                 If ok Then     { G�ltiger Filename? }
@@ -381,7 +381,7 @@ Begin
             escape: ok := true;
             return:
             Begin
-                IniLeadBlank (instring);
+                instring := TrimLeft (instring);
                 If ((mausmenu = 2) OR (maustaste = 0)) Then
                 Begin
                     If instring = '' Then

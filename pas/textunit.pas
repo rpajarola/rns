@@ -35,6 +35,7 @@ Implementation
 Uses
     getunit,
     printunit,
+    SysUtils,
     titleunit;
 
 Const
@@ -337,7 +338,7 @@ Var
 Begin
     If startx <= 0 Then
         startx := 1;
-    IniTrailBlank (page[linenum]);
+    page[linenum] := TrimRight (page[linenum]);
     endx := GetMaxX - GcuRightMargin;
     If (endx > startx) Then
     Begin
@@ -961,7 +962,7 @@ Var
     s: String;
 Begin
     s := Copy (Page[linenum], 11, length (page[linenum]) - linemarker);
-    IniTrailBlank (S);
+    S := TrimRight (S);
     TexGetText := s;
 End;
 

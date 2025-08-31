@@ -174,7 +174,7 @@ Begin
 
             return:
             Begin
-                IniLeadBlank (instring);
+                instring := TrimLeft (instring);
                 If pos ('.', instring) = 0 Then
                     instring := instring + extn;
                 HlpTestFileName (instring, ok, 10, 10, 40);

@@ -751,7 +751,7 @@ Begin
                 Begin
                     FilHeapExtractString (inblock, t2ptr, startptr, endptr);
                     If (trailblank AND (inblock[1] = 'T')) Then
-                        IniTrailBlank (inblock);
+                        inblock := TrimRight (inblock);
                     t1ptr^.datblock := t1ptr^.datblock + inblock + chr (0);
                 End
                 Else
@@ -781,7 +781,7 @@ Begin
     For i := firstline To lastline Do
     Begin
         If page[i, 1] = 'T' Then
-            IniTrailBlank (page[i]);
+            page[i] := TrimRight (page[i]);
         FilHeapInsertString (page[i] + chr (0), tempptr, startptr, lastptr,
             tempptr, false);
     End;

@@ -23,6 +23,9 @@ Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
 
 Implementation
 
+Uses
+    SysUtils;
+
 
 Procedure SduSodir(Disponly: Boolean; Var Selected: Boolean; ShowSel: Boolean;
     Var instring: string; Mask: String;
@@ -133,7 +136,7 @@ Var
     Var
         i: Integer;
         b: Byte;
-        D: SearchRec;
+        D: TRawbyteSearchRec;
         at: byte;
         m: string;
     Begin
@@ -158,7 +161,7 @@ Var
             at := anyfile;
         While mask <> '' Do
         Begin
-            inileadblank (mask);
+            mask := TrimLeft (mask);
             If pos (' ', mask) = 0 Then
             Begin
                 m := mask;
@@ -168,8 +171,7 @@ Var
                 m := copy (mask, 1, pos (' ', mask));
                 delete (mask, 1, pos (' ', mask));
             End;
-            inileadblank (m);
-            initrailblank (m);
+            m := Trim (m);
             FindFirst (Dir + M, At, D);
             While (DosError = 0) AND (EntryC <= MaxEntries) Do
             Begin
@@ -182,8 +184,8 @@ Var
                             b := Pos ('.', D.Name);
                             If b <> 0 Then
                             Begin
-                                Name := Copy (D.Name, 1, b - 1);
-                                Ext  := Copy (D.Name, b + 1, byte (d.Name[0]) - b);
+                                Name := ChangeFileExt (D.Name, '');
+                                Ext  := ExtractFileExt (D.Name);
                             End Else
                             Begin
                                 Name := D.Name;
