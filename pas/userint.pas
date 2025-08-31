@@ -23,7 +23,8 @@ Uses menutyp,
     crt,
     Strings,
     Texts,
-    SysUtils;
+    SysUtils,
+    RnsIni;
 
 Procedure UseTopMenu;
 
@@ -84,111 +85,6 @@ Begin
     { TODO: Implement cursor restoration functionality }
     { Original: INT 10h function 1 (set cursor) with saved CLS/CLE values }
     { Stub: Cursor visibility control not implemented }
-End;
-{******************************************************}
-Procedure UseGetConfig;
-{Liest die Configuration aus dem File CONFIG.rns}
-
-    Procedure SearchADir(Var S: String);
-    Var F: TSearchRec;
-    Begin
-        S := '*.*';
-        FindFirst (S, Directory, F);
-        While (((F.Attr AND Directory) = 0) OR (F.Name = '.') OR
-                (F.Name = '..') OR (F.Name = '')) AND (DosError = 0) Do
-            FindNext (F);
-        S := F.Name;
-    End;
-Var
-    infile: text;
-    b: byte;
-    actdir: string;
-Begin
-    GetDir (0, actdir);
-    Assign (infile, 'config.rns');
-    reset (infile);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot open config file: config.rns');
-        WriteLn ('Make sure the config file exists in the current directory.');
-        Halt (2);
-    End;
-    readln (infile, datadir);
-    If IOResult <> 0 Then
-        ChDir (DataDir);
-    If IOResult <> 0 Then SearchADir (Datadir) Else
-        ChDir (ActDir);
-    readln (infile, colorfile);
-    readln (infile, psdir);
-    readln (infile, bufdir);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read configuration data from config.rns');
-        close (infile);
-        Halt (100);
-    End;
-    close (infile);
-    b := pos ('.', datadir);
-    If (b = length (datadir)) AND (b <> 0) Then
-        datadir := copy (datadir, 1, b - 1) + copy (datadir, b + 1, length (datadir) - b - 1);
-    If NOT IniDirExist (datadir) Then
-    Begin
-        MkDir (datadir);
-        If IOResult <> 0 Then
-        Begin
-            WriteLn ('Error: Cannot create datadir ', datadir);
-            Halt (100);
-        End;
-    End;
-    If psdir = '' Then
-        psdir := 'PSFILES';
-    If bufdir = '' Then
-        bufdir := 'BUFFERS';
-    If NOT IniDirExist (psdir) Then
-        MkDir (psdir);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot create psdir ', psdir);
-        Halt (100);
-
-    End;
-    If NOT IniDirExist (bufdir) Then
-        MkDir (bufdir);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot create bufdir ', bufdir);
-        Halt (100);
-    End;
-    ChDir (ActDir);
-End;
-
-{******************************************************}
-Procedure UseSaveConfig;
-{Speichert die Configuration in das File CONFIG.rns}
-
-Var
-    outfile: text;
-
-Begin
-    Assign (outfile, 'config.rns');
-    rewrite (outfile);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot create config file: config.rns');
-        WriteLn ('Check write permissions in current directory.');
-        Halt (5);
-    End;
-    writeln (outfile, datadir);
-    writeln (outfile, colorfile);
-    writeln (outfile, psdir);
-    writeln (outfile, bufdir);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot write configuration data to config.rns');
-        close (outfile);
-        Halt (101);
-    End;
-    close (outfile);
 End;
 
 {******************************************************}
@@ -339,7 +235,7 @@ Begin
         8 * (substarty + 4) + 1, (sdymax + sdymin + 2) * 16, 3);
     IniSpacedText (substartx, substarty + 1,{Rahmen zeichnen}
         ' Active File [max 8 (.rns)]:                             ', frLow);
-    If NOT IniFileExist (ConcatPaths ([datadir, instring])) Then
+    If NOT IniFileExist (ConcatPaths ([RnsConfig.DataDir, instring])) Then
         instring := '';
     oldstring := instring;
     c := chr (0);
@@ -347,7 +243,7 @@ Begin
     IniSpacedText (substartx, (subendy - 1) * 2,
         ' [Enter] (last name) - new name, cursor+[Enter] or [Esc] '
         , frLow);
-    SduSodir (True, ok, false, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (datadir), false,
+    SduSodir (True, ok, false, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (RnsConfig.DataDir), false,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, mausmenu, 0, 0, true);
     Mauszeigen;
@@ -413,14 +309,14 @@ Begin
                 If pos ('.', instring) = 0 Then
                     instring := instring + '.RNS';
                 If ok Then     { G�ltiger Filename? }
-                    HlpTestFileName (ConcatPaths ([datadir, instring]), ok,
+                    HlpTestFileName (ConcatPaths ([RnsConfig.DataDir, instring]), ok,
                         substartx, subendx, substarty + 6);
             End;
             arrow: If dir = down Then
-                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (datadir),
+                    SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (RnsConfig.DataDir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
-            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (datadir),
+            specialkey: If KeyResp = #81 Then SduSodir (false, ok, true, instring, '*.RNS *.BUF', IncludeTrailingPathDelimiter (RnsConfig.DataDir),
                         false, sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, true);
         End; {case resp of}
@@ -437,8 +333,6 @@ Var
     KeyResp: Char;
     ok: boolean;
     instring: String;
-    actdir: String;
-    b:  byte;
     st: string;
     changed: boolean;
 Begin
@@ -457,9 +351,8 @@ Begin
     SduSodir (True, ok, false, instring, '*.*', '', true,
         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
         mausx, mausy, maustaste, 3, 0, 0, True);
-    datadir := upstring (datadir);
     Repeat
-        instring := IncludeTrailingPathDelimiter (datadir);
+        instring := IncludeTrailingPathDelimiter (RnsConfig.DataDir);
         GrGet_Prompted_Spaced_String (instring, fieldlength, '>',
             substartx + 30 + fieldlength, substarty + 1,
             substartx + 28,
@@ -468,8 +361,7 @@ Begin
             subendx - substartx - 2 * fieldlength - 2 - 27{30},
             resp, dir, Keyresp, true,
             mausx, mausy, maustaste, mausmenu, changed);
-        Instring := UpString (Instring);
-        ExcludeTrailingPathDelimiter (instring);
+        instring := ExcludeTrailingPathDelimiter (instring);
         ok := false;
         IniMausAssign (maustaste, resp);
 
@@ -482,31 +374,16 @@ Begin
                 Begin
                     If instring = '' Then
                     Begin
-                        instring := datadir;
+                        instring := RnsConfig.DataDir;
                         ok := true;
                     End Else If instring = '..' Then
                     Begin
-                        getdir (0, actdir);
-                        If Length (actdir) <= 3 Then
-                            instring := datadir + IncludeTrailingPathDelimiter ('..');
+                        instring := ExtractFileDir (RnsConfig.DataDir);
                         ok := true;
                     End Else If instring = '.' Then
                     Begin
-                        instring := datadir;
+                        instring := RnsConfig.DataDir;
                         ok := true;
-                    End Else If instring = '\' Then
-                    Begin
-                        { XXX }
-                        instring := '\';
-                        ok := true;
-                    End Else If pos (':', instring) = 2 Then
-                    Begin
-                        instring := '';
-                        ok := false;
-                        HlpText (substartx, subendx, substarty + 6, 'Illegal name for data directory', true);
-                        SduSodir (true, ok, false, instring, '*.*', '', true,
-                            sdxmin * 8 - 4, sdymin * 16 - 8, sdymax,
-                            sdcol, mausx, mausy, maustaste, 3, 0, 0, true);
                     End Else Begin
                         If (pos (':', instring) <> 0) OR
                             (pos ('\', instring) <> 0) OR
@@ -516,10 +393,10 @@ Begin
                             (pos ('..', instring) <> 0) OR
                             (pos ('*', instring) <> 0) OR
                             (pos ('?', instring) <> 0) Then
-                            instring := datadir;
+                            instring := RnsConfig.DataDir;
                         If (instring <> '') AND IniDirExist (instring) Then
                         Begin
-                            datadir := instring;
+                            RnsConfig.DataDir := instring;
                             ok := true;
                         End Else Begin
                             MkDir (instring);
@@ -527,7 +404,7 @@ Begin
                             Begin
                                 If HlpAreYouSure ('Directory "' + instring + '\" does not exist', hpFileMenu) Then
                                 Begin
-                                    datadir := instring;
+                                    RnsConfig.DataDir := instring;
                                     ok := true;
                                 End Else Begin
                                     RmDir (instring);
@@ -550,7 +427,7 @@ Begin
                     SduSodir (false, ok, true, instring, '*.*', '', true,
                         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, True);
-                    If ok Then datadir := instring;
+                    If ok Then RnsConfig.DataDir := instring;
                 End Else Begin
                     ok := true;
                     resp := escape;
@@ -561,7 +438,7 @@ Begin
                     SduSodir (false, ok, true, instring, '*.*', '', true,
                         sdxmin * 8 - 4, sdymin * 16 - 8, sdymax, sdcol,
                         mausx, mausy, maustaste, 3, 0, 0, True);
-                    If ok Then datadir := instring;
+                    If ok Then RnsConfig.DataDir := instring;
                 End;{case of arrow}
         End;{case resp of}
 
@@ -577,14 +454,8 @@ Begin
     Begin    {new}
         If (mausx = 0) AND (mausy = 0) AND (maustaste = 0) AND (mausmenu = 0) Then
             mausx := 1;
-        b := pos ('.', datadir);
-        If (b = length (datadir)) AND (b <> 0) Then
-            datadir := copy (datadir, 1, b - 1) + copy (datadir, b + 1, length (datadir) - b - 1);
-        instring := datadir;
-        st := ' Loading Directory ' + datadir + ' ';
+        st := ' Loading Directory ' + RnsConfig.DataDir + ' ';
         IniSpacedText (substartx, topendy * 2, st, frHigh);
-        UseGetConfig;
-        datadir := instring;
     End;
 End;
 
@@ -790,7 +661,7 @@ Var
     mx, my, mt, mm: Word;
     changed: boolean;
 Begin
-    UseGetConfig;
+    RnsIniLoadConfig ();
     UseGetSetup;
     IniIniColors;
     IniIniSymbols;
@@ -879,23 +750,23 @@ Begin
                 Begin
                     UseSetPickFil (instring);
                     UseGetSetup;
-                    If IniFileExist (ConcatPaths ([datadir, instring])) Then
+                    If IniFileExist (ConcatPaths ([RnsConfig.DataDir, instring])) Then
                     Begin
                         If Pos ('.', instring) = 0 Then
                         Begin
-                            FilCopyFile (ConcatPaths ([datadir, instring]), ConcatPaths ([datadir, instring + '.bak']));
-                            Assign (Bakfile, ConcatPaths ([datadir, instring + '.bak']));
+                            FilCopyFile (ConcatPaths ([RnsConfig.DataDir, instring]), ConcatPaths ([RnsConfig.DataDir, instring + '.bak']));
+                            Assign (Bakfile, ConcatPaths ([RnsConfig.DataDir, instring + '.bak']));
                         End Else Begin
-                            FilCopyFile (ConcatPaths ([datadir, instring]), ConcatPaths ([datadir,
+                            FilCopyFile (ConcatPaths ([RnsConfig.DataDir, instring]), ConcatPaths ([RnsConfig.DataDir,
                                 Copy (instring, 1, Pos ('.', instring)) + 'bak']));
-                            Assign (Bakfile, ConcatPaths ([datadir, Copy (instring, 1,
+                            Assign (Bakfile, ConcatPaths ([RnsConfig.DataDir, Copy (instring, 1,
                                 Pos ('.', instring)) + 'bak']));
                         End;
-                        BakName := ConcatPaths ([datadir, Copy (instring, 1, Pos ('.', instring)) + 'BAK']); { Modern file name access }
+                        BakName := ConcatPaths ([RnsConfig.DataDir, Copy (instring, 1, Pos ('.', instring)) + 'BAK']); { Modern file name access }
                     End Else
                         BakName := '';
                     IniSwapMenuColors;
-                    EdiRythmEdit (ConcatPaths ([datadir, instring]), bakname, false);
+                    EdiRythmEdit (ConcatPaths ([RnsConfig.DataDir, instring]), bakname, false);
                     Mauszeigen;
                     IniSwapMenuColors;
                     st := copy (fontfile, 1, Length (fontfile) - 3) + 'par';
@@ -1032,7 +903,7 @@ Begin
                 If (mausx <> 0) OR (mausy <> 0) OR (maustaste <> 0) OR (mausmenu <> 0) Then
                 Begin
                     IniSwapMenuColors;
-                    UseSaveConfig;
+                    RnsIniSaveConfig ();
                     UseGetSetup;
                     IniIniSymbols;
                     IniIniColors;
@@ -1068,7 +939,7 @@ Begin
                 IniSwapMenuColors;
                 UseColorSelect (mausx, mausy, maustaste, mausmenu);
                 IniSwapMenuColors;
-                UseSaveConfig;
+                RnsIniSaveConfig ();
                 IniIniColors;
                 IniSwapMenuColors;
                 GcuIniCursor;

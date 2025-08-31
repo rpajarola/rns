@@ -5,6 +5,7 @@ Unit imenuunit;
 Interface
 
 Uses
+    RnsIni,
     crt,
     graph,
     gcurunit,
@@ -669,7 +670,7 @@ Begin
 
         Choices := 'FDSPCQ          ';
 
-        Descriptions[1] := 'F - ' + upstring (datadir) + '\ Files            ';
+        Descriptions[1] := 'F - ' + RnsConfig.DataDir + '\ Files            ';
         SetLength (Descriptions[1], 24);
         Descriptions[2] := 'D - Directories         ';
         Descriptions[3] := 'S - Symbol Fonts        ';

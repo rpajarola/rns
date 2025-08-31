@@ -5,6 +5,7 @@ Unit Specunit;
 Interface
 
 Uses
+    RnsIni,
     Graph,
     InitSc,
     menutyp,
@@ -379,14 +380,14 @@ Begin
         ok := true;
         If HlpGetFileName (instring, '.RNS', 0, 0) Then
         Begin
-            filename := datadir + '/' + instring;
+            filename := ConcatPaths ([RnsConfig.DataDir, instring]);
             If IniFileExist (filename) Then
                 If NOT HlpAreYouSure ('File already exists - overwrite?', hpEdit) Then ok := false;
             If ok Then
             Begin
                 FilSavePage (topmargin, pagelength, actptr,
                     startptr, lastptr);
-                assign (outfile, datadir + '/' + instring);
+                assign (outfile, filename);
                 FilHeapToFile (outfile, actptr, startptr, lastptr,
                     false, false, true);
                 FilHeapToFile (infile, actptr, startptr, lastptr,

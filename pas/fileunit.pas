@@ -4,7 +4,9 @@ Unit fileunit;
 
 Interface
 
-Uses initsc,
+Uses
+    RnsIni,
+    initsc,
     MenuTyp,
     MousDrv,
     PageUnit,
@@ -82,7 +84,7 @@ Procedure FilFindeErstBestenFont(Var instring: stringline);
 
 Var sr: SearchRec;
 Begin
-    FindFirst ('*.fnt', $3F, SR);
+    FindFirst (ConcatPaths (['fonts', '*.fnt']), $3F, SR);
     If IOResult <> 0 Then
     Begin
         WriteLn;
@@ -169,7 +171,7 @@ Function FilAssignCfgFile(Var cfgfile: text; basename: string; readf: boolean): 
 Var filepath: stringline;
 Begin
     FilAssignCfgFile := '';
-    filepath := ConcatPaths ([datadir, basename + '.cfg']);
+    filepath := ConcatPaths ([RnsConfig.DataDir, basename + '.cfg']);
     If ((NOT IniFileExist (filepath)) OR
         (FilWrongVersion (filepath))) Then
         FilCopyFile (basename + '.cfg', filepath);
@@ -520,9 +522,7 @@ Var temptr: listptr;
     inblock, tempblock: stringline;
     lineend: byte;
     attr: word;
-    fn: String;
 Begin
-    fn := UpString (actfilename);
     temptr := startptr;
     GetFAttr (outfile, attr);
     If ((attr AND readonly) <> 0) Then

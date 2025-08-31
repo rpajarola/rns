@@ -265,7 +265,7 @@ Var ThePalette: TDACTable;
     TOP_Line, Left_Col, Valcol: integer;
     stabxmin, stabxmax, stabymin, stabymax: integer;
     sxmin, sxmax, symin, symax: integer;
-    datadir, fontfile, colorfile: string;
+    fontfile, colorfile: string;
 
     searchstring: stringline;
     searchtyp: char;
