@@ -820,6 +820,24 @@ Begin
         If c <> 'F' Then
         Begin
             logo^.display (192, 150); {192,175}
+            SetColor (12);
+            inbuf := '                          ';
+            IniExpand (inbuf, subendx - substartx - 2);
+            IniOutTextXY (substartx, (substarty + 3) * 2, inbuf);
+            inbuf := '  L I C E N S E D  V E R S I O N  ' + usrfirstname + ' ' + usrname;
+            IniCenter (inbuf, 74);
+            IniOutTextXY (substartx, (substarty + 4) * 2, inbuf);
+            assign (infile, 'copyr.rns');
+            reset (infile);
+            i := 6;
+            While NOT eof (infile) Do
+            Begin
+                readln (infile, inbuf);
+                IniExpand (inbuf, subendx - substartx - 2);
+                IniOutTextXY (substartx, (substarty + i + 2) * 2, ' ' + inbuf);
+                i := i + 1;
+            End;
+            close (infile);
             MausGrafik (1);
             MausBereich (1, (substartX - 3) * Charwidth - 3, 42, GrmaxY + 14);
             MausSetXY (102, 90);
