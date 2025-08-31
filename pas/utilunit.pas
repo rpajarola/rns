@@ -214,7 +214,7 @@ Begin
     If IniArrow (inblock[1]) Then
     Begin
         Delete (strbuf, 1, 1);
-        If IniDoppel (strbuf[1]) Then
+        If strbuf[1] = ':' Then
             Delete (strbuf, 1, 1);
     End;
     If (((strbuf[1] = '0') AND (length (strbuf) = 3) AND (strbuf[2] > '0')) OR

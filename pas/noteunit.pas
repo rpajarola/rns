@@ -162,7 +162,7 @@ Begin
         oldx := x;
         k := UtiComputeGroup (c, indexc);
         clearendx := x + 25;
-        If (NOT (IniNumChar (c) OR IniArrow (c) OR IniDoppel (c))) Then
+        If (NOT (IniNumChar (c) OR IniArrow (c) OR (c = ':'))) Then
         Begin
             If ordc = 8 Then
             Begin {BS}
@@ -335,7 +335,7 @@ Begin
                 arrow := true;
                 left  := (inbuffer[1] = '<');
                 delete (inbuffer, 1, 1);
-                If IniDoppel (inbuffer[1]) Then
+                If inbuffer[1] = 'c' Then
                 Begin
                     j := actpos;
                     If Left Then

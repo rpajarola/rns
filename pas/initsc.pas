@@ -353,7 +353,6 @@ Function IniPrintChar(c: char): Boolean;
 Function IniPrintNote(c: char): Boolean;
 Function IniNumChar(c: char): Boolean;
 Function IniArrow(c: char): Boolean;
-Function IniDoppel(c: char): Boolean;
 Procedure IniGraphXY(Var X, Y: integer);
 Procedure IniInversWrite(X, Y: integer; Texts: String; T: Byte);
 Procedure IniSpacedWrite(X, Y: integer; Texts: String; T: Byte);
@@ -974,14 +973,6 @@ Function IniArrow(c: char): Boolean;
     {True wenn c = < oder > ist}
 Begin
     IniArrow := ((c = '>') OR (c = '<'));
-End;
-
-{**************************************************************}
-
-Function IniDoppel(c: char): Boolean;
-    {True wenn c = : ist}
-Begin
-    IniDoppel := (c = ':');
 End;
 
 {**************************************************************}
