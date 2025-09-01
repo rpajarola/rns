@@ -58,6 +58,7 @@ Uses
     fileunit,
     helpunit,
     printunit,
+    Character,
     markunit;
 
 {*******************************************************************}
@@ -115,33 +116,28 @@ Var
 
     Var
         c: Char;
-        b: Byte;
-        Code: integer;
     Begin
         c := St[p];
-        Val (c, b, Code);
-        If ((p = 0) OR (Code <> 0)) Then   {RICO: P=0 gibt weiter unten einen
-                                           Range Check error [P-1]}
-        Begin
-            GetL := 0;
-            Exit;
-        End;{if}
-        If x = 0 Then
-            c := St[P - 1]
-        Else If p < $FF Then
-            c := St[P + 1]
-        Else
+        If NOT IsNumber (c) Then
         Begin
             GetL := 0;
             Exit;
         End;
-        Val (c, b, Code);
-        If Code <> 0 Then
+        If (p = 0) OR (p = Length (st)) Then
         Begin
-            GetL := 1;
+            GetL := 0;
             Exit;
-        End;{if}
-        GetL := 2;
+        End;
+
+        If x = 0 Then
+            c := St[P - 1]
+        Else
+            c := St[P + 1];
+
+        If IsNumber (c) Then
+            GetL := 2
+        Else
+            GetL := 1;
     End;{func}
 
 
@@ -295,7 +291,7 @@ Begin
                     i := round (abs (i * mulcent - i));
                     str (i: 5, row);
                     {???}     If i > 0{ich meine if i=0} Then
-                        row := ' �' + row + 'Hz ';
+                        row := ' ' + #165 + row + 'Hz ';
                     col := col + 'Hz ' + row;
                 End;{ if mulcent<>1}
                 If (mulcent = 1) Then
@@ -376,13 +372,13 @@ Begin
             Else
             If c = ' ' Then
                 c := ',';
-        chbuf := '�  [' + c + ']  �';
+        chbuf := #174 + '  [' + c + ']  ' + #175;
         If c = ' ' Then
-            chbuf := '� space �';
+            chbuf := #174 + ' space ' + #175;
         If (c >= #128) AND (c <= #153) Then
         Begin
             c := chr (ord (c) - 31);
-            chbuf := '� Alt-' + c + ' �';
+            chbuf := #174 + ' Alt-' + c + ' ' + #175;
         End;
 
         NL := GetN (Page[linenum], ActPosn, 0);
@@ -465,7 +461,7 @@ Begin
         If CorrY = 0 Then
             IniSpacedText (gmaxx DIV (3 * charwidth) - 24,
                 gmaxy DIV charheight - 5,
-                ' ' + #25 + Row + '�' + '    ' + #26 + ' ', frLow);
+                ' ' + #25 + Row + #179 + '    ' + #26 + ' ', frLow);
 
         {damit die y-Position der ML gleichzeitig richtig angezeigt wird:}
         Str (ActPost - 10, Col);
@@ -492,7 +488,7 @@ Begin
             Else If addcent < 0 Then
                 col := '-' + col
             Else
-                col := '�' + Col;
+                col := #164 + Col;
             str (round (paggetfreq (page[linenum, actposn]) * mulcent): 5, row);
             col := ' ' + col + 'Cent=' + row + 'Hz';
             IniExpand (col, 19);
@@ -520,7 +516,7 @@ Begin
             SetLength (Row, 4);
             IniSpacedText (gmaxx DIV (3 * charwidth) - 24,
                 gmaxy DIV charheight - 5,
-                ' ' + #25 + Row + '�' + Col + #26 + ' ', frLow);
+                ' ' + #25 + Row + #179 + Col + #26 + ' ', frLow);
 
             IniSpacedText (gmaxx DIV (2 * charwidth) - 3,
                 gmaxy DIV charheight - 5,
