@@ -5,10 +5,7 @@ Unit butunit;
 Interface
 
 Uses
-    graph,
-    initsc,
-    menutyp,
-    GcuRunit;
+    menutyp;
 
 Type
     pbutton = ^tbutton;
@@ -56,6 +53,11 @@ Procedure ButActivated(mausx, mausy: Integer;
     Var vresp: response_type; Var vkeyresponse: Char);
 
 Implementation
+
+Uses
+    graph,
+    initsc,
+    GcuRunit;
 
 {*************************************************************}
 Constructor TButton.init(ax0, ax1, ay0, ay1: Integer;
