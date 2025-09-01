@@ -8,6 +8,7 @@ Interface
 Type
     TRnsConfig = Record
         DataDir: String;        { Where to look for files }
+	PickFile: String;	{ Last file loaded }
         ColorFile: String;   { The color schema }
         PSDir: String;       { Where to write .ps files when printing to file }
         BufDir: String;      { scratch dir for buffers }
@@ -96,10 +97,11 @@ Var
     rnsIniFile: TIniFile;
 Begin
     rnsIniFile := TIniFile.Create (RnsConfigFilename);
-    RnsConfig.DataDir := rnsIniFile.ReadString ('main', 'DataDir', 'demodir');
-    RnsConfig.ColorFile := rnsIniFile.ReadString ('main', 'ColorFile', 'colors.rns');
-    RnsConfig.PSDir := rnsIniFile.ReadString ('main', 'PSDir', 'psdir');
-    RnsConfig.BufDir := rnsIniFile.ReadString ('main', 'BufDir', 'bufdir');
+    RnsConfig.DataDir := rnsIniFile.ReadString ('main', 'datadir', 'demodir');
+    RnsConfig.PickFile := rnsIniFile.ReadString ('main', 'pickfile', 'manual.rns');
+    RnsConfig.ColorFile := rnsIniFile.ReadString ('main', 'colorfile', 'colors.rns');
+    RnsConfig.PSDir := rnsIniFile.ReadString ('main', 'psdir', 'psdir');
+    RnsConfig.BufDir := rnsIniFile.ReadString ('main', 'bufdir', 'bufdir');
     rnsIniFile.Free ();
 
     If NOT DirectoryExists (RnsConfig.DataDir) Then
@@ -114,10 +116,11 @@ Var
     rnsIniFile: TIniFile;
 Begin
     rnsIniFile := TIniFile.Create (RnsConfigFilename);
-    rnsIniFile.WriteString ('main', 'DataDir', RnsConfig.DataDir);
-    rnsIniFile.WriteString ('main', 'ColorFile', RnsConfig.ColorFile);
-    rnsIniFile.WriteString ('main', 'PSDir', RnsConfig.PSDir);
-    rnsIniFile.WriteString ('main', 'BufDir', RnsConfig.BufDir);
+    rnsIniFile.WriteString ('main', 'datadir', RnsConfig.DataDir);
+    rnsIniFile.WriteString ('main', 'pickfile', RnsConfig.DataDir);
+    rnsIniFile.WriteString ('main', 'colorfile', RnsConfig.ColorFile);
+    rnsIniFile.WriteString ('main', 'psdir', RnsConfig.PSDir);
+    rnsIniFile.WriteString ('main', 'bufdir', RnsConfig.BufDir);
     rnsIniFile.Free ();
 End;
 
