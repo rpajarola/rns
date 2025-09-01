@@ -506,54 +506,6 @@ End;
 
 {******************************************************}
 
-Procedure UseGetPickFil(Var Instring: Stringline);
-Var
-    infile: text;
-Begin
-    FilAssignCfgFile (infile, 'pickfil', true);
-    {Check if file was opened successfully}
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot open pickfil file');
-        WriteLn ('Make sure the pickfil file exists in the data directory.');
-        Halt (2);
-    End;
-    readln (infile, instring);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read from pickfil file');
-        close (infile);
-        Halt (100);
-    End;
-    close (infile);
-End;
-
-{******************************************************}
-
-Procedure UseSetPickFil(Instring: Stringline);
-Var
-    infile: text;
-Begin
-    FilAssignCfgFile (infile, 'pickfil', false);
-    {Check if file was opened successfully}
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot create pickfil file');
-        WriteLn ('Check write permissions in data directory.');
-        Halt (5);
-    End;
-    writeln (infile, instring);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot write to pickfil file');
-        close (infile);
-        Halt (101);
-    End;
-    close (infile);
-End;
-
-{******************************************************}
-
 Procedure UseTopMenu;
 
 Var
@@ -563,11 +515,10 @@ Var
     i: integer;
     b: byte;
     c: char;
-    instring, inbuf: String;
+    inbuf: String;
     choicenum: byte;
-    infile, bakfile: text;
     st: string;
-    bakname: String;
+    rnsfilename, bakfilename: String;
     mausx, mausy, maustaste, mausmenu: word;
     mx, my, mt, mm: Word;
     changed: boolean;
@@ -587,7 +538,6 @@ Begin
     Repeat
         SetFillStyle (SolidFill, MenuBkColor);
         SetColor (MenuFrameColor);
-        UseGetPickFil (instring);
         Mausdunkel;
         If c <> ' ' Then
         Begin{ nur beim ersten mal nicht l�schen }
@@ -656,31 +606,18 @@ Begin
                 SetFillStyle (Solidfill, 7);
                 Bar ((substartx - 1) * charwidth, (substarty + 2) * 2 * Charwidth,
                     (subendx) * charwidth, (subendy - 2) * 2 * charwidth);
-                UseFileName (instring, c, mausx, mausy,
+                UseFileName (RnsConfig.PickFile, c, mausx, mausy,
                     maustaste, mausmenu);
-                Instring := UpString (Instring);
                 If c <> #27 Then
                 Begin
-                    UseSetPickFil (instring);
-                    UseGetSetup;
-                    If FileExists (ConcatPaths ([RnsConfig.DataDir, instring])) Then
-                    Begin
-                        If Pos ('.', instring) = 0 Then
-                        Begin
-                            FilCopyFile (ConcatPaths ([RnsConfig.DataDir, instring]), ConcatPaths ([RnsConfig.DataDir, instring + '.bak']));
-                            Assign (Bakfile, ConcatPaths ([RnsConfig.DataDir, instring + '.bak']));
-                        End Else
-                        Begin
-                            FilCopyFile (ConcatPaths ([RnsConfig.DataDir, instring]), ConcatPaths ([RnsConfig.DataDir,
-                                Copy (instring, 1, Pos ('.', instring)) + 'bak']));
-                            Assign (Bakfile, ConcatPaths ([RnsConfig.DataDir, Copy (instring, 1,
-                                Pos ('.', instring)) + 'bak']));
-                        End;
-                        BakName := ConcatPaths ([RnsConfig.DataDir, Copy (instring, 1, Pos ('.', instring)) + 'BAK']); { Modern file name access }
-                    End Else
-                        BakName := '';
+			RnsIniSaveConfig();
+rnsfilename :=ConcatPaths ([RnsConfig.DataDir, RnsConfig.PickFile]);
+bakfilename :=ChangeFileExt(rnsfilename, '.bak');
+
+                    If Not FileExists (rnsfilename) Then
+                        bakfilename := '';
                     IniSwapMenuColors;
-                    EdiRythmEdit (ConcatPaths ([RnsConfig.DataDir, instring]), bakname, false);
+                    EdiRythmEdit (rnsfilename, bakfilename, false);
                     Mauszeigen;
                     IniSwapMenuColors;
                     st := ChangeFileExt (RnsSetup.FontFile, '.par');
@@ -773,8 +710,6 @@ Begin
                                 End;
                             End;
                     End;
-                    If BakName <> '' Then
-                        Erase (BakFile);
                     {.........................................................................}
                     {Zur�cksetzungen vor Save beim verlassen des Files}
                     {          soundchange:=(soundchange xor saMuffled) and not saMuffled;}
