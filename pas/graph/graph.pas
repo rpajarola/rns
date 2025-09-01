@@ -692,4 +692,18 @@ Begin
     CurrentY := CurrentY + Dy;
 End;
 
+
+Procedure PutPixel(X, Y: integer; Pixel: word);
+Var
+    Color: TSDL_Color;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (Pixel);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+    SDL_RenderDrawPoint (Renderer, X, Y);
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
