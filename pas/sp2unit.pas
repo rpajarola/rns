@@ -242,9 +242,8 @@ Var
     resp: response_type;
     choicenum: byte;
     x, y, hy: integer;
-    instring, rstring: string;
+    instring: string;
     s: string;
-    b: boolean;
     mausx, mausy, maustaste, mausmenu: word;
     changed: boolean;
 
@@ -324,7 +323,7 @@ Begin
                     ' - Enter text to search                     >', instring);
                 searchstring := UpString (instring);
                 If searchstring <> '' Then
-                    b := Sp2SearchString (linenum, actposn, actpost,
+                    Sp2SearchString (linenum, actposn, actpost,
                         actptr, startptr, lastptr);
             End;
 
@@ -335,7 +334,7 @@ Begin
                 SearchPatternInput (4, ' - Enter pattern to search                  >',
                     searchstring);
                 If searchstring <> '' Then
-                    b := Sp2SearchString (linenum, actposn, actpost,
+                    Sp2SearchString (linenum, actposn, actpost,
                         actptr, startptr, lastptr)
                 Else
                     PagCursorLeft (linenum, actposn, actpost);
@@ -346,14 +345,11 @@ Begin
                 searchtyp := 'T';
                 replaceflag := true;
                 SearchTextInput (2,
-                    ' - Enter text to change                     >', instring);
-                searchstring := UpString (instring);
+                    ' - Enter text to change                     >', searchstring);
                 If (searchstring <> '') AND (resp <> escape) Then
                 Begin
-                    replacestring := ' - Change "' + instring + '" to';
                     IniExpand (Replacestring, 44);
-                    SearchTextInput (2, ReplaceString + '>', instring);
-                    replacestring := rstring;
+                    SearchTextInput (2, ' - Change "' + instring + '" to' + '>', replacestring);
                     CallReplace;
                 End;
                 c := 'C';

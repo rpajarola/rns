@@ -74,9 +74,6 @@ Uses
     RnsIni,
     NoteUnit;
 
-Var
-    RErr: Boolean;
-
 {*****************************************************************}
 Procedure SpeBlockCommands(Var linenum, actposn, actpost: integer;
     Var actptr, startptr, lastptr: listptr;
@@ -1076,7 +1073,6 @@ Function SpeLineUsed(Linenum: Integer): Boolean;
 Begin
     If (Linenum < 1) OR (Linenum > PageLength) Then
     Begin
-        RErr := True;
         SpeLineUsed := True;
         Exit;
     End;
@@ -1213,6 +1209,4 @@ End;
 
 {*************************************************************************}
 
-Begin
-    RErr := False;
 End.

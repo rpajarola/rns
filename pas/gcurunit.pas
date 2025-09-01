@@ -36,7 +36,7 @@ Uses
     xcrt,
     crt,
     Mousdrv,
-RnsIni,
+    RnsIni,
     initsc;
 
 Var
@@ -169,7 +169,7 @@ End;
 Procedure GcuDrawCursor;
 
 Var
-    i, j, imin, imax, jmin, jmax, icorr, jcorr: integer;
+    i, j, imin, imax, jmin, jmax: integer;
     b: Boolean;
 Begin
     b := NOT istdunkel;
@@ -179,7 +179,7 @@ Begin
         GcuPatternStore;
     CursorIsOn := True;
     If ((NOT xKeyPressed) AND (RnsSetup.DispCurs
- < 3)) Then
+        < 3)) Then
     Begin
         MinMax (imin, imax, jmin, jmax);
         For j := jmin To jmax Do
@@ -187,7 +187,7 @@ Begin
                 If (i > 1) AND (j > 1) AND (i < GetmaxX) AND (j < GetmaxY - 56) Then
                     PutPixel (i, j, GraphCursor[i - imin, jmax - j]);
         If RnsSetup.DispCurs
-   	= 2 Then
+            = 2 Then
         Begin
             For i := 1 To curgridxs Do
                 If Page[gcycoord DIV linethick - 1, 1] <> 'N' Then
@@ -196,7 +196,7 @@ Begin
                 PutPixel (gcxcoord, GcuGridPosY (i), gridcolor);
         End;
     End Else If (RnsSetup.DispCurs
- < 3) Then
+        < 3) Then
     Begin
         MinMax (imin, imax, jmin, jmax);
         For i := imin + 2 To imax - 2 Do

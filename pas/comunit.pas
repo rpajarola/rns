@@ -62,7 +62,8 @@ Implementation
 
 Uses
     Symbols,
- inout,   TitleUnit,
+    inout,
+    TitleUnit,
     fileunit,
     grintunit,
     pageunit,
@@ -95,7 +96,6 @@ Uses
 
 Var
     CursorKilled: Boolean;
-    Cursorlinestart, cursorlineend: Byte;
 
 {******************************************************}
 Function ComKeyGrant(Var c: char; linenum: integer): boolean;
@@ -708,12 +708,7 @@ Begin
     { TODO: Implement cursor hiding functionality }
     { Original: INT 10h cursor manipulation }
     If NOT CursorKilled Then
-    Begin
-        Cursorlinestart := 0; { Save cursor info }
-        Cursorlineend := 0;
-        CursorKilled  := true;
-        { Stub: Actual cursor hiding not implemented }
-    End;
+        CursorKilled := true{ Stub: Actual cursor hiding not implemented };
 End;
 
 {******************************************************}

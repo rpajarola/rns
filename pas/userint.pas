@@ -70,17 +70,12 @@ Const
     sdymax = 22;
     sdcol = 3;
 
-Var
-    CLS, CLE: byte;
-
 {******************************************************}
 
 Procedure KillCursor;
 Begin
     { TODO: Implement cursor hiding functionality }
     { Original: INT 10h function 3 (get cursor) then function 1 (set cursor invisible) }
-    CLS := 0; { Save current cursor start line }
-    CLE := 0; { Save current cursor end line }
     { Stub: Cursor visibility control not implemented }
 End;
 
@@ -98,7 +93,7 @@ Procedure UseGetSetup;
 {Liest das setup-file}
 
 Begin
-	RnsIniLoadSetup();
+    RnsIniLoadSetup ();
     GetNoteBlock (RnsSetup.NoteBlock, actattr, 1);
 End;
 
@@ -106,8 +101,8 @@ End;
 Procedure UseSaveSetup;
 {Save settings to setup.ini}
 Begin
-   RnsSetup.NoteBlock := Format('          %-5d%-5d%-5d%-5d', [actattr.beats, actattr.eint, actattr.resolution, actattr.linestyle]);
-   RnsIniSaveSetup();
+    RnsSetup.NoteBlock := Format ('          %-5d%-5d%-5d%-5d', [actattr.beats, actattr.eint, actattr.resolution, actattr.linestyle]);
+    RnsIniSaveSetup ();
 End;
 
 {************************************************************}
@@ -688,7 +683,7 @@ Begin
                     EdiRythmEdit (ConcatPaths ([RnsConfig.DataDir, instring]), bakname, false);
                     Mauszeigen;
                     IniSwapMenuColors;
-		    st := ChangeFileExt(RnsSetup.FontFile, '.par');
+                    st := ChangeFileExt (RnsSetup.FontFile, '.par');
                     IniHideCursor;
                     If NOT FilCompareFiles (st, 'symbols.par') Then
                     Begin

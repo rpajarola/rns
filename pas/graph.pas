@@ -140,6 +140,7 @@ Procedure EGAVGADriverProc;
 Procedure InitGraph(Var Driver, Mode: Integer; Const Path: String);
 Procedure CloseGraph;
 Function RegisterBGIDriver(Driver: Pointer): Integer;
+Function GetGraphMode: Integer;
 
 { Drawing functions - stubs }
 Procedure SetColor(Color: Word);
@@ -194,7 +195,7 @@ Var
     CurrentX, CurrentY: Integer;
     CurrentColor: Word;
     CurrentBkColor: Word;
-    GraphInitialized: Boolean;
+    GraphInitialized: Boolean = False;
 
 { BGI Driver procedures }
 Procedure EGAVGADriverProc;
@@ -228,6 +229,16 @@ Function RegisterBGIDriver(Driver: Pointer): Integer;
 Begin
     // TODO: Register graphics driver with modern system
     RegisterBGIDriver := 0; // Success
+End;
+
+
+Function GetGraphMode: Integer;
+Begin
+    // TODO: return actual mode
+    If GraphInitialized Then
+        Result := 1
+    Else
+        Result := 0;
 End;
 
 { Drawing functions - stubs }
