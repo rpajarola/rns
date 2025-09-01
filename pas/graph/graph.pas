@@ -997,4 +997,45 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Procedure PieSlice(X, Y: integer; StAngle, EndAngle, Radius: word);
+Var
+    Color: TSDL_Color;
+    Angle, RadAngle: Real;
+    px, py, lastpx, lastpy: Integer;
+    FirstPoint: Boolean;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentFillColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    { Draw lines from center to arc points to create filled pie slice }
+    Angle := StAngle;
+
+    While True Do
+    Begin
+        RadAngle := Angle * Pi / 180.0;
+        px := X + Round (Radius * Cos (RadAngle));
+        py := Y - Round (Radius * Sin (RadAngle));
+
+        { Draw line from center to arc point }
+        SDL_RenderDrawLine (Renderer, X, Y, px, py);
+
+        If Angle = EndAngle Then
+            Break;
+
+        Angle := Angle + 1;
+        If Angle > 360 Then
+            Angle := Angle - 360;
+        If (StAngle < EndAngle) AND (Angle > EndAngle) Then
+            Break;
+        If (StAngle > EndAngle) AND (Angle > EndAngle) AND (Angle < StAngle) Then
+            Break;
+    End;
+
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
