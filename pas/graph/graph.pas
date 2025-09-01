@@ -331,3 +331,40 @@ Function TextHeight(TextString: string): word;
 Function TextWidth(TextString: string): word;
 
 
+Implementation
+
+Uses
+    SDL2;
+
+Var
+    { SDL2 graphics state }
+    Window: PSDL_Window;
+    Renderer: PSDL_Renderer;
+    WindowWidth, WindowHeight: Integer;
+    GraphInitialized: Boolean = False;
+
+    { Current graphics state }
+    CurrentX, CurrentY: Integer;
+    CurrentColor: Word;
+    CurrentBkColor: Word;
+    CurrentLineStyle: Word;
+    CurrentLinePattern: Word;
+    CurrentLineThickness: Word;
+    CurrentFillPattern: Word;
+    CurrentFillColor: Word;
+
+    { Text settings }
+    CurrentFont: Word;
+    CurrentTextDirection: Word;
+    CurrentCharSize: Word;
+    CurrentHorizJust: Word;
+    CurrentVertJust: Word;
+
+    { Viewport settings }
+    ViewPortX1, ViewPortY1, ViewPortX2, ViewPortY2: Integer;
+    ClipEnabled: Boolean;
+
+    { Error state }
+    LastGraphResult: Integer;
+
+End.
