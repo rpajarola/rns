@@ -905,4 +905,50 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Procedure Arc(X, Y: integer; StAngle, EndAngle, Radius: word);
+Var
+    Color: TSDL_Color;
+    Angle, RadAngle: Real;
+    px, py, lastpx, lastpy: Integer;
+    FirstPoint: Boolean;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    { Draw arc using line segments }
+    FirstPoint := True;
+    Angle := StAngle;
+
+    While True Do
+    Begin
+        RadAngle := Angle * Pi / 180.0;
+        px := X + Round (Radius * Cos (RadAngle));
+        py := Y - Round (Radius * Sin (RadAngle));
+
+        If NOT FirstPoint Then
+            SDL_RenderDrawLine (Renderer, lastpx, lastpy, px, py);
+
+        lastpx := px;
+        lastpy := py;
+        FirstPoint := False;
+
+        If Angle = EndAngle Then
+            Break;
+
+        Angle := Angle + 1;
+        If Angle > 360 Then
+            Angle := Angle - 360;
+        If (StAngle < EndAngle) AND (Angle > EndAngle) Then
+            Break;
+        If (StAngle > EndAngle) AND (Angle > EndAngle) AND (Angle < StAngle) Then
+            Break;
+    End;
+
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
