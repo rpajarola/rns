@@ -290,10 +290,7 @@ Begin
             inblock := page[linenum];
             GetNoteBlock (inblock, lineattr, linenum);
         End Else
-        Begin
-            { 'N           1 0 480 3 %.1.';}
-            GetNoteBlock (RnsSetup.InsMusicLine, lineattr, 0);
-        End;
+            GetNoteBlock (RnsSetup.InsMusicLine, lineattr, 0){ 'N           1 0 480 3 %.1.';};
 
         ChoiceVal[1].Ival := lineattr.beats;
         ChoiceVal[2].Ival := lineattr.eint;

@@ -249,7 +249,7 @@ Var
     GrInitialized: boolean = false;
     GrMinX, GrMaxX, GrMinY, GrMaxY: integer;
     UsrMenu, Symbolmenu1, Symbolmenu2: Menu_Rec;
-    togglestring:  toggletyp;
+    togglestring: toggletyp;
     hfminx, hfminy, hfmaxx, hfmaxy: integer;
     TOP_Line, Left_Col, Valcol: integer;
     stabxmin, stabxmax, stabymin, stabymax: integer;

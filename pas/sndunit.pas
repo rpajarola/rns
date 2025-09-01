@@ -306,7 +306,7 @@ Var
     Var
         St: String;
     Begin
-        RnsSetup.SndLength:= Round (60000 / RnsSetup.SndLengthSpm);
+        RnsSetup.SndLength := Round (60000 / RnsSetup.SndLengthSpm);
         If RnsSetup.SndLengthPer = 1 Then
             actlength := RnsSetup.SndLength
         Else
@@ -372,7 +372,7 @@ Var
                             wait := False
                         Else If auftakt Then
                         Begin
-                            If ((RnsSetup.SndChar= 'L') AND (c <> #27)) Then
+                            If ((RnsSetup.SndChar = 'L') AND (c <> #27)) Then
                                 inblock := '';
                         End Else If NOT ((RnsSetup.SndChar = 'L') AND (c <> #27)) Then
                         Begin
@@ -623,7 +623,7 @@ Begin
                         {spiele Linie zu Ende bevor n�chste gespielt wird}
                         IniSpacedText (12, gmaxy DIV charheight - 5,
                             'pause  ', frNoFrame);
-                                SndUpdateSndLength (actlength);
+                        SndUpdateSndLength (actlength);
                         PlayNext := True;
                         Inc (Linenum);
                         paused := False;
@@ -972,7 +972,7 @@ Begin
                             {spiele Linie zu Ende bevor n�chste gespielt wird}
                             IniSpacedText (12, gmaxy DIV charheight - 5,
                                 'pause  ', frNoFrame);
-                                SndUpdateSndLength (actlength);
+                            SndUpdateSndLength (actlength);
                             PlayNext := True;
                             Inc (Linenum);
                             paused := False;
@@ -1462,7 +1462,7 @@ Begin
                         {spiele Linie zu Ende bevor n�chste gespielt wird}
                         IniSpacedText (12, gmaxy DIV charheight - 5,
                             'pause  ', frNoFrame);
-                                SndUpdateSndLength (actlength);
+                        SndUpdateSndLength (actlength);
                         PlayNext := True;
                         Inc (Linenum);
                         paused := False;
@@ -1755,7 +1755,7 @@ Begin
                     SaveSlinexmax := slinexmin;
             End;
             If SChanged Then
-                                SndUpdateSndLength (actlength);
+                SndUpdateSndLength (actlength);
             If IniMausEscape = #27 Then
             Begin
                 c := #27;
@@ -1871,7 +1871,7 @@ Begin
     RnsSetup.SndBeatLength := UsrMenu.ChoiceVal[6].ival;
     RnsSetup.SndPulsePitch := UsrMenu.ChoiceVal[7].ival;
     RnsSetup.SndPulseLength := UsrMenu.ChoiceVal[8].ival;
-    RnsSetup.KbdSound := UsrMenu.ChoiceVal[9].tval;
+    RnsSetup.KbdSound  := UsrMenu.ChoiceVal[9].tval;
     RnsSetup.SndWarning := UsrMenu.ChoiceVal[10].tval;
 End;
 

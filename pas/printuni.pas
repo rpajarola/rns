@@ -680,12 +680,9 @@ Var
 Begin
     PriPostscriptinit := False; { Default to failure }
     If RnsSetup.PrFile = 1 Then
-    Begin                      { PS-File oeffnen            }
-        Assign (psfile, ConcatPaths ([psdir, RnsSetup.PrfName]));
-    End Else
-    Begin
+        Assign (psfile, ConcatPaths ([psdir, RnsSetup.PrfName])){ PS-File oeffnen            }
+    Else
         Assign (psfile, 'psfile');
-    End;
     rewrite (psfile);
     If IOResult <> 0 Then
     Begin
