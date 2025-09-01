@@ -706,4 +706,15 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Function GetPixel(X, Y: integer): word;
+Begin
+    If NOT GraphInitialized Then
+    Begin
+        GetPixel := 0;
+        Exit;
+    End;
+    GetPixel := 0;
+End;
+
 End.
