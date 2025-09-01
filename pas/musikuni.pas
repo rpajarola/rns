@@ -1,4 +1,4 @@
-﻿{$I RNS.H}
+{$I RNS.H}
 
 Unit musikunit;
 
