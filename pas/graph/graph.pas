@@ -1038,4 +1038,38 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Procedure SetViewPort(x1, y1, x2, y2: integer; Clip: boolean);
+Var
+    ClipRect: TSDL_Rect;
+Begin
+    ViewPortX1 := x1;
+    ViewPortY1 := y1;
+    ViewPortX2 := x2;
+    ViewPortY2 := y2;
+    ClipEnabled := Clip;
+
+    If GraphInitialized Then
+        If Clip Then
+        Begin
+            ClipRect.x := x1;
+            ClipRect.y := y1;
+            ClipRect.w := x2 - x1 + 1;
+            ClipRect.h := y2 - y1 + 1;
+            SDL_RenderSetClipRect (Renderer, @ClipRect);
+        End
+        Else
+            SDL_RenderSetClipRect (Renderer, nil);
+End;
+
+
+Procedure GetViewSettings(Var ViewPort: ViewPortType);
+Begin
+    ViewPort.x1 := ViewPortX1;
+    ViewPort.y1 := ViewPortY1;
+    ViewPort.x2 := ViewPortX2;
+    ViewPort.y2 := ViewPortY2;
+    ViewPort.Clip := ClipEnabled;
+End;
+
 End.
