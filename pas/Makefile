@@ -17,7 +17,9 @@ LD_LIBS=-Fl/opt/local/lib -Fusdl2
 
 # HomeBrew
 #LD_LIBS=-Fl/opt/homebrew/lib -Fusdl2
-
+else
+# SDL2 library is in default path
+LD_LIBS=-Fusdl2
 endif
 
 SRC=rns.pas
