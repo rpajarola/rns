@@ -191,6 +191,9 @@ Function GraphErrorMsg(ErrorCode: Integer): String;
 
 Implementation
 
+Uses
+	SDL2;
+
 Var
     CurrentX, CurrentY: Integer;
     CurrentColor: Word;
@@ -215,6 +218,8 @@ Begin
     CurrentY := 0;
     CurrentColor := White; // Default color
     CurrentBkColor := Black; // Default background color
+
+    SDL_Init(SDL_INIT_VIDEO);
 End;
 
 
@@ -222,6 +227,7 @@ Procedure CloseGraph;
 Begin
     // TODO: Cleanup modern graphics system
     GraphInitialized := False;
+    SDL_Quit();
 End;
 
 

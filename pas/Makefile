@@ -5,7 +5,7 @@
 #  -Sew = halt on warnings (-Sen = halt on notes)
 #  -vw = show warnings
 all:
-	fpc -Sew -Mdelphi -gw3 -bl -FEobj -Foobj -vm6058 rns.pas
+	fpc -Fusdl2 -Sew -Mdelphi -gw3 -bl -FEobj -Foobj -vm6058 rns.pas
 
 clean:
 	-rm -f obj/*
