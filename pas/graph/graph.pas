@@ -787,4 +787,43 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Procedure Bar3D(x1, y1, x2, y2: integer; Depth: word; Top: boolean);
+Var
+    Color: TSDL_Color;
+    MainRect, TopRect, SideRect: TSDL_Rect;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    { Draw main filled rectangle }
+    Bar (x1, y1, x2, y2);
+
+    { Draw 3D effect if depth > 0 }
+    If Depth > 0 Then
+    Begin
+        Color := BGIColorToSDL (CurrentColor);
+        SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+        { Right side }
+        SideRect.x := x2 + 1;
+        SideRect.y := y1 - Depth;
+        SideRect.w := Depth;
+        SideRect.h := y2 - y1 + 1 + Depth;
+        SDL_RenderFillRect (Renderer, @SideRect);
+
+        { Top side (if enabled) }
+        If Top Then
+        Begin
+            TopRect.x := x1;
+            TopRect.y := y1 - Depth;
+            TopRect.w := x2 - x1 + 1 + Depth;
+            TopRect.h := Depth;
+            SDL_RenderFillRect (Renderer, @TopRect);
+        End;
+
+        SDL_RenderPresent (Renderer);
+    End;
+End;
+
 End.
