@@ -634,6 +634,7 @@ Begin
     GetDriverName := 'SDL2 Graphics Driver';
 End;
 
+
 Function GetGraphMode: integer;
 Begin
     If GraphInitialized Then
@@ -642,9 +643,10 @@ Begin
         GetGraphMode := 0;
 End;
 
+
 Procedure SetGraphMode(Mode: integer);
 Begin
-    If Not GraphInitialized Then
+    If NOT GraphInitialized Then
     Begin
         LastGraphResult := grNoInitGraph;
         Exit;
@@ -652,14 +654,42 @@ Begin
     LastGraphResult := grOk;
 End;
 
+
 Function GetMaxX: integer;
 Begin
     GetMaxX := WindowWidth - 1;
 End;
 
+
 Function GetMaxY: integer;
 Begin
     GetMaxY := WindowHeight - 1;
+End;
+
+
+Function GetX: integer;
+Begin
+    GetX := CurrentX;
+End;
+
+
+Function GetY: integer;
+Begin
+    GetY := CurrentY;
+End;
+
+
+Procedure MoveTo(X, Y: integer);
+Begin
+    CurrentX := X;
+    CurrentY := Y;
+End;
+
+
+Procedure MoveRel(Dx, Dy: integer);
+Begin
+    CurrentX := CurrentX + Dx;
+    CurrentY := CurrentY + Dy;
 End;
 
 End.
