@@ -717,4 +717,32 @@ Begin
     GetPixel := 0;
 End;
 
+
+Procedure Line(x1, y1, x2, y2: integer);
+Var
+    Color: TSDL_Color;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+    SDL_RenderDrawLine (Renderer, x1, y1, x2, y2);
+    SDL_RenderPresent (Renderer);
+    CurrentX := x2;
+    CurrentY := y2;
+End;
+
+
+Procedure LineTo(X, Y: integer);
+Begin
+    Line (CurrentX, CurrentY, X, Y);
+End;
+
+
+Procedure LineRel(Dx, Dy: integer);
+Begin
+    Line (CurrentX, CurrentY, CurrentX + Dx, CurrentY + Dy);
+End;
+
 End.
