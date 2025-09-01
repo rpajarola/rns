@@ -867,4 +867,28 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Procedure SetColor(Color: word);
+Begin
+    CurrentColor := Color;
+End;
+
+
+Function GetColor: word;
+Begin
+    GetColor := CurrentColor;
+End;
+
+
+Procedure SetBkColor(ColorNum: word);
+Begin
+    CurrentBkColor := ColorNum;
+End;
+
+
+Function GetBkColor: word;
+Begin
+    GetBkColor := CurrentBkColor;
+End;
+
 End.
