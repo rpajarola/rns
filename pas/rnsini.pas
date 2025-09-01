@@ -37,7 +37,7 @@ Type
         DispGrid: integer; {Grids: 1 = show, 2 = hide, 3 = bottom line only}
         DispHidLines: integer; {Helplines: 1 = show, 2 = hide}
         DispCurs: integer; {Cursor: 1 = show, 2 = show+cross, 3 = hide}
-        DispSlash: integer; {
+        DispSlash: integer; {Show jump marks: 1 = show, 2 = hide}
 
         {Keyboard}
         ManSet: integer; {1 = normal, 2 = add all characters}
@@ -149,7 +149,7 @@ Begin
     RnsSetup.DispCurs := rnsIniFile.ReadInteger ('display', 'cursor', 1);
     RnsSetup.DispSlash := rnsIniFile.ReadInteger ('display', 'slash', 1);
     If RnsSetup.DispSlash < 1 Then
-    RnsSetup.DispSlash:=1;
+        RnsSetup.DispSlash := 1;
 
     RnsSetup.ManSet := rnsIniFile.ReadInteger ('keyboard', 'manset', 1);
     RnsSetup.CharSet := rnsIniFile.ReadInteger ('keyboard', 'charset', 1);
@@ -177,12 +177,12 @@ Begin
     RnsSetup.SndLengthSpm := rnsIniFile.ReadFloat ('sound', 'strokesperminute', 8.0);
     RnsSetup.SndAttr := rnsIniFile.ReadInteger ('sound', 'attr', 0);
     RnsSetup.SndWarning := rnsIniFile.ReadInteger ('sound', 'warning', 1);
-    if RnsSetup.SndWarning < 1 Then
-    RnsSetup.SndWarning := 1;
+    If RnsSetup.SndWarning < 1 Then
+        RnsSetup.SndWarning := 1;
 
     RnsSetup.CtrlEnterOfs := rnsIniFile.ReadInteger ('misc', '', 2);
     If RnsSetup.CtrlEnterOfs = 0 Then
-    RnsSetup.CtrlEnterOfs:=2;
+        RnsSetup.CtrlEnterOfs := 2;
 
     rnsIniFile.Free ();
 End;
@@ -227,7 +227,7 @@ Begin
     RnsInifile.WriteInteger ('sound', 'pulsepitch', RnsSetup.SndPulsePitch);
     RnsInifile.WriteInteger ('sound', 'pulselength', RnsSetup.SndPulselength);
     RnsInifile.WriteFloat ('sound', 'strokesperminute', RnsSetup.SndLengthSpm);
-    RnsIniFile.WriteInteger('sound', 'attr', RnsSetup.SndAttr);
+    RnsIniFile.WriteInteger ('sound', 'attr', RnsSetup.SndAttr);
     RnsInifile.WriteInteger ('sound', 'warning', RnsSetup.SndWarning);
 
     RnsInifile.WriteInteger ('misc', '', RnsSetup.CtrlEnterOfs);
