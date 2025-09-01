@@ -766,4 +766,25 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Procedure Bar(x1, y1, x2, y2: integer);
+Var
+    Color: TSDL_Color;
+    Rect:  TSDL_Rect;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentFillColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    Rect.x := x1;
+    Rect.y := y1;
+    Rect.w := x2 - x1 + 1;
+    Rect.h := y2 - y1 + 1;
+
+    SDL_RenderFillRect (Renderer, @Rect);
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
