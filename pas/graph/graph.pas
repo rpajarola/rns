@@ -367,4 +367,271 @@ Var
     { Error state }
     LastGraphResult: Integer;
 
+{ Color conversion from BGI to SDL2 }
+Function BGIColorToSDL(Color: Word): TSDL_Color;
+Begin
+    Case Color Of
+        Black:
+        Begin
+            Result.r := 0;
+            Result.g := 0;
+            Result.b := 0;
+        End;
+        Blue:
+        Begin
+            Result.r := 0;
+            Result.g := 0;
+            Result.b := 255;
+        End;
+        Green:
+        Begin
+            Result.r := 0;
+            Result.g := 255;
+            Result.b := 0;
+        End;
+        Cyan:
+        Begin
+            Result.r := 0;
+            Result.g := 255;
+            Result.b := 255;
+        End;
+        Red:
+        Begin
+            Result.r := 255;
+            Result.g := 0;
+            Result.b := 0;
+        End;
+        Magenta:
+        Begin
+            Result.r := 255;
+            Result.g := 0;
+            Result.b := 255;
+        End;
+        Brown:
+        Begin
+            Result.r := 165;
+            Result.g := 42;
+            Result.b := 42;
+        End;
+        LightGray:
+        Begin
+            Result.r := 192;
+            Result.g := 192;
+            Result.b := 192;
+        End;
+        DarkGray:
+        Begin
+            Result.r := 128;
+            Result.g := 128;
+            Result.b := 128;
+        End;
+        LightBlue:
+        Begin
+            Result.r := 173;
+            Result.g := 216;
+            Result.b := 230;
+        End;
+        LightGreen:
+        Begin
+            Result.r := 144;
+            Result.g := 238;
+            Result.b := 144;
+        End;
+        LightCyan:
+        Begin
+            Result.r := 224;
+            Result.g := 255;
+            Result.b := 255;
+        End;
+        LightRed:
+        Begin
+            Result.r := 255;
+            Result.g := 182;
+            Result.b := 193;
+        End;
+        LightMagenta:
+        Begin
+            Result.r := 255;
+            Result.g := 174;
+            Result.b := 201;
+        End;
+        Yellow:
+        Begin
+            Result.r := 255;
+            Result.g := 255;
+            Result.b := 0;
+        End;
+        White:
+        Begin
+            Result.r := 255;
+            Result.g := 255;
+            Result.b := 255;
+        End;
+    Else
+    Begin
+        Result.r := 255;
+        Result.g := 255;
+        Result.b := 255;
+    End;
+    End;
+    Result.a := 255;
+End;
+
+{ *** high-level error handling *** }
+Function GraphErrorMsg(ErrorCode: integer): String;
+Begin
+    Case ErrorCode Of
+        grOk: GraphErrorMsg := 'No error';
+        grNoInitGraph: GraphErrorMsg := 'Graphics not initialized';
+        grNotDetected: GraphErrorMsg := 'Graphics hardware not detected';
+        grFileNotFound: GraphErrorMsg := 'Device driver file not found';
+        grInvalidDriver: GraphErrorMsg := 'Invalid device driver file';
+        grNoLoadMem: GraphErrorMsg := 'Not enough memory to load driver';
+        grNoScanMem: GraphErrorMsg := 'Out of memory in scan fill';
+        grNoFloodMem: GraphErrorMsg := 'Out of memory in flood fill';
+        grFontNotFound: GraphErrorMsg := 'Font file not found';
+        grNoFontMem: GraphErrorMsg := 'Not enough memory to load font';
+        grInvalidMode: GraphErrorMsg := 'Invalid graphics mode';
+        grError: GraphErrorMsg := 'Graphics error';
+        grIOerror: GraphErrorMsg := 'Graphics I/O error';
+        grInvalidFont: GraphErrorMsg := 'Invalid font file';
+        grInvalidFontNum: GraphErrorMsg := 'Invalid font number';
+        grInvalidVersion: GraphErrorMsg := 'Invalid driver version';
+    Else
+        GraphErrorMsg := 'Unknown graphics error';
+    End;
+End;
+
+
+Function GraphResult: integer;
+Begin
+    GraphResult := LastGraphResult;
+    LastGraphResult := grOk;
+End;
+
+{ *** detection, initialization and crt mode routines *** }
+Procedure InitGraph(Var GraphDriver: integer; Var GraphMode: integer; PathToDriver: String);
+Begin
+    LastGraphResult := grOk;
+
+    If SDL_Init (SDL_INIT_VIDEO) < 0 Then
+    Begin
+        LastGraphResult := grError;
+        exit;
+    End;
+
+    { Set default window size based on graphics mode }
+    Case GraphMode Of
+        VGAHi, EGAHi:
+        Begin
+            WindowWidth := 640;
+            WindowHeight := 480;
+        End;
+        VGAMed:
+        Begin
+            WindowWidth := 640;
+            WindowHeight := 350;
+        End;
+        VGALo:
+        Begin
+            WindowWidth := 640;
+            WindowHeight := 200;
+        End;
+        MCGAHi:
+        Begin
+            WindowWidth := 640;
+            WindowHeight := 480;
+        End;
+        MCGAMed:
+        Begin
+            WindowWidth := 640;
+            WindowHeight := 200;
+        End;
+    Else
+    Begin
+        WindowWidth := 640;
+        WindowHeight := 480;
+    End; { Default VGA }
+    End;
+
+    Window := SDL_CreateWindow ('Pascal Graphics',
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        WindowWidth, WindowHeight, SDL_WINDOW_SHOWN);
+
+    If Window = nil Then
+    Begin
+        LastGraphResult := grError;
+        SDL_Quit ();
+        exit;
+    End;
+
+    Renderer := SDL_CreateRenderer (Window, -1, SDL_RENDERER_ACCELERATED);
+    If Renderer = nil Then
+    Begin
+        LastGraphResult := grError;
+        SDL_DestroyWindow (Window);
+        SDL_Quit ();
+        exit;
+    End;
+
+    { Initialize state }
+    GraphInitialized := True;
+    GraphDriver := VGA;
+    GraphMode := VGAHi;
+    CurrentX  := 0;
+    CurrentY  := 0;
+    CurrentColor := White;
+    CurrentBkColor := Black;
+    CurrentLineStyle := SolidLn;
+    CurrentLinePattern := 0;
+    CurrentLineThickness := NormWidth;
+    CurrentFillPattern := SolidFill;
+    CurrentFillColor := White;
+    CurrentFont := DefaultFont;
+    CurrentTextDirection := HorizDir;
+    CurrentCharSize := 1;
+    CurrentHorizJust := LeftText;
+    CurrentVertJust := TopText;
+    ViewPortX1 := 0;
+    ViewPortY1 := 0;
+    ViewPortX2 := WindowWidth - 1;
+    ViewPortY2 := WindowHeight - 1;
+    ClipEnabled := False;
+
+    { Clear screen to background color }
+    SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
+    SDL_RenderClear (Renderer);
+    SDL_RenderPresent (Renderer);
+End;
+
+
+Procedure CloseGraph;
+Begin
+    If GraphInitialized Then
+    Begin
+        If Renderer <> nil Then
+            SDL_DestroyRenderer (Renderer);
+        If Window <> nil Then
+            SDL_DestroyWindow (Window);
+        SDL_Quit ();
+        GraphInitialized := False;
+        Window := nil;
+        Renderer := nil;
+    End;
+End;
+
+
+Procedure DetectGraph(Var GraphDriver, GraphMode: integer);
+Begin
+    GraphDriver := VGA;
+    GraphMode := VGAHi;
+    LastGraphResult := grOk;
+End;
+
+
+Function GetDriverName: string;
+Begin
+    GetDriverName := 'SDL2 Graphics Driver';
+End;
+
 End.
