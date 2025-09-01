@@ -634,4 +634,32 @@ Begin
     GetDriverName := 'SDL2 Graphics Driver';
 End;
 
+Function GetGraphMode: integer;
+Begin
+    If GraphInitialized Then
+        GetGraphMode := VGAHi
+    Else
+        GetGraphMode := 0;
+End;
+
+Procedure SetGraphMode(Mode: integer);
+Begin
+    If Not GraphInitialized Then
+    Begin
+        LastGraphResult := grNoInitGraph;
+        Exit;
+    End;
+    LastGraphResult := grOk;
+End;
+
+Function GetMaxX: integer;
+Begin
+    GetMaxX := WindowWidth - 1;
+End;
+
+Function GetMaxY: integer;
+Begin
+    GetMaxY := WindowHeight - 1;
+End;
+
 End.
