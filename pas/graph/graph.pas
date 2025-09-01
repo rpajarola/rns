@@ -1072,4 +1072,25 @@ Begin
     ViewPort.Clip := ClipEnabled;
 End;
 
+
+Procedure ClearViewPort;
+Var
+    Color: TSDL_Color;
+    ViewRect: TSDL_Rect;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentBkColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    ViewRect.x := ViewPortX1;
+    ViewRect.y := ViewPortY1;
+    ViewRect.w := ViewPortX2 - ViewPortX1 + 1;
+    ViewRect.h := ViewPortY2 - ViewPortY1 + 1;
+
+    SDL_RenderFillRect (Renderer, @ViewRect);
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
