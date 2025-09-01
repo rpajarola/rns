@@ -891,4 +891,18 @@ Begin
     GetBkColor := CurrentBkColor;
 End;
 
+
+Procedure ClearDevice;
+Var
+    Color: TSDL_Color;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentBkColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+    SDL_RenderClear (Renderer);
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
