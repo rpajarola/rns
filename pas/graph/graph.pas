@@ -826,4 +826,45 @@ Begin
     End;
 End;
 
+
+Procedure Circle(X, Y: integer; Radius: word);
+Var
+    Color: TSDL_Color;
+    i: Integer;
+    xx, yy: Integer;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    { Bresenham circle algorithm }
+    i := 0;
+    xx := Radius;
+    yy := 0;
+
+    While xx >= yy Do
+    Begin
+        SDL_RenderDrawPoint (Renderer, X + xx, Y + yy);
+        SDL_RenderDrawPoint (Renderer, X + yy, Y + xx);
+        SDL_RenderDrawPoint (Renderer, X - yy, Y + xx);
+        SDL_RenderDrawPoint (Renderer, X - xx, Y + yy);
+        SDL_RenderDrawPoint (Renderer, X - xx, Y - yy);
+        SDL_RenderDrawPoint (Renderer, X - yy, Y - xx);
+        SDL_RenderDrawPoint (Renderer, X + yy, Y - xx);
+        SDL_RenderDrawPoint (Renderer, X + xx, Y - yy);
+
+        Inc (yy);
+        i := i + 1 + 2 * yy;
+        If i > 0 Then
+        Begin
+            Dec (xx);
+            i := i - 2 * xx;
+        End;
+    End;
+
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
