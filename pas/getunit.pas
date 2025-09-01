@@ -5,8 +5,7 @@ Unit GetUnit;
 Interface
 
 Uses
-    InitSc,
-    graph;
+    InitSc;
 
 Procedure GetLine(linenum, startx: integer);
 Procedure GetDrawBlock(inblock: stringline; linenum: integer;
@@ -39,7 +38,9 @@ Uses
     PrintUnit,
     DmemUnit,
     ComUnit,
+    RnsIni,
     NoteUnit,
+    Graph,
     PageUnit;
 
 {****************************************************************}
@@ -572,14 +573,14 @@ Begin
         If page[linenum, i + 1] <> '.' Then
         Begin
             Beat (x, IniYnow (linenum), beatlength, false);
-            If (dispgrid <> 3) OR (GetMainline (lineattr, linenum)) Then
+            If (RnsSetup.DispGrid <> 3) OR (GetMainline (lineattr, linenum)) Then
                 DistanceMark (x, IniYnow (linenum), x + dx, 0, lineattr.eint);
         End;
         For i := 1 To lineattr.beats Do
         Begin
             x := x + dx;
             Beat (x, IniYnow (linenum), beatlength, false);
-            If (dispgrid <> 3) OR (GetMainline (lineattr, linenum)) Then
+            If (RnsSetup.DispGrid <> 3) OR (GetMainline (lineattr, linenum)) Then
                 DistanceMark (x, IniYnow (linenum), x + dx, 0, lineattr.eint);
         End;
 {    GetNotePosX(x,notec,linenum,false,true);
@@ -611,7 +612,7 @@ Begin
     until (i=x) or (page[linenum,notec]<>'.') or (x>=x0+dx) or (notec=length(page[linenum]))
     or (((page[linenum,notec+1]<'0') or (page[linenum,notec+1]>'9')) and (page[linenum,notec+1]<>'.'));
 
-    if (x<x0+dx) And ((dispgrid<>3) or (GetMainline(lineattr,linenum)))Then Begin
+    if (x<x0+dx) And ((RnsSetup.DispGrid<>3) or (GetMainline(lineattr,linenum)))Then Begin
       DistanceMark(x0,IniYnow(linenum),x0+dx,x,lineattr.eint);
     End;
 }
@@ -623,10 +624,10 @@ Procedure GetDrawDistances(lineattr: lineattrtype; linenum, startx: integer);
 
 Begin
 (*   if ((linenum <= pagelength) and
-       (GetMainLine(lineattr, linenum) or (dispgrid = 2)) and
+       (GetMainLine(lineattr, linenum) or (RnsSetup.DispGrid = 2)) and
        (lineattr.eint > 1) and
        (lineattr.linestyle < 5) and
-       (dispgrid > 1)) then
+       (RnsSetup.DispGrid > 1)) then
    begin
       rdx:= IniRDxValue(lineattr);
 
@@ -746,7 +747,7 @@ Begin
         GetValidstaff := True;
         Exit;
     End;{IF lineattr.linestyle<>2}
-    If linenum < CtrlEnterOfs - 1 Then
+    If linenum < RnsSetup.CtrlEnterOfs - 1 Then
     Begin
         GetvalidStaff := False;
         Exit;

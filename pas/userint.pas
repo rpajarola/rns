@@ -97,130 +97,17 @@ End;
 Procedure UseGetSetup;
 {Liest das setup-file}
 
-Var
-    infile: text;
-    inblock: string;
-    tempattr: lineattrtype;
-
 Begin
-    FilAssignCfgFile (infile, 'setup', true);
-    {Check if file was opened successfully}
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot open setup.cfg');
-        WriteLn ('Make sure the setup file exists in the data directory.');
-        Halt (2);
-    End;
-    {Aktuelle Attribute lesen}
-    readln (infile, inblock);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read setup data from setup.cfg');
-        close (infile);
-        Halt (100);
-    End;
-    GetNoteBlock (inblock, tempattr, 1);
-    readln (infile, insmusicline);
-    actattr := tempattr;
-    readln (infile, linecount);
-    readln (infile, dispspec, dispgrid, disphidlines, dispcurs,
-        manset, charset, blankset);
-    readln (infile, prformat, prdest);
-    readln (infile, prfname);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read setup parameters from setup.cfg');
-        close (infile);
-        Halt (100);
-    End;
-    prfname := TrimLeft (prfname);
-    readln (infile, prfile);
-    readln (infile, prdevice);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read printer settings from setup.cfg');
-        close (infile);
-        Halt (100);
-    End;
-    prdevice := TrimLeft (prdevice);
-    readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound);
-    readln (infile, sndchar);
-    readln (infile, sndbeat, sndbeatlength);
-    readln (infile, sndpulse, sndpulselength);
-    readln (infile, fontfile);
-    readln (infile, sndlengthspm);{New}
-    readln (infile, ctrlenterofs);
-    readln (infile, sndwarning);
-    readln (infile, dispslash);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot read sound and display settings from setup.cfg');
-        close (infile);
-        Halt (100);
-    End;
-    If sndwarning < 1 Then
-        sndwarning := 1;
-    If ctrlenterofs = 0 Then
-        ctrlEnterOfs := 2;
-    If dispslash < 1 Then
-        dispslash := 1;
-    close (infile);
+	RnsIniLoadSetup();
+    GetNoteBlock (RnsSetup.NoteBlock, actattr, 1);
 End;
 
 {******************************************************}
 Procedure UseSaveSetup;
-{speichert das Setup-File}
-
-Var
-    infile: text;
-
+{Save settings to setup.ini}
 Begin
-    FilAssignCfgFile (infile, 'setup', false);
-    {Check if file was opened successfully}
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot create setup file');
-        WriteLn ('Check write permissions in data directory.');
-        Halt (5);
-    End;
-    {Aktuelle Attribute schreibenlesen}
-    writeln (infile, '          ',
-        actattr.beats: 5, actattr.eint: 5, actattr.resolution: 5,
-        actattr.linestyle: 5);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot write setup attributes to setup file');
-        close (infile);
-        Halt (101);
-    End;
-    writeln (infile, insmusicline);
-    writeln (infile, '          ',
-        linecount: 5);
-    writeln (infile, '          ',
-        dispspec: 3, dispgrid: 3, disphidlines: 3, dispcurs: 3,
-        manset: 3, charset: 3, blankset: 3);
-    writeln (infile, prformat: 3, prdest: 3);
-    writeln (infile, prfname);
-    writeln (infile, prfile: 3);
-    writeln (infile, prdevice: 3);
-    writeln (infile, sndlength: 5, sndlengthper: 3, sndplaybeat: 3,
-        sndplaypulse: 3, dispsound: 3);
-    writeln (infile, sndchar);
-    writeln (infile, sndbeat: 6, sndbeatlength: 6);
-    writeln (infile, sndpulse: 6, sndpulselength: 6);
-    writeln (infile, fontfile);
-    writeln (infile, sndlengthspm: 12);{New}
-    writeln (infile, ctrlenterofs: 3);
-    writeln (infile, sndwarning: 3);
-    writeln (infile, dispslash: 3);
-    If IOResult <> 0 Then
-    Begin
-        WriteLn ('Error: Cannot write setup data to setup file');
-        close (infile);
-        Halt (101);
-    End;
-    close (infile);
-
+   RnsSetup.NoteBlock := Format('          %-5d%-5d%-5d%-5d', [actattr.beats, actattr.eint, actattr.resolution, actattr.linestyle]);
+   RnsIniSaveSetup();
 End;
 
 {************************************************************}
@@ -489,7 +376,7 @@ Var
 Begin
     maustaste := 0;
 
-    Instring := ' Active Font: ' + fontfile;
+    Instring := ' Active Font: ' + RnsSetup.FontFile;
     IniExpand (instring, 57);
     IniSpacedText (substartx, substarty * 2, instring, frLow);
 
@@ -512,7 +399,7 @@ Begin
         mausx, mausy, maustaste, 3, 0, 0, False);
     If ok Then
     Begin
-        fontfile := instring;
+        RnsSetup.FontFile := instring;
         IniIniSymbols;
         Window (substartx + 1, substarty + 3, subendx - 1, subendy - 3);
         Window (1, 1, 80, 25);
@@ -801,7 +688,7 @@ Begin
                     EdiRythmEdit (ConcatPaths ([RnsConfig.DataDir, instring]), bakname, false);
                     Mauszeigen;
                     IniSwapMenuColors;
-                    st := copy (fontfile, 1, Length (fontfile) - 3) + 'par';
+		    st := ChangeFileExt(RnsSetup.FontFile, '.par');
                     IniHideCursor;
                     If NOT FilCompareFiles (st, 'symbols.par') Then
                     Begin

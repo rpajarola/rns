@@ -4,6 +4,10 @@ Unit grintunit;
 
 Interface
 
+Procedure GriBeatMenuDisp(linenum: integer);
+
+Implementation
+
 Uses
     menutyp,
     graphmenu,
@@ -15,13 +19,8 @@ Uses
     crt,
     pageunit,
     HelpUnit,
-    fileunit;
-
-Procedure GriBeatMenuDisp(linenum: integer);
-
-Implementation
-
-Uses
+    fileunit,
+    RnsIni,
     SysUtils;
 
 {******************************************************}
@@ -57,7 +56,7 @@ begin
     ChoiceVal[1].Ival:= lineattr.beats;
     ChoiceVal[2].Ival:= lineattr.eint;
     ChoiceVal[3].ival:= lineattr.resolution;
-    ChoiceVal[4].Ival:= linecount;
+    ChoiceVal[4].Ival:= RnsSetup.LineCount;
     ChoiceVal[5].tval:= lineattr.linestyle;
 
     b:=lineattr.Beats;
@@ -80,7 +79,7 @@ begin
       Tempattr.beats:= ChoiceVal[1].Ival;
       Tempattr.eint:= ChoiceVal[2].Ival;
       Tempattr.resolution:= ChoiceVal[3].Ival;
-      linecount:= ChoiceVal[4].Ival;
+      RnsSetup.LineCount:= ChoiceVal[4].Ival;
       Tempattr.linestyle:= ChoiceVal[5].tval;
       bc:=changed[1];
       ec:=changed[2];
@@ -292,15 +291,14 @@ Begin
             GetNoteBlock (inblock, lineattr, linenum);
         End Else
         Begin
-            {      insmusicline:= 'N           1 0 480 3 %.1.';}
-            inblock := insmusicline;
-            GetNoteBlock (inblock, lineattr, 0);
+            { 'N           1 0 480 3 %.1.';}
+            GetNoteBlock (RnsSetup.InsMusicLine, lineattr, 0);
         End;
 
         ChoiceVal[1].Ival := lineattr.beats;
         ChoiceVal[2].Ival := lineattr.eint;
         ChoiceVal[3].ival := lineattr.resolution;
-        ChoiceVal[4].Ival := linecount;
+        ChoiceVal[4].Ival := RnsSetup.LineCount;
         ChoiceVal[5].tval := lineattr.linestyle;
 
         For y := 1 To num_choices Do
@@ -320,7 +318,7 @@ Begin
             Tempattr.beats := ChoiceVal[1].Ival;
             Tempattr.eint := ChoiceVal[2].Ival;
             Tempattr.resolution := ChoiceVal[3].Ival;
-            linecount := ChoiceVal[4].Ival;
+            RnsSetup.LineCount := ChoiceVal[4].Ival;
             Tempattr.linestyle := ChoiceVal[5].tval;
             bc := changed[1];
             ec := changed[2];
@@ -494,7 +492,7 @@ Begin
             If page[linenum, 1] = 'N' Then
                 inblock := Page[linenum]
             Else
-                inblock := insmusicline;
+                inblock := RnsSetup.InsMusicLine;
 
             bufline := copy (inblock, 1, linemarker);
             delete (inblock, 1, LineMarker);
@@ -532,7 +530,7 @@ Begin
             If page[linenum, 1] = 'N' Then
                 Page[linenum] := bufline
             Else
-                insmusicline  := bufline;
+                RnsSetup.InsMusicLine := bufline;
         End;{For MEnd.MLine Downto MStart.MLine Do}
         linenum := a;
         If startmlinesav <> endmlinesav Then

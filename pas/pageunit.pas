@@ -5,12 +5,7 @@ Unit pageunit;
 Interface
 
 Uses
-    Graph,
-    menutyp,
-    butunit,
-    InitSc,
-    crt,
-    Mousdrv;
+    InitSc;
 
 
 Procedure PagDisplayPage(Var tempptr, startptr, lastptr: listptr);
@@ -48,6 +43,12 @@ Function paggetfreq(c: char): Integer;
 Implementation
 
 Uses
+    Graph,
+    menutyp,
+    butunit,
+    crt,
+    Mousdrv,
+    RnsIni,
     Symbols,
     GCurUnit,
     GetUnit,
@@ -223,14 +224,14 @@ Begin
         Begin
             i := imenubkcolor;
             j := imenutextcolor;
-            If KeySwap[blankset, manset, charset].H Then
+            If KeySwap[RnsSetup.BlankSet, RnsSetup.ManSet, RnsSetup.CharSet].H Then
             Begin
                 imenubkcolor := alarmbkcolor;
                 imenutextcolor := alarmcolor;
             End;
             IniSpacedText (gmaxx DIV (2 * charwidth) - 3,
                 gmaxy DIV charheight - 3,
-                KeySwap[blankset, manset, charset].S, frLow);
+                KeySwap[RnsSetup.BlankSet, RnsSetup.ManSet, RnsSetup.CharSet].S, frLow);
             imenubkcolor := i;
             imenutextcolor := j;
         End;
@@ -362,14 +363,14 @@ Begin
     actposn := i;
     If Page[linenum, 1] = 'N' Then
     Begin
-        If (charset = 2) Then
+        If (RnsSetup.CharSet = 2) Then
             If (('a' <= c) AND (c <= 'z')) Then
                 c := Char (Byte (c) - 32)
             Else {if (('a' <= c) and (c <= 'z')) then}If (('A' <= c) AND (c <= 'Z')) Then
                 c := Char (Byte (c) + 63)
             Else If ((#128 <= c) AND (c <= #153)) Then
                 c := Char (Byte (c) - 31){else if (('a' <= c) and (c <= 'z')) then}; {if charset = 2 then}
-        If blankset = 2 Then
+        If RnsSetup.BlankSet = 2 Then
             If c = ',' Then
                 c := ' '
             Else
@@ -711,13 +712,13 @@ Begin
             gmaxy DIV charheight - 1,
             ' [F1] = HELP ', fr3D);
 
-        If sndlengthspm = 0 Then
-            sndlengthspm := 80;
-        w := Round (1000 * sndlengthspm);
+        If RnsSetup.SndLengthSpm = 0 Then
+            RnsSetup.SndLengthSpm := 80;
+        w := Round (1000 * RnsSetup.SndLengthSpm);
         Str ((w / 1000): 5: 3, St);
         While Length (St) < 8 Do
             St := ' ' + st;
-        Case sndlengthper Of
+        Case RnsSetup.SndLengthPer Of
             1: st := St + '  B';
             2: st := st + '  L';
         End;
@@ -765,7 +766,7 @@ Begin
         i := framewidth;
         Framewidth := 0;
         IniSpacedText (grmaxx DIV charwidth - 22, gmaxy DIV charheight - 1,
-            ' ' + fontfile, frLow);
+            ' ' + RnsSetup.FontFile, frLow);
         Framewidth := i;
     End Else {if not printeron} If printeron Then
     Begin

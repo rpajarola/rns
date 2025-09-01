@@ -5,10 +5,7 @@ Unit utilunit;
 Interface
 
 Uses
-    initsc,
-    gcurunit,
-    menutyp,
-    graph;
+    initsc;
 
 Procedure UtiDelNoteChar(Var inblock: stringline; Var actpos: integer;
     Var stbuf: string);
@@ -35,6 +32,10 @@ Implementation
 
 Uses
     HelpUnit,
+    gcurunit,
+    menutyp,
+    graph,
+    RnsIni,
     Texts;
 
 {**************************************************************}
@@ -97,7 +98,7 @@ Begin
     Begin
         c := inblock[j];
         k := UtiComputeGroup (c, indexc);
-        If ((k > 0) AND (sympar[indexc, 2, k] = 1) AND (manset = 1)) OR
+        If ((k > 0) AND (sympar[indexc, 2, k] = 1) AND (RnsSetup.ManSet = 1)) OR
             ((k = 0) AND (c <> '\') AND (c <> #221) AND (c IN spec)) Then
             inc (i);
     End;
@@ -130,7 +131,7 @@ Begin
             { Klammern }
             a := length (inblock);
             Case c Of
-                '(', '[': If manset = 2 Then
+                '(', '[': If RnsSetup.ManSet = 2 Then
                         inblock := inblock + c{ add mode }
                     Else
                     Begin

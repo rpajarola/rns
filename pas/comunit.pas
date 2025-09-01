@@ -5,17 +5,8 @@ Unit Comunit;
 Interface
 
 Uses
-    Graph,
-    GCurUnit,
-    InitSc,
-    menutyp,
-    xcrt,
-    crt,
-    getunit,
-    dos,
-    SndUnit,
-    MousDrv,
-    ScrSave;
+    MenuTyp,
+    InitSc;
 
 Procedure ComEdArrow(Direction: Movement;
     Var linenum, actposn, actpost: integer);
@@ -71,8 +62,7 @@ Implementation
 
 Uses
     Symbols,
-    TitleUnit,
-    inout,
+ inout,   TitleUnit,
     fileunit,
     grintunit,
     pageunit,
@@ -91,6 +81,16 @@ Uses
     Texts,
     userint,
     SysUtils,
+    Graph,
+    GCurUnit,
+    xcrt,
+    crt,
+    getunit,
+    dos,
+    SndUnit,
+    MousDrv,
+    ScrSave,
+    RnsIni,
     EditUnit;
 
 Var
@@ -1009,10 +1009,10 @@ Begin
                 IniDrawSoundState;
 
                 IniSpacedText (65, 54, ' / * = LPMBPM ', frHigh);
-                Str (sndlengthspm: 4: 3, st);
+                Str (RnsSetup.SndLengthSpm: 4: 3, st);
                 While Length (st) < 8 Do
                     st := ' ' + st;
-                If SndLengthPer = 1 Then
+                If RnsSetup.SndLengthPer = 1 Then
                     st := st + '   BPM '
                 Else
                     st := st + '   LPM ';
@@ -1021,7 +1021,7 @@ Begin
                 GcuPatternRestore;
                 If page[linenum, 5] = 'H' Then
                 Begin
-                    sndchar := 'L';
+                    RnsSetup.SndChar := 'L';
                     SndPlaySound (linenum, actposn, actpost, actptr, startptr,
                         lastptr, true, playnext);
                     gcupatternrestore;

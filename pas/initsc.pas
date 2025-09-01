@@ -4,15 +4,9 @@ Unit InitSc;
 Interface
 
 Uses
-    graph,
-    menutyp,
-    inout,
-    dos,
-    xcrt,
-    crt,
     TextFont,
     loadbmp,
-    SysUtils;
+    menutyp;
 
 Const
     versionstring = '004';
@@ -235,7 +229,6 @@ Var
     Chr8Width: integer;
     Page: Array[0..PageLim] Of stringline;
     actfilename: stringline;
-    insmusicline: stringline;
     TextMargin: integer;
     SymCount: integer;
     ActNumber: integer;
@@ -246,18 +239,9 @@ Var
     SymPar: SymParamTyp;
     actattr: lineattrtype;
 
-    dispspec: byte; {2 = off, 1 = on}
-    dispgrid: byte;
-    dispsound: byte; {2 = off, 1 = play while editing}
-    disphidlines: byte;
-    dispslash: byte;
-    charset: byte; {1 = normaler set, 2 = <alt> , normal, shift}
-    blankset: byte; {1 = blank ist Leertaste, 2 = blank ist Komma}
-    manset: byte;  {1 = normal, 2 = alle Zeichen addieren}
     delln, saveln: stringline;
     delpage: boolean; {true, falls zuletzt eine Seite geloescht wurde}
     copypage: boolean;{" " " Seite kopiert}
-    linecount: integer;
     yzeropos: integer;
 
     gmaxx, gmaxy: integer;
@@ -270,7 +254,7 @@ Var
     TOP_Line, Left_Col, Valcol: integer;
     stabxmin, stabxmax, stabymin, stabymax: integer;
     sxmin, sxmax, symin, symax: integer;
-    fontfile, colorfile: string;
+    colorfile: string;
 
     searchstring: stringline;
     searchtyp: char;
@@ -293,22 +277,9 @@ Var
 
     printeron: boolean; {true, wenn postscriptfile geschrieben wird}
 
-    prformat: byte; {1 = 1 page per sheet, 2 = 2 pages per sheet}
-    prpage, prdest: integer;
-    prfname: string;
-    prfile: integer; {1 wenn auf file geschrieben wird}
-    prdevice: string;
+    prpage: integer;
 
     paused: boolean;    {pause?}
-    sndlength: integer; {l�nge pro beat}
-    sndlengthspm: real;{new}{dasselbe f�r strokes/min}
-    sndlengthper: byte; {Laenge pro beat oder Line}
-    sndplaybeat: byte; {Beat spielen oder nicht}
-    sndplaypulse: byte; {Puls spielen oder nicht}{ bit 0: ','; bit 1:' '}
-    {Beath�he, L�nge, Pulsh�he, L�nge}
-    sndbeat, sndbeatlength, sndpulse, sndpulselength: integer;
-    sndchar: char;
-    sndwarning: byte;
     PlaySuccess: Boolean;
 
     usrname, usrfirstname: stringline;
@@ -320,14 +291,12 @@ Var
     LastSound: integer;
     FrameWidth: Byte;
     FileChanged: Byte;
-    CtrlEnterOfs: Byte;
     TxtFnt: TTextFontViewer;
     pagebuf: integer;
     lastbuf: integer;
     ctrlF5: boolean;
     bufffile: boolean;
     playoptions: byte;(* () [] {} � / *)
-    soundattr: byte;
     soundchange: byte;
     Logo: pbmp16;
     SymFontSize: Byte;
@@ -408,6 +377,13 @@ Procedure IniDrawSoundState;
 Implementation
 
 Uses
+    graph,
+    inout,
+    dos,
+    xcrt,
+    crt,
+    SysUtils,
+    RnsIni,
     gcurunit,
     mousdrv,
     fileunit,
@@ -1323,11 +1299,11 @@ End;
 
 Procedure IniIniSymbols;
 Begin
-    If NOT FileExists (fontfile) Then
-        fontfile := 'perc.fnt';
-    FilCopyFile (fontfile, 'symbols.prn'); {different file extension!}
-    FilCopyFile (ChangeFileExt (fontfile, '.sym'), 'symbols.sym');
-    FilCopyFile (ChangeFileExt (fontfile, '.par'), 'symbols.par');
+    If NOT FileExists (RnsSetup.FontFile) Then
+        RnsSetup.FontFile := 'perc.fnt';
+    FilCopyFile (RnsSetup.FontFile, 'symbols.prn'); {different file extension!}
+    FilCopyFile (ChangeFileExt (RnsSetup.FontFile, '.sym'), 'symbols.sym');
+    FilCopyFile (ChangeFileExt (RnsSetup.FontFile, '.par'), 'symbols.par');
     IniGetSymbols;
 End;
 
@@ -1602,11 +1578,11 @@ Procedure IniDrawSoundState;
 
 Begin
     (* 'BPTSLMR ([{�' *)
-    DrawTriStateChar (01, 'B', SndPlayBeat);
-    DrawStateChar (02, 'P', (SndPlayPulse AND plspace) = 0);
-    DrawTriStatechar (03, 'T', (SndPlayPulse AND plPulse) + 1);
-    DrawStateChar (04, 'S', (soundattr AND saStaccato) = 0);
-    DrawStateChar (05, 'L', (soundattr AND saLegato) = 0);
+    DrawTriStateChar (01, 'B', RnsSetup.SndPlayBeat);
+    DrawStateChar (02, 'P', (RnsSetup.SndPlayPulse AND plspace) = 0);
+    DrawTriStatechar (03, 'T', (RnsSetup.SndPlayPulse AND plPulse) + 1);
+    DrawStateChar (04, 'S', (RnsSetup.SndAttr AND saStaccato) = 0);
+    DrawStateChar (05, 'L', (RnsSetup.SndAttr AND saLegato) = 0);
     DrawStateChar (06, 'M', (soundchange AND saMuffled) = 0);
     DrawStateChar (07, 'R', (soundchange AND saRhythm) = 0);
     DrawStateChar (09, '(', (PlayOptions AND poParentheses) = 0);
@@ -1624,7 +1600,6 @@ Begin
     FrameWidth := 1;
     FileChanged := 0;
     TTextFontViewer (TxtFnt).Init ('rns');
-    sndwarning := 1;
     pagebuf := -1;
     lastbuf := -1;
     playOptions := 0;

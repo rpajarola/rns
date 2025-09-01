@@ -45,6 +45,7 @@ Uses
     musikunit,
     pageunit,
     Texts,
+    RnsIni,
     mousdrv;
 
 {*********************************************************}
@@ -486,9 +487,9 @@ Var
 
 Begin
     ImeIniSwapMenu;
-    usrmenu.choiceval[1].tval := manset;
-    usrmenu.choiceval[2].tval := charset;
-    usrmenu.choiceval[3].tval := blankset + 1;
+    usrmenu.choiceval[1].tval := RnsSetup.ManSet;
+    usrmenu.choiceval[2].tval := RnsSetup.CharSet;
+    usrmenu.choiceval[3].tval := RnsSetup.BlankSet + 1;
     y := grmaxy - (usrmenu.num_choices * usrmenu.spacing +
         usrmenu.menuattr.firstline + 5) * charheight;
     hy := y DIV charheight;
@@ -496,9 +497,9 @@ Begin
     GrDisplay_Menu (hfminx, hy, usrmenu, 0);
     GrGet_Menu_Values (hfminx, hy, hfmaxy, usrmenu, c);
 
-    manset := usrmenu.choiceval[1].tval;
-    charset := usrmenu.choiceval[2].tval;
-    blankset := usrmenu.choiceval[3].tval - 1;
+    RnsSetup.ManSet := usrmenu.choiceval[1].tval;
+    RnsSetup.CharSet := usrmenu.choiceval[2].tval;
+    RnsSetup.BlankSet := usrmenu.choiceval[3].tval - 1;
     PagRefClearVal (0, y - 16, gmaxX, gmaxy);
 End;
 
@@ -509,11 +510,11 @@ Var
     c: char;
 Begin
     ImeIniVisiMenu;
-    usrmenu.choiceval[1].tval := dispspec;
-    usrmenu.choiceval[2].tval := dispgrid;
-    usrmenu.choiceval[3].tval := disphidlines;
-    usrmenu.choiceval[4].tval := dispslash;
-    usrmenu.choiceval[5].tval := dispcurs;
+    usrmenu.choiceval[1].tval := RnsSetup.DispSpec;
+    usrmenu.choiceval[2].tval := RnsSetup.DispGrid;
+    usrmenu.choiceval[3].tval := RnsSetup.DispHidlines;
+    usrmenu.choiceval[4].tval := RnsSetup.DispSlash;
+    usrmenu.choiceval[5].tval := RnsSetup.DispCurs;
     y := grmaxy - (usrmenu.num_choices * usrmenu.spacing +
         usrmenu.menuattr.firstline + 5) * charheight;
     hy := y DIV charheight;
@@ -521,11 +522,11 @@ Begin
     GrDisplay_Menu (hfminx, hy, usrmenu, 0);
     GrGet_Menu_Values (hfminx, hy, hfmaxy, usrmenu, c);
 
-    dispspec := usrmenu.choiceval[1].tval;
-    dispgrid := usrmenu.choiceval[2].tval;
-    disphidlines := usrmenu.choiceval[3].tval;
-    dispslash := usrmenu.choiceval[4].tval;
-    dispcurs := usrmenu.choiceval[5].tval;
+    RnsSetup.DispSpec := usrmenu.choiceval[1].tval;
+    RnsSetup.DispGrid := usrmenu.choiceval[2].tval;
+    RnsSetup.DispHidLines := usrmenu.choiceval[3].tval;
+    RnsSetup.DispSlash := usrmenu.choiceval[4].tval;
+    RnsSetup.DispCurs := usrmenu.choiceval[5].tval;
 End;
 
 {*****************************************************************}

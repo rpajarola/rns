@@ -441,20 +441,20 @@ Begin
                     1: ReSet (Infile);{ kein header!                          }
                     2:
                     Begin
-                        fontfile := inblock;  { nur font                              }
+                        RnsSetup.FontFile := inblock;  { nur font                              }
                         IniIniSymbols;
                     End;
                     3:
                     Begin
-                        fontfile := inblock;  { font+snd...                           }
-                        readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound);
+                        RnsSetup.FontFile := inblock;  { font+snd...                           }
+                        readln (infile, RnsSetup.SndLength, RnsSetup.SndLengthPer, RnsSetup.SndPlayBeat, RnsSetup.SndPlayPulse, RnsSetup.KbdSound);
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
                             HlpHint (HntCannotReadFile, HintWaitEsc, [actfilename]);
                             Exit;
                         End;
-                        readln (infile, sndlengthspm);
+                        readln (infile, RnsSetup.SndLengthSpm);
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
@@ -465,15 +465,15 @@ Begin
                     End;{case version of 3}
                     4:
                     Begin
-                        fontfile := inblock;  { font+snd...                           }
-                        readln (infile, sndlength, sndlengthper, sndplaybeat, sndplaypulse, dispsound, soundattr);
+                        RnsSetup.FontFile := inblock;  { font+snd...                           }
+                        readln (infile, RnsSetup.SndLength, RnsSetup.SndLengthPer, RnsSetup.SndPlayBeat, RnsSetup.SndPlayPulse, RnsSetup.KbdSound, RnsSetup.SndAttr);
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
                             HlpHint (HntCannotReadFile, HintWaitEsc, [actfilename]);
                             Exit;
                         End;
-                        readln (infile, sndlengthspm);
+                        readln (infile, RnsSetup.SndLengthSpm);
                         If IOResult <> 0 Then
                         Begin
                             close (infile);
@@ -570,22 +570,22 @@ Begin
                 HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
                 Exit;
             End;
-            WriteLn (Outfile, fontfile);
+            WriteLn (Outfile, RnsSetup.FontFile);
             If IOResult <> 0 Then
             Begin
                 close (outfile);
                 HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
                 Exit;
             End;
-            writeln (Outfile, sndlength: 5, sndlengthper: 3, sndplaybeat: 3,
-                sndplaypulse: 3, dispsound: 3, soundattr: 3);
+            writeln (Outfile, RnsSetup.SndLength: 5, RnsSetup.SndLengthPer: 3, RnsSetup.SndPlayBeat: 3,
+                RnsSetup.SndPlayPulse: 3, RnsSetup.KbdSound: 3, RnsSetup.SndAttr: 3);
             If IOResult <> 0 Then
             Begin
                 close (outfile);
                 HlpHint (HntCannotWriteFile, HintWaitEsc, [actfilename]);
                 Exit;
             End;
-            WriteLn (Outfile, sndlengthspm);
+            WriteLn (Outfile, RnsSetup.SndLengthSpm);
             If IOResult <> 0 Then
             Begin
                 close (outfile);
@@ -913,7 +913,7 @@ begin
   SduSodir(False,ok, True, instring,'*.fnt','',false,
            22,45,22,1, mausx, mausy, maustaste, 3, 0, 0,false);
   IF Ok Then Begin
-    fontfile:= instring;
+    RnsSetup.FontFile:= instring;
     IniIniSymbols;
   End;
   PagRefPage;
@@ -924,7 +924,7 @@ Begin
     s := FilFileSelect ('Select Symbolfont', '*.fnt', '');
     If s <> '' Then
     Begin
-        fontfile := s;
+        RnsSetup.FontFile := s;
         IniIniSymbols;
     End;
 End;

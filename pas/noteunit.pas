@@ -34,6 +34,7 @@ Uses
     utilunit,
     helpunit,
     crt,
+    RnsIni,
     Comunit,
     Texts;
 
@@ -138,21 +139,21 @@ Begin
         inblock := page[linenum];
         ordc := ord (c);
         arrow := false; {zeigt an ob eine Pfeiltaste gedrckt wurde}
-        If (charset = 2) Then
+        If (RnsSetup.CharSet = 2) Then
             If (c >= 'a') AND (c <= 'z') Then
                 c := char (byte (c) + 31)
             Else If (c >= 'A') AND (c <= 'Z') Then
                 c := char (byte (c) + 32)
             Else If (c >= #128) AND (c <= #153) Then
-                c := char (byte (c) - 63); {if charset = 2 then}
+                c := char (byte (c) - 63); {if RnsSetup.CharSet = 2 then}
         { ' ' '.' ',' rotieren }
-        If (blankset >= 0) AND (blankset <= 2) Then
+        If (RnsSetup.BlankSet >= 0) AND (RnsSetup.BlankSet <= 2) Then
             Case c Of
-                ' ': c := keyswap[blankset, 0];
-                ',': c := keyswap[blankset, 1];
-                '.': c := keyswap[blankset, 2];
+                ' ': c := keyswap[RnsSetup.BlankSet, 0];
+                ',': c := keyswap[RnsSetup.BlankSet, 1];
+                '.': c := keyswap[RnsSetup.BlankSet, 2];
             End;
-{    if blankset=2 then begin
+{    if RnsSetup.BlankSet=2 then begin
       if c=' ' then
         c:=','
       else if c=',' then
@@ -241,7 +242,7 @@ Begin
            Zeichen ber ein altes geschrieben wird}
                     {???}
                     If ((NOT UtiCharReady (strbuf, #255)) AND (strbuf <> '')) OR
-                        ((manset = 2) AND (c IN flamset)) Then
+                        ((RnsSetup.ManSet = 2) AND (c IN flamset)) Then
                         inbuffer := strbuf;
                     { repetitionszeichen}
                     If c = '"' Then
@@ -288,7 +289,7 @@ Begin
                     End Else
                         Insert (inbuffer, page[linenum], actpos);
                     {Spielen der Note}
-                    If dispsound = 1 Then
+                    If RnsSetup.KbdSound = 1 Then
                         If (k > 0) Then
                         Begin
                             sound (sympar[indexc, 3, k]);
@@ -406,10 +407,10 @@ Begin
         If actpos = length (page[linenum]) Then
             If (gcxcoord = InilineEnd (Page[linenum])) AND (x <> gcxcoord) Then
             Begin
-                If (((sndwarning - 1) AND 1) = 1) Then{und am Ende der Zeile?}
+                If (((RnsSetup.SndWarning - 1) AND 1) = 1) Then{und am Ende der Zeile?}
                     IniLineEndSound (0);
             End {if gcx...}Else If (gcxcoord = grmaxx) Then
-                If (((sndwarning - 1) AND 2) = 2) Then{oder am Ende des Bildschirms?}
+                If (((RnsSetup.SndWarning - 1) AND 2) = 2) Then{oder am Ende des Bildschirms?}
                     IniLineEndSound (1){am Ende des Strings?}{if gcx... else};
         If oldx > x Then
             oldx := x;

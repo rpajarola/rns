@@ -62,7 +62,7 @@ Begin
         Menu_Width := 15;
         spacing := 4;
         Choices := 'abcdefghijklm   ';
-        Title := 'Keyboard: a-m              ' + fontfile;
+        Title := 'Keyboard: a-m              ' + RnsSetup.FontFile;
 
         For i := 1 To 13 Do
         Begin
@@ -82,7 +82,7 @@ Begin
         Menu_Width := 15;
         spacing := 4;
         Choices := 'nopqrstuvwxyz   ';
-        Title := 'Keyboard: n-z             ' + fontfile;
+        Title := 'Keyboard: n-z             ' + RnsSetup.FontFile;
 
         For i := 1 To 13 Do
         Begin

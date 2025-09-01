@@ -29,6 +29,7 @@ Uses
     dos,
     crt,
     xcrt,
+    RnsIni,
     Texts,
     mousdrv;
 
@@ -114,7 +115,6 @@ Var
     Hide: string;
 
 Begin
-    soundattr := 0;
     Mausdunkel;
     symcount := 0;
     Response := No_Response;
@@ -266,16 +266,16 @@ Begin
         PagDisplayPage (actptr, startptr, lastptr);
         j := 1000;
         Hide := '';
-        If DispSpec = 2 Then
+        If RnsSetup.DispSpec = 2 Then
         Begin
             Hide := SlashSeparated (Hide, 'Nonprintings');
             j := 0;
         End;
-        If DispGrid = 1 Then
+        If RnsSetup.DispGrid = 1 Then
             Hide := SlashSeparated (Hide, 'Grids');
-        If DispHidLines = 2 Then
+        If RnsSetup.DispHidLines = 2 Then
             Hide := SlashSeparated (Hide, 'Helplines');
-        If DispCurs = 3 Then
+        If RnsSetup.DispCurs = 3 Then
         Begin
             Hide := SlashSeparated (Hide, 'Cursor');
             j := 0;
@@ -351,7 +351,7 @@ Begin
             FileChanged := 2;
         FilSavePage (1, PageLength, actptr, startptr, lastptr);
         Mausdunkel;
-        soundattr := soundattr AND NOT saRhythm;
+        RnsSetup.SndAttr := RnsSetup.SndAttr AND NOT saRhythm;
         If defpagesetup Then
         Begin
             rewrite (infile);

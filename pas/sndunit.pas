@@ -38,6 +38,7 @@ Uses
     Mousdrv,
     Specunit,
     MarkUnit,
+    RnsIni,
     StrUtils;
 
 Const
@@ -127,7 +128,7 @@ Var
     Procedure XSound(v: integer; m: real);
     Begin
 {$R-}
-        If v <> sndbeat Then
+        If v <> RnsSetup.SndBeatPitch Then
             sound (round (v * m))
         Else
             sound (v);
@@ -146,9 +147,9 @@ Begin
         delay (timemax);
         exit;
     End;
-    playlast := ((soundattr AND saLegato) <> 0);
+    playlast := ((RnsSetup.SndAttr AND saLegato) <> 0);
     totlength := 0;
-    If (soundattr AND saStaccato) <> 0 Then
+    If (RnsSetup.SndAttr AND saStaccato) <> 0 Then
     Begin
         lastsound := 0;
         playlast  := false;
@@ -238,7 +239,7 @@ Begin
     {$ENDIF}
             If wait Then
                 Delay (idel);
-            If ((soundattr AND saStaccato) <> 0) AND (NOT playlast) Then
+            If ((RnsSetup.SndAttr AND saStaccato) <> 0) AND (NOT playlast) Then
                 NoSound;
         End;
         If (idel > 1) AND (isnd > 1) AND (NOT playlast) Then
@@ -301,18 +302,16 @@ Var
 
     {******************************************************************}
 
-    Procedure SndUpdateSndlength(sndlengthspm: real;
-        Var sndlength, actlength: integer;
-        Sndlengthper: Byte);
+    Procedure SndUpdateSndLength(actlength: integer);
     Var
         St: String;
     Begin
-        sndlength := Round (60000 / sndlengthspm);
-        If sndlengthper = 1 Then
-            actlength := sndlength
+        RnsSetup.SndLength:= Round (60000 / RnsSetup.SndLengthSpm);
+        If RnsSetup.SndLengthPer = 1 Then
+            actlength := RnsSetup.SndLength
         Else
-            actlength := sndlength DIV lineattr.beats;
-        Str (sndlengthspm: 4: 3, st);
+            actlength := RnsSetup.SndLength DIV lineattr.beats;
+        Str (RnsSetup.SndLengthSpm: 4: 3, st);
         While Length (st) < 8 Do
             st := ' ' + st;
         IniSpacedText (65, gmaxy DIV charheight - 3, st, frNoFrame);
@@ -355,13 +354,13 @@ Var
                 End;
                 lastsound := itemchars[itemcount].pitch;
                 { something special }
-            End Else If ((sndplaypulse AND plPulse) <> 0) AND
-                ((blength > 0) OR (sndplaybeat = PlayBeatNever) OR
-                ((sndplaybeat = PlayBeatEmpty) AND (itemcount = 1))) Then
+            End Else If ((RnsSetup.SndPlayPulse AND plPulse) <> 0) AND
+                ((blength > 0) OR (RnsSetup.SndPlayBeat = PlayBeatNever) OR
+                ((RnsSetup.SndPlayBeat = PlayBeatEmpty) AND (itemcount = 1))) Then
             Begin
                 SndIncItemCount;
-                itemchars[itemcount].pitch := sndpulse;
-                itemchars[itemcount].length := sndpulselength;
+                itemchars[itemcount].pitch := RnsSetup.SndPulsePitch;
+                itemchars[itemcount].length := RnsSetup.SndPulseLength;
             End;
             If leaveout > 0 Then
                 dec (leaveout);
@@ -373,16 +372,16 @@ Var
                             wait := False
                         Else If auftakt Then
                         Begin
-                            If ((sndchar = 'L') AND (c <> #27)) Then
+                            If ((RnsSetup.SndChar= 'L') AND (c <> #27)) Then
                                 inblock := '';
-                        End Else If NOT ((sndchar = 'L') AND (c <> #27)) Then
+                        End Else If NOT ((RnsSetup.SndChar = 'L') AND (c <> #27)) Then
                         Begin
                             k := length (orginblock) - length (inblock);
                             For a := commusicStart (orginblock) To k Do
                                 If UtiComputeGroup (orginblock[a], indexc) <> 0 Then
                                     inblock := '';
                         End;
-                '\': If NOT ((sndchar = 'L') AND (c <> #27)) Then
+                '\': If NOT ((RnsSetup.SndChar = 'L') AND (c <> #27)) Then
                     Begin
                         k := length (orginblock) - length (inblock);
                         For a := commusicStart (orginblock) To k Do
@@ -393,12 +392,12 @@ Var
                 Begin
                     If leaveout > 0 Then
                         dec (leaveout);
-                    If (sndplaypulse AND plPulse) <> 0 Then
+                    If (RnsSetup.SndPlayPulse AND plPulse) <> 0 Then
                     Begin
                         found := true;
                         SndIncItemCount;
-                        itemchars[itemcount].pitch := sndpulse;
-                        itemchars[itemcount].length := sndpulselength;
+                        itemchars[itemcount].pitch := RnsSetup.SndPulsePitch;
+                        itemchars[itemcount].length := RnsSetup.SndPulseLength;
                     End Else
                         found := true;
                 End;
@@ -409,12 +408,12 @@ Var
                     nosound;
                     If leaveout > 0 Then
                         dec (leaveout);
-                    If (sndplaypulse AND plSpace) <> 0 Then
+                    If (RnsSetup.SndPlayPulse AND plSpace) <> 0 Then
                     Begin
                         found := true;
                         SndIncItemCount;
-                        itemchars[itemcount].pitch := sndpulse;
-                        itemchars[itemcount].length := sndpulselength;
+                        itemchars[itemcount].pitch := RnsSetup.SndPulsePitch;
+                        itemchars[itemcount].length := RnsSetup.SndPulseLength;
                         playlast := true;
                     End Else
                     Begin
@@ -458,8 +457,8 @@ Var
                         saveitemcount := itemmax;
                     For b := 1 To saveitemcount Do
                     Begin
-                        If (saveitemchars[b].pitch = sndbeat) AND
-                            ((saveitemchars[b].length = 5) OR (saveitemchars[b].length = sndbeatlength)) Then
+                        If (saveitemchars[b].pitch = RnsSetup.SndBeatPitch) AND
+                            ((saveitemchars[b].length = 5) OR (saveitemchars[b].length = RnsSetup.SndBeatLength)) Then
                             continue;
                         itemchars[itemcount + 1].pitch := saveitemchars[b].pitch;
                         itemchars[itemcount + 1].length := saveitemchars[b].length;
@@ -487,18 +486,18 @@ Var
     { check if beat should be played and add a beat sound if approp.}
     Begin
         If wait Then
-            If ((sndplaybeat <> playBeatNever)) AND
-                ((sndplaybeat = PlayBeatAlways) OR (blength > actlength) OR
+            If ((RnsSetup.SndPlayBeat <> playBeatNever)) AND
+                ((RnsSetup.SndPlayBeat = PlayBeatAlways) OR (blength > actlength) OR
                 (inblock[1] = ' ') OR (inblock[1] = ',') OR (inblock[1] = '.')) Then
             Begin
                 If (inblock[1] = '.') OR (inblock[1] = ',') OR (blength > actlength) Then
                     playlast := true;
                 SndIncItemCount;
-                itemchars[itemcount].pitch := sndbeat;
-                If playlast AND ((soundattr AND saLegato) <> 0) Then
+                itemchars[itemcount].pitch := RnsSetup.SndBeatPitch;
+                If playlast AND ((RnsSetup.SndAttr AND saLegato) <> 0) Then
                     itemchars[itemcount].length := 5
                 Else
-                    itemchars[itemcount].length := sndbeatlength;
+                    itemchars[itemcount].length := RnsSetup.SndBeatLength;
             End;
         { make sure the beat won't eat up the next ones time }
         rlength := rlength - actlength;
@@ -553,11 +552,11 @@ Begin
         slinexmin := IniFirstBeatPos (lineattr) - dx;
         slinexmax := slinexmin;
         rlinexmax := slinexmax;
-        If sndlengthper = 1 Then
-            actlength := sndlength
+        If RnsSetup.SndLengthPer = 1 Then
+            actlength := RnsSetup.SndLength
         Else
         Begin
-            actlength := sndlength DIV lineattr.beats;
+            actlength := RnsSetup.SndLength DIV lineattr.beats;
         End;
         y := IniYNow (linenum);
         While inblock[1] <> '%' Do
@@ -593,7 +592,7 @@ Begin
                             PlayNext := False;
                             If NOT temp1 Then
                             Begin
-                                SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                SndUpdateSndLength (actlength);
                                 nosound;
                                 Exit;
                             End Else
@@ -624,12 +623,12 @@ Begin
                         {spiele Linie zu Ende bevor n�chste gespielt wird}
                         IniSpacedText (12, gmaxy DIV charheight - 5,
                             'pause  ', frNoFrame);
-                        SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                SndUpdateSndLength (actlength);
                         PlayNext := True;
                         Inc (Linenum);
                         paused := False;
                         nosound;
-                        sndchar := 'P';
+                        RnsSetup.SndChar := 'P';
                         restsndchar := true;
                     End;
 
@@ -638,32 +637,32 @@ Begin
                     Begin
                         If temp1 AND (NOT Temp2) Then
                         Begin{Shft}
-                            If sndlengthspm <= 12 Then
-                                sndlengthspm := 2;
-                            If sndlengthspm > 12 Then
-                                sndlengthspm := sndlengthspm - 10;
+                            If RnsSetup.SndLengthSpm <= 12 Then
+                                RnsSetup.SndLengthSpm := 2;
+                            If RnsSetup.SndLengthSpm > 12 Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm - 10;
                         End Else
                         If NOT (Temp1 OR Temp2) Then {Normal}
-                            If sndlengthspm >= 2 Then
-                                sndlengthspm := sndlengthspm - 1;
-                        If sndlengthspm < 2 Then
-                            sndlengthspm := 2;
+                            If RnsSetup.SndLengthSpm >= 2 Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm - 1;
+                        If RnsSetup.SndLengthSpm < 2 Then
+                            RnsSetup.SndLengthSpm := 2;
                         SChanged := True;
                     End;{case inpC OF '-'}
                     '+':
                     Begin
                         If temp1 AND (NOT Temp2) Then
                         Begin{Shft}
-                            If sndlengthspm <= (SndMaxSpm - 10) Then
-                                sndlengthspm := sndlengthspm + 10;
-                            If (sndlengthspm + 10) > SndMaxSpm Then
-                                sndlengthspm := SndMaxSpm;
+                            If RnsSetup.SndLengthSpm <= (SndMaxSpm - 10) Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm + 10;
+                            If (RnsSetup.SndLengthSpm + 10) > SndMaxSpm Then
+                                RnsSetup.SndLengthSpm := SndMaxSpm;
                         End Else
                         If NOT (Temp1 OR Temp2) Then {Normal}
-                            If sndlengthspm <= SndMaxSpm - 1 Then
-                                sndlengthspm := sndlengthspm + 1;
-                        If sndlengthspm > (SndMaxSpm - 1) Then
-                            sndlengthspm := SndMaxSpm;
+                            If RnsSetup.SndLengthSpm <= SndMaxSpm - 1 Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm + 1;
+                        If RnsSetup.SndLengthSpm > (SndMaxSpm - 1) Then
+                            RnsSetup.SndLengthSpm := SndMaxSpm;
                         SChanged := True;
                     End;
                     #0:
@@ -691,21 +690,21 @@ Begin
                                 End;{if not temp1 or temp2}{#28}
                             #82:
                             Begin{Insert}
-                                sndlengthspm := Round (sndlengthspm);
+                                RnsSetup.SndLengthSpm := Round (RnsSetup.SndLengthSpm);
                                 SChanged := True;
                             End;
                             #78:{Alt +}
-                                If (Sndlengthspm * 1.33333{1.5}) <= SndMaxSpm Then
-                                    Sndlengthspm := (Sndlengthspm * 1.33333{1.5});
+                                If (RnsSetup.SndLengthSpm * 1.33333{1.5}) <= SndMaxSpm Then
+                                    RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm * 1.33333{1.5});
                             #144:{Ctrl +}
-                                If sndlengthspm <= SndMaxSpm SHR 1 Then
-                                    sndlengthspm := sndlengthspm * 2;
+                                If RnsSetup.SndLengthSpm <= SndMaxSpm SHR 1 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm * 2;
                             #74:{Alt -}
-                                If (Sndlengthspm) >= 2 * 1.33333{1.5} Then
-                                    Sndlengthspm := (Sndlengthspm / 1.33333{1.5});
+                                If (RnsSetup.SndLengthSpm) >= 2 * 1.33333{1.5} Then
+                                    RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm / 1.33333{1.5});
                             #142:{Ctrl -}
-                                If sndlengthspm >= 4 Then
-                                    sndlengthspm := sndlengthspm / 2;
+                                If RnsSetup.SndLengthSpm >= 4 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm / 2;
                         End;
                         SChanged := True;
                     End;
@@ -729,21 +728,21 @@ Begin
                             saveslinexmin := saveslinexmax;
                         End;
                     End;
-                    '/': If Sndlengthper = 1 Then
-                            If sndlengthspm / lineattr.beats >= 2 {and <=SndMaxSpm} Then
+                    '/': If RnsSetup.SndLengthPer = 1 Then
+                            If RnsSetup.SndLengthSpm / lineattr.beats >= 2 {and <=SndMaxSpm} Then
                             Begin
-                                sndlengthper := 2;
-                                sndlengthspm := (sndlengthspm / lineattr.beats);
+                                RnsSetup.SndLengthPer := 2;
+                                RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm / lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'LPM', frNoFrame);
                                 SChanged := True;
                             End Else
                                 IniSpacedText (65, gmaxy DIV charheight - 3,
                                     ' raise  ', frNoFrame);
-                    '*': If Sndlengthper <> 1 Then
-                            If sndlengthspm * lineattr.beats <= SndMaxSpm Then
+                    '*': If RnsSetup.SndLengthPer <> 1 Then
+                            If RnsSetup.SndLengthSpm * lineattr.beats <= SndMaxSpm Then
                             Begin
-                                sndlengthper := 1;
-                                sndlengthspm := (sndlengthspm * lineattr.beats);
+                                RnsSetup.SndLengthPer := 1;
+                                RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm * lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'BPM', frNoFrame);
                                 SChanged := True;
                                 {  end; }
@@ -752,7 +751,7 @@ Begin
                                     ' lower  ', frNoFrame);
                     '.':
                     Begin  {or Del, wenn NumLock off}
-                        sndlengthspm := Round (sndlengthspm);
+                        RnsSetup.SndLengthSpm := Round (RnsSetup.SndLengthSpm);
                         SChanged := True;
                     End;
                     '0':
@@ -827,30 +826,30 @@ Begin
                     End;
                     'B':
                     Begin
-                        SndPlayBeat := SndPlayBeat MOD 3 + 1;
+                        RnsSetup.SndPlayBeat := RnsSetup.SndPlayBeat MOD 3 + 1;
                         IniDrawSoundState;
                     End;
                     'T':
                     Begin
-                        If (SndPlayPulse AND plPulse) = 2 Then
-                            SndPlayPulse := SndPlayPulse AND (NOT 3)
+                        If (RnsSetup.SndPlayPulse AND plPulse) = 2 Then
+                            RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse AND (NOT 3)
                         Else
-                            Inc (SndPlayPulse);
+                            Inc (RnsSetup.SndPlayPulse);
                         IniDrawSoundState;
                     End;
                     'P':
                     Begin
-                        SndPlayPulse := SndPlayPulse XOR plspace;
+                        RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse XOR plspace;
                         IniDrawSoundState;
                     End;
                     'L':
                     Begin
-                        soundattr := (soundattr XOR saLegato) AND saLegato;
+                        RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saLegato) AND saLegato;
                         IniDrawSoundState;
                     End;
                     'S':
                     Begin
-                        soundattr := (soundattr XOR saStaccato) AND saStaccato;
+                        RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saStaccato) AND saStaccato;
                         IniDrawSoundState;
                     End;
                     'R':
@@ -894,7 +893,7 @@ Begin
                 End;{Case}
             End;{While XKeyPressed}
             If SChanged Then
-                SndUpDateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                SndUpdateSndLength (actlength);
             If IniMausEscape = #27 Then
             Begin
                 c := #27;
@@ -941,7 +940,7 @@ Begin
                                 PlayNext := False;
                                 If NOT temp1 Then
                                 Begin
-                                    SndUpDateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                    SndUpdateSndLength (actlength);
                                     nosound;
                                     Exit;
                                 End Else
@@ -963,7 +962,7 @@ Begin
                             paused := false;
                             IniSpacedText (12, gmaxy DIV charheight - 5,
                                 'pause  ', frNoFrame);
-                            SndUpDateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                            SndUpdateSndLength (actlength);
                             nosound;
                             Exit;
                         End;{Case InpC Of #13}
@@ -973,12 +972,12 @@ Begin
                             {spiele Linie zu Ende bevor n�chste gespielt wird}
                             IniSpacedText (12, gmaxy DIV charheight - 5,
                                 'pause  ', frNoFrame);
-                            SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                SndUpdateSndLength (actlength);
                             PlayNext := True;
                             Inc (Linenum);
                             paused := False;
                             nosound;
-                            sndchar := 'P';
+                            RnsSetup.SndChar := 'P';
                             restsndchar := true;
                         End;
 
@@ -987,32 +986,32 @@ Begin
                         Begin
                             If temp1 AND (NOT Temp2) Then
                             Begin{Shft}
-                                If sndlengthspm <= 12 Then
-                                    sndlengthspm := 2;
-                                If sndlengthspm > 12 Then
-                                    sndlengthspm := sndlengthspm - 10;
+                                If RnsSetup.SndLengthSpm <= 12 Then
+                                    RnsSetup.SndLengthSpm := 2;
+                                If RnsSetup.SndLengthSpm > 12 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm - 10;
                             End Else
                             If NOT (Temp1 OR Temp2) Then {Normal}
-                                If sndlengthspm >= 2 Then
-                                    sndlengthspm := sndlengthspm - 1;
-                            If sndlengthspm < 2 Then
-                                sndlengthspm := 2;
+                                If RnsSetup.SndLengthSpm >= 2 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm - 1;
+                            If RnsSetup.SndLengthSpm < 2 Then
+                                RnsSetup.SndLengthSpm := 2;
                             SChanged := True;
                         End;{case inpC OF '-'}
                         '+':
                         Begin
                             If temp1 AND (NOT Temp2) Then
                             Begin{Shft}
-                                If sndlengthspm <= (SndMaxSpm - 10) Then
-                                    sndlengthspm := sndlengthspm + 10;
-                                If (sndlengthspm + 10) > SndMaxSpm Then
-                                    sndlengthspm := SndMaxSpm;
+                                If RnsSetup.SndLengthSpm <= (SndMaxSpm - 10) Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm + 10;
+                                If (RnsSetup.SndLengthSpm + 10) > SndMaxSpm Then
+                                    RnsSetup.SndLengthSpm := SndMaxSpm;
                             End Else
                             If NOT (Temp1 OR Temp2) Then {Normal}
-                                If sndlengthspm <= SndMaxSpm - 1 Then
-                                    sndlengthspm := sndlengthspm + 1;
-                            If sndlengthspm > (SndMaxSpm - 1) Then
-                                sndlengthspm := SndMaxSpm;
+                                If RnsSetup.SndLengthSpm <= SndMaxSpm - 1 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm + 1;
+                            If RnsSetup.SndLengthSpm > (SndMaxSpm - 1) Then
+                                RnsSetup.SndLengthSpm := SndMaxSpm;
                             SChanged := True;
                         End;{case inpC OF '+'}
                         #0:
@@ -1040,25 +1039,25 @@ Begin
                                     End;{if not temp1 or temp2}{#28}
                                 #82:
                                 Begin{Insert}
-                                    sndlengthspm := Round (sndlengthspm);
-                                    If sndlengthper = 1 Then
-                                        actlength := sndlength
+                                    RnsSetup.SndLengthSpm := Round (RnsSetup.SndLengthSpm);
+                                    If RnsSetup.SndLengthPer = 1 Then
+                                        actlength := RnsSetup.SndLength
                                     Else
-                                        actlength := sndlength DIV lineattr.beats;
+                                        actlength := RnsSetup.SndLength DIV lineattr.beats;
                                     SChanged := True;
                                 End;
                                 #78:{Alt +}
-                                    If (Sndlengthspm * 1.33333{1.5}) <= SndMaxSpm Then
-                                        Sndlengthspm := (Sndlengthspm * 1.33333{1.5});
+                                    If (RnsSetup.SndLengthSpm * 1.33333{1.5}) <= SndMaxSpm Then
+                                        RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm * 1.33333{1.5});
                                 #144:{Ctrl +}
-                                    If sndlengthspm <= SndMaxSpm SHR 1 Then
-                                        sndlengthspm := sndlengthspm * 2;
+                                    If RnsSetup.SndLengthSpm <= SndMaxSpm SHR 1 Then
+                                        RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm * 2;
                                 #74:{Alt -}
-                                    If (Sndlengthspm) >= 2 * 1.33333{1.5} Then
-                                        Sndlengthspm := (Sndlengthspm / 1.33333{1.5});
+                                    If (RnsSetup.SndLengthSpm) >= 2 * 1.33333{1.5} Then
+                                        RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm / 1.33333{1.5});
                                 #142:{Ctrl -}
-                                    If sndlengthspm >= 4 Then
-                                        sndlengthspm := sndlengthspm / 2;
+                                    If RnsSetup.SndLengthSpm >= 4 Then
+                                        RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm / 2;
                                 #98:
                                 Begin{ctrl F5}
                         {$R-}
@@ -1148,30 +1147,30 @@ Begin
                                             End;
                                             'B':
                                             Begin
-                                                SndPlayBeat := SndPlayBeat MOD 3 + 1;
+                                                RnsSetup.SndPlayBeat := RnsSetup.SndPlayBeat MOD 3 + 1;
                                                 IniDrawSoundState;
                                             End;
                                             'T':
                                             Begin
-                                                If (SndPlayPulse AND plPulse) = 2 Then
-                                                    SndPlayPulse := SndPlayPulse AND (NOT 3)
+                                                If (RnsSetup.SndPlayPulse AND plPulse) = 2 Then
+                                                    RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse AND (NOT 3)
                                                 Else
-                                                    Inc (SndPlayPulse);
+                                                    Inc (RnsSetup.SndPlayPulse);
                                                 IniDrawSoundState;
                                             End;
                                             'P':
                                             Begin
-                                                SndPlayPulse := SndPlayPulse XOR plspace;
+                                                RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse XOR plspace;
                                                 IniDrawSoundState;
                                             End;
                                             'L':
                                             Begin
-                                                soundattr := (soundattr XOR saLegato) AND saLegato;
+                                                RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saLegato) AND saLegato;
                                                 IniDrawSoundState;
                                             End;
                                             'S':
                                             Begin
-                                                soundattr := (soundattr XOR saStaccato) AND saStaccato;
+                                                RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saStaccato) AND saStaccato;
                                                 IniDrawSoundState;
                                             End;
                                             'R':
@@ -1227,21 +1226,21 @@ Begin
                             End;{Case XReadKey OF}
                             SChanged := True;
                         End;{case inpC OF #0}
-                        '/': If Sndlengthper = 1 Then
-                                If sndlengthspm / lineattr.beats >= 2 {and <=SndMaxSpm} Then
+                        '/': If RnsSetup.SndLengthPer = 1 Then
+                                If RnsSetup.SndLengthSpm / lineattr.beats >= 2 {and <=SndMaxSpm} Then
                                 Begin
-                                    sndlengthper := 2;
-                                    sndlengthspm := (sndlengthspm / lineattr.beats);
+                                    RnsSetup.SndLengthPer := 2;
+                                    RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm / lineattr.beats);
                                     IniSpacedText (76, gmaxy DIV charheight - 3, 'LPM', frNoFrame);
                                     SChanged := True;
                                 End Else
                                     IniSpacedText (65, gmaxy DIV charheight - 3,
                                         ' raise  ', frNoFrame);
-                        '*': If Sndlengthper <> 1 Then
-                                If sndlengthspm * lineattr.beats <= SndMaxSpm Then
+                        '*': If RnsSetup.SndLengthPer <> 1 Then
+                                If RnsSetup.SndLengthSpm * lineattr.beats <= SndMaxSpm Then
                                 Begin
-                                    sndlengthper := 1;
-                                    sndlengthspm := (sndlengthspm * lineattr.beats);
+                                    RnsSetup.SndLengthPer := 1;
+                                    RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm * lineattr.beats);
                                     IniSpacedText (76, gmaxy DIV charheight - 3, 'BPM', frNoFrame);
                                     SChanged := True;
                                 End Else
@@ -1249,11 +1248,11 @@ Begin
                                         ' lower  ', frNoFrame);
                         '.':
                         Begin  {or Del, wenn NumLock off}
-                            sndlengthspm := Round (sndlengthspm);
-                            If sndlengthper = 1 Then
-                                actlength := sndlength
+                            RnsSetup.SndLengthSpm := Round (RnsSetup.SndLengthSpm);
+                            If RnsSetup.SndLengthPer = 1 Then
+                                actlength := RnsSetup.SndLength
                             Else
-                                actlength := sndlength DIV lineattr.beats;
+                                actlength := RnsSetup.SndLength DIV lineattr.beats;
                             SChanged := True;
                         End;
                         '0':
@@ -1328,30 +1327,30 @@ Begin
                         End;
                         'B':
                         Begin
-                            SndPlayBeat := SndPlayBeat MOD 3 + 1;
+                            RnsSetup.SndPlayBeat := RnsSetup.SndPlayBeat MOD 3 + 1;
                             IniDrawSoundState;
                         End;
                         'T':
                         Begin
-                            If (SndPlayPulse AND plPulse) = 2 Then
-                                SndPlayPulse := SndPlayPulse AND (NOT 3)
+                            If (RnsSetup.SndPlayPulse AND plPulse) = 2 Then
+                                RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse AND (NOT 3)
                             Else
-                                Inc (SndPlayPulse);
+                                Inc (RnsSetup.SndPlayPulse);
                             IniDrawSoundState;
                         End;
                         'P':
                         Begin
-                            SndPlayPulse := SndPlayPulse XOR plspace;
+                            RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse XOR plspace;
                             IniDrawSoundState;
                         End;
                         'L':
                         Begin
-                            soundattr := (soundattr XOR saLegato) AND saLegato;
+                            RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saLegato) AND saLegato;
                             IniDrawSoundState;
                         End;
                         'S':
                         Begin
-                            soundattr := (soundattr XOR saStaccato) AND saStaccato;
+                            RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saStaccato) AND saStaccato;
                             IniDrawSoundState;
                         End;
                         'R':
@@ -1361,7 +1360,7 @@ Begin
                         End;
                         'M':
                         Begin
-                            soundattr := (soundattr XOR saMuffled) {and saMuffled};
+                            RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saMuffled) {and saMuffled};
                             IniDrawSoundState;
                         End;
                         '%':
@@ -1392,7 +1391,7 @@ Begin
                     End;
                     If SChanged Then
                     Begin
-                        Str (sndlengthspm: 4: 3, st);
+                        Str (RnsSetup.SndLengthSpm: 4: 3, st);
                         While Length (st) < 8 Do
                             st := ' ' + st;
                         IniSpacedText (65, gmaxy DIV charheight - 3, st, frNoFrame);
@@ -1429,7 +1428,7 @@ Begin
                             PlayNext := False;
                             If NOT temp1 Then
                             Begin
-                                SndUpDateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                SndUpdateSndLength (actlength);
                                 nosound;
                                 Exit;
                             End Else
@@ -1463,12 +1462,12 @@ Begin
                         {spiele Linie zu Ende bevor n�chste gespielt wird}
                         IniSpacedText (12, gmaxy DIV charheight - 5,
                             'pause  ', frNoFrame);
-                        SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                SndUpdateSndLength (actlength);
                         PlayNext := True;
                         Inc (Linenum);
                         paused := False;
                         nosound;
-                        sndchar := 'P';
+                        RnsSetup.SndChar := 'P';
                         restsndchar := true;
                     End;
 
@@ -1477,32 +1476,32 @@ Begin
                     Begin
                         If temp1 AND (NOT Temp2) Then
                         Begin{Shft}
-                            If sndlengthspm <= 12 Then
-                                sndlengthspm := 2;
-                            If sndlengthspm > 12 Then
-                                sndlengthspm := sndlengthspm - 10;
+                            If RnsSetup.SndLengthSpm <= 12 Then
+                                RnsSetup.SndLengthSpm := 2;
+                            If RnsSetup.SndLengthSpm > 12 Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm - 10;
                         End Else
                         If NOT (Temp1 OR Temp2) Then {Normal}
-                            If sndlengthspm >= 2 Then
-                                sndlengthspm := sndlengthspm - 1;
-                        If sndlengthspm < 2 Then
-                            sndlengthspm := 2;
+                            If RnsSetup.SndLengthSpm >= 2 Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm - 1;
+                        If RnsSetup.SndLengthSpm < 2 Then
+                            RnsSetup.SndLengthSpm := 2;
                         SChanged := True;
                     End;{case inpC OF '-'}
                     '+':
                     Begin
                         If temp1 AND (NOT Temp2) Then
                         Begin{Shft}
-                            If sndlengthspm <= (SndMaxSpm - 10) Then
-                                sndlengthspm := sndlengthspm + 10;
-                            If (sndlengthspm + 10) > SndMaxSpm Then
-                                sndlengthspm := SndMaxSpm;
+                            If RnsSetup.SndLengthSpm <= (SndMaxSpm - 10) Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm + 10;
+                            If (RnsSetup.SndLengthSpm + 10) > SndMaxSpm Then
+                                RnsSetup.SndLengthSpm := SndMaxSpm;
                         End Else
                         If NOT (Temp1 OR Temp2) Then {Normal}
-                            If sndlengthspm <= SndMaxSpm - 1 Then
-                                sndlengthspm := sndlengthspm + 1;
-                        If sndlengthspm > (SndMaxSpm - 1) Then
-                            sndlengthspm := SndMaxSpm;
+                            If RnsSetup.SndLengthSpm <= SndMaxSpm - 1 Then
+                                RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm + 1;
+                        If RnsSetup.SndLengthSpm > (SndMaxSpm - 1) Then
+                            RnsSetup.SndLengthSpm := SndMaxSpm;
                         SChanged := True;
                     End;
                     #0:
@@ -1511,25 +1510,25 @@ Begin
                         Case InpC Of
                             #82:
                             Begin{Insert}
-                                sndlengthspm := Round (sndlengthspm);
-                                If sndlengthper = 1 Then
-                                    actlength := sndlength
+                                RnsSetup.SndLengthSpm := Round (RnsSetup.SndLengthSpm);
+                                If RnsSetup.SndLengthPer = 1 Then
+                                    actlength := RnsSetup.SndLength
                                 Else
-                                    actlength := sndlength DIV lineattr.beats;
+                                    actlength := RnsSetup.SndLength DIV lineattr.beats;
                                 SChanged := True;
                             End;
                             #78:{Alt +}
-                                If (Sndlengthspm * 1.33333{1.5}) <= SndMaxSpm Then
-                                    Sndlengthspm := (Sndlengthspm * 1.33333{1.5});
+                                If (RnsSetup.SndLengthSpm * 1.33333{1.5}) <= SndMaxSpm Then
+                                    RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm * 1.33333{1.5});
                             #144:{Ctrl +}
-                                If sndlengthspm <= SndMaxSpm SHR 1 Then
-                                    sndlengthspm := sndlengthspm * 2;
+                                If RnsSetup.SndLengthSpm <= SndMaxSpm SHR 1 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm * 2;
                             #74:{Alt -}
-                                If (Sndlengthspm) >= 2 * 1.33333{1.5} Then
-                                    Sndlengthspm := (Sndlengthspm / 1.33333{1.5});
+                                If (RnsSetup.SndLengthSpm) >= 2 * 1.33333{1.5} Then
+                                    RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm / 1.33333{1.5});
                             #142:{Ctrl -}
-                                If sndlengthspm >= 4 Then
-                                    sndlengthspm := sndlengthspm / 2;
+                                If RnsSetup.SndLengthSpm >= 4 Then
+                                    RnsSetup.SndLengthSpm := RnsSetup.SndLengthSpm / 2;
                             #28:{Alt-Enter} If NOT (Temp1 OR Temp2) AND (c <> #27) Then
                                 Begin{Alt-Enter}
 {                         PagRefClearVal(0,     IniYnow(linenum)-1,
@@ -1652,21 +1651,21 @@ Begin
                                 SndDraw (saveslinexmin, Saveslinexmax, Savey, wait);
                         End;
                     End;
-                    '/': If Sndlengthper = 1 Then
-                            If sndlengthspm / lineattr.beats >= 2 {<=SndMaxSpm} Then
+                    '/': If RnsSetup.SndLengthPer = 1 Then
+                            If RnsSetup.SndLengthSpm / lineattr.beats >= 2 {<=SndMaxSpm} Then
                             Begin
-                                sndlengthper := 2;
-                                sndlengthspm := (sndlengthspm / lineattr.beats);
+                                RnsSetup.SndLengthPer := 2;
+                                RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm / lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'LPM', frNoFrame);
                                 SChanged := True;
                             End Else
                                 IniSpacedText (65, gmaxy DIV charheight - 3,
                                     ' raise  ', frNoFrame);
-                    '*': If Sndlengthper <> 1 Then
-                            If sndlengthspm * lineattr.beats <= SndMaxSpm Then
+                    '*': If RnsSetup.SndLengthPer <> 1 Then
+                            If RnsSetup.SndLengthSpm * lineattr.beats <= SndMaxSpm Then
                             Begin
-                                sndlengthper := 1;
-                                sndlengthspm := (sndlengthspm * lineattr.beats);
+                                RnsSetup.SndLengthPer := 1;
+                                RnsSetup.SndLengthSpm := (RnsSetup.SndLengthSpm * lineattr.beats);
                                 IniSpacedText (76, gmaxy DIV charheight - 3, 'BPM', frNoFrame);
                                 SChanged := True;
                             End Else
@@ -1674,35 +1673,35 @@ Begin
                                     ' lower  ', frNoFrame);
                     '.':
                     Begin  {or Del, wenn Numlock off}
-                        sndlengthspm := Round (sndlengthspm);
+                        RnsSetup.SndLengthSpm := Round (RnsSetup.SndLengthSpm);
                         SChanged := True;
                     End;
                     'B':
                     Begin
-                        SndPlayBeat := SndPlayBeat MOD 3 + 1;
+                        RnsSetup.SndPlayBeat := RnsSetup.SndPlayBeat MOD 3 + 1;
                         IniDrawSoundState;
                     End;
                     'T':
                     Begin
-                        If (SndPlayPulse AND plPulse) = 2 Then
-                            SndPlayPulse := SndPlayPulse AND (NOT 3)
+                        If (RnsSetup.SndPlayPulse AND plPulse) = 2 Then
+                            RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse AND (NOT 3)
                         Else
-                            Inc (SndPlayPulse);
+                            Inc (RnsSetup.SndPlayPulse);
                         IniDrawSoundState;
                     End;
                     'P':
                     Begin
-                        SndPlayPulse := SndPlayPulse XOR plspace;
+                        RnsSetup.SndPlayPulse := RnsSetup.SndPlayPulse XOR plspace;
                         IniDrawSoundState;
                     End;
                     'L':
                     Begin
-                        soundattr := (soundattr XOR saLegato) AND saLegato;
+                        RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saLegato) AND saLegato;
                         IniDrawSoundState;
                     End;
                     'S':
                     Begin
-                        soundattr := (soundattr XOR saStaccato) AND saStaccato;
+                        RnsSetup.SndAttr := (RnsSetup.SndAttr XOR saStaccato) AND saStaccato;
                         IniDrawSoundState;
                     End;
                     'R':
@@ -1711,7 +1710,7 @@ Begin
                         IniDrawSoundState;
                     End;  {*schliesst so die andern nicht aus}
 (*             'I' :begin
-                 soundattr:=(soundattr xor saIncipit) and saIncipit;
+                 RnsSetup.SndAttr:=(RnsSetup.SndAttr xor saIncipit) and saIncipit;
                end;      *)
                     'M':
                     Begin
@@ -1756,12 +1755,12 @@ Begin
                     SaveSlinexmax := slinexmin;
             End;
             If SChanged Then
-                SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                                SndUpdateSndLength (actlength);
             If IniMausEscape = #27 Then
             Begin
                 c := #27;
                 PlayNext := False;
-                SndUpdateSndLength (sndlengthspm, sndlength, actlength, sndlengthper);
+                SndUpdateSndLength (actlength);
                 nosound;
                 Exit;
             End;
@@ -1769,8 +1768,8 @@ Begin
             Begin
                 { save current sound for legato }
                 If (itemcount <> 0) AND (NOT repeatchar) Then
-                    If ((itemcount > 1) OR (itemchars[1].pitch <> sndbeat) OR
-                        ((itemchars[1].length <> 5) AND (itemchars[1].length <> sndbeatlength))) Then
+                    If ((itemcount > 1) OR (itemchars[1].pitch <> RnsSetup.SndBeatPitch) OR
+                        ((itemchars[1].length <> 5) AND (itemchars[1].length <> RnsSetup.SndBeatLength))) Then
                     Begin
                         saveitemcount := itemcount;
                         saveitemchars := itemchars;
@@ -1788,8 +1787,8 @@ Begin
                rtime:=rtime+(actlength/IniNextNumber(inblock));
              end else begin
                if (inblock[1]='.')or((inblock[1]=',')and
-               ( ((SndPlayPulse and plpulse)=plPulseNever) or
-                (((SndPlayPulse and plpulse)=plPulseNoLeg)And((soundattr and saLegato)<>0))))then
+               ( ((RnsSetup.SndPlayPulse and plpulse)=plPulseNever) or
+                (((RnsSetup.SndPlayPulse and plpulse)=plPulseNoLeg)And((RnsSetup.SndAttr and saLegato)<>0))))then
                  delete(inblock,1,1)
                else
                  ok:=true;
@@ -1822,7 +1821,7 @@ Begin
     End Else
     Begin {if inblock[1] = 'N' then}
         playnext := false;
-        If Sndchar = 'L' Then
+        If RnsSetup.SndChar = 'L' Then
         Begin
             c := #27;
             playnext := true;
@@ -1830,7 +1829,7 @@ Begin
     End;
     NoSound;
     If restsndchar Then
-        sndchar := savesndchar;
+        RnsSetup.SndChar := savesndchar;
 End;
 
 {******************************************************************}
@@ -1842,18 +1841,18 @@ Var
 
 Begin
     ImeInitSndOptionsMenu;
-    If sndlengthspm = 0 Then
-        sndlengthspm := 60000 / sndlength;{New}
-    UsrMenu.ChoiceVal[1].rval := sndlengthspm;{New}
-    UsrMenu.ChoiceVal[2].Tval := sndlengthper;
-    UsrMenu.ChoiceVal[3].Tval := sndplaybeat;
-    UsrMenu.ChoiceVal[4].Tval := sndplaypulse + 1;
-    UsrMenu.ChoiceVal[5].ival := sndbeat;
-    UsrMenu.ChoiceVal[6].ival := sndbeatlength;
-    UsrMenu.ChoiceVal[7].ival := sndpulse;
-    UsrMenu.ChoiceVal[8].ival := sndpulselength;
-    UsrMenu.ChoiceVal[9].tval := dispsound;
-    UsrMenu.ChoiceVal[10].tval := sndwarning;
+    If RnsSetup.SndLengthSpm = 0 Then
+        RnsSetup.SndLengthSpm := 60000 / RnsSetup.SndLength;{New}
+    UsrMenu.ChoiceVal[1].rval := RnsSetup.SndLengthSpm;{New}
+    UsrMenu.ChoiceVal[2].Tval := RnsSetup.SndLengthPer;
+    UsrMenu.ChoiceVal[3].Tval := RnsSetup.SndPlayBeat;
+    UsrMenu.ChoiceVal[4].Tval := RnsSetup.SndPlayPulse + 1;
+    UsrMenu.ChoiceVal[5].ival := RnsSetup.SndBeatPitch;
+    UsrMenu.ChoiceVal[6].ival := RnsSetup.SndBeatLength;
+    UsrMenu.ChoiceVal[7].ival := RnsSetup.SndPulsePitch;
+    UsrMenu.ChoiceVal[8].ival := RnsSetup.SndPulseLength;
+    UsrMenu.ChoiceVal[9].tval := RnsSetup.KbdSound;
+    UsrMenu.ChoiceVal[10].tval := RnsSetup.SndWarning;
     y := grmaxy - (usrmenu.num_choices * usrmenu.spacing +
         usrmenu.menuattr.firstline + 6) * charheight;
     MausDunkel;
@@ -1863,17 +1862,17 @@ Begin
     GrDisplay_Menu (hfminx, hy, usrmenu, 0);
     MausZeigen;
     GrGet_Menu_Values (hfminx, hy, hfmaxy, UsrMenu, c);
-    sndlength := Round (60000 / UsrMenu.ChoiceVal[1].rval);{New}
-    sndlengthspm := UsrMenu.ChoiceVal[1].rval;{New}
-    sndlengthper := UsrMenu.ChoiceVal[2].tval;
-    sndplaybeat := UsrMenu.ChoiceVal[3].tval;
-    sndplaypulse := UsrMenu.ChoiceVal[4].tval - 1;
-    sndbeat := UsrMenu.ChoiceVal[5].ival;
-    sndbeatlength := UsrMenu.ChoiceVal[6].ival;
-    sndpulse := UsrMenu.ChoiceVal[7].ival;
-    sndpulselength := UsrMenu.ChoiceVal[8].ival;
-    dispsound := UsrMenu.ChoiceVal[9].tval;
-    sndwarning := UsrMenu.ChoiceVal[10].tval;
+    RnsSetup.SndLength := Round (60000 / UsrMenu.ChoiceVal[1].rval);{New}
+    RnsSetup.SndLengthSpm := UsrMenu.ChoiceVal[1].rval;{New}
+    RnsSetup.SndLengthPer := UsrMenu.ChoiceVal[2].tval;
+    RnsSetup.SndPlayBeat := UsrMenu.ChoiceVal[3].tval;
+    RnsSetup.SndPlayPulse := UsrMenu.ChoiceVal[4].tval - 1;
+    RnsSetup.SndBeatPitch := UsrMenu.ChoiceVal[5].ival;
+    RnsSetup.SndBeatLength := UsrMenu.ChoiceVal[6].ival;
+    RnsSetup.SndPulsePitch := UsrMenu.ChoiceVal[7].ival;
+    RnsSetup.SndPulseLength := UsrMenu.ChoiceVal[8].ival;
+    RnsSetup.KbdSound := UsrMenu.ChoiceVal[9].tval;
+    RnsSetup.SndWarning := UsrMenu.ChoiceVal[10].tval;
 End;
 
 {******************************************************************}
@@ -1915,7 +1914,7 @@ Begin
         Else
         If c >= 'A' Then
         Begin
-            sndchar := c;
+            RnsSetup.SndChar := c;
             c := chr (27);
             PagRefreshPage (refxmin, refymin, refxmax, refymax);
             IniRefInit;
@@ -1940,10 +1939,10 @@ Begin
             IniSpacedText (65, gmaxy DIV charheight - 1, ' . = round -PM ', frHigh);
 
 
-            Str (sndlengthspm: 4: 3, st);
+            Str (RnsSetup.SndLengthSpm: 4: 3, st);
             While Length (st) < 8 Do
                 st := ' ' + st;
-            If SndLengthPer = 1 Then
+            If RnsSetup.SndLengthPer = 1 Then
                 st := st + '   BPM '
             Else
                 st := st + '   LPM ';
@@ -2000,11 +1999,11 @@ Var
 
 Begin
     PlaySuccess := False;
-    savesndchar := sndchar;
+    savesndchar := RnsSetup.SndChar;
     savelinenum := linenum;
     If NOT Menu Then
-        sndchar := 'L';
-    If sndchar <> 'F' Then
+        RnsSetup.SndChar := 'L';
+    If RnsSetup.SndChar <> 'F' Then
     Begin
         linenum := 0;
         While (page[linenum, 1] <> 'N') AND (linenum <> pagelength + 1) Do
@@ -2012,7 +2011,7 @@ Begin
         If linenum >= pagelength Then
             If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then
             Begin
-                sndchar := 'B';
+                RnsSetup.SndChar := 'B';
                 filbufclear;
                 MarMarkToBuffer (actptr, startptr, lastptr);
             End Else
@@ -2021,16 +2020,16 @@ Begin
                 c := #27;
                 playnext := False;
                 linenum := savelinenum;
-                sndchar := savesndchar;
+                RnsSetup.SndChar := savesndchar;
                 nosound;
                 Exit;
             End;
         linenum := savelinenum;
-    End;{if sndchar<>'F'}
+    End;{if RnsSetup.SndChar<>'F'}
     actcolor := lcolor;
     If Menu Then
         If page[linenum] <> 'N' Then
-            If sndchar <> 'F' Then
+            If RnsSetup.SndChar <> 'F' Then
             Begin
                 While (page[linenum, 1] <> 'N') AND (linenum <> pagelength + 1) Do
                     inc (linenum);
@@ -2044,20 +2043,20 @@ Begin
                         exit;
                     End;{if linenum=1}
                 End;{if page[linenum]<>'N'}
-            End{if sndchar<>'F'}{if page[linenum]<>'N'};{if Menu}
-    If (NOT Menu) AND (sndchar <> 'F') Then
+            End{if RnsSetup.SndChar<>'F'}{if page[linenum]<>'N'};{if Menu}
+    If (NOT Menu) AND (RnsSetup.SndChar <> 'F') Then
     Begin
-        sndchar := 'L';
+        RnsSetup.SndChar := 'L';
         If (Page[Linenum, 1] <> 'N') Then
-            sndchar := 'P';
+            RnsSetup.SndChar := 'P';
         If (mstart.mpag <> -1) AND (mend.mpag <> -1) Then
         Begin
-            sndchar := 'B';
+            RnsSetup.SndChar := 'B';
             filbufclear;
             MarMarkToBuffer (actptr, startptr, lastptr);
         End;
-    End;{if (not Menu) and (sndchar<>'F')}
-    Case sndchar Of
+    End;{if (not Menu) and (RnsSetup.SndChar<>'F')}
+    Case RnsSetup.SndChar Of
         'L':
         Begin
             While c <> #27 Do
@@ -2215,7 +2214,7 @@ Begin
     While xKeyPressed Do
         xReadKey (temp1, temp2);
     PagUnmark;
-    sndchar := savesndchar;
+    RnsSetup.SndChar := savesndchar;
     linenum := savelinenum;
     If NOT PlaySuccess Then
         playNext := False;

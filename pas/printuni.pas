@@ -5,12 +5,7 @@ Unit printunit;
 Interface
 
 Uses
-    initsc,
-    crt,
-    DOS,
-    HelpUnit,
-    Texts,
-    SysUtils;
+    initsc;
 
 {Hier werden Raender von 2 File-Seiten auf A4 definiert:}
 {  0.0 Punkte = unterer Blattrand des amerik.Formats!?}
@@ -72,6 +67,12 @@ Procedure PriDrawFrame(x0, y0, x1, y1: integer);
 Implementation
 
 Uses
+    crt,
+    DOS,
+    HelpUnit,
+    Texts,
+    SysUtils,
+    RnsIni,
     pageunit;
 
 
@@ -657,7 +658,7 @@ Begin
         writeln (psfile, '/Helvetica-Bold findfont 12 scalefont setfont');
     PagRefreshPage (0, 0, gmaxx, gmaxy);          { und los geht die Pixlerei }
 
-    If ((prpage MOD prformat) = 0) Then
+    If ((prpage MOD RnsSetup.PrFormat) = 0) Then
     Begin    { Seite fertig?             }
         inblock := 'showpage';                      { Seite anzeigen            }
         PriString (inblock);
@@ -676,17 +677,14 @@ Function PriPostscriptinit: Boolean;
 Var
     inblock, strbuf: stringline;
     infile: text;
-    filename: string;
 Begin
     PriPostscriptinit := False; { Default to failure }
-    If prfile = 1 Then
+    If RnsSetup.PrFile = 1 Then
     Begin                      { PS-File oeffnen            }
-        Assign (psfile, ConcatPaths ([psdir, prfname]));
-        filename := FExpand (ConcatPaths ([psdir, prfname]));
+        Assign (psfile, ConcatPaths ([psdir, RnsSetup.PrfName]));
     End Else
     Begin
         Assign (psfile, 'psfile');
-        filename := FExpand ('psfile');
     End;
     rewrite (psfile);
     If IOResult <> 0 Then
@@ -698,7 +696,7 @@ Begin
     inblock := '%%BoundingBox:';                   { Boundingbox schreiben     }
     Str (cxmin: 8: 2, strbuf);
     inblock := inblock + strbuf;
-    If prformat = 1 Then
+    If RnsSetup.PrFormat = 1 Then
     Begin
         Str (cymintop: 8: 2, strbuf);
         inblock := inblock + strbuf;
@@ -781,7 +779,7 @@ Var
     infile, lst: text;
 Begin
     PriPostscriptComplete := False; { Default to failure }
-    If ((prformat = 2) AND ((prpage MOD prformat) = 0)) Then
+    If ((RnsSetup.PrFormat = 2) AND ((prpage MOD RnsSetup.PrFormat) = 0)) Then
     Begin
         PriSetTopMargins;
         inblock := 'showpage';
@@ -790,9 +788,9 @@ Begin
     close (psfile);
     IniIniColors;
     printeron := false;
-    If prfile = 0 Then
+    If RnsSetup.PrFile = 0 Then
     Begin
-        assign (lst, prdevice);
+        assign (lst, RnsSetup.PrDevice);
         assign (infile, 'psfile');
         reset (infile);
         If IOResult <> 0 Then
@@ -804,7 +802,7 @@ Begin
         If IOResult <> 0 Then
         Begin
             close (infile);
-            HlpHint (HntPrinterError, HintWaitEsc, [prdevice]);
+            HlpHint (HntPrinterError, HintWaitEsc, [RnsSetup.PrDevice]);
             exit;
         End;
         While NOT eof (infile) Do
@@ -822,13 +820,13 @@ Begin
             Begin
                 close (infile);
                 close (lst);
-                HlpHint (HntPrinterError, HintWaitEsc, [prdevice]);
+                HlpHint (HntPrinterError, HintWaitEsc, [RnsSetup.PrDevice]);
                 exit;
             End;
         End;
         Close (Lst);
         Close (infile);
-        HlpHint (HntPrintFinished, HintWaitEsc, [prdevice]);
+        HlpHint (HntPrintFinished, HintWaitEsc, [RnsSetup.PrDevice]);
     End Else
         HlpHint (HntPrintToFileFinished, HintWaitEsc, ['psfile']);
     PriPostscriptComplete := True; { Success }

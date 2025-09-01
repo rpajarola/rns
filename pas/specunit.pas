@@ -51,7 +51,6 @@ Implementation
 Uses
     GCurUnit,
     Symbols,
-    RnsIni,
     Graph,
     menutyp,
     Imenuunit,
@@ -72,6 +71,7 @@ Uses
     sp2unit,
     helpunit,
     Texts,
+    RnsIni,
     NoteUnit;
 
 Var
@@ -696,15 +696,15 @@ Begin
     SpeLastFilled (i);
     If GetValidStaff (linenum) Then
     Begin
-        inblock := insmusicline;
+        inblock := RnsSetup.InsMusicLine;
         GetNoteAttributes (inblock, lineattr);
         If lineattr.linestyle = 2 Then
         Begin
             If ((SpeSpaceInPage (1)) AND (linenum <= pagelength)) Then
             Begin
-                actposn := length (insmusicline);
+                actposn := length (RnsSetup.InsMusicLine);
                 inserted := true;
-                SpeLineInsert (linenum, insmusicline);
+                SpeLineInsert (linenum, RnsSetup.InsMusicLine);
             End Else
             Begin
                 HlpHint (HntNotEnoughSpace, HintWaitEsc, []);
@@ -712,13 +712,13 @@ Begin
             End;
         End Else
         Begin
-            If ((SpeSpaceInPage (linecount)) AND ((linenum + linecount - 1) <= pagelength)) Then
+            If ((SpeSpaceInPage (RnsSetup.LineCount)) AND ((linenum + RnsSetup.LineCount - 1) <= pagelength)) Then
             Begin
                 {Notenlinie ins Page-Array schreiben}
-                actposn := length (insmusicline);
+                actposn := length (RnsSetup.InsMusicLine);
                 inserted := true;
-                For i := 1 To linecount Do
-                    SpeLineInsert (linenum + i - 1, insmusicline);
+                For i := 1 To RnsSetup.LineCount Do
+                    SpeLineInsert (linenum + i - 1, RnsSetup.InsMusicLine);
             End Else
             Begin
                 HlpHint (HntNotEnoughSpace, HintWaitEsc, []);

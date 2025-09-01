@@ -5,11 +5,7 @@ Unit textunit;
 Interface
 
 Uses
-    initsc,
-    gcurunit,
-    symbols,
-    graph,
-    Pageunit;
+    initsc;
 
 Procedure TexDelChar(linenum: integer; Var actpos: integer);
 Procedure TexInsChar(linenum, actpos: integer);
@@ -33,6 +29,11 @@ Procedure TexSetText(Linenum: Integer; S: String);
 Implementation
 
 Uses
+    gcurunit,
+    symbols,
+    graph,
+    Pageunit,
+    RnsIni,
     getunit,
     printunit,
     SysUtils,
@@ -169,7 +170,7 @@ Begin
         SetColor (5);
         MainLine (IniLeftMargin, IniYnow (linenum) + 2,
             GetMaxX - GcuRightMargin + drightmargin, hlwidth);
-        If dispspec = 1 Then
+        If RnsSetup.DispSpec = 1 Then
         Begin
             SetColor (speccolor);
             line (x + 2, IniYnow (linenum), x + 6, IniYNow (linenum));
@@ -237,7 +238,7 @@ Begin
         End;
         SetColor (oldcolor);               {fÅr vertikale 3D-Linie}
 
-        If dispspec = 1 Then
+        If RnsSetup.DispSpec = 1 Then
         Begin
             oldcolor := GetColor;
             SetColor (speccolor);
@@ -698,7 +699,7 @@ Begin
                         End {if printit}Else
                         Begin
                             txtfnt.write (x + 1, y, inblock, getcolor, sz6x12, stnormal);
-                            If dispspec = 1 Then
+                            If RnsSetup.DispSpec = 1 Then
                             Begin
                                 j := 1;
                                 While (j <= 3) AND (inblock[j] = ' ') Do
@@ -707,7 +708,7 @@ Begin
                                     inc (x, 6);
                                     inc (j);
                                 End;{while (j<=3) and (inblock[j]=' ')}
-                            End;{if dispspec=1}
+                            End;{if RnsSetup.DispSpec=1}
                         End;{if printit else}
                     End;
                     236: {Verticale Linie ohne bis zu einer Horizontalen}TexVerticalLine (linenum, x + char2width - 1, false, false);

@@ -5,8 +5,6 @@ Unit symbols;
 Interface
 
 Uses
-    Graph,
-    GcurUnit,
     InitSc;
 
 Const
@@ -57,13 +55,16 @@ Uses
     Helpunit,
     Dmemunit,
     Graphmenu,
+    Graph,
+    GcurUnit,
+    RnsIni,
     Printunit;
 
 {******************************************************************}
 Procedure SymTabSymbol(x, y: integer);
 {Zeichnen eines Tabulatorzeichens}
 Begin
-    If dispspec = 1 Then
+    If RnsSetup.DispSpec = 1 Then
     Begin
         putpixel (x + 1, y - 3, speccolor);
         putpixel (x + 2, y - 2, speccolor);
@@ -76,7 +77,7 @@ End;
 Procedure SymTabSymbolDown(x, y: integer);
 {Zeichnen eines umbgekehrten Tabulatorzeichens}
 Begin
-    If (dispspec = 1) Then
+    If (RnsSetup.DispSpec = 1) Then
     Begin
         putpixel (x + 1, y - 4, speccolor);
         putpixel (x + 2, y - 3, speccolor);
@@ -420,7 +421,7 @@ Var
     rx, rdx: real;
     i: integer;
 Begin
-    If (GridNum < 1) OR (Dispgrid = 1) Then
+    If (GridNum < 1) OR (RnsSetup.DispGrid = 1) Then
         Exit;
     iy0 := round (y0);
     y0  := y0 - 1;
@@ -542,7 +543,7 @@ Var
     oldcolor: byte;
 
 Begin
-    If disphidlines = 2 Then
+    If RnsSetup.DispHidLines = 2 Then
         Exit;
     If NOT printeron Then
     Begin
@@ -576,7 +577,7 @@ Begin
     If X > 638 Then
         Exit;
     ClearLine (x, y, x);
-    If dispspec = 1 Then
+    If RnsSetup.DispSpec = 1 Then
         PutPixel (x, y - 4, speccolor);
 End;
 
@@ -634,7 +635,7 @@ End;
 {******************************************************************}
 Procedure SymDotSlash(ix, iy: integer; x: real); {neu als: SymDotBkSlash}
 Begin
-    If dispslash = 2 Then
+    If RnsSetup.DispSlash = 2 Then
         exit;
     If PrinterOn Then
     Begin
@@ -661,7 +662,7 @@ End;
 {******************************************************************}
 Procedure SymDotSlash2(ix, iy: integer; x: real);
 Begin
-    If dispslash = 2 Then
+    If RnsSetup.DispSlash = 2 Then
         exit;
     If PrinterOn Then
     Begin

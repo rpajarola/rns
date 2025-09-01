@@ -5,12 +5,8 @@ Unit musikunit;
 Interface
 
 Uses
-    menutyp,
-    graphmenu,
-    crt,
-    gcurunit,
-    initsc,
-    graph;
+    MenuTyp,
+    InitSc;
 
 Procedure MusGetPattern(Var IN_STRING: STRINGLINE;
     X, Y: integer;
@@ -34,7 +30,12 @@ Uses
     symbols,
     noteunit,
     pageunit,
-    inout;
+    inout,
+    RnsIni,
+    graphmenu,
+    crt,
+    gcurunit,
+    graph;
 
 {****************************************************************}
 Procedure MusGetPromptedPattern(Var IN_STRING: STRINGLINE;
@@ -72,11 +73,11 @@ Var
     idummy, xfirst, linenum, actposn, actpost: integer;
     shiftp, ctrlp: boolean;
     mausx, mausy, maustaste, mp, mausmenu: word;
-    OldDispCurs: byte;
+    OldDispCurs: integer;
 Begin
     ActPost := 0;
-    OldDispCurs := DispCurs;
-    DispCurs := 1;
+    OldDispCurs := RnsSetup.DispCurs;
+    RnsSetup.DispCurs := 1;
     {Bereite das Feld vor}
     yzeropos := y + 40;
     page[0] := 'N            1   0   120 1 %.';
@@ -164,7 +165,7 @@ Begin
         Until NOT IniNumChar (in_string[actposn]);
     If in_string = '.' Then
         in_string := '';
-    DispCurs := OldDispCurs;
+    RnsSetup.DispCurs := OldDispCurs;
 End;
 
 End.

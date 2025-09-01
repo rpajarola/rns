@@ -5,10 +5,6 @@ Unit markunit;
 Interface
 
 Uses
-    graph,
-    crt,
-    dos,
-    gcurunit,
     initsc;
 
 Procedure MarkInit;
@@ -22,8 +18,13 @@ Procedure MarkInverse(lstart, lend, mstartx, mendx: integer);
 Implementation
 
 Uses
+    graph,
+    crt,
+    dos,
+    gcurunit,
     textunit,
     fileunit,
+    RnsIni,
     utilunit,
     specunit,
     pageunit,
@@ -621,7 +622,7 @@ Begin
             mstart.mxcoord + 7{6});
 
     {header und footer marken anzeigen}
-    If ((setuppage IN actedit) OR (dispspec = 1)) Then
+    If ((setuppage IN actedit) OR (RnsSetup.DispSpec = 1)) Then
     Begin
         oldcolor := GetColor;
         SetColor (speccolor);
@@ -640,7 +641,7 @@ Begin
                 IniYBottomMargin - 1,
                 IniLeftMargin{+1}, false);
         SetColor (oldcolor);
-    End; { if ((dispspec > 0) or (setuppage in actedit)) then }
+    End; { if ((RnsSetup.DispSpec > 0) or (setuppage in actedit)) then }
     SetLineStyle (0, 1, 1);
 End;
 

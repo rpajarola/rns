@@ -23,6 +23,7 @@ Uses
     crt,
     helpunit,
     DOS,
+    RnsIni,
     mousdrv,
     grinout,
     fileunit;
@@ -41,21 +42,21 @@ Begin
     If m Then
         mausdunkel;
     ImeInitPrOptionsMenu;
-    UsrMenu.ChoiceVal[1].Tval := prformat;
-    UsrMenu.ChoiceVal[2].Tval := prdest;
-    UsrMenu.ChoiceVal[3].Sval := prfname;
+    UsrMenu.ChoiceVal[1].Tval := RnsSetup.PrFormat;
+    UsrMenu.ChoiceVal[2].Tval := RnsSetup.PrDest;
+    UsrMenu.ChoiceVal[3].Sval := RnsSetup.PrfName;
     y := grmaxy - (usrmenu.num_choices * usrmenu.spacing + usrmenu.menuattr.firstline + 6) * charheight;
     hy := y DIV charheight;
     GrDisplay_Frame (grminx, y, grmaxx, grmaxy, true, true);
     GrDisplay_Menu (hfminx, hy, usrmenu, 0);
     GrGet_Menu_Values (hfminx, hy, hfmaxy, UsrMenu, c);
-    prformat := UsrMenu.ChoiceVal[1].tval;
-    prdest := UsrMenu.ChoiceVal[2].tval;
-    If (pos (':', Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1]) = 0) Then
-        prfile := 1
+    RnsSetup.PrFormat := UsrMenu.ChoiceVal[1].tval;
+    RnsSetup.PrDest := UsrMenu.ChoiceVal[2].tval;
+    If (pos (':', Togglestring[RnsSetup.PrDest + UsrMenu.ChoiceVal[2].tvalmin - 1]) = 0) Then
+        RnsSetup.PrFile := 1
     Else
-        prfile := 0;
-    If prfile = 1 Then
+        RnsSetup.PrFile := 0;
+    If RnsSetup.PrFile = 1 Then
     Begin
         sval := TrimLeft (UsrMenu.ChoiceVal[3].sval);
         UsrMenu.ChoiceVal[3].sval := sval;
@@ -64,9 +65,9 @@ Begin
         HlpTestFileName (ConcatPaths ([psdir, UsrMenu.ChoiceVal[3].sval]),
             ok, grminx, grmaxx, y);
         If ok Then
-            prfname := UsrMenu.ChoiceVal[3].sval;
+            RnsSetup.PrfName := UsrMenu.ChoiceVal[3].sval;
     End Else
-        prdevice := Copy (Togglestring[prdest + UsrMenu.ChoiceVal[2].tvalmin - 1], 1, 4);
+        RnsSetup.PrDevice := Copy (Togglestring[RnsSetup.PrDest + UsrMenu.ChoiceVal[2].tvalmin - 1], 1, 4);
     If m Then
         mauszeigen;
 End;
@@ -146,8 +147,8 @@ Var
     inblock: stringline;
     n: integer;
 Begin
-    If (NOT (prfile = 1)) OR (NOT FileExists (ConcatPaths ([psdir, prfname]))) OR
-        HlpAreYouSure ('File: "' + ConcatPaths ([psdir, prfname]) + '" already exists, overwrite?', hpEdit) Then
+    If (NOT (RnsSetup.PrFile = 1)) OR (NOT FileExists (ConcatPaths ([psdir, RnsSetup.PrfName]))) OR
+        HlpAreYouSure ('File: "' + ConcatPaths ([psdir, RnsSetup.PrfName]) + '" already exists, overwrite?', hpEdit) Then
     Begin
         n := filnumpages (actptr, startptr, lastptr);
         PriPostscriptinit;
@@ -161,14 +162,14 @@ Begin
             If pagecount = 0 Then
             Begin
                 { auf n„chste seite gehen }
-                If ((prpage MOD prformat) <> 0) Then
+                If ((prpage MOD RnsSetup.PrFormat) <> 0) Then
                 Begin{ Seite nicht sowieso fertig? }
                     inblock := 'showpage';                 { Seite anzeigen              }
                     PriString (inblock);
                     PriSetTopMargins;                     { n„xtes Mal: obere H„lfte    }
                     Repeat
                         inc (prpage);
-                    Until (prpage MOD prformat) = 0;
+                    Until (prpage MOD RnsSetup.PrFormat) = 0;
                 End;
             End Else
             { seite "laden" ... }
@@ -231,8 +232,8 @@ Begin
                     Printpages (linenum, actposn, actpost, actptr, startptr, lastptr, list);
                 End;
             End;
-            'P': If (NOT (prfile = 1)) OR (NOT FileExists (ConcatPaths ([psdir, prfname]))) OR
-                    (HlpAreYouSure ('File: "' + ConcatPaths ([psdir, prfname]) +
+            'P': If (NOT (RnsSetup.PrFile = 1)) OR (NOT FileExists (ConcatPaths ([psdir, RnsSetup.PrfName]))) OR
+                    (HlpAreYouSure ('File: "' + ConcatPaths ([psdir, RnsSetup.PrfName]) +
                     '" already exists, overwrite?', hpEdit)) Then
                 Begin
                     PriPostscriptinit;

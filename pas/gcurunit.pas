@@ -4,12 +4,6 @@ Unit gcurunit;
 
 Interface
 
-Uses
-    graph,
-    xcrt,
-    crt,
-    Mousdrv;
-
 Const
     CursorXSize = 9;
     CursorYSize = 13;
@@ -24,8 +18,6 @@ Type
 Var
     PatternSave, GraphCursor: CursorArr;
     gcxcoord, gcycoord: integer;
-    dispcurs: byte; {1= display cursor, 2 = display cursor and grid
-                     3= dont display cursor}
     CurGridX: Array[1..CurGridXS] Of Word;
     CurGridY: Array[1..CurGridYS] Of word;
 
@@ -40,6 +32,11 @@ Procedure GcuPatternStore;{save pattern}
 Implementation
 
 Uses
+    graph,
+    xcrt,
+    crt,
+    Mousdrv,
+RnsIni,
     initsc;
 
 Var
@@ -110,7 +107,7 @@ Begin
         For i := imin To imax Do
             PatternSave[i - imin, j - jmin] := GetPixel (i, j);
 
-    If dispcurs = 2 Then
+    If RnsSetup.DispCurs = 2 Then
     Begin
         For i := 1 To curgridxs Do
             If Page[gcycoord DIV linethick - 1, 1] <> 'N' Then
@@ -131,7 +128,7 @@ Begin
     For j := jmin To jmax Do
         For i := imin To imax Do
             PatternSave[i - imin, j - jmin] := bkcolor;
-    If dispcurs = 2 Then
+    If RnsSetup.DispCurs = 2 Then
     Begin
         For i := 1 To curgridxs Do
             curgridx[i] := bkcolor;
@@ -156,7 +153,7 @@ Begin
     For j := jmin To jmax Do
         For i := imin To imax Do
             PutPixel (i, j, PatternSave[i - imin, j - jmin]);
-    If dispcurs = 2 Then
+    If RnsSetup.DispCurs = 2 Then
     Begin
         For i := 1 To curgridxs Do
             If Page[gcycoord DIV linethick - 1, 1] <> 'N' Then
@@ -181,14 +178,16 @@ Begin
     If NOT CursorisOn Then
         GcuPatternStore;
     CursorIsOn := True;
-    If ((NOT xKeyPressed) AND (dispcurs < 3)) Then
+    If ((NOT xKeyPressed) AND (RnsSetup.DispCurs
+ < 3)) Then
     Begin
         MinMax (imin, imax, jmin, jmax);
         For j := jmin To jmax Do
             For i := imin To imax Do
                 If (i > 1) AND (j > 1) AND (i < GetmaxX) AND (j < GetmaxY - 56) Then
                     PutPixel (i, j, GraphCursor[i - imin, jmax - j]);
-        If dispcurs = 2 Then
+        If RnsSetup.DispCurs
+   	= 2 Then
         Begin
             For i := 1 To curgridxs Do
                 If Page[gcycoord DIV linethick - 1, 1] <> 'N' Then
@@ -196,7 +195,8 @@ Begin
             For i := 1 To curgridys Do
                 PutPixel (gcxcoord, GcuGridPosY (i), gridcolor);
         End;
-    End Else If (dispcurs < 3) Then
+    End Else If (RnsSetup.DispCurs
+ < 3) Then
     Begin
         MinMax (imin, imax, jmin, jmax);
         For i := imin + 2 To imax - 2 Do
@@ -249,6 +249,5 @@ Begin
 End;
 
 Begin
-    dispcurs := 1;
     CursorIsOn := False;
 End.
