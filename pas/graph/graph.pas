@@ -745,4 +745,25 @@ Begin
     Line (CurrentX, CurrentY, CurrentX + Dx, CurrentY + Dy);
 End;
 
+
+Procedure Rectangle(x1, y1, x2, y2: integer);
+Var
+    Color: TSDL_Color;
+    Rect:  TSDL_Rect;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    Rect.x := x1;
+    Rect.y := y1;
+    Rect.w := x2 - x1 + 1;
+    Rect.h := y2 - y1 + 1;
+
+    SDL_RenderDrawRect (Renderer, @Rect);
+    SDL_RenderPresent (Renderer);
+End;
+
 End.
