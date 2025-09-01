@@ -7,8 +7,8 @@ Interface
 { The global configuration }
 Type
     TRnsConfig = Record
-        DataDir: String;        { Where to look for files }
-	PickFile: String;	{ Last file loaded }
+        DataDir: String;     { Where to look for files }
+        PickFile: String;    { Last file loaded }
         ColorFile: String;   { The color schema }
         PSDir: String;       { Where to write .ps files when printing to file }
         BufDir: String;      { scratch dir for buffers }
@@ -33,17 +33,17 @@ Type
         FontFile:  string;
 
         {Display}
-	DispSpec: integer; {Non-printing marks: 1 = show, 2 = hide}
-	DispGrid: integer; {Grids: 1 = show, 2 = hide, 3 = bottom line only}
-	DispHidLines: integer; {Helplines: 1 = show, 2 = hide}
-	DispCurs: integer; {Cursor: 1 = show, 2 = show+cross, 3 = hide}
+        DispSpec: integer; {Non-printing marks: 1 = show, 2 = hide}
+        DispGrid: integer; {Grids: 1 = show, 2 = hide, 3 = bottom line only}
+        DispHidLines: integer; {Helplines: 1 = show, 2 = hide}
+        DispCurs: integer; {Cursor: 1 = show, 2 = show+cross, 3 = hide}
         DispSlash: integer; {
 
         {Keyboard}
         ManSet: integer; {1 = normal, 2 = add all characters}
         CharSet: integer; {1 = normal, 2 = <alt>, normal, shift}
         BlankSet: integer; {1 = space is blank, 2 = space is komma}
-	KbdSound: integer; {Play Sound: 1 = play while editing, 2 = off}
+        KbdSound: integer; {Play Sound: 1 = play while editing, 2 = off}
 
         {Print}
         PrFormat: integer; {1 = 1 page per sheet, 2 = 2 pages per sheet}
@@ -56,15 +56,15 @@ Type
         SndLength: integer; {Length per beat}
         SndLengthPer: integer; {Length per beat or line}
         SndPlayBeat: integer; {Play beat sounds or not}
-	SndPlayPulse: integer; {Play pulse sounds or not: bit 0:',' bit 1:' '}
+        SndPlayPulse: integer; {Play pulse sounds or not: bit 0:',' bit 1:' '}
         SndChar: char; {?}
         SndBeatPitch: integer; {Beat sound pitch}
         SndBeatLength: integer; {Beat sound length}
         SndPulsePitch: integer; {Pulse sound pitch}
         SndPulseLength: integer; {Pulse sound length}
         SndLengthSpm: double; {Strokes Per Minute}
-	SndAttr: integer; {saXXX}
-	SndWarning: integer; {Warning sounds: 0:none, 1:end of line, 2:end of screen, 3:both}
+        SndAttr: integer; {saXXX}
+        SndWarning: integer; {Warning sounds: 0:none, 1:end of line, 2:end of screen, 3:both}
 
         {Misc}
         CtrlEnterOfs: integer;
