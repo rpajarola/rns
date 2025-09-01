@@ -1298,12 +1298,16 @@ End;
 {**************************************************************}
 
 Procedure IniIniSymbols;
+Var
+    filepath: string;
 Begin
-    If NOT FileExists (RnsSetup.FontFile) Then
+    filepath := ConcatPaths (['fonts', RnsSetup.FontFile]);
+    If NOT FileExists (filepath) Then
         RnsSetup.FontFile := 'perc.fnt';
-    FilCopyFile (RnsSetup.FontFile, 'symbols.prn'); {different file extension!}
-    FilCopyFile (ChangeFileExt (RnsSetup.FontFile, '.sym'), 'symbols.sym');
-    FilCopyFile (ChangeFileExt (RnsSetup.FontFile, '.par'), 'symbols.par');
+    filepath := ConcatPaths (['fonts', 'perc.fnt']);
+    FilCopyFile (filepath, 'symbols.prn'); {different file extension!}
+    FilCopyFile (ChangeFileExt (filepath, '.sym'), 'symbols.sym');
+    FilCopyFile (ChangeFileExt (filepath, '.par'), 'symbols.par');
     IniGetSymbols;
 End;
 
