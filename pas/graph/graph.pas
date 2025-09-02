@@ -373,6 +373,9 @@ Var
     LastArcXStart, LastArcYStart: Integer;
     LastArcXEnd, LastArcYEnd: Integer;
 
+    { Aspect ratio }
+    AspectRatioX, AspectRatioY: Word;
+
 
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
@@ -717,6 +720,8 @@ Begin
     ViewPortX2 := WindowWidth - 1;
     ViewPortY2 := WindowHeight - 1;
     ClipEnabled := False;
+    AspectRatioX := 10000;
+    AspectRatioY := 10000;
 
     { Clear screen to background color }
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
@@ -1174,6 +1179,20 @@ Begin
         End;
 
     SDL_RenderPresent (Renderer);
+End;
+
+
+Procedure GetAspectRatio(Var Xasp, Yasp: word);
+Begin
+    Xasp := AspectRatioX;
+    Yasp := AspectRatioY;
+End;
+
+
+Procedure SetAspectRatio(Xasp, Yasp: word);
+Begin
+    AspectRatioX := Xasp;
+    AspectRatioY := Yasp;
 End;
 
 
