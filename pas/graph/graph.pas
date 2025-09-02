@@ -335,7 +335,7 @@ Implementation
 
 Uses
     SDL2,
-Math;
+    Math;
 
 Var
     { SDL2 graphics state }
@@ -1086,6 +1086,67 @@ Begin
 End;
 
 
+Procedure FillEllipse(X, Y: integer; XRadius, YRadius: word);
+Var
+    Color: TSDL_Color;
+    minX, maxX, minY, maxY: Integer;
+    scanY, scanX: Integer;
+    dx, dy: Real;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    { Calculate bounding box }
+    minX := X - XRadius;
+    maxX := X + XRadius;
+    minY := Y - YRadius;
+    maxY := Y + YRadius;
+
+    { Scan-line fill the ellipse area }
+    For scanY := minY To maxY Do
+        For scanX := minX To maxX Do
+        Begin
+            { Check if point is inside ellipse using ellipse equation }
+            dx := (scanX - X) / XRadius;
+            dy := (scanY - Y) / YRadius;
+
+            If (dx * dx + dy * dy) <= 1.0 Then
+            Begin
+                Color := BGIColorToSDL (CurrentFillColor);
+                SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
+                { Apply fill pattern }
+                Case CurrentFillPattern Of
+                    EmptyFill: ; { No fill }
+                    SolidFill: SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    LineFill: If scanY MOD 3 = 0 Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    LtSlashFill: If (scanX + scanY) MOD 4 = 0 Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    SlashFill: If (scanX + scanY) MOD 3 = 0 Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    BkSlashFill: If (scanX - scanY) MOD 3 = 0 Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    LtBkSlashFill: If (scanX - scanY) MOD 4 = 0 Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    HatchFill: If (scanY MOD 3 = 0) OR ((scanX + scanY) MOD 3 = 0) Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    XHatchFill: If ((scanX + scanY) MOD 3 = 0) OR ((scanX - scanY) MOD 3 = 0) Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    InterleaveFill: If ((scanX + scanY) MOD 2 = 0) Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    WideDotFill: If (scanX MOD 4 = 0) AND (scanY MOD 4 = 0) Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    CloseDotFill: If (scanX MOD 2 = 0) AND (scanY MOD 2 = 0) Then
+                            SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                End;
+            End;
+        End;
+
+    SDL_RenderPresent (Renderer);
+End;
+
+
 Procedure PieSlice(X, Y: integer; StAngle, EndAngle, Radius: word);
 Var
     Color: TSDL_Color;
@@ -1253,17 +1314,17 @@ Begin
         Exit;
 
     Points := @PolyPoints;
-    Color := BGIColorToSDL(CurrentColor);
-    SDL_SetRenderDrawColor(Renderer, Color.r, Color.g, Color.b, Color.a);
+    Color  := BGIColorToSDL (CurrentColor);
+    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
 
     { Draw lines connecting all points }
     For i := 1 To NumPoints - 1 Do
-        SDL_RenderDrawLine(Renderer, Points^[i].X, Points^[i].Y, Points^[i + 1].X, Points^[i + 1].Y);
+        SDL_RenderDrawLine (Renderer, Points^[i].X, Points^[i].Y, Points^[i + 1].X, Points^[i + 1].Y);
 
     { Close the polygon by connecting last point to first }
-    SDL_RenderDrawLine(Renderer, Points^[NumPoints].X, Points^[NumPoints].Y, Points^[1].X, Points^[1].Y);
+    SDL_RenderDrawLine (Renderer, Points^[NumPoints].X, Points^[NumPoints].Y, Points^[1].X, Points^[1].Y);
 
-    SDL_RenderPresent(Renderer);
+    SDL_RenderPresent (Renderer);
 End;
 
 
@@ -1288,8 +1349,10 @@ Begin
     maxY := Points^[1].Y;
     For i := 1 To NumPoints Do
     Begin
-        If Points^[i].Y < minY Then minY := Points^[i].Y;
-        If Points^[i].Y > maxY Then maxY := Points^[i].Y;
+        If Points^[i].Y < minY Then
+            minY := Points^[i].Y;
+        If Points^[i].Y > maxY Then
+            maxY := Points^[i].Y;
     End;
 
     { Scan-line fill algorithm }
@@ -1301,7 +1364,8 @@ Begin
         For i := 1 To NumPoints Do
         Begin
             j := i + 1;
-            If j > NumPoints Then j := 1;
+            If j > NumPoints Then
+                j := 1;
 
             x1 := Points^[i].X;
             y1 := Points^[i].Y;
@@ -1310,13 +1374,11 @@ Begin
 
             { Check if scan line intersects this edge }
             If ((y1 <= scanY) AND (y2 > scanY)) OR ((y2 <= scanY) AND (y1 > scanY)) Then
-            Begin
                 If y1 <> y2 Then
                 Begin
-                    Inc(intersectionCount);
-                    intersections[intersectionCount] := x1 + Round((scanY - y1) * (x2 - x1) / (y2 - y1));
+                    Inc (intersectionCount);
+                    intersections[intersectionCount] := x1 + Round ((scanY - y1) * (x2 - x1) / (y2 - y1));
                 End;
-            End;
         End;
 
         { Sort intersections }
@@ -1333,12 +1395,12 @@ Begin
         i := 1;
         While i < intersectionCount Do
         Begin
-            FillRectWithPattern(intersections[i], scanY, intersections[i + 1] - 1, scanY, CurrentFillPattern, CurrentFillColor);
-            Inc(i, 2);
+            FillRectWithPattern (intersections[i], scanY, intersections[i + 1] - 1, scanY, CurrentFillPattern, CurrentFillColor);
+            Inc (i, 2);
         End;
     End;
 
-    SDL_RenderPresent(Renderer);
+    SDL_RenderPresent (Renderer);
 End;
 
 End.
