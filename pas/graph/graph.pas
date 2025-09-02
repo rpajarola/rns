@@ -368,6 +368,11 @@ Var
     { Error state }
     LastGraphResult: Integer;
 
+    { Arc coordinates tracking }
+    LastArcX, LastArcY: Integer;
+    LastArcXStart, LastArcYStart: Integer;
+    LastArcXEnd, LastArcYEnd: Integer;
+
 
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
@@ -998,6 +1003,20 @@ Begin
     If NOT GraphInitialized Then
         Exit;
 
+    { Store arc coordinates for GetArcCoords }
+    LastArcX := X;
+    LastArcY := Y;
+
+    { Calculate start point }
+    RadAngle := StAngle * Pi / 180.0;
+    LastArcXStart := X + Round (Radius * Cos (RadAngle));
+    LastArcYStart := Y - Round (Radius * Sin (RadAngle));
+
+    { Calculate end point }
+    RadAngle := EndAngle * Pi / 180.0;
+    LastArcXEnd := X + Round (Radius * Cos (RadAngle));
+    LastArcYEnd := Y - Round (Radius * Sin (RadAngle));
+
     Color := BGIColorToSDL (CurrentColor);
     SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
 
@@ -1034,6 +1053,17 @@ Begin
     End;
 
     SDL_RenderPresent (Renderer);
+End;
+
+
+Procedure GetArcCoords(Var ArcCoords: ArcCoordsType);
+Begin
+    ArcCoords.X := LastArcX;
+    ArcCoords.Y := LastArcY;
+    ArcCoords.Xstart := LastArcXStart;
+    ArcCoords.Ystart := LastArcYStart;
+    ArcCoords.Xend := LastArcXEnd;
+    ArcCoords.Yend := LastArcYEnd;
 End;
 
 
