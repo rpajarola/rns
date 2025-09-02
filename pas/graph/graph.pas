@@ -389,6 +389,8 @@ Var
     { Font system }
     LoadedFonts: Array[0..10] Of PTTF_Font;
     CurrentTTFFont: PTTF_Font;
+    UserCharSizeMultX, UserCharSizeDivX: Word;
+    UserCharSizeMultY, UserCharSizeDivY: Word;
 
 { Graphics mode table }
 Type
@@ -838,6 +840,10 @@ Begin
     { Initialize font system }
     FillChar (LoadedFonts, SizeOf (LoadedFonts), 0);
     CurrentTTFFont := nil;
+    UserCharSizeMultX := 4;
+    UserCharSizeDivX := 4;
+    UserCharSizeMultY := 6;
+    UserCharSizeDivY := 6;
 
     { Clear screen to background color }
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
@@ -2029,6 +2035,10 @@ Begin
     CurrentHorizJust := LeftText;
     CurrentVertJust := TopText;
     CurrentWriteMode := CopyPut;
+    UserCharSizeMultX := 4;
+    UserCharSizeDivX := 4;
+    UserCharSizeMultY := 6;
+    UserCharSizeDivY := 6;
 
     { Reset viewport to full screen }
     ViewPortX1 := 0;
@@ -2202,6 +2212,15 @@ End;
 Procedure OutText(TextString: string);
 Begin
     OutTextXY (CurrentX, CurrentY, TextString);
+End;
+
+
+Procedure SetUserCharSize(MultX, DivX, MultY, DivY: word);
+Begin
+    UserCharSizeMultX := MultX;
+    UserCharSizeDivX  := DivX;
+    UserCharSizeMultY := MultY;
+    UserCharSizeDivY  := DivY;
 End;
 
 End.
