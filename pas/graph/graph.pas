@@ -1936,4 +1936,59 @@ Begin
     CurrentWriteMode := WriteMode;
 End;
 
+
+Procedure GraphDefaults;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    { Reset all graphics settings to defaults }
+    CurrentX := 0;
+    CurrentY := 0;
+    CurrentColor := White;
+    CurrentBkColor := Black;
+    CurrentLineStyle := SolidLn;
+    CurrentLinePattern := 0;
+    CurrentLineThickness := NormWidth;
+    CurrentFillPattern := SolidFill;
+    CurrentFillColor := White;
+    CurrentFont := DefaultFont;
+    CurrentTextDirection := HorizDir;
+    CurrentCharSize := 1;
+    CurrentHorizJust := LeftText;
+    CurrentVertJust := TopText;
+    CurrentWriteMode := CopyPut;
+
+    { Reset viewport to full screen }
+    ViewPortX1 := 0;
+    ViewPortY1 := 0;
+    ViewPortX2 := WindowWidth - 1;
+    ViewPortY2 := WindowHeight - 1;
+    ClipEnabled := False;
+    SDL_RenderSetClipRect (Renderer, nil);
+
+    { Reset aspect ratio }
+    AspectRatioX := 10000;
+    AspectRatioY := 10000;
+
+    { Reset palette to default }
+    CurrentPalette.Size := 16;
+    CurrentPalette.Colors[0] := Black;
+    CurrentPalette.Colors[1] := Blue;
+    CurrentPalette.Colors[2] := Green;
+    CurrentPalette.Colors[3] := Cyan;
+    CurrentPalette.Colors[4] := Red;
+    CurrentPalette.Colors[5] := Magenta;
+    CurrentPalette.Colors[6] := Brown;
+    CurrentPalette.Colors[7] := LightGray;
+    CurrentPalette.Colors[8] := DarkGray;
+    CurrentPalette.Colors[9] := LightBlue;
+    CurrentPalette.Colors[10] := LightGreen;
+    CurrentPalette.Colors[11] := LightCyan;
+    CurrentPalette.Colors[12] := LightRed;
+    CurrentPalette.Colors[13] := LightMagenta;
+    CurrentPalette.Colors[14] := Yellow;
+    CurrentPalette.Colors[15] := White;
+End;
+
 End.
