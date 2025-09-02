@@ -379,6 +379,9 @@ Var
     { Palette }
     CurrentPalette: PaletteType;
 
+    { User-defined fill pattern }
+    UserFillPattern: FillPatternType;
+
 { Graphics mode table }
 Type
     ModeInfo = Record
@@ -1722,6 +1725,88 @@ End;
 Function GetMaxColor: word;
 Begin
     GetMaxColor := MaxColors;
+End;
+
+
+Procedure GetFillPattern(Var FillPattern: FillPatternType);
+Begin
+    FillPattern := UserFillPattern;
+End;
+
+
+Procedure SetFillPattern(Pattern: FillPatternType; Color: word);
+Begin
+    UserFillPattern := Pattern;
+    CurrentFillPattern := UserFill;
+    CurrentFillColor := Color;
+End;
+
+
+Procedure FloodFill(X, Y: integer; Border: word);
+Var
+    Stack: Array[1..10000] Of PointType;
+    StackPtr: Integer;
+    CurrentPixel: Word;
+    FillColor: TSDL_Color;
+    px, py: Integer;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    { Get current pixel color at starting point }
+    CurrentPixel := GetPixel (X, Y);
+
+    { Don't fill if starting point is already the border color or fill color }
+    If (CurrentPixel = Border) OR (CurrentPixel = CurrentFillColor) Then
+        Exit;
+
+    FillColor := BGIColorToSDL (CurrentFillColor);
+    SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+
+    { Initialize stack with starting point }
+    StackPtr := 1;
+    Stack[StackPtr].X := X;
+    Stack[StackPtr].Y := Y;
+
+    { Flood fill using stack-based algorithm }
+    While StackPtr > 0 Do
+    Begin
+        { Pop point from stack }
+        px := Stack[StackPtr].X;
+        py := Stack[StackPtr].Y;
+        Dec (StackPtr);
+
+        { Check bounds }
+        If (px < 0) OR (px >= WindowWidth) OR (py < 0) OR (py >= WindowHeight) Then
+            Continue;
+
+        { Check if this pixel should be filled }
+        CurrentPixel := GetPixel (px, py);
+        If (CurrentPixel = Border) OR (CurrentPixel = CurrentFillColor) Then
+            Continue;
+
+        { Fill this pixel }
+        SDL_RenderDrawPoint (Renderer, px, py);
+
+        { Add neighboring points to stack if there's room }
+        If StackPtr < High (Stack) - 4 Then
+        Begin
+            Inc (StackPtr);
+            Stack[StackPtr].X := px + 1;
+            Stack[StackPtr].Y := py;
+            Inc (StackPtr);
+            Stack[StackPtr].X := px - 1;
+            Stack[StackPtr].Y := py;
+            Inc (StackPtr);
+            Stack[StackPtr].X := px;
+            Stack[StackPtr].Y := py + 1;
+            Inc (StackPtr);
+            Stack[StackPtr].X := px;
+            Stack[StackPtr].Y := py - 1;
+        End;
+    End;
+
+    SDL_RenderPresent (Renderer);
 End;
 
 End.
