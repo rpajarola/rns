@@ -382,6 +382,9 @@ Var
     { User-defined fill pattern }
     UserFillPattern: FillPatternType;
 
+    { Write mode }
+    CurrentWriteMode: Integer;
+
 { Graphics mode table }
 Type
     ModeInfo = Record
@@ -773,6 +776,7 @@ Begin
     CurrentPalette.Colors[13] := LightMagenta;
     CurrentPalette.Colors[14] := Yellow;
     CurrentPalette.Colors[15] := White;
+    CurrentWriteMode := CopyPut;
 
     { Clear screen to background color }
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
@@ -1807,6 +1811,130 @@ Begin
     End;
 
     SDL_RenderPresent (Renderer);
+End;
+
+
+Function ImageSize(x1, y1, x2, y2: integer): word;
+Var
+    Width, Height: Integer;
+Begin
+    Width := Abs (x2 - x1) + 1;
+    Height := Abs (y2 - y1) + 1;
+    { Each pixel is 1 byte + 4 bytes header for width/height }
+    ImageSize := Width * Height + 4;
+End;
+
+
+Procedure GetImage(x1, y1, x2, y2: integer; Var BitMap);
+Type
+    ImageHeader = Record
+        Width, Height: Word;
+    End;
+    ImageData = Array[0..65000] Of Byte;
+Var
+    Header: ^ImageHeader;
+    Data: ^ImageData;
+    Width, Height: Integer;
+    i, j: Integer;
+    Pixel: Word;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Width := Abs (x2 - x1) + 1;
+    Height := Abs (y2 - y1) + 1;
+
+    { Set up image header }
+    Header := @BitMap;
+    Header^.Width := Width;
+    Header^.Height := Height;
+
+    { Get pixel data }
+    Data := @BitMap;
+    For j := 0 To Height - 1 Do
+        For i := 0 To Width - 1 Do
+        Begin
+            Pixel := GetPixel (x1 + i, y1 + j);
+            Data^[4 + j * Width + i] := Pixel;
+        End;
+End;
+
+
+Procedure PutImage(X, Y: integer; Var BitMap; BitBlt: word);
+Type
+    ImageHeader = Record
+        Width, Height: Word;
+    End;
+    ImageData = Array[0..65000] Of Byte;
+Var
+    Header: ^ImageHeader;
+    Data: ^ImageData;
+    Width, Height: Integer;
+    i, j: Integer;
+    Pixel, DestPixel: Word;
+    Color: TSDL_Color;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    Header := @BitMap;
+    Width := Header^.Width;
+    Height := Header^.Height;
+    Data := @BitMap;
+
+    For j := 0 To Height - 1 Do
+        For i := 0 To Width - 1 Do
+        Begin
+            Pixel := Data^[4 + j * Width + i];
+
+            Case BitBlt Of
+                CopyPut, NormalPut:
+                Begin
+                    Color := BGIColorToSDL (Pixel);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+                    SDL_RenderDrawPoint (Renderer, X + i, Y + j);
+                End;
+                XorPut:
+                Begin
+                    DestPixel := GetPixel (X + i, Y + j);
+                    Pixel := Pixel XOR DestPixel;
+                    Color := BGIColorToSDL (Pixel);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+                    SDL_RenderDrawPoint (Renderer, X + i, Y + j);
+                End;
+                OrPut:
+                Begin
+                    DestPixel := GetPixel (X + i, Y + j);
+                    Pixel := Pixel OR DestPixel;
+                    Color := BGIColorToSDL (Pixel);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+                    SDL_RenderDrawPoint (Renderer, X + i, Y + j);
+                End;
+                AndPut:
+                Begin
+                    DestPixel := GetPixel (X + i, Y + j);
+                    Pixel := Pixel AND DestPixel;
+                    Color := BGIColorToSDL (Pixel);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+                    SDL_RenderDrawPoint (Renderer, X + i, Y + j);
+                End;
+                NotPut:
+                Begin
+                    Pixel := NOT Pixel;
+                    Color := BGIColorToSDL (Pixel);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+                    SDL_RenderDrawPoint (Renderer, X + i, Y + j);
+                End;
+            End;
+        End;
+
+    SDL_RenderPresent (Renderer);
+End;
+
+
+Procedure SetWriteMode(WriteMode: integer);
+Begin
+    CurrentWriteMode := WriteMode;
 End;
 
 End.
