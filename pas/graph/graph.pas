@@ -1243,4 +1243,105 @@ Begin
     FillInfo.Color := CurrentFillColor;
 End;
 
+
+Procedure DrawPoly(NumPoints: word; Var PolyPoints);
+Type
+    PointArray = Array[1..1000] Of PointType;
+Var
+    Points: ^PointArray;
+    i: Word;
+    Color: TSDL_Color;
+Begin
+    If NOT GraphInitialized OR (NumPoints < 2) Then
+        Exit;
+
+    Points := @PolyPoints;
+    Color := BGIColorToSDL(CurrentColor);
+    SDL_SetRenderDrawColor(Renderer, Color.r, Color.g, Color.b, Color.a);
+
+    { Draw lines connecting all points }
+    For i := 1 To NumPoints - 1 Do
+        SDL_RenderDrawLine(Renderer, Points^[i].X, Points^[i].Y, Points^[i + 1].X, Points^[i + 1].Y);
+
+    { Close the polygon by connecting last point to first }
+    SDL_RenderDrawLine(Renderer, Points^[NumPoints].X, Points^[NumPoints].Y, Points^[1].X, Points^[1].Y);
+
+    SDL_RenderPresent(Renderer);
+End;
+
+
+Procedure FillPoly(NumPoints: word; Var PolyPoints);
+Type
+    PointArray = Array[1..1000] Of PointType;
+Var
+    Points: ^PointArray;
+    i, j, minY, maxY, scanY: Integer;
+    intersections: Array[1..1000] Of Integer;
+    intersectionCount: Integer;
+    x1, y1, x2, y2: Integer;
+    temp: Integer;
+Begin
+    If NOT GraphInitialized OR (NumPoints < 3) Then
+        Exit;
+
+    Points := @PolyPoints;
+
+    { Find bounding box }
+    minY := Points^[1].Y;
+    maxY := Points^[1].Y;
+    For i := 1 To NumPoints Do
+    Begin
+        If Points^[i].Y < minY Then minY := Points^[i].Y;
+        If Points^[i].Y > maxY Then maxY := Points^[i].Y;
+    End;
+
+    { Scan-line fill algorithm }
+    For scanY := minY To maxY Do
+    Begin
+        intersectionCount := 0;
+
+        { Find intersections with polygon edges }
+        For i := 1 To NumPoints Do
+        Begin
+            j := i + 1;
+            If j > NumPoints Then j := 1;
+
+            x1 := Points^[i].X;
+            y1 := Points^[i].Y;
+            x2 := Points^[j].X;
+            y2 := Points^[j].Y;
+
+            { Check if scan line intersects this edge }
+            If ((y1 <= scanY) AND (y2 > scanY)) OR ((y2 <= scanY) AND (y1 > scanY)) Then
+            Begin
+                If y1 <> y2 Then
+                Begin
+                    Inc(intersectionCount);
+                    intersections[intersectionCount] := x1 + Round((scanY - y1) * (x2 - x1) / (y2 - y1));
+                End;
+            End;
+        End;
+
+        { Sort intersections }
+        For i := 1 To intersectionCount - 1 Do
+            For j := i + 1 To intersectionCount Do
+                If intersections[i] > intersections[j] Then
+                Begin
+                    temp := intersections[i];
+                    intersections[i] := intersections[j];
+                    intersections[j] := temp;
+                End;
+
+        { Fill between pairs of intersections }
+        i := 1;
+        While i < intersectionCount Do
+        Begin
+            FillRectWithPattern(intersections[i], scanY, intersections[i + 1] - 1, scanY, CurrentFillPattern, CurrentFillColor);
+            Inc(i, 2);
+        End;
+    End;
+
+    SDL_RenderPresent(Renderer);
+End;
+
 End.
