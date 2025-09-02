@@ -1417,4 +1417,16 @@ Begin
     InstallUserDriver := grInvalidDriver;
 End;
 
+
+Procedure RestoreCrtMode;
+Begin
+    { No action needed for SDL2 - just ignore }
+End;
+
+
+Procedure SetGraphBufSize(BufSize: word);
+Begin
+    { No action needed for SDL2 - just ignore }
+End;
+
 End.
