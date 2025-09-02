@@ -1712,7 +1712,6 @@ End;
 Procedure SetAllPalette(Var Palette);
 Var
     PalPtr: ^PaletteType;
-    i: Integer;
 Begin
     PalPtr := @Palette;
     CurrentPalette := PalPtr^;
@@ -1888,7 +1887,7 @@ Begin
             Pixel := Data^[4 + j * Width + i];
 
             Case BitBlt Of
-                CopyPut, NormalPut:
+                CopyPut:
                 Begin
                     Color := BGIColorToSDL (Pixel);
                     SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
