@@ -335,6 +335,7 @@ Implementation
 
 Uses
     SDL2,
+    SDL2_ttf,
     Math;
 
 Var
@@ -385,6 +386,10 @@ Var
     { Write mode }
     CurrentWriteMode: Integer;
 
+    { Font system }
+    LoadedFonts: Array[0..10] Of PTTF_Font;
+    CurrentTTFFont: PTTF_Font;
+
 { Graphics mode table }
 Type
     ModeInfo = Record
@@ -411,6 +416,52 @@ Const
         (Driver: IBM8514; Mode: 0; Width: 1024; Height: 768; Name: 'IBM8514 1024x768')
         );
 
+{ Font mapping table }
+Type
+    FontInfo = Record
+        FontFile: String;
+        BaseSize: Integer;
+    End;
+
+Const
+    FontTable: Array[0..10] Of FontInfo = (
+        (FontFile: ''; BaseSize: 8),                       { DefaultFont - use built-in }
+        (FontFile: 'fonts/triplex.ttf'; BaseSize: 10),     { TriplexFont }
+        (FontFile: 'fonts/small.ttf'; BaseSize: 6),        { SmallFont }
+        (FontFile: 'fonts/sans.ttf'; BaseSize: 10),        { SansSerifFont }
+        (FontFile: 'fonts/gothic.ttf'; BaseSize: 12),      { GothicFont }
+        (FontFile: 'fonts/script.ttf'; BaseSize: 10),      { ScriptFont }
+        (FontFile: 'fonts/simplex.ttf'; BaseSize: 8),      { SimplexFont }
+        (FontFile: 'fonts/tscript.ttf'; BaseSize: 10),     { TScriptFont }
+        (FontFile: 'fonts/complex.ttf'; BaseSize: 12),     { ComplexFont }
+        (FontFile: 'fonts/european.ttf'; BaseSize: 10),    { EuropeanFont }
+        (FontFile: 'fonts/bold.ttf'; BaseSize: 10)         { BoldFont }
+        );
+
+
+{ Font loading helper }
+Function LoadBGIFont(FontNum: Integer; Size: Integer): PTTF_Font;
+Var
+    font: PTTF_Font;
+Begin
+    If (FontNum < 0) OR (FontNum > High (FontTable)) Then
+    Begin
+        LoadBGIFont := nil;
+        Exit;
+    End;
+
+    { For DefaultFont, try to use system default or fallback }
+    If FontTable[FontNum].FontFile = '' Then
+    Begin
+        { Try common system fonts }
+        font := TTF_OpenFont ('/System/Library/Fonts/Courier.ttf', Size);
+        If font = nil Then
+            font := TTF_OpenFont ('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', Size);
+        LoadBGIFont := font;
+    End
+    Else
+        LoadBGIFont := TTF_OpenFont (PChar (FontTable[FontNum].FontFile), Size);
+End;
 
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
@@ -678,6 +729,12 @@ Begin
         exit;
     End;
 
+    If TTF_Init () < 0 Then
+    Begin
+        LastGraphResult := grError;
+        exit;
+    End;
+
     { Set default window size based on graphics mode }
     Case GraphMode Of
         VGAHi, EGAHi:
@@ -778,6 +835,10 @@ Begin
     CurrentPalette.Colors[15] := White;
     CurrentWriteMode := CopyPut;
 
+    { Initialize font system }
+    FillChar (LoadedFonts, SizeOf (LoadedFonts), 0);
+    CurrentTTFFont := nil;
+
     { Clear screen to background color }
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
     SDL_RenderClear (Renderer);
@@ -786,9 +847,18 @@ End;
 
 
 Procedure CloseGraph;
+Var
+    i: Integer;
 Begin
     If GraphInitialized Then
     Begin
+        { Close all loaded fonts }
+        For i := 0 To High (LoadedFonts) Do
+            If LoadedFonts[i] <> nil Then
+                TTF_CloseFont (LoadedFonts[i]);
+
+        TTF_Quit ();
+
         If Renderer <> nil Then
             SDL_DestroyRenderer (Renderer);
         If Window <> nil Then
@@ -797,6 +867,7 @@ Begin
         GraphInitialized := False;
         Window := nil;
         Renderer := nil;
+        CurrentTTFFont := nil;
     End;
 End;
 
@@ -1989,6 +2060,148 @@ Begin
     CurrentPalette.Colors[13] := LightMagenta;
     CurrentPalette.Colors[14] := Yellow;
     CurrentPalette.Colors[15] := White;
+End;
+
+
+Procedure SetTextStyle(Font, Direction: word; CharSize: word);
+Var
+    FontSize: Integer;
+Begin
+    CurrentFont := Font;
+    CurrentTextDirection := Direction;
+    CurrentCharSize := CharSize;
+
+    { Calculate actual font size }
+    If Font <= High (FontTable) Then
+        FontSize := FontTable[Font].BaseSize * CharSize
+    Else
+        FontSize := 8 * CharSize;
+
+    { Close current font if loaded }
+    If CurrentTTFFont <> nil Then
+        TTF_CloseFont (CurrentTTFFont);
+
+    { Load new font }
+    CurrentTTFFont := LoadBGIFont (Font, FontSize);
+    If CurrentTTFFont = nil Then
+        CurrentTTFFont := LoadBGIFont (DefaultFont, FontSize);
+End;
+
+
+Procedure GetTextSettings(Var TextInfo: TextSettingsType);
+Begin
+    TextInfo.Font := CurrentFont;
+    TextInfo.Direction := CurrentTextDirection;
+    TextInfo.CharSize := CurrentCharSize;
+    TextInfo.Horiz := CurrentHorizJust;
+    TextInfo.Vert := CurrentVertJust;
+End;
+
+
+Procedure SetTextJustify(Horiz, Vert: word);
+Begin
+    CurrentHorizJust := Horiz;
+    CurrentVertJust  := Vert;
+End;
+
+
+Function TextWidth(TextString: string): word;
+Var
+    w, h: Integer;
+Begin
+    If (CurrentTTFFont <> nil) AND (Length (TextString) > 0) Then
+    Begin
+        TTF_SizeText (CurrentTTFFont, PChar (TextString), @w, @h);
+        TextWidth := w;
+    End
+    Else
+        TextWidth := Length (TextString) * 8 * CurrentCharSize;
+End;
+
+
+Function TextHeight(TextString: string): word;
+Var
+    w, h: Integer;
+Begin
+    If (CurrentTTFFont <> nil) AND (Length (TextString) > 0) Then
+    Begin
+        TTF_SizeText (CurrentTTFFont, PChar (TextString), @w, @h);
+        TextHeight := h;
+    End
+    Else
+        TextHeight := 16 * CurrentCharSize;
+End;
+
+
+Procedure OutTextXY(X, Y: integer; TextString: string);
+Var
+    TextSurface: PSDL_Surface;
+    TextTexture: PSDL_Texture;
+    Color: TSDL_Color;
+    DstRect: TSDL_Rect;
+    TextW, TextH: Integer;
+Begin
+    If NOT GraphInitialized OR (Length (TextString) = 0) Then
+        Exit;
+
+    { Load font if not already loaded }
+    If CurrentTTFFont = nil Then
+        SetTextStyle (CurrentFont, CurrentTextDirection, CurrentCharSize);
+
+    If CurrentTTFFont = nil Then
+        Exit;
+
+    Color := BGIColorToSDL (CurrentColor);
+
+    { Render text to surface }
+    TextSurface := TTF_RenderText_Solid (CurrentTTFFont, PChar (TextString), Color);
+    If TextSurface = nil Then
+        Exit;
+
+    { Create texture from surface }
+    TextTexture := SDL_CreateTextureFromSurface (Renderer, TextSurface);
+
+    TextW := TextSurface^.w;
+    TextH := TextSurface^.h;
+    SDL_FreeSurface (TextSurface);
+
+    If TextTexture = nil Then
+        Exit;
+
+    { Calculate position based on justification }
+    DstRect.x := X;
+    DstRect.y := Y;
+
+    Case CurrentHorizJust Of
+        CenterText: DstRect.x := X - TextW DIV 2;
+        RightText: DstRect.x  := X - TextW;
+    End;
+
+    Case CurrentVertJust Of
+        TopText: DstRect.y := Y - TextH;
+        { BottomText uses Y as-is }
+    End;
+
+    DstRect.w := TextW;
+    DstRect.h := TextH;
+
+    { Handle text direction }
+    If CurrentTextDirection = VertDir Then
+        { For vertical text, we'd need to rotate the texture }{ For now, just render horizontally };
+
+    SDL_RenderCopy (Renderer, TextTexture, nil, @DstRect);
+    SDL_DestroyTexture (TextTexture);
+    SDL_RenderPresent (Renderer);
+
+    { Update current position }
+    CurrentX := DstRect.x + TextW;
+    CurrentY := DstRect.y;
+End;
+
+
+Procedure OutText(TextString: string);
+Begin
+    OutTextXY (CurrentX, CurrentY, TextString);
 End;
 
 End.
