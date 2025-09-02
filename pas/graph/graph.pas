@@ -371,8 +371,6 @@ Var
 
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
-Var
-    Result: TSDL_Color;
 Begin
     Case Color Of
         Black:
@@ -479,7 +477,6 @@ Begin
     End;
     End;
     Result.a := 255;
-    BGIColorToSDL := Result;
 End;
 
 
