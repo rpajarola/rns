@@ -1718,4 +1718,10 @@ Begin
     { This function is kept for BGI compatibility but does nothing }
 End;
 
+
+Function GetMaxColor: word;
+Begin
+    GetMaxColor := MaxColors;
+End;
+
 End.
