@@ -2223,4 +2223,33 @@ Begin
     UserCharSizeDivY  := DivY;
 End;
 
+
+Function RegisterBGIfont(Font: pointer): integer;
+Begin
+    { BGI font registration not supported in SDL2 implementation }
+    LastGraphResult := grInvalidFont;
+    RegisterBGIfont := grInvalidFont;
+End;
+
+
+Function InstallUserFont(FontFileName: string): integer;
+Var
+    TestFont: PTTF_Font;
+Begin
+    { Try to load the font file to validate it }
+    TestFont := TTF_OpenFont (PChar (FontFileName), 12);
+    If TestFont = nil Then
+    Begin
+        LastGraphResult := grFontNotFound;
+        InstallUserFont := grFontNotFound;
+    End
+    Else
+    Begin
+        TTF_CloseFont (TestFont);
+        LastGraphResult := grOk;
+        { Return a font ID (in real BGI this would be 11+) }
+        InstallUserFont := 11;
+    End;
+End;
+
 End.
