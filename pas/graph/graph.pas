@@ -1403,4 +1403,18 @@ Begin
     SDL_RenderPresent (Renderer);
 End;
 
+
+Function RegisterBGIdriver(Driver: pointer): integer;
+Begin
+    LastGraphResult := grInvalidDriver;
+    RegisterBGIdriver := grInvalidDriver;
+End;
+
+
+Function InstallUserDriver(DriverFileName: string; AutoDetectPtr: pointer): integer;
+Begin
+    LastGraphResult := grInvalidDriver;
+    InstallUserDriver := grInvalidDriver;
+End;
+
 End.
