@@ -768,61 +768,28 @@ End;
 
 
 Procedure Bar(x1, y1, x2, y2: integer);
-Var
-    Color: TSDL_Color;
-    Rect:  TSDL_Rect;
 Begin
-    If NOT GraphInitialized Then
-        Exit;
-
-    Color := BGIColorToSDL (CurrentFillColor);
-    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
-
-    Rect.x := x1;
-    Rect.y := y1;
-    Rect.w := x2 - x1 + 1;
-    Rect.h := y2 - y1 + 1;
-
-    SDL_RenderFillRect (Renderer, @Rect);
-    SDL_RenderPresent (Renderer);
+    FillRectWithPattern (x1, y1, x2, y2, CurrentFillPattern, CurrentFillColor);
 End;
 
 
 Procedure Bar3D(x1, y1, x2, y2: integer; Depth: word; Top: boolean);
-Var
-    Color: TSDL_Color;
-    MainRect, TopRect, SideRect: TSDL_Rect;
 Begin
     If NOT GraphInitialized Then
         Exit;
 
     { Draw main filled rectangle }
-    Bar (x1, y1, x2, y2);
+    FillRectWithPattern (x1, y1, x2, y2, CurrentFillPattern, CurrentFillColor);
 
     { Draw 3D effect if depth > 0 }
     If Depth > 0 Then
     Begin
-        Color := BGIColorToSDL (CurrentColor);
-        SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
-
         { Right side }
-        SideRect.x := x2 + 1;
-        SideRect.y := y1 - Depth;
-        SideRect.w := Depth;
-        SideRect.h := y2 - y1 + 1 + Depth;
-        SDL_RenderFillRect (Renderer, @SideRect);
+        FillRectWithPattern (x2 + 1, y1 - Depth, x2 + Depth, y2 + Depth, CurrentFillPattern, CurrentColor);
 
         { Top side (if enabled) }
         If Top Then
-        Begin
-            TopRect.x := x1;
-            TopRect.y := y1 - Depth;
-            TopRect.w := x2 - x1 + 1 + Depth;
-            TopRect.h := Depth;
-            SDL_RenderFillRect (Renderer, @TopRect);
-        End;
-
-        SDL_RenderPresent (Renderer);
+            FillRectWithPattern (x1, y1 - Depth, x2 + Depth, y1 - 1, CurrentFillPattern, CurrentColor);
     End;
 End;
 
@@ -1002,38 +969,68 @@ Procedure PieSlice(X, Y: integer; StAngle, EndAngle, Radius: word);
 Var
     Color: TSDL_Color;
     Angle, RadAngle: Real;
-    px, py, lastpx, lastpy: Integer;
-    FirstPoint: Boolean;
+    px, py: Integer;
+    minX, maxX, minY, maxY: Integer;
+    scanY, scanX: Integer;
 Begin
     If NOT GraphInitialized Then
         Exit;
 
-    Color := BGIColorToSDL (CurrentFillColor);
-    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+    { Calculate bounding box for the pie slice }
+    minX := X - Radius;
+    maxX := X + Radius;
+    minY := Y - Radius;
+    maxY := Y + Radius;
 
-    { Draw lines from center to arc points to create filled pie slice }
-    Angle := StAngle;
+    { Scan-line fill the pie slice area }
+    For scanY := minY To maxY Do
+        For scanX := minX To maxX Do
+            If (scanX - X) * (scanX - X) + (scanY - Y) * (scanY - Y) <= Radius * Radius Then
+            Begin
+                { Calculate angle for this point }
+                If (scanX = X) AND (scanY = Y) Then
+                    Angle := StAngle { Center point - use start angle }
+                Else
+                Begin
+                    Angle := ArcTan2 (Y - scanY, scanX - X) * 180.0 / Pi;
+                    If Angle < 0 Then
+                        Angle := Angle + 360;
+                End;
 
-    While True Do
-    Begin
-        RadAngle := Angle * Pi / 180.0;
-        px := X + Round (Radius * Cos (RadAngle));
-        py := Y - Round (Radius * Sin (RadAngle));
+                { Check if angle is within pie slice range }
+                If ((StAngle <= EndAngle) AND (Angle >= StAngle) AND (Angle <= EndAngle)) OR
+                    ((StAngle > EndAngle) AND ((Angle >= StAngle) OR (Angle <= EndAngle))) Then
+                Begin
+                    Color := BGIColorToSDL (CurrentFillColor);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
 
-        { Draw line from center to arc point }
-        SDL_RenderDrawLine (Renderer, X, Y, px, py);
-
-        If Angle = EndAngle Then
-            Break;
-
-        Angle := Angle + 1;
-        If Angle > 360 Then
-            Angle := Angle - 360;
-        If (StAngle < EndAngle) AND (Angle > EndAngle) Then
-            Break;
-        If (StAngle > EndAngle) AND (Angle > EndAngle) AND (Angle < StAngle) Then
-            Break;
-    End;
+                    { Apply fill pattern }
+                    Case CurrentFillPattern Of
+                        EmptyFill: ; { No fill }
+                        SolidFill: SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        LineFill: If scanY MOD 3 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        LtSlashFill: If (scanX + scanY) MOD 4 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        SlashFill: If (scanX + scanY) MOD 3 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        BkSlashFill: If (scanX - scanY) MOD 3 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        LtBkSlashFill: If (scanX - scanY) MOD 4 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        HatchFill: If (scanY MOD 3 = 0) OR ((scanX + scanY) MOD 3 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        XHatchFill: If ((scanX + scanY) MOD 3 = 0) OR ((scanX - scanY) MOD 3 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        InterleaveFill: If ((scanX + scanY) MOD 2 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        WideDotFill: If (scanX MOD 4 = 0) AND (scanY MOD 4 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        CloseDotFill: If (scanX MOD 2 = 0) AND (scanY MOD 2 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                    End;
+                End;
+            End{ Check if point is inside circle };
 
     SDL_RenderPresent (Renderer);
 End;
@@ -1090,6 +1087,149 @@ Begin
     ViewRect.h := ViewPortY2 - ViewPortY1 + 1;
 
     SDL_RenderFillRect (Renderer, @ViewRect);
+    SDL_RenderPresent (Renderer);
+End;
+
+
+Procedure SetLineStyle(LineStyle: word; Pattern: word; Thickness: word);
+Begin
+    CurrentLineStyle := LineStyle;
+    CurrentLinePattern := Pattern;
+    CurrentLineThickness := Thickness;
+End;
+
+
+Procedure GetLineSettings(Var LineInfo: LineSettingsType);
+Begin
+    LineInfo.LineStyle := CurrentLineStyle;
+    LineInfo.Pattern := CurrentLinePattern;
+    LineInfo.Thickness := CurrentLineThickness;
+End;
+
+
+Procedure SetFillStyle(Pattern: word; Color: word);
+Begin
+    CurrentFillPattern := Pattern;
+    CurrentFillColor := Color;
+End;
+
+
+Procedure GetFillSettings(Var FillInfo: FillSettingsType);
+Begin
+    FillInfo.Pattern := CurrentFillPattern;
+    FillInfo.Color := CurrentFillColor;
+End;
+
+
+Procedure FillRectWithPattern(x1, y1, x2, y2: integer; Pattern: word; Color: word);
+Var
+    FillColor, BkColor: TSDL_Color;
+    i, j: Integer;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    FillColor := BGIColorToSDL (Color);
+    BkColor := BGIColorToSDL (CurrentBkColor);
+
+    Case Pattern Of
+        EmptyFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+        End;
+
+        SolidFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            Bar (x1, y1, x2, y2);
+        End;
+
+        LineFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := y1 To y2 Do
+                If (i - y1) MOD 4 = 0 Then
+                    SDL_RenderDrawLine (Renderer, x1, i, x2, i);
+        End;
+
+        LtSlashFill, SlashFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If (i - x1 + j - y1) MOD 8 = 0 Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        BkSlashFill, LtBkSlashFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If (i - x1 - j + y1) MOD 8 = 0 Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        HatchFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := y1 To y2 Do
+                If (i - y1) MOD 4 = 0 Then
+                    SDL_RenderDrawLine (Renderer, x1, i, x2, i);
+            For i := x1 To x2 Do
+                If (i - x1) MOD 4 = 0 Then
+                    SDL_RenderDrawLine (Renderer, i, y1, i, y2);
+        End;
+
+        XHatchFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If ((i - x1 + j - y1) MOD 4 = 0) OR ((i - x1 - j + y1) MOD 4 = 0) Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        WideDotFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If ((i - x1) MOD 8 = 0) AND ((j - y1) MOD 8 = 0) Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        CloseDotFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If ((i - x1) MOD 4 = 0) AND ((j - y1) MOD 4 = 0) Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+    Else
+    Begin
+        SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+        Bar (x1, y1, x2, y2);
+    End;
+    End;
+
     SDL_RenderPresent (Renderer);
 End;
 
