@@ -1561,4 +1561,73 @@ Begin
     GetModeName := 'Unknown mode';
 End;
 
+
+Procedure Sector(X, Y: Integer; StAngle, EndAngle, XRadius, YRadius: word);
+Var
+    Color: TSDL_Color;
+    Angle: Real;
+    minX, maxX, minY, maxY: Integer;
+    scanY, scanX: Integer;
+    dx, dy: Real;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    { Calculate bounding box for the elliptical sector }
+    minX := X - XRadius;
+    maxX := X + XRadius;
+    minY := Y - YRadius;
+    maxY := Y + YRadius;
+
+    { Scan-line fill the sector area }
+    For scanY := minY To maxY Do
+    Begin
+        For scanX := minX To maxX Do
+        Begin
+            { Check if point is inside ellipse }
+            dx := (scanX - X) / XRadius;
+            dy := (scanY - Y) / YRadius;
+            
+            If (dx * dx + dy * dy) <= 1.0 Then
+            Begin
+                { Calculate angle for this point }
+                If (scanX = X) AND (scanY = Y) Then
+                    Angle := StAngle { Center point - use start angle }
+                Else
+                Begin
+                    Angle := ArcTan2(Y - scanY, scanX - X) * 180.0 / Pi;
+                    If Angle < 0 Then
+                        Angle := Angle + 360;
+                End;
+
+                { Check if angle is within sector range }
+                If ((StAngle <= EndAngle) AND (Angle >= StAngle) AND (Angle <= EndAngle)) OR
+                   ((StAngle > EndAngle) AND ((Angle >= StAngle) OR (Angle <= EndAngle))) Then
+                Begin
+                    Color := BGIColorToSDL(CurrentFillColor);
+                    SDL_SetRenderDrawColor(Renderer, Color.r, Color.g, Color.b, Color.a);
+                    
+                    { Apply fill pattern }
+                    Case CurrentFillPattern Of
+                        EmptyFill: ; { No fill }
+                        SolidFill: SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        LineFill: If scanY MOD 3 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        LtSlashFill: If (scanX + scanY) MOD 4 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        SlashFill: If (scanX + scanY) MOD 3 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        BkSlashFill: If (scanX - scanY) MOD 3 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        LtBkSlashFill: If (scanX - scanY) MOD 4 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        HatchFill: If (scanY MOD 3 = 0) OR ((scanX + scanY) MOD 3 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        XHatchFill: If ((scanX + scanY) MOD 3 = 0) OR ((scanX - scanY) MOD 3 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        InterleaveFill: If ((scanX + scanY) MOD 2 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        WideDotFill: If (scanX MOD 4 = 0) AND (scanY MOD 4 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        CloseDotFill: If (scanX MOD 2 = 0) AND (scanY MOD 2 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                    End;
+                End;
+            End;
+        End;
+    End;
+
+    SDL_RenderPresent(Renderer);
+End;
+
 End.
