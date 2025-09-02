@@ -38,35 +38,35 @@ Const
     PC3270 = 10;
 
     { graphics modes for each driver }
-    CGAC0 = 0;  { 320x200 palette 0: LightGreen, LightRed, Yellow; 1 page }
-    CGAC1 = 1;  { 320x200 palette 1: LightCyan, LightMagenta, White; 1 page }
-    CGAC2 = 2;  { 320x200 palette 2: Green, Red, Brown; 1 page }
-    CGAC3 = 3;  { 320x200 palette 3: Cyan, Magenta, LightGray; 1 page }
-    CGAHi = 4;  { 640x200 1 page }
-    MCGAC0 = 0;  { 320x200 palette 0: LightGreen, LightRed, Yellow; 1 page }
-    MCGAC1 = 1;  { 320x200 palette 1: LightCyan, LightMagenta, White; 1 page }
-    MCGAC2 = 2;  { 320x200 palette 2: Green, Red, Brown; 1 page }
-    MCGAC3 = 3;  { 320x200 palette 3: Cyan, Magenta, LightGray; 1 page }
-    MCGAMed = 4;  { 640x200 1 page }
-    MCGAHi = 5;  { 640x480 1 page }
-    EGALo = 0;  { 640x200 16 color 4 page }
-    EGAHi = 1;  { 640x350 16 color 2 page }
-    EGA64Lo = 0;  { 640x200 16 color 1 page }
-    EGA64Hi = 1;  { 640x350 4 color  1 page }
-    EGAMonoHi = 3;  { 640x350 64K on card, 1 page; 256K on card, 2 page }
-    HercMonoHi = 0;  { 720x348 2 page }
-    ATT400C0 = 0;  { 320x200 palette 0: LightGreen, LightRed, Yellow; 1 page }
-    ATT400C1 = 1;  { 320x200 palette 1: LightCyan, LightMagenta, White; 1 page }
-    ATT400C2 = 2;  { 320x200 palette 2: Green, Red, Brown; 1 page }
-    ATT400C3 = 3;  { 320x200 palette 3: Cyan, Magenta, LightGray; 1 page }
-    ATT400Med = 4;  { 640x200 1 page }
-    ATT400Hi = 5;  { 640x400 1 page }
-    VGALo = 0;  { 640x200 16 color 4 page }
-    VGAMed = 1;  { 640x350 16 color 2 page }
-    VGAHi = 2;  { 640x480 16 color 1 page }
-    PC3270Hi = 0;  { 720x350 1 page }
-    IBM8514LO = 0;  { 640x480 256 colors }
-    IBM8514HI = 1;  { 1024x768 256 colors }
+    CGAC0 = (CGA SHL 8) + 0;  { 320x200 palette 0: LightGreen, LightRed, Yellow; 1 page }
+    CGAC1 = (CGA SHL 8) + 1;  { 320x200 palette 1: LightCyan, LightMagenta, White; 1 page }
+    CGAC2 = (CGA SHL 8) + 2;  { 320x200 palette 2: Green, Red, Brown; 1 page }
+    CGAC3 = (CGA SHL 8) + 3;  { 320x200 palette 3: Cyan, Magenta, LightGray; 1 page }
+    CGAHi = (CGA SHL 8) + 4;  { 640x200 1 page }
+    MCGAC0 = (MCGA SHL 8) + 0;  { 320x200 palette 0: LightGreen, LightRed, Yellow; 1 page }
+    MCGAC1 = (MCGA SHL 8) + 1;  { 320x200 palette 1: LightCyan, LightMagenta, White; 1 page }
+    MCGAC2 = (MCGA SHL 8) + 2;  { 320x200 palette 2: Green, Red, Brown; 1 page }
+    MCGAC3 = (MCGA SHL 8) + 3;  { 320x200 palette 3: Cyan, Magenta, LightGray; 1 page }
+    MCGAMed = (MCGA SHL 8) + 4;  { 640x200 1 page }
+    MCGAHi = (MCGA SHL 8) + 5;  { 640x480 1 page }
+    EGALo = (EGA SHL 8) + 0;  { 640x200 16 color 4 page }
+    EGAHi = (EGA SHL 8) + 1;  { 640x350 16 color 2 page }
+    EGA64Lo = (EGA SHL 8) + 0;  { 640x200 16 color 1 page }
+    EGA64Hi = (EGA SHL 8) + 1;  { 640x350 4 color  1 page }
+    EGAMonoHi = (EGA SHL 8) + 3;  { 640x350 64K on card, 1 page; 256K on card, 2 page }
+    HercMonoHi = (HercMono SHL 8) + 0;  { 720x348 2 page }
+    ATT400C0 = (ATT400 SHL 8) + 0;  { 320x200 palette 0: LightGreen, LightRed, Yellow; 1 page }
+    ATT400C1 = (ATT400 SHL 8) + 1;  { 320x200 palette 1: LightCyan, LightMagenta, White; 1 page }
+    ATT400C2 = (ATT400 SHL 8) + 2;  { 320x200 palette 2: Green, Red, Brown; 1 page }
+    ATT400C3 = (ATT400 SHL 8) + 3;  { 320x200 palette 3: Cyan, Magenta, LightGray; 1 page }
+    ATT400Med = (ATT400 SHL 8) + 4;  { 640x200 1 page }
+    ATT400Hi = (ATT400 SHL 8) + 5;  { 640x400 1 page }
+    VGALo = (VGA SHL 8) + 0;  { 640x200 16 color 4 page }
+    VGAMed = (VGA SHL 8) + 1;  { 640x350 16 color 2 page }
+    VGAHi = (VGA SHL 8) + 2;  { 640x480 16 color 1 page }
+    PC3270Hi = (PC3270 SHL 8) + 0;  { 720x350 1 page }
+    IBM8514LO = (IBM8514 SHL 8) + 0;  { 640x480 256 colors }
+    IBM8514HI = (IBM8514 SHL 8) + 1;  { 1024x768 256 colors }
 
     { Colors for SetPalette and SetAllPalette: }
     Black = 0;
@@ -334,7 +334,8 @@ Function TextWidth(TextString: string): word;
 Implementation
 
 Uses
-    SDL2;
+    SDL2,
+Math;
 
 Var
     { SDL2 graphics state }
@@ -367,8 +368,11 @@ Var
     { Error state }
     LastGraphResult: Integer;
 
+
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
+Var
+    Result: TSDL_Color;
 Begin
     Case Color Of
         Black:
@@ -475,6 +479,120 @@ Begin
     End;
     End;
     Result.a := 255;
+    BGIColorToSDL := Result;
+End;
+
+
+Procedure FillRectWithPattern(x1, y1, x2, y2: integer; Pattern: word; Color: word);
+Var
+    FillColor, BkColor: TSDL_Color;
+    i, j: Integer;
+Begin
+    If NOT GraphInitialized Then
+        Exit;
+
+    FillColor := BGIColorToSDL (Color);
+    BkColor := BGIColorToSDL (CurrentBkColor);
+
+    Case Pattern Of
+        EmptyFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+        End;
+
+        SolidFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            Bar (x1, y1, x2, y2);
+        End;
+
+        LineFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := y1 To y2 Do
+                If (i - y1) MOD 4 = 0 Then
+                    SDL_RenderDrawLine (Renderer, x1, i, x2, i);
+        End;
+
+        LtSlashFill, SlashFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If (i - x1 + j - y1) MOD 8 = 0 Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        BkSlashFill, LtBkSlashFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If (i - x1 - j + y1) MOD 8 = 0 Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        HatchFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := y1 To y2 Do
+                If (i - y1) MOD 4 = 0 Then
+                    SDL_RenderDrawLine (Renderer, x1, i, x2, i);
+            For i := x1 To x2 Do
+                If (i - x1) MOD 4 = 0 Then
+                    SDL_RenderDrawLine (Renderer, i, y1, i, y2);
+        End;
+
+        XHatchFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If ((i - x1 + j - y1) MOD 4 = 0) OR ((i - x1 - j + y1) MOD 4 = 0) Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        WideDotFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If ((i - x1) MOD 8 = 0) AND ((j - y1) MOD 8 = 0) Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+        CloseDotFill:
+        Begin
+            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
+            Bar (x1, y1, x2, y2);
+            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+            For i := x1 To x2 Do
+                For j := y1 To y2 Do
+                    If ((i - x1) MOD 4 = 0) AND ((j - y1) MOD 4 = 0) Then
+                        SDL_RenderDrawPoint (Renderer, i, j);
+        End;
+
+    Else
+    Begin
+        SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
+        Bar (x1, y1, x2, y2);
+    End;
+    End;
+
+    SDL_RenderPresent (Renderer);
 End;
 
 { *** high-level error handling *** }
@@ -890,6 +1008,9 @@ Begin
     FirstPoint := True;
     Angle := StAngle;
 
+    lastpx := 0;
+    lastpy := 0;
+
     While True Do
     Begin
         RadAngle := Angle * Pi / 180.0;
@@ -936,6 +1057,9 @@ Begin
     FirstPoint := True;
     Angle := StAngle;
 
+    lastpx := 0;
+    lastpy := 0;
+
     While True Do
     Begin
         RadAngle := Angle * Pi / 180.0;
@@ -968,8 +1092,7 @@ End;
 Procedure PieSlice(X, Y: integer; StAngle, EndAngle, Radius: word);
 Var
     Color: TSDL_Color;
-    Angle, RadAngle: Real;
-    px, py: Integer;
+    Angle: Real;
     minX, maxX, minY, maxY: Integer;
     scanY, scanX: Integer;
 Begin
@@ -1118,119 +1241,6 @@ Procedure GetFillSettings(Var FillInfo: FillSettingsType);
 Begin
     FillInfo.Pattern := CurrentFillPattern;
     FillInfo.Color := CurrentFillColor;
-End;
-
-
-Procedure FillRectWithPattern(x1, y1, x2, y2: integer; Pattern: word; Color: word);
-Var
-    FillColor, BkColor: TSDL_Color;
-    i, j: Integer;
-Begin
-    If NOT GraphInitialized Then
-        Exit;
-
-    FillColor := BGIColorToSDL (Color);
-    BkColor := BGIColorToSDL (CurrentBkColor);
-
-    Case Pattern Of
-        EmptyFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-        End;
-
-        SolidFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            Bar (x1, y1, x2, y2);
-        End;
-
-        LineFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := y1 To y2 Do
-                If (i - y1) MOD 4 = 0 Then
-                    SDL_RenderDrawLine (Renderer, x1, i, x2, i);
-        End;
-
-        LtSlashFill, SlashFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := x1 To x2 Do
-                For j := y1 To y2 Do
-                    If (i - x1 + j - y1) MOD 8 = 0 Then
-                        SDL_RenderDrawPoint (Renderer, i, j);
-        End;
-
-        BkSlashFill, LtBkSlashFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := x1 To x2 Do
-                For j := y1 To y2 Do
-                    If (i - x1 - j + y1) MOD 8 = 0 Then
-                        SDL_RenderDrawPoint (Renderer, i, j);
-        End;
-
-        HatchFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := y1 To y2 Do
-                If (i - y1) MOD 4 = 0 Then
-                    SDL_RenderDrawLine (Renderer, x1, i, x2, i);
-            For i := x1 To x2 Do
-                If (i - x1) MOD 4 = 0 Then
-                    SDL_RenderDrawLine (Renderer, i, y1, i, y2);
-        End;
-
-        XHatchFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := x1 To x2 Do
-                For j := y1 To y2 Do
-                    If ((i - x1 + j - y1) MOD 4 = 0) OR ((i - x1 - j + y1) MOD 4 = 0) Then
-                        SDL_RenderDrawPoint (Renderer, i, j);
-        End;
-
-        WideDotFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := x1 To x2 Do
-                For j := y1 To y2 Do
-                    If ((i - x1) MOD 8 = 0) AND ((j - y1) MOD 8 = 0) Then
-                        SDL_RenderDrawPoint (Renderer, i, j);
-        End;
-
-        CloseDotFill:
-        Begin
-            SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
-            SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            For i := x1 To x2 Do
-                For j := y1 To y2 Do
-                    If ((i - x1) MOD 4 = 0) AND ((j - y1) MOD 4 = 0) Then
-                        SDL_RenderDrawPoint (Renderer, i, j);
-        End;
-
-    Else
-    Begin
-        SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-        Bar (x1, y1, x2, y2);
-    End;
-    End;
-
-    SDL_RenderPresent (Renderer);
 End;
 
 End.
