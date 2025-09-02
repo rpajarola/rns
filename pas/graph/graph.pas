@@ -376,6 +376,32 @@ Var
     { Aspect ratio }
     AspectRatioX, AspectRatioY: Word;
 
+{ Graphics mode table }
+Type
+    ModeInfo = Record
+        Driver: Integer;
+        Mode: Integer;
+        Width, Height: Integer;
+        Name: String;
+    End;
+
+Const
+    GraphicsModes: Array[0..12] Of ModeInfo = (
+        (Driver: CGA; Mode: 0; Width: 320; Height: 200; Name: 'CGA 320x200 C0'),
+        (Driver: CGA; Mode: 1; Width: 320; Height: 200; Name: 'CGA 320x200 C1'),
+        (Driver: CGA; Mode: 2; Width: 320; Height: 200; Name: 'CGA 320x200 C2'),
+        (Driver: CGA; Mode: 3; Width: 320; Height: 200; Name: 'CGA 320x200 C3'),
+        (Driver: CGA; Mode: 4; Width: 640; Height: 200; Name: 'CGA 640x200'),
+        (Driver: EGA; Mode: 0; Width: 640; Height: 200; Name: 'EGA 640x200'),
+        (Driver: EGA; Mode: 1; Width: 640; Height: 350; Name: 'EGA 640x350'),
+        (Driver: MCGA; Mode: 4; Width: 640; Height: 200; Name: 'MCGA 640x200'),
+        (Driver: MCGA; Mode: 5; Width: 640; Height: 480; Name: 'MCGA 640x480'),
+        (Driver: VGA; Mode: 0; Width: 640; Height: 200; Name: 'VGA 640x200'),
+        (Driver: VGA; Mode: 1; Width: 640; Height: 350; Name: 'VGA 640x350'),
+        (Driver: VGA; Mode: 2; Width: 640; Height: 480; Name: 'VGA 640x480'),
+        (Driver: IBM8514; Mode: 0; Width: 1024; Height: 768; Name: 'IBM8514 1024x768')
+        );
+
 
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
@@ -1476,6 +1502,63 @@ End;
 Procedure SetGraphBufSize(BufSize: word);
 Begin
     { No action needed for SDL2 - just ignore }
+End;
+
+
+Function GetMaxMode: integer;
+Begin
+    GetMaxMode := 2; { VGA has modes 0, 1, 2 }
+End;
+
+
+Procedure GetModeRange(GraphDriver: integer; Var LoMode, HiMode: integer);
+Begin
+    Case GraphDriver Of
+        CGA:
+        Begin
+            LoMode := 0;
+            HiMode := 4;
+        End;
+        EGA:
+        Begin
+            LoMode := 0;
+            HiMode := 1;
+        End;
+        MCGA:
+        Begin
+            LoMode := 4;
+            HiMode := 5;
+        End;
+        VGA:
+        Begin
+            LoMode := 0;
+            HiMode := 2;
+        End;
+        IBM8514:
+        Begin
+            LoMode := 0;
+            HiMode := 0;
+        End;
+    Else
+    Begin
+        LoMode := 0;
+        HiMode := 0;
+    End;
+    End;
+End;
+
+
+Function GetModeName(GraphMode: integer): string;
+Var
+    i: Integer;
+Begin
+    For i := 0 To High (GraphicsModes) Do
+        If GraphicsModes[i].Mode = GraphMode Then
+        Begin
+            GetModeName := GraphicsModes[i].Name;
+            Exit;
+        End;
+    GetModeName := 'Unknown mode';
 End;
 
 End.
