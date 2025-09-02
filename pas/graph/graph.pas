@@ -376,6 +376,9 @@ Var
     { Aspect ratio }
     AspectRatioX, AspectRatioY: Word;
 
+    { Palette }
+    CurrentPalette: PaletteType;
+
 { Graphics mode table }
 Type
     ModeInfo = Record
@@ -748,6 +751,25 @@ Begin
     ClipEnabled := False;
     AspectRatioX := 10000;
     AspectRatioY := 10000;
+
+    { Initialize default palette }
+    CurrentPalette.Size := 16;
+    CurrentPalette.Colors[0] := Black;
+    CurrentPalette.Colors[1] := Blue;
+    CurrentPalette.Colors[2] := Green;
+    CurrentPalette.Colors[3] := Cyan;
+    CurrentPalette.Colors[4] := Red;
+    CurrentPalette.Colors[5] := Magenta;
+    CurrentPalette.Colors[6] := Brown;
+    CurrentPalette.Colors[7] := LightGray;
+    CurrentPalette.Colors[8] := DarkGray;
+    CurrentPalette.Colors[9] := LightBlue;
+    CurrentPalette.Colors[10] := LightGreen;
+    CurrentPalette.Colors[11] := LightCyan;
+    CurrentPalette.Colors[12] := LightRed;
+    CurrentPalette.Colors[13] := LightMagenta;
+    CurrentPalette.Colors[14] := Yellow;
+    CurrentPalette.Colors[15] := White;
 
     { Clear screen to background color }
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
@@ -1581,13 +1603,12 @@ Begin
 
     { Scan-line fill the sector area }
     For scanY := minY To maxY Do
-    Begin
         For scanX := minX To maxX Do
         Begin
             { Check if point is inside ellipse }
             dx := (scanX - X) / XRadius;
             dy := (scanY - Y) / YRadius;
-            
+
             If (dx * dx + dy * dy) <= 1.0 Then
             Begin
                 { Calculate angle for this point }
@@ -1595,39 +1616,106 @@ Begin
                     Angle := StAngle { Center point - use start angle }
                 Else
                 Begin
-                    Angle := ArcTan2(Y - scanY, scanX - X) * 180.0 / Pi;
+                    Angle := ArcTan2 (Y - scanY, scanX - X) * 180.0 / Pi;
                     If Angle < 0 Then
                         Angle := Angle + 360;
                 End;
 
                 { Check if angle is within sector range }
                 If ((StAngle <= EndAngle) AND (Angle >= StAngle) AND (Angle <= EndAngle)) OR
-                   ((StAngle > EndAngle) AND ((Angle >= StAngle) OR (Angle <= EndAngle))) Then
+                    ((StAngle > EndAngle) AND ((Angle >= StAngle) OR (Angle <= EndAngle))) Then
                 Begin
-                    Color := BGIColorToSDL(CurrentFillColor);
-                    SDL_SetRenderDrawColor(Renderer, Color.r, Color.g, Color.b, Color.a);
-                    
+                    Color := BGIColorToSDL (CurrentFillColor);
+                    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+
                     { Apply fill pattern }
                     Case CurrentFillPattern Of
                         EmptyFill: ; { No fill }
-                        SolidFill: SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        LineFill: If scanY MOD 3 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        LtSlashFill: If (scanX + scanY) MOD 4 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        SlashFill: If (scanX + scanY) MOD 3 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        BkSlashFill: If (scanX - scanY) MOD 3 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        LtBkSlashFill: If (scanX - scanY) MOD 4 = 0 Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        HatchFill: If (scanY MOD 3 = 0) OR ((scanX + scanY) MOD 3 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        XHatchFill: If ((scanX + scanY) MOD 3 = 0) OR ((scanX - scanY) MOD 3 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        InterleaveFill: If ((scanX + scanY) MOD 2 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        WideDotFill: If (scanX MOD 4 = 0) AND (scanY MOD 4 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
-                        CloseDotFill: If (scanX MOD 2 = 0) AND (scanY MOD 2 = 0) Then SDL_RenderDrawPoint(Renderer, scanX, scanY);
+                        SolidFill: SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        LineFill: If scanY MOD 3 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        LtSlashFill: If (scanX + scanY) MOD 4 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        SlashFill: If (scanX + scanY) MOD 3 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        BkSlashFill: If (scanX - scanY) MOD 3 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        LtBkSlashFill: If (scanX - scanY) MOD 4 = 0 Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        HatchFill: If (scanY MOD 3 = 0) OR ((scanX + scanY) MOD 3 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        XHatchFill: If ((scanX + scanY) MOD 3 = 0) OR ((scanX - scanY) MOD 3 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        InterleaveFill: If ((scanX + scanY) MOD 2 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        WideDotFill: If (scanX MOD 4 = 0) AND (scanY MOD 4 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
+                        CloseDotFill: If (scanX MOD 2 = 0) AND (scanY MOD 2 = 0) Then
+                                SDL_RenderDrawPoint (Renderer, scanX, scanY);
                     End;
                 End;
             End;
         End;
-    End;
 
-    SDL_RenderPresent(Renderer);
+    SDL_RenderPresent (Renderer);
+End;
+
+
+Procedure SetPalette(ColorNum: word; Color: shortint);
+Begin
+    If ColorNum <= MaxColors Then
+        CurrentPalette.Colors[ColorNum] := Color;
+End;
+
+
+Procedure GetPalette(Var Palette: PaletteType);
+Begin
+    Palette := CurrentPalette;
+End;
+
+
+Function GetPaletteSize: integer;
+Begin
+    GetPaletteSize := CurrentPalette.Size;
+End;
+
+
+Procedure GetDefaultPalette(Var Palette: PaletteType);
+Begin
+    Palette.Size := 16;
+    Palette.Colors[0] := Black;
+    Palette.Colors[1] := Blue;
+    Palette.Colors[2] := Green;
+    Palette.Colors[3] := Cyan;
+    Palette.Colors[4] := Red;
+    Palette.Colors[5] := Magenta;
+    Palette.Colors[6] := Brown;
+    Palette.Colors[7] := LightGray;
+    Palette.Colors[8] := DarkGray;
+    Palette.Colors[9] := LightBlue;
+    Palette.Colors[10] := LightGreen;
+    Palette.Colors[11] := LightCyan;
+    Palette.Colors[12] := LightRed;
+    Palette.Colors[13] := LightMagenta;
+    Palette.Colors[14] := Yellow;
+    Palette.Colors[15] := White;
+End;
+
+
+Procedure SetAllPalette(Var Palette);
+Var
+    PalPtr: ^PaletteType;
+    i: Integer;
+Begin
+    PalPtr := @Palette;
+    CurrentPalette := PalPtr^;
+End;
+
+
+Procedure SetRGBPalette(ColorNum, RedValue, GreenValue, BlueValue: integer);
+Begin
+    { In SDL2, we don't need to modify palette entries since we use direct RGB colors }
+    { This function is kept for BGI compatibility but does nothing }
 End;
 
 End.
