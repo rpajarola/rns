@@ -392,6 +392,9 @@ Var
     UserCharSizeMultX, UserCharSizeDivX: Word;
     UserCharSizeMultY, UserCharSizeDivY: Word;
 
+    { Page management }
+    VisualPage, ActivePage: Word;
+
 { Graphics mode table }
 Type
     ModeInfo = Record
@@ -844,6 +847,10 @@ Begin
     UserCharSizeDivX := 4;
     UserCharSizeMultY := 6;
     UserCharSizeDivY := 6;
+
+    { Initialize page management }
+    VisualPage := 0;
+    ActivePage := 0;
 
     { Clear screen to background color }
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
@@ -2052,6 +2059,10 @@ Begin
     AspectRatioX := 10000;
     AspectRatioY := 10000;
 
+    { Reset page management }
+    VisualPage := 0;
+    ActivePage := 0;
+
     { Reset palette to default }
     CurrentPalette.Size := 16;
     CurrentPalette.Colors[0] := Black;
@@ -2250,6 +2261,24 @@ Begin
         { Return a font ID (in real BGI this would be 11+) }
         InstallUserFont := 11;
     End;
+End;
+
+
+Procedure SetVisualPage(Page: word);
+Begin
+    { In SDL2, we only have one display page, so we just track the visual page }
+    VisualPage := Page;
+    { Note: In true BGI, this would switch which page is displayed }
+    { For SDL2 implementation, all drawing goes to the same renderer }
+End;
+
+
+Procedure SetActivePage(Page: word);
+Begin
+    { In SDL2, we only have one drawing page, so we just track the active page }
+    ActivePage := Page;
+    { Note: In true BGI, this would switch which page drawing operations target }
+    { For SDL2 implementation, all drawing goes to the same renderer }
 End;
 
 End.
