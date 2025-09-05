@@ -368,6 +368,7 @@ Var
 
     { Error state }
     LastGraphResult: Integer;
+    LastErrorMessage: String;
 
     { Arc coordinates tracking }
     LastArcX, LastArcY: Integer;
@@ -466,6 +467,16 @@ Begin
     End
     Else
         LoadBGIFont := TTF_OpenFont (PChar (FontTable[FontNum].FontFile), Size);
+End;
+
+{ Helper function to set graphics error with SDL2 error message }
+Procedure SetGraphError(ErrorCode: Integer; ErrorMessage: PAnsiChar);
+Begin
+    LastGraphResult := ErrorCode;
+    If ErrorMessage <> nil Then
+        LastErrorMessage := String (ErrorMessage)
+    Else
+        LastErrorMessage := '';
 End;
 
 { Helper function to apply write mode to pixel colors }
@@ -707,27 +718,36 @@ End;
 
 { *** high-level error handling *** }
 Function GraphErrorMsg(ErrorCode: integer): String;
+Var
+    BaseMsg: String;
 Begin
     Case ErrorCode Of
-        grOk: GraphErrorMsg := 'No error';
-        grNoInitGraph: GraphErrorMsg := 'Graphics not initialized';
-        grNotDetected: GraphErrorMsg := 'Graphics hardware not detected';
-        grFileNotFound: GraphErrorMsg := 'Device driver file not found';
-        grInvalidDriver: GraphErrorMsg := 'Invalid device driver file';
-        grNoLoadMem: GraphErrorMsg := 'Not enough memory to load driver';
-        grNoScanMem: GraphErrorMsg := 'Out of memory in scan fill';
-        grNoFloodMem: GraphErrorMsg := 'Out of memory in flood fill';
-        grFontNotFound: GraphErrorMsg := 'Font file not found';
-        grNoFontMem: GraphErrorMsg := 'Not enough memory to load font';
-        grInvalidMode: GraphErrorMsg := 'Invalid graphics mode';
-        grError: GraphErrorMsg := 'Graphics error';
-        grIOerror: GraphErrorMsg := 'Graphics I/O error';
-        grInvalidFont: GraphErrorMsg := 'Invalid font file';
-        grInvalidFontNum: GraphErrorMsg := 'Invalid font number';
-        grInvalidVersion: GraphErrorMsg := 'Invalid driver version';
+        grOk: BaseMsg := 'No error';
+        grNoInitGraph: BaseMsg := 'Graphics not initialized';
+        grNotDetected: BaseMsg := 'Graphics hardware not detected';
+        grFileNotFound: BaseMsg := 'Device driver file not found';
+        grInvalidDriver: BaseMsg := 'Invalid device driver file';
+        grNoLoadMem: BaseMsg := 'Not enough memory to load driver';
+        grNoScanMem: BaseMsg := 'Out of memory in scan fill';
+        grNoFloodMem: BaseMsg := 'Out of memory in flood fill';
+        grFontNotFound: BaseMsg := 'Font file not found';
+        grNoFontMem: BaseMsg := 'Not enough memory to load font';
+        grInvalidMode: BaseMsg := 'Invalid graphics mode';
+        grError: BaseMsg := 'Graphics error';
+        grIOerror: BaseMsg := 'Graphics I/O error';
+        grInvalidFont: BaseMsg := 'Invalid font file';
+        grInvalidFontNum: BaseMsg := 'Invalid font number';
+        grInvalidVersion: BaseMsg := 'Invalid driver version';
     Else
-        GraphErrorMsg := 'Unknown graphics error';
+        BaseMsg := 'Unknown graphics error';
     End;
+
+    { Append specific error message if available }
+    If (ErrorCode <> grOk) AND (LastErrorMessage <> '') Then
+        GraphErrorMsg := BaseMsg + ' (' + LastErrorMessage + ')'
+    Else
+        GraphErrorMsg := BaseMsg;
+    LastErrorMessage := '';
 End;
 
 
@@ -737,20 +757,21 @@ Begin
     LastGraphResult := grOk;
 End;
 
+
 { *** detection, initialization and crt mode routines *** }
 Procedure InitGraph(Var GraphDriver: integer; Var GraphMode: integer; PathToDriver: String);
 Begin
-    LastGraphResult := grOk;
+    SetGraphError (grOk, nil);
 
     If SDL_Init (SDL_INIT_VIDEO) < 0 Then
     Begin
-        LastGraphResult := grError;
+        SetGraphError (grError, SDL_GetError ());
         exit;
     End;
 
     If TTF_Init () < 0 Then
     Begin
-        LastGraphResult := grError;
+        SetGraphError (grError, SDL_GetError ());
         exit;
     End;
 
@@ -794,7 +815,7 @@ Begin
 
     If Window = nil Then
     Begin
-        LastGraphResult := grError;
+        SetGraphError (grError, SDL_GetError ());
         SDL_Quit ();
         exit;
     End;
@@ -802,7 +823,7 @@ Begin
     Renderer := SDL_CreateRenderer (Window, -1, SDL_RENDERER_ACCELERATED);
     If Renderer = nil Then
     Begin
-        LastGraphResult := grError;
+        SetGraphError (grError, SDL_GetError ());
         SDL_DestroyWindow (Window);
         SDL_Quit ();
         exit;
@@ -903,7 +924,7 @@ Procedure DetectGraph(Var GraphDriver, GraphMode: integer);
 Begin
     GraphDriver := VGA;
     GraphMode := VGAHi;
-    LastGraphResult := grOk;
+    SetGraphError (grOk, nil);
 End;
 
 
@@ -926,10 +947,10 @@ Procedure SetGraphMode(Mode: integer);
 Begin
     If NOT GraphInitialized Then
     Begin
-        LastGraphResult := grNoInitGraph;
+        SetGraphError (grNoInitGraph, nil);
         Exit;
     End;
-    LastGraphResult := grOk;
+    SetGraphError (grOk, nil);
 End;
 
 
@@ -1010,7 +1031,7 @@ Procedure Line(x1, y1, x2, y2: integer);
 Var
     Color: TSDL_Color;
     dx, dy, sx, sy, err, e2: Integer;
-    x, y: Integer;
+    x, y:  Integer;
 Begin
     If NOT GraphInitialized Then
         Exit;
@@ -1027,8 +1048,14 @@ Begin
         { Use Bresenham's line algorithm with write mode }
         dx := Abs (x2 - x1);
         dy := -Abs (y2 - y1);
-        If x1 < x2 Then sx := 1 Else sx := -1;
-        If y1 < y2 Then sy := 1 Else sy := -1;
+        If x1 < x2 Then
+            sx := 1
+        Else
+            sx := -1;
+        If y1 < y2 Then
+            sy := 1
+        Else
+            sy := -1;
         err := dx + dy;
         x := x1;
         y := y1;
@@ -1685,14 +1712,14 @@ End;
 
 Function RegisterBGIdriver(Driver: pointer): integer;
 Begin
-    LastGraphResult := grInvalidDriver;
+    SetGraphError (grInvalidDriver, 'RegisterBGIdriver is not supported');
     RegisterBGIdriver := grInvalidDriver;
 End;
 
 
 Function InstallUserDriver(DriverFileName: string; AutoDetectPtr: pointer): integer;
 Begin
-    LastGraphResult := grInvalidDriver;
+    SetGraphError (grInvalidDriver, 'InstallUserDriver is not supported');
     InstallUserDriver := grInvalidDriver;
 End;
 
@@ -2374,8 +2401,7 @@ End;
 
 Function RegisterBGIfont(Font: pointer): integer;
 Begin
-    { BGI font registration not supported in SDL2 implementation }
-    LastGraphResult := grInvalidFont;
+    SetGraphError (grInvalidDriver, 'RegisterBGIfont is not supported');
     RegisterBGIfont := grInvalidFont;
 End;
 
@@ -2388,13 +2414,13 @@ Begin
     TestFont := TTF_OpenFont (PChar (FontFileName), 12);
     If TestFont = nil Then
     Begin
-        LastGraphResult := grFontNotFound;
+        SetGraphError (grFontNotFound, nil);
         InstallUserFont := grFontNotFound;
     End
     Else
     Begin
         TTF_CloseFont (TestFont);
-        LastGraphResult := grOk;
+        SetGraphError (grOk, nil);
         { Return a font ID (in real BGI this would be 11+) }
         InstallUserFont := 11;
     End;
