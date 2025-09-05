@@ -2178,16 +2178,34 @@ End;
 Procedure SetTextStyle(Font, Direction: word; CharSize: word);
 Var
     FontSize: Integer;
+    BaseSize: Integer;
 Begin
     CurrentFont := Font;
     CurrentTextDirection := Direction;
     CurrentCharSize := CharSize;
 
-    { Calculate actual font size }
+    { Get base font size }
     If Font <= High (FontTable) Then
-        FontSize := FontTable[Font].BaseSize * CharSize
+        BaseSize := FontTable[Font].BaseSize
     Else
-        FontSize := 8 * CharSize;
+        BaseSize := 8;
+
+    { Calculate actual font size }
+    If CharSize = UserCharSize Then
+    Begin
+        { Use user-defined character size ratios }
+        If (UserCharSizeDivX > 0) AND (UserCharSizeDivY > 0) Then
+            FontSize := Round (BaseSize * (UserCharSizeMultX / UserCharSizeDivX))
+        Else
+            FontSize := BaseSize;
+    End
+    Else
+        { Use direct multiplier }
+        FontSize := BaseSize * CharSize;
+
+    { Ensure minimum font size }
+    If FontSize < 1 Then
+        FontSize := 1;
 
     { Close current font if loaded }
     If CurrentTTFFont <> nil Then
@@ -2220,6 +2238,7 @@ End;
 Function TextWidth(TextString: string): word;
 Var
     w, h: Integer;
+    SizeFactor: Real;
 Begin
     If (CurrentTTFFont <> nil) AND (Length (TextString) > 0) Then
     Begin
@@ -2227,13 +2246,27 @@ Begin
         TextWidth := w;
     End
     Else
-        TextWidth := Length (TextString) * 8 * CurrentCharSize;
+    Begin
+        { Calculate size factor }
+        If CurrentCharSize = UserCharSize Then
+        Begin
+            If (UserCharSizeDivX > 0) Then
+                SizeFactor := UserCharSizeMultX / UserCharSizeDivX
+            Else
+                SizeFactor := 1.0;
+        End
+        Else
+            SizeFactor := CurrentCharSize;
+
+        TextWidth := Round (Length (TextString) * 8 * SizeFactor);
+    End;
 End;
 
 
 Function TextHeight(TextString: string): word;
 Var
     w, h: Integer;
+    SizeFactor: Real;
 Begin
     If (CurrentTTFFont <> nil) AND (Length (TextString) > 0) Then
     Begin
@@ -2241,7 +2274,20 @@ Begin
         TextHeight := h;
     End
     Else
-        TextHeight := 16 * CurrentCharSize;
+    Begin
+        { Calculate size factor }
+        If CurrentCharSize = UserCharSize Then
+        Begin
+            If (UserCharSizeDivY > 0) Then
+                SizeFactor := UserCharSizeMultY / UserCharSizeDivY
+            Else
+                SizeFactor := 1.0;
+        End
+        Else
+            SizeFactor := CurrentCharSize;
+
+        TextHeight := Round (16 * SizeFactor);
+    End;
 End;
 
 
