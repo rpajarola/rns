@@ -468,6 +468,20 @@ Begin
         LoadBGIFont := TTF_OpenFont (PChar (FontTable[FontNum].FontFile), Size);
 End;
 
+{ Helper function to apply write mode to pixel colors }
+Function ApplyWriteMode(NewColor, ExistingColor: Word; WriteMode: Integer): Word;
+Begin
+    Case WriteMode Of
+        CopyPut: ApplyWriteMode := NewColor;
+        XorPut: ApplyWriteMode := NewColor XOR ExistingColor;
+        OrPut: ApplyWriteMode := NewColor OR ExistingColor;
+        AndPut: ApplyWriteMode := NewColor AND ExistingColor;
+        NotPut: ApplyWriteMode := NOT NewColor;
+    Else
+        ApplyWriteMode := NewColor;
+    End;
+End;
+
 { Color conversion from BGI to SDL2 }
 Function BGIColorToSDL(Color: Word): TSDL_Color;
 Begin
@@ -960,11 +974,21 @@ End;
 Procedure PutPixel(X, Y: integer; Pixel: word);
 Var
     Color: TSDL_Color;
+    ExistingPixel, FinalPixel: Word;
 Begin
     If NOT GraphInitialized Then
         Exit;
 
-    Color := BGIColorToSDL (Pixel);
+    { Apply write mode if not CopyPut }
+    If CurrentWriteMode <> CopyPut Then
+    Begin
+        ExistingPixel := GetPixel (X, Y);
+        FinalPixel := ApplyWriteMode (Pixel, ExistingPixel, CurrentWriteMode);
+    End
+    Else
+        FinalPixel := Pixel;
+
+    Color := BGIColorToSDL (FinalPixel);
     SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
     SDL_RenderDrawPoint (Renderer, X, Y);
     SDL_RenderPresent (Renderer);
@@ -985,13 +1009,49 @@ End;
 Procedure Line(x1, y1, x2, y2: integer);
 Var
     Color: TSDL_Color;
+    dx, dy, sx, sy, err, e2: Integer;
+    x, y: Integer;
 Begin
     If NOT GraphInitialized Then
         Exit;
 
-    Color := BGIColorToSDL (CurrentColor);
-    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
-    SDL_RenderDrawLine (Renderer, x1, y1, x2, y2);
+    { If write mode is CopyPut, use fast SDL line drawing }
+    If CurrentWriteMode = CopyPut Then
+    Begin
+        Color := BGIColorToSDL (CurrentColor);
+        SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
+        SDL_RenderDrawLine (Renderer, x1, y1, x2, y2);
+    End
+    Else
+    Begin
+        { Use Bresenham's line algorithm with write mode }
+        dx := Abs (x2 - x1);
+        dy := -Abs (y2 - y1);
+        If x1 < x2 Then sx := 1 Else sx := -1;
+        If y1 < y2 Then sy := 1 Else sy := -1;
+        err := dx + dy;
+        x := x1;
+        y := y1;
+
+        While True Do
+        Begin
+            PutPixel (x, y, CurrentColor);
+            If (x = x2) AND (y = y2) Then
+                Break;
+            e2 := 2 * err;
+            If e2 >= dy Then
+            Begin
+                err := err + dy;
+                x := x + sx;
+            End;
+            If e2 <= dx Then
+            Begin
+                err := err + dx;
+                y := y + sy;
+            End;
+        End;
+    End;
+
     SDL_RenderPresent (Renderer);
     CurrentX := x2;
     CurrentY := y2;
@@ -1067,31 +1127,62 @@ Begin
     If NOT GraphInitialized Then
         Exit;
 
-    Color := BGIColorToSDL (CurrentColor);
-    SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
-
-    { Bresenham circle algorithm }
-    i := 0;
-    xx := Radius;
-    yy := 0;
-
-    While xx >= yy Do
+    { If write mode is CopyPut, use fast SDL drawing }
+    If CurrentWriteMode = CopyPut Then
     Begin
-        SDL_RenderDrawPoint (Renderer, X + xx, Y + yy);
-        SDL_RenderDrawPoint (Renderer, X + yy, Y + xx);
-        SDL_RenderDrawPoint (Renderer, X - yy, Y + xx);
-        SDL_RenderDrawPoint (Renderer, X - xx, Y + yy);
-        SDL_RenderDrawPoint (Renderer, X - xx, Y - yy);
-        SDL_RenderDrawPoint (Renderer, X - yy, Y - xx);
-        SDL_RenderDrawPoint (Renderer, X + yy, Y - xx);
-        SDL_RenderDrawPoint (Renderer, X + xx, Y - yy);
+        Color := BGIColorToSDL (CurrentColor);
+        SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
 
-        Inc (yy);
-        i := i + 1 + 2 * yy;
-        If i > 0 Then
+        { Bresenham circle algorithm }
+        i := 0;
+        xx := Radius;
+        yy := 0;
+
+        While xx >= yy Do
         Begin
-            Dec (xx);
-            i := i - 2 * xx;
+            SDL_RenderDrawPoint (Renderer, X + xx, Y + yy);
+            SDL_RenderDrawPoint (Renderer, X + yy, Y + xx);
+            SDL_RenderDrawPoint (Renderer, X - yy, Y + xx);
+            SDL_RenderDrawPoint (Renderer, X - xx, Y + yy);
+            SDL_RenderDrawPoint (Renderer, X - xx, Y - yy);
+            SDL_RenderDrawPoint (Renderer, X - yy, Y - xx);
+            SDL_RenderDrawPoint (Renderer, X + yy, Y - xx);
+            SDL_RenderDrawPoint (Renderer, X + xx, Y - yy);
+
+            Inc (yy);
+            i := i + 1 + 2 * yy;
+            If i > 0 Then
+            Begin
+                Dec (xx);
+                i := i - 2 * xx;
+            End;
+        End;
+    End
+    Else
+    Begin
+        { Use write mode with individual PutPixel calls }
+        i := 0;
+        xx := Radius;
+        yy := 0;
+
+        While xx >= yy Do
+        Begin
+            PutPixel (X + xx, Y + yy, CurrentColor);
+            PutPixel (X + yy, Y + xx, CurrentColor);
+            PutPixel (X - yy, Y + xx, CurrentColor);
+            PutPixel (X - xx, Y + yy, CurrentColor);
+            PutPixel (X - xx, Y - yy, CurrentColor);
+            PutPixel (X - yy, Y - xx, CurrentColor);
+            PutPixel (X + yy, Y - xx, CurrentColor);
+            PutPixel (X + xx, Y - yy, CurrentColor);
+
+            Inc (yy);
+            i := i + 1 + 2 * yy;
+            If i > 0 Then
+            Begin
+                Dec (xx);
+                i := i - 2 * xx;
+            End;
         End;
     End;
 
