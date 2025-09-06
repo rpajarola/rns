@@ -6,14 +6,14 @@ endif
 
 ifeq ($(ACT_OS),Darwin) 
 # MacPorts
-LD_LIBS=-Fl/opt/local/lib -Fusdl2
+LD_LIBS=-Fl/opt/local/lib -Fusdl2 -Fugraph
 # HomeBrew
-#LD_LIBS=-Fl/opt/homebrew/lib -Fusdl2
+#LD_LIBS=-Fl/opt/homebrew/lib -Fusdl2 -Fugraph
 
 DEBUG_PFLAGS=-gw
 else
 # SDL2 library is in default path
-LD_LIBS=-Fusdl2
+LD_LIBS=-Fusdl2 -Fugraph
 
 DEBUG_PFLAGS=-gw3
 endif
