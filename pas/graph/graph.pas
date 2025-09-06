@@ -891,6 +891,7 @@ Begin
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
     SDL_RenderClear (Renderer);
     SDL_RenderPresent (Renderer);
+    SDL_PumpEvents();
 End;
 
 
