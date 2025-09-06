@@ -659,7 +659,7 @@ Begin
         BkSlashFill, LtBkSlashFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := x1 To x2 Do
                 For j := y1 To y2 Do
@@ -670,7 +670,7 @@ Begin
         HatchFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := y1 To y2 Do
                 If (i - y1) MOD 4 = 0 Then
@@ -683,7 +683,7 @@ Begin
         XHatchFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := x1 To x2 Do
                 For j := y1 To y2 Do
@@ -694,7 +694,7 @@ Begin
         WideDotFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := x1 To x2 Do
                 For j := y1 To y2 Do
@@ -705,7 +705,7 @@ Begin
         CloseDotFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := x1 To x2 Do
                 For j := y1 To y2 Do
@@ -716,7 +716,7 @@ Begin
     Else
     Begin
         SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-        Bar (x1, y1, x2, y2);
+        SDL_RenderFillRect (Renderer, @Rect);
     End;
     End;
 
@@ -898,7 +898,7 @@ Begin
     SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
     SDL_RenderClear (Renderer);
     SDL_RenderPresent (Renderer);
-    SDL_PumpEvents();
+    SDL_PumpEvents ();
 End;
 
 
