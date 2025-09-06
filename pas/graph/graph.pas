@@ -607,6 +607,7 @@ End;
 Procedure FillRectWithPattern(x1, y1, x2, y2: integer; Pattern: word; Color: word);
 Var
     FillColor, BkColor: TSDL_Color;
+    Rect: TSDL_Rect;
     i, j: Integer;
 Begin
     If NOT GraphInitialized Then
@@ -615,23 +616,29 @@ Begin
     FillColor := BGIColorToSDL (Color);
     BkColor := BGIColorToSDL (CurrentBkColor);
 
+    { Set up rectangle }
+    Rect.x := x1;
+    Rect.y := y1;
+    Rect.w := x2 - x1 + 1;
+    Rect.h := y2 - y1 + 1;
+
     Case Pattern Of
         EmptyFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
         End;
 
         SolidFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
         End;
 
         LineFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := y1 To y2 Do
                 If (i - y1) MOD 4 = 0 Then
@@ -641,7 +648,7 @@ Begin
         LtSlashFill, SlashFill:
         Begin
             SDL_SetRenderDrawColor (Renderer, BkColor.r, BkColor.g, BkColor.b, BkColor.a);
-            Bar (x1, y1, x2, y2);
+            SDL_RenderFillRect (Renderer, @Rect);
             SDL_SetRenderDrawColor (Renderer, FillColor.r, FillColor.g, FillColor.b, FillColor.a);
             For i := x1 To x2 Do
                 For j := y1 To y2 Do
