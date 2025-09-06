@@ -342,6 +342,7 @@ Var
     { SDL2 graphics state }
     Window: PSDL_Window;
     Renderer: PSDL_Renderer;
+    Display: PSDL_Texture;
     WindowWidth, WindowHeight: Integer;
     GraphInitialized: Boolean = False;
 
@@ -477,6 +478,16 @@ Begin
         LastErrorMessage := String (ErrorMessage)
     Else
         LastErrorMessage := '';
+End;
+
+
+Procedure PresentDisplay();
+Begin
+    SDL_SetRenderTarget (renderer, nil);
+    SDL_RenderCopy (renderer, display, nil, nil);
+    SDL_RenderPresent (Renderer);
+    SDL_SetRenderTarget (renderer, display);
+    SDL_PumpEvents ();
 End;
 
 { Helper function to apply write mode to pixel colors }
@@ -720,7 +731,7 @@ Begin
     End;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 { *** high-level error handling *** }
@@ -836,6 +847,24 @@ Begin
         exit;
     End;
 
+    { Clear screen to background color }
+    SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
+    SDL_RenderClear (Renderer);
+    PresentDisplay ();
+    SDL_PumpEvents ();
+
+    Display := SDL_CreateTexture (renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WindowWidth, WindowHeight);
+    If Display = nil Then
+    Begin
+        SetGraphError (grError, SDL_GetError ());
+        SDL_DestroyRenderer (Renderer);
+        SDL_DestroyWindow (Window);
+        SDL_Quit ();
+        exit;
+    End;
+
+    SDL_SetRenderTarget (renderer, display);
+
     { Initialize state }
     GraphInitialized := True;
     GraphDriver := VGA;
@@ -893,12 +922,6 @@ Begin
     { Initialize page management }
     VisualPage := 0;
     ActivePage := 0;
-
-    { Clear screen to background color }
-    SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 255);
-    SDL_RenderClear (Renderer);
-    SDL_RenderPresent (Renderer);
-    SDL_PumpEvents ();
 End;
 
 
@@ -1020,7 +1043,7 @@ Begin
     Color := BGIColorToSDL (FinalPixel);
     SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
     SDL_RenderDrawPoint (Renderer, X, Y);
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1050,6 +1073,7 @@ Begin
         Color := BGIColorToSDL (CurrentColor);
         SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
         SDL_RenderDrawLine (Renderer, x1, y1, x2, y2);
+        PresentDisplay ();
     End
     Else
     Begin
@@ -1087,7 +1111,7 @@ Begin
         End;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
     CurrentX := x2;
     CurrentY := y2;
 End;
@@ -1122,7 +1146,7 @@ Begin
     Rect.h := y2 - y1 + 1;
 
     SDL_RenderDrawRect (Renderer, @Rect);
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1221,7 +1245,7 @@ Begin
         End;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1259,7 +1283,7 @@ Begin
     Color := BGIColorToSDL (CurrentBkColor);
     SDL_SetRenderDrawColor (Renderer, Color.r, Color.g, Color.b, Color.a);
     SDL_RenderClear (Renderer);
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1322,7 +1346,7 @@ Begin
             Break;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1382,7 +1406,7 @@ Begin
             Break;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1443,7 +1467,7 @@ Begin
             End;
         End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1527,7 +1551,7 @@ Begin
                 End;
             End{ Check if point is inside circle };
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1582,7 +1606,7 @@ Begin
     ViewRect.h := ViewPortY2 - ViewPortY1 + 1;
 
     SDL_RenderFillRect (Renderer, @ViewRect);
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1638,7 +1662,7 @@ Begin
     { Close the polygon by connecting last point to first }
     SDL_RenderDrawLine (Renderer, Points^[NumPoints].X, Points^[NumPoints].Y, Points^[1].X, Points^[1].Y);
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1714,7 +1738,7 @@ Begin
         End;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -1874,7 +1898,7 @@ Begin
             End;
         End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -2019,7 +2043,7 @@ Begin
         End;
     End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -2137,7 +2161,7 @@ Begin
             End;
         End;
 
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 End;
 
 
@@ -2384,7 +2408,7 @@ Begin
 
     SDL_RenderCopy (Renderer, TextTexture, nil, @DstRect);
     SDL_DestroyTexture (TextTexture);
-    SDL_RenderPresent (Renderer);
+    PresentDisplay ();
 
     { Update current position }
     CurrentX := DstRect.x + TextW;
