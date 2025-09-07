@@ -829,7 +829,7 @@ Begin
 
     Window := SDL_CreateWindow ('Pascal Graphics',
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        WindowWidth, WindowHeight, SDL_WINDOW_SHOWN);
+        2*WindowWidth, 2*WindowHeight, SDL_WINDOW_SHOWN);
 
     If Window = nil Then
     Begin
